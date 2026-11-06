@@ -1,7 +1,0 @@
-name: Test Push
-on: [push]
-jobs:
-  test:
-    runs-on: ubuntu-latest
-    steps:
-      - run: echo "push event works"
