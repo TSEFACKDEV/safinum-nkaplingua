@@ -55,6 +55,15 @@ copiez pas le corpus dans le dépôt public sans vérifier les termes.
 | Source | Mozilla Data Collective / Common Voice |
 | Usage | démonstration audio, pas nécessaire au MVP |
 
+### Polices
+
+| Élément | Valeur |
+|---|---|
+| Polices | Noto Sans, Fraunces |
+| Licence | **SIL Open Font License 1.1** |
+| Source | Google Fonts, sous-ensembles WOFF2 locaux |
+| Usage | interface et page de démonstration |
+
 ### Recherches du centre linguistique
 
 Les publications du centre linguistique camerounais peuvent être utilisées

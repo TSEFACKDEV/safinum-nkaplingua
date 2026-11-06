@@ -7,59 +7,90 @@
     <link rel="stylesheet" href="popup.css" />
   </head>
   <body>
-    <header class="header">
-      <div class="brand">
-        <div class="logo">N</div>
-        <div>
-          <h1>NkapLingua</h1>
-          <p>Inclusion financière · Fulfulde</p>
+    <div class="shell">
+      <header class="topbar">
+        <div class="brand">
+          <img class="brand-mark" src="icon-48.png" alt="" width="42" height="42" />
+          <div class="brand-copy">
+            <p class="eyebrow">SAFINUM 2026</p>
+            <h1>NkapLingua</h1>
+          </div>
         </div>
-      </div>
-      <span class="badge">SAFINUM 2026</span>
-    </header>
+        <span class="lang-pair" aria-label="Français vers fulfulde">
+          <span>FR</span>
+          <span class="lang-arrow" aria-hidden="true">→</span>
+          <span>FF</span>
+        </span>
+      </header>
 
-    <main class="content">
-      <label class="label" for="language">Langue cible</label>
-      <select id="language" class="select" disabled>
-        <option value="fub">Fulfulde (Adamawa) — fub</option>
-      </select>
+      <main class="content">
+        <section class="hero">
+          <p class="kicker">Accessibilité financière</p>
+          <h2>Votre page,<br />en fulfulde.</h2>
+          <p class="lede">
+            Une couche de traduction locale, réversible et sans modification du
+            site financier.
+          </p>
+        </section>
 
-      <div class="actions">
-        <button id="translatePage" class="primary" type="button">
-          Traduire cette page
-        </button>
-        <button id="restore" class="secondary" type="button">
-          Restaurer l’original
-        </button>
-      </div>
+        <section class="panel">
+          <div class="field">
+            <label for="language">Langue cible</label>
+            <select id="language" class="select" disabled>
+              <option value="fub">Fulfulde (Adamawa) — fub</option>
+            </select>
+          </div>
 
-      <button id="translateSelection" class="ghost" type="button">
-        Traduire la sélection
-      </button>
+          <button id="translatePage" class="btn btn-primary" type="button">
+            <span>Traduire cette page</span>
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M5 12h14M13 6l6 6-6 6" />
+            </svg>
+          </button>
 
-      <section class="test">
-        <label class="label" for="unseen">Tester un texte inédit</label>
-        <textarea
-          id="unseen"
-          class="textarea"
-          rows="4"
-          placeholder="Collez ici un paragraphe financier jamais vu…"
-        ></textarea>
-        <button id="translateText" class="secondary" type="button">
-          Traduire ce texte
-        </button>
-        <div id="result" class="result" aria-live="polite"></div>
-      </section>
+          <div class="btn-row">
+            <button id="restore" class="btn btn-secondary" type="button">
+              Restaurer l’original
+            </button>
+            <button id="translateSelection" class="btn btn-quiet" type="button">
+              Traduire la sélection
+            </button>
+          </div>
+        </section>
 
-      <div id="status" class="status" role="status" aria-live="polite">
-        Prêt. Le backend doit tourner sur 127.0.0.1:8000.
-      </div>
+        <section class="panel panel-soft">
+          <div class="panel-head">
+            <div>
+              <p class="kicker">Contenu inédit</p>
+              <h3>Tester un texte</h3>
+            </div>
+            <span class="pill">Live</span>
+          </div>
+          <textarea
+            id="unseen"
+            class="textarea"
+            rows="4"
+            placeholder="Collez ici un message financier jamais vu…"
+          ></textarea>
+          <button id="translateText" class="btn btn-secondary btn-full" type="button">
+            Traduire ce texte
+          </button>
+          <div id="result" class="result" aria-live="polite"></div>
+        </section>
 
-      <p class="security">
-        Aucune valeur de formulaire, aucun cookie et aucun mot de passe n’est
-        lu. Le texte est envoyé à un backend local, sans journalisation.
-      </p>
-    </main>
+        <div id="status" class="status" role="status" aria-live="polite">
+          Prêt. Le backend local doit tourner sur 127.0.0.1:8000.
+        </div>
+
+        <footer class="security">
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M12 3l7 3v5c0 4.5-2.9 8.2-7 10-4.1-1.8-7-5.5-7-10V6l7-3z" />
+            <path d="M9 12l2 2 4-4" />
+          </svg>
+          <span>Backend local · aucune valeur de formulaire lue</span>
+        </footer>
+      </main>
+    </div>
 
     <script src="popup.js"></script>
   </body>

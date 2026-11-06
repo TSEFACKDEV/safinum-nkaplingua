@@ -16,6 +16,18 @@ service cloud.
 Projet préparé pour le **SAFINUM Innovate Challenge 2026** (Yaoundé,
 26–28 novembre 2026).
 
+## Aperçu
+
+<p align="center">
+  <img src="docs/assets/demo-overview.png" alt="Aperçu de l’interface FINAKA avec NkapLingua" width="760" />
+</p>
+
+<p align="center">
+  <img src="docs/assets/popup.png" alt="Popup de l’extension NkapLingua" width="300" />
+</p>
+
+Design system : [`docs/DESIGN.md`](docs/DESIGN.md).
+
 ---
 
 ## Sommaire
@@ -317,6 +329,7 @@ exigence par exigence dans [`docs/COMPLIANCE.md`](docs/COMPLIANCE.md).
 | Document | Contenu |
 |---|---|
 | [`docs/COMPLIANCE.md`](docs/COMPLIANCE.md) | grille 100 points, livrables, écarts |
+| [`docs/DESIGN.md`](docs/DESIGN.md) | palette, typographie, espacement, accessibilité |
 | [`docs/TECHNICAL.md`](docs/TECHNICAL.md) | architecture, intégration, dépendances, limites |
 | [`docs/LANGUAGE_VALIDATION.md`](docs/LANGUAGE_VALIDATION.md) | fulfulde, méthode de validation native |
 | [`docs/VIDEO_SCRIPT.md`](docs/VIDEO_SCRIPT.md) | script de la vidéo de 3 minutes |

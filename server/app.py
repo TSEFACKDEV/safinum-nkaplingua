@@ -72,6 +72,8 @@ DNT_TERMS = [
     "KYC",
     "IBAN",
     "SWIFT",
+    "FINAKA",
+    "Aïcha",
 ]
 
 TOKEN_RE = re.compile(

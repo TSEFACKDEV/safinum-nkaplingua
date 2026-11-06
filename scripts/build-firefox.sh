@@ -11,6 +11,7 @@ cp "$ROOT"/extension/*.js "$OUT"/
 cp "$ROOT"/extension/*.html "$OUT"/
 cp "$ROOT"/extension/*.css "$OUT"/
 cp "$ROOT"/extension/icon-*.png "$OUT"/
+cp -R "$ROOT"/extension/fonts "$OUT"/fonts
 cp "$ROOT"/extension/manifest.firefox.json "$OUT"/manifest.json
 
 echo "Build Firefox prêt : $OUT"
