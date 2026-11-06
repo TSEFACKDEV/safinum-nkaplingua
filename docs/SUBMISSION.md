@@ -1,5 +1,8 @@
 # Soumission — SAFINUM Innovate Challenge 2026
 
+**Version soumise : 0.4.0** — sept langues, détection FR/EN, protection des
+noms et packs communautaires.
+
 ## Liens à copier dans le formulaire
 
 ### 1. Lien de la vidéo de présentation
@@ -18,7 +21,7 @@ https://github.com/TSEFACKDEV/safinum-nkaplingua/releases/latest/download/NkapLi
 https://github.com/TSEFACKDEV/safinum-nkaplingua/releases/latest/download/NkapLingua-Documentation.pdf
 ```
 
-- PDF A4, **8 pages**, ~1,3 Mo (limite : 10 Mo)
+- PDF A4, **8 pages**, ~1,33 Mo (limite : 10 Mo)
 - Architecture, intégration, sécurité, langues, détection, licences, limites
 
 ### 3. Lien du dépôt GitHub
@@ -38,7 +41,7 @@ https://github.com/TSEFACKDEV/safinum-nkaplingua/releases/latest/download/nkapli
 ```
 
 - ZIP universel **Chrome / Edge / Firefox**
-- ~360 Ko (limite : 10 Mo)
+- ~373 Ko (limite : 10 Mo)
 - Aucun backend Python requis : cloud de secours MyMemory
 - Mode 100 % local disponible avec le backend du dépôt
 - 7 langues : fulfulde en MT, yemba/medumba/ewondo/douala/bassa/ghomala’ en
