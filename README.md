@@ -8,13 +8,40 @@
 
 > **Traduction financière non intrusive en fulfulde, directement dans le navigateur.**
 
-NkapLingua est une extension navigateur + un backend local qui traduit les
-interfaces financières numériques en **fulfulde (Adamawa)** sans modifier le
-site source, sans lire les champs sensibles et sans envoyer les données à un
-service cloud.
+NkapLingua est une extension navigateur autonome qui traduit les interfaces
+financières numériques en **fulfulde (Adamawa)** sans modifier le site source
+et sans lire les champs sensibles. Elle fonctionne **sans installation Python**
+grâce à un service cloud de secours, ou en **100 % local** avec le backend NLLB
+fourni dans le dépôt.
 
 Projet préparé pour le **SAFINUM Innovate Challenge 2026** (Yaoundé,
 26–28 novembre 2026).
+
+## Aperçu
+
+<p align="center">
+  <img src="docs/assets/demo-overview.png" alt="Aperçu de l’interface FINAKA avec NkapLingua" width="760" />
+</p>
+
+<p align="center">
+  <img src="docs/assets/popup.png" alt="Popup de l’extension NkapLingua" width="300" />
+</p>
+
+Design system : [`docs/DESIGN.md`](docs/DESIGN.md).
+
+## Livrables
+
+| Livrable | Lien |
+|---|---|
+| **Vidéo de démonstration** (2 min 19) | [NkapLingua-Demo.mp4](https://github.com/TSEFACKDEV/safinum-nkaplingua/releases/latest/download/NkapLingua-Demo.mp4) |
+| **Documentation PDF** | [NkapLingua-Documentation.pdf](https://github.com/TSEFACKDEV/safinum-nkaplingua/releases/latest/download/NkapLingua-Documentation.pdf) |
+| **Extension universelle** (Chrome/Edge/Firefox) | [nkaplingua-extension.zip](https://github.com/TSEFACKDEV/safinum-nkaplingua/releases/latest/download/nkaplingua-extension.zip) |
+| **Dépôt GitHub** | https://github.com/TSEFACKDEV/safinum-nkaplingua |
+| **Démo publique** | https://tsefackdev.github.io/safinum-nkaplingua/demo/ |
+
+> L’extension universelle fonctionne sans installation Python : elle utilise
+> le backend local s’il est présent, sinon le service cloud MyMemory avec un
+> texte pseudonymisé.
 
 ---
 
@@ -61,7 +88,10 @@ financière :
 5. il peut revenir à l’original à tout moment.
 
 Le site source n’est jamais modifié. Aucune ligne de code n’est ajoutée au
-serveur de la banque.
+serveur de la banque. L’extension utilise le backend local s’il est disponible ;
+sinon, elle bascule sur le service cloud **MyMemory** avec un texte
+pseudonymisé. Aucun mot de passe, code PIN, OTP ou valeur de formulaire n’est
+lu.
 
 ```text
 Page financière
@@ -77,11 +107,12 @@ Content script
       ▼
 Background (service worker Chrome / event page Firefox)
   ├─ cache local
-  └─ appel HTTP vers 127.0.0.1:8000
+  ├─ backend local si disponible (127.0.0.1:8000)
+  └─ sinon service cloud MyMemory (texte pseudonymisé)
       │
       ▼
-Backend local — FastAPI + NLLB-200
-  ├─ traduction français → fulfulde
+Moteur — NLLB-200 local ou MyMemory
+  ├─ traduction français/anglais → fulfulde
   ├─ post-contrôle des jetons et termes critiques
   └─ refus si un montant ou une entité est modifié
 ```
@@ -95,7 +126,10 @@ Backend local — FastAPI + NLLB-200
 - **Pseudonymisation** des montants, numéros, URLs et emails avant envoi.
 - **Refus sécurisé** si un jeton ou un terme critique manque.
 - **Aucune lecture** des mots de passe, codes OTP, PIN ou valeurs de formulaire.
-- **Backend local** : le texte ne quitte pas la machine.
+- **Extension autonome** : un seul ZIP, aucun serveur à installer.
+- **Backend local optionnel** : mode 100 % local avec NLLB si disponible.
+- **Cloud de secours** : MyMemory, avec texte pseudonymisé et consentement
+  explicite par le clic de l’utilisateur.
 - **CI GitHub Actions** : tests backend mock, lint JS, lint Firefox, scan de
   secrets.
 
@@ -105,12 +139,13 @@ Backend local — FastAPI + NLLB-200
 flowchart LR
     A[Page financière] --> B[Content script]
     B --> C[Background]
-    C --> D[Backend local FastAPI]
-    D --> E[NLLB-200]
-    E --> D
-    D --> C
+    C --> D{Backend local ?}
+    D -->|oui| E[FastAPI + NLLB]
+    D -->|non| F[MyMemory cloud]
+    E --> C
+    F --> C
     C --> B
-    B --> F[Page traduite réversible]
+    B --> G[Page traduite réversible]
 ```
 
 ### Stack
@@ -128,15 +163,23 @@ flowchart LR
 
 ## Démarrage rapide
 
-### Prérequis
+### Option A — extension seule (recommandée pour le jury)
 
-- Python 3.10+
-- Chrome/Edge 116+ ou Firefox 140+
-- Node.js 20+ (uniquement pour `web-ext` et le lint Firefox)
-- ~3 Go d’espace disque pour le modèle NLLB
-- 8 Go de RAM recommandés
+Aucun Python, aucun modèle à télécharger.
 
-### 1. Backend local
+1. Télécharger `dist/nkaplingua-extension.zip`.
+2. Dézipper le fichier.
+3. Charger le dossier dans Chrome/Edge ou Firefox (voir ci-dessous).
+4. Ouvrir la démo publique :
+   **https://tsefackdev.github.io/safinum-nkaplingua/demo/**
+5. Cliquer sur l’icône NkapLingua → **Traduire cette page**.
+
+L’extension utilise le backend local s’il tourne, sinon le service cloud
+MyMemory. Les montants, URLs et emails sont pseudonymisés avant l’envoi.
+
+### Option B — 100 % local (NLLB)
+
+Prérequis : Python 3.10+, ~3 Go d’espace disque, 8 Go de RAM recommandés.
 
 ```bash
 cd server
@@ -159,9 +202,7 @@ curl http://127.0.0.1:8000/health
 Le premier lancement télécharge le modèle NLLB (~2,4 Go). Sur CPU, comptez
 plusieurs dizaines de secondes pour la première traduction d’une page.
 
-### 2. Mode maquette (sans modèle)
-
-Pour tester l’extension et l’UI sans attendre le modèle :
+### Mode maquette (sans modèle)
 
 ```bash
 cd server
@@ -169,48 +210,41 @@ source .venv/bin/activate
 NK_MOCK=1 uvicorn app:app --host 127.0.0.1 --port 8000
 ```
 
-### 3. Page de démo
+### Page de démo
 
-Le backend sert directement la page de démonstration :
-
-```text
-http://127.0.0.1:8000/demo
-```
-
-La page FINAKA contient un solde, un transfert, des frais, un crédit, un champ
-PIN/OTP et un paragraphe « texte inédit ».
+- en ligne : `https://tsefackdev.github.io/safinum-nkaplingua/demo/`
+- en local : `http://127.0.0.1:8000/demo` (si backend lancé)
+- dans le dépôt : `demo/index.html`
 
 ---
 
 ## Chrome / Edge
 
-1. Ouvrir `chrome://extensions`.
-2. Activer le **mode développeur**.
-3. Cliquer sur **Charger l’extension non empaquetée**.
-4. Sélectionner le dossier `extension/`.
-5. Épingler **NkapLingua**.
-6. Ouvrir `http://127.0.0.1:8000/demo`.
-7. Cliquer sur l’icône → **Traduire cette page**.
+1. Télécharger `dist/nkaplingua-extension.zip` et le dézipper.
+2. Ouvrir `chrome://extensions`.
+3. Activer le **mode développeur**.
+4. Cliquer sur **Charger l’extension non empaquetée**.
+5. Sélectionner le dossier dézippé (celui qui contient `manifest.json`).
+6. Épingler **NkapLingua**.
+7. Ouvrir la démo publique :
+   **https://tsefackdev.github.io/safinum-nkaplingua/demo/**
+8. Cliquer sur l’icône → **Traduire cette page**.
 
-> Chrome 149+ bloque le chargement automatique des extensions non empaquetées
-> via `--load-extension` dans les builds officielles. Le chargement manuel
-> ci-dessus est la voie normale pour le développement.
+> Chrome 149+ bloque le chargement automatique via `--load-extension` dans les
+> builds officielles. Le chargement manuel ci-dessus est la voie normale.
 
 ## Firefox
 
-```bash
-./scripts/build-firefox.sh
-```
-
-Puis :
+Le même ZIP universel fonctionne dans Firefox 140+ :
 
 1. Ouvrir `about:debugging#/runtime/this-firefox`.
 2. Cliquer sur **Charger un module temporaire…**.
-3. Choisir `dist/firefox/manifest.json`.
+3. Choisir le `manifest.json` du dossier dézippé.
 
-Ou lancer directement une instance Firefox avec l’extension temporaire :
+Alternative de développement :
 
 ```bash
+./scripts/build-firefox.sh
 ./scripts/start-firefox.sh
 ```
 
@@ -273,8 +307,11 @@ l’original.
 - UI en Shadow DOM ; le texte traduit est injecté via `textContent`.
 - Montants, numéros, URLs et emails remplacés par des jetons avant traduction.
 - Si un jeton ou un terme critique manque, la traduction est refusée.
-- Backend lié à `127.0.0.1`, sans journalisation du texte.
-- CORS restreint aux origines `chrome-extension://` et `moz-extension://`.
+- Backend local prioritaire, lié à `127.0.0.1`, sans journalisation du texte.
+- Mode cloud de secours : texte pseudonymisé envoyé à **MyMemory** ; aucun mot
+  de passe, PIN, OTP ou valeur de formulaire n’est lu.
+- Aucun code JavaScript distant ; tout le code de l’extension est local.
+- CORS local restreint aux origines `chrome-extension://` et `moz-extension://`.
 
 Détails : [`docs/SECURITY.md`](docs/SECURITY.md).
 
@@ -285,6 +322,7 @@ Détails : [`docs/SECURITY.md`](docs/SECURITY.md).
 | **NLLB-200 distilled 600M** | CC BY-NC 4.0 | traduction, hackathon non commercial |
 | **Adamawa Fulfulde–French Parallel Corpus 1.2** | NOODL-1.0 | évaluation / adaptation |
 | **Common Voice Adamawa Fulfulde** | CC0 1.0 | audio optionnel |
+| **MyMemory API** | service externe gratuit | mode cloud de secours |
 | **Recherches du centre linguistique** | à confirmer | référence orthographique et terminologique |
 | **Code NkapLingua** | MIT | réutilisation libre |
 
@@ -317,6 +355,7 @@ exigence par exigence dans [`docs/COMPLIANCE.md`](docs/COMPLIANCE.md).
 | Document | Contenu |
 |---|---|
 | [`docs/COMPLIANCE.md`](docs/COMPLIANCE.md) | grille 100 points, livrables, écarts |
+| [`docs/DESIGN.md`](docs/DESIGN.md) | palette, typographie, espacement, accessibilité |
 | [`docs/TECHNICAL.md`](docs/TECHNICAL.md) | architecture, intégration, dépendances, limites |
 | [`docs/LANGUAGE_VALIDATION.md`](docs/LANGUAGE_VALIDATION.md) | fulfulde, méthode de validation native |
 | [`docs/VIDEO_SCRIPT.md`](docs/VIDEO_SCRIPT.md) | script de la vidéo de 3 minutes |
@@ -410,5 +449,5 @@ Les modèles et données gardent leurs licences respectives : NLLB-200
 
 <p align="center">
   <strong>NkapLingua</strong> — rendre les frais, les conditions et les alertes
-  compréhensibles, sans toucher au site et sans exposer les données.
+  compréhensibles, sans toucher au site et sans exposer les données sensibles.
 </p>

@@ -6,3 +6,8 @@ models/
 server/.venv/
 dist/
 .DS_Store
+video/frames/
+video/audio/
+video/clips/
+video/clips.txt
+video/*.mp4

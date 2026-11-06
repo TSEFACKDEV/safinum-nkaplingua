@@ -10,7 +10,7 @@ Ce document confronte le prototype NkapLingua au règlement officiel du
 | 1. Adaptation de la langue de l’interface | ✅ | Extension Manifest V3 + backend NLLB ; page FINAKA de démonstration |
 | 2. Parcours financier : solde, frais, transfert | ✅ | Page FINAKA : solde, frais, formulaire de transfert, récapitulatif |
 | 3. Préservation des montants, frais, bénéficiaires, conditions, alertes | ✅ / ⚠️ | Jetons `[[NUM_n]]`, contrôle des termes critiques, refus si un jeton manque ; la qualité linguistique reste à valider |
-| 4. Fonctionnement sans modifier le code source | ✅ | Injection à l’exécution, aucun changement serveur, toggle original |
+| 4. Fonctionnement sans modifier le code source | ✅ | Injection à l’exécution, aucun changement serveur, toggle original ; extension autonome avec cloud de secours |
 | 5. Adaptation à un nouveau contenu | ✅ / ⚠️ | Popup « texte inédit », traduction de sélection ; qualité NLLB variable sur les phrases longues |
 
 ## 2. Grille d’évaluation (100 points)
@@ -19,7 +19,7 @@ Ce document confronte le prototype NkapLingua au règlement officiel du
 |---|---:|---|---|
 | Fonctionnalité du prototype | 25 | 20–23 | Le pipeline fonctionne ; la qualité native doit être validée |
 | Intégration et indépendance | 20 | 18–20 | Aucune modification du site ; `activeTab` + `scripting` |
-| Sécurité et préservation des informations | 20 | 17–19 | Pseudonymisation, contrôle des jetons, backend local ; noms propres à surveiller |
+| Sécurité et préservation des informations | 20 | 16–19 | Pseudonymisation, contrôle des jetons, local prioritaire ; cloud de secours divulgué |
 | Accessibilité et expérience utilisateur | 15 | 11–13 | Toggle original, `lang`, popup natif ; pas encore de lecture audio |
 | Adaptation à un nouveau contenu | 10 | 7–9 | Oui, mais dépend de la qualité NLLB sur phrases longues |
 | Faisabilité technique et documentation | 10 | 9–10 | README, doc technique, licences, CI |
@@ -49,7 +49,8 @@ Points à vérifier le jour J :
 - [ ] Les montants et numéros restent identiques.
 - [ ] Le bouton « Restaurer l’original » fonctionne.
 - [ ] Un message nouveau ajouté par le jury est traduit.
-- [ ] Le backend est lancé sur `127.0.0.1:8000`.
+- [ ] L’extension fonctionne aussi sans backend (mode cloud de secours).
+- [ ] Le backend local est lancé si l’on veut le mode 100 % local.
 
 Limites connues :
 
@@ -64,7 +65,7 @@ Limites connues :
 | Règle | Respect |
 |---|---|
 | Ne pas utiliser de vrais comptes bancaires | ✅ page FINAKA fictive |
-| Ne pas collecter/transmettre de données personnelles | ✅ backend local, texte pseudonymisé |
+| Ne pas collecter/transmettre de données personnelles | ✅ local prioritaire ; cloud avec texte pseudonymisé |
 | Ne pas contourner les mécanismes de sécurité | ✅ aucune modification du site |
 | Préserver montants, frais, bénéficiaires, confirmations | ✅ jetons + contrôle ; noms propres à renforcer |
 | Divulguer les outils et composants tiers | ✅ `docs/DATA_LICENSES.md`, `docs/TECHNICAL.md` |
@@ -73,13 +74,14 @@ Limites connues :
 ## 6. Actions prioritaires avant soumission
 
 1. **Faire valider 20 phrases finance par un locuteur natif fulfulde.**
-2. **Remplacer les traductions de la page de démo par des versions validées**
+2. **Tester le ZIP universel sur Chrome et Firefox, sans backend local.**
+3. **Remplacer les traductions de la page de démo par des versions validées**
    (ou utiliser le glossaire / la mémoire de traduction).
-3. **Enregistrer la vidéo de 3 minutes** selon `docs/VIDEO_SCRIPT.md`.
-4. **Tester sur une page que l’équipe n’a pas écrite** (autre site de démo).
-5. **Vérifier que le backend démarre sur une machine propre** (ou fournir une
+4. **Enregistrer la vidéo de 3 minutes** selon `docs/VIDEO_SCRIPT.md`.
+5. **Tester sur une page que l’équipe n’a pas écrite** (autre site de démo).
+6. **Vérifier que le backend démarre sur une machine propre** (ou fournir une
    vidéo de secours).
-6. **Mettre à jour `docs/LANGUAGE_VALIDATION.md`** avec les résultats réels.
+7. **Mettre à jour `docs/LANGUAGE_VALIDATION.md`** avec les résultats réels.
 
 ## 7. Ce qu’il ne faut pas promettre
 

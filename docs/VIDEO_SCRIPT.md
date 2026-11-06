@@ -104,8 +104,9 @@ phrase courte déjà chargée.
 
 **Voix off** :
 
-> « Une seule requête : `127.0.0.1:8000`. Pas de cloud, pas de cookies, pas de
-> mot de passe. Le backend est local, sans journalisation du texte. »
+> « L’extension utilise le backend local s’il est disponible. Sinon, elle
+> bascule sur un service cloud avec un texte pseudonymisé. Dans les deux cas :
+> pas de cookies, pas de mot de passe, pas de code PIN. »
 
 **Écran** : montrer `docs/DATA_LICENSES.md` ou le tableau des composants.
 
@@ -123,14 +124,15 @@ phrase courte déjà chargée.
 **Voix off** :
 
 > « NkapLingua : une couche de confiance pour l’inclusion financière, sans
-> toucher au site et sans exposer les données. »
+> toucher au site et sans exposer les données sensibles. »
 
 ---
 
 ## Checklist d’enregistrement
 
-- [ ] Backend lancé sur `127.0.0.1:8000`
-- [ ] Modèle NLLB préchauffé (une première traduction faite avant)
+- [ ] Extension seule testée sans backend (mode cloud)
+- [ ] Backend local lancé pour le mode 100 % local (optionnel)
+- [ ] Modèle NLLB préchauffé si mode local
 - [ ] Extension chargée dans Chrome/Firefox
 - [ ] Page `http://127.0.0.1:8000/demo` ouverte
 - [ ] Zoom navigateur à 100 %

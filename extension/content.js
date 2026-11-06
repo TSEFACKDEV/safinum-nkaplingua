@@ -57,7 +57,9 @@
     "OTP",
     "KYC",
     "IBAN",
-    "SWIFT"
+    "SWIFT",
+    "FINAKA",
+    "Aïcha"
   ];
 
   // Détection FR/EN volontairement simple : le challenge peut fournir une
@@ -336,7 +338,7 @@
         });
 
         if (!response || response.error) {
-          showToast("Backend indisponible. Lancez le serveur local.");
+          showToast("Service de traduction indisponible. Vérifiez la connexion ou lancez le backend local.");
           break;
         }
 
@@ -369,7 +371,7 @@
       );
     } catch (error) {
       console.error("[NkapLingua]", error);
-      showToast("Erreur de traduction. Vérifiez le backend local.");
+      showToast("Erreur de traduction. Vérifiez la connexion ou le backend local.");
     } finally {
       applying = false;
       if (active) startObserver();
@@ -469,53 +471,60 @@
     style.textContent = `
       .box {
         width: min(420px, calc(100vw - 24px));
-        background: #ffffff;
-        color: #111111;
-        border: 1px solid #d7d7d7;
-        border-radius: 14px;
-        box-shadow: 0 18px 50px rgba(0,0,0,.22);
-        font: 14px/1.45 system-ui, -apple-system, Segoe UI, sans-serif;
-        padding: 14px 16px;
+        background: #fffdf8;
+        color: #14201b;
+        border: 1px solid #e3dbcd;
+        border-radius: 16px;
+        box-shadow: 0 18px 50px rgba(20,32,27,.18);
+        font: 14px/1.45 "Noto Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+        padding: 15px 17px;
       }
       .tag {
         display: flex;
         align-items: center;
         justify-content: space-between;
-        font-size: 11px;
-        font-weight: 700;
-        letter-spacing: .08em;
+        gap: 10px;
+        font-size: 10px;
+        font-weight: 800;
+        letter-spacing: .1em;
         text-transform: uppercase;
-        color: #0b6b4f;
-        margin-bottom: 8px;
+        color: #7a5a22;
+        margin-bottom: 9px;
       }
       .original {
-        color: #666;
+        color: #5d6d64;
         font-size: 12px;
-        border-left: 3px solid #e5e5e5;
-        padding-left: 8px;
-        margin-bottom: 10px;
+        border-left: 3px solid #e8d5ad;
+        padding-left: 9px;
+        margin-bottom: 11px;
         max-height: 70px;
         overflow: auto;
       }
       .translation {
         font-size: 16px;
-        line-height: 1.5;
+        line-height: 1.55;
         white-space: pre-wrap;
       }
       button {
         border: 0;
-        background: #0b6b4f;
-        color: #fff;
+        background: #123b2e;
+        color: #fbf7ee;
         border-radius: 999px;
-        padding: 4px 10px;
+        padding: 5px 11px;
         font: inherit;
-        font-size: 11px;
+        font-size: 10px;
+        font-weight: 700;
         cursor: pointer;
+      }
+      button:hover {
+        background: #174a39;
       }
     `;
 
     const box = document.createElement("div");
     box.className = "box";
+    box.setAttribute("role", "dialog");
+    box.setAttribute("aria-label", "Traduction NkapLingua");
 
     const tag = document.createElement("div");
     tag.className = "tag";
@@ -560,18 +569,21 @@
     style.textContent = `
       .toast {
         max-width: 360px;
-        background: #0b1f18;
-        color: #f4fff9;
-        border: 1px solid rgba(255,255,255,.14);
-        border-radius: 12px;
-        box-shadow: 0 12px 32px rgba(0,0,0,.28);
-        padding: 10px 14px;
-        font: 13px/1.4 system-ui, -apple-system, Segoe UI, sans-serif;
+        background: #123b2e;
+        color: #f8f4ec;
+        border: 1px solid rgba(232,213,173,.24);
+        border-left: 3px solid #c9a45c;
+        border-radius: 14px;
+        box-shadow: 0 14px 34px rgba(13,42,32,.24);
+        padding: 11px 14px;
+        font: 13px/1.45 "Noto Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
       }
     `;
 
     const box = document.createElement("div");
     box.className = "toast";
+    box.setAttribute("role", "status");
+    box.setAttribute("aria-live", "polite");
     box.textContent = message;
     shadow.append(style, box);
     document.documentElement.appendChild(host);

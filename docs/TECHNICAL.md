@@ -51,14 +51,14 @@ financière existante, sans modifier son code source.
 ┌──────────────────────────────────────────────────────────────┐
 │ Background (Chrome service worker / Firefox event page)      │
 │  - cache local                                               │
-│  - timeout                                                   │
-│  - appel HTTP local                                          │
+│  - backend local prioritaire si disponible                   │
+│  - sinon service cloud MyMemory (texte pseudonymisé)         │
 └──────────────────────────────┬───────────────────────────────┘
-                               │ HTTP 127.0.0.1:8000
+                               │ local ou HTTPS
                                ▼
 ┌──────────────────────────────────────────────────────────────┐
-│ Backend FastAPI                                              │
-│  - NLLB-200 distilled 600M                                   │
+│ Moteur de traduction                                         │
+│  - NLLB-200 local (FastAPI) ou MyMemory cloud                │
 │  - découpage en phrases                                      │
 │  - post-contrôle : jetons + termes critiques                 │
 │  - refus si un montant/entité est modifié                    │
@@ -72,7 +72,7 @@ financière existante, sans modifier son code source.
 | Extension Chrome/Edge | `extension/manifest.json` | Manifest V3 |
 | Extension Firefox | `extension/manifest.firefox.json` | event page, Firefox 140+ |
 | Content script | `extension/content.js` | lecture DOM, pseudonymisation, rendu |
-| Background | `extension/background.js` | orchestration, cache, appels API |
+| Background | `extension/background.js` | orchestration, cache, local/cloud |
 | Popup | `extension/popup.html/js/css` | contrôle utilisateur, texte inédit |
 | Backend | `server/app.py` | API FastAPI + NLLB |
 | Tests | `server/test_api.py` | tests sans modèle (`NK_MOCK=1`) |
@@ -98,6 +98,8 @@ financière existante, sans modifier son code source.
   n’est pas touché.
 - **Aucune API côté banque** : l’extension lit uniquement le DOM rendu.
 - **Aucune dépendance à un identifiant de page** : le pipeline est générique.
+- **Fonctionne sans backend** : un service cloud de secours (MyMemory) prend le
+  relais si le backend local n’est pas lancé ; le texte reste pseudonymisé.
 - **Permissions minimales** : `activeTab`, `scripting`, `storage`,
   `contextMenus`; pas de `*://*/*`.
 - **Portabilité** : même code JS pour Chrome et Firefox, avec
@@ -114,7 +116,8 @@ reconnus par le code.
 
 | Dépendance | Version | Licence | Usage |
 |---|---|---|---|
-| `facebook/nllb-200-distilled-600M` | 600M | CC BY-NC 4.0 | traduction |
+| `facebook/nllb-200-distilled-600M` | 600M | CC BY-NC 4.0 | traduction locale |
+| MyMemory Translation API | — | service externe gratuit | traduction cloud de secours |
 | FastAPI | >=0.115 | MIT | API |
 | Uvicorn | >=0.30 | BSD | serveur |
 | PyTorch | >=2.3 | BSD | inférence |
@@ -195,7 +198,10 @@ Puis ouvrir `http://127.0.0.1:8000/demo`.
 - Les noms propres ne sont pas encore protégés par un mécanisme dédié.
 - Pas de support des iframes cross-origin, shadow DOM fermés, images/canvas.
 - Pas de traduction audio (TTS fulfulde) dans le MVP.
-- Le backend doit tourner sur la machine de démonstration.
+- Le backend local est optionnel ; le mode cloud dépend d’un service externe
+  (MyMemory) et de sa disponibilité/quota.
+- En mode cloud, le texte pseudonymisé quitte la machine ; ne pas l’utiliser
+  avec des données réelles sensibles.
 - NLLB est CC BY-NC 4.0 : usage non commercial pour le hackathon.
 - Le prototype n’est pas une traduction certifiée pour un contrat.
 

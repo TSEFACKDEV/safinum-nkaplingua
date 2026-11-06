@@ -1,0 +1,1107 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="utf-8" />
+    <title>NkapLingua — Documentation SAFINUM 2026</title>
+    <style>
+      @font-face {
+        font-family: "Noto Sans";
+        src: url("../demo/fonts/noto-sans-latin.woff2") format("woff2");
+        font-weight: 400 700;
+        font-style: normal;
+      }
+      @font-face {
+        font-family: "Noto Sans";
+        src: url("../demo/fonts/noto-sans-latin-ext.woff2") format("woff2");
+        font-weight: 400 700;
+        font-style: normal;
+        unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7,
+          U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F,
+          U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C4, U+2113, U+2C60-2C7F,
+          U+A720-A7FF;
+      }
+      @font-face {
+        font-family: "Fraunces";
+        src: url("../demo/fonts/fraunces-latin.woff2") format("woff2");
+        font-weight: 500 600;
+        font-style: normal;
+      }
+
+      :root {
+        --forest: #123b2e;
+        --forest-deep: #0d2a20;
+        --gold: #c9a45c;
+        --gold-dark: #7a5a22;
+        --ink: #14201b;
+        --muted: #5d6d64;
+        --line: #e3dbcd;
+        --canvas: #f8f4ec;
+        --sand: #f2ece0;
+        --danger: #b4453a;
+        --success: #2f7d5b;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      html {
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+      }
+
+      body {
+        margin: 0;
+        background: #fff;
+        color: var(--ink);
+        font: 10.5pt/1.55 "Noto Sans", "DejaVu Sans", sans-serif;
+      }
+
+      @page {
+        size: A4;
+        margin: 15mm 14mm 16mm;
+      }
+
+      @page :first {
+        margin: 0;
+      }
+
+      .page {
+        position: relative;
+        min-height: 265mm;
+        break-after: page;
+      }
+
+      .page:last-child {
+        break-after: auto;
+      }
+
+      .cover {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        min-height: 297mm;
+        margin: 0;
+        padding: 24mm 20mm 18mm;
+        background:
+          radial-gradient(circle at 90% 8%, rgba(201, 164, 92, 0.2), transparent 32%),
+          radial-gradient(circle at 0% 100%, rgba(201, 164, 92, 0.08), transparent 40%),
+          linear-gradient(140deg, var(--forest) 0%, var(--forest-deep) 100%);
+        color: #f8f4ec;
+      }
+
+      .cover-top {
+        display: flex;
+        align-items: center;
+        gap: 14px;
+      }
+
+      .mark {
+        display: grid;
+        place-items: center;
+        width: 52px;
+        height: 52px;
+        border-radius: 16px;
+        background: var(--gold);
+        color: var(--forest-deep);
+        font-family: "Fraunces", Georgia, serif;
+        font-size: 30px;
+        font-weight: 600;
+      }
+
+      .cover-kicker {
+        margin: 0;
+        color: rgba(248, 244, 236, 0.62);
+        font-size: 8.5pt;
+        font-weight: 700;
+        letter-spacing: 0.16em;
+        text-transform: uppercase;
+      }
+
+      .cover-brand {
+        margin: 3px 0 0;
+        font-family: "Fraunces", Georgia, serif;
+        font-size: 22pt;
+        font-weight: 600;
+        letter-spacing: -0.03em;
+      }
+
+      .cover h1 {
+        max-width: 150mm;
+        margin: 0;
+        font-family: "Fraunces", Georgia, serif;
+        font-size: 36pt;
+        font-weight: 500;
+        letter-spacing: -0.04em;
+        line-height: 1.04;
+      }
+
+      .cover h1 span {
+        color: var(--gold);
+      }
+
+      .cover-lede {
+        max-width: 125mm;
+        margin: 8mm 0 0;
+        color: rgba(248, 244, 236, 0.72);
+        font-size: 12pt;
+        line-height: 1.55;
+      }
+
+      .cover-meta {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+        margin-top: 14mm;
+      }
+
+      .cover-pill {
+        border: 1px solid rgba(232, 213, 173, 0.28);
+        border-radius: 999px;
+        padding: 5px 10px;
+        color: var(--gold);
+        font-size: 8pt;
+        font-weight: 700;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+      }
+
+      .cover-bottom {
+        display: flex;
+        align-items: flex-end;
+        justify-content: space-between;
+        gap: 20px;
+        padding-top: 12mm;
+        border-top: 1px solid rgba(232, 213, 173, 0.18);
+      }
+
+      .cover-bottom p {
+        margin: 0;
+        color: rgba(248, 244, 236, 0.56);
+        font-size: 8.5pt;
+        line-height: 1.5;
+      }
+
+      .cover-bottom strong {
+        color: #f8f4ec;
+        font-weight: 600;
+      }
+
+      h2 {
+        margin: 0 0 5mm;
+        color: var(--forest);
+        font-family: "Fraunces", Georgia, serif;
+        font-size: 22pt;
+        font-weight: 600;
+        letter-spacing: -0.03em;
+        line-height: 1.1;
+      }
+
+      h3 {
+        margin: 7mm 0 2.5mm;
+        color: var(--ink);
+        font-size: 12pt;
+        font-weight: 700;
+        letter-spacing: -0.01em;
+      }
+
+      h3:first-child {
+        margin-top: 0;
+      }
+
+      p {
+        margin: 0 0 3mm;
+      }
+
+      .lede {
+        color: var(--muted);
+        font-size: 11pt;
+        line-height: 1.6;
+      }
+
+      .eyebrow {
+        margin: 0 0 2mm;
+        color: var(--gold-dark);
+        font-size: 8pt;
+        font-weight: 800;
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+      }
+
+      .rule {
+        height: 1px;
+        margin: 5mm 0;
+        background: var(--line);
+      }
+
+      .grid-2 {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 7mm;
+      }
+
+      .grid-3 {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 4mm;
+      }
+
+      .card {
+        border: 1px solid var(--line);
+        border-radius: 3mm;
+        padding: 4mm;
+        background: #fffdf8;
+      }
+
+      .card-soft {
+        background: var(--canvas);
+      }
+
+      .card h4 {
+        margin: 0 0 1.5mm;
+        color: var(--forest);
+        font-size: 10pt;
+        font-weight: 700;
+      }
+
+      .card p,
+      .card li {
+        color: var(--muted);
+        font-size: 9pt;
+        line-height: 1.5;
+      }
+
+      .card ul {
+        margin: 0;
+        padding-left: 4mm;
+      }
+
+      .stat {
+        border-left: 2px solid var(--gold);
+        padding-left: 3mm;
+      }
+
+      .stat strong {
+        display: block;
+        color: var(--forest);
+        font-size: 18pt;
+        letter-spacing: -0.03em;
+        line-height: 1.1;
+      }
+
+      .stat span {
+        color: var(--muted);
+        font-size: 8.5pt;
+      }
+
+      ul.clean {
+        margin: 0 0 3mm;
+        padding-left: 4.5mm;
+      }
+
+      ul.clean li {
+        margin-bottom: 1.6mm;
+        color: var(--muted);
+      }
+
+      ul.clean li strong {
+        color: var(--ink);
+      }
+
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        margin: 3mm 0 5mm;
+        font-size: 8.8pt;
+      }
+
+      th,
+      td {
+        padding: 2.2mm 2.5mm;
+        border-bottom: 1px solid var(--line);
+        text-align: left;
+        vertical-align: top;
+      }
+
+      th {
+        color: var(--forest);
+        font-size: 7.8pt;
+        font-weight: 800;
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
+        background: var(--sand);
+      }
+
+      td {
+        color: var(--muted);
+      }
+
+      td strong {
+        color: var(--ink);
+      }
+
+      .tag {
+        display: inline-block;
+        border: 1px solid var(--line);
+        border-radius: 999px;
+        padding: 1mm 2.5mm;
+        background: var(--canvas);
+        color: var(--muted);
+        font-size: 7.5pt;
+        font-weight: 700;
+        letter-spacing: 0.05em;
+        text-transform: uppercase;
+      }
+
+      .callout {
+        border-left: 2.5px solid var(--gold);
+        border-radius: 1mm;
+        padding: 3.5mm 4mm;
+        background: #faf4e7;
+        color: #5c4a24;
+        font-size: 9pt;
+        line-height: 1.5;
+      }
+
+      .callout-danger {
+        border-left-color: var(--danger);
+        background: #fdf3f1;
+        color: #7f2e24;
+      }
+
+      .callout-success {
+        border-left-color: var(--success);
+        background: #f1f7f3;
+        color: #1d4d3a;
+      }
+
+      .screenshot {
+        width: 100%;
+        border: 1px solid var(--line);
+        border-radius: 2.5mm;
+        box-shadow: 0 2mm 5mm rgba(20, 32, 27, 0.08);
+      }
+
+      .screenshot-small {
+        width: 58mm;
+        border: 1px solid var(--line);
+        border-radius: 2.5mm;
+        box-shadow: 0 2mm 5mm rgba(20, 32, 27, 0.08);
+      }
+
+      .figure-row {
+        display: flex;
+        align-items: flex-start;
+        gap: 5mm;
+      }
+
+      .figure-caption {
+        margin-top: 1.5mm;
+        color: var(--muted);
+        font-size: 7.5pt;
+      }
+
+      .diagram {
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr;
+        gap: 3mm;
+        margin: 4mm 0;
+      }
+
+      .diagram-box {
+        border: 1px solid var(--line);
+        border-radius: 2.5mm;
+        padding: 3mm;
+        background: var(--canvas);
+      }
+
+      .diagram-box strong {
+        display: block;
+        color: var(--forest);
+        font-size: 9pt;
+      }
+
+      .diagram-box span {
+        display: block;
+        margin-top: 1mm;
+        color: var(--muted);
+        font-size: 7.8pt;
+        line-height: 1.4;
+      }
+
+      .page-footer {
+        position: absolute;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        display: flex;
+        justify-content: space-between;
+        gap: 10mm;
+        border-top: 1px solid var(--line);
+        padding-top: 2mm;
+        color: var(--muted);
+        font-size: 7.2pt;
+      }
+
+      .page-footer strong {
+        color: var(--forest);
+      }
+
+      .mono {
+        font-family: "DejaVu Sans Mono", monospace;
+        font-size: 8pt;
+        color: var(--forest);
+      }
+
+      .no-break {
+        break-inside: avoid;
+      }
+
+      .two-col-list {
+        columns: 2;
+        column-gap: 7mm;
+      }
+
+      .two-col-list li {
+        break-inside: avoid;
+      }
+
+      @media print {
+        a {
+          color: inherit;
+          text-decoration: none;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Cover -->
+    <section class="page cover">
+      <div>
+        <div class="cover-top">
+          <span class="mark">N</span>
+          <div>
+            <p class="cover-kicker">SAFINUM Innovate Challenge 2026</p>
+            <p class="cover-brand">NkapLingua</p>
+          </div>
+        </div>
+      </div>
+
+      <div>
+        <p class="cover-kicker">Documentation technique et fonctionnelle</p>
+        <h1>
+          Rendre les services financiers numériques accessibles en
+          <span>fulfulde</span>.
+        </h1>
+        <p class="cover-lede">
+          Une couche de traduction réversible, locale et non intrusive pour les
+          interfaces de banque, de mobile money et de microfinance au Cameroun.
+        </p>
+        <div class="cover-meta">
+          <span class="cover-pill">Fulfulde · fub</span>
+          <span class="cover-pill">Browser extension</span>
+          <span class="cover-pill">Local-first</span>
+          <span class="cover-pill">NLLB-200</span>
+        </div>
+      </div>
+
+      <div class="cover-bottom">
+        <p>
+          <strong>Équipe NkapLingua</strong><br />
+          Klein · Freedy · Marius<br />
+          Yaoundé, Cameroun · novembre 2026
+        </p>
+        <p style="text-align: right">
+          <strong>Dépôt</strong><br />
+          github.com/TSEFACKDEV/safinum-nkaplingua<br />
+          Prototype de présélection
+        </p>
+      </div>
+    </section>
+
+    <!-- 1. Résumé -->
+    <section class="page">
+      <p class="eyebrow">01 · Résumé</p>
+      <h2>Le problème, la solution, la promesse</h2>
+      <p class="lede">
+        Les interfaces financières numériques camerounaises sont majoritairement
+        en français ou en anglais. Une partie de la population ne maîtrise pas
+        suffisamment ces langues pour comprendre un solde, des frais, une
+        condition de crédit ou une alerte de sécurité.
+      </p>
+
+      <div class="grid-2" style="margin-top: 7mm">
+        <div class="card">
+          <h4>Le problème</h4>
+          <p>
+            Les traducteurs généralistes ne connaissent pas la terminologie
+            financière et peuvent modifier un montant, un numéro de compte ou un
+            avertissement. Dans un contexte financier, une erreur de sens est un
+            défaut majeur.
+          </p>
+        </div>
+        <div class="card">
+          <h4>La solution</h4>
+          <p>
+            Une extension navigateur qui ajoute une couche de traduction
+            réversible à une interface existante, sans modifier son code source.
+            Elle fonctionne seule avec un service cloud de secours, ou en
+            100 % local avec le backend NLLB. L’utilisateur clique, choisit le
+            fulfulde, et peut revenir à l’original à tout moment.
+          </p>
+        </div>
+      </div>
+
+      <h3>Ce que le prototype démontre</h3>
+      <ul class="clean">
+        <li>
+          <strong>Adaptation de l’interface</strong> : textes, instructions,
+          messages et alertes en fulfulde.
+        </li>
+        <li>
+          <strong>Parcours financier</strong> : solde, frais, préparation d’un
+          transfert, récapitulatif avant confirmation, erreur et sécurité.
+        </li>
+        <li>
+          <strong>Préservation</strong> : montants, frais, bénéficiaires,
+          conditions et avertissements contrôlés avant affichage.
+        </li>
+        <li>
+          <strong>Indépendance</strong> : aucune modification du site cible,
+          aucune API côté banque.
+        </li>
+        <li>
+          <strong>Contenu inédit</strong> : popup de test et traduction de
+          sélection pour un message introduit pendant la démonstration.
+        </li>
+      </ul>
+
+      <div class="callout" style="margin-top: 6mm">
+        <strong>Positionnement :</strong> NkapLingua n’est pas un nouveau service
+        financier. C’est une couche d’accessibilité linguistique qui s’adapte aux
+        services existants.
+      </div>
+
+      <h3>Périmètre du prototype</h3>
+      <div class="grid-3">
+        <div class="card">
+          <h4>Inclus</h4>
+          <ul>
+            <li>Extension Chrome/Edge et Firefox.</li>
+            <li>Traduction français/anglais → fulfulde.</li>
+            <li>Parcours solde, frais, transfert, récapitulatif.</li>
+            <li>Contrôle des montants et termes critiques.</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h4>Hors périmètre</h4>
+          <ul>
+            <li>Application mobile native.</li>
+            <li>Traduction audio/TTS fulfulde.</li>
+            <li>Contrats juridiques certifiés.</li>
+            <li>Déploiement en production bancaire.</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h4>Hypothèses</h4>
+          <ul>
+            <li>Interface web accessible dans un navigateur.</li>
+            <li>Backend local disponible sur la machine.</li>
+            <li>Validation native réalisée avant la démo.</li>
+            <li>Opérations simulées uniquement.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="page-footer">
+        <span><strong>NkapLingua</strong> · SAFINUM 2026</span>
+        <span>Documentation · page 2</span>
+      </div>
+    </section>
+
+    <!-- 2. Architecture -->
+    <section class="page">
+      <p class="eyebrow">02 · Architecture</p>
+      <h2>Une intégration sans toucher au site</h2>
+      <p class="lede">
+        Le pipeline est générique : il ne dépend pas d’une page ou d’un
+        fournisseur financier particulier.
+      </p>
+
+      <div class="diagram">
+        <div class="diagram-box">
+          <strong>1 · Page financière</strong>
+          <span>
+            Interface existante ou simulée : solde, frais, transfert,
+            récapitulatif, erreurs.
+          </span>
+        </div>
+        <div class="diagram-box">
+          <strong>2 · Content script</strong>
+          <span>
+            Lit uniquement les nœuds texte visibles. Ignore les champs
+            sensibles. Détecte FR/EN.
+          </span>
+        </div>
+        <div class="diagram-box">
+          <strong>3 · Pseudonymisation</strong>
+          <span>
+            Remplace montants, numéros, URLs et emails par des jetons avant
+            l’envoi.
+          </span>
+        </div>
+        <div class="diagram-box">
+          <strong>4 · Background</strong>
+          <span>
+            Cache, backend local prioritaire, sinon service cloud MyMemory.
+          </span>
+        </div>
+        <div class="diagram-box">
+          <strong>5 · Moteur de traduction</strong>
+          <span>
+            NLLB-200 local ou MyMemory cloud, contrôle des jetons et termes
+            critiques.
+          </span>
+        </div>
+        <div class="diagram-box">
+          <strong>6 · Rendu réversible</strong>
+          <span>
+            Restaure les jetons, écrit via textContent, conserve l’original et
+            permet le retour arrière.
+          </span>
+        </div>
+      </div>
+
+      <h3>Choix techniques</h3>
+      <table>
+        <tr>
+          <th>Élément</th>
+          <th>Choix</th>
+          <th>Pourquoi</th>
+        </tr>
+        <tr>
+          <td><strong>Extension</strong></td>
+          <td>Manifest V3, Chrome/Edge + Firefox 140+</td>
+          <td>Déploiement sans intégration, permissions minimales.</td>
+        </tr>
+        <tr>
+          <td><strong>Langue</strong></td>
+          <td>Fulfulde Adamawa (`fub`), modèle `fuv_Latn`</td>
+          <td>Langue nationale majeure, pertinence pour l’inclusion financière.</td>
+        </tr>
+        <tr>
+          <td><strong>Traduction</strong></td>
+          <td>NLLB-200 distilled 600M</td>
+          <td>Meilleure qualité que M2M100 sur les phrases courtes fulfulde.</td>
+        </tr>
+        <tr>
+          <td><strong>Moteur</strong></td>
+          <td>NLLB local + MyMemory cloud de secours</td>
+          <td>Extension autonome ; mode local prioritaire pour la confidentialité.</td>
+        </tr>
+        <tr>
+          <td><strong>Tests / CI</strong></td>
+          <td>Pytest, GitHub Actions</td>
+          <td>Vérification reproductible sans télécharger le modèle.</td>
+        </tr>
+      </table>
+
+      <div class="callout callout-success">
+        <strong>Indépendance :</strong> le site cible n’est jamais modifié. Le
+        content script est injecté après action de l’utilisateur via
+        <span class="mono">activeTab</span> + <span class="mono">scripting</span>.
+        Un seul ZIP universel fonctionne sur Chrome, Edge et Firefox.
+      </div>
+
+      <h3>Exemple de flux</h3>
+      <div class="card card-soft">
+        <p class="mono" style="line-height: 1.7">
+          « Les frais sont de 1 000 FCFA. »<br />
+          → « Les frais sont de [[NUM_0]] FCFA. »<br />
+          → traduction NLLB avec le jeton préservé<br />
+          → contrôle : le jeton est présent exactement une fois<br />
+          → « Fedde jaɓɓorgo nden ko 1 000 FCFA. »
+        </p>
+      </div>
+
+
+      <div class="page-footer">
+        <span><strong>NkapLingua</strong> · SAFINUM 2026</span>
+        <span>Documentation · page 3</span>
+      </div>
+    </section>
+
+    <!-- 3. Démonstration -->
+    <section class="page">
+      <p class="eyebrow">03 · Démonstration</p>
+      <h2>Le parcours financier complet</h2>
+      <p class="lede">
+        La page FINAKA est fictive. Elle reprend les étapes demandées par le
+        challenge : solde, frais, transfert, récapitulatif, erreur et alerte de
+        sécurité.
+      </p>
+
+      <div class="figure-row" style="margin-top: 5mm">
+        <div style="flex: 1">
+          <img class="screenshot" src="assets/demo-overview.png" alt="Aperçu de la page FINAKA" />
+          <p class="figure-caption">
+            Page de démonstration FINAKA : solde, transfert, récapitulatif,
+            sécurité et test de contenu inédit.
+          </p>
+        </div>
+        <img class="screenshot-small" src="assets/popup.png" alt="Popup NkapLingua" />
+      </div>
+
+      <h3>Les cinq fonctionnalités minimales</h3>
+      <table>
+        <tr>
+          <th>Exigence</th>
+          <th>Démonstration</th>
+        </tr>
+        <tr>
+          <td><strong>1. Adaptation de la langue</strong></td>
+          <td>Traduction de la page en fulfulde, bouton de retour à l’original.</td>
+        </tr>
+        <tr>
+          <td><strong>2. Parcours financier</strong></td>
+          <td>Solde, frais, transfert, récapitulatif avant confirmation.</td>
+        </tr>
+        <tr>
+          <td><strong>3. Préservation</strong></td>
+          <td>Jetons pour les montants, contrôle des termes critiques, refus si un jeton manque.</td>
+        </tr>
+        <tr>
+          <td><strong>4. Indépendance</strong></td>
+          <td>Aucune modification du site, injection à l’exécution, toggle original.</td>
+        </tr>
+        <tr>
+          <td><strong>5. Nouveau contenu</strong></td>
+          <td>Popup « texte inédit » + traduction de sélection.</td>
+        </tr>
+      </table>
+
+
+      <div class="page-footer">
+        <span><strong>NkapLingua</strong> · SAFINUM 2026</span>
+        <span>Documentation · page 4</span>
+      </div>
+    </section>
+
+    <!-- 4. Sécurité -->
+    <section class="page">
+      <p class="eyebrow">04 · Sécurité et intégrité</p>
+      <h2>Les montants ne changent jamais</h2>
+      <p class="lede">
+        La sécurité est traitée comme une propriété du pipeline, pas comme une
+        promesse.
+      </p>
+
+      <h3>Pseudonymisation</h3>
+      <p>
+        Avant l’envoi au backend, le content script remplace les nombres, URLs et
+        emails par des jetons :
+      </p>
+      <p class="mono">
+        « Le solde est de 125 000 FCFA. » → « Le solde est de [[NUM_0]] FCFA. »
+      </p>
+      <p>
+        Après traduction, chaque jeton doit être présent exactement une fois.
+        Sinon, la traduction est refusée et l’original est conservé. Les jetons
+        sont ensuite restaurés à l’identique.
+      </p>
+
+      <div class="grid-2">
+        <div class="card">
+          <h4>Ce qui est lu</h4>
+          <ul>
+            <li>Nœuds texte visibles uniquement.</li>
+            <li>Libellés, messages, alertes, boutons.</li>
+            <li>Langue source détectée (FR/EN).</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h4>Ce qui n’est jamais lu</h4>
+          <ul>
+            <li>Mots de passe, PIN, codes OTP.</li>
+            <li>Valeurs de formulaire, cookies, tokens.</li>
+            <li>En-têtes d’authentification.</li>
+          </ul>
+        </div>
+      </div>
+
+      <h3>Contrôles</h3>
+      <ul class="clean">
+        <li><strong>Jetons</strong> : montants, numéros, URLs, emails.</li>
+        <li><strong>Termes critiques</strong> : FCFA, PIN, OTP, KYC, noms de bénéficiaires.</li>
+        <li><strong>Refus</strong> : si un jeton ou un terme critique manque, l’original reste affiché.</li>
+        <li><strong>Rendu</strong> : `textContent`, jamais `innerHTML` ; UI en Shadow DOM.</li>
+        <li><strong>Backend local</strong> : `127.0.0.1` uniquement, sans journalisation du texte.</li>
+        <li><strong>Cloud de secours</strong> : MyMemory, texte pseudonymisé, aucun PIN/OTP.</li>
+      </ul>
+
+      <div class="callout callout-danger">
+        <strong>Règle du challenge :</strong> une erreur qui altère un montant,
+        une condition ou un avertissement de sécurité est un défaut majeur. Le
+        contrôle de préservation est donc un élément central du prototype, pas
+        une option.
+      </div>
+
+      <h3>Modèle de menace</h3>
+      <table>
+        <tr>
+          <th>Risque</th>
+          <th>Réponse</th>
+        </tr>
+        <tr>
+          <td>Modification d’un montant</td>
+          <td>Jeton + contrôle d’unicité + refus si perte.</td>
+        </tr>
+        <tr>
+          <td>Lecture d’un mot de passe / OTP</td>
+          <td>Champs exclus du TreeWalker, aucune valeur lue.</td>
+        </tr>
+        <tr>
+          <td>Envoi de données à un tiers</td>
+          <td>Backend local, pas de cloud, pas de cookies.</td>
+        </tr>
+        <tr>
+          <td>Injection de HTML malveillant</td>
+          <td><span class="mono">textContent</span>, Shadow DOM, CSP verrouillée.</td>
+        </tr>
+      </table>
+
+      <div class="page-footer">
+        <span><strong>NkapLingua</strong> · SAFINUM 2026</span>
+        <span>Documentation · page 5</span>
+      </div>
+    </section>
+
+    <!-- 5. Langue -->
+    <section class="page">
+      <p class="eyebrow">05 · Langue et validation</p>
+      <h2>Fulfulde (Adamawa), code fub</h2>
+      <p class="lede">
+        La langue cible est le fulfulde adamawa. Le prototype utilise
+        <span class="mono">fuv_Latn</span> (fulfulde nigérian, proche) comme
+        approximation, avec l’orthographe AGLC comme référence.
+      </p>
+
+      <div class="grid-2">
+        <div class="card">
+          <h4>Exemple de sortie</h4>
+          <p><strong>Source :</strong> Le solde est de 125 000 FCFA.</p>
+          <p><strong>Sortie :</strong> Fedde jaɓande nden ko 125 000 FCFA.</p>
+          <p class="figure-caption">
+            Exemple indicatif, à valider par un locuteur natif.
+          </p>
+        </div>
+        <div class="card">
+          <h4>Méthode de validation</h4>
+          <ul>
+            <li>2 à 3 locuteurs natifs fulfulde adamawa.</li>
+            <li>20 phrases finance minimum pour la présélection.</li>
+            <li>Adéquation, fidélité, terminologie, préservation.</li>
+            <li>0 défaut majeur sur les phrases critiques.</li>
+            <li>100 % des montants, frais et bénéficiaires préservés.</li>
+          </ul>
+        </div>
+      </div>
+
+      <h3>Ce qui est honnête de dire</h3>
+      <ul class="clean">
+        <li>NLLB est un <strong>baseline</strong>, pas une traduction certifiée.</li>
+        <li>Les phrases courtes sont plus fiables que les phrases longues.</li>
+        <li>La validation native est la prochaine étape obligatoire.</li>
+        <li>Le prototype ne remplace pas une traduction contractuelle officielle.</li>
+      </ul>
+
+      <div class="callout">
+        <strong>Transparence :</strong> la qualité linguistique reste le point
+        critique du projet. Le jury doit voir un pipeline solide et une méthode
+        de validation, pas une promesse de perfection.
+      </div>
+
+      <h3>Plan de validation</h3>
+      <div class="grid-3">
+        <div class="card">
+          <h4>1 · Corpus</h4>
+          <p>20 phrases finance minimum, jamais utilisées pour l’entraînement.</p>
+        </div>
+        <div class="card">
+          <h4>2 · Revue</h4>
+          <p>2 à 3 locuteurs natifs, grille adéquation / fidélité / terminologie.</p>
+        </div>
+        <div class="card">
+          <h4>3 · Décision</h4>
+          <p>0 défaut majeur, 100 % des montants préservés, adéquation ≥ 3,5/5.</p>
+        </div>
+      </div>
+
+      <div class="page-footer">
+        <span><strong>NkapLingua</strong> · SAFINUM 2026</span>
+        <span>Documentation · page 6</span>
+      </div>
+    </section>
+
+    <!-- 6. Conformité / licences -->
+    <section class="page">
+      <p class="eyebrow">06 · Conformité et ressources</p>
+      <h2>Ce qui est couvert, ce qui reste à faire</h2>
+
+      <table>
+        <tr>
+          <th>Critère SAFINUM</th>
+          <th>Poids</th>
+          <th>Réponse NkapLingua</th>
+        </tr>
+        <tr>
+          <td>Fonctionnalité du prototype</td>
+          <td>25</td>
+          <td>Pipeline complet, page de démonstration, texte inédit.</td>
+        </tr>
+        <tr>
+          <td>Intégration et indépendance</td>
+          <td>20</td>
+          <td>Extension, aucune modification du site, rendu réversible.</td>
+        </tr>
+        <tr>
+          <td>Sécurité et préservation</td>
+          <td>20</td>
+          <td>Jetons, termes critiques, backend local, refus sécurisé.</td>
+        </tr>
+        <tr>
+          <td>Accessibilité et UX</td>
+          <td>15</td>
+          <td>Design system, focus, contrastes, lang, alertes lisibles.</td>
+        </tr>
+        <tr>
+          <td>Adaptation au nouveau contenu</td>
+          <td>10</td>
+          <td>Popup et sélection ; qualité à valider.</td>
+        </tr>
+        <tr>
+          <td>Faisabilité et documentation</td>
+          <td>10</td>
+          <td>README, doc technique, CI, licences.</td>
+        </tr>
+      </table>
+
+      <h3>Ressources et licences</h3>
+      <table>
+        <tr>
+          <th>Ressource</th>
+          <th>Licence</th>
+          <th>Usage</th>
+        </tr>
+        <tr>
+          <td>NLLB-200 distilled 600M</td>
+          <td>CC BY-NC 4.0</td>
+          <td>Traduction, hackathon non commercial.</td>
+        </tr>
+        <tr>
+          <td>Corpus Adamawa Fulfulde–French</td>
+          <td>NOODL-1.0</td>
+          <td>Évaluation / adaptation.</td>
+        </tr>
+        <tr>
+          <td>MyMemory Translation API</td>
+          <td>Service externe gratuit</td>
+          <td>Cloud de secours, texte pseudonymisé.</td>
+        </tr>
+        <tr>
+          <td>Common Voice Adamawa Fulfulde</td>
+          <td>CC0 1.0</td>
+          <td>Audio optionnel.</td>
+        </tr>
+        <tr>
+          <td>Noto Sans / Fraunces</td>
+          <td>SIL OFL 1.1</td>
+          <td>Typographie de l’interface.</td>
+        </tr>
+        <tr>
+          <td>Code NkapLingua</td>
+          <td>MIT</td>
+          <td>Réutilisation libre.</td>
+        </tr>
+      </table>
+
+      <h3>Limites connues</h3>
+      <ul class="clean two-col-list">
+        <li>Variété fulfulde à valider.</li>
+        <li>Phrases longues fragiles.</li>
+        <li>Pas d’iframes cross-origin.</li>
+        <li>Pas de shadow DOM fermé.</li>
+        <li>Pas de TTS fulfulde dans le MVP.</li>
+        <li>Backend local requis.</li>
+        <li>NLLB non commercial.</li>
+        <li>Pas une traduction certifiée.</li>
+      </ul>
+
+      <div class="page-footer">
+        <span><strong>NkapLingua</strong> · SAFINUM 2026</span>
+        <span>Documentation · page 7</span>
+      </div>
+    </section>
+
+    <!-- 7. Livrables -->
+    <section class="page">
+      <p class="eyebrow">07 · Livrables</p>
+      <h2>Reproduire et soumettre</h2>
+
+      <h3>Dépôt GitHub</h3>
+      <p class="mono">https://github.com/TSEFACKDEV/safinum-nkaplingua</p>
+      <p>
+        Branches : <span class="mono">main</span>,
+        <span class="mono">develop</span>, <span class="mono">klein</span>,
+        <span class="mono">freedy</span>, <span class="mono">marius</span>.
+        CI GitHub Actions : backend mock, lint extension, Firefox lint, scan de
+        secrets.
+      </p>
+
+      <h3>Lancer la démonstration</h3>
+      <p>
+        <strong>Option A — extension seule :</strong> charger le ZIP universel,
+        puis ouvrir
+        <span class="mono">https://tsefackdev.github.io/safinum-nkaplingua/demo/</span>.
+      </p>
+      <p>
+        <strong>Option B — 100 % local :</strong>
+      </p>
+      <p class="mono">
+        cd server<br />
+        NK_DEVICE=cpu .venv/bin/uvicorn app:app --host 127.0.0.1 --port 8000
+      </p>
+      <p>
+        Puis ouvrir <span class="mono">http://127.0.0.1:8000/demo</span>.
+      </p>
+
+      <h3>Documents</h3>
+      <ul class="clean">
+        <li><strong>README</strong> : description, architecture, démarrage.</li>
+        <li><strong>docs/TECHNICAL.md</strong> : document technique.</li>
+        <li><strong>docs/COMPLIANCE.md</strong> : grille de conformité.</li>
+        <li><strong>docs/LANGUAGE_VALIDATION.md</strong> : méthode native.</li>
+        <li><strong>docs/DESIGN.md</strong> : design system.</li>
+        <li><strong>docs/VIDEO_SCRIPT.md</strong> : script vidéo.</li>
+        <li><strong>docs/SUBMISSION_CHECKLIST.md</strong> : checklist.</li>
+      </ul>
+
+      <div class="callout callout-success" style="margin-top: 8mm">
+        <strong>Phrase de conclusion :</strong> NkapLingua ne traduit pas
+        seulement des mots. Elle rend les frais, les conditions et les alertes
+        compréhensibles, sans toucher au site et sans exposer les données
+        sensibles.
+      </div>
+
+      <p style="margin-top: 12mm; color: var(--muted); font-size: 9pt">
+        Document préparé pour le SAFINUM Innovate Challenge 2026. Les opérations
+        présentées sont simulées ; aucune donnée bancaire réelle n’est utilisée.
+      </p>
+
+      <div class="page-footer">
+        <span><strong>NkapLingua</strong> · SAFINUM 2026</span>
+        <span>Documentation · page 8</span>
+      </div>
+    </section>
+  </body>
+</html>
