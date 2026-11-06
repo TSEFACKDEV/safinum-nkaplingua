@@ -49,9 +49,15 @@ jobs:
 
       - name: Check JavaScript syntax
         run: |
+          node --check extension/languages.js
           node --check extension/background.js
           node --check extension/content.js
           node --check extension/popup.js
+
+      - name: Test language registry and packs
+        run: |
+          node scripts/test-extension.js
+          python3 scripts/check-language-packs.py
 
       - name: Validate manifests
         run: |
@@ -77,6 +83,8 @@ jobs:
         run: |
           ./scripts/package-extension.sh
           test -f dist/nkaplingua-extension.zip
+          grep -q "NK_LANGUAGES" dist/package/universal/background.js
+          test -d dist/package/universal/language-packs
           unzip -l dist/nkaplingua-extension.zip | head -20
 
   security:

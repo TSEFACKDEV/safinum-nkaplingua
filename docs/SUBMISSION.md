@@ -19,7 +19,7 @@ https://github.com/TSEFACKDEV/safinum-nkaplingua/releases/latest/download/NkapLi
 ```
 
 - PDF A4, **8 pages**, ~1,3 Mo (limite : 10 Mo)
-- Architecture, intégration, sécurité, langue, licences, limites
+- Architecture, intégration, sécurité, langues, détection, licences, limites
 
 ### 3. Lien du dépôt GitHub
 
@@ -38,9 +38,12 @@ https://github.com/TSEFACKDEV/safinum-nkaplingua/releases/latest/download/nkapli
 ```
 
 - ZIP universel **Chrome / Edge / Firefox**
-- ~350 Ko (limite : 10 Mo)
+- ~360 Ko (limite : 10 Mo)
 - Aucun backend Python requis : cloud de secours MyMemory
 - Mode 100 % local disponible avec le backend du dépôt
+- 7 langues : fulfulde en MT, yemba/medumba/ewondo/douala/bassa/ghomala’ en
+  packs communautaires
+- Détection FR/EN, protection des montants et des noms, attributs traduits
 
 Variantes :
 
@@ -83,12 +86,18 @@ https://tsefackdev.github.io/safinum-nkaplingua/demo/
 - [ ] Démo publique accessible.
 - [ ] Aucune donnée réelle dans la vidéo ou les captures.
 - [ ] Un locuteur natif a relu les phrases critiques.
+- [ ] Les packs yemba/medumba sont remplis ou affichés comme « 0/20 ».
+- [ ] Un nom de bénéficiaire est préservé.
+- [ ] Les attributs `title`, `aria-label`, `placeholder`, `alt` sont traduits.
 
 ## Notes pour le jury
 
 - L’extension fonctionne sans installation Python.
 - Elle utilise le backend local s’il est disponible, sinon MyMemory avec un
   texte pseudonymisé.
-- Les montants, URLs et emails sont contrôlés après traduction.
+- Les montants, URLs, emails et noms de bénéficiaires sont contrôlés après
+  traduction.
 - Les opérations sont simulées ; aucune transaction réelle.
-- La qualité linguistique est un baseline NLLB, à valider par un locuteur natif.
+- Le fulfulde est une baseline NLLB, à valider par un locuteur natif.
+- Le yemba, le medumba et les autres langues en pack ne sont pas de la
+  traduction automatique : uniquement des phrases validées.

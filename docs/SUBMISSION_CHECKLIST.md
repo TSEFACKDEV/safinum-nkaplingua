@@ -6,7 +6,8 @@
 - [ ] Prototype fonctionnel : `extension/` + `server/` + `demo/`
 - [x] Vidéo ≤ 3 minutes : `NkapLingua-Demo.mp4` (2 min 19)
 - [ ] Document technique : `docs/TECHNICAL.md`
-- [ ] Langue + validation : `docs/LANGUAGE_VALIDATION.md`
+- [ ] Langues + validation : `docs/LANGUAGE_VALIDATION.md`, `docs/LANGUAGES.md`
+- [ ] Intégration des données linguistiques : `docs/DATA_INTEGRATION.md`
 - [ ] Licences et composants : `docs/DATA_LICENSES.md`
 - [ ] Démonstration reproductible : commandes dans `README.md`
 - [ ] Dépôt GitHub à jour : https://github.com/TSEFACKDEV/safinum-nkaplingua
@@ -32,20 +33,24 @@
 - [ ] Test du toggle « Restaurer l’original »
 - [ ] Test d’un message d’erreur
 - [ ] Test d’un contenu inédit court
+- [ ] Test d’un nom de bénéficiaire (`Aïcha`) : montant et nom préservés
+- [ ] Test des attributs (`title`, `aria-label`, `placeholder`, `alt`)
+- [ ] Test d’une langue en pack : phrase validée, puis phrase absente
 - [ ] Connaître les limites par cœur (pas de survente)
 
 ## 4. Questions probables du jury
 
-**Quelle langue ?**
-Fulfulde (Adamawa), code `fub`, variété à valider avec un natif.
+**Quelles langues ?**
+Fulfulde (Adamawa) en traduction automatique, plus six langues en packs de
+phrases validées : yemba, medumba, ewondo, douala, bassa, ghomala’.
 
 **Pourquoi NLLB ?**
 Meilleure qualité que M2M100 sur les phrases courtes fulfulde. Licence
 CC BY-NC 4.0, utilisable pour ce hackathon non commercial.
 
-**Comment garantissez-vous les montants ?**
-Pseudonymisation côté extension, contrôle d’unicité côté backend, refus de la
-traduction si un jeton manque.
+**Comment garantissez-vous les montants et les noms ?**
+Pseudonymisation côté extension (NUM, NAME), contrôle d’unicité côté backend,
+refus de la traduction si un jeton manque.
 
 **Comment fonctionne l’intégration ?**
 Extension navigateur, `activeTab` + `scripting`, aucun changement du code
@@ -57,7 +62,8 @@ message pendant la démo.
 
 **Quelle est la limite principale ?**
 La qualité linguistique de NLLB sur les phrases longues et certaines tournures
-finance. La validation native est la prochaine étape.
+finance. Les six autres langues sont des packs vides tant qu’un natif ne les
+remplit pas. La validation native est la prochaine étape.
 
 **Est-ce que ça marche sur l’interface du jury ?**
 Oui si c’est une page web. Le pipeline est générique ; nous ne dépendons pas
@@ -71,6 +77,8 @@ CONTRIBUTING.md
 docs/COMPLIANCE.md
 docs/TECHNICAL.md
 docs/LANGUAGE_VALIDATION.md
+docs/LANGUAGES.md
+docs/DATA_INTEGRATION.md
 docs/DATA_LICENSES.md
 docs/SECURITY.md
 docs/EVAL.md

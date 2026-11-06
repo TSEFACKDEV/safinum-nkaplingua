@@ -6,11 +6,14 @@
 [![Chrome](https://img.shields.io/badge/Chrome-Manifest%20V3-4285F4?logo=googlechrome&logoColor=white)](#chrome--edge)
 [![Firefox](https://img.shields.io/badge/Firefox-140%2B-FF7139?logo=firefox&logoColor=white)](#firefox)
 
-> **Traduction financière non intrusive en fulfulde, directement dans le navigateur.**
+> **Traduction financière non intrusive en fulfulde, yemba, medumba et
+> autres langues camerounaises, directement dans le navigateur.**
 
 NkapLingua est une extension navigateur autonome qui traduit les interfaces
-financières numériques en **fulfulde (Adamawa)** sans modifier le site source
-et sans lire les champs sensibles. Elle fonctionne **sans installation Python**
+financières numériques en **sept langues camerounaises** sans modifier le site
+source et sans lire les champs sensibles. Le fulfulde (Adamawa) utilise NLLB ;
+le yemba, le medumba, l’ewondo, le douala, le bassa et le ghomala’ utilisent des
+**packs de phrases validées**. Elle fonctionne **sans installation Python**
 grâce à un service cloud de secours, ou en **100 % local** avec le backend NLLB
 fourni dans le dépôt.
 
@@ -51,6 +54,7 @@ Design system : [`docs/DESIGN.md`](docs/DESIGN.md).
 - [Le problème](#le-problème)
 - [La solution](#la-solution)
 - [Fonctionnalités](#fonctionnalités)
+- [Langues](#langues)
 - [Architecture](#architecture)
 - [Démarrage rapide](#démarrage-rapide)
 - [Chrome / Edge](#chrome--edge)
@@ -84,55 +88,82 @@ financière :
 
 1. l’utilisateur ouvre sa page mobile money ou sa banque ;
 2. il clique sur l’extension ;
-3. il choisit le fulfulde ;
-4. la page devient lisible ;
-5. il peut revenir à l’original à tout moment.
+3. il choisit la langue cible (fulfulde, yemba, medumba, etc.) ;
+4. la langue source est détectée automatiquement (français ou anglais) ;
+5. la page devient lisible ;
+6. il peut revenir à l’original à tout moment.
 
 Le site source n’est jamais modifié. Aucune ligne de code n’est ajoutée au
 serveur de la banque. L’extension utilise le backend local s’il est disponible ;
 sinon, elle bascule sur le service cloud **MyMemory** avec un texte
-pseudonymisé. Aucun mot de passe, code PIN, OTP ou valeur de formulaire n’est
-lu.
+pseudonymisé. Les langues en mode pack ne contactent aucun service cloud.
+Aucun mot de passe, code PIN, OTP ou valeur de formulaire n’est lu.
 
 ```text
 Page financière
       │
       ▼
 Content script
-  ├─ nœuds texte visibles uniquement
-  ├─ exclusion : mots de passe, OTP, PIN, champs de formulaire
-  ├─ pseudonymisation : montants, numéros, URLs, emails
+  ├─ nœuds texte + attributs sûrs (title, aria-label, placeholder, alt)
+  ├─ exclusion : mots de passe, OTP, PIN, valeurs de formulaire
+  ├─ détection FR/EN avec score de confiance
+  ├─ pseudonymisation : montants, numéros, URLs, emails, noms
   ├─ découpage en phrases courtes
   └─ rendu réversible
       │
       ▼
 Background (service worker Chrome / event page Firefox)
   ├─ cache local
+  ├─ packs communautaires validés (yemba, medumba, etc.)
   ├─ backend local si disponible (127.0.0.1:8000)
   └─ sinon service cloud MyMemory (texte pseudonymisé)
       │
       ▼
-Moteur — NLLB-200 local ou MyMemory
+Moteur — NLLB-200 local, MyMemory ou pack
   ├─ traduction français/anglais → fulfulde
+  ├─ phrases validées pour les autres langues
   ├─ post-contrôle des jetons et termes critiques
-  └─ refus si un montant ou une entité est modifié
+  └─ refus si un montant, un nom ou une entité est modifié
 ```
 
 ## Fonctionnalités
 
 - **Extension Manifest V3** pour Chrome/Edge et Firefox 140+.
+- **Sept langues cibles** : fulfulde, yemba, medumba, ewondo, douala, bassa,
+  ghomala’.
+- **Détection FR/EN** avant traduction, avec score de confiance affiché.
 - **Traduction réversible** : bouton « Restaurer l’original ».
 - **Contenu inédit** : test dans le popup ou traduction de la sélection.
-- **Mode bilingue** possible pour les termes sensibles.
-- **Pseudonymisation** des montants, numéros, URLs et emails avant envoi.
+- **Attributs traduits** : `title`, `aria-label`, `placeholder`, `alt`, boutons
+  `input` et options de `select`.
+- **Pseudonymisation** des montants, numéros, URLs, emails et noms de
+  bénéficiaires avant envoi.
 - **Refus sécurisé** si un jeton ou un terme critique manque.
 - **Aucune lecture** des mots de passe, codes OTP, PIN ou valeurs de formulaire.
 - **Extension autonome** : un seul ZIP, aucun serveur à installer.
+- **Packs communautaires** : phrases validées, aucun appel cloud.
 - **Backend local optionnel** : mode 100 % local avec NLLB si disponible.
 - **Cloud de secours** : MyMemory, avec texte pseudonymisé et consentement
   explicite par le clic de l’utilisateur.
 - **CI GitHub Actions** : tests backend mock, lint JS, lint Firefox, scan de
-  secrets.
+  secrets, packaging.
+
+## Langues
+
+| Langue | Code | Moteur | État |
+|---|---|---|---|
+| Fulfulde (Adamawa) | `fub` | NLLB + MyMemory | MT baseline, validation native en cours |
+| Yemba | `ybb` | Pack communautaire | 0/20 phrases validées |
+| Medumba | `byv` | Pack communautaire | 0/20 phrases validées |
+| Ewondo | `ewo` | Pack communautaire | 0/20 phrases validées |
+| Douala | `dua` | Pack communautaire | 0/20 phrases validées |
+| Bassa | `bas` | Pack communautaire | 0/20 phrases validées |
+| Ghomala' | `bbj` | Pack communautaire | 0/20 phrases validées |
+
+Le détail, les limites et la procédure de contribution sont dans
+[`docs/LANGUAGES.md`](docs/LANGUAGES.md). L’intégration des données d’un centre
+linguistique camerounais (OLC/ERDELAP, comités de langues, NTeALan) est décrite
+dans [`docs/DATA_INTEGRATION.md`](docs/DATA_INTEGRATION.md).
 
 ## Architecture
 
@@ -294,9 +325,22 @@ curl -s http://127.0.0.1:8000/translate \
 }
 ```
 
-Les jetons `[[NUM_n]]`, `[[URL_n]]` et `[[EMAIL_n]]` sont contrôlés : si un
-jeton manque ou est dupliqué, `ok` passe à `false` et l’extension conserve
-l’original.
+Les jetons `[[NUM_n]]`, `[[URL_n]]`, `[[EMAIL_n]]` et `[[NAME_n]]` sont
+contrôlés : si un jeton manque ou est dupliqué, `ok` passe à `false` et
+l’extension conserve l’original.
+
+### `GET /languages`
+
+Retourne les sept langues, leur moteur (`mt` ou `pack`) et leur statut.
+
+### `POST /detect`
+
+```bash
+curl -s http://127.0.0.1:8000/detect   -H 'Content-Type: application/json'   -d '{"text": "Le solde de votre compte est disponible."}'
+```
+
+La détection est aussi embarquée dans l’extension, pour fonctionner sans
+backend.
 
 ---
 
@@ -306,8 +350,10 @@ l’original.
 - Aucune lecture des valeurs de formulaire, mots de passe, OTP ou cookies.
 - Aucun code distant, aucune évaluation dynamique.
 - UI en Shadow DOM ; le texte traduit est injecté via `textContent`.
-- Montants, numéros, URLs et emails remplacés par des jetons avant traduction.
+- Montants, numéros, URLs, emails et noms de bénéficiaires remplacés par des
+  jetons avant traduction.
 - Si un jeton ou un terme critique manque, la traduction est refusée.
+- Les packs communautaires ne contactent aucun service cloud.
 - Backend local prioritaire, lié à `127.0.0.1`, sans journalisation du texte.
 - Mode cloud de secours : texte pseudonymisé envoyé à **MyMemory** ; aucun mot
   de passe, PIN, OTP ou valeur de formulaire n’est lu.
@@ -324,6 +370,7 @@ Détails : [`docs/SECURITY.md`](docs/SECURITY.md).
 | **Adamawa Fulfulde–French Parallel Corpus 1.2** | NOODL-1.0 | évaluation / adaptation |
 | **Common Voice Adamawa Fulfulde** | CC0 1.0 | audio optionnel |
 | **MyMemory API** | service externe gratuit | mode cloud de secours |
+| **Packs yemba, medumba, ewondo, douala, bassa, ghomala’** | à définir avec les contributeurs | mémoires de traduction validées |
 | **Recherches du centre linguistique** | à confirmer | référence orthographique et terminologique |
 | **Code NkapLingua** | MIT | réutilisation libre |
 
@@ -406,9 +453,11 @@ Règles simples :
 
 ```bash
 NK_MOCK=1 pytest -q server/test_api.py
+node --check extension/languages.js
 node --check extension/background.js
 node --check extension/content.js
 node --check extension/popup.js
+./scripts/package-extension.sh
 ```
 
 Conventions de commit : `feat:`, `fix:`, `docs:`, `test:`, `chore:`.
@@ -417,9 +466,13 @@ Conventions de commit : `feat:`, `fix:`, `docs:`, `test:`, `chore:`.
 
 - [x] Extension Manifest V3 + backend local
 - [x] Traduction réversible et test de texte inédit
-- [x] Pseudonymisation des montants et entités
+- [x] Pseudonymisation des montants, entités et noms
+- [x] Détection FR/EN et choix de sept langues
+- [x] Traduction des attributs et des options
 - [x] CI GitHub Actions
+- [ ] Remplir les packs yemba et medumba (20 phrases)
 - [ ] Validation native de 100 phrases finance
+- [ ] Brancher les données OLC/ERDELAP (`docs/DATA_INTEGRATION.md`)
 - [ ] Glossaire finance validé (`data/glossary.template.csv`)
 - [ ] Fine-tuning / adaptation au fulfulde adamawa
 - [ ] Mode bilingue pour les contrats

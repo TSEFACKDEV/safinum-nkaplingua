@@ -2,24 +2,35 @@
  * NkapLingua — background.
  * Chrome : service worker. Firefox : event page (`background.scripts`).
  *
- * Le prototype fonctionne de deux façons :
- *  1. backend local NLLB (127.0.0.1:8000) si disponible ;
- *  2. service cloud MyMemory en secours, pour qu’un simple fichier
+ * Trois modes de traduction :
+ *  1. mémoire de traduction communautaire (packs validés) ;
+ *  2. backend local NLLB (127.0.0.1:8000) si disponible ;
+ *  3. service cloud MyMemory en secours, pour qu’un simple fichier
  *     d’extension fonctionne sans installation Python.
  *
- * Dans les deux cas :
+ * Dans tous les cas :
  *  - seuls des textes pseudonymisés sont envoyés ;
  *  - aucune valeur de formulaire, aucun cookie, aucun code PIN n’est lu ;
- *  - les montants, URLs et emails sont contrôlés après traduction.
+ *  - les montants, URLs, emails et noms sont contrôlés après traduction.
  */
+
+// Chrome service worker : charge le registre partagé. Firefox et les tests
+// chargent `languages.js` avant ce fichier.
+if (!globalThis.NK_LANGUAGES && typeof importScripts === "function") {
+  importScripts("languages.js");
+}
 
 // Chrome expose `chrome`, Firefox expose `browser` (API à promesses).
 const api = globalThis.browser ?? globalThis.chrome;
+const LANG = globalThis.NK_LANGUAGES;
+
+if (!LANG) {
+  console.error("[NkapLingua] languages.js doit être chargé avant background.js");
+}
 
 const LOCAL_API = "http://127.0.0.1:8000";
 const CLOUD_API = "https://api.mymemory.translated.net/get";
 const DEFAULT_TARGET = "fub";
-const CLOUD_TARGET = "ff";
 const CACHE_LIMIT = 500;
 const LOCAL_TIMEOUT_MS = 120000;
 const LOCAL_HEALTH_TIMEOUT_MS = 900;
@@ -30,6 +41,8 @@ const CLOUD_CONCURRENCY = 3;
 const TRANSLATION_MODE = "auto";
 
 const cache = new Map();
+const packCache = new Map();
+const packIndexes = new WeakMap();
 let localAvailable = null;
 
 api.runtime.onInstalled.addListener(() => {
@@ -56,7 +69,10 @@ api.contextMenus.onClicked.addListener((info, tab) => {
       // Le content script n'est peut-être pas encore injecté : on l'injecte
       // puis on réessaie une fois.
       api.scripting
-        .executeScript({ target: { tabId: tab.id }, files: ["content.js"] })
+        .executeScript({
+          target: { tabId: tab.id },
+          files: ["languages.js", "content.js"]
+        })
         .then(() =>
           api.tabs.sendMessage(tab.id, { type: "NK_TRANSLATE_SELECTION" })
         )
@@ -65,6 +81,23 @@ api.contextMenus.onClicked.addListener((info, tab) => {
 });
 
 api.runtime.onMessage.addListener((message, _sender, sendResponse) => {
+  if (message?.type === "NK_GET_LANGUAGES") {
+    sendResponse({
+      targets: LANG ? LANG.listTargets() : [],
+      defaultTarget: DEFAULT_TARGET
+    });
+    return true;
+  }
+
+  if (message?.type === "NK_DETECT_LANGUAGE") {
+    sendResponse(
+      LANG
+        ? LANG.detectLanguage(message.text || "", message.hint || "")
+        : { code: "unknown", confidence: 0 }
+    );
+    return true;
+  }
+
   if (message?.type === "NK_TRANSLATE_SEGMENTS") {
     translateSegments(
       message.segments || [],
@@ -94,31 +127,11 @@ api.runtime.onMessage.addListener((message, _sender, sendResponse) => {
 /* Détection de langue                                                */
 /* ------------------------------------------------------------------ */
 
-const FRENCH_HINTS = [
-  " le ", " la ", " les ", " des ", " une ", " un ", " est ", " sont ",
-  " pour ", " avec ", " votre ", " vos ", " vous ", " nous ", " frais ",
-  " solde ", " compte ", " transfert ", " paiement ", " code ",
-  " confirmation ", " bénéficiaire ", " montant ", " transaction "
-];
-const ENGLISH_HINTS = [
-  " the ", " and ", " is ", " are ", " for ", " with ", " your ", " you ",
-  " we ", " account ", " balance ", " fees ", " transfer ", " payment ",
-  " code ", " confirmation ", " beneficiary ", " amount ", " transaction "
-];
-
-function detectSourceLanguage(text) {
-  const value = ` ${String(text || "").toLowerCase()} `;
-  let french = 0;
-  let english = 0;
-
-  for (const hint of FRENCH_HINTS) {
-    french += value.split(hint).length - 1;
-  }
-  for (const hint of ENGLISH_HINTS) {
-    english += value.split(hint).length - 1;
-  }
-
-  return english > french * 1.2 ? "en" : "fr";
+function detectSourceLanguage(text, hint) {
+  const info = LANG
+    ? LANG.detectLanguage(text, hint)
+    : { code: "fr", confidence: 0 };
+  return info.code === "en" ? "en" : "fr";
 }
 
 /* ------------------------------------------------------------------ */
@@ -129,7 +142,10 @@ async function translateText(text, target, source) {
   const clean = String(text || "").trim();
   if (!clean) return { translation: null, error: "empty_text" };
 
-  const detected = source || detectSourceLanguage(clean);
+  const detectedInfo = LANG
+    ? LANG.detectLanguage(clean, "")
+    : { code: "fr", confidence: 0 };
+  const detected = source || (detectedInfo.code === "en" ? "en" : "fr");
   const result = await translateSegments(
     [{ id: "text", text: clean, context: "" }],
     target,
@@ -139,13 +155,23 @@ async function translateText(text, target, source) {
   if (result.error) return result;
   return {
     translation: result.translations?.[0] || null,
-    provider: result.provider || null
+    provider: result.provider || null,
+    detected: detectedInfo
   };
 }
 
 async function translateSegments(segments, target, source) {
   if (!Array.isArray(segments) || segments.length === 0) {
     return { translations: [], provider: null };
+  }
+
+  const targetSpec = LANG?.getTarget(target);
+  if (!targetSpec) {
+    return {
+      translations: [],
+      provider: null,
+      error: `Langue cible non supportée : ${target}`
+    };
   }
 
   const detected =
@@ -166,55 +192,62 @@ async function translateSegments(segments, target, source) {
     }
   }
 
-  if (missing.length > 0) {
-    let translations = null;
-    let provider = null;
+  if (missing.length === 0) {
+    return {
+      translations: segments
+        .map((segment) => results.get(segment.id))
+        .filter(Boolean),
+      provider: null
+    };
+  }
 
-    if (TRANSLATION_MODE !== "cloud" && (await isLocalAvailable())) {
-      try {
-        translations = await translateWithLocal(missing, target, detected);
-        provider = "local";
-      } catch {
-        // Le backend local a échoué : on passe au cloud.
-        localAvailable = false;
-      }
-    }
+  let provider = null;
+  let remaining = missing;
 
-    if (!translations && TRANSLATION_MODE !== "local") {
-      try {
-        translations = await translateWithCloud(missing, detected);
-        provider = "cloud";
-      } catch (error) {
+  // 1) Pack communautaire : prioritaire, car il contient des phrases
+  //    relues par des locuteurs natifs.
+  if (targetSpec.pack) {
+    let packResults = [];
+    try {
+      packResults = await translateWithPack(missing, targetSpec);
+    } catch (error) {
+      if (targetSpec.engine === "pack") {
         return {
           translations: [],
           provider: null,
-          error: `Traduction indisponible : ${String(error)}`
+          error: `Pack ${targetSpec.label} indisponible : ${String(error)}`
         };
       }
+      // Pour une cible MT, un pack absent ne doit pas bloquer le moteur.
     }
 
-    if (!translations) {
+    const hits = packResults.filter((translation) => translation.ok);
+    for (const translation of hits) {
+      results.set(translation.id, translation);
+      const original = missing.find((item) => item.id === translation.id);
+      if (original) cacheTranslation(detected, target, original.text, translation);
+    }
+    if (hits.length > 0) provider = "pack";
+
+    if (targetSpec.engine === "pack") {
+      for (const translation of packResults) {
+        results.set(translation.id, translation);
+      }
       return {
-        translations: [],
-        provider: null,
-        error: "Aucun moteur de traduction disponible."
+        translations: segments
+          .map((segment) => results.get(segment.id))
+          .filter(Boolean),
+        provider: "pack",
+        detected
       };
     }
 
-    for (const translation of translations) {
-      results.set(translation.id, translation);
-      if (translation.ok) {
-        const original = missing.find((item) => item.id === translation.id);
-        if (original) {
-          cache.set(`${detected}:${target}:${original.text}`, translation);
-          if (cache.size > CACHE_LIMIT) {
-            const firstKey = cache.keys().next().value;
-            cache.delete(firstKey);
-          }
-        }
-      }
-    }
+    remaining = missing.filter(
+      (segment) => !hits.some((translation) => translation.id === segment.id)
+    );
+  }
 
+  if (remaining.length === 0) {
     return {
       translations: segments
         .map((segment) => results.get(segment.id))
@@ -223,12 +256,152 @@ async function translateSegments(segments, target, source) {
     };
   }
 
+  // 2) Backend local.
+  let translations = null;
+  if (TRANSLATION_MODE !== "cloud" && (await isLocalAvailable())) {
+    try {
+      translations = await translateWithLocal(
+        remaining,
+        targetSpec.code,
+        detected
+      );
+      provider = "local";
+    } catch {
+      // Le backend local a échoué : on passe au cloud.
+      localAvailable = false;
+    }
+  }
+
+  // 3) Cloud de secours.
+  if (!translations && TRANSLATION_MODE !== "local") {
+    try {
+      translations = await translateWithCloud(remaining, detected, targetSpec);
+      provider = "cloud";
+    } catch (error) {
+      return {
+        translations: [],
+        provider: null,
+        error: `Traduction indisponible : ${String(error)}`
+      };
+    }
+  }
+
+  if (!translations) {
+    return {
+      translations: [],
+      provider: null,
+      error: "Aucun moteur de traduction disponible."
+    };
+  }
+
+  for (const translation of translations) {
+    results.set(translation.id, translation);
+    if (translation.ok) {
+      const original = remaining.find((item) => item.id === translation.id);
+      if (original) {
+        cacheTranslation(detected, target, original.text, translation);
+      }
+    }
+  }
+
   return {
     translations: segments
       .map((segment) => results.get(segment.id))
       .filter(Boolean),
-    provider: null
+    provider,
+    detected
   };
+}
+
+function cacheTranslation(source, target, text, translation) {
+  cache.set(`${source}:${target}:${text}`, translation);
+  if (cache.size > CACHE_LIMIT) {
+    const firstKey = cache.keys().next().value;
+    cache.delete(firstKey);
+  }
+}
+
+/* ------------------------------------------------------------------ */
+/* Packs communautaires                                               */
+/* ------------------------------------------------------------------ */
+
+async function loadPack(targetSpec) {
+  const code = targetSpec.code;
+
+  if (globalThis.__NK_PACK_OVERRIDES__?.[code]) {
+    return globalThis.__NK_PACK_OVERRIDES__[code];
+  }
+
+  if (packCache.has(code)) return packCache.get(code);
+
+  const promise = (async () => {
+    const url = api.runtime.getURL(targetSpec.pack);
+    const response = await fetch(url);
+    if (!response.ok) {
+      throw new Error(`pack HTTP ${response.status}`);
+    }
+    const pack = await response.json();
+    if (!pack || !Array.isArray(pack.entries)) {
+      throw new Error("format de pack invalide");
+    }
+    return pack;
+  })();
+
+  packCache.set(code, promise);
+  return promise;
+}
+
+function indexPack(pack) {
+  if (packIndexes.has(pack)) return packIndexes.get(pack);
+  const index = new Map();
+  for (const entry of pack.entries || []) {
+    if (!entry?.source || !entry?.target) continue;
+    index.set(LANG.normalizePhrase(entry.source), entry);
+  }
+  packIndexes.set(pack, index);
+  return index;
+}
+
+async function translateWithPack(segments, targetSpec) {
+  const pack = await loadPack(targetSpec);
+  const index = indexPack(pack);
+
+  return segments.map((segment) => {
+    const key = LANG.normalizePhrase(segment.text);
+    const entry = index.get(key);
+
+    if (!entry) {
+      return {
+        id: segment.id,
+        text: segment.text,
+        ok: false,
+        reason: "pack_miss"
+      };
+    }
+
+    if (entry.status !== "validated") {
+      return {
+        id: segment.id,
+        text: segment.text,
+        ok: false,
+        reason: "pack_unverified"
+      };
+    }
+
+    const translation = LANG.canonicalizeTokens(entry.target);
+    const validation = validateTranslation(
+      segment.text,
+      translation,
+      targetSpec
+    );
+
+    return {
+      id: segment.id,
+      text: validation.ok ? translation : segment.text,
+      ok: validation.ok,
+      reason: validation.reason
+    };
+  });
 }
 
 /* ------------------------------------------------------------------ */
@@ -298,17 +471,17 @@ async function translateWithLocal(segments, target, source) {
 /* Service cloud (MyMemory)                                           */
 /* ------------------------------------------------------------------ */
 
-async function translateWithCloud(segments, source) {
+async function translateWithCloud(segments, source, targetSpec) {
   const sourceCode = source === "en" ? "en" : "fr";
   const results = await mapWithConcurrency(
     segments,
     CLOUD_CONCURRENCY,
-    (segment) => translateCloudSegment(segment, sourceCode)
+    (segment) => translateCloudSegment(segment, sourceCode, targetSpec)
   );
   return results;
 }
 
-async function translateCloudSegment(segment, sourceCode) {
+async function translateCloudSegment(segment, sourceCode, targetSpec) {
   const { cloudText, tokenMap } = toCloudPlaceholders(segment.text);
   if (!cloudText.trim()) {
     return {
@@ -321,7 +494,7 @@ async function translateCloudSegment(segment, sourceCode) {
 
   const params = new URLSearchParams({
     q: cloudText,
-    langpair: `${sourceCode}|${CLOUD_TARGET}`
+    langpair: `${sourceCode}|${targetSpec.cloudCode || "ff"}`
   });
 
   const controller = new AbortController();
@@ -368,7 +541,11 @@ async function translateCloudSegment(segment, sourceCode) {
     };
   }
 
-  const validation = validateCloud(segment.text, restored);
+  const validation = validateTranslation(
+    segment.text,
+    restored,
+    targetSpec
+  );
   return {
     id: segment.id,
     text: validation.ok ? restored : segment.text,
@@ -382,7 +559,7 @@ function toCloudPlaceholders(text) {
   let index = 0;
 
   const cloudText = String(text || "").replace(
-    /\[\[(NUM|URL|EMAIL)_(\d+)\]\]/g,
+    /\[\[(NUM|URL|EMAIL|NAME)_(\d+)\]\]/g,
     (match) => {
       const token = `[[${index++}]]`;
       tokenMap.set(token, match);
@@ -407,27 +584,36 @@ function restoreCloudTokens(text, tokenMap) {
   return value;
 }
 
-function validateCloud(source, translation) {
+function validateTranslation(source, translation, targetSpec) {
   if (!translation.trim()) {
     return { ok: false, reason: "empty_translation" };
   }
 
-  const tokens = [
-    ...String(source).matchAll(/\[\[(NUM|URL|EMAIL)_(\d+)\]\]/g)
-  ].map((match) => match[0]);
+  const tokenPattern = /\[\[\s*(NUM|URL|EMAIL|NAME)\s*_\s*(\d+)\s*\]\]/gi;
+  const sourceTokens = [
+    ...String(source).matchAll(tokenPattern)
+  ].map((match) => `[[${match[1].toUpperCase()}_${match[2]}]]`);
+  const normalized = LANG
+    ? LANG.canonicalizeTokens(translation)
+    : String(translation);
 
-  for (const token of tokens) {
-    if (translation.split(token).length - 1 !== 1) {
+  for (const token of sourceTokens) {
+    if (normalized.split(token).length - 1 !== 1) {
       return { ok: false, reason: `token_lost:${token}` };
     }
   }
 
   const criticalTerms = ["FCFA", "XAF", "PIN", "OTP", "KYC", "FINAKA"];
   for (const term of criticalTerms) {
-    if (hasWord(source, term) && !hasWord(translation, term)) {
-      if (term === "FCFA" && /F\s*CFA/i.test(translation)) continue;
+    if (hasWord(source, term) && !hasWord(normalized, term)) {
+      if (term === "FCFA" && /F\s*CFA/i.test(normalized)) continue;
       return { ok: false, reason: `dnt_missing:${term}` };
     }
+  }
+
+  // Le pack doit rester dans la même variété linguistique que la cible.
+  if (targetSpec?.engine === "pack" && !normalized.trim()) {
+    return { ok: false, reason: "pack_empty_target" };
   }
 
   return { ok: true, reason: null };

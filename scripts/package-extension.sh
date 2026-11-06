@@ -21,6 +21,13 @@ copy_common() {
   cp "$ROOT"/extension/icon-*.png "$target"/
   cp "$ROOT"/extension/INSTALL.md "$target"/
   cp -R "$ROOT"/extension/fonts "$target"/fonts
+  cp -R "$ROOT"/extension/language-packs "$target"/language-packs
+
+  # Le service worker Chrome peut être chargé comme module (importScripts
+  # interdit). On inline le registre des langues dans le background packagé
+  # pour que Chrome et Firefox utilisent exactement le même fichier.
+  cat "$ROOT"/extension/languages.js "$ROOT"/extension/background.js \
+    > "$target"/background.js
 }
 
 copy_common "$CHROME"

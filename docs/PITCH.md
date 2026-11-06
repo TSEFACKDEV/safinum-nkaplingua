@@ -2,7 +2,7 @@
 
 ## Une phrase
 
-> **NkapLingua traduit n’importe quelle interface financière en fulfulde, directement dans le navigateur, sans modifier le site, sans exposer les données sensibles, et sans phrase pré-traduite.**
+> **NkapLingua traduit n’importe quelle interface financière en fulfulde, yemba, medumba et autres langues camerounaises, directement dans le navigateur, sans modifier le site et sans exposer les données sensibles.**
 
 ## Structure du pitch
 
@@ -16,9 +16,10 @@ retard », ni « solde disponible ».
 ### 2. La solution (30 s)
 
 Une extension navigateur qui ajoute une **couche de traduction réversible** à
-n’importe quelle page financière. L’utilisateur clique, choisit le fulfulde, et
+n’importe quelle page financière. L’utilisateur clique, choisit sa langue, et
 la page devient lisible — sans que le site ait besoin d’intégrer quoi que ce
-soit.
+soit. Le fulfulde est traduit automatiquement ; le yemba et le medumba
+utilisent des phrases validées par des locuteurs natifs.
 
 ### 3. La démo (60 s)
 
@@ -34,8 +35,8 @@ soit.
 
 - Manifest V3, `activeTab` uniquement.
 - Segmentation par nœuds texte, pas de `innerHTML`.
-- Pseudonymisation des montants, numéros, URLs, emails.
-- Post-contrôle : si un chiffre change, la traduction est refusée.
+- Pseudonymisation des montants, numéros, URLs, emails et noms.
+- Post-contrôle : si un chiffre ou un nom change, la traduction est refusée.
 - Backend local, modèle NLLB-200 (CC BY-NC 4.0, usage hackathon non commercial).
 - Aucune lecture des mots de passe, OTP ou valeurs de formulaire.
 
@@ -51,7 +52,7 @@ soit.
 | Exigence | Réponse |
 |---|---|
 | Extension navigateur | Manifest V3, Chrome/Edge |
-| Au moins une langue | Fulfulde adamawa (`fub`) |
+| Au moins une langue | Fulfulde `fub` + six langues en packs |
 | Page financière ou autre | Pipeline DOM générique + page FINAKA |
 | Sans modifier le contexte | Segmentation par bloc, glossaire, jetons |
 | Sans modifier le site source | Injection à l’exécution, réversible |

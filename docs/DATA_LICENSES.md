@@ -38,8 +38,24 @@ fine-tuner M2M100 (MIT) sur le corpus adamawa.
 | Type | API externe gratuite, usage soumis aux conditions du service |
 | Source | https://mymemory.translated.net/doc/spec.php |
 | Usage | mode cloud de secours si le backend local n’est pas disponible |
-| Données | texte pseudonymisé (montants, URLs, emails remplacés) |
+| Données | texte pseudonymisé (montants, URLs, emails et noms de bénéficiaires remplacés) |
 | Remarque | ne pas utiliser avec des données réelles sensibles ; le mode local est prioritaire |
+
+### Packs communautaires
+
+| Langue | Code | Source | Licence | Statut |
+|---|---|---|---|---|
+| Yemba | `ybb` | à remplir par un locuteur natif / comité de langue | à définir avec les contributeurs | 0/20 |
+| Medumba | `byv` | à remplir par un locuteur natif / comité de langue | à définir avec les contributeurs | 0/20 |
+| Ewondo | `ewo` | à remplir | à définir | 0/20 |
+| Douala | `dua` | à remplir | à définir | 0/20 |
+| Bassa | `bas` | à remplir | à définir | 0/20 |
+| Ghomala' | `bbj` | à remplir | à définir | 0/20 |
+
+Les packs ne contiennent aucune donnée personnelle. Chaque entrée doit
+indiquer son relecteur, sa date et sa licence. Les dictionnaires et corpus
+externes (NTeALan, Kemelang, Glosbe, PDF LLACAN, Petit Dictionnaire Yémba)
+servent de **référence** et ne sont pas recopiés sans autorisation.
 
 ### Corpus de référence / évaluation
 
@@ -77,10 +93,11 @@ copiez pas le corpus dans le dépôt public sans vérifier les termes.
 
 ### Recherches du centre linguistique
 
-Les publications du centre linguistique camerounais peuvent être utilisées
-comme **référence scientifique** : orthographe, grammaire, terminologie,
-variétés. Elles ne doivent pas être transformées en corpus d’entraînement sans
-autorisation explicite.
+Les publications de l’OLC / ERDELAP (Université de Dschang), des comités de
+langues, de l’ANACLAC et de SIL Cameroun peuvent être utilisées comme
+**référence scientifique** : orthographe, grammaire, terminologie, variétés.
+Elles ne doivent pas être transformées en corpus d’entraînement ou en packs
+redistribués sans autorisation explicite. Voir `docs/DATA_INTEGRATION.md`.
 
 À faire :
 
@@ -101,9 +118,9 @@ autorisation explicite.
 ## Data card à remplir avant la démo
 
 ```yaml
-language: Fulfulde (Adamawa)
-iso639_3: fub
-model_code: fuv_Latn
+language: Fulfulde (Adamawa) + packs yemba/medumba/ewondo/douala/bassa/ghomala'
+iso639_3: fub, ybb, byv, ewo, dua, bas, bbj
+model_code: fuv_Latn (fulfulde uniquement)
 orthography: AGLC
 sources:
   - name: NLLB-200 600M
@@ -112,9 +129,12 @@ sources:
   - name: Adamawa Fulfulde–French Parallel Corpus of Narratives 1.2
     license: NOODL-1.0
     role: evaluation
-  - name: Centre linguistique camerounais
+  - name: OLC / ERDELAP, Université de Dschang
     license: à confirmer
     role: reference_only
+  - name: Packs communautaires
+    license: à définir avec les contributeurs
+    role: runtime_translation_memory
 validation:
   native_speakers: à remplir
   sentences_validated: à remplir

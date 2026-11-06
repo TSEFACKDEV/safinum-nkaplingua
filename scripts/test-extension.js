@@ -1,0 +1,164 @@
+#!/usr/bin/env node
+/**
+ * Tests légers de l’extension, sans navigateur ni réseau.
+ *
+ * Vérifie :
+ *  - le registre des langues et la détection FR/EN ;
+ *  - la mémoire de traduction (pack) ;
+ *  - le refus des entrées non validées ;
+ *  - la préservation des jetons NUM et NAME.
+ */
+
+const fs = require("fs");
+const path = require("path");
+const vm = require("vm");
+
+const root = path.resolve(__dirname, "..");
+
+function assert(condition, message) {
+  if (!condition) throw new Error(message);
+}
+
+const noop = () => {};
+const event = { addListener: noop };
+
+const context = {
+  console,
+  fetch,
+  URLSearchParams,
+  AbortController,
+  setTimeout,
+  clearTimeout,
+  Promise,
+  Map,
+  WeakMap,
+  Array,
+  String,
+  Number,
+  RegExp,
+  Math,
+  JSON,
+  chrome: {
+    runtime: {
+      onInstalled: event,
+      onMessage: event,
+      getURL: (file) => `chrome-extension://test/${file}`
+    },
+    contextMenus: {
+      removeAll: async () => {},
+      create: () => {},
+      onClicked: event
+    },
+    tabs: { sendMessage: async () => {} },
+    scripting: { executeScript: async () => {} }
+  }
+};
+context.globalThis = context;
+vm.createContext(context);
+
+vm.runInContext(
+  fs.readFileSync(path.join(root, "extension/languages.js"), "utf8"),
+  context
+);
+
+const LANG = context.NK_LANGUAGES;
+const codes = LANG.listTargets().map((target) => target.code);
+assert(codes.length === 7, `7 langues attendues, reçu ${codes.length}`);
+assert(codes.includes("fub"), "fulfulde manquant");
+assert(codes.includes("ybb"), "yemba manquant");
+assert(codes.includes("byv"), "medumba manquant");
+
+const french = LANG.detectLanguage("Le solde de votre compte est disponible.");
+assert(french.code === "fr", `détection FR échouée : ${french.code}`);
+assert(french.confidence > 0, "confiance FR nulle");
+
+const english = LANG.detectLanguage("The balance of your account is available.");
+assert(english.code === "en", `détection EN échouée : ${english.code}`);
+
+const hinted = LANG.detectLanguage("Solde", "en-US");
+assert(hinted.code === "en", "indice HTML non prioritaire sur texte court");
+
+context.__NK_PACK_OVERRIDES__ = {
+  ybb: {
+    code: "ybb",
+    entries: [
+      {
+        source: "Le solde est de [[NUM_0]] FCFA.",
+        target: "Solde ybb [[NUM_0]] FCFA.",
+        status: "validated"
+      },
+      {
+        source: "Le bénéficiaire [[NAME_0]] reçoit [[NUM_0]] FCFA.",
+        target: "Nafoore [[NAME_0]] ina heɓa [[NUM_0]] FCFA.",
+        status: "validated"
+      },
+      {
+        source: "Phrase non validée.",
+        target: "Phrase ybb.",
+        status: "draft"
+      }
+    ]
+  }
+};
+
+vm.runInContext(
+  fs.readFileSync(path.join(root, "extension/background.js"), "utf8"),
+  context
+);
+
+(async () => {
+  const hit = await context.translateSegments(
+    [{ id: "a", text: "Le solde est de [[NUM_0]] FCFA." }],
+    "ybb",
+    "fr"
+  );
+  assert(hit.provider === "pack", "provider pack attendu");
+  assert(hit.translations[0].ok === true, "phrase validée refusée");
+  assert(
+    hit.translations[0].text.includes("[[NUM_0]]"),
+    "jeton NUM perdu dans le pack"
+  );
+
+  const nameHit = await context.translateSegments(
+    [
+      {
+        id: "b",
+        text: "Le bénéficiaire [[NAME_0]] reçoit [[NUM_0]] FCFA."
+      }
+    ],
+    "ybb",
+    "fr"
+  );
+  assert(nameHit.translations[0].ok === true, "phrase avec NAME refusée");
+  assert(
+    nameHit.translations[0].text.includes("[[NAME_0]]"),
+    "jeton NAME perdu dans le pack"
+  );
+
+  const miss = await context.translateSegments(
+    [{ id: "c", text: "Une phrase inconnue." }],
+    "ybb",
+    "fr"
+  );
+  assert(miss.translations[0].ok === false, "phrase inconnue acceptée");
+  assert(
+    miss.translations[0].reason === "pack_miss",
+    "raison pack_miss attendue"
+  );
+
+  const draft = await context.translateSegments(
+    [{ id: "d", text: "Phrase non validée." }],
+    "ybb",
+    "fr"
+  );
+  assert(draft.translations[0].ok === false, "phrase draft acceptée");
+  assert(
+    draft.translations[0].reason === "pack_unverified",
+    "raison pack_unverified attendue"
+  );
+
+  console.log("Extension tests OK — registre, détection, packs, jetons");
+})().catch((error) => {
+  console.error("FAIL", error);
+  process.exit(1);
+});

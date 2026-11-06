@@ -7,11 +7,11 @@ Ce document confronte le prototype NkapLingua au règlement officiel du
 
 | Exigence officielle | Statut | Preuve / remarque |
 |---|---|---|
-| 1. Adaptation de la langue de l’interface | ✅ | Extension Manifest V3 + backend NLLB ; page FINAKA de démonstration |
+| 1. Adaptation de la langue de l’interface | ✅ | Extension Manifest V3 ; fulfulde en MT, six langues en packs ; page FINAKA de démonstration |
 | 2. Parcours financier : solde, frais, transfert | ✅ | Page FINAKA : solde, frais, formulaire de transfert, récapitulatif |
-| 3. Préservation des montants, frais, bénéficiaires, conditions, alertes | ✅ / ⚠️ | Jetons `[[NUM_n]]`, contrôle des termes critiques, refus si un jeton manque ; la qualité linguistique reste à valider |
+| 3. Préservation des montants, frais, bénéficiaires, conditions, alertes | ✅ / ⚠️ | Jetons `[[NUM_n]]` et `[[NAME_n]]`, contrôle des termes critiques, refus si un jeton manque ; la qualité linguistique reste à valider |
 | 4. Fonctionnement sans modifier le code source | ✅ | Injection à l’exécution, aucun changement serveur, toggle original ; extension autonome avec cloud de secours |
-| 5. Adaptation à un nouveau contenu | ✅ / ⚠️ | Popup « texte inédit », traduction de sélection ; qualité NLLB variable sur les phrases longues |
+| 5. Adaptation à un nouveau contenu | ✅ / ⚠️ | Popup « texte inédit », traduction de sélection et d’attributs ; qualité NLLB variable sur les phrases longues, packs limités aux phrases validées |
 
 ## 2. Grille d’évaluation (100 points)
 
@@ -19,11 +19,11 @@ Ce document confronte le prototype NkapLingua au règlement officiel du
 |---|---:|---|---|
 | Fonctionnalité du prototype | 25 | 20–23 | Le pipeline fonctionne ; la qualité native doit être validée |
 | Intégration et indépendance | 20 | 18–20 | Aucune modification du site ; `activeTab` + `scripting` |
-| Sécurité et préservation des informations | 20 | 16–19 | Pseudonymisation, contrôle des jetons, local prioritaire ; cloud de secours divulgué |
-| Accessibilité et expérience utilisateur | 15 | 11–13 | Toggle original, `lang`, popup natif ; pas encore de lecture audio |
-| Adaptation à un nouveau contenu | 10 | 7–9 | Oui, mais dépend de la qualité NLLB sur phrases longues |
-| Faisabilité technique et documentation | 10 | 9–10 | README, doc technique, licences, CI |
-| **Total indicatif** | **100** | **82–94** | Objectif : sécuriser la qualité linguistique avant la démo |
+| Sécurité et préservation des informations | 20 | 17–19 | Pseudonymisation des noms, contrôle des jetons, local prioritaire ; cloud de secours divulgué |
+| Accessibilité et expérience utilisateur | 15 | 12–14 | Choix de 7 langues, détection affichée, toggle original, `lang`, popup natif ; pas encore de lecture audio |
+| Adaptation à un nouveau contenu | 10 | 7–9 | Oui, mais dépend de la qualité NLLB sur phrases longues ; packs limités aux phrases validées |
+| Faisabilité technique et documentation | 10 | 9–10 | README, doc technique, doc langues, doc d’intégration, licences, CI |
+| **Total indicatif** | **100** | **84–95** | Objectif : sécuriser la qualité linguistique avant la démo |
 
 > Ces notes sont une auto-évaluation, pas une note du jury.
 
@@ -35,7 +35,8 @@ Ce document confronte le prototype NkapLingua au règlement officiel du
 | Prototype fonctionnel / démonstration reproductible | ✅ | `extension/`, `server/`, `demo/` |
 | Vidéo de démonstration ≤ 3 minutes | ✅ | `NkapLingua-Demo.mp4` (2 min 19) + `docs/VIDEO_SCRIPT.md` |
 | Document technique : architecture, intégration, dépendances, limites | ✅ | `docs/TECHNICAL.md` |
-| Langue(s) supportée(s) + méthode de validation | ✅ / ⏳ | `docs/LANGUAGE_VALIDATION.md` ; validation native à compléter |
+| Langue(s) supportée(s) + méthode de validation | ✅ / ⏳ | `docs/LANGUAGE_VALIDATION.md`, `docs/LANGUAGES.md` ; validation native à compléter |
+| Intégration des données linguistiques | ✅ | `docs/DATA_INTEGRATION.md`, `scripts/import-language-pack.py` |
 
 ## 4. Environnement de test imposé
 
@@ -49,8 +50,11 @@ Points à vérifier le jour J :
 - [ ] Les montants et numéros restent identiques.
 - [ ] Le bouton « Restaurer l’original » fonctionne.
 - [ ] Un message nouveau ajouté par le jury est traduit.
+- [ ] Les attributs `title`, `aria-label`, `placeholder`, `alt` sont traduits.
+- [ ] Un nom de bénéficiaire est préservé et tokenisé.
 - [ ] L’extension fonctionne aussi sans backend (mode cloud de secours).
 - [ ] Le backend local est lancé si l’on veut le mode 100 % local.
+- [ ] Une langue en mode pack affiche l’original si la phrase n’est pas validée.
 
 Limites connues :
 
@@ -58,6 +62,7 @@ Limites connues :
 - pas de support des shadow DOM fermés ;
 - pas de traduction des images/canvas ;
 - qualité NLLB variable sur les phrases longues ;
+- les six langues en pack sont vides tant qu’un natif ne les remplit pas ;
 - l’interface doit être une page web (pas une application mobile native).
 
 ## 5. Règles de sécurité
@@ -67,26 +72,29 @@ Limites connues :
 | Ne pas utiliser de vrais comptes bancaires | ✅ page FINAKA fictive |
 | Ne pas collecter/transmettre de données personnelles | ✅ local prioritaire ; cloud avec texte pseudonymisé |
 | Ne pas contourner les mécanismes de sécurité | ✅ aucune modification du site |
-| Préserver montants, frais, bénéficiaires, confirmations | ✅ jetons + contrôle ; noms propres à renforcer |
+| Préserver montants, frais, bénéficiaires, confirmations | ✅ jetons NUM/NAME + contrôle ; noms hors déclencheur à surveiller |
 | Divulguer les outils et composants tiers | ✅ `docs/DATA_LICENSES.md`, `docs/TECHNICAL.md` |
 | Respecter la propriété intellectuelle | ✅ licences documentées ; NLLB CC BY-NC pour le hackathon |
 
 ## 6. Actions prioritaires avant soumission
 
 1. **Faire valider 20 phrases finance par un locuteur natif fulfulde.**
-2. **Tester le ZIP universel sur Chrome et Firefox, sans backend local.**
-3. **Remplacer les traductions de la page de démo par des versions validées**
-   (ou utiliser le glossaire / la mémoire de traduction).
-4. **Enregistrer la vidéo de 3 minutes** selon `docs/VIDEO_SCRIPT.md`.
-5. **Tester sur une page que l’équipe n’a pas écrite** (autre site de démo).
-6. **Vérifier que le backend démarre sur une machine propre** (ou fournir une
+2. **Remplir les packs yemba et medumba** avec les locuteurs de l’équipe.
+3. **Tester le ZIP universel sur Chrome et Firefox, sans backend local.**
+4. **Tester la tokenisation des noms et la traduction des attributs.**
+5. **Enregistrer la vidéo de 3 minutes** selon `docs/VIDEO_SCRIPT.md`.
+6. **Tester sur une page que l’équipe n’a pas écrite** (autre site de démo).
+7. **Vérifier que le backend démarre sur une machine propre** (ou fournir une
    vidéo de secours).
-7. **Mettre à jour `docs/LANGUAGE_VALIDATION.md`** avec les résultats réels.
+8. **Mettre à jour `docs/LANGUAGE_VALIDATION.md`** avec les résultats réels.
 
 ## 7. Ce qu’il ne faut pas promettre
 
 - « 100 % de précision » : faux et non mesuré.
-- « Toutes les langues du Cameroun » : le prototype couvre le fulfulde.
+- « Toutes les langues du Cameroun » : le prototype couvre le fulfulde en MT
+  et six langues en packs, pas les 280 langues du pays.
+- « Traduction automatique yemba/medumba » : faux, ce sont des packs de
+  phrases validées.
 - « Aucune erreur possible » : le contrôle de sûreté réduit le risque, il ne
   l’élimine pas.
 - « Production ready » : c’est un prototype de hackathon.

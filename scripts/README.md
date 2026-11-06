@@ -2,13 +2,13 @@
 
 ## 1. Télécharger le modèle
 
-Le backend télécharge automatiquement `facebook/m2m100_418M` au premier appel
-`/translate`. Pour pré-télécharger :
+Le backend télécharge automatiquement `facebook/nllb-200-distilled-600M` au
+premier appel `/translate`. Pour pré-télécharger :
 
 ```bash
 cd server
 source .venv/bin/activate
-python -c "from transformers import M2M100ForConditionalGeneration, M2M100Tokenizer; M2M100Tokenizer.from_pretrained('facebook/m2m100_418M'); M2M100ForConditionalGeneration.from_pretrained('facebook/m2m100_418M')"
+python -c "from transformers import AutoTokenizer, AutoModelForSeq2SeqLM; AutoTokenizer.from_pretrained('facebook/nllb-200-distilled-600M'); AutoModelForSeq2SeqLM.from_pretrained('facebook/nllb-200-distilled-600M')"
 ```
 
 ## 2. Corpus d’évaluation
@@ -51,3 +51,30 @@ NK_MOCK=1 uvicorn app:app --host 127.0.0.1 --port 8000
 ```
 
 Utile pour tester l’extension et le rendu sans attendre le modèle.
+
+## 6. Packs linguistiques
+
+```bash
+# Vérifier les packs et les feuilles de traduction
+python3 scripts/check-language-packs.py
+
+# Importer un CSV rempli par un locuteur natif
+python3 scripts/import-language-pack.py data/language-packs/ybb.csv
+python3 scripts/import-language-pack.py data/language-packs/byv.csv
+
+# Reconstruire les ZIP
+./scripts/package-extension.sh
+```
+
+Le script refuse une entrée si un jeton `[[NUM_n]]`, `[[NAME_n]]`,
+`[[URL_n]]` ou `[[EMAIL_n]]` manque, ou si un terme critique (`FCFA`, `PIN`,
+`OTP`, `FINAKA`) a été traduit.
+
+## 7. Tests rapides de l’extension
+
+```bash
+node scripts/test-extension.js
+```
+
+Vérifie le registre des sept langues, la détection FR/EN, les packs et la
+préservation des jetons, sans navigateur ni réseau.
