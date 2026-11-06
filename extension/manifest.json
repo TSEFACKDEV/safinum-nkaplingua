@@ -1,8 +1,8 @@
 {
   "manifest_version": 3,
   "name": "NkapLingua — SAFINUM 2026",
-  "version": "0.1.0",
-  "description": "Traduction financière non intrusive en fulfulde (Adamawa). Prototype SAFINUM Innovate 2026.",
+  "version": "0.3.0",
+  "description": "Traduction financière non intrusive en fulfulde (Adamawa). Fonctionne avec backend local ou service cloud de secours.",
   "minimum_chrome_version": "116",
   "permissions": [
     "activeTab",
@@ -12,7 +12,8 @@
   ],
   "host_permissions": [
     "http://127.0.0.1:8000/*",
-    "http://localhost:8000/*"
+    "http://localhost:8000/*",
+    "https://api.mymemory.translated.net/*"
   ],
   "icons": {
     "16": "icon-16.png",

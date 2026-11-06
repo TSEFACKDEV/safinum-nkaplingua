@@ -92,7 +92,7 @@ Mitigations à conserver :
 - ne jamais rendre la sortie en HTML ;
 - limiter la longueur et le contexte envoyés.
 
-## Backend local
+## Backend local (prioritaire)
 
 - écoute sur `127.0.0.1` uniquement ;
 - pas de journalisation du texte ;
@@ -100,6 +100,23 @@ Mitigations à conserver :
 - timeout de 30 s côté extension ;
 - cache mémoire limité à 500 entrées ;
 - CORS restreint aux origines de l’extension et au localhost.
+
+## Mode cloud de secours (MyMemory)
+
+L’extension doit pouvoir être testée comme un simple fichier, sans installer
+Python. Si le backend local n’est pas disponible, elle bascule sur **MyMemory**.
+
+- Le texte envoyé est **pseudonymisé** : montants, URLs et emails remplacés par
+  des jetons.
+- Aucun mot de passe, code PIN, OTP, cookie ou valeur de formulaire n’est lu.
+- Les noms propres peuvent rester dans le texte : ne pas utiliser ce mode sur
+  des données réelles sensibles.
+- Le mode cloud n’est déclenché qu’après un clic de l’utilisateur.
+- Si le service cloud échoue ou dépasse le quota, l’original est conservé.
+- Le service est divulgué dans `docs/DATA_LICENSES.md` et dans le popup.
+
+Pour une démonstration 100 % locale, lancer le backend NLLB : l’extension le
+détecte et l’utilise en priorité.
 
 ## Limites connues
 
@@ -120,5 +137,7 @@ Mitigations à conserver :
 - [ ] Tester avec un numéro de téléphone.
 - [ ] Tester avec un champ mot de passe.
 - [ ] Vérifier le toggle « Restaurer l’original ».
-- [ ] Vérifier que le réseau ne montre que `127.0.0.1:8000`.
+- [ ] Vérifier que le réseau montre `127.0.0.1:8000` (local) ou `api.mymemory.translated.net` (cloud).
 - [ ] Préparer une page de secours si le modèle est lent.
+- [ ] Tester le mode cloud en coupant le backend local.
+- [ ] Vérifier qu’aucune valeur de formulaire n’apparaît dans le réseau.

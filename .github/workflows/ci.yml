@@ -57,7 +57,11 @@ jobs:
         run: |
           python3 - <<'PY'
           import json
-          for path in ["extension/manifest.json", "extension/manifest.firefox.json"]:
+          for path in [
+              "extension/manifest.json",
+              "extension/manifest.firefox.json",
+              "extension/manifest.universal.json",
+          ]:
               with open(path, encoding="utf-8") as handle:
                   json.load(handle)
               print("ok", path)
@@ -68,6 +72,12 @@ jobs:
 
       - name: Lint Firefox extension
         run: npx --yes web-ext lint --source-dir dist/firefox
+
+      - name: Package extension
+        run: |
+          ./scripts/package-extension.sh
+          test -f dist/nkaplingua-extension.zip
+          unzip -l dist/nkaplingua-extension.zip | head -20
 
   security:
     name: Secret scan

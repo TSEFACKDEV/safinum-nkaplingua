@@ -338,7 +338,7 @@
         });
 
         if (!response || response.error) {
-          showToast("Backend indisponible. Lancez le serveur local.");
+          showToast("Service de traduction indisponible. Vérifiez la connexion ou lancez le backend local.");
           break;
         }
 
@@ -371,7 +371,7 @@
       );
     } catch (error) {
       console.error("[NkapLingua]", error);
-      showToast("Erreur de traduction. Vérifiez le backend local.");
+      showToast("Erreur de traduction. Vérifiez la connexion ou le backend local.");
     } finally {
       applying = false;
       if (active) startObserver();

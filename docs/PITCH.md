@@ -2,7 +2,7 @@
 
 ## Une phrase
 
-> **NkapLingua traduit n’importe quelle interface financière en fulfulde, directement dans le navigateur, sans modifier le site, sans exposer les données de l’utilisateur, et sans phrase pré-traduite.**
+> **NkapLingua traduit n’importe quelle interface financière en fulfulde, directement dans le navigateur, sans modifier le site, sans exposer les données sensibles, et sans phrase pré-traduite.**
 
 ## Structure du pitch
 

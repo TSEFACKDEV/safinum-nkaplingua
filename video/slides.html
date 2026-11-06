@@ -1,0 +1,813 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="utf-8" />
+    <title>NkapLingua — vidéo</title>
+    <style>
+      @font-face {
+        font-family: "Noto Sans";
+        src: url("../demo/fonts/noto-sans-latin.woff2") format("woff2");
+        font-weight: 400 700;
+        font-style: normal;
+      }
+      @font-face {
+        font-family: "Noto Sans";
+        src: url("../demo/fonts/noto-sans-latin-ext.woff2") format("woff2");
+        font-weight: 400 700;
+        font-style: normal;
+        unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7,
+          U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F,
+          U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C4, U+2113, U+2C60-2C7F,
+          U+A720-A7FF;
+      }
+      @font-face {
+        font-family: "Fraunces";
+        src: url("../demo/fonts/fraunces-latin.woff2") format("woff2");
+        font-weight: 500 600;
+        font-style: normal;
+      }
+
+      :root {
+        --forest: #123b2e;
+        --forest-deep: #0d2a20;
+        --gold: #c9a45c;
+        --gold-light: #e8d5ad;
+        --gold-dark: #7a5a22;
+        --ink: #14201b;
+        --muted: #5d6d64;
+        --canvas: #f8f4ec;
+        --surface: #fffdf8;
+        --line: #e3dbcd;
+        --terracotta: #a94d35;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      html,
+      body {
+        width: 1920px;
+        height: 1080px;
+        margin: 0;
+        overflow: hidden;
+      }
+
+      body {
+        background: var(--canvas);
+        color: var(--ink);
+        font: 26px/1.5 "Noto Sans", "DejaVu Sans", sans-serif;
+      }
+
+      .slide {
+        display: none;
+        width: 1920px;
+        height: 1080px;
+        padding: 82px 110px 64px;
+        flex-direction: column;
+        justify-content: space-between;
+        background:
+          radial-gradient(circle at 96% 4%, rgba(201, 164, 92, 0.13), transparent 26%),
+          var(--canvas);
+      }
+
+      body[data-slide="1"] #s1,
+      body[data-slide="2"] #s2,
+      body[data-slide="3"] #s3,
+      body[data-slide="4"] #s4,
+      body[data-slide="5"] #s5,
+      body[data-slide="6"] #s6,
+      body[data-slide="7"] #s7 {
+        display: flex;
+      }
+
+      .slide-cover {
+        padding: 72px 110px 64px;
+        background:
+          radial-gradient(circle at 88% 8%, rgba(201, 164, 92, 0.2), transparent 30%),
+          radial-gradient(circle at 0% 100%, rgba(201, 164, 92, 0.08), transparent 38%),
+          linear-gradient(140deg, var(--forest) 0%, var(--forest-deep) 100%);
+        color: #f8f4ec;
+      }
+
+      .slide-cover::after {
+        content: "";
+        position: absolute;
+        right: -180px;
+        top: -220px;
+        width: 680px;
+        height: 680px;
+        border: 1px solid rgba(232, 213, 173, 0.14);
+        border-radius: 50%;
+        box-shadow:
+          0 0 0 60px rgba(232, 213, 173, 0.035),
+          0 0 0 120px rgba(232, 213, 173, 0.02);
+      }
+
+      .cover-top {
+        position: relative;
+        z-index: 1;
+        display: flex;
+        align-items: center;
+        gap: 22px;
+      }
+
+      .mark {
+        display: grid;
+        place-items: center;
+        width: 82px;
+        height: 82px;
+        border-radius: 24px;
+        background: var(--gold);
+        color: var(--forest-deep);
+        font-family: "Fraunces", Georgia, serif;
+        font-size: 48px;
+        font-weight: 600;
+      }
+
+      .cover-kicker {
+        margin: 0;
+        color: rgba(248, 244, 236, 0.62);
+        font-size: 16px;
+        font-weight: 700;
+        letter-spacing: 0.18em;
+        text-transform: uppercase;
+      }
+
+      .cover-brand {
+        margin: 6px 0 0;
+        font-family: "Fraunces", Georgia, serif;
+        font-size: 46px;
+        font-weight: 600;
+        letter-spacing: -0.03em;
+      }
+
+      .cover-main {
+        position: relative;
+        z-index: 1;
+        max-width: 1300px;
+      }
+
+      .cover-main h1 {
+        margin: 0;
+        font-family: "Fraunces", Georgia, serif;
+        font-size: 112px;
+        font-weight: 500;
+        letter-spacing: -0.055em;
+        line-height: 0.98;
+      }
+
+      .cover-main h1 span {
+        color: var(--gold);
+      }
+
+      .cover-lede {
+        max-width: 1000px;
+        margin: 38px 0 0;
+        color: rgba(248, 244, 236, 0.72);
+        font-size: 32px;
+        line-height: 1.45;
+      }
+
+      .cover-pills {
+        display: flex;
+        gap: 12px;
+        margin-top: 44px;
+      }
+
+      .cover-pill {
+        border: 1px solid rgba(232, 213, 173, 0.28);
+        border-radius: 999px;
+        padding: 10px 18px;
+        color: var(--gold-light);
+        font-size: 14px;
+        font-weight: 700;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+      }
+
+      .cover-bottom {
+        position: relative;
+        z-index: 1;
+        display: flex;
+        align-items: flex-end;
+        justify-content: space-between;
+        border-top: 1px solid rgba(232, 213, 173, 0.18);
+        padding-top: 26px;
+      }
+
+      .cover-bottom p {
+        margin: 0;
+        color: rgba(248, 244, 236, 0.55);
+        font-size: 18px;
+        line-height: 1.55;
+      }
+
+      .cover-bottom strong {
+        color: #f8f4ec;
+      }
+
+      .slide-top {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 24px;
+      }
+
+      .eyebrow {
+        margin: 0;
+        color: var(--gold-dark);
+        font-size: 17px;
+        font-weight: 800;
+        letter-spacing: 0.16em;
+        text-transform: uppercase;
+      }
+
+      .slide-number {
+        color: var(--muted);
+        font-size: 15px;
+        font-weight: 700;
+        letter-spacing: 0.1em;
+      }
+
+      .slide-content {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        padding: 38px 0;
+      }
+
+      h1 {
+        max-width: 1500px;
+        margin: 0;
+        font-family: "Fraunces", Georgia, serif;
+        font-size: 82px;
+        font-weight: 500;
+        letter-spacing: -0.045em;
+        line-height: 1.05;
+      }
+
+      h2 {
+        margin: 0;
+        font-family: "Fraunces", Georgia, serif;
+        font-size: 38px;
+        font-weight: 600;
+        letter-spacing: -0.03em;
+      }
+
+      .lede {
+        max-width: 1180px;
+        margin: 25px 0 0;
+        color: var(--muted);
+        font-size: 28px;
+        line-height: 1.5;
+      }
+
+      .slide-footer {
+        display: flex;
+        justify-content: space-between;
+        border-top: 1px solid var(--line);
+        padding-top: 18px;
+        color: var(--muted);
+        font-size: 15px;
+        font-weight: 600;
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
+      }
+
+      .slide-footer strong {
+        color: var(--forest);
+      }
+
+      .grid-3 {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 26px;
+        margin-top: 44px;
+      }
+
+      .card {
+        border: 1px solid var(--line);
+        border-radius: 24px;
+        padding: 30px;
+        background: var(--surface);
+      }
+
+      .card h3 {
+        margin: 0 0 12px;
+        font-size: 24px;
+        font-weight: 700;
+        letter-spacing: -0.02em;
+      }
+
+      .card p {
+        margin: 0;
+        color: var(--muted);
+        font-size: 20px;
+        line-height: 1.5;
+      }
+
+      .card .num {
+        display: block;
+        margin-bottom: 16px;
+        color: var(--gold-dark);
+        font-family: "Fraunces", Georgia, serif;
+        font-size: 36px;
+        font-weight: 600;
+      }
+
+      .split {
+        display: grid;
+        grid-template-columns: 1.1fr 0.9fr;
+        gap: 58px;
+        align-items: center;
+      }
+
+      .bullets {
+        display: grid;
+        gap: 18px;
+        margin: 30px 0 0;
+        padding: 0;
+        list-style: none;
+      }
+
+      .bullets li {
+        display: flex;
+        gap: 14px;
+        color: var(--ink);
+        font-size: 24px;
+        line-height: 1.45;
+      }
+
+      .bullets li::before {
+        content: "";
+        flex-shrink: 0;
+        width: 10px;
+        height: 10px;
+        margin-top: 12px;
+        border-radius: 50%;
+        background: var(--gold);
+      }
+
+      .popup-shot {
+        width: 390px;
+        max-height: 760px;
+        object-fit: contain;
+        object-position: top;
+        border: 1px solid var(--line);
+        border-radius: 24px;
+        box-shadow: 0 30px 70px rgba(20, 32, 27, 0.16);
+        justify-self: center;
+      }
+
+      .demo-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 22px;
+        margin-top: 38px;
+      }
+
+      .demo-card {
+        overflow: hidden;
+        border: 1px solid var(--line);
+        border-radius: 18px;
+        background: var(--surface);
+        box-shadow: 0 14px 34px rgba(20, 32, 27, 0.08);
+      }
+
+      .demo-card img {
+        display: block;
+        width: 100%;
+        height: 300px;
+        object-fit: cover;
+        object-position: top;
+      }
+
+      .demo-card div {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        padding: 16px 18px;
+        font-size: 18px;
+        font-weight: 700;
+      }
+
+      .demo-card span {
+        display: grid;
+        place-items: center;
+        width: 30px;
+        height: 30px;
+        border-radius: 50%;
+        background: var(--gold-50);
+        color: var(--gold-dark);
+        font-size: 14px;
+      }
+
+      .security-flow {
+        display: flex;
+        align-items: center;
+        gap: 16px;
+        margin-top: 44px;
+      }
+
+      .flow-box {
+        flex: 1;
+        min-height: 150px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        border: 1px solid var(--line);
+        border-radius: 18px;
+        padding: 22px;
+        background: var(--surface);
+      }
+
+      .flow-box strong {
+        color: var(--forest);
+        font-size: 22px;
+        line-height: 1.2;
+      }
+
+      .flow-box span {
+        margin-top: 8px;
+        color: var(--muted);
+        font-size: 17px;
+        line-height: 1.35;
+      }
+
+      .flow-box.is-token {
+        background: var(--gold-50);
+        border-color: var(--gold-light);
+      }
+
+      .flow-arrow {
+        flex-shrink: 0;
+        color: var(--gold-dark);
+        font-size: 34px;
+      }
+
+      .security-points {
+        display: flex;
+        gap: 30px;
+        margin-top: 38px;
+      }
+
+      .security-points div {
+        flex: 1;
+        border-left: 3px solid var(--gold);
+        padding-left: 18px;
+      }
+
+      .security-points strong {
+        display: block;
+        color: var(--forest);
+        font-size: 20px;
+      }
+
+      .security-points span {
+        display: block;
+        margin-top: 5px;
+        color: var(--muted);
+        font-size: 17px;
+        line-height: 1.4;
+      }
+
+      .translation-pair {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 28px;
+        margin-top: 38px;
+      }
+
+      .translation-pair .card {
+        padding: 34px;
+      }
+
+      .translation-pair .label {
+        display: block;
+        margin-bottom: 14px;
+        color: var(--gold-dark);
+        font-size: 14px;
+        font-weight: 800;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+      }
+
+      .translation-pair .text {
+        font-size: 30px;
+        line-height: 1.4;
+        color: var(--ink);
+      }
+
+      .translation-pair .target {
+        color: var(--forest);
+        font-weight: 600;
+      }
+
+      .validation-note {
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        margin-top: 34px;
+        border: 1px solid var(--gold-light);
+        border-radius: 999px;
+        padding: 10px 18px;
+        background: var(--gold-50);
+        color: var(--gold-dark);
+        font-size: 17px;
+        font-weight: 700;
+      }
+
+      .validation-note::before {
+        content: "";
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        background: var(--gold);
+      }
+
+      .impact-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 26px;
+        margin-top: 42px;
+      }
+
+      .impact-stat {
+        padding: 28px;
+        border: 1px solid var(--line);
+        border-radius: 20px;
+        background: var(--surface);
+      }
+
+      .impact-stat strong {
+        display: block;
+        color: var(--forest);
+        font-family: "Fraunces", Georgia, serif;
+        font-size: 58px;
+        font-weight: 600;
+        letter-spacing: -0.04em;
+        line-height: 1;
+      }
+
+      .impact-stat span {
+        display: block;
+        margin-top: 10px;
+        color: var(--muted);
+        font-size: 19px;
+        line-height: 1.4;
+      }
+
+      .repo {
+        margin-top: 48px;
+        color: var(--muted);
+        font-size: 22px;
+      }
+
+      .repo strong {
+        color: var(--forest);
+      }
+    </style>
+  </head>
+  <body>
+    <section class="slide slide-cover" id="s1">
+      <div class="cover-top">
+        <span class="mark">N</span>
+        <div>
+          <p class="cover-kicker">SAFINUM Innovate Challenge 2026</p>
+          <p class="cover-brand">NkapLingua</p>
+        </div>
+      </div>
+
+      <div class="cover-main">
+        <h1>Votre banque,<br />en <span>fulfulde</span>.</h1>
+        <p class="cover-lede">
+          Une couche d’accessibilité linguistique pour les services financiers
+          numériques camerounais. Sans modifier le site. Sans exposer les
+          données sensibles.
+        </p>
+        <div class="cover-pills">
+          <span class="cover-pill">Fulfulde · fub</span>
+          <span class="cover-pill">Browser extension</span>
+          <span class="cover-pill">Local-first</span>
+        </div>
+      </div>
+
+      <div class="cover-bottom">
+        <p>
+          <strong>Équipe NkapLingua</strong><br />
+          Klein · Freedy · Marius · Yaoundé
+        </p>
+        <p style="text-align: right">
+          Prototype de présélection<br />
+          Novembre 2026
+        </p>
+      </div>
+    </section>
+
+    <section class="slide" id="s2">
+      <div class="slide-top">
+        <p class="eyebrow">01 · Le problème</p>
+        <span class="slide-number">02 / 07</span>
+      </div>
+      <div class="slide-content">
+        <h1>Comprendre un solde<br />ne devrait pas être un obstacle.</h1>
+        <p class="lede">
+          Les interfaces de mobile money, de banque et de microfinance restent
+          souvent en français ou en anglais.
+        </p>
+        <div class="grid-3">
+          <div class="card">
+            <span class="num">01</span>
+            <h3>Les frais</h3>
+            <p>Combien vais-je payer ? Pourquoi ce montant ?</p>
+          </div>
+          <div class="card">
+            <span class="num">02</span>
+            <h3>Le crédit</h3>
+            <p>Quel taux, quelles pénalités, quelle échéance ?</p>
+          </div>
+          <div class="card">
+            <span class="num">03</span>
+            <h3>La sécurité</h3>
+            <p>Ce message est-il une alerte ou une tentative de fraude ?</p>
+          </div>
+        </div>
+      </div>
+      <div class="slide-footer">
+        <span><strong>NkapLingua</strong> · SAFINUM 2026</span>
+        <span>Inclusion financière</span>
+      </div>
+    </section>
+
+    <section class="slide" id="s3">
+      <div class="slide-top">
+        <p class="eyebrow">02 · La solution</p>
+        <span class="slide-number">03 / 07</span>
+      </div>
+      <div class="slide-content split">
+        <div>
+          <h1>Une couche de traduction,<br />pas un nouveau service.</h1>
+          <ul class="bullets">
+            <li>L’utilisateur clique, choisit le fulfulde, lit la page.</li>
+            <li>Aucune modification du site financier.</li>
+            <li>Retour à l’original à tout moment.</li>
+            <li>Fonctionne seule, avec un backend local optionnel.</li>
+          </ul>
+        </div>
+        <img class="popup-shot" src="assets/popup.png" alt="Popup NkapLingua" />
+      </div>
+      <div class="slide-footer">
+        <span><strong>NkapLingua</strong> · SAFINUM 2026</span>
+        <span>Réversible · non intrusif</span>
+      </div>
+    </section>
+
+    <section class="slide" id="s4">
+      <div class="slide-top">
+        <p class="eyebrow">03 · Démonstration</p>
+        <span class="slide-number">04 / 07</span>
+      </div>
+      <div class="slide-content">
+        <h1>Le parcours financier,<br />étape par étape.</h1>
+        <div class="demo-grid">
+          <div class="demo-card">
+            <img src="assets/hero.png" alt="Solde" />
+            <div><span>1</span> Vérifier le solde</div>
+          </div>
+          <div class="demo-card">
+            <img src="assets/transfer.png" alt="Transfert" />
+            <div><span>2</span> Lire les frais</div>
+          </div>
+          <div class="demo-card">
+            <img src="assets/recap.png" alt="Récapitulatif" />
+            <div><span>3</span> Relire avant confirmation</div>
+          </div>
+        </div>
+      </div>
+      <div class="slide-footer">
+        <span><strong>NkapLingua</strong> · SAFINUM 2026</span>
+        <span>Solde · frais · transfert · récapitulatif</span>
+      </div>
+    </section>
+
+    <section class="slide" id="s5">
+      <div class="slide-top">
+        <p class="eyebrow">04 · Sécurité</p>
+        <span class="slide-number">05 / 07</span>
+      </div>
+      <div class="slide-content">
+        <h1>Les montants<br />ne changent jamais.</h1>
+        <div class="security-flow">
+          <div class="flow-box">
+            <strong>125 000 FCFA</strong>
+            <span>Montant affiché sur la page</span>
+          </div>
+          <span class="flow-arrow">→</span>
+          <div class="flow-box is-token">
+            <strong>[[NUM_0]]</strong>
+            <span>Jeton avant envoi</span>
+          </div>
+          <span class="flow-arrow">→</span>
+          <div class="flow-box">
+            <strong>Traduction</strong>
+            <span>Local ou cloud pseudonymisé</span>
+          </div>
+          <span class="flow-arrow">→</span>
+          <div class="flow-box">
+            <strong>Contrôle</strong>
+            <span>Jeton présent une seule fois</span>
+          </div>
+          <span class="flow-arrow">→</span>
+          <div class="flow-box">
+            <strong>125 000 FCFA</strong>
+            <span>Restauré à l’identique</span>
+          </div>
+        </div>
+        <div class="security-points">
+          <div>
+            <strong>Refus sécurisé</strong>
+            <span>Si un jeton ou un terme critique manque, l’original reste affiché.</span>
+          </div>
+          <div>
+            <strong>Zéro PIN / OTP</strong>
+            <span>Les champs sensibles ne sont jamais lus.</span>
+          </div>
+          <div>
+            <strong>Local prioritaire</strong>
+            <span>Cloud seulement en secours, avec texte pseudonymisé.</span>
+          </div>
+        </div>
+      </div>
+      <div class="slide-footer">
+        <span><strong>NkapLingua</strong> · SAFINUM 2026</span>
+        <span>Intégrité financière</span>
+      </div>
+    </section>
+
+    <section class="slide" id="s6">
+      <div class="slide-top">
+        <p class="eyebrow">05 · Langue & validation</p>
+        <span class="slide-number">06 / 07</span>
+      </div>
+      <div class="slide-content">
+        <h1>Fulfulde (Adamawa),<br />code fub.</h1>
+        <div class="translation-pair">
+          <div class="card">
+            <span class="label">Source · français</span>
+            <div class="text">Le solde est de 125 000 FCFA.</div>
+          </div>
+          <div class="card">
+            <span class="label">Cible · fulfulde</span>
+            <div class="text target">Fedde jaɓande nden ko 125 000 FCFA.</div>
+          </div>
+        </div>
+        <span class="validation-note">
+          NLLB baseline · validation native en cours · orthographe AGLC
+        </span>
+      </div>
+      <div class="slide-footer">
+        <span><strong>NkapLingua</strong> · SAFINUM 2026</span>
+        <span>Qualité linguistique</span>
+      </div>
+    </section>
+
+    <section class="slide" id="s7">
+      <div class="slide-top">
+        <p class="eyebrow">06 · Impact</p>
+        <span class="slide-number">07 / 07</span>
+      </div>
+      <div class="slide-content">
+        <h1>Zéro intégration.<br />Un language pack par langue.</h1>
+        <div class="impact-grid">
+          <div class="impact-stat">
+            <strong>1</strong>
+            <span>ZIP universel pour Chrome, Edge et Firefox</span>
+          </div>
+          <div class="impact-stat">
+            <strong>2</strong>
+            <span>modes : local 100 % ou cloud de secours</span>
+          </div>
+          <div class="impact-stat">
+            <strong>0</strong>
+            <span>ligne de code modifiée sur le site financier</span>
+          </div>
+        </div>
+        <p class="repo">
+          <strong>github.com/TSEFACKDEV/safinum-nkaplingua</strong><br />
+          Merci.
+        </p>
+      </div>
+      <div class="slide-footer">
+        <span><strong>NkapLingua</strong> · SAFINUM 2026</span>
+        <span>Inclusion financière · Cameroun</span>
+      </div>
+    </section>
+
+    <script>
+      const slide = new URLSearchParams(location.search).get("s") || "1";
+      document.body.dataset.slide = slide;
+    </script>
+  </body>
+</html>
