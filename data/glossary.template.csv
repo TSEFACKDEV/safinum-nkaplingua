@@ -1,0 +1,21 @@
+source_fr,source_en,target_fub,domain,note,status
+solde disponible,available balance,,mobile_money,terme affiché sur l'écran principal,à valider
+frais de transfert,transfer fee,,mobile_money,doit rester explicite,à valider
+montant à envoyer,amount to send,,mobile_money,,à valider
+bénéficiaire,recipient,,mobile_money,,à valider
+code PIN,PIN code,,security,ne jamais traduire le chiffre,à valider
+code de confirmation,confirmation code,,security,OTP,à valider
+taux d'intérêt,interest rate,,credit,,à valider
+frais de dossier,processing fee,,credit,,à valider
+pénalité de retard,late penalty,,credit,,à valider
+capacité de remboursement,repayment capacity,,credit,,à valider
+épargne automatique,automatic savings,,savings,,à valider
+objectif d'épargne,savings goal,,savings,,à valider
+dépôt,deposit,,mobile_money,,à valider
+retrait,withdrawal,,mobile_money,,à valider
+paiement marchand,merchant payment,,mobile_money,,à valider
+vérification d'identité,identity verification,,kyc,,à valider
+pièce d'identité,identity document,,kyc,,à valider
+service client,customer service,,support,,à valider
+transaction,transaction,,general,,à valider
+remboursement,repayment,,credit,,à valider

@@ -1,0 +1,17 @@
+# Termes qui ne doivent pas être traduits.
+# Un terme par ligne. Les lignes commençant par # sont ignorées.
+FCFA
+XAF
+MTN
+MoMo
+Orange Money
+Wave
+Visa
+Mastercard
+WhatsApp
+PIN
+OTP
+KYC
+IBAN
+SWIFT
+FINAKA

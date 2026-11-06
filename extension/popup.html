@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>NkapLingua</title>
+    <link rel="stylesheet" href="popup.css" />
+  </head>
+  <body>
+    <header class="header">
+      <div class="brand">
+        <div class="logo">N</div>
+        <div>
+          <h1>NkapLingua</h1>
+          <p>Inclusion financière · Fulfulde</p>
+        </div>
+      </div>
+      <span class="badge">SAFINUM 2026</span>
+    </header>
+
+    <main class="content">
+      <label class="label" for="language">Langue cible</label>
+      <select id="language" class="select" disabled>
+        <option value="fub">Fulfulde (Adamawa) — fub</option>
+      </select>
+
+      <div class="actions">
+        <button id="translatePage" class="primary" type="button">
+          Traduire cette page
+        </button>
+        <button id="restore" class="secondary" type="button">
+          Restaurer l’original
+        </button>
+      </div>
+
+      <button id="translateSelection" class="ghost" type="button">
+        Traduire la sélection
+      </button>
+
+      <section class="test">
+        <label class="label" for="unseen">Tester un texte inédit</label>
+        <textarea
+          id="unseen"
+          class="textarea"
+          rows="4"
+          placeholder="Collez ici un paragraphe financier jamais vu…"
+        ></textarea>
+        <button id="translateText" class="secondary" type="button">
+          Traduire ce texte
+        </button>
+        <div id="result" class="result" aria-live="polite"></div>
+      </section>
+
+      <div id="status" class="status" role="status" aria-live="polite">
+        Prêt. Le backend doit tourner sur 127.0.0.1:8000.
+      </div>
+
+      <p class="security">
+        Aucune valeur de formulaire, aucun cookie et aucun mot de passe n’est
+        lu. Le texte est envoyé à un backend local, sans journalisation.
+      </p>
+    </main>
+
+    <script src="popup.js"></script>
+  </body>
+</html>
