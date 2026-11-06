@@ -99,3 +99,4 @@ l’utilisateur garde le contrôle. »
 - Promettre 100 % de précision.
 - Cacher que le modèle est un baseline.
 - Utiliser une page pré-traduite en prétendant que c’est du direct.
+
