@@ -38,6 +38,7 @@ Design system : [`docs/DESIGN.md`](docs/DESIGN.md).
 | **Extension universelle** (Chrome/Edge/Firefox) | [nkaplingua-extension.zip](https://github.com/TSEFACKDEV/safinum-nkaplingua/releases/latest/download/nkaplingua-extension.zip) |
 | **Dépôt GitHub** | https://github.com/TSEFACKDEV/safinum-nkaplingua |
 | **Démo publique** | https://tsefackdev.github.io/safinum-nkaplingua/demo/ |
+| **Guide de soumission** | [`docs/SUBMISSION.md`](docs/SUBMISSION.md) |
 
 > L’extension universelle fonctionne sans installation Python : elle utilise
 > le backend local s’il est présent, sinon le service cloud MyMemory avec un
