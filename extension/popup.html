@@ -16,29 +16,28 @@
             <h1>NkapLingua</h1>
           </div>
         </div>
-        <span class="lang-pair" aria-label="Français vers fulfulde">
-          <span>FR</span>
+        <span class="lang-pair" aria-label="Détection de la langue source et langue cible">
+          <span id="sourceCode">FR·EN</span>
           <span class="lang-arrow" aria-hidden="true">→</span>
-          <span>FF</span>
+          <span id="targetCode">FF</span>
         </span>
       </header>
 
       <main class="content">
         <section class="hero">
           <p class="kicker">Accessibilité financière</p>
-          <h2>Votre page,<br />en fulfulde.</h2>
+          <h2 id="heroTitle">Votre page,<br />en fulfulde.</h2>
           <p class="lede">
-            Une couche de traduction locale, réversible et sans modification du
-            site financier.
+            Une couche de traduction réversible, sans modification du site
+            financier. La langue source est détectée avant l’envoi.
           </p>
         </section>
 
         <section class="panel">
           <div class="field">
             <label for="language">Langue cible</label>
-            <select id="language" class="select" disabled>
-              <option value="fub">Fulfulde (Adamawa) — fub</option>
-            </select>
+            <select id="language" class="select"></select>
+            <p id="targetNote" class="target-note"></p>
           </div>
 
           <button id="translatePage" class="btn btn-primary" type="button">
@@ -76,10 +75,11 @@
             Traduire ce texte
           </button>
           <div id="result" class="result" aria-live="polite"></div>
+          <div id="resultMeta" class="result-meta" aria-live="polite"></div>
         </section>
 
         <div id="status" class="status" role="status" aria-live="polite">
-          Prêt. Traduction locale ou cloud selon disponibilité.
+          Prêt. Détection FR/EN active.
         </div>
 
         <footer class="security">
@@ -89,12 +89,26 @@
           </svg>
           <span>Texte pseudonymisé · local ou cloud</span>
         </footer>
-        <p class="privacy">
-          Mode cloud : service MyMemory. Aucun mot de passe, code PIN ou OTP lu.
-        </p>
+
+        <details class="privacy-box">
+          <summary>Confidentialité et mode cloud</summary>
+          <p>
+            Le backend local est prioritaire. S’il n’est pas lancé,
+            l’extension utilise MyMemory avec un texte pseudonymisé :
+            montants, URLs, emails et noms de bénéficiaires remplacés par des
+            jetons. Aucun mot de passe, code PIN, OTP ou valeur de formulaire
+            n’est lu. Pour un usage réel, lancer le backend NLLB local.
+          </p>
+          <p>
+            Les langues en « pack communautaire » (yemba, medumba, ewondo,
+            douala, bassa, ghomala’) ne fonctionnent que sur des phrases
+            validées et ne contactent aucun service cloud.
+          </p>
+        </details>
       </main>
     </div>
 
+    <script src="languages.js"></script>
     <script src="popup.js"></script>
   </body>
 </html>

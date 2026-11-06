@@ -1,55 +1,75 @@
-# Validation linguistique — fulfulde (Adamawa)
+# Validation linguistique — fulfulde et packs communautaires
 
-## 1. Langue supportée
+## 1. Langues et statuts
 
-| Élément | Valeur |
-|---|---|
-| Langue | fulfulde (Adamawa) |
-| Code ISO 639-3 | `fub` |
-| Code NLLB utilisé | `fuv_Latn` (fulfulde nigérian, proche de l’adamawa) |
-| Orthographe de référence | AGLC (Alphabet général des langues camerounaises) |
-| Variétés à vérifier | Maroua, Garoua, Ngaoundéré |
-| Public visé | utilisateurs de mobile money / banque / microfinance |
+| Langue | Code | Moteur | Statut | Ce qui reste à faire |
+|---|---|---|---|---|
+| Fulfulde (Adamawa) | `fub` | NLLB `fuv_Latn` + MyMemory | MT baseline | relecture native de 20 phrases |
+| Yemba | `ybb` | Pack communautaire | 0/20 phrases | remplir `data/language-packs/ybb.csv` |
+| Medumba | `byv` | Pack communautaire | 0/20 phrases | remplir `data/language-packs/byv.csv` |
+| Ewondo | `ewo` | Pack communautaire | 0/20 phrases | remplir le CSV |
+| Douala | `dua` | Pack communautaire | 0/20 phrases | remplir le CSV |
+| Bassa | `bas` | Pack communautaire | 0/20 phrases | remplir le CSV |
+| Ghomala' | `bbj` | Pack communautaire | 0/20 phrases | remplir le CSV |
 
-Le prototype utilise `fuv_Latn` comme approximation. La validation doit
-confirmer que les traductions sont compréhensibles pour des locuteurs de la
-variété adamawa visée.
+**Règle** : aucune langue autre que le fulfulde n’est présentée comme
+« traduction automatique ». Les six autres sont des mémoires de phrases
+validées. Le popup et la page affichent explicitement cet état.
 
-## 2. Méthode de validation
+## 2. Pourquoi ne pas utiliser NLLB pour le yemba et le medumba
 
-### Constitution du panel
+Le tokenizer NLLB-200 ne connaît pas les codes `ybb_Latn`, `byv_Latn`,
+`ewo_Latn`, `dua_Latn`, `bas_Latn` ou `bbj_Latn` : ils sont rejetés comme
+`unk`. MyMemory renvoie aussi une erreur de langue cible invalide pour `ybb`
+et `byv`. Inventer une traduction mot à mot serait dangereux sur des montants
+et des conditions financières.
+
+La seule voie responsable est :
+
+1. collecter des phrases finance ;
+2. les faire traduire et relire par des locuteurs natifs ;
+3. les importer comme mémoire de traduction ;
+4. n’appliquer que les phrases validées ;
+5. laisser l’original visible sinon.
+
+## 3. Corpus de validation
+
+Le fichier `data/language-packs/<code>.csv` contient 20 phrases finance :
+
+- solde, frais, montant total, crédit, débit ;
+- bénéficiaire, transfert, confirmation ;
+- code PIN, OTP, alerte de sécurité ;
+- erreur, annulation, service client ;
+- conditions et pénalités.
+
+Les jetons `[[NUM_n]]`, `[[NAME_n]]`, `[[URL_n]]` et `[[EMAIL_n]]` ne doivent
+pas être traduits ni déplacés. Les termes `FCFA`, `PIN`, `OTP` et `FINAKA`
+doivent rester identiques.
+
+## 4. Protocole pour le fulfulde (MT)
+
+### Panel
 
 - 2 à 3 locuteurs natifs du fulfulde adamawa.
 - Au moins un linguiste ou enseignant de langues nationales.
-- Si possible, un agent de service client financier pour vérifier la
-  terminologie métier.
+- Si possible, un agent de service client financier.
 
-### Corpus de validation
+### Notation
 
-- 20 phrases minimum pour la présélection ;
-- 100 phrases pour la version finale ;
-- phrases courtes et longues ;
-- domaines : solde, frais, transfert, crédit, épargne, KYC, sécurité ;
-- phrases jamais utilisées pour l’entraînement ou le prompt ;
-- références conservées dans un fichier séparé, non versionné si sensible.
-
-### Protocole
-
-1. Le traducteur ne voit pas la sortie du modèle avant d’avoir lu la source.
-2. Il lit la phrase source (français ou anglais).
-3. Il lit la traduction proposée.
-4. Il note :
-   - **adéquation** (le sens est-il conservé ?) 1–5 ;
+1. Le relecteur lit la phrase source.
+2. Il lit la traduction proposée.
+3. Il note :
+   - **adéquation** (sens conservé) 1–5 ;
    - **fidélité** (aucun ajout, omission, contresens) 1–5 ;
-   - **terminologie** (terme financier correct) oui/non ;
+   - **terminologie** financière oui/non ;
    - **préservation** (montant, nom, condition, alerte) oui/non ;
    - **défaut majeur** oui/non.
-5. Un second locuteur révise les cas litigieux.
-6. Les désaccords sont consignés et arbitrés, pas moyennés silencieusement.
+4. Un second locuteur révise les cas litigieux.
+5. Les désaccords sont consignés et arbitrés.
 
 ### Défaut majeur
 
-Un défaut est **majeur** si la traduction :
+Un défaut est majeur si la traduction :
 
 - modifie un montant, un frais ou un pourcentage ;
 - change un nom de bénéficiaire ou une institution ;
@@ -59,7 +79,7 @@ Un défaut est **majeur** si la traduction :
 
 Un seul défaut majeur sur une phrase critique suffit à refuser la phrase.
 
-### Seuils proposés
+### Seuils
 
 | Métrique | Seuil |
 |---|---|
@@ -70,9 +90,31 @@ Un seul défaut majeur sur une phrase critique suffit à refuser la phrase.
 | Terminologie finance | ≥ 90 % |
 | Accord entre réviseurs | ≥ 80 % |
 
-## 3. État actuel du prototype
+## 5. Protocole pour les packs (yemba, medumba, etc.)
 
-Le moteur NLLB a été testé sur quelques phrases courtes. Résultats observés :
+1. Remplir la colonne `target` du CSV.
+2. Relire avec un second locuteur.
+3. Passer `status` à `validated`.
+4. Importer :
+
+```bash
+python3 scripts/import-language-pack.py data/language-packs/ybb.csv
+python3 scripts/import-language-pack.py data/language-packs/byv.csv
+```
+
+5. Vérifier que le script ne signale aucun jeton manquant.
+6. Tester dans le popup : la phrase doit apparaître, les montants et le nom du
+   bénéficiaire doivent être identiques.
+7. Tester une phrase absente : l’original doit rester affiché.
+
+Le script refuse une entrée si :
+
+- un jeton `[[...]]` a disparu ou est dupliqué ;
+- `FCFA`, `XAF`, `PIN`, `OTP`, `KYC` ou `FINAKA` a été traduit.
+
+## 6. État actuel du prototype fulfulde
+
+Quelques sorties observées :
 
 | Phrase source | Sortie NLLB | Observation |
 |---|---|---|
@@ -80,17 +122,18 @@ Le moteur NLLB a été testé sur quelques phrases courtes. Résultats observés
 | Les frais de transfert sont de 1 000 FCFA. | `Fedde jaɓɓorgo nden ko 1 000 FCFA.` | frais et montant préservés |
 | Le taux d’intérêt mensuel est de 2 %. | `Fedde faayiida lewru fuu ko 2%.` | pourcentage préservé |
 | Ne partagez jamais votre code PIN. | `Taa ɓe nganndi PIN-ɗaa.` | avertissement à faire valider |
-| Le bénéficiaire reçoit le montant net après déduction des frais. | sortie instable | **phrase trop complexe : à découper** |
+| Le bénéficiaire reçoit le montant net après déduction des frais. | sortie instable | phrase trop complexe : à découper |
 
-**Conclusion actuelle** : le pipeline technique est fonctionnel, mais la
-qualité linguistique n’est **pas encore validée**. Il faut un locuteur natif
-avant la démonstration.
+**Conclusion** : le pipeline technique est fonctionnel, mais la qualité
+linguistique du fulfulde n’est **pas encore validée**. Les six packs sont
+vides. Il faut des locuteurs natifs avant de présenter le prototype comme
+« validé ».
 
-## 4. Fiche de validation à remplir
+## 7. Fiche de validation à remplir
 
 ```text
 Validateur :
-Variété de fulfulde :
+Langue / variété :
 Date :
 Nombre de phrases :
 Phrases avec défaut majeur :
@@ -99,17 +142,22 @@ Terminologie correcte :
 Commentaires :
 ```
 
-## 5. Données à utiliser
+## 8. Données à utiliser
 
-- `data/unseen_finance.txt` : 20 phrases finance de test.
-- `data/glossary.template.csv` : glossaire à remplir avec un natif.
+- `data/language-packs/ybb.csv` et `byv.csv` : 20 phrases finance.
+- `data/unseen_finance.txt` : phrases de test fulfulde.
+- `data/glossary.template.csv` : glossaire à remplir.
 - `docs/EVAL.md` : protocole de mesure (chrF++, COMET, latence).
-- `docs/DATA_LICENSES.md` : licences du corpus et du modèle.
+- `docs/LANGUAGES.md` : couverture et limites.
+- `docs/DATA_INTEGRATION.md` : intégration des données d’un centre
+  linguistique camerounais.
+- `docs/DATA_LICENSES.md` : licences.
 
-## 6. Ce qu’il faut éviter
+## 9. Ce qu’il faut éviter
 
 - Faire valider par une seule personne puis annoncer « validé par le centre ».
 - Utiliser des phrases de la page de démo comme jeu de test.
 - Corriger la traduction puis présenter la correction comme sortie du modèle.
 - Annoncer un score sans protocole ni nombre de phrases.
+- Remplir un pack yemba/medumba sans locuteur natif.
 - Traduire un contrat réel sans mention « traduction assistée ».

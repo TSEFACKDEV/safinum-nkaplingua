@@ -14,6 +14,12 @@ Lancement :
 Mode maquette (sans modèle, pour tester l'extension) :
     NK_MOCK=1 uvicorn app:app --host 127.0.0.1 --port 8000
 
+Langues cibles :
+  - fub : traduction automatique NLLB-200 (fuv_Latn) ;
+  - ybb, byv, ewo, dua, bas, bbj : packs communautaires gérés par
+    l'extension (le backend ne produit pas de traduction automatique pour
+    ces langues, faute de modèle validé).
+
 Note licence : NLLB est CC BY-NC 4.0, donc autorisé pour ce hackathon
 non commercial. Pour une exploitation commerciale, il faudra un accord ou
 un autre modèle.
@@ -57,6 +63,70 @@ TARGET_ALIASES = {
     "ful": "fuv_Latn",
 }
 
+# Langues sans modèle de traduction validé : l'extension applique uniquement
+# une mémoire de traduction communautaire (phrases status=validated).
+PACK_TARGETS = {
+    "ybb": "Yemba",
+    "byv": "Medumba",
+    "ewo": "Ewondo",
+    "dua": "Douala",
+    "bas": "Bassa",
+    "bbj": "Ghomala'",
+}
+
+LANGUAGE_REGISTRY = [
+    {
+        "code": "fub",
+        "label": "Fulfulde (Adamawa)",
+        "engine": "mt",
+        "model_code": "fuv_Latn",
+        "status": "mt-baseline",
+        "license": "NLLB-200: CC BY-NC 4.0 (non commercial)",
+    },
+    {
+        "code": "ybb",
+        "label": "Yemba",
+        "engine": "pack",
+        "status": "community-pack",
+        "license": "pack communautaire, validation native requise",
+    },
+    {
+        "code": "byv",
+        "label": "Medumba",
+        "engine": "pack",
+        "status": "community-pack",
+        "license": "pack communautaire, validation native requise",
+    },
+    {
+        "code": "ewo",
+        "label": "Ewondo",
+        "engine": "pack",
+        "status": "community-pack",
+        "license": "pack communautaire, validation native requise",
+    },
+    {
+        "code": "dua",
+        "label": "Douala",
+        "engine": "pack",
+        "status": "community-pack",
+        "license": "pack communautaire, validation native requise",
+    },
+    {
+        "code": "bas",
+        "label": "Bassa",
+        "engine": "pack",
+        "status": "community-pack",
+        "license": "pack communautaire, validation native requise",
+    },
+    {
+        "code": "bbj",
+        "label": "Ghomala'",
+        "engine": "pack",
+        "status": "community-pack",
+        "license": "pack communautaire, validation native requise",
+    },
+]
+
 DNT_TERMS = [
     "FCFA",
     "XAF",
@@ -77,10 +147,12 @@ DNT_TERMS = [
 ]
 
 TOKEN_RE = re.compile(
-    r"\[\[\s*(NUM|URL|EMAIL)\s*_\s*(\d+)\s*\]\]", re.IGNORECASE
+    r"\[\[\s*(NUM|URL|EMAIL|NAME)\s*_\s*(\d+)\s*\]\]",
+    re.IGNORECASE,
 )
 NORMALIZED_TOKEN_RE = re.compile(
-    r"\[\s*\[\s*(NUM|URL|EMAIL)\s*_\s*(\d+)\s*\]\s*\]", re.IGNORECASE
+    r"\[\s*\[\s*(NUM|URL|EMAIL|NAME)\s*_\s*(\d+)\s*\]\s*\]",
+    re.IGNORECASE,
 )
 
 
@@ -96,6 +168,11 @@ class TranslateRequest(BaseModel):
     source: str = "fr"
 
 
+class DetectRequest(BaseModel):
+    text: str = ""
+    hint: str = ""
+
+
 class Translation(BaseModel):
     id: str
     text: str
@@ -109,7 +186,7 @@ class TranslateResponse(BaseModel):
     target: str
 
 
-app = FastAPI(title="NkapLingua API", version="0.2.0")
+app = FastAPI(title="NkapLingua API", version="0.4.0")
 
 # Le backend est local ; on n'ouvre pas les origines à tout Internet.
 # En production, remplacer par l'ID exact de l'extension et un jeton.
@@ -197,6 +274,82 @@ def contains_term(text: str, term: str) -> bool:
         )
         is not None
     )
+
+
+FRENCH_WORDS = {
+    "le", "la", "les", "un", "une", "des", "du", "de", "dans", "sur",
+    "pour", "avec", "sans", "sous", "est", "sont", "ete", "être", "avoir",
+    "votre", "vos", "notre", "nos", "vous", "nous", "je", "tu", "il",
+    "elle", "ils", "elles", "ce", "cet", "cette", "ces", "qui", "que",
+    "quoi", "compte", "solde", "frais", "transfert", "paiement", "montant",
+    "beneficiaire", "bénéficiaire", "transaction", "confirmation",
+    "securite", "sécurité", "code", "banque", "credit", "crédit", "debit",
+    "débit", "taux", "interet", "intérêt", "echeance", "échéance",
+    "retard", "penalite", "pénalité", "client", "service", "information",
+    "donnee", "données",
+}
+
+ENGLISH_WORDS = {
+    "the", "a", "an", "and", "or", "of", "to", "in", "on", "at", "for",
+    "with", "without", "under", "is", "are", "was", "were", "be", "been",
+    "your", "our", "you", "we", "i", "he", "she", "they", "it", "this",
+    "that", "these", "those", "who", "what", "which", "account", "balance",
+    "fee", "fees", "transfer", "payment", "amount", "beneficiary",
+    "transaction", "confirmation", "security", "code", "bank", "credit",
+    "debit", "rate", "interest", "due", "late", "penalty", "customer",
+    "service", "information", "data",
+}
+
+
+def detect_language(text: str, hint: str = "") -> dict:
+    """Détection FR/EN explicable, alignée sur extension/languages.js."""
+    value = re.sub(r"\s+", " ", str(text or "")).strip().lower()
+    words = re.findall(r"[a-zà-ÿ']+", value)
+    french = sum(1 for word in words if word in FRENCH_WORDS)
+    english = sum(1 for word in words if word in ENGLISH_WORDS)
+    french += len(re.findall(r"[àâçéèêëîïôûùüÿœ]", value)) * 0.6
+    english += len(re.findall(r"\b(?:th|wh|sh|ing|tion|ough)\b", value)) * 0.4
+
+    total = french + english
+    hinted = hint.lower()[:2] if hint else ""
+    guessed = hinted if hinted in {"fr", "en"} else None
+
+    if total == 0:
+        return {
+            "code": guessed or "unknown",
+            "confidence": 0.3 if guessed else 0.0,
+            "scores": {"fr": 0.0, "en": 0.0},
+            "mixed": False,
+        }
+
+    confidence = min(0.99, round(abs(french - english) / total, 2))
+    if french >= english * 1.25:
+        code = "fr"
+    elif english >= french * 1.25:
+        code = "en"
+    else:
+        code = "mixed"
+
+    if guessed and total < 2:
+        return {
+            "code": guessed,
+            "confidence": 0.3,
+            "scores": {
+                "fr": round(french, 1),
+                "en": round(english, 1),
+            },
+            "mixed": False,
+        }
+
+    return {
+        "code": code,
+        "confidence": confidence,
+        "scores": {
+            "fr": round(french, 1),
+            "en": round(english, 1),
+        },
+        "mixed": code == "mixed",
+    }
 
 
 def validate(source: str, translation: str) -> tuple[bool, Optional[str]]:
@@ -344,15 +497,15 @@ def demo():
 def languages():
     return {
         "source": ["fr", "en"],
-        "target": [
-            {
-                "code": "fub",
-                "model_code": "fuv_Latn",
-                "label": "Fulfulde (Adamawa)",
-                "license": "NLLB-200: CC BY-NC 4.0 (non commercial)",
-            }
-        ],
+        "targets": LANGUAGE_REGISTRY,
+        # Ancien champ conservé pour les clients existants.
+        "target": LANGUAGE_REGISTRY,
     }
+
+
+@app.post("/detect")
+def detect(request: DetectRequest):
+    return detect_language(request.text, request.hint)
 
 
 @app.post("/translate", response_model=TranslateResponse)
@@ -362,6 +515,16 @@ def translate(request: TranslateRequest):
             translations=[], model=MODEL_NAME, target=request.target
         )
 
+    if request.target in PACK_TARGETS:
+        raise HTTPException(
+            status_code=400,
+            detail=(
+                f"La langue {PACK_TARGETS[request.target]} fonctionne en mode "
+                "pack communautaire dans l'extension ; le backend NLLB ne "
+                "produit pas de traduction automatique validée pour cette langue."
+            ),
+        )
+
     target_lang = TARGET_ALIASES.get(request.target)
     if not target_lang:
         raise HTTPException(
@@ -369,7 +532,15 @@ def translate(request: TranslateRequest):
             detail=f"Langue cible non supportée par ce prototype : {request.target}",
         )
 
-    source_lang = SOURCE_ALIASES.get(request.source)
+    source_code = request.source
+    if source_code == "auto":
+        source_code = detect_language(
+            " ".join(segment.text for segment in request.segments)
+        )["code"]
+        if source_code not in {"fr", "en"}:
+            source_code = "fr"
+
+    source_lang = SOURCE_ALIASES.get(source_code)
     if not source_lang:
         raise HTTPException(
             status_code=400,

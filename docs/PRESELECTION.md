@@ -4,11 +4,14 @@
 
 - **Nom du projet** : NkapLingua
 - **Hackathon** : SAFINUM Innovate Challenge 2026
-- **Langue cible** : fulfulde adamawa (`fub`)
-- **Plateforme** : extension navigateur Chrome/Edge (Manifest V3)
-- **Moteur** : NLLB-200 600M (CC BY-NC 4.0, usage hackathon non commercial), français → fulfulde (`fuv_Latn`)
+- **Langues cibles** : fulfulde adamawa (`fub`) en MT ; yemba (`ybb`),
+  medumba (`byv`), ewondo (`ewo`), douala (`dua`), bassa (`bas`) et
+  ghomala’ (`bbj`) en packs de phrases validées
+- **Plateforme** : extension navigateur Chrome/Edge/Firefox (Manifest V3)
+- **Moteur** : NLLB-200 600M (CC BY-NC 4.0, usage hackathon non commercial),
+  français → fulfulde (`fuv_Latn`) ; packs communautaires pour les autres
 - **Données** : corpus open data Adamawa Fulfulde–French (NOODL-1.0), références
-  du centre linguistique camerounais, glossaire finance à valider
+  de l’OLC/ERDELAP et des comités de langues, glossaire finance à valider
 
 ## 2. Problème
 
@@ -34,7 +37,7 @@ L’utilisateur :
 
 1. ouvre sa page mobile money ou sa banque ;
 2. clique sur NkapLingua ;
-3. choisit le fulfulde ;
+3. choisit la langue cible ;
 4. lit la page traduite ;
 5. peut revenir à l’original à tout moment.
 
@@ -46,7 +49,7 @@ serveur de la banque.
 | Exigence | Réponse NkapLingua |
 |---|---|
 | Extension navigateur | Manifest V3, Chrome/Edge |
-| Au moins une langue | Fulfulde adamawa, code ISO `fub` |
+| Au moins une langue | Fulfulde `fub` + six langues en packs |
 | Page financière ou autre | Pipeline DOM générique + page de démo FINAKA |
 | Sans modifier le contexte | Segmentation par bloc, glossaire, préservation des entités |
 | Sans modifier le site source | Injection à l’exécution, rendu réversible |
@@ -54,7 +57,7 @@ serveur de la banque.
 | Sécurité plateforme | `activeTab`, pas de code distant, CSP verrouillée |
 | Sécurité utilisateur | Pas de mots de passe/OTP/cookies, backend local |
 | Orientation finance | Frais, crédit, épargne, alertes, KYC |
-| Données du centre | Publications citées comme référence |
+| Données du centre | OLC/ERDELAP et comités cités ; pipeline `docs/DATA_INTEGRATION.md` |
 | Licences | NLLB-200 CC BY-NC 4.0 (hackathon), corpus NOODL, Common Voice CC0 |
 
 ## 5. Architecture
