@@ -60,6 +60,21 @@
     "SWIFT"
   ];
 
+  // Détection FR/EN volontairement simple : le challenge peut fournir une
+  // interface en français ou en anglais. Le backend reçoit la langue source.
+  const FRENCH_HINTS = [
+    " le ", " la ", " les ", " des ", " une ", " un ", " est ", " sont ",
+    " pour ", " avec ", " votre ", " vos ", " vous ", " nous ", " frais ",
+    " solde ", " compte ", " transfert ", " paiement ", " code ", " confirmation ",
+    " bénéficiaire ", " montant ", " transaction ", " sécurité "
+  ];
+  const ENGLISH_HINTS = [
+    " the ", " and ", " is ", " are ", " for ", " with ", " your ", " you ",
+    " we ", " account ", " balance ", " fees ", " transfer ", " payment ",
+    " code ", " confirmation ", " beneficiary ", " amount ", " transaction ",
+    " security "
+  ];
+
   let translated = new WeakMap();
   const translatedNodes = new Set();
   const flaggedNodes = new Set();
@@ -73,6 +88,22 @@
   /* ------------------------------------------------------------------ */
   /* Sélection des nœuds                                                */
   /* ------------------------------------------------------------------ */
+
+  function detectSourceLanguage(text) {
+    const value = ` ${String(text || "").toLowerCase()} `;
+    let french = 0;
+    let english = 0;
+
+    for (const hint of FRENCH_HINTS) {
+      french += value.split(hint).length - 1;
+    }
+    for (const hint of ENGLISH_HINTS) {
+      english += value.split(hint).length - 1;
+    }
+
+    if (english > french * 1.2) return "en";
+    return "fr";
+  }
 
   function isSensitive(element) {
     if (!element) return false;
@@ -275,6 +306,10 @@
         return;
       }
 
+      const source = detectSourceLanguage(
+        document.body?.innerText || document.documentElement?.textContent || ""
+      );
+
       const segments = nodes.map((node, index) => {
         const { text, tokens } = redact(node.nodeValue || "");
         return {
@@ -292,6 +327,7 @@
         const response = await api.runtime.sendMessage({
           type: "NK_TRANSLATE_SEGMENTS",
           target: TARGET,
+          source,
           segments: batch.map(({ id, text, context }) => ({
             id,
             text,
@@ -327,7 +363,8 @@
       }
 
       showToast(
-        `${translatedCount} segment(s) traduit(s) en fulfulde. ` +
+        `${translatedCount} segment(s) traduit(s) en fulfulde ` +
+          `(source : ${source === "en" ? "anglais" : "français"}). ` +
           "Les montants et entités ont été préservés."
       );
     } catch (error) {
@@ -387,6 +424,7 @@
       const response = await api.runtime.sendMessage({
         type: "NK_TRANSLATE_TEXT",
         target: TARGET,
+        source: detectSourceLanguage(text),
         text: redacted
       });
 

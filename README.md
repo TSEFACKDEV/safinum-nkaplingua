@@ -309,6 +309,19 @@ Protocole et métriques : [`docs/EVAL.md`](docs/EVAL.md).
 > fiables que les phrases longues. Une validation native est indispensable
 > avant toute démonstration.
 
+## Conformité SAFINUM
+
+Le règlement officiel du Hackathon Preselection Challenge est analysé
+exigence par exigence dans [`docs/COMPLIANCE.md`](docs/COMPLIANCE.md).
+
+| Document | Contenu |
+|---|---|
+| [`docs/COMPLIANCE.md`](docs/COMPLIANCE.md) | grille 100 points, livrables, écarts |
+| [`docs/TECHNICAL.md`](docs/TECHNICAL.md) | architecture, intégration, dépendances, limites |
+| [`docs/LANGUAGE_VALIDATION.md`](docs/LANGUAGE_VALIDATION.md) | fulfulde, méthode de validation native |
+| [`docs/VIDEO_SCRIPT.md`](docs/VIDEO_SCRIPT.md) | script de la vidéo de 3 minutes |
+| [`docs/SUBMISSION_CHECKLIST.md`](docs/SUBMISSION_CHECKLIST.md) | checklist avant soumission |
+
 ---
 
 ## Structure du dépôt

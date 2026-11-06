@@ -1,0 +1,90 @@
+# Conformité au SAFINUM Innovate Challenge 2026
+
+Ce document confronte le prototype NkapLingua au règlement officiel du
+**Hackathon Preselection Challenge**.
+
+## 1. Fonctionnalités minimales attendues
+
+| Exigence officielle | Statut | Preuve / remarque |
+|---|---|---|
+| 1. Adaptation de la langue de l’interface | ✅ | Extension Manifest V3 + backend NLLB ; page FINAKA de démonstration |
+| 2. Parcours financier : solde, frais, transfert | ✅ | Page FINAKA : solde, frais, formulaire de transfert, récapitulatif |
+| 3. Préservation des montants, frais, bénéficiaires, conditions, alertes | ✅ / ⚠️ | Jetons `[[NUM_n]]`, contrôle des termes critiques, refus si un jeton manque ; la qualité linguistique reste à valider |
+| 4. Fonctionnement sans modifier le code source | ✅ | Injection à l’exécution, aucun changement serveur, toggle original |
+| 5. Adaptation à un nouveau contenu | ✅ / ⚠️ | Popup « texte inédit », traduction de sélection ; qualité NLLB variable sur les phrases longues |
+
+## 2. Grille d’évaluation (100 points)
+
+| Critère | Poids | Auto-évaluation | Commentaire |
+|---|---:|---|---|
+| Fonctionnalité du prototype | 25 | 20–23 | Le pipeline fonctionne ; la qualité native doit être validée |
+| Intégration et indépendance | 20 | 18–20 | Aucune modification du site ; `activeTab` + `scripting` |
+| Sécurité et préservation des informations | 20 | 17–19 | Pseudonymisation, contrôle des jetons, backend local ; noms propres à surveiller |
+| Accessibilité et expérience utilisateur | 15 | 11–13 | Toggle original, `lang`, popup natif ; pas encore de lecture audio |
+| Adaptation à un nouveau contenu | 10 | 7–9 | Oui, mais dépend de la qualité NLLB sur phrases longues |
+| Faisabilité technique et documentation | 10 | 9–10 | README, doc technique, licences, CI |
+| **Total indicatif** | **100** | **82–94** | Objectif : sécuriser la qualité linguistique avant la démo |
+
+> Ces notes sont une auto-évaluation, pas une note du jury.
+
+## 3. Livrables attendus
+
+| Livrable | Statut | Fichier |
+|---|---|---|
+| Description de la solution et du problème | ✅ | `README.md`, `docs/PRESELECTION.md` |
+| Prototype fonctionnel / démonstration reproductible | ✅ | `extension/`, `server/`, `demo/` |
+| Vidéo de démonstration ≤ 3 minutes | ⏳ à enregistrer | `docs/VIDEO_SCRIPT.md` |
+| Document technique : architecture, intégration, dépendances, limites | ✅ | `docs/TECHNICAL.md` |
+| Langue(s) supportée(s) + méthode de validation | ✅ / ⏳ | `docs/LANGUAGE_VALIDATION.md` ; validation native à compléter |
+
+## 4. Environnement de test imposé
+
+Le jury fournira une interface financière simulée commune. Le prototype doit
+donc fonctionner sur une page qu’il n’a pas conçue.
+
+Points à vérifier le jour J :
+
+- [ ] L’extension s’injecte sur l’interface fournie (page web classique).
+- [ ] Les textes principaux sont détectés (pas seulement la page FINAKA).
+- [ ] Les montants et numéros restent identiques.
+- [ ] Le bouton « Restaurer l’original » fonctionne.
+- [ ] Un message nouveau ajouté par le jury est traduit.
+- [ ] Le backend est lancé sur `127.0.0.1:8000`.
+
+Limites connues :
+
+- pas de support des iframes cross-origin ;
+- pas de support des shadow DOM fermés ;
+- pas de traduction des images/canvas ;
+- qualité NLLB variable sur les phrases longues ;
+- l’interface doit être une page web (pas une application mobile native).
+
+## 5. Règles de sécurité
+
+| Règle | Respect |
+|---|---|
+| Ne pas utiliser de vrais comptes bancaires | ✅ page FINAKA fictive |
+| Ne pas collecter/transmettre de données personnelles | ✅ backend local, texte pseudonymisé |
+| Ne pas contourner les mécanismes de sécurité | ✅ aucune modification du site |
+| Préserver montants, frais, bénéficiaires, confirmations | ✅ jetons + contrôle ; noms propres à renforcer |
+| Divulguer les outils et composants tiers | ✅ `docs/DATA_LICENSES.md`, `docs/TECHNICAL.md` |
+| Respecter la propriété intellectuelle | ✅ licences documentées ; NLLB CC BY-NC pour le hackathon |
+
+## 6. Actions prioritaires avant soumission
+
+1. **Faire valider 20 phrases finance par un locuteur natif fulfulde.**
+2. **Remplacer les traductions de la page de démo par des versions validées**
+   (ou utiliser le glossaire / la mémoire de traduction).
+3. **Enregistrer la vidéo de 3 minutes** selon `docs/VIDEO_SCRIPT.md`.
+4. **Tester sur une page que l’équipe n’a pas écrite** (autre site de démo).
+5. **Vérifier que le backend démarre sur une machine propre** (ou fournir une
+   vidéo de secours).
+6. **Mettre à jour `docs/LANGUAGE_VALIDATION.md`** avec les résultats réels.
+
+## 7. Ce qu’il ne faut pas promettre
+
+- « 100 % de précision » : faux et non mesuré.
+- « Toutes les langues du Cameroun » : le prototype couvre le fulfulde.
+- « Aucune erreur possible » : le contrôle de sûreté réduit le risque, il ne
+  l’élimine pas.
+- « Production ready » : c’est un prototype de hackathon.

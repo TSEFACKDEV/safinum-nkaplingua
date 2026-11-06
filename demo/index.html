@@ -278,6 +278,16 @@
         font-size: 13px;
       }
 
+      .error-box {
+        padding: 12px 14px;
+        border-left: 4px solid var(--danger);
+        border-radius: 8px;
+        background: #fef3f2;
+        color: #7a1c12;
+        font-size: 13px;
+        font-weight: 650;
+      }
+
       .conditions p {
         margin: 0 0 10px;
         color: #43554c;
@@ -417,6 +427,73 @@
             <button class="pay-button" type="button">
               Confirmer le transfert
             </button>
+          </article>
+
+          <article class="card" style="margin-top: 18px">
+            <h2>Récapitulatif avant confirmation</h2>
+            <p class="sub">
+              Vérifiez le bénéficiaire, le montant et les frais avant de
+              confirmer l’opération.
+            </p>
+            <ul class="transactions">
+              <li>
+                <div>
+                  <div class="transaction-name">Bénéficiaire</div>
+                  <div class="transaction-date">Compte mobile money</div>
+                </div>
+                <div class="transaction-amount">Aïcha</div>
+              </li>
+              <li>
+                <div>
+                  <div class="transaction-name">Montant envoyé</div>
+                  <div class="transaction-date">Transfert national</div>
+                </div>
+                <div class="transaction-amount">25 000 FCFA</div>
+              </li>
+              <li>
+                <div>
+                  <div class="transaction-name">Frais de transfert</div>
+                  <div class="transaction-date">Affichés avant confirmation</div>
+                </div>
+                <div class="transaction-amount">1 000 FCFA</div>
+              </li>
+              <li>
+                <div>
+                  <div class="transaction-name">Total débité</div>
+                  <div class="transaction-date">Montant + frais</div>
+                </div>
+                <div class="transaction-amount out">26 000 FCFA</div>
+              </li>
+              <li>
+                <div>
+                  <div class="transaction-name">Solde après opération</div>
+                  <div class="transaction-date">Compte principal</div>
+                </div>
+                <div class="transaction-amount">99 000 FCFA</div>
+              </li>
+            </ul>
+            <div class="notice">
+              Vérifiez que le nom du bénéficiaire est correct. Une fois
+              confirmé, le transfert ne peut plus être annulé.
+            </div>
+            <button class="pay-button" type="button">
+              Confirmer le transfert
+            </button>
+          </article>
+
+          <article class="card" style="margin-top: 18px">
+            <h2>Message d’erreur et alerte de sécurité</h2>
+            <p class="sub">
+              Exemple de message affiché lorsque le numéro saisi est invalide.
+            </p>
+            <div class="error-box">
+              Erreur : le numéro du bénéficiaire est invalide. Vérifiez le
+              numéro et réessayez.
+            </div>
+            <div class="notice" style="margin-top: 12px">
+              Alerte de sécurité : ne communiquez jamais votre code PIN ou un
+              code de confirmation à une tierce personne.
+            </div>
           </article>
 
           <article class="card" style="margin-top: 18px">
