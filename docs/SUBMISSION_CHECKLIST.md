@@ -4,7 +4,7 @@
 
 - [ ] Description de la solution : `README.md` + `docs/PRESELECTION.md`
 - [ ] Prototype fonctionnel : `extension/` + `server/` + `demo/`
-- [ ] Vidéo ≤ 3 minutes : à enregistrer avec `docs/VIDEO_SCRIPT.md`
+- [x] Vidéo ≤ 3 minutes : `NkapLingua-Demo.mp4` (2 min 19)
 - [ ] Document technique : `docs/TECHNICAL.md`
 - [ ] Langue + validation : `docs/LANGUAGE_VALIDATION.md`
 - [ ] Licences et composants : `docs/DATA_LICENSES.md`

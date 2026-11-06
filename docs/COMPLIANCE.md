@@ -33,7 +33,7 @@ Ce document confronte le prototype NkapLingua au règlement officiel du
 |---|---|---|
 | Description de la solution et du problème | ✅ | `README.md`, `docs/PRESELECTION.md` |
 | Prototype fonctionnel / démonstration reproductible | ✅ | `extension/`, `server/`, `demo/` |
-| Vidéo de démonstration ≤ 3 minutes | ⏳ à enregistrer | `docs/VIDEO_SCRIPT.md` |
+| Vidéo de démonstration ≤ 3 minutes | ✅ | `NkapLingua-Demo.mp4` (2 min 19) + `docs/VIDEO_SCRIPT.md` |
 | Document technique : architecture, intégration, dépendances, limites | ✅ | `docs/TECHNICAL.md` |
 | Langue(s) supportée(s) + méthode de validation | ✅ / ⏳ | `docs/LANGUAGE_VALIDATION.md` ; validation native à compléter |
 
