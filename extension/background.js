@@ -56,14 +56,22 @@ api.contextMenus.onClicked.addListener((info, tab) => {
 
 api.runtime.onMessage.addListener((message, _sender, sendResponse) => {
   if (message?.type === "NK_TRANSLATE_SEGMENTS") {
-    translateSegments(message.segments || [], message.target || DEFAULT_TARGET)
+    translateSegments(
+      message.segments || [],
+      message.target || DEFAULT_TARGET,
+      message.source
+    )
       .then(sendResponse)
       .catch((error) => sendResponse({ error: String(error) }));
     return true;
   }
 
   if (message?.type === "NK_TRANSLATE_TEXT") {
-    translateText(message.text || "", message.target || DEFAULT_TARGET)
+    translateText(
+      message.text || "",
+      message.target || DEFAULT_TARGET,
+      message.source
+    )
       .then(sendResponse)
       .catch((error) => sendResponse({ error: String(error) }));
     return true;
@@ -72,29 +80,64 @@ api.runtime.onMessage.addListener((message, _sender, sendResponse) => {
   return false;
 });
 
-async function translateText(text, target) {
+const FRENCH_HINTS = [
+  " le ", " la ", " les ", " des ", " une ", " un ", " est ", " sont ",
+  " pour ", " avec ", " votre ", " vos ", " vous ", " nous ", " frais ",
+  " solde ", " compte ", " transfert ", " paiement ", " code ",
+  " confirmation ", " bénéficiaire ", " montant ", " transaction "
+];
+const ENGLISH_HINTS = [
+  " the ", " and ", " is ", " are ", " for ", " with ", " your ", " you ",
+  " we ", " account ", " balance ", " fees ", " transfer ", " payment ",
+  " code ", " confirmation ", " beneficiary ", " amount ", " transaction "
+];
+
+function detectSourceLanguage(text) {
+  const value = ` ${String(text || "").toLowerCase()} `;
+  let french = 0;
+  let english = 0;
+
+  for (const hint of FRENCH_HINTS) {
+    french += value.split(hint).length - 1;
+  }
+  for (const hint of ENGLISH_HINTS) {
+    english += value.split(hint).length - 1;
+  }
+
+  return english > french * 1.2 ? "en" : "fr";
+}
+
+async function translateText(text, target, source) {
   const clean = String(text || "").trim();
   if (!clean) return { translation: null, error: "empty_text" };
 
+  const detected = source || detectSourceLanguage(clean);
   const result = await translateSegments(
     [{ id: "text", text: clean, context: "" }],
-    target
+    target,
+    detected
   );
 
   if (result.error) return result;
   return { translation: result.translations?.[0] || null };
 }
 
-async function translateSegments(segments, target) {
+async function translateSegments(segments, target, source) {
   if (!Array.isArray(segments) || segments.length === 0) {
     return { translations: [] };
   }
+
+  const detected =
+    source ||
+    detectSourceLanguage(
+      segments.map((segment) => segment.text || "").join(" ")
+    );
 
   const results = new Map();
   const missing = [];
 
   for (const segment of segments) {
-    const key = `${target}:${segment.text}`;
+    const key = `${detected}:${target}:${segment.text}`;
     if (cache.has(key)) {
       results.set(segment.id, { ...cache.get(key), id: segment.id });
     } else {
@@ -104,6 +147,7 @@ async function translateSegments(segments, target) {
 
   if (missing.length > 0) {
     const payload = {
+      source: detected,
       target,
       segments: missing.map((segment) => ({
         id: segment.id,
@@ -137,7 +181,7 @@ async function translateSegments(segments, target) {
       if (translation.ok) {
         const original = missing.find((item) => item.id === translation.id);
         if (original) {
-          cache.set(`${target}:${original.text}`, translation);
+          cache.set(`${detected}:${target}:${original.text}`, translation);
           if (cache.size > CACHE_LIMIT) {
             const firstKey = cache.keys().next().value;
             cache.delete(firstKey);

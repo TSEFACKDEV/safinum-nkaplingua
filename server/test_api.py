@@ -62,6 +62,27 @@ def test_translate_preserves_placeholders():
     assert "FCFA" in translation["text"]
 
 
+def test_translate_accepts_english_source():
+    response = client.post(
+        "/translate",
+        json={
+            "source": "en",
+            "target": "fub",
+            "segments": [
+                {
+                    "id": "s1",
+                    "text": "The transfer fee is [[NUM_0]] FCFA.",
+                    "context": "mobile money",
+                }
+            ],
+        },
+    )
+    assert response.status_code == 200
+    translation = response.json()["translations"][0]
+    assert translation["ok"] is True
+    assert "[[NUM_0]]" in translation["text"]
+
+
 def test_translate_rejects_unknown_target():
     response = client.post(
         "/translate",
