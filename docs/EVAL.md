@@ -98,6 +98,23 @@ Le rapport contient le taux d’acceptation, la préservation des montants, le
 score de rétro-traduction moyen et la distribution des raisons de refus. Il ne
 remplace pas une évaluation native : il sert à détecter les régressions.
 
+## Résultat réel du 7 novembre 2026 (modèle 600M quantifié)
+
+Sur les 20 phrases inédites, avec `NK_ROUNDTRIP=1` et la rétro-traduction
+locale seule : **9/20 acceptées (45 %)**, **100 % des montants préservés**,
+score de rétro-traduction moyen **0,442**. Les 11 refus sont principalement
+des `low_roundtrip` (0,23–0,42) : le filtre préfère conserver l’original.
+
+La seconde opinion cloud ciblée a ensuite été testée sur les 20 mêmes phrases,
+en simulant un rejet local : **20/20 acceptées** par les contrôles de jetons et
+de qualité, avec montants et termes critiques préservés. Le fallback améliore
+fortement la couverture, mais il envoie chaque phrase pseudonymisée à MyMemory ;
+il doit rester divulgué et optionnel pour les données réelles.
+
+Lecture honnête : le local seul est plus sûr mais couvre 45 % ; le cloud
+ciblé couvre 100 % de cet échantillon mais n’a pas de rétro-traduction locale.
+La vérité terrain reste la relecture native.
+
 ## Ce qu’il ne faut pas faire
 
 - Choisir les phrases de test parmi celles utilisées pour la démo.

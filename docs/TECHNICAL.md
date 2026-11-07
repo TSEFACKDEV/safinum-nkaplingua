@@ -105,6 +105,9 @@ financière existante, sans modifier son code source.
 - **Aucune dépendance à un identifiant de page** : le pipeline est générique.
 - **Fonctionne sans backend** : un service cloud de secours (MyMemory) prend le
   relais si le backend local n’est pas lancé ; le texte reste pseudonymisé.
+- **Seconde opinion ciblée** : si le backend local rejette une phrase, le
+  background redemande uniquement cette phrase au cloud, puis garde la
+  meilleure sortie conforme. Le local reste prioritaire.
 - **Sept langues cibles** : fulfulde en MT, six langues en packs communautaires.
 - **Détection source** : FR/EN, avec indice HTML, mots-outils et confiance.
 - **Permissions minimales** : `activeTab`, `scripting`, `storage`,
@@ -202,6 +205,9 @@ node --check extension/languages.js
 node --check extension/background.js
 node --check extension/content.js
 node --check extension/popup.js
+node scripts/test-extension.js
+npm install --no-save --no-package-lock jsdom
+node tests/content.test.js
 ./scripts/build-firefox.sh
 npx --yes web-ext lint --source-dir dist/firefox
 ./scripts/package-extension.sh

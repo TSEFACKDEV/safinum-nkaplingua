@@ -57,6 +57,8 @@ QUANTIZE_MODEL = os.getenv("NK_QUANTIZE", "0") == "1"
 ROUNDTRIP_ENABLED = os.getenv("NK_ROUNDTRIP", "1") == "1"
 ROUNDTRIP_MIN_SIMILARITY = float(os.getenv("NK_ROUNDTRIP_MIN", "0.45"))
 ROUNDTRIP_MAX_CHARS = int(os.getenv("NK_ROUNDTRIP_MAX_CHARS", "220"))
+QUALITY_ENABLED = os.getenv("NK_QUALITY", "1") == "1"
+FRENCH_LEAK_MAX = float(os.getenv("NK_QUALITY_FRENCH_LEAK", "0.25"))
 GLOSSARY_PATH = (
     Path(__file__).resolve().parent.parent
     / "data"
@@ -169,6 +171,8 @@ NORMALIZED_TOKEN_RE = re.compile(
     r"\[\s*\[\s*(NUM|URL|EMAIL|NAME|TERM)\s*_\s*(\d+)\s*\]\s*\]",
     re.IGNORECASE,
 )
+BARE_TOKEN_RE = re.compile(r"\[\[\s*(\d+)\s*\]\]")
+NORMALIZED_BARE_TOKEN_RE = re.compile(r"\[\s*\[\s*(\d+)\s*\]\s*\]")
 
 
 class Segment(BaseModel):
@@ -259,7 +263,9 @@ def load_model():
         MODEL_NAME, src_lang="fra_Latn"
     )
     model = AutoModelForSeq2SeqLM.from_pretrained(
-        MODEL_NAME, torch_dtype=dtype
+        MODEL_NAME,
+        torch_dtype=dtype,
+        low_cpu_mem_usage=True,
     )
     model.to(device)
     if QUANTIZE_MODEL and device == "cpu":
@@ -315,7 +321,7 @@ def protect_terms(
             match = pattern.search(value)
             if not match:
                 break
-            token = f"[[TERM_{len(terms)}]]"
+            token = f"[[{len(terms)}]]"
             terms.append(
                 {
                     "token": token,
@@ -334,7 +340,7 @@ def protect_terms(
             match = pattern.search(value)
             if not match:
                 break
-            token = f"[[TERM_{len(terms)}]]"
+            token = f"[[{len(terms)}]]"
             terms.append(
                 {
                     "token": token,
@@ -349,7 +355,10 @@ def protect_terms(
 
 
 def restore_terms(text: str, terms: list[dict]) -> Optional[str]:
-    value = normalize_placeholders(text)
+    value = NORMALIZED_BARE_TOKEN_RE.sub(
+        lambda match: f"[[{match.group(1)}]]",
+        normalize_placeholders(text),
+    )
     for item in terms:
         if value.count(item["token"]) != 1:
             return None
@@ -371,6 +380,13 @@ def tokens_of(text: str) -> set[str]:
         f"[[{match.group(1).upper()}_{match.group(2)}]]"
         for match in TOKEN_RE.finditer(text)
     }
+
+
+def bare_tokens_of(text: str) -> list[str]:
+    return [
+        f"[[{match.group(1)}]]"
+        for match in BARE_TOKEN_RE.finditer(text)
+    ]
 
 
 def contains_term(text: str, term: str) -> bool:
@@ -501,7 +517,7 @@ def quality_check(
             leak = sum(
                 1 for word in target_words if word in FRENCH_LEAK_WORDS
             )
-            if leak / len(target_words) > 0.25:
+            if leak / len(target_words) > FRENCH_LEAK_MAX:
                 return False, "french_leak"
 
     return True, None
@@ -518,6 +534,10 @@ def validate(source: str, translation: str) -> tuple[bool, Optional[str]]:
         if normalized.count(token) != 1:
             return False, f"token_lost:{token}"
 
+    for token in bare_tokens_of(source):
+        if normalized.count(token) != 1:
+            return False, f"token_lost:{token}"
+
     # 2) Les termes financiers critiques ne doivent pas être traduits.
     for term in DNT_TERMS:
         if contains_term(source, term) and not contains_term(normalized, term):
@@ -529,6 +549,8 @@ def validate(source: str, translation: str) -> tuple[bool, Optional[str]]:
             return False, f"dnt_missing:{term}"
 
     # 3) Filtre de qualité sur les sorties dégénérées.
+    if not QUALITY_ENABLED:
+        return True, None
     return quality_check(source, normalized, allow_source_leak=MOCK_MODE)
 
 
@@ -652,6 +674,8 @@ def health():
         "loaded": MOCK_MODE or load_model.cache_info().currsize > 0,
         "roundtrip": ROUNDTRIP_ENABLED and not MOCK_MODE,
         "roundtrip_min": ROUNDTRIP_MIN_SIMILARITY,
+        "quality": QUALITY_ENABLED,
+        "french_leak_max": FRENCH_LEAK_MAX,
         "quantized": QUANTIZE_MODEL,
     }
 

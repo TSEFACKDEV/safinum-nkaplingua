@@ -306,7 +306,38 @@ async function translateSegments(segments, target, source) {
     }
   }
 
-  // 3) Cloud de secours.
+  // 2b) Si le local est disponible mais rejette certaines phrases (jeton,
+  // qualité, rétro-traduction), on demande une seconde opinion au cloud
+  // pseudonymisé. Le local reste prioritaire pour les phrases acceptées.
+  if (translations && TRANSLATION_MODE !== "local") {
+    const rejected = translations.filter((translation) => !translation.ok);
+    if (rejected.length > 0) {
+      const rejectedSegments = remaining.filter((segment) =>
+        rejected.some((translation) => translation.id === segment.id)
+      );
+      try {
+        const fallback = await translateWithCloud(
+          rejectedSegments,
+          detected,
+          targetSpec
+        );
+        const fallbackById = new Map(
+          fallback.map((translation) => [translation.id, translation])
+        );
+        translations = translations.map((translation) => {
+          const candidate = fallbackById.get(translation.id);
+          return candidate?.ok ? candidate : translation;
+        });
+        if (fallback.some((translation) => translation.ok)) {
+          provider = "cloud";
+        }
+      } catch {
+        // Le cloud est un secours : on conserve le résultat local.
+      }
+    }
+  }
+
+  // 3) Cloud de secours complet si le local n'a rien produit.
   if (!translations && TRANSLATION_MODE !== "local") {
     try {
       translations = await translateWithCloud(remaining, detected, targetSpec);
@@ -589,7 +620,7 @@ async function translateCloudSegment(segment, sourceCode, targetSpec) {
   }
 
   const matchScore = Number(data?.responseData?.match || 0);
-  if (matchScore > 0 && matchScore < 0.5) {
+  if (matchScore > 0 && matchScore < 0.6) {
     return {
       id: segment.id,
       text: segment.text,
@@ -641,7 +672,7 @@ function toCloudPlaceholders(text) {
   const cloudText = String(text || "").replace(
     /\[\[(NUM|URL|EMAIL|NAME|TERM)_(\d+)\]\]/g,
     (match) => {
-      const token = `[[${index++}]]`;
+      const token = `[[C${index++}]]`;
       tokenMap.set(token, match);
       return token;
     }
@@ -652,8 +683,8 @@ function toCloudPlaceholders(text) {
 
 function restoreCloudTokens(text, tokenMap) {
   let value = String(text || "").replace(
-    /\[\s*\[\s*(\d+)\s*\]\s*\]/g,
-    (_match, number) => `[[${number}]]`
+    /\[\s*\[\s*C\s*(\d+)\s*\]\s*\]/g,
+    (_match, number) => `[[C${number}]]`
   );
 
   for (const [token, original] of tokenMap) {
@@ -678,6 +709,15 @@ function validateTranslation(source, translation, targetSpec) {
     : String(translation);
 
   for (const token of sourceTokens) {
+    if (normalized.split(token).length - 1 !== 1) {
+      return { ok: false, reason: `token_lost:${token}` };
+    }
+  }
+
+  const bareTokens = [
+    ...String(source).matchAll(/\[\[(\d+)\]\]/g)
+  ].map((match) => `[[${match[1]}]]`);
+  for (const token of bareTokens) {
     if (normalized.split(token).length - 1 !== 1) {
       return { ok: false, reason: `token_lost:${token}` };
     }

@@ -127,6 +127,9 @@ Python. Si le backend local n’est pas disponible, elle bascule sur **MyMemory*
 - Certains noms propres hors contexte (marques, lieux, termes non déclenchés)
   peuvent rester : ne pas utiliser ce mode sur des données réelles sensibles.
 - Le mode cloud n’est déclenché qu’après un clic de l’utilisateur.
+- Si le backend local rejette une phrase (rétro-traduction, qualité), le
+  background peut demander une seconde opinion au cloud **pour cette phrase
+  seulement**. Le texte reste pseudonymisé.
 - Si le service cloud échoue ou dépasse le quota, l’original est conservé.
 - Le service est divulgué dans `docs/DATA_LICENSES.md` et dans le popup.
 

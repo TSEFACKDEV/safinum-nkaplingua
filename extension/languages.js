@@ -364,7 +364,7 @@
         const start = match.toLowerCase().indexOf(term.toLowerCase());
         const prefix = match.slice(0, start);
         const suffix = match.slice(start + term.length);
-        const token = `[[TERM_${terms.length}]]`;
+        const token = `[[${terms.length}]]`;
         terms.push({ token, original: term });
         return `${prefix}${token}${suffix}`;
       });
@@ -374,7 +374,10 @@
   }
 
   function restoreTerms(text, terms) {
-    let value = canonicalizeTokens(text);
+    let value = canonicalizeTokens(text).replace(
+      /\[\s*\[\s*(\d+)\s*\]\s*\]/g,
+      (_match, number) => `[[${number}]]`
+    );
     for (const item of terms || []) {
       if (value.split(item.token).length - 1 !== 1) return null;
       value = value.split(item.token).join(item.original);

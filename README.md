@@ -144,7 +144,9 @@ Moteur — NLLB-200 local, MyMemory ou pack
 - **Packs communautaires** : phrases validées, aucun appel cloud.
 - **Backend local optionnel** : mode 100 % local avec NLLB si disponible.
 - **Cloud de secours** : MyMemory, avec texte pseudonymisé et consentement
-  explicite par le clic de l’utilisateur.
+  explicite par le clic de l’utilisateur. Si le backend local rejette une
+  phrase (rétro-traduction ou qualité), l’extension demande une seconde
+  opinion au cloud pour cette phrase seulement.
 - **CI GitHub Actions** : tests backend mock, lint JS, lint Firefox, scan de
   secrets, packaging.
 
@@ -247,6 +249,9 @@ NK_QUANTIZE=1 NK_DEVICE=cpu uvicorn app:app --host 127.0.0.1 --port 8000
 
 # Désactiver la rétro-traduction si le CPU est trop lent
 NK_ROUNDTRIP=0 NK_DEVICE=cpu uvicorn app:app --host 127.0.0.1 --port 8000
+
+# Ajuster le filtre de fuite de français (0.25 par défaut)
+NK_QUALITY_FRENCH_LEAK=0.35 NK_DEVICE=cpu uvicorn app:app --host 127.0.0.1 --port 8000
 ```
 
 Le modèle 600M est le défaut. Pour une meilleure qualité sur une machine
@@ -485,6 +490,9 @@ node --check extension/languages.js
 node --check extension/background.js
 node --check extension/content.js
 node --check extension/popup.js
+node scripts/test-extension.js
+npm install --no-save --no-package-lock jsdom
+node tests/content.test.js
 ./scripts/package-extension.sh
 ```
 

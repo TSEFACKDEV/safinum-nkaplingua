@@ -214,6 +214,11 @@ $("translateText").addEventListener("click", async () => {
       `Source détectée : ${detectedLabel} · ` +
       `Moteur : ${providerLabel(response.provider)} · ` +
       `Cible : ${spec().label}`;
+
+    if (typeof response.translation.roundtrip === "number") {
+      meta.textContent +=
+        ` · cohérence ${Math.round(response.translation.roundtrip * 100)} %`;
+    }
     setStatus("Texte inédit traduit avec contrôle des montants et des noms.");
   } catch (error) {
     setStatus(`Erreur : ${error.message}`);

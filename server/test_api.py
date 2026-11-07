@@ -99,8 +99,8 @@ def test_protect_and_restore_dnt_terms():
     protected, terms = protect_terms(
         "Le solde est de 125 000 FCFA. Ne partagez jamais votre code PIN."
     )
-    assert "[[TERM_0]]" in protected
-    assert "[[TERM_1]]" in protected
+    assert "[[0]]" in protected
+    assert "[[1]]" in protected
     assert "FCFA" not in protected
     restored = restore_terms(protected, terms)
     assert restored == "Le solde est de 125 000 FCFA. Ne partagez jamais votre code PIN."
@@ -111,7 +111,7 @@ def test_glossary_term_is_protected_and_restored():
         "Les frais de transfert sont de 1 000 FCFA.",
         glossary=(("frais de transfert", "Njoɓdi jolngo"),),
     )
-    assert "[[TERM_0]]" in protected
+    assert "[[0]]" in protected
     assert "frais de transfert" not in protected
     restored = restore_terms(protected, terms)
     assert "Njoɓdi jolngo" in restored
@@ -166,6 +166,7 @@ def test_translate_protects_dnt_terms_with_mock():
     assert "PIN" in translation["text"]
     assert "FCFA" in translation["text"]
     assert "[[TERM_" not in translation["text"]
+    assert "[[0]]" not in translation["text"]
 
 
 def test_translate_accepts_english_source():

@@ -218,11 +218,11 @@ vm.runInContext(
     "Le solde est de 125 000 FCFA. Ne partagez jamais votre code PIN."
   );
   assert(
-    protectedTerms.text.includes("[[TERM_0]]"),
+    protectedTerms.text.includes("[[0]]"),
     "FCFA non protégé avant le moteur MT"
   );
   assert(
-    protectedTerms.text.includes("[[TERM_1]]"),
+    protectedTerms.text.includes("[[1]]"),
     "PIN non protégé avant le moteur MT"
   );
   const restoredTerms = LANG.restoreTerms(
@@ -237,13 +237,13 @@ vm.runInContext(
   const finalized = context.finalizeTranslation(
     {
       id: "term",
-      text: "Solde fulfulde [[TERM_0]].",
+      text: "Solde fulfulde [[0]].",
       ok: true,
       reason: null
     },
     {
       tokens: [],
-      terms: [{ token: "[[TERM_0]]", original: "FCFA" }],
+      terms: [{ token: "[[0]]", original: "FCFA" }],
       originalText: "Le solde est de 125 000 FCFA."
     }
   );
