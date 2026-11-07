@@ -91,10 +91,19 @@ sous CC0 ou CC BY, avec consentement écrit. MMS-TTS-ful (CC BY-NC) et NLLB
 | **Common Voice 27.0 — Duala** | **CC0-1.0** ; 14,44 h enregistrées, 12,52 h validées, 13 voix | Audio, ASR, évaluation |
 | **Common Voice — Fulfulde Adamawa** | CC0-1.0 | Audio, ASR, évaluation |
 | **Ewondo-ASR** (ENS Yaoundé / Mozilla Data Collective) | Accès restreint | Ne pas redistribuer ; demander l’autorisation |
-| **Kemelang, Glosbe, Scribd, dictionnaire Helmlinger** | Pas de licence ouverte claire | **Référence seulement**, aucun scraping ni redistribution |
+| **Glosbe** | Contenu utilisateur **CC BY-NC-SA 4.0** ; copie automatisée d’une partie substantielle interdite par les CGU | **Référence manuelle seulement** ; aucun scraping, aucun import dans un pack |
+| **Resulam** | Livres, phrasebooks et applications payants ; aucune licence ouverte | **Lien de référence** ; achat éventuel, aucune copie |
+| **Webonary (SIL Cameroon)** | Copyright propre à chaque dictionnaire ; `robots.txt` : `use=reference`, `ai-train=no` | **Référence seulement** ; accord écrit du propriétaire pour tout extrait |
+| **SIL Cameroon — archives** | Disponibilité et licence variables ; beaucoup « Contact the Archives » | Demander l’accès et la licence de chaque ressource |
+| **Kemelang, Scribd, dictionnaire Helmlinger** | Pas de licence ouverte claire | **Référence seulement**, aucun scraping ni redistribution |
 | **CENALA** | Centre national de linguistique appliquée du **Bénin** | Ne pas le citer comme source camerounaise |
 | **Corpus Adamawa–français** | NOODL-1.0 | Évaluation interne ; pas d’entraînement sans autorisation |
 | **Audio contributeur** | CC0-1.0 ou CC-BY-4.0 avec consentement écrit | 15 phrases sans montant, deux relecteurs |
+
+L’audit détaillé (CGU, `robots.txt`, extraits, modèle de demande d’autorisation)
+est dans [`REFERENCE_SOURCES.md`](REFERENCE_SOURCES.md). Le navigateur de
+références du glossaire est dans
+[`../data/reference/glossary-links.csv`](../data/reference/glossary-links.csv).
 
 **Conséquence pour la compétition** : le pack niveau A ne peut contenir que des
 phrases écrites par des natifs et validées par le panel. Aucune donnée de

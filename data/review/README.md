@@ -64,6 +64,23 @@ item_id,type,priorite,source_fr,...,target,commentaire,reviewer,reviewed_at,lice
 G01,glossaire,P0,solde disponible,...,<votre traduction>,,<nom>,2026-11-10,CC-BY-4.0,human
 ```
 
+## 3bis. Références externes
+
+Pour le glossaire, un navigateur de liens est disponible dans
+[`../reference/glossary-links.csv`](../reference/glossary-links.csv) :
+Glosbe, Webonary, Resulam et archives SIL Cameroon, terme par terme.
+
+Règles :
+
+- ces liens servent à **comprendre** le sens, pas à copier ;
+- Glosbe est sous CC BY-NC-SA, Resulam et Webonary ne donnent pas de licence
+  libre : aucun contenu ne doit être recopié dans le pack ;
+- écrivez votre propre traduction et notez l’URL consultée dans
+  `commentaire` si elle a aidé ;
+- l’arbitre vérifie que la traduction est humaine et originale.
+
+Audit complet : [`../../docs/REFERENCE_SOURCES.md`](../../docs/REFERENCE_SOURCES.md).
+
 ## 4. Termes à ne jamais traduire
 
 Recopier exactement :

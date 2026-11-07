@@ -271,6 +271,41 @@ def check_audio() -> list[str]:
     return errors
 
 
+def check_reference_links() -> list[str]:
+    errors: list[str] = []
+    path = ROOT / "data" / "reference" / "glossary-links.csv"
+    if not path.exists():
+        return [f"références : {path.name} manquant"]
+    rows = read_csv(path)
+    glossary = read_csv(ROOT / "data" / "glossary.template.csv")
+    if len(rows) != len(glossary):
+        errors.append(
+            f"références : {len(rows)} lignes, {len(glossary)} attendues"
+        )
+    for index, (row, term) in enumerate(zip(rows, glossary), start=1):
+        if row.get("item_id") != f"G{index:02d}":
+            errors.append(f"références#{index}: item_id incohérent")
+        if row.get("source_fr") != term.get("source_fr"):
+            errors.append(
+                f"références#{index}: source désynchronisée du glossaire"
+            )
+        if not (row.get("glosbe_query") or "").strip():
+            errors.append(f"références#{index}: glosbe_query vide")
+        for field in (
+            "glosbe_ewo",
+            "glosbe_dua",
+            "glosbe_fub",
+            "webonary_search",
+            "resulam_search",
+            "silcam_ewo",
+            "silcam_dua",
+            "silcam_fub",
+        ):
+            if not (row.get(field) or "").startswith("https://"):
+                errors.append(f"références#{index}: {field} invalide")
+    return errors
+
+
 def check_unseen() -> list[str]:
     errors: list[str] = []
     source_path = ROOT / "data" / "unseen_finance.txt"
@@ -350,6 +385,7 @@ def main() -> int:
     errors.extend(check_variants())
     errors.extend(check_audio())
     errors.extend(check_unseen())
+    errors.extend(check_reference_links())
 
     if errors:
         print("Données linguistiques invalides :", file=sys.stderr)
@@ -364,7 +400,8 @@ def main() -> int:
         f"{glossary_counts['dua']}) ; "
         f"messages 70 (validés fub/ewo/dua : "
         f"{message_counts['fub']}/{message_counts['ewo']}/"
-        f"{message_counts['dua']}) ; variantes 10 ; audio 15 ; unseen 20"
+        f"{message_counts['dua']}) ; variantes 10 ; audio 15 ; unseen 20 ; "
+        "références 40"
     )
     return 0
 

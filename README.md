@@ -161,9 +161,15 @@ Moteur — NLLB-200 local, MyMemory ou pack
 | Duala | `dua` | Pack communautaire | Common Voice 27.0 (heures à vérifier) | 0/20 phrases validées |
 
 Le **kit natif TRAPD** est prêt dans [`data/review/`](data/review/) :
-classeurs T1/T2, fiche d'arbitrage et 20 phrases inédites. Aucune traduction
-n'est inventée : les colonnes cibles restent vides tant que les natifs n'ont
+classeurs T1/T2, fiche d’arbitrage et 20 phrases inédites. Aucune traduction
+n’est inventée : les colonnes cibles restent vides tant que les natifs n’ont
 pas travaillé.
+
+Les sources externes (Glosbe, Resulam, Webonary) ne sont **pas scrapées** :
+leurs licences ou conditions d’utilisation ne le permettent pas. Un navigateur
+de références manuelles est fourni dans
+[`data/reference/`](data/reference/) ; l’audit complet est dans
+[`docs/REFERENCE_SOURCES.md`](docs/REFERENCE_SOURCES.md).
 
 Yemba, medumba, bassa et ghomala’ ne font pas partie du prototype : ni corpus
 de parole comparable, ni moteur validé. Voir la justification détaillée dans
@@ -454,6 +460,8 @@ exigence par exigence dans [`docs/COMPLIANCE.md`](docs/COMPLIANCE.md).
 | [`docs/LANGUAGE_VALIDATION.md`](docs/LANGUAGE_VALIDATION.md) | fulfulde, méthode de validation native |
 | [`docs/VALIDATION_REPORT.md`](docs/VALIDATION_REPORT.md) | état réel du panel, corpus, phrases inédites |
 | [`data/review/README.md`](data/review/README.md) | kit natif T1/T2, arbitrage et consentement |
+| [`data/reference/README.md`](data/reference/README.md) | navigateur Glosbe / Webonary / Resulam, sans copie |
+| [`docs/REFERENCE_SOURCES.md`](docs/REFERENCE_SOURCES.md) | audit licences et conditions des sources externes |
 | [`docs/VIDEO_SCRIPT.md`](docs/VIDEO_SCRIPT.md) | script de la vidéo de 3 minutes |
 | [`docs/SUBMISSION_CHECKLIST.md`](docs/SUBMISSION_CHECKLIST.md) | checklist avant soumission |
 
@@ -472,7 +480,7 @@ exigence par exigence dans [`docs/COMPLIANCE.md`](docs/COMPLIANCE.md).
 │   ├── requirements.txt
 │   └── requirements-ci.txt
 ├── demo/                   # Page FINAKA fictive
-├── data/                   # Glossaire, packs, audio, kit natif T1/T2
+├── data/                   # Glossaire, packs, audio, kit natif, références
 ├── docs/                   # Sécurité, licences, évaluation, pitch, Firefox
 ├── scripts/                # build Firefox, lancement Firefox
 ├── .github/workflows/      # CI GitHub Actions
