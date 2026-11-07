@@ -170,3 +170,40 @@ mot `json`) avec les champs ci-dessous. Exemple de structure, en indentation :
   "blockers": []
 }
 ```
+
+## 2026-11-07T18:55:00+01:00 — Freedy — F0 — done
+
+```json
+{
+  "timestamp": "2026-11-07T18:55:00+01:00",
+  "person": "Freedy",
+  "branch": "freedy",
+  "task": "F0",
+  "status": "done",
+  "summary": "Mise en place du dossier de travail dev (clone de develop à 55292c8) avec WORKSPACE.md",
+  "files": [
+    "WORKSPACE.md",
+    "tasks/EVOLUTION.md"
+  ],
+  "tests": [
+    {
+      "command": "python3 scripts/check-evolution.py",
+      "result": "pass",
+      "note": "journal valide dans le clone"
+    },
+    {
+      "command": "node scripts/test-extension.js",
+      "result": "pass",
+      "note": "registre, détection, packs, jetons"
+    },
+    {
+      "command": "python3 scripts/check-language-packs.py",
+      "result": "pass",
+      "note": "7 packs encore présents : K10 pas encore exécuté"
+    }
+  ],
+  "evidence": "WORKSPACE.md ; commit initial 55292c8",
+  "next": "F1 — charte UI ; Klein exécute K10 dans le domaine code",
+  "blockers": []
+}
+```
