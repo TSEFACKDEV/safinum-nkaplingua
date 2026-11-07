@@ -135,6 +135,42 @@ vm.runInContext(
     "jeton NAME perdu dans le pack"
   );
 
+  // Appel direct (popup « texte inédit ») : le background doit tokeniser
+  // les montants et les noms, puis les restaurer avant de répondre.
+  const rawAmount = await context.translateSegments(
+    [{ id: "raw-amount", text: "Le solde est de 125 000 FCFA." }],
+    "ybb",
+    "fr"
+  );
+  assert(rawAmount.translations[0].ok === true, "montant brut refusé");
+  assert(
+    rawAmount.translations[0].text.includes("125 000 FCFA"),
+    "montant brut non restauré"
+  );
+  assert(
+    !rawAmount.translations[0].text.includes("[[NUM_"),
+    "jeton NUM visible dans la réponse au popup"
+  );
+
+  const rawName = await context.translateSegments(
+    [{ id: "raw-name", text: "Le bénéficiaire Aïcha reçoit 25 000 FCFA." }],
+    "ybb",
+    "fr"
+  );
+  assert(rawName.translations[0].ok === true, "phrase avec nom brut refusée");
+  assert(
+    rawName.translations[0].text.includes("Aïcha"),
+    "nom brut non restauré"
+  );
+  assert(
+    rawName.translations[0].text.includes("25 000 FCFA"),
+    "montant avec nom brut non restauré"
+  );
+  assert(
+    !rawName.translations[0].text.includes("[[NAME_"),
+    "jeton NAME visible dans la réponse au popup"
+  );
+
   const miss = await context.translateSegments(
     [{ id: "c", text: "Une phrase inconnue." }],
     "ybb",

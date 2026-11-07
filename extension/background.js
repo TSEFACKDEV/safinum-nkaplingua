@@ -174,17 +174,32 @@ async function translateSegments(segments, target, source) {
     };
   }
 
+  // Deuxième barrière de pseudonymisation : elle protège aussi les appels
+  // directs au background (popup « texte inédit », test, futur client).
+  const prepared = segments.map((segment) => {
+    const redaction = LANG.redactSensitive(segment.text || "");
+    return {
+      ...segment,
+      text: redaction.text,
+      tokens: redaction.tokens,
+      originalText: segment.text || ""
+    };
+  });
+  const preparedById = new Map(
+    prepared.map((segment) => [segment.id, segment])
+  );
+
   const detected =
     source ||
     detectSourceLanguage(
-      segments.map((segment) => segment.text || "").join(" ")
+      prepared.map((segment) => segment.originalText).join(" ")
     );
 
   const results = new Map();
   const missing = [];
 
-  for (const segment of segments) {
-    const key = `${detected}:${target}:${segment.text}`;
+  for (const segment of prepared) {
+    const key = `${detected}:${target}:${segment.originalText}`;
     if (cache.has(key)) {
       results.set(segment.id, { ...cache.get(key), id: segment.id });
     } else {
@@ -223,15 +238,25 @@ async function translateSegments(segments, target, source) {
 
     const hits = packResults.filter((translation) => translation.ok);
     for (const translation of hits) {
-      results.set(translation.id, translation);
+      const final = finalizeTranslation(
+        translation,
+        preparedById.get(translation.id)
+      );
+      results.set(final.id, final);
       const original = missing.find((item) => item.id === translation.id);
-      if (original) cacheTranslation(detected, target, original.text, translation);
+      if (original) {
+        cacheTranslation(detected, target, original.originalText, final);
+      }
     }
     if (hits.length > 0) provider = "pack";
 
     if (targetSpec.engine === "pack") {
       for (const translation of packResults) {
-        results.set(translation.id, translation);
+        const final = finalizeTranslation(
+          translation,
+          preparedById.get(translation.id)
+        );
+        results.set(final.id, final);
       }
       return {
         translations: segments
@@ -295,11 +320,15 @@ async function translateSegments(segments, target, source) {
   }
 
   for (const translation of translations) {
-    results.set(translation.id, translation);
-    if (translation.ok) {
-      const original = remaining.find((item) => item.id === translation.id);
+    const final = finalizeTranslation(
+      translation,
+      preparedById.get(translation.id)
+    );
+    results.set(final.id, final);
+    if (final.ok) {
+      const original = remaining.find((item) => item.id === final.id);
       if (original) {
-        cacheTranslation(detected, target, original.text, translation);
+        cacheTranslation(detected, target, original.originalText, final);
       }
     }
   }
@@ -319,6 +348,25 @@ function cacheTranslation(source, target, text, translation) {
     const firstKey = cache.keys().next().value;
     cache.delete(firstKey);
   }
+}
+
+function finalizeTranslation(translation, segment) {
+  if (!translation || !translation.ok) return translation;
+
+  const restored = LANG.restoreSensitive(
+    translation.text,
+    segment?.tokens || []
+  );
+  if (restored === null) {
+    return {
+      id: translation.id,
+      text: segment?.originalText || translation.text,
+      ok: false,
+      reason: "token_lost"
+    };
+  }
+
+  return { ...translation, text: restored };
 }
 
 /* ------------------------------------------------------------------ */

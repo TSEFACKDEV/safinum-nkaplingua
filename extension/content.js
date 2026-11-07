@@ -306,11 +306,13 @@
   function redact(text) {
     const tokens = [];
     let value = String(text);
-    let index = 0;
+    // Index par type : [[NUM_0]] et [[NAME_0]] peuvent coexister sans
+    // décaler les numéros suivants. Les packs sont ainsi stables.
+    const counters = { NUM: 0, URL: 0, EMAIL: 0, NAME: 0 };
 
     const addToken = (kind, original) => {
       // Placeholder ASCII : plus robuste avec les tokenizers multilingues.
-      const token = `[[${kind}_${index++}]]`;
+      const token = `[[${kind}_${counters[kind]++}]]`;
       tokens.push({ token, original });
       return token;
     };

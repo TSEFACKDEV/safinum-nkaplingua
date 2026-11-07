@@ -27,6 +27,7 @@ un autre modèle.
 
 from __future__ import annotations
 
+import difflib
 import os
 import re
 from functools import lru_cache
@@ -47,6 +48,13 @@ REPETITION_PENALTY = float(os.getenv("NK_REPETITION_PENALTY", "1.2"))
 NO_REPEAT_NGRAM = int(os.getenv("NK_NO_REPEAT_NGRAM", "4"))
 DEVICE_PREFERENCE = os.getenv("NK_DEVICE", "auto").lower()
 MOCK_MODE = os.getenv("NK_MOCK", "0") == "1"
+
+# Contrôle de cohérence par rétro-traduction : NLLB traduit la sortie
+# fulfulde vers le français, puis on compare avec la source. Un score trop
+# bas signale une hallucination probable et l'original est conservé.
+ROUNDTRIP_ENABLED = os.getenv("NK_ROUNDTRIP", "1") == "1"
+ROUNDTRIP_MIN_SIMILARITY = float(os.getenv("NK_ROUNDTRIP_MIN", "0.45"))
+ROUNDTRIP_MAX_CHARS = int(os.getenv("NK_ROUNDTRIP_MAX_CHARS", "220"))
 
 # NLLB utilise des codes de type "fra_Latn" / "fuv_Latn".
 SOURCE_ALIASES = {
@@ -178,6 +186,7 @@ class Translation(BaseModel):
     text: str
     ok: bool
     reason: Optional[str] = None
+    roundtrip: Optional[float] = None
 
 
 class TranslateResponse(BaseModel):
@@ -376,7 +385,22 @@ def validate(source: str, translation: str) -> tuple[bool, Optional[str]]:
     return True, None
 
 
-def split_sentences(text: str, max_chars: int = 260) -> List[str]:
+def normalize_similarity_text(text: str) -> str:
+    value = re.sub(r"\[\[[^\]]+\]\]", " ", text.lower())
+    value = re.sub(r"[^\wàâçéèêëîïôûùüÿœ']+", " ", value, flags=re.UNICODE)
+    return " ".join(value.split())
+
+
+def roundtrip_similarity(source: str, back_translation: str) -> float:
+    """Similarité lexicale simple entre source et rétro-traduction."""
+    left = normalize_similarity_text(source)
+    right = normalize_similarity_text(back_translation)
+    if not left or not right:
+        return 0.0
+    return difflib.SequenceMatcher(None, left, right).ratio()
+
+
+def split_sentences(text: str, max_chars: int = 220) -> List[str]:
     """Découpe les longs paragraphes : NLLB répète sur les très longues entrées."""
     text = text.strip()
     if not text:
@@ -478,6 +502,8 @@ def health():
         "model": MODEL_NAME,
         "mock": MOCK_MODE,
         "loaded": MOCK_MODE or load_model.cache_info().currsize > 0,
+        "roundtrip": ROUNDTRIP_ENABLED and not MOCK_MODE,
+        "roundtrip_min": ROUNDTRIP_MIN_SIMILARITY,
     }
 
 
@@ -575,20 +601,66 @@ def translate(request: TranslateRequest):
     for item, output in zip(expanded, outputs):
         grouped.setdefault(item["original_id"], []).append(output)
 
-    translations: List[Translation] = []
+    drafts = []
     for segment in request.segments:
         parts = grouped.get(segment.id, [])
         joined = " ".join(part.strip() for part in parts if part.strip())
         normalized = normalize_placeholders(joined)
         ok, reason = validate(segment.text, normalized)
-        translations.append(
-            Translation(
-                id=segment.id,
-                text=normalized,
-                ok=ok,
-                reason=reason,
-            )
+        drafts.append(
+            {
+                "segment": segment,
+                "text": normalized,
+                "ok": ok,
+                "reason": reason,
+                "roundtrip": None,
+            }
         )
+
+    # Rétro-traduction : garde-fou contre les hallucinations sur contenu inédit.
+    # Désactivable avec NK_ROUNDTRIP=0 si la latence CPU est trop élevée.
+    if ROUNDTRIP_ENABLED and not MOCK_MODE:
+        candidates = [
+            draft
+            for draft in drafts
+            if draft["ok"]
+            and len(draft["segment"].text) <= ROUNDTRIP_MAX_CHARS
+        ]
+        if candidates:
+            try:
+                texts = [draft["text"] for draft in candidates]
+                backs: List[str] = []
+                for start in range(0, len(texts), BATCH_SIZE):
+                    backs.extend(
+                        safe_generate_batch(
+                            texts[start : start + BATCH_SIZE],
+                            "fuv_Latn",
+                            "fra_Latn",
+                        )
+                    )
+                for draft, back in zip(candidates, backs):
+                    score = roundtrip_similarity(
+                        draft["segment"].text, back
+                    )
+                    draft["roundtrip"] = round(score, 3)
+                    if score < ROUNDTRIP_MIN_SIMILARITY:
+                        draft["ok"] = False
+                        draft["reason"] = f"low_roundtrip:{score:.2f}"
+            except Exception:
+                # La rétro-traduction est un filtre de qualité, pas une
+                # dépendance dure : on conserve la traduction validée.
+                pass
+
+    translations = [
+        Translation(
+            id=draft["segment"].id,
+            text=draft["text"],
+            ok=draft["ok"],
+            reason=draft["reason"],
+            roundtrip=draft["roundtrip"],
+        )
+        for draft in drafts
+    ]
 
     return TranslateResponse(
         translations=translations,
