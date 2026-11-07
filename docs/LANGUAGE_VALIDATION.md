@@ -161,7 +161,7 @@ améliore la couverture, mais le cloud n’a pas la rétro-traduction locale : l
 validation native reste obligatoire.
 
 **Conclusion** : le pipeline technique est fonctionnel, mais la qualité
-linguistique du fulfulde n’est **pas encore validée**. Les six packs sont
+linguistique du fulfulde n’est **pas encore validée**. Les deux packs sont
 vides. Il faut des locuteurs natifs avant de présenter le prototype comme
 « validé ». Le test réel confirme aussi que NLLB 600M est fragile sur les
 phrases longues : le découpage et la rétro-traduction réduisent le risque,

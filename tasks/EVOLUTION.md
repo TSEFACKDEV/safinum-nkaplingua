@@ -171,6 +171,69 @@ mot `json`) avec les champs ci-dessous. Exemple de structure, en indentation :
 }
 ```
 
+## 2026-11-07T18:45:00+01:00 — Klein — K10 — done
+
+```json
+{
+  "timestamp": "2026-11-07T18:45:00+01:00",
+  "person": "Klein",
+  "branch": "klein",
+  "task": "K10",
+  "status": "done",
+  "summary": "Retrait de yemba, medumba, bassa et ghomala' du registre, des packs, du serveur, des scripts, des tests et de la documentation. Le prototype ne garde que fulfulde, ewondo et duala.",
+  "files": [
+    "extension/languages.js",
+    "extension/language-packs/ybb.json",
+    "extension/language-packs/byv.json",
+    "extension/language-packs/bas.json",
+    "extension/language-packs/bbj.json",
+    "data/language-packs/ybb.csv",
+    "data/language-packs/byv.csv",
+    "data/language-packs/bas.csv",
+    "data/language-packs/bbj.csv",
+    "server/app.py",
+    "server/test_api.py",
+    "scripts/check-language-packs.py",
+    "scripts/test-extension.js",
+    "extension/manifest.json",
+    "extension/manifest.firefox.json",
+    "extension/manifest.universal.json",
+    "extension/INSTALL.md",
+    "extension/language-packs/README.md",
+    "extension/popup.html",
+    "scripts/README.md",
+    "scripts/import-language-pack.py",
+    "docs/LANGUAGE_VALIDATION.md",
+    "docs/SUBMISSION_DOCUMENT.html"
+  ],
+  "tests": [
+    {
+      "command": "node scripts/test-extension.js",
+      "result": "pass",
+      "note": "registre à 3 langues, pack de test ewondo"
+    },
+    {
+      "command": "python3 scripts/check-language-packs.py",
+      "result": "pass",
+      "note": "3 packs, 2 feuilles, packs retirés absents"
+    },
+    {
+      "command": "NK_MOCK=1 server/.venv/bin/python -m pytest -q server/test_api.py",
+      "result": "pass",
+      "note": "25 tests backend"
+    },
+    {
+      "command": "./scripts/package-extension.sh",
+      "result": "pass",
+      "note": "ZIP 0.6.0 construit"
+    }
+  ],
+  "evidence": "extension/languages.js contient fub, ewo, dua ; server/app.py PACK_TARGETS={ewo,dua} ; docs/SUBMISSION_DOCUMENT.html à 3 langues",
+  "next": "K1 — recruter les 3 natifs fulfulde et obtenir les consentements",
+  "blockers": []
+}
+```
+
 ## 2026-11-07T18:55:00+01:00 — Freedy — F0 — done
 
 ```json

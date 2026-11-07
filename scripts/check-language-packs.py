@@ -12,7 +12,8 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parent.parent
 PACKS = ROOT / "extension" / "language-packs"
 CSV_DIR = ROOT / "data" / "language-packs"
-EXPECTED = {"fub", "ybb", "byv", "ewo", "dua", "bas", "bbj"}
+EXPECTED = {"fub", "ewo", "dua"}
+REMOVED = {"ybb", "byv", "bas", "bbj"}
 TOKEN_RE = re.compile(r"\[\[\s*(NUM|URL|EMAIL|NAME)\s*_\s*(\d+)\s*\]\]", re.I)
 DNT_TERMS = ["FCFA", "XAF", "PIN", "OTP", "KYC", "FINAKA"]
 
@@ -73,6 +74,14 @@ def main() -> int:
     missing = EXPECTED - present
     if missing:
         errors.append(f"packs manquants : {', '.join(sorted(missing))}")
+
+    for code in sorted(REMOVED):
+        removed_json = PACKS / f"{code}.json"
+        removed_csv = CSV_DIR / f"{code}.csv"
+        if removed_json.exists():
+            errors.append(f"pack retiré encore présent : {removed_json.name}")
+        if removed_csv.exists():
+            errors.append(f"feuille retirée encore présente : {removed_csv.name}")
 
     for path in sorted(PACKS.glob("*.json")):
         errors.extend(check_pack(path))

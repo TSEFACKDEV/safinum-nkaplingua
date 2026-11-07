@@ -63,10 +63,10 @@ vm.runInContext(
 
 const LANG = context.NK_LANGUAGES;
 const codes = LANG.listTargets().map((target) => target.code);
-assert(codes.length === 7, `7 langues attendues, reçu ${codes.length}`);
+assert(codes.length === 3, `3 langues attendues, reçu ${codes.length}`);
 assert(codes.includes("fub"), "fulfulde manquant");
-assert(codes.includes("ybb"), "yemba manquant");
-assert(codes.includes("byv"), "medumba manquant");
+assert(codes.includes("ewo"), "ewo manquant");
+assert(codes.includes("dua"), "dua manquant");
 
 const french = LANG.detectLanguage("Le solde de votre compte est disponible.");
 assert(french.code === "fr", `détection FR échouée : ${french.code}`);
@@ -79,12 +79,12 @@ const hinted = LANG.detectLanguage("Solde", "en-US");
 assert(hinted.code === "en", "indice HTML non prioritaire sur texte court");
 
 context.__NK_PACK_OVERRIDES__ = {
-  ybb: {
-    code: "ybb",
+  ewo: {
+    code: "ewo",
     entries: [
       {
         source: "Le solde est de [[NUM_0]] FCFA.",
-        target: "Solde ybb [[NUM_0]] FCFA.",
+        target: "Solde ewo [[NUM_0]] FCFA.",
         status: "validated"
       },
       {
@@ -94,7 +94,7 @@ context.__NK_PACK_OVERRIDES__ = {
       },
       {
         source: "Phrase non validée.",
-        target: "Phrase ybb.",
+        target: "Phrase ewo.",
         status: "draft"
       }
     ]
@@ -109,7 +109,7 @@ vm.runInContext(
 (async () => {
   const hit = await context.translateSegments(
     [{ id: "a", text: "Le solde est de [[NUM_0]] FCFA." }],
-    "ybb",
+    "ewo",
     "fr"
   );
   assert(hit.provider === "pack", "provider pack attendu");
@@ -126,7 +126,7 @@ vm.runInContext(
         text: "Le bénéficiaire [[NAME_0]] reçoit [[NUM_0]] FCFA."
       }
     ],
-    "ybb",
+    "ewo",
     "fr"
   );
   assert(nameHit.translations[0].ok === true, "phrase avec NAME refusée");
@@ -139,7 +139,7 @@ vm.runInContext(
   // les montants et les noms, puis les restaurer avant de répondre.
   const rawAmount = await context.translateSegments(
     [{ id: "raw-amount", text: "Le solde est de 125 000 FCFA." }],
-    "ybb",
+    "ewo",
     "fr"
   );
   assert(rawAmount.translations[0].ok === true, "montant brut refusé");
@@ -154,7 +154,7 @@ vm.runInContext(
 
   const rawName = await context.translateSegments(
     [{ id: "raw-name", text: "Le bénéficiaire Aïcha reçoit 25 000 FCFA." }],
-    "ybb",
+    "ewo",
     "fr"
   );
   assert(rawName.translations[0].ok === true, "phrase avec nom brut refusée");
@@ -173,7 +173,7 @@ vm.runInContext(
 
   const miss = await context.translateSegments(
     [{ id: "c", text: "Une phrase inconnue." }],
-    "ybb",
+    "ewo",
     "fr"
   );
   assert(miss.translations[0].ok === false, "phrase inconnue acceptée");
@@ -184,7 +184,7 @@ vm.runInContext(
 
   const draft = await context.translateSegments(
     [{ id: "d", text: "Phrase non validée." }],
-    "ybb",
+    "ewo",
     "fr"
   );
   assert(draft.translations[0].ok === false, "phrase draft acceptée");

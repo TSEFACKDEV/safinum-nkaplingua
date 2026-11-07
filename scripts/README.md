@@ -59,8 +59,8 @@ Utile pour tester l’extension et le rendu sans attendre le modèle.
 python3 scripts/check-language-packs.py
 
 # Importer un CSV rempli par un locuteur natif
-python3 scripts/import-language-pack.py data/language-packs/ybb.csv
-python3 scripts/import-language-pack.py data/language-packs/byv.csv
+python3 scripts/import-language-pack.py data/language-packs/ewo.csv
+python3 scripts/import-language-pack.py data/language-packs/dua.csv
 
 # Reconstruire les ZIP
 ./scripts/package-extension.sh
@@ -87,5 +87,5 @@ rétro-traduction moyen et les raisons de refus sur les 20 phrases de
 node scripts/test-extension.js
 ```
 
-Vérifie le registre des sept langues, la détection FR/EN, les packs et la
+Vérifie le registre des trois langues, la détection FR/EN, les packs et la
 préservation des jetons, sans navigateur ni réseau.

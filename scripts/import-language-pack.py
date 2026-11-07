@@ -2,7 +2,7 @@
 """Importe un CSV de traduction communautaire vers un pack JSON.
 
 Usage :
-    python3 scripts/import-language-pack.py data/language-packs/ybb.csv
+    python3 scripts/import-language-pack.py data/language-packs/ewo.csv
 
 Le CSV doit contenir les colonnes : source, target, status, reviewer, context.
 Seules les lignes avec une cible non vide sont importées. Les jetons

@@ -9,7 +9,7 @@ financiers numériques camerounais.
 duala en packs communautaires. Yemba, medumba, bassa et ghomala’ sont retirés
 du prototype (voir `tasks/klein.md`, K10).
 
-**Version** : prototype 0.5 — novembre 2026.
+**Version** : prototype 0.6 — novembre 2026.
 
 ---
 

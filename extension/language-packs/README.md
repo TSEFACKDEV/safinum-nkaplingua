@@ -21,8 +21,8 @@ condition.
 
 ```json
 {
-  "code": "ybb",
-  "label": "Yemba",
+  "code": "ewo",
+  "label": "Ewondo",
   "version": "0.1.0",
   "status": "community-pack",
   "entries": [
@@ -46,15 +46,17 @@ condition.
 4. Lancer :
 
 ```bash
-python3 scripts/import-language-pack.py data/language-packs/ybb.csv
+python3 scripts/import-language-pack.py data/language-packs/ewo.csv
 ```
 
-Le script met à jour `extension/language-packs/ybb.json`. Il vérifie que les
+Le script met à jour `extension/language-packs/ewo.json`. Il vérifie que les
 jetons et les termes critiques sont présents.
 
 ## Langues sans pack rempli
 
-Le yemba, le medumba, l'ewondo, le douala, le bassa et le ghomala' sont
-présents dans le sélecteur, mais leur pack est vide au départ. L'extension
-affiche alors « aucune phrase validée » et conserve le texte source. C'est un
-état honnête, pas une traduction automatique déguisée.
+L'ewondo et le duala sont présents dans le sélecteur, mais leurs packs sont
+vides au départ. L'extension affiche alors « aucune phrase validée » et
+conserve le texte source. C'est un état honnête, pas une traduction automatique
+déguisée.
+
+Yemba, medumba, bassa et ghomala' ne font plus partie du prototype.

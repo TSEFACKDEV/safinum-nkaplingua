@@ -16,9 +16,9 @@ Mode maquette (sans modèle, pour tester l'extension) :
 
 Langues cibles :
   - fub : traduction automatique NLLB-200 (fuv_Latn) ;
-  - ybb, byv, ewo, dua, bas, bbj : packs communautaires gérés par
-    l'extension (le backend ne produit pas de traduction automatique pour
-    ces langues, faute de modèle validé).
+  - ewo, dua : packs communautaires gérés par l'extension (le backend ne
+    produit pas de traduction automatique pour ces langues, faute de modèle
+    validé).
 
 Note licence : NLLB est CC BY-NC 4.0, donc autorisé pour ce hackathon
 non commercial. Pour une exploitation commerciale, il faudra un accord ou
@@ -83,12 +83,8 @@ TARGET_ALIASES = {
 # Langues sans modèle de traduction validé : l'extension applique uniquement
 # une mémoire de traduction communautaire (phrases status=validated).
 PACK_TARGETS = {
-    "ybb": "Yemba",
-    "byv": "Medumba",
     "ewo": "Ewondo",
     "dua": "Douala",
-    "bas": "Bassa",
-    "bbj": "Ghomala'",
 }
 
 LANGUAGE_REGISTRY = [
@@ -99,20 +95,7 @@ LANGUAGE_REGISTRY = [
         "model_code": "fuv_Latn",
         "status": "mt-baseline",
         "license": "NLLB-200: CC BY-NC 4.0 (non commercial)",
-    },
-    {
-        "code": "ybb",
-        "label": "Yemba",
-        "engine": "pack",
-        "status": "community-pack",
-        "license": "pack communautaire, validation native requise",
-    },
-    {
-        "code": "byv",
-        "label": "Medumba",
-        "engine": "pack",
-        "status": "community-pack",
-        "license": "pack communautaire, validation native requise",
+        "audio": "Common Voice ASR ; 1 303 enregistrements TTS à une voix",
     },
     {
         "code": "ewo",
@@ -120,6 +103,7 @@ LANGUAGE_REGISTRY = [
         "engine": "pack",
         "status": "community-pack",
         "license": "pack communautaire, validation native requise",
+        "audio": "Common Voice 27.0 : 14,36 h validées, 31 voix ; Ewondo-ASR ~3 h 11, 16 voix",
     },
     {
         "code": "dua",
@@ -127,20 +111,7 @@ LANGUAGE_REGISTRY = [
         "engine": "pack",
         "status": "community-pack",
         "license": "pack communautaire, validation native requise",
-    },
-    {
-        "code": "bas",
-        "label": "Bassa",
-        "engine": "pack",
-        "status": "community-pack",
-        "license": "pack communautaire, validation native requise",
-    },
-    {
-        "code": "bbj",
-        "label": "Ghomala'",
-        "engine": "pack",
-        "status": "community-pack",
-        "license": "pack communautaire, validation native requise",
+        "audio": "Common Voice 27.0 (heures à vérifier)",
     },
 ]
 

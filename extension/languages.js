@@ -31,34 +31,6 @@
       verified: false
     },
     {
-      code: "ybb",
-      iso6393: "ybb",
-      label: "Yemba",
-      nativeLabel: "Yɛmba",
-      shortLabel: "YBB",
-      region: "Menoua · Ouest",
-      engine: "pack",
-      pack: "language-packs/ybb.json",
-      status: "community-pack",
-      statusLabel: "Pack communautaire — phrases validées",
-      orthography: "AGLC",
-      verified: false
-    },
-    {
-      code: "byv",
-      iso6393: "byv",
-      label: "Medumba",
-      nativeLabel: "Mə̀dʉ̂mbɑ̀",
-      shortLabel: "BYV",
-      region: "Ndé · Ouest",
-      engine: "pack",
-      pack: "language-packs/byv.json",
-      status: "community-pack",
-      statusLabel: "Pack communautaire — phrases validées",
-      orthography: "AGLC",
-      verified: false
-    },
-    {
       code: "ewo",
       iso6393: "ewo",
       label: "Ewondo",
@@ -86,34 +58,6 @@
       orthography: "AGLC",
       verified: false
     },
-    {
-      code: "bas",
-      iso6393: "bas",
-      label: "Bassa",
-      nativeLabel: "Basàa",
-      shortLabel: "BAS",
-      region: "Littoral · Nkam · Sanaga-Maritime",
-      engine: "pack",
-      pack: "language-packs/bas.json",
-      status: "community-pack",
-      statusLabel: "Pack communautaire — phrases validées",
-      orthography: "AGLC",
-      verified: false
-    },
-    {
-      code: "bbj",
-      iso6393: "bbj",
-      label: "Ghomala'",
-      nativeLabel: "Ghomala'",
-      shortLabel: "BBJ",
-      region: "Ouest · Koung-Khi · Hauts-Plateaux",
-      engine: "pack",
-      pack: "language-packs/bbj.json",
-      status: "community-pack",
-      statusLabel: "Pack communautaire — phrases validées",
-      orthography: "AGLC",
-      verified: false
-    }
   ];
 
   const BY_CODE = new Map(TARGETS.map((target) => [target.code, target]));
@@ -168,7 +112,7 @@
 
   /**
    * Détection FR/EN volontairement déterministe et explicable.
-   * Elle ne prétend pas détecter le fulfulde, le yemba ou le medumba :
+   * Elle ne prétend pas détecter le fulfulde, l’ewondo ou le duala :
    * ces langues sont des cibles, pas des sources attendues du challenge.
    */
   function detectLanguage(text, hint) {
