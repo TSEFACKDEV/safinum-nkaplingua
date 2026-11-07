@@ -332,6 +332,60 @@
     return value;
   }
 
+
+  const DNT_TERMS = [
+    "FCFA",
+    "XAF",
+    "MTN",
+    "MoMo",
+    "Orange Money",
+    "Wave",
+    "Visa",
+    "Mastercard",
+    "WhatsApp",
+    "PIN",
+    "OTP",
+    "KYC",
+    "IBAN",
+    "SWIFT",
+    "FINAKA"
+  ];
+
+  function protectTerms(text) {
+    let value = String(text || "");
+    const terms = [];
+
+    for (const term of [...DNT_TERMS].sort((a, b) => b.length - a.length)) {
+      const pattern = new RegExp(
+        `(?:^|[^\\w])${escapeRegExp(term)}(?:[^\\w]|$)`,
+        "gi"
+      );
+      value = value.replace(pattern, (match) => {
+        const start = match.toLowerCase().indexOf(term.toLowerCase());
+        const prefix = match.slice(0, start);
+        const suffix = match.slice(start + term.length);
+        const token = `[[TERM_${terms.length}]]`;
+        terms.push({ token, original: term });
+        return `${prefix}${token}${suffix}`;
+      });
+    }
+
+    return { text: value, terms };
+  }
+
+  function restoreTerms(text, terms) {
+    let value = canonicalizeTokens(text);
+    for (const item of terms || []) {
+      if (value.split(item.token).length - 1 !== 1) return null;
+      value = value.split(item.token).join(item.original);
+    }
+    return value;
+  }
+
+  function escapeRegExp(value) {
+    return String(value).replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+  }
+
   function getTarget(code) {
     return BY_CODE.get(String(code || "")) || null;
   }
@@ -355,6 +409,8 @@
     normalizePhrase,
     canonicalizeTokens,
     redactSensitive,
-    restoreSensitive
+    restoreSensitive,
+    protectTerms,
+    restoreTerms
   };
 })(globalThis);

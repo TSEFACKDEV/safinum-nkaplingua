@@ -25,6 +25,8 @@ il est littéraire. Ajouter au moins 50 phrases finance écrites pour le projet.
 |---|---|---|
 | chrF++ | similarité globale avec la référence | à mesurer, pas de cible inventée |
 | COMET | qualité sémantique | si disponible |
+| Taux d’acceptation | sorties acceptées par les contrôles | à mesurer |
+| Rétro-traduction | similarité source ↔ retour français | ≥ 0,45 (configurable) |
 | Terminologie | respect du glossaire finance | > 90 % sur les termes validés |
 | Montants | nombres identiques | **100 %** |
 | Entités | noms/URLs/numéros préservés | **100 %** |
@@ -57,6 +59,25 @@ Avant la démo :
 - ne pas préparer la phrase à l’avance ;
 - accepter que le modèle échoue et montrer le fallback sécurisé.
 
+## Filtres automatiques de précision
+
+Le backend applique désormais trois garde-fous sur le contenu inédit :
+
+1. **Jetons** : montants, noms, URLs et emails doivent être présents une seule
+   fois.
+2. **Qualité** : rejet des sorties identiques à la source, trop courtes, trop
+   longues, répétitives ou avec une fuite de français.
+3. **Rétro-traduction** (`NK_ROUNDTRIP=1`, actif par défaut) : NLLB traduit la
+   sortie fulfulde vers le français, puis on compare avec la source. Un score
+   inférieur à `NK_ROUNDTRIP_MIN` (0,45 par défaut) refuse la traduction.
+
+La rétro-traduction double le temps d’inférence. Pour une démonstration sur CPU
+lent :
+
+```bash
+NK_ROUNDTRIP=0 NK_DEVICE=cpu uvicorn app:app --host 127.0.0.1 --port 8000
+```
+
 ## Commandes utiles
 
 ```bash
@@ -67,7 +88,15 @@ curl http://127.0.0.1:8000/health
 curl -s http://127.0.0.1:8000/translate \
   -H 'Content-Type: application/json' \
   -d '{"target":"fub","segments":[{"id":"t1","text":"Les frais de transfert sont de 1 000 FCFA.","context":"mobile money"}]}'
+
+# Évaluer les 20 phrases finance « jamais vues »
+python3 scripts/evaluate-unseen.py --url http://127.0.0.1:8000 \
+  --output eval-unseen.json
 ```
+
+Le rapport contient le taux d’acceptation, la préservation des montants, le
+score de rétro-traduction moyen et la distribution des raisons de refus. Il ne
+remplace pas une évaluation native : il sert à détecter les régressions.
 
 ## Ce qu’il ne faut pas faire
 

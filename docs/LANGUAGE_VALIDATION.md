@@ -129,6 +129,12 @@ linguistique du fulfulde n’est **pas encore validée**. Les six packs sont
 vides. Il faut des locuteurs natifs avant de présenter le prototype comme
 « validé ».
 
+Le backend applique un filtre de qualité et, si `NK_ROUNDTRIP=1`, une
+rétro-traduction de contrôle. Ces filtres réduisent les hallucinations mais ne
+remplacent pas la relecture native. Le script `scripts/evaluate-unseen.py`
+mesure le taux d’acceptation et la préservation des montants sur 20 phrases
+inédites.
+
 ## 7. Fiche de validation à remplir
 
 ```text

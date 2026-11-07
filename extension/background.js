@@ -281,6 +281,15 @@ async function translateSegments(segments, target, source) {
     };
   }
 
+  // Protection des termes critiques avant le moteur MT (FCFA, PIN, etc.).
+  // Les packs, eux, sont cherchés sur le texte brut pour rester compatibles
+  // avec les entrées validées.
+  for (const segment of remaining) {
+    const protectedTerms = LANG.protectTerms(segment.text);
+    segment.text = protectedTerms.text;
+    segment.terms = protectedTerms.terms;
+  }
+
   // 2) Backend local.
   let translations = null;
   if (TRANSLATION_MODE !== "cloud" && (await isLocalAvailable())) {
@@ -353,11 +362,11 @@ function cacheTranslation(source, target, text, translation) {
 function finalizeTranslation(translation, segment) {
   if (!translation || !translation.ok) return translation;
 
-  const restored = LANG.restoreSensitive(
+  const restoredSensitive = LANG.restoreSensitive(
     translation.text,
     segment?.tokens || []
   );
-  if (restored === null) {
+  if (restoredSensitive === null) {
     return {
       id: translation.id,
       text: segment?.originalText || translation.text,
@@ -366,7 +375,20 @@ function finalizeTranslation(translation, segment) {
     };
   }
 
-  return { ...translation, text: restored };
+  const restoredTerms = LANG.restoreTerms(
+    restoredSensitive,
+    segment?.terms || []
+  );
+  if (restoredTerms === null) {
+    return {
+      id: translation.id,
+      text: segment?.originalText || translation.text,
+      ok: false,
+      reason: "token_lost:TERM"
+    };
+  }
+
+  return { ...translation, text: restoredTerms };
 }
 
 /* ------------------------------------------------------------------ */
@@ -566,6 +588,16 @@ async function translateCloudSegment(segment, sourceCode, targetSpec) {
     throw new Error(data?.responseDetails || "Cloud response error");
   }
 
+  const matchScore = Number(data?.responseData?.match || 0);
+  if (matchScore > 0 && matchScore < 0.5) {
+    return {
+      id: segment.id,
+      text: segment.text,
+      ok: false,
+      reason: "cloud_low_match"
+    };
+  }
+
   const translated = decodeHtml(
     String(data?.responseData?.translatedText || "")
   ).trim();
@@ -607,7 +639,7 @@ function toCloudPlaceholders(text) {
   let index = 0;
 
   const cloudText = String(text || "").replace(
-    /\[\[(NUM|URL|EMAIL|NAME)_(\d+)\]\]/g,
+    /\[\[(NUM|URL|EMAIL|NAME|TERM)_(\d+)\]\]/g,
     (match) => {
       const token = `[[${index++}]]`;
       tokenMap.set(token, match);
@@ -637,7 +669,7 @@ function validateTranslation(source, translation, targetSpec) {
     return { ok: false, reason: "empty_translation" };
   }
 
-  const tokenPattern = /\[\[\s*(NUM|URL|EMAIL|NAME)\s*_\s*(\d+)\s*\]\]/gi;
+  const tokenPattern = /\[\[\s*(NUM|URL|EMAIL|NAME|TERM)\s*_\s*(\d+)\s*\]\]/gi;
   const sourceTokens = [
     ...String(source).matchAll(tokenPattern)
   ].map((match) => `[[${match[1].toUpperCase()}_${match[2]}]]`);
@@ -662,6 +694,53 @@ function validateTranslation(source, translation, targetSpec) {
   // Le pack doit rester dans la même variété linguistique que la cible.
   if (targetSpec?.engine === "pack" && !normalized.trim()) {
     return { ok: false, reason: "pack_empty_target" };
+  }
+
+  const quality = qualityCheck(source, normalized);
+  if (!quality.ok) return quality;
+
+  return { ok: true, reason: null };
+}
+
+function qualityCheck(source, translation) {
+  const clean = (value) =>
+    LANG
+      .normalizePhrase(value)
+      .replace(/\[\[[^\]]+\]\]/g, " ")
+      .replace(/[^a-zà-ÿ0-9']+/g, " ")
+      .trim();
+
+  const sourceClean = clean(source);
+  const targetClean = clean(translation);
+  if (!targetClean) return { ok: false, reason: "empty_translation" };
+  if (sourceClean === targetClean) {
+    return { ok: false, reason: "untranslated" };
+  }
+
+  const sourceWords = sourceClean.split(/\s+/).filter(Boolean);
+  const targetWords = targetClean.split(/\s+/).filter(Boolean);
+  if (sourceWords.length >= 4) {
+    if (targetWords.length < Math.max(2, Math.floor(sourceWords.length * 0.35))) {
+      return { ok: false, reason: "too_short" };
+    }
+    if (targetWords.length > Math.max(12, Math.floor(sourceWords.length * 3))) {
+      return { ok: false, reason: "too_long" };
+    }
+    if (targetWords.length >= 8) {
+      const uniqueRatio = new Set(targetWords).size / targetWords.length;
+      if (uniqueRatio < 0.3) {
+        return { ok: false, reason: "repetitive" };
+      }
+      const frenchLeak = new Set([
+        "le", "la", "les", "des", "une", "et", "est", "sont", "pour",
+        "avec", "votre", "vos", "vous", "nous", "du", "de", "dans",
+        "sur", "ce", "cette", "ces", "qui", "que", "au", "aux", "par"
+      ]);
+      const leak = targetWords.filter((word) => frenchLeak.has(word)).length;
+      if (leak / targetWords.length > 0.25) {
+        return { ok: false, reason: "french_leak" };
+      }
+    }
   }
 
   return { ok: true, reason: null };

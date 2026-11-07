@@ -8,7 +8,7 @@ financiers numériques camerounais.
 **Langues cibles** : fulfulde (Adamawa) en traduction automatique, puis
 yemba, medumba, ewondo, douala, bassa et ghomala’ en packs communautaires.
 
-**Version** : prototype 0.4 — novembre 2026.
+**Version** : prototype 0.5-dev — novembre 2026.
 
 ---
 
@@ -156,6 +156,10 @@ propre de l’équipe et des relecteurs natifs.
   d’unicité.
 - Termes critiques (`FCFA`, `PIN`, `OTP`, etc.) : contrôle de présence.
 - Refus des entrées de pack non `validated`.
+- Filtre de qualité : sortie identique à la source, trop courte, trop longue,
+  répétitive ou avec fuite de français.
+- Rétro-traduction de contrôle (`NK_ROUNDTRIP=1`) : similarité source ↔ retour
+  français ≥ 0,45, sinon l’original est conservé.
 - Refus de la traduction si un jeton ou un terme critique manque.
 - UI en Shadow DOM, texte injecté via `textContent` (pas de `innerHTML`).
 - CSP de l’extension verrouillée ; aucun code distant.
@@ -172,6 +176,14 @@ propre de l’équipe et des relecteurs natifs.
 - Les phrases longues et certaines tournures financières restent fragiles :
   voir `docs/LANGUAGE_VALIDATION.md`, `docs/LANGUAGES.md`, `docs/EVAL.md` et
   `docs/DATA_INTEGRATION.md`.
+- Le décodage utilise 2 faisceaux, un plafond de 128 nouveaux jetons et un
+  découpage à 220 caractères pour limiter les répétitions.
+- `scripts/evaluate-unseen.py` mesure le taux d’acceptation, la préservation
+  des montants et le score de rétro-traduction sur 20 phrases inédites.
+- Glossaire finance : les termes `validated` de
+  `data/glossary.template.csv` sont protégés par des jetons avant NLLB, puis
+  restaurés avec la traduction validée. Cela améliore la cohérence sur le
+  contenu inédit sans réentraîner le modèle.
 
 ## 8. Tests et reproductibilité
 

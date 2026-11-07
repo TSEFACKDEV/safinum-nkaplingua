@@ -27,6 +27,7 @@ un autre modèle.
 
 from __future__ import annotations
 
+import csv
 import difflib
 import os
 import re
@@ -41,13 +42,14 @@ from pydantic import BaseModel, Field
 
 MODEL_NAME = os.getenv("NK_MODEL", "facebook/nllb-200-distilled-600M")
 MAX_INPUT_TOKENS = int(os.getenv("NK_MAX_INPUT_TOKENS", "256"))
-MAX_NEW_TOKENS = int(os.getenv("NK_MAX_NEW_TOKENS", "96"))
+MAX_NEW_TOKENS = int(os.getenv("NK_MAX_NEW_TOKENS", "128"))
 BATCH_SIZE = int(os.getenv("NK_BATCH_SIZE", "8"))
-NUM_BEAMS = int(os.getenv("NK_NUM_BEAMS", "1"))
+NUM_BEAMS = int(os.getenv("NK_NUM_BEAMS", "2"))
 REPETITION_PENALTY = float(os.getenv("NK_REPETITION_PENALTY", "1.2"))
 NO_REPEAT_NGRAM = int(os.getenv("NK_NO_REPEAT_NGRAM", "4"))
 DEVICE_PREFERENCE = os.getenv("NK_DEVICE", "auto").lower()
 MOCK_MODE = os.getenv("NK_MOCK", "0") == "1"
+QUANTIZE_MODEL = os.getenv("NK_QUANTIZE", "0") == "1"
 
 # Contrôle de cohérence par rétro-traduction : NLLB traduit la sortie
 # fulfulde vers le français, puis on compare avec la source. Un score trop
@@ -55,6 +57,11 @@ MOCK_MODE = os.getenv("NK_MOCK", "0") == "1"
 ROUNDTRIP_ENABLED = os.getenv("NK_ROUNDTRIP", "1") == "1"
 ROUNDTRIP_MIN_SIMILARITY = float(os.getenv("NK_ROUNDTRIP_MIN", "0.45"))
 ROUNDTRIP_MAX_CHARS = int(os.getenv("NK_ROUNDTRIP_MAX_CHARS", "220"))
+GLOSSARY_PATH = (
+    Path(__file__).resolve().parent.parent
+    / "data"
+    / "glossary.template.csv"
+)
 
 # NLLB utilise des codes de type "fra_Latn" / "fuv_Latn".
 SOURCE_ALIASES = {
@@ -155,11 +162,11 @@ DNT_TERMS = [
 ]
 
 TOKEN_RE = re.compile(
-    r"\[\[\s*(NUM|URL|EMAIL|NAME)\s*_\s*(\d+)\s*\]\]",
+    r"\[\[\s*(NUM|URL|EMAIL|NAME|TERM)\s*_\s*(\d+)\s*\]\]",
     re.IGNORECASE,
 )
 NORMALIZED_TOKEN_RE = re.compile(
-    r"\[\s*\[\s*(NUM|URL|EMAIL|NAME)\s*_\s*(\d+)\s*\]\s*\]",
+    r"\[\s*\[\s*(NUM|URL|EMAIL|NAME|TERM)\s*_\s*(\d+)\s*\]\s*\]",
     re.IGNORECASE,
 )
 
@@ -255,8 +262,101 @@ def load_model():
         MODEL_NAME, torch_dtype=dtype
     )
     model.to(device)
+    if QUANTIZE_MODEL and device == "cpu":
+        # Quantification dynamique : moins de RAM, CPU plus rapide.
+        # Optionnelle car certains noyaux NLLB ne la supportent pas.
+        model = torch.quantization.quantize_dynamic(
+            model,
+            {torch.nn.Linear},
+            dtype=torch.qint8,
+        )
     model.eval()
     return tokenizer, model, device
+
+
+@lru_cache(maxsize=1)
+def load_glossary() -> tuple[tuple[str, str], ...]:
+    """Charge les termes finance validés (target_fub non vide)."""
+    if not GLOSSARY_PATH.exists():
+        return ()
+
+    entries = []
+    with GLOSSARY_PATH.open(encoding="utf-8", newline="") as handle:
+        for row in csv.DictReader(handle):
+            status = (row.get("status") or "").strip().lower()
+            target = (row.get("target_fub") or "").strip()
+            source = (row.get("source_fr") or "").strip()
+            if status in {"validated", "validé", "valide"} and source and target:
+                entries.append((source, target))
+
+    return tuple(sorted(entries, key=lambda item: len(item[0]), reverse=True))
+
+
+def protect_terms(
+    text: str,
+    glossary: tuple[tuple[str, str], ...] | None = None,
+) -> tuple[str, list[dict]]:
+    """Tokenise les termes critiques et les termes validés avant le modèle.
+
+    Cela évite que NLLB traduise FCFA, PIN ou FINAKA, puis que le contrôle
+    rejette une traduction par ailleurs correcte. Les termes du glossaire sont
+    restaurés avec leur traduction validée.
+    """
+    value = text
+    terms: list[dict] = []
+    entries = load_glossary() if glossary is None else glossary
+
+    # Glossaire d'abord : « code PIN » doit être capturé avant « PIN ».
+    for source, target in entries:
+        pattern = re.compile(
+            rf"(?<!\w){re.escape(source)}(?!\w)", re.IGNORECASE
+        )
+        while True:
+            match = pattern.search(value)
+            if not match:
+                break
+            token = f"[[TERM_{len(terms)}]]"
+            terms.append(
+                {
+                    "token": token,
+                    "original": match.group(0),
+                    "target": target,
+                    "term": source,
+                }
+            )
+            value = f"{value[:match.start()]}{token}{value[match.end():]}"
+
+    for term in sorted(DNT_TERMS, key=len, reverse=True):
+        pattern = re.compile(
+            rf"(?<!\w){re.escape(term)}(?!\w)", re.IGNORECASE
+        )
+        while True:
+            match = pattern.search(value)
+            if not match:
+                break
+            token = f"[[TERM_{len(terms)}]]"
+            terms.append(
+                {
+                    "token": token,
+                    "original": match.group(0),
+                    "target": match.group(0),
+                    "term": term,
+                }
+            )
+            value = f"{value[:match.start()]}{token}{value[match.end():]}"
+
+    return value, terms
+
+
+def restore_terms(text: str, terms: list[dict]) -> Optional[str]:
+    value = normalize_placeholders(text)
+    for item in terms:
+        if value.count(item["token"]) != 1:
+            return None
+        value = value.replace(
+            item["token"], item.get("target") or item["original"]
+        )
+    return value
 
 
 def normalize_placeholders(text: str) -> str:
@@ -361,6 +461,52 @@ def detect_language(text: str, hint: str = "") -> dict:
     }
 
 
+FRENCH_LEAK_WORDS = {
+    "le", "la", "les", "des", "une", "et", "est", "sont", "pour",
+    "avec", "votre", "vos", "vous", "nous", "du", "de", "dans", "sur",
+    "ce", "cette", "ces", "qui", "que", "au", "aux", "par", "plus",
+}
+
+
+def quality_check(
+    source: str,
+    translation: str,
+    allow_source_leak: bool = False,
+) -> tuple[bool, Optional[str]]:
+    """Filtre les sorties manifestement dégénérées sur du contenu inédit."""
+    source_clean = normalize_similarity_text(source)
+    target_clean = normalize_similarity_text(translation)
+
+    if not target_clean:
+        return False, "empty_translation"
+    if source_clean == target_clean:
+        return False, "untranslated"
+
+    source_words = source_clean.split()
+    target_words = target_clean.split()
+
+    # Les phrases très courtes (libellés, boutons) sont peu comparables.
+    if len(source_words) >= 4:
+        if len(target_words) < max(2, int(len(source_words) * 0.35)):
+            return False, "too_short"
+        if len(target_words) > max(12, int(len(source_words) * 3.0)):
+            return False, "too_long"
+
+        if len(target_words) >= 8:
+            unique_ratio = len(set(target_words)) / len(target_words)
+            if unique_ratio < 0.30:
+                return False, "repetitive"
+
+        if not allow_source_leak and len(target_words) >= 6:
+            leak = sum(
+                1 for word in target_words if word in FRENCH_LEAK_WORDS
+            )
+            if leak / len(target_words) > 0.25:
+                return False, "french_leak"
+
+    return True, None
+
+
 def validate(source: str, translation: str) -> tuple[bool, Optional[str]]:
     if not translation.strip():
         return False, "empty_translation"
@@ -382,7 +528,8 @@ def validate(source: str, translation: str) -> tuple[bool, Optional[str]]:
                 continue
             return False, f"dnt_missing:{term}"
 
-    return True, None
+    # 3) Filtre de qualité sur les sorties dégénérées.
+    return quality_check(source, normalized, allow_source_leak=MOCK_MODE)
 
 
 def normalize_similarity_text(text: str) -> str:
@@ -469,6 +616,7 @@ def generate_batch(
             num_beams=NUM_BEAMS,
             repetition_penalty=REPETITION_PENALTY,
             no_repeat_ngram_size=NO_REPEAT_NGRAM,
+            length_penalty=1.0,
             early_stopping=True,
         )
 
@@ -504,6 +652,7 @@ def health():
         "loaded": MOCK_MODE or load_model.cache_info().currsize > 0,
         "roundtrip": ROUNDTRIP_ENABLED and not MOCK_MODE,
         "roundtrip_min": ROUNDTRIP_MIN_SIMILARITY,
+        "quantized": QUANTIZE_MODEL,
     }
 
 
@@ -573,13 +722,19 @@ def translate(request: TranslateRequest):
             detail=f"Langue source non supportée : {request.source}",
         )
 
-    # On découpe chaque segment en phrases : NLLB est plus stable sur des
-    # entrées courtes, et on évite les répétitions sur les paragraphes longs.
+    # On protège les termes critiques, puis on découpe chaque segment en
+    # phrases : NLLB est plus stable sur des entrées courtes.
+    protected_by_id = {}
     expanded = []
     for segment in request.segments:
-        parts = split_sentences(segment.text)
+        protected, terms = protect_terms(segment.text)
+        protected_by_id[segment.id] = {
+            "source": protected,
+            "terms": terms,
+        }
+        parts = split_sentences(protected)
         if not parts:
-            parts = [segment.text]
+            parts = [protected]
         for index, part in enumerate(parts):
             expanded.append(
                 {
@@ -606,11 +761,19 @@ def translate(request: TranslateRequest):
         parts = grouped.get(segment.id, [])
         joined = " ".join(part.strip() for part in parts if part.strip())
         normalized = normalize_placeholders(joined)
-        ok, reason = validate(segment.text, normalized)
+        protected = protected_by_id.get(
+            segment.id, {"source": segment.text, "terms": []}
+        )
+        ok, reason = validate(protected["source"], normalized)
+        restored = restore_terms(normalized, protected["terms"])
+        if restored is None:
+            ok = False
+            reason = "token_lost:TERM"
+        final_text = restored if restored is not None else normalized
         drafts.append(
             {
                 "segment": segment,
-                "text": normalized,
+                "text": final_text,
                 "ok": ok,
                 "reason": reason,
                 "roundtrip": None,
