@@ -1247,3 +1247,144 @@ mot `json`) avec les champs ci-dessous. Exemple de structure, en indentation :
   "blockers": []
 }
 ```
+
+## 2026-11-07T20:00:00+01:00 — Klein — K2 — in_progress
+
+```json
+{
+  "timestamp": "2026-11-07T20:00:00+01:00",
+  "person": "Klein",
+  "branch": "klein",
+  "task": "K2",
+  "status": "in_progress",
+  "summary": "Audit du zip Langue.zip : le corpus anglais-duala (15 351 paires, CC-BY-4.0) est utilisable ; les textes ewondo et fulfulde restent sous autorisation (Bible/YouVersion). Le code africa-corpus-builder est MIT.",
+  "files": [
+    "docs/TRAINING_DATA_AUDIT.md",
+    "data/training/sources.csv",
+    "data/training/README.md"
+  ],
+  "tests": [
+    {
+      "command": "python3 scripts/check-training-data.py",
+      "result": "pass",
+      "note": "11 sources : 7 bloquées, 3 sous autorisation, 1 utilisable"
+    }
+  ],
+  "evidence": "docs/TRAINING_DATA_AUDIT.md §5bis ; data/training/sources.csv",
+  "next": "Entraîner le modèle anglais → duala et documenter les limites",
+  "blockers": [
+    "pas de paire français-duala",
+    "ewondo et fulfulde non autorisés"
+  ]
+}
+```
+
+## 2026-11-07T20:01:00+01:00 — Klein — K2 — in_progress
+
+```json
+{
+  "timestamp": "2026-11-07T20:01:00+01:00",
+  "person": "Klein",
+  "branch": "klein",
+  "task": "K2",
+  "status": "in_progress",
+  "summary": "Ajout du script d'entraînement anglais → duala (Marian, encodeur gelé) et du document de suivi ; pilote lancé sur 2 000 paires en CPU.",
+  "files": [
+    "scripts/train-duala-mt.py",
+    "docs/DUALA_MT.md",
+    "scripts/README.md"
+  ],
+  "tests": [
+    {
+      "command": "server/.venv/bin/python scripts/train-duala-mt.py --csv ... --max-pairs 2000 --dry-run",
+      "result": "pass",
+      "note": "2 000 paires propres"
+    },
+    {
+      "command": "server/.venv/bin/python scripts/train-duala-mt.py --csv ... --max-pairs 2000 --epochs 1",
+      "result": "not_run",
+      "note": "pilote en cours"
+    }
+  ],
+  "evidence": "scripts/train-duala-mt.py ; docs/DUALA_MT.md",
+  "next": "Lire metrics.json et les exemples générés, puis compléter la note",
+  "blockers": [
+    "entraînement CPU lent",
+    "qualité non validée"
+  ]
+}
+```
+
+## 2026-11-07T20:30:00+01:00 — Klein — K2 — in_progress
+
+```json
+{
+  "timestamp": "2026-11-07T20:30:00+01:00",
+  "person": "Klein",
+  "branch": "klein",
+  "task": "K2",
+  "status": "in_progress",
+  "summary": "Pilote anglais → duala entraîné sur 2 000 paires CC-BY-4.0 : loss validation 4,22 en 11 min CPU, mais générations répétitives et fuite de français. Modèle conservé localement, non intégré.",
+  "files": [
+    "scripts/train-duala-mt.py",
+    "scripts/translate-duala-pivot.py",
+    "docs/DUALA_MT.md",
+    "data/training/README.md"
+  ],
+  "tests": [
+    {
+      "command": "server/.venv/bin/python scripts/train-duala-mt.py --csv ... --max-pairs 2000 --epochs 1",
+      "result": "pass",
+      "note": "450 steps, train 5,10, valid 4,22, 682 s"
+    },
+    {
+      "command": "python3 scripts/check-training-data.py",
+      "result": "pass",
+      "note": "1 source usable (Duala), 3 sous autorisation"
+    },
+    {
+      "command": "python3 scripts/check-evolution.py",
+      "result": "pass",
+      "note": "journal valide"
+    }
+  ],
+  "evidence": "docs/DUALA_MT.md §4 ; dist/models/duala-en-pilot/metrics.json",
+  "next": "Passer au corpus complet/GPU ou intégrer le pivot côté Marius après évaluation native",
+  "blockers": [
+    "qualité insuffisante",
+    "pas de paire français-duala",
+    "ewondo/fulfulde non autorisés"
+  ]
+}
+```
+
+## 2026-11-07T20:35:00+01:00 — Klein — K2 — blocked
+
+```json
+{
+  "timestamp": "2026-11-07T20:35:00+01:00",
+  "person": "Klein",
+  "branch": "klein",
+  "task": "K2",
+  "status": "blocked",
+  "summary": "Test du pivot français → anglais → duala : la phrase « Votre solde est disponible » sort en répétition (« Nde nde nje ba ba ba... »). Le modèle pilote n'est pas utilisable pour la démo.",
+  "files": [
+    "scripts/translate-duala-pivot.py",
+    "docs/DUALA_MT.md"
+  ],
+  "tests": [
+    {
+      "command": "server/.venv/bin/python scripts/translate-duala-pivot.py --model dist/models/duala-en-pilot --text 'Votre solde est disponible.'",
+      "result": "fail",
+      "note": "sortie répétitive, non exploitable"
+    }
+  ],
+  "evidence": "docs/DUALA_MT.md §4 ; log local dist/logs/duala-en-pilot.log",
+  "next": "Corpus complet + GPU + décodage contraint, ou abandon du MT duala pour le niveau A",
+  "blockers": [
+    "qualité insuffisante",
+    "pas de paire français-duala",
+    "pas de GPU compatible"
+  ]
+}
+```
