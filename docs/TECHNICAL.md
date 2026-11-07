@@ -5,8 +5,9 @@ financiers numériques camerounais.
 
 **Challenge** : SAFINUM Innovate Challenge 2026 — Hackathon Preselection.
 
-**Langues cibles** : fulfulde (Adamawa) en traduction automatique, puis
-yemba, medumba, ewondo, douala, bassa et ghomala’ en packs communautaires.
+**Langues cibles** : fulfulde (Adamawa) en traduction automatique, ewondo et
+duala en packs communautaires. Yemba, medumba, bassa et ghomala’ sont retirés
+du prototype (voir `tasks/klein.md`, K10).
 
 **Version** : prototype 0.5 — novembre 2026.
 
@@ -108,7 +109,7 @@ financière existante, sans modifier son code source.
 - **Seconde opinion ciblée** : si le backend local rejette une phrase, le
   background redemande uniquement cette phrase au cloud, puis garde la
   meilleure sortie conforme. Le local reste prioritaire.
-- **Sept langues cibles** : fulfulde en MT, six langues en packs communautaires.
+- **Trois langues cibles** : fulfulde en MT, ewondo et duala en packs communautaires.
 - **Détection source** : FR/EN, avec indice HTML, mots-outils et confiance.
 - **Permissions minimales** : `activeTab`, `scripting`, `storage`,
   `contextMenus`; pas de `*://*/*`.
@@ -128,7 +129,7 @@ reconnus par le code.
 |---|---|---|---|
 | `facebook/nllb-200-distilled-600M` | 600M | CC BY-NC 4.0 | traduction locale |
 | MyMemory Translation API | — | service externe gratuit | traduction cloud de secours |
-| Packs yemba, medumba, ewondo, douala, bassa, ghomala’ | 0.1 | à définir avec les contributeurs | mémoires de traduction validées |
+| Packs ewondo et duala | 0.1 | à définir avec les contributeurs (CC0 / CC BY) | mémoires de traduction validées |
 | FastAPI | >=0.115 | MIT | API |
 | Uvicorn | >=0.30 | BSD | serveur |
 | PyTorch | >=2.3 | BSD | inférence |
@@ -170,8 +171,9 @@ propre de l’équipe et des relecteurs natifs.
 ## 7. Traitement linguistique
 
 - Fulfulde (`fub`) : NLLB `fuv_Latn`, découpage en phrases courtes.
-- Yemba, medumba, ewondo, douala, bassa, ghomala’ : packs de phrases validées,
-  sans modèle inventé.
+- Ewondo (`ewo`) et duala (`dua`) : packs de phrases validées, sans modèle
+  inventé. Corpus de parole connus : Common Voice 27.0 (14,36 h pour l'ewondo),
+  Ewondo-ASR (~3 h 11), Common Voice duala (à vérifier).
 - Détection source FR/EN : `extension/languages.js` et `/detect`.
 - Orthographe de référence : AGLC.
 - Validation prévue : 20 à 100 phrases finance, locuteur natif, grille
@@ -230,20 +232,22 @@ Puis ouvrir `http://127.0.0.1:8000/demo`.
 - Les phrases longues peuvent être mal traduites ou répétitives.
 - Les noms sont tokenisés de façon conservatrice ; un nom sans mot déclencheur
   peut rester en clair.
-- Les six langues en pack sont vides tant qu’un natif ne les a pas remplies.
+- Les packs ewondo et duala sont vides tant qu’un natif ne les a pas remplis.
 - Pas de support des iframes cross-origin, shadow DOM fermés, images/canvas.
 - Pas de traduction audio (TTS fulfulde) dans le MVP.
-- Le backend local est optionnel ; le mode cloud dépend d’un service externe
-  (MyMemory) et de sa disponibilité/quota.
+- Le backend local est optionnel ; le cloud MyMemory reste expérimental et
+  désactivé par défaut (opt-in explicite, quota et conditions à vérifier).
 - En mode cloud, le texte pseudonymisé quitte la machine ; ne pas l’utiliser
   avec des données réelles sensibles.
+- Le champ `context` doit être supprimé ou nettoyé (correctif M1) : il peut
+  contenir des valeurs de formulaire ou des zones `data-sensitive`.
 - NLLB est CC BY-NC 4.0 : usage non commercial pour le hackathon.
 - Le prototype n’est pas une traduction certifiée pour un contrat.
 
 ## 10. Feuille de route technique
 
 1. Valider 20 phrases avec un locuteur natif.
-2. Remplir les packs yemba et medumba avec l’équipe.
+2. Remplir les packs ewondo et duala avec des locuteurs natifs.
 3. Tester sur l’interface fournie par le jury.
 4. Ajouter un mode bilingue côte à côte pour les conditions contractuelles.
 5. Ajouter une synthèse vocale dans les langues disposant d’une voix validée.

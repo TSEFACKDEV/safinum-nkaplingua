@@ -1,27 +1,41 @@
-# Validation linguistique — fulfulde et packs communautaires
+# Validation linguistique — fulfulde, ewondo et duala
+
+> **Méthode** : TRAPD (traduction, relecture, arbitrage, prétest,
+> documentation), pas la rétro-traduction. Trois natifs, deux traductions
+> indépendantes, un arbitre, un prétest avec 5 à 8 personnes peu
+> alphabétisées. La rétro-traduction reste un filtre d'exécution, jamais une
+> validation.
 
 ## 1. Langues et statuts
 
 | Langue | Code | Moteur | Statut | Ce qui reste à faire |
 |---|---|---|---|---|
-| Fulfulde (Adamawa) | `fub` | NLLB `fuv_Latn` + MyMemory | MT baseline | relecture native de 20 phrases |
-| Yemba | `ybb` | Pack communautaire | 0/20 phrases | remplir `data/language-packs/ybb.csv` |
-| Medumba | `byv` | Pack communautaire | 0/20 phrases | remplir `data/language-packs/byv.csv` |
-| Ewondo | `ewo` | Pack communautaire | 0/20 phrases | remplir le CSV |
-| Douala | `dua` | Pack communautaire | 0/20 phrases | remplir le CSV |
-| Bassa | `bas` | Pack communautaire | 0/20 phrases | remplir le CSV |
-| Ghomala' | `bbj` | Pack communautaire | 0/20 phrases | remplir le CSV |
+| Fulfulde (Adamawa) | `fub` | NLLB `fuv_Latn` | MT baseline | TRAPD sur 40 phrases P0, puis 102 |
+| Ewondo | `ewo` | Pack communautaire | 0/20 phrases | TRAPD sur `data/language-packs/ewo.csv` |
+| Duala | `dua` | Pack communautaire | 0/20 phrases | TRAPD sur `data/language-packs/dua.csv` |
 
-**Règle** : aucune langue autre que le fulfulde n’est présentée comme
-« traduction automatique ». Les six autres sont des mémoires de phrases
+**Patrimoine audio** (annonces externes, à vérifier) :
+
+| Langue | Corpus | Volume annoncé | Limite |
+|---|---|---|---|
+| Ewondo | Common Voice 27.0 | 14,36 h validées, 31 voix | lectures de textes, pas de spontané |
+| Ewondo | Ewondo-ASR | ~3 h 11, 16 voix, tons marqués | accès restreint |
+| Duala | Common Voice 27.0 | à vérifier | quantité non comparable |
+| Fulfulde | Common Voice Adamawa | ASR | — |
+| Fulfulde | Jeu TTS | 1 303 enregistrements | une seule voix, insuffisant seul |
+
+**Règle** : aucune langue autre que le fulfulde n'est présentée comme
+« traduction automatique ». L'ewondo et le duala sont des mémoires de phrases
 validées. Le popup et la page affichent explicitement cet état.
 
-## 2. Pourquoi ne pas utiliser NLLB pour le yemba et le medumba
+Yemba, medumba, bassa et ghomala' sont **retirés** du prototype (voir
+`tasks/klein.md`, K10).
 
-Le tokenizer NLLB-200 ne connaît pas les codes `ybb_Latn`, `byv_Latn`,
-`ewo_Latn`, `dua_Latn`, `bas_Latn` ou `bbj_Latn` : ils sont rejetés comme
-`unk`. MyMemory renvoie aussi une erreur de langue cible invalide pour `ybb`
-et `byv`. Inventer une traduction mot à mot serait dangereux sur des montants
+## 2. Pourquoi ne pas utiliser NLLB pour l'ewondo et le duala
+
+Le tokenizer NLLB-200 ne connaît pas les codes `ewo_Latn` et `dua_Latn`
+comme cibles entraînées pour cette version : on ne peut pas garantir une
+sortie. Inventer une traduction mot à mot serait dangereux sur des montants
 et des conditions financières.
 
 La seule voie responsable est :
@@ -90,7 +104,7 @@ Un seul défaut majeur sur une phrase critique suffit à refuser la phrase.
 | Terminologie finance | ≥ 90 % |
 | Accord entre réviseurs | ≥ 80 % |
 
-## 5. Protocole pour les packs (yemba, medumba, etc.)
+## 5. Protocole pour les packs (ewondo, duala)
 
 1. Remplir la colonne `target` du CSV.
 2. Relire avec un second locuteur.
@@ -98,8 +112,8 @@ Un seul défaut majeur sur une phrase critique suffit à refuser la phrase.
 4. Importer :
 
 ```bash
-python3 scripts/import-language-pack.py data/language-packs/ybb.csv
-python3 scripts/import-language-pack.py data/language-packs/byv.csv
+python3 scripts/import-language-pack.py data/language-packs/ewo.csv
+python3 scripts/import-language-pack.py data/language-packs/dua.csv
 ```
 
 5. Vérifier que le script ne signale aucun jeton manquant.
@@ -174,7 +188,8 @@ Commentaires :
 
 ## 8. Données à utiliser
 
-- `data/language-packs/ybb.csv` et `byv.csv` : 20 phrases finance.
+- `data/language-packs/ewo.csv` et `dua.csv` : 20 phrases finance chacune.
+- `data/language-packs/fub.csv` : 102 segments de la démo (37 P0 en tête).
 - `data/unseen_finance.txt` : phrases de test fulfulde.
 - `data/glossary.template.csv` : glossaire à remplir.
 - `docs/EVAL.md` : protocole de mesure (chrF++, COMET, latence).
@@ -189,5 +204,9 @@ Commentaires :
 - Utiliser des phrases de la page de démo comme jeu de test.
 - Corriger la traduction puis présenter la correction comme sortie du modèle.
 - Annoncer un score sans protocole ni nombre de phrases.
-- Remplir un pack yemba/medumba sans locuteur natif.
+- Remplir un pack ewondo/duala sans locuteur natif.
+- Utiliser la rétro-traduction comme méthode de validation (elle rate de vrais
+  problèmes et en signale de faux).
+- Présenter une langue retirée (yemba, medumba, bassa, ghomala') comme
+  disponible.
 - Traduire un contrat réel sans mention « traduction assistée ».

@@ -41,8 +41,9 @@
 ## 4. Questions probables du jury
 
 **Quelles langues ?**
-Fulfulde (Adamawa) en traduction automatique, plus six langues en packs de
-phrases validées : yemba, medumba, ewondo, douala, bassa, ghomala’.
+Fulfulde (Adamawa) en traduction automatique, plus ewondo et duala en packs de
+phrases validées. Ces trois langues sont retenues pour leurs corpus de parole
+et leurs ressources documentaires.
 
 **Pourquoi NLLB ?**
 Meilleure qualité que M2M100 sur les phrases courtes fulfulde. Licence

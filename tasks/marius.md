@@ -4,8 +4,10 @@
 **Mission** : rendre le pipeline sûr, local, testable et compatible avec le site
 officiel Vue 3. Corriger les défauts P0, intégrer le pack de Klein, préparer le
 packaging et la CI.
-**Dépend de** : Klein (pack, glossaire, audio) pour l'intégration ; Freedy pour
-l'UI des badges et du lecteur audio.
+**Dépend de** : Klein (K10 retrait des langues, packs, glossaire, audio) pour
+l'intégration ; Freedy pour l'UI des badges et du lecteur audio.
+**Note** : le registre `extension/languages.js` et `server/app.py` sont touchés
+par K10 (Klein) ; Marius vérifie seulement que rien ne casse côté moteur.
 **Livraison à** : Freedy (UI), équipe (packaging, CI, preuves).
 
 ## 1. Règles du lot
@@ -224,7 +226,7 @@ Vue, valeurs intactes.
 
 **À ne pas toucher** :
 
-- `data/language-packs/fub.csv` (Klein)
+- `data/language-packs/*.csv` et `data/site-officiel/messages.fr-en.csv` (Klein)
 - `data/glossary.template.csv` (Klein)
 - `demo/index.html` et styles (Freedy)
 - `docs/LANGUAGE_VALIDATION.md` (Klein)

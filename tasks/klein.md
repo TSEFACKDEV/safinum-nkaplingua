@@ -1,9 +1,11 @@
 # Lot de Klein — langue, données, validation
 
 **Branche** : `klein`
-**Mission** : produire le pack fulfulde validé, le glossaire, les enregistrements
-audio et le rapport de validation. C'est le **chemin critique** du projet.
-**Dépend de** : rien, sauf les 3 natifs.
+**Mission** : produire les packs validés des **trois langues retenues**
+(fulfulde, ewondo, duala), le glossaire, les enregistrements audio et le rapport
+de validation. **Retirer les langues hors périmètre** (yemba, medumba, bassa,
+ghomala') de tout le dépôt. C'est le **chemin critique** du projet.
+**Dépend de** : rien, sauf les natifs (3 par langue prioritaire).
 **Livraison à** : Marius (import du pack, politique niveau A) et Freedy (UI,
 badges, audio).
 
@@ -14,8 +16,9 @@ badges, audio).
 ## 1. Règles du lot
 
 - **TRAPD**, pas de rétro-traduction comme validation.
-- **Trois natifs** : deux traducteurs indépendants (sous-variétés différentes)
-  + un arbitre. Le prétest est fait avec 5 à 8 personnes peu alphabétisées.
+- **Trois natifs par langue prioritaire** : deux traducteurs indépendants
+  (sous-variétés différentes) + un arbitre. Le prétest est fait avec 5 à 8
+  personnes peu alphabétisées.
 - **Niveau A = pack validé uniquement** : solde, frais, total, PIN/OTP, erreurs,
   confirmation, sécurité.
 - **Aucune phrase inventée** : les sources viennent de `fub.csv` ou du site
@@ -24,6 +27,11 @@ badges, audio).
   CC BY 4.0. Sans consentement, la phrase n'entre pas dans le pack.
 - **Aucun corpus NOODL** pour l'entraînement, l'adaptation ou la création
   d'œuvres dérivées sans autorisation écrite.
+- **Trois langues seulement** : fulfulde d'Adamawa (`fub`), ewondo (`ewo`),
+  duala (`dua`). Toute autre langue est hors périmètre et doit disparaître du
+  code, des packs, des tests et de la doc.
+- **Libre de droit** : traductions sous CC0 1.0 ou CC BY 4.0, audio humain
+  sous CC0/CC BY, pas de NLLB ni de MMS-TTS dans un produit commercial.
 
 ## 2. Tâches P0
 
@@ -148,12 +156,105 @@ Procédure TRAPD :
 **Livrable** : section licences à jour, consentements archivés.
 **Critère** : chaque ligne du pack a une licence et un relecteur.
 
+## 3quater. Tâche P0 — retirer les langues hors périmètre (K10)
+
+Tu l'as demandé : **Klein retire toute langue sauf fulfulde, ewondo et duala**,
+et met à jour la doc. C'est à faire **avant** toute autre tâche.
+
+### Ce qui reste
+
+| Code | Langue | Moteur | Rôle |
+|---|---|---|---|
+| `fub` | Fulfulde (Adamawa) | NLLB (démonstration non commerciale) + pack | langue prioritaire |
+| `ewo` | Ewondo | pack validé | 1er corpus de parole |
+| `dua` | Duala | pack validé | 2e corpus de parole |
+
+### Ce qui disparaît
+
+`ybb` (yemba), `byv` (medumba), `bas` (bassa), `bbj` (ghomala').
+
+### Fichiers à modifier (code)
+
+- [ ] `extension/languages.js` : supprimer les 4 entrées `ybb`, `byv`, `bas`,
+      `bbj` de `TARGETS` ; garder `fub`, `ewo`, `dua`.
+- [ ] `extension/language-packs/` : supprimer `ybb.json`, `byv.json`,
+      `bas.json`, `bbj.json`.
+- [ ] `data/language-packs/` : supprimer `ybb.csv`, `byv.csv`, `bas.csv`,
+      `bbj.csv` ; garder `ewo.csv`, `dua.csv`.
+- [ ] `server/app.py` : `PACK_TARGETS` → `{"ewo", "dua"}` ;
+      `LANGUAGE_REGISTRY` → 3 entrées (`fub`, `ewo`, `dua`) avec un champ
+      `audio` (volumes Common Voice).
+- [ ] `scripts/check-language-packs.py` : `EXPECTED = {"fub", "ewo", "dua"}` ;
+      ajouter `REMOVED = {"ybb", "byv", "bas", "bbj"}` et une erreur si un
+      pack de langue retirée existe encore.
+- [ ] `scripts/test-extension.js` : attendre 3 langues ; remplacer le pack de
+      test `ybb` par `ewo`.
+- [ ] `extension/INSTALL.md` et `extension/language-packs/README.md` :
+      corriger les exemples (`ybb` → `ewo`, liste des langues).
+- [ ] `scripts/README.md` et l'usage dans `scripts/import-language-pack.py` :
+      exemples `ybb`/`byv` → `ewo`/`dua`.
+- [ ] `server/test_api.py` : attendre 3 langues, refuser les 4 anciennes.
+
+### Fichiers à modifier (documentation)
+
+- [ ] `README.md` : intro, badge, section Langues, données et licences,
+      roadmap, MyMemory (« expérimental, désactivé par défaut »), « sept
+      langues » → « trois langues ».
+- [ ] `docs/LANGUAGES.md` : réécrire avec la table des trois langues, la
+      justification (ewondo 14,36 h/31 voix + ASR ~3 h 11 ; duala ; fulfulde
+      1 303 enregistrements TTS à une voix), et les limites.
+- [ ] `docs/LANGUAGE_VALIDATION.md` : trois langues, TRAPD, protocole des six
+      étapes, patrimoine audio.
+- [ ] `docs/TECHNICAL.md` : langues cibles, traitement linguistique, limites.
+- [ ] `docs/PRESELECTION.md` : langues cibles et réponses aux exigences.
+- [ ] `docs/SUBMISSION.md` : version 0.6.0, trois langues, statut réel.
+- [ ] `docs/COMPLIANCE.md` : exigence 1, limites, actions prioritaires.
+- [ ] `docs/DATA_LICENSES.md` : tableau des packs (deux langues), tableau des
+      corpus de parole, règles « libre de droit ».
+- [ ] `docs/DATA_INTEGRATION.md` : plan ewondo/duala, pas yemba/medumba.
+- [ ] `extension/INSTALL.md`, `extension/language-packs/README.md`,
+      `scripts/README.md` : exemples et listes de langues.
+
+### Fichiers à ne pas modifier
+
+- `demo/index.html` (Freedy)
+- `extension/content.js`, `extension/background.js` (Marius)
+
+### Vérification
+
+```bash
+grep -rnE "ybb|byv|\bbas\b|bbj|yemba|medumba|bassa|ghomala" \
+  README.md docs/*.md extension/*.md extension/languages.js \
+  scripts/*.md scripts/*.py server/*.py | grep -v "retiré"
+node scripts/test-extension.js
+NK_MOCK=1 server/.venv/bin/python -m pytest -q server/test_api.py
+python3 scripts/check-language-packs.py
+```
+
+**Critère** : plus aucune référence active ; 3 langues dans le registre et
+l'API ; tests verts ; doc cohérente.
+
+## 3quinquies. Tâche P0 — messages FR/EN du site officiel (K11)
+
+Nouveau fichier fourni : **`data/site-officiel/messages.fr-en.csv`**
+(70 messages FR/EN extraits des textes affichés du site officiel, 35 classés
+niveau A et 35 niveau B).
+
+- [ ] Faire traduire chaque message par TRAPD en fulfulde, ewondo et duala.
+- [ ] Ajouter les colonnes `target_fub`, `target_ewo`, `target_dua`.
+- [ ] Le prétest doit couvrir les messages d'erreur (`AMOUNT_002`,
+      `SECURITY_001`, `SECURITY_002`, `NETWORK_001`, `CONFIRM_001`).
+- [ ] Livrer aussi les 20 phrases inédites de `data/unseen_finance.txt` pour
+      l'évaluation.
+
+**Critère** : 70/70 messages FR et EN couverts, 0 défaut majeur.
+
 ## 4. Première 72 heures
 
 | Jour | Action |
 |---|---|
-| J1 | Recruter les 3 natifs, faire signer les consentements, ouvrir la fiche de validation |
-| J2 | Glossaire 40 termes, première passe des 37 phrases P0 |
+| J1 | **K10** retirer yemba/medumba/bassa/ghomala' (code + doc) ; recruter les natifs, faire signer les consentements |
+| J2 | Glossaire 40 termes (3 langues), première passe des 37 phrases P0 |
 | J3 | Deuxième traduction indépendante, relecture commune, début d'arbitrage |
 
 ## 5. Fichiers
@@ -178,7 +279,9 @@ Procédure TRAPD :
 
 | Vers | Quoi | Quand |
 |---|---|---|
+| Marius | **K10 terminé** : 3 langues dans le code, tests verts | J1 |
 | Marius | `fub.csv` 37 P0 validées, glossaire 40, règles de jetons | J3–J7 |
+| Marius | `messages.fr-en.csv` traduit (3 langues) | J10 |
 | Marius | `fub.csv` 102, audio, table orthographe | J12 |
 | Freedy | liste des phrases avec audio, formulations FR/EN, badges | J12 |
 | Équipe | rapport de validation signé | J16 |
@@ -193,13 +296,16 @@ Procédure TRAPD :
 - [ ] 15 audio sans montant, 2 relecteurs, licences CC0/CC BY.
 - [ ] Rapport de validation rempli et signé.
 - [ ] Aucune utilisation de NOODL sans autorisation.
+- [ ] K10 : yemba, medumba, bassa et ghomala' absents du code, des packs et
+      de la doc.
+- [ ] K11 : les 70 messages FR/EN du site officiel traduits et validés.
 
 ## 8. Journal d'évolution
 
 À chaque avancement (K1…K9), ajouter une entrée dans
 [`tasks/EVOLUTION.md`](EVOLUTION.md) **avant** le commit/PR :
 
-- `task: "K1"` … `"K9"` ;
+- `task: "K1"` … `"K11"` ;
 - `status: "in_progress"`, `"blocked"` ou `"done"` ;
 - les tests réellement exécutés (`not_run` accepté pour un début de tâche) ;
 - les fichiers touchés et la preuve (ligne de CSV, capture, sortie de test).

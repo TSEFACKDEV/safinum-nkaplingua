@@ -4,9 +4,10 @@
 
 - **Nom du projet** : NkapLingua
 - **Hackathon** : SAFINUM Innovate Challenge 2026
-- **Langues cibles** : fulfulde adamawa (`fub`) en MT ; yemba (`ybb`),
-  medumba (`byv`), ewondo (`ewo`), douala (`dua`), bassa (`bas`) et
-  ghomala’ (`bbj`) en packs de phrases validées
+- **Langues cibles** : fulfulde adamawa (`fub`) en MT ; ewondo (`ewo`) et
+  duala (`dua`) en packs de phrases validées. Trois langues retenues pour leurs
+  corpus de parole et leurs ressources documentaires ; yemba, medumba, bassa et
+  ghomala' retirés du prototype.
 - **Plateforme** : extension navigateur Chrome/Edge/Firefox (Manifest V3)
 - **Moteur** : NLLB-200 600M (CC BY-NC 4.0, usage hackathon non commercial),
   français → fulfulde (`fuv_Latn`) ; packs communautaires pour les autres
@@ -49,7 +50,7 @@ serveur de la banque.
 | Exigence | Réponse NkapLingua |
 |---|---|
 | Extension navigateur | Manifest V3, Chrome/Edge |
-| Au moins une langue | Fulfulde `fub` + six langues en packs |
+| Au moins une langue | Fulfulde `fub` (MT) + ewondo `ewo` et duala `dua` (packs) |
 | Page financière ou autre | Pipeline DOM générique + page de démo FINAKA |
 | Sans modifier le contexte | Segmentation par bloc, glossaire, préservation des entités |
 | Sans modifier le site source | Injection à l’exécution, rendu réversible |

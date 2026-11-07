@@ -127,3 +127,46 @@ mot `json`) avec les champs ci-dessous. Exemple de structure, en indentation :
   "blockers": []
 }
 ```
+
+## 2026-11-07T18:20:00+01:00 — Freedy — F0 — done
+
+```json
+{
+  "timestamp": "2026-11-07T18:20:00+01:00",
+  "person": "Freedy",
+  "branch": "freedy",
+  "task": "F0",
+  "status": "done",
+  "summary": "Réduction du périmètre à trois langues (fulfulde, ewondo, duala) dans la documentation et ajout des tâches K10 (retrait des autres langues) et K11 (messages FR/EN du site officiel)",
+  "files": [
+    "README.md",
+    "docs/LANGUAGES.md",
+    "docs/LANGUAGE_VALIDATION.md",
+    "docs/TECHNICAL.md",
+    "docs/PRESELECTION.md",
+    "docs/SUBMISSION.md",
+    "docs/COMPLIANCE.md",
+    "docs/DATA_LICENSES.md",
+    "docs/DATA_INTEGRATION.md",
+    "extension/INSTALL.md",
+    "extension/language-packs/README.md",
+    "scripts/README.md",
+    "scripts/import-language-pack.py",
+    "data/site-officiel/README.md",
+    "data/site-officiel/messages.fr-en.csv",
+    "tasks/README.md",
+    "tasks/klein.md",
+    "tasks/marius.md"
+  ],
+  "tests": [
+    {
+      "command": "python3 scripts/check-evolution.py",
+      "result": "pass",
+      "note": "journal valide"
+    }
+  ],
+  "evidence": "docs/LANGUAGES.md ; data/site-officiel/messages.fr-en.csv (70 messages, 35 niveau A)",
+  "next": "Klein exécute K10 dans le code (registre, packs, tests) puis K11",
+  "blockers": []
+}
+```

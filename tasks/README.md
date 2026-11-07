@@ -10,7 +10,7 @@
 | Personne | Périmètre | Branche | Fichiers principaux |
 |---|---|---|---|
 | **Freedy** | Frontend visuel, expérience utilisateur, tests profonds navigateur, démo sur le site officiel | `freedy` | `extension/popup.*`, `demo/index.html`, styles, captures, rapport de tests |
-| **Klein** | Langue et données : natifs, glossaire, catalogue fulfulde, TRAPD, audio, licences des traductions | `klein` | `data/language-packs/fub.csv`, `data/glossary.template.csv`, `docs/LANGUAGE_VALIDATION.md`, `data/audio/` |
+| **Klein** | Langue et données : **réduction à trois langues** (K10), natifs, glossaire, catalogues fulfulde/ewondo/duala, TRAPD, audio, licences, messages FR/EN du site officiel | `klein` | `data/language-packs/*.csv`, `data/site-officiel/messages.fr-en.csv`, `data/glossary.template.csv`, `extension/languages.js` (registre), `server/app.py` (registre), `docs/LANGUAGES.md` |
 | **Marius** | Moteur, sécurité, intégration : fuite `context`, cloud, politique niveau A, collisions, jetons, audio backend, packaging, CI | `marius` | `extension/content.js`, `extension/background.js`, `extension/popup.js`, `server/app.py`, `scripts/`, `tests/` |
 
 **Chemin critique** : Klein (3 natifs + 40 phrases P0) → Marius (import + politique
@@ -65,7 +65,7 @@ l'humain et parsé par le test.
 
 | Jour | Freedy | Klein | Marius |
 |---|---|---|---|
-| J1 | Figer la charte UI et les écrans ; lister les badges et le panneau audio | Recruter 3 natifs (2 traducteurs + 1 arbitre), consentements | Corriger la fuite `context` ; test `privacy` vert |
+| J1 | Figer la charte UI et les écrans ; lister les badges et le panneau audio | **K10 : retirer yemba, medumba, bassa, ghomala'** (code + doc) ; recruter les natifs | Corriger la fuite `context` ; test `privacy` vert |
 | J2 | Maquette des 5 étapes + états « traduit / non traduit / en cours » | Glossaire 40 termes ; premières 37 phrases P0 | Local-only par défaut ; retirer MyMemory du chemin |
 | J3 | Test sur le site officiel, capture des erreurs Vue | Deux traductions indépendantes des 37 phrases | Détecteur de collisions + contrôle lexical |
 
@@ -80,7 +80,9 @@ l'humain et parsé par le test.
 
 ## 5. Définition de « fini » (équipe)
 
-- 40/40 phrases P0 validées par TRAPD, **0 défaut majeur**.
+- 40/40 phrases P0 validées par TRAPD, **0 défaut majeur**, pour les trois
+  langues (fulfulde, ewondo, duala).
+- Trois langues seulement dans le code, les packs, les tests et la doc.
 - 100 % du niveau A couvert par le pack ; le reste est explicitement
   « non traduit ».
 - `tests/privacy.test.js` **vert** (plus de fuite de `context`).
@@ -93,7 +95,7 @@ l'humain et parsé par le test.
 
 ## 6. Détail des lots
 
-- [Lot de Klein](klein.md) — langue, données, validation, audio.
+- [Lot de Klein](klein.md) — **retrait des langues hors périmètre (K10)**, langue, données, validation, audio, messages FR/EN du site officiel (K11).
 - [Lot de Marius](marius.md) — moteur, sécurité, intégration, packaging.
 
 Le périmètre de Freedy est détaillé en §2.2 : frontend visuel, expérience,

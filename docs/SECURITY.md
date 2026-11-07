@@ -165,5 +165,8 @@ détecte et l’utilise en priorité.
 - [ ] Tester un nom de bénéficiaire (`Aïcha`) et vérifier qu’il n’apparaît pas
       en clair dans la requête.
 - [ ] Tester `title`, `aria-label`, `placeholder`, `alt` et un bouton `input`.
-- [ ] Tester une langue en mode pack (yemba) et vérifier que l’original reste
+- [ ] Tester une langue en mode pack (ewondo) et vérifier que l’original reste
       affiché si la phrase n’est pas validée.
+- [ ] Vérifier qu’aucun texte d’un `<textarea>` ni d’une zone `data-sensitive`
+      n’apparaît dans le réseau (correctif M1).
+- [ ] Vérifier que MyMemory n’est pas appelé par défaut (opt-in uniquement).

@@ -45,17 +45,31 @@ fine-tuner M2M100 (MIT) sur le corpus adamawa.
 
 | Langue | Code | Source | Licence | Statut |
 |---|---|---|---|---|
-| Yemba | `ybb` | à remplir par un locuteur natif / comité de langue | à définir avec les contributeurs | 0/20 |
-| Medumba | `byv` | à remplir par un locuteur natif / comité de langue | à définir avec les contributeurs | 0/20 |
-| Ewondo | `ewo` | à remplir | à définir | 0/20 |
-| Douala | `dua` | à remplir | à définir | 0/20 |
-| Bassa | `bas` | à remplir | à définir | 0/20 |
-| Ghomala' | `bbj` | à remplir | à définir | 0/20 |
+| Ewondo | `ewo` | natifs, corpus Common Voice 27.0 (CC0) comme référence | CC0-1.0 ou CC-BY-4.0 (consentement écrit) | 0/20 |
+| Duala | `dua` | natifs, corpus Common Voice (CC0) comme référence | CC0-1.0 ou CC-BY-4.0 (consentement écrit) | 0/20 |
+
+Yemba, medumba, bassa et ghomala' sont retirés du prototype (voir
+`tasks/klein.md`, K10) ; leurs feuilles de traduction ne sont plus maintenues.
 
 Les packs ne contiennent aucune donnée personnelle. Chaque entrée doit
-indiquer son relecteur, sa date et sa licence. Les dictionnaires et corpus
-externes (NTeALan, Kemelang, Glosbe, PDF LLACAN, Petit Dictionnaire Yémba)
-servent de **référence** et ne sont pas recopiés sans autorisation.
+indiquer son relecteur, sa date et sa licence, et le JSON du pack doit porter
+un champ `license`. Les dictionnaires et corpus externes (NTeALan, Kemelang,
+Glosbe, PDF LLACAN) servent de **référence** et ne sont pas recopiés sans
+autorisation.
+
+### Corpus de parole
+
+| Langue | Corpus | Licence | Usage |
+|---|---|---|---|
+| Ewondo | Common Voice 27.0 (14,36 h, 31 voix) | CC0 1.0 | audio, évaluation |
+| Ewondo | Ewondo-ASR (~3 h 11, 16 voix) | accès restreint | évaluation ASR, vérifier |
+| Duala | Common Voice 27.0 | CC0 1.0 | audio, vérifier les heures |
+| Fulfulde | Common Voice Adamawa | CC0 1.0 | audio, évaluation |
+| Fulfulde | Jeu TTS (1 303 enregistrements) | à vérifier | écoute, pas d'entraînement |
+
+**Règle libre de droit** : les enregistrements utilisés dans le produit sont
+sous CC0 ou CC BY, avec consentement écrit. MMS-TTS-ful (CC BY-NC) et NLLB
+(CC BY-NC) restent réservés à la démonstration non commerciale.
 
 ### Corpus de référence / évaluation
 
@@ -118,8 +132,8 @@ redistribués sans autorisation explicite. Voir `docs/DATA_INTEGRATION.md`.
 ## Data card à remplir avant la démo
 
 ```yaml
-language: Fulfulde (Adamawa) + packs yemba/medumba/ewondo/douala/bassa/ghomala'
-iso639_3: fub, ybb, byv, ewo, dua, bas, bbj
+language: Fulfulde (Adamawa) + packs ewondo et duala
+iso639_3: fub, ewo, dua
 model_code: fuv_Latn (fulfulde uniquement)
 orthography: AGLC
 sources:

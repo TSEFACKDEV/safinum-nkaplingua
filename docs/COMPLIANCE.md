@@ -7,7 +7,7 @@ Ce document confronte le prototype NkapLingua au règlement officiel du
 
 | Exigence officielle | Statut | Preuve / remarque |
 |---|---|---|
-| 1. Adaptation de la langue de l’interface | ✅ | Extension Manifest V3 ; fulfulde en MT, six langues en packs ; page FINAKA de démonstration |
+| 1. Adaptation de la langue de l’interface | ✅ | Extension Manifest V3 ; fulfulde en MT, ewondo et duala en packs ; page FINAKA de démonstration |
 | 2. Parcours financier : solde, frais, transfert | ✅ | Page FINAKA : solde, frais, formulaire de transfert, récapitulatif |
 | 3. Préservation des montants, frais, bénéficiaires, conditions, alertes | ✅ / ⚠️ | Jetons `[[NUM_n]]` et `[[NAME_n]]`, contrôle des termes critiques, refus si un jeton manque ; la qualité linguistique reste à valider |
 | 4. Fonctionnement sans modifier le code source | ✅ | Injection à l’exécution, aucun changement serveur, toggle original ; extension autonome avec cloud de secours |
@@ -20,7 +20,7 @@ Ce document confronte le prototype NkapLingua au règlement officiel du
 | Fonctionnalité du prototype | 25 | 20–23 | Le pipeline fonctionne ; la qualité native doit être validée |
 | Intégration et indépendance | 20 | 18–20 | Aucune modification du site ; `activeTab` + `scripting` |
 | Sécurité et préservation des informations | 20 | 17–19 | Pseudonymisation des noms, contrôle des jetons, local prioritaire ; cloud de secours divulgué |
-| Accessibilité et expérience utilisateur | 15 | 12–14 | Choix de 7 langues, détection affichée, toggle original, `lang`, popup natif ; pas encore de lecture audio |
+| Accessibilité et expérience utilisateur | 15 | 12–14 | Choix de 3 langues, détection affichée, toggle original, `lang`, popup natif ; pas encore de lecture audio |
 | Adaptation à un nouveau contenu | 10 | 7–9 | Oui, mais dépend de la qualité NLLB sur phrases longues ; packs limités aux phrases validées |
 | Faisabilité technique et documentation | 10 | 9–10 | README, doc technique, doc langues, doc d’intégration, licences, CI |
 | **Total indicatif** | **100** | **84–95** | Objectif : sécuriser la qualité linguistique avant la démo |
@@ -62,7 +62,7 @@ Limites connues :
 - pas de support des shadow DOM fermés ;
 - pas de traduction des images/canvas ;
 - qualité NLLB variable sur les phrases longues ;
-- les six langues en pack sont vides tant qu’un natif ne les remplit pas ;
+- les packs ewondo et duala sont vides tant qu’un natif ne les remplit pas ;
 - l’interface doit être une page web (pas une application mobile native).
 
 ## 5. Règles de sécurité
@@ -79,7 +79,7 @@ Limites connues :
 ## 6. Actions prioritaires avant soumission
 
 1. **Faire valider 20 phrases finance par un locuteur natif fulfulde.**
-2. **Remplir les packs yemba et medumba** avec les locuteurs de l’équipe.
+2. **Remplir les packs ewondo et duala** avec des locuteurs natifs (TRAPD).
 3. **Tester le ZIP universel sur Chrome et Firefox, sans backend local.**
 4. **Tester la tokenisation des noms et la traduction des attributs.**
 5. **Enregistrer la vidéo de 3 minutes** selon `docs/VIDEO_SCRIPT.md`.
@@ -92,8 +92,8 @@ Limites connues :
 
 - « 100 % de précision » : faux et non mesuré.
 - « Toutes les langues du Cameroun » : le prototype couvre le fulfulde en MT
-  et six langues en packs, pas les 280 langues du pays.
-- « Traduction automatique yemba/medumba » : faux, ce sont des packs de
+  l’ewondo et le duala en packs, pas les 280 langues du pays.
+- « Traduction automatique ewondo/duala » : faux, ce sont des packs de
   phrases validées.
 - « Aucune erreur possible » : le contrôle de sûreté réduit le risque, il ne
   l’élimine pas.
