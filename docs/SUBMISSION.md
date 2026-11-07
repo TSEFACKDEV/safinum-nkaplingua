@@ -1,7 +1,11 @@
 # Soumission — SAFINUM Innovate Challenge 2026
 
-**Version soumise : 0.4.0** — sept langues, détection FR/EN, protection des
+**Version publiée : 0.4.0** — sept langues, détection FR/EN, protection des
 noms et packs communautaires.
+
+**Version en cours : 0.5.0-dev (branche `klein`)** — filtres de qualité,
+glossaire validé, rétro-traduction et fallback cloud ciblé. À merger et
+publier après validation native.
 
 ## Liens à copier dans le formulaire
 
