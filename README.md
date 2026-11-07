@@ -28,10 +28,16 @@ Projet préparé pour le **SAFINUM Innovate Challenge 2026** (Yaoundé,
 </p>
 
 <p align="center">
-  <img src="docs/assets/popup.png" alt="Popup de l’extension NkapLingua" width="300" />
+  <img src="docs/assets/popup-redesign.png" alt="Popup de l’extension NkapLingua" width="300" />
+  <img src="docs/assets/popup-redesign-list.png" alt="Liste des langues du popup NkapLingua" width="300" />
 </p>
 
 Design system : [`docs/DESIGN.md`](docs/DESIGN.md).
+
+Autres états du popup : [test de texte](docs/assets/popup-redesign-test.png),
+[confidentialité](docs/assets/popup-redesign-privacy.png),
+[erreur](docs/assets/popup-redesign-error.png),
+[page large](docs/assets/popup-redesign-wide.png).
 
 ## Livrables
 

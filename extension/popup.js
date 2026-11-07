@@ -6,11 +6,24 @@ const $ = (id) => document.getElementById(id);
 let target = "fub";
 
 function setStatus(message) {
-  $("status").textContent = message;
+  const status = $("status");
+  if (!status) return;
+  status.textContent = message;
+  status.dataset.tone = /erreur|refus|impossible|indisponible|non fiable|aucun onglet|collez/i.test(
+    message
+  )
+    ? "danger"
+    : "ok";
 }
 
 function spec() {
   return LANG.getTarget(target) || LANG.getTarget("fub");
+}
+
+function displayName(item) {
+  return String(item?.label || "")
+    .replace(/\s*\([^)]*\)\s*$/, "")
+    .toLowerCase();
 }
 
 function providerLabel(provider) {
@@ -20,37 +33,93 @@ function providerLabel(provider) {
   return "moteur inconnu";
 }
 
+function optionCheckSvg() {
+  const ns = "http://www.w3.org/2000/svg";
+  const svg = document.createElementNS(ns, "svg");
+  svg.setAttribute("viewBox", "0 0 16 16");
+  svg.setAttribute("aria-hidden", "true");
+  svg.classList.add("option-check");
+  const path = document.createElementNS(ns, "path");
+  path.setAttribute("d", "M3.5 8.5l3 3 6-6");
+  svg.append(path);
+  return svg;
+}
+
 function updateLanguageUI() {
   const current = spec();
 
   $("targetCode").textContent = current.shortLabel;
-  const hero = $("heroTitle");
-  hero.textContent = "";
-  hero.append(
-    "Votre page,",
-    document.createElement("br"),
-    `en ${current.label}.`
+  $("languageLabel").textContent = current.label;
+  $("languageButton").setAttribute(
+    "aria-label",
+    `Langue cible : ${current.label}`
   );
-  $("targetNote").textContent = `${current.statusLabel} · ${current.region}`;
+  $("heroTitle").textContent = "Traduire cette page";
+  $("engineTag").textContent = current.engine === "pack" ? "PACK:" : "MT:";
+  $("targetStatus").textContent = String(current.statusLabel || "")
+    .replace(/^MT\s*—\s*/i, "")
+    .replace(/^Pack communautaire\s*—\s*/i, "");
+  $("targetNote").title = current.region || "";
   $("targetNote").dataset.engine = current.engine;
-  $("language").value = current.code;
+
+  for (const option of $("languageList").querySelectorAll(".lang-option")) {
+    option.setAttribute(
+      "aria-selected",
+      option.dataset.code === current.code ? "true" : "false"
+    );
+  }
 }
 
 function populateLanguages() {
-  const select = $("language");
-  select.textContent = "";
+  const list = $("languageList");
+  list.textContent = "";
 
   for (const item of LANG.listTargets()) {
-    const option = document.createElement("option");
-    option.value = item.code;
-    option.textContent =
-      item.engine === "pack"
-        ? `${item.label} — pack communautaire`
-        : `${item.label} — traduction automatique`;
-    select.append(option);
-  }
+    const button = document.createElement("button");
+    button.type = "button";
+    button.className = "lang-option";
+    button.dataset.code = item.code;
+    button.tabIndex = -1;
+    button.setAttribute("role", "option");
+    button.setAttribute("aria-selected", "false");
 
-  select.disabled = false;
+    const label = document.createElement("span");
+    label.className = "option-label";
+    label.textContent = item.label;
+
+    const engine = document.createElement("span");
+    engine.className = "option-engine";
+    engine.textContent = item.engine === "pack" ? "PACK" : "MT";
+
+    button.append(label, engine, optionCheckSvg());
+    button.addEventListener("click", () => selectLanguage(item.code));
+    list.append(button);
+  }
+}
+
+function openLanguageList() {
+  const list = $("languageList");
+  if (!list.hidden) return;
+  list.hidden = false;
+  $("languageButton").setAttribute("aria-expanded", "true");
+  const rail = list.closest(".lang-rail");
+  if (rail) {
+    rail.style.marginBottom = `${Math.ceil(list.getBoundingClientRect().height) + 6}px`;
+  }
+  const selected =
+    list.querySelector('[aria-selected="true"]') ||
+    list.querySelector(".lang-option");
+  selected?.focus({ preventScroll: true });
+}
+
+function closeLanguageList(refocus = false) {
+  const list = $("languageList");
+  if (list.hidden) return;
+  list.hidden = true;
+  $("languageButton").setAttribute("aria-expanded", "false");
+  const rail = list.closest(".lang-rail");
+  if (rail) rail.style.marginBottom = "";
+  if (refocus) $("languageButton").focus({ preventScroll: true });
 }
 
 async function getActiveTab() {
@@ -61,6 +130,35 @@ async function getActiveTab() {
   return tab;
 }
 
+async function selectLanguage(code) {
+  const next = LANG.getTarget(code);
+  if (!next) return;
+
+  target = code;
+  updateLanguageUI();
+  closeLanguageList(true);
+
+  try {
+    await api.storage.local.set({ nkTarget: target });
+  } catch {
+    // Le stockage peut être indisponible ; la session reste utilisable.
+  }
+
+  try {
+    const tab = await getActiveTab();
+    if (tab?.id) {
+      await api.tabs.sendMessage(tab.id, {
+        type: "NK_SET_TARGET",
+        target
+      });
+    }
+  } catch {
+    // Le content script n'est peut-être pas encore injecté.
+  }
+
+  setStatus(`Langue cible : ${next.label}.`);
+}
+
 async function ensureContentScript(tabId) {
   try {
     await api.scripting.executeScript({
@@ -68,9 +166,8 @@ async function ensureContentScript(tabId) {
       files: ["languages.js", "content.js"]
     });
   } catch (error) {
-    // L'injection peut échouer sur les pages chrome://, PDF, Web Store, etc.
     throw new Error(
-      "Impossible d'injecter le script sur cette page. Utilisez une page web classique."
+      "Injection impossible sur cette page. Utilisez une page web classique."
     );
   }
 }
@@ -102,37 +199,62 @@ async function loadTarget() {
     $("cloudFallback").checked = true;
   }
 
-  setStatus(`Prêt. Langue cible : ${spec().label}. Détection FR/EN active.`);
+  setStatus("Prêt · détection FR/EN");
 }
 
-$("language").addEventListener("change", async () => {
-  const next = $("language").value;
-  if (!LANG.getTarget(next)) return;
-
-  target = next;
-  updateLanguageUI();
-
-  try {
-    await api.storage.local.set({ nkTarget: target });
-  } catch {
-    // Le stockage peut être indisponible ; la session reste utilisable.
+$("languageButton").addEventListener("click", (event) => {
+  event.stopPropagation();
+  if ($("languageList").hidden) {
+    openLanguageList();
+  } else {
+    closeLanguageList(true);
   }
+});
 
-  try {
-    const tab = await getActiveTab();
-    if (tab?.id) {
-      await api.tabs.sendMessage(tab.id, {
-        type: "NK_SET_TARGET",
-        target
-      });
-    }
-  } catch {
-    // Le content script n'est peut-être pas encore injecté.
+$("languageButton").addEventListener("keydown", (event) => {
+  if (event.key === "ArrowDown" || event.key === "ArrowUp") {
+    event.preventDefault();
+    openLanguageList();
+  } else if (event.key === "Escape") {
+    event.preventDefault();
+    closeLanguageList(true);
   }
+});
 
-  setStatus(
-    `Langue cible : ${spec().label}. ${spec().statusLabel}.`
-  );
+$("languageList").addEventListener("keydown", (event) => {
+  const options = [...document.querySelectorAll(".lang-option")];
+  const index = options.indexOf(document.activeElement);
+
+  if (event.key === "ArrowDown") {
+    event.preventDefault();
+    options[Math.min(index + 1, options.length - 1)]?.focus();
+  } else if (event.key === "ArrowUp") {
+    event.preventDefault();
+    options[Math.max(index - 1, 0)]?.focus();
+  } else if (event.key === "Home") {
+    event.preventDefault();
+    options[0]?.focus();
+  } else if (event.key === "End") {
+    event.preventDefault();
+    options[options.length - 1]?.focus();
+  } else if (event.key === "Escape") {
+    event.preventDefault();
+    closeLanguageList(true);
+  }
+});
+
+$("languageList").addEventListener("focusout", (event) => {
+  const next = event.relatedTarget;
+  if (
+    !next ||
+    (!next.closest?.(".lang-rail") && next !== $("languageButton"))
+  ) {
+    closeLanguageList();
+  }
+});
+
+document.addEventListener("click", (event) => {
+  if (!event.target.closest?.(".lang-rail")) closeLanguageList();
 });
 
 $("cloudFallback").addEventListener("change", async () => {
@@ -144,16 +266,16 @@ $("cloudFallback").addEventListener("change", async () => {
   }
   setStatus(
     enabled
-      ? "Cloud de secours autorisé pour les phrases rejetées."
-      : "Mode local uniquement : le cloud est désactivé."
+      ? "Cloud autorisé pour les phrases rejetées."
+      : "Mode local uniquement."
   );
 });
 
 $("translatePage").addEventListener("click", async () => {
   try {
-    setStatus(`Traduction de la page en ${spec().label}…`);
+    setStatus(`Traduction en ${displayName(spec())}…`);
     await sendToPage({ type: "NK_TRANSLATE_PAGE", target });
-    setStatus("Traduction lancée. Le résultat apparaît sur la page.");
+    setStatus("Traduction lancée sur la page.");
   } catch (error) {
     setStatus(error.message);
   }
@@ -162,7 +284,7 @@ $("translatePage").addEventListener("click", async () => {
 $("restore").addEventListener("click", async () => {
   try {
     await sendToPage({ type: "NK_RESTORE" });
-    setStatus("Page restaurée à l'original.");
+    setStatus("Original restauré.");
   } catch (error) {
     setStatus(error.message);
   }
@@ -172,7 +294,7 @@ $("translateSelection").addEventListener("click", async () => {
   try {
     setStatus("Traduction de la sélection…");
     await sendToPage({ type: "NK_TRANSLATE_SELECTION", target });
-    setStatus("Sélection traduite dans une bulle sur la page.");
+    setStatus("Sélection traduite.");
   } catch (error) {
     setStatus(error.message);
   }
@@ -190,7 +312,7 @@ $("translateText").addEventListener("click", async () => {
 
   result.textContent = "";
   meta.textContent = "";
-  setStatus("Détection de la langue et traduction du texte inédit…");
+  setStatus("Traduction du texte inédit…");
 
   try {
     const response = await api.runtime.sendMessage({

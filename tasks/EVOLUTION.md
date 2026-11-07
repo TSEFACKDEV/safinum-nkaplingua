@@ -1080,3 +1080,60 @@ mot `json`) avec les champs ci-dessous. Exemple de structure, en indentation :
   ]
 }
 ```
+
+## 2026-11-07T19:55:00+01:00 — Freedy — F1 — done
+
+```json
+{
+  "timestamp": "2026-11-07T19:55:00+01:00",
+  "person": "Freedy",
+  "branch": "freedy",
+  "task": "F1",
+  "status": "done",
+  "summary": "Popup redessiné en console compacte 380x428 : listbox des trois langues, arrondis cohérents, captures README et états test/confidentialité/erreur mis à jour.",
+  "files": [
+    "extension/popup.html",
+    "extension/popup.css",
+    "extension/popup.js",
+    "scripts/preview-popup.mjs",
+    "README.md",
+    "PRODUCT.md",
+    "docs/DESIGN.md",
+    "WORKSPACE.md",
+    ".impeccable/surfaces/popup.md",
+    "docs/assets/popup-redesign.png",
+    "docs/assets/popup-redesign-list.png",
+    "docs/assets/popup-redesign-test.png",
+    "docs/assets/popup-redesign-privacy.png",
+    "docs/assets/popup-redesign-error.png",
+    "docs/assets/popup-redesign-wide.png",
+    "docs/assets/popup-redesign-real.png",
+    "docs/assets/popup-redesign-real-list.png"
+  ],
+  "tests": [
+    {
+      "command": "node scripts/preview-popup.mjs",
+      "result": "pass",
+      "note": "états fermé, liste, test, confidentialité, erreur, large"
+    },
+    {
+      "command": "impeccable detect extension/popup.html extension/popup.css extension/popup.js",
+      "result": "pass",
+      "note": "0 anti-pattern"
+    },
+    {
+      "command": "chargement réel de l'extension Chrome",
+      "result": "pass",
+      "note": "3 langues, 380x428 fermé, 528 ouvert, 0 erreur page"
+    },
+    {
+      "command": "node scripts/test-extension.js",
+      "result": "pass",
+      "note": "registre, détection, packs, jetons, qualité"
+    }
+  ],
+  "evidence": "docs/assets/popup-redesign.png ; docs/assets/popup-redesign-list.png ; README.md § Aperçu",
+  "next": "Merger design/popup dans develop et pousser",
+  "blockers": []
+}
+```
