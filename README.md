@@ -6,16 +6,17 @@
 [![Chrome](https://img.shields.io/badge/Chrome-Manifest%20V3-4285F4?logo=googlechrome&logoColor=white)](#chrome--edge)
 [![Firefox](https://img.shields.io/badge/Firefox-140%2B-FF7139?logo=firefox&logoColor=white)](#firefox)
 
-> **Traduction financière non intrusive en fulfulde, yemba, medumba et
-> autres langues camerounaises, directement dans le navigateur.**
+> **Traduction financière non intrusive en fulfulde, ewondo et duala,
+> directement dans le navigateur.**
 
 NkapLingua est une extension navigateur autonome qui traduit les interfaces
-financières numériques en **sept langues camerounaises** sans modifier le site
-source et sans lire les champs sensibles. Le fulfulde (Adamawa) utilise NLLB ;
-le yemba, le medumba, l’ewondo, le douala, le bassa et le ghomala’ utilisent des
-**packs de phrases validées**. Elle fonctionne **sans installation Python**
-grâce à un service cloud de secours, ou en **100 % local** avec le backend NLLB
-fourni dans le dépôt.
+financières numériques en **trois langues camerounaises** sans modifier le site
+source et sans lire les champs sensibles. Le **fulfulde d’Adamawa** utilise
+NLLB ; l’**ewondo** et le **duala** utilisent des **packs de phrases validées**.
+Elle fonctionne **sans installation Python**, en **100 % local** avec le backend
+NLLB fourni dans le dépôt (le cloud MyMemory est expérimental et désactivé par
+défaut). Ces trois langues sont retenues pour leurs corpus de parole et leurs
+ressources documentaires ; le détail est dans [`docs/LANGUAGES.md`](docs/LANGUAGES.md).
 
 Projet préparé pour le **SAFINUM Innovate Challenge 2026** (Yaoundé,
 26–28 novembre 2026).
@@ -44,8 +45,9 @@ Design system : [`docs/DESIGN.md`](docs/DESIGN.md).
 | **Guide de soumission** | [`docs/SUBMISSION.md`](docs/SUBMISSION.md) |
 
 > L’extension universelle fonctionne sans installation Python : elle utilise
-> le backend local s’il est présent, sinon le service cloud MyMemory avec un
-> texte pseudonymisé.
+> le backend local s’il est présent. Le service cloud MyMemory est
+> **expérimental et désactivé par défaut** ; ne pas le recommander pour une
+> démonstration.
 
 ---
 
@@ -88,15 +90,16 @@ financière :
 
 1. l’utilisateur ouvre sa page mobile money ou sa banque ;
 2. il clique sur l’extension ;
-3. il choisit la langue cible (fulfulde, yemba, medumba, etc.) ;
+3. il choisit la langue cible (fulfulde, ewondo ou duala) ;
 4. la langue source est détectée automatiquement (français ou anglais) ;
 5. la page devient lisible ;
 6. il peut revenir à l’original à tout moment.
 
 Le site source n’est jamais modifié. Aucune ligne de code n’est ajoutée au
 serveur de la banque. L’extension utilise le backend local s’il est disponible ;
-sinon, elle bascule sur le service cloud **MyMemory** avec un texte
-pseudonymisé. Les langues en mode pack ne contactent aucun service cloud.
+le cloud **MyMemory** reste expérimental et désactivé par défaut ; s'il est
+autorisé explicitement, il reçoit un texte pseudonymisé. Les langues en mode
+pack ne contactent aucun service cloud.
 Aucun mot de passe, code PIN, OTP ou valeur de formulaire n’est lu.
 
 ```text
@@ -114,9 +117,9 @@ Content script
       ▼
 Background (service worker Chrome / event page Firefox)
   ├─ cache local
-  ├─ packs communautaires validés (yemba, medumba, etc.)
+  ├─ packs communautaires validés (ewondo, duala)
   ├─ backend local si disponible (127.0.0.1:8000)
-  └─ sinon service cloud MyMemory (texte pseudonymisé)
+  └─ cloud MyMemory expérimental (opt-in, texte pseudonymisé)
       │
       ▼
 Moteur — NLLB-200 local, MyMemory ou pack
@@ -129,8 +132,7 @@ Moteur — NLLB-200 local, MyMemory ou pack
 ## Fonctionnalités
 
 - **Extension Manifest V3** pour Chrome/Edge et Firefox 140+.
-- **Sept langues cibles** : fulfulde, yemba, medumba, ewondo, douala, bassa,
-  ghomala’.
+- **Trois langues cibles** : fulfulde d’Adamawa, ewondo, duala.
 - **Détection FR/EN** avant traduction, avec score de confiance affiché.
 - **Traduction réversible** : bouton « Restaurer l’original ».
 - **Contenu inédit** : test dans le popup ou traduction de la sélection.
@@ -143,25 +145,29 @@ Moteur — NLLB-200 local, MyMemory ou pack
 - **Extension autonome** : un seul ZIP, aucun serveur à installer.
 - **Packs communautaires** : phrases validées, aucun appel cloud.
 - **Backend local optionnel** : mode 100 % local avec NLLB si disponible.
-- **Cloud de secours** : MyMemory, avec texte pseudonymisé et consentement
-  explicite par le clic de l’utilisateur. Si le backend local rejette une
-  phrase (rétro-traduction ou qualité), l’extension demande une seconde
-  opinion au cloud pour cette phrase seulement. La case
-  « Autoriser MyMemory » du popup permet de rester en local strict.
+- **Cloud expérimental** : MyMemory, désactivé par défaut. Si l’utilisateur
+  l’autorise et que le backend local rejette une phrase (rétro-traduction ou
+  qualité), l’extension demande une seconde opinion pour cette phrase
+  seulement.
 - **CI GitHub Actions** : tests backend mock, lint JS, lint Firefox, scan de
   secrets, packaging.
 
 ## Langues
 
-| Langue | Code | Moteur | État |
-|---|---|---|---|
-| Fulfulde (Adamawa) | `fub` | NLLB + MyMemory | MT baseline, validation native en cours |
-| Yemba | `ybb` | Pack communautaire | 0/20 phrases validées |
-| Medumba | `byv` | Pack communautaire | 0/20 phrases validées |
-| Ewondo | `ewo` | Pack communautaire | 0/20 phrases validées |
-| Douala | `dua` | Pack communautaire | 0/20 phrases validées |
-| Bassa | `bas` | Pack communautaire | 0/20 phrases validées |
-| Ghomala' | `bbj` | Pack communautaire | 0/20 phrases validées |
+| Langue | Code | Moteur | Ressources connues | État |
+|---|---|---|---|---|
+| Fulfulde (Adamawa) | `fub` | NLLB local | Common Voice ASR ; 1 303 enregistrements TTS | MT baseline, 0/102 phrases validées |
+| Ewondo | `ewo` | Pack communautaire | Common Voice 27.0 : 14,36 h, 31 voix ; Ewondo-ASR ~3 h 11 | 0/20 phrases validées |
+| Duala | `dua` | Pack communautaire | Common Voice 27.0 (heures à vérifier) | 0/20 phrases validées |
+
+Le **kit natif TRAPD** est prêt dans [`data/review/`](data/review/) :
+classeurs T1/T2, fiche d'arbitrage et 20 phrases inédites. Aucune traduction
+n'est inventée : les colonnes cibles restent vides tant que les natifs n'ont
+pas travaillé.
+
+Yemba, medumba, bassa et ghomala’ ne font pas partie du prototype : ni corpus
+de parole comparable, ni moteur validé. Voir la justification détaillée dans
+[`docs/LANGUAGES.md`](docs/LANGUAGES.md).
 
 Le détail, les limites et la procédure de contribution sont dans
 [`docs/LANGUAGES.md`](docs/LANGUAGES.md). L’intégration des données d’un centre
@@ -176,7 +182,7 @@ flowchart LR
     B --> C[Background]
     C --> D{Backend local ?}
     D -->|oui| E[FastAPI + NLLB]
-    D -->|non| F[MyMemory cloud]
+    D -->|non| F[MyMemory expérimental]
     E --> C
     F --> C
     C --> B
@@ -198,9 +204,10 @@ flowchart LR
 
 ## Démarrage rapide
 
-### Option A — extension seule (recommandée pour le jury)
+### Option A — extension seule
 
-Aucun Python, aucun modèle à télécharger.
+Pour installer et montrer l’interface rapidement. La traduction fulfulde
+demande le backend local (option B) ou un pack rempli.
 
 1. Télécharger `dist/nkaplingua-extension.zip`.
 2. Dézipper le fichier.
@@ -209,10 +216,11 @@ Aucun Python, aucun modèle à télécharger.
    **https://tsefackdev.github.io/safinum-nkaplingua/demo/**
 5. Cliquer sur l’icône NkapLingua → **Traduire cette page**.
 
-L’extension utilise le backend local s’il tourne, sinon le service cloud
-MyMemory. Les montants, URLs et emails sont pseudonymisés avant l’envoi.
+L’extension utilise le backend local s’il tourne. Le cloud MyMemory n’est
+utilisé que si l’utilisateur l’autorise explicitement. Les montants, URLs et
+emails sont pseudonymisés avant tout envoi.
 
-### Option B — 100 % local (NLLB)
+### Option B — 100 % local (NLLB) — recommandé pour la démonstration jury
 
 Prérequis : Python 3.10+, ~3 Go d’espace disque, 8 Go de RAM recommandés.
 
@@ -365,7 +373,7 @@ NK_ROUNDTRIP=0 NK_DEVICE=cpu uvicorn app:app --host 127.0.0.1 --port 8000
 
 ### `GET /languages`
 
-Retourne les sept langues, leur moteur (`mt` ou `pack`) et leur statut.
+Retourne les trois langues, leur moteur (`mt` ou `pack`) et leur statut.
 
 ### `POST /detect`
 
@@ -389,8 +397,8 @@ backend.
 - Si un jeton ou un terme critique manque, la traduction est refusée.
 - Les packs communautaires ne contactent aucun service cloud.
 - Backend local prioritaire, lié à `127.0.0.1`, sans journalisation du texte.
-- Mode cloud de secours : texte pseudonymisé envoyé à **MyMemory** ; aucun mot
-  de passe, PIN, OTP ou valeur de formulaire n’est lu.
+- Cloud expérimental (opt-in) : texte pseudonymisé envoyé à **MyMemory** ;
+  aucun mot de passe, PIN, OTP ou valeur de formulaire n’est lu.
 - Aucun code JavaScript distant ; tout le code de l’extension est local.
 - CORS local restreint aux origines `chrome-extension://` et `moz-extension://`.
 
@@ -403,14 +411,17 @@ Détails : [`docs/SECURITY.md`](docs/SECURITY.md).
 | **NLLB-200 distilled 600M** | CC BY-NC 4.0 | traduction, hackathon non commercial |
 | **Adamawa Fulfulde–French Parallel Corpus 1.2** | NOODL-1.0 | évaluation / adaptation |
 | **Common Voice Adamawa Fulfulde** | CC0 1.0 | audio optionnel |
-| **MyMemory API** | service externe gratuit | mode cloud de secours |
-| **Packs yemba, medumba, ewondo, douala, bassa, ghomala’** | à définir avec les contributeurs | mémoires de traduction validées |
+| **Common Voice Ewondo / Duala** | CC0 1.0 | audio, ASR |
+| **Ewondo-ASR** | accès restreint | évaluation ASR, à vérifier |
+| **Jeu TTS fulfulde (1 303 enregistrements)** | à vérifier | écoute, pas d’entraînement |
+| **MyMemory API** | service externe gratuit | cloud expérimental, désactivé par défaut |
+| **Packs ewondo et duala** | à définir avec les contributeurs (CC0 / CC BY) | mémoires de traduction validées |
 | **Recherches du centre linguistique** | à confirmer | référence orthographique et terminologique |
 | **Code NkapLingua** | MIT | réutilisation libre |
 
 > NLLB est autorisé pour ce hackathon non commercial. Pour une exploitation
-> commerciale, il faudra un accord ou un autre modèle (par exemple M2M100 MIT
-> fine-tuné sur le corpus adamawa).
+> commerciale, il faudra un accord, ou un autre modèle libre. Le pack validé
+> et la voix humaine sous CC0/CC BY sont la seule voie 100 % libre.
 
 Détails : [`docs/DATA_LICENSES.md`](docs/DATA_LICENSES.md).
 
@@ -418,7 +429,8 @@ Détails : [`docs/DATA_LICENSES.md`](docs/DATA_LICENSES.md).
 
 Le projet distingue :
 
-- **qualité linguistique** : validation par un locuteur natif fulfulde ;
+- **qualité linguistique** : validation TRAPD par trois natifs par langue
+  (deux traducteurs indépendants et un arbitre) ;
 - **sécurité** : 100 % des montants et entités préservés ;
 - **contenu inédit** : phrases jamais utilisées pour l’entraînement ;
 - **latence** : mesurée sur CPU et GPU.
@@ -440,6 +452,8 @@ exigence par exigence dans [`docs/COMPLIANCE.md`](docs/COMPLIANCE.md).
 | [`docs/DESIGN.md`](docs/DESIGN.md) | palette, typographie, espacement, accessibilité |
 | [`docs/TECHNICAL.md`](docs/TECHNICAL.md) | architecture, intégration, dépendances, limites |
 | [`docs/LANGUAGE_VALIDATION.md`](docs/LANGUAGE_VALIDATION.md) | fulfulde, méthode de validation native |
+| [`docs/VALIDATION_REPORT.md`](docs/VALIDATION_REPORT.md) | état réel du panel, corpus, phrases inédites |
+| [`data/review/README.md`](data/review/README.md) | kit natif T1/T2, arbitrage et consentement |
 | [`docs/VIDEO_SCRIPT.md`](docs/VIDEO_SCRIPT.md) | script de la vidéo de 3 minutes |
 | [`docs/SUBMISSION_CHECKLIST.md`](docs/SUBMISSION_CHECKLIST.md) | checklist avant soumission |
 
@@ -458,7 +472,7 @@ exigence par exigence dans [`docs/COMPLIANCE.md`](docs/COMPLIANCE.md).
 │   ├── requirements.txt
 │   └── requirements-ci.txt
 ├── demo/                   # Page FINAKA fictive
-├── data/                   # Glossaire à valider, termes à ne pas traduire
+├── data/                   # Glossaire, packs, audio, kit natif T1/T2
 ├── docs/                   # Sécurité, licences, évaluation, pitch, Firefox
 ├── scripts/                # build Firefox, lancement Firefox
 ├── .github/workflows/      # CI GitHub Actions
@@ -504,10 +518,12 @@ Conventions de commit : `feat:`, `fix:`, `docs:`, `test:`, `chore:`.
 - [x] Extension Manifest V3 + backend local
 - [x] Traduction réversible et test de texte inédit
 - [x] Pseudonymisation des montants, entités et noms
-- [x] Détection FR/EN et choix de sept langues
+- [x] Détection FR/EN et choix de trois langues (fulfulde, ewondo, duala)
 - [x] Traduction des attributs et des options
 - [x] CI GitHub Actions
-- [ ] Remplir les packs yemba et medumba (20 phrases)
+- [x] Kit natif T1/T2, glossaire 40 termes et 70 messages du site
+- [x] Pré-évaluation mécanique des 20 phrases inédites (12 acceptées, 8 refusées)
+- [ ] Remplir les packs fulfulde, ewondo et duala avec les locuteurs natifs
 - [ ] Validation native de 100 phrases finance
 - [ ] Brancher les données OLC/ERDELAP (`docs/DATA_INTEGRATION.md`)
 - [ ] Glossaire finance validé (`data/glossary.template.csv`)

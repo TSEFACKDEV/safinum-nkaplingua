@@ -1,34 +1,61 @@
 # Langues, détection et couverture
 
 NkapLingua ne prétend pas traduire automatiquement toutes les langues du
-Cameroun. Le prototype distingue trois niveaux de couverture, affichés dans le
-popup.
+Cameroun. Le prototype retient **trois langues**, choisies pour leurs
+ressources existantes (corpus de parole, grammaires, dictionnaires) :
+
+- **Fulfulde d'Adamawa** (`fub`) — traduction automatique ;
+- **Ewondo** (`ewo`) — pack communautaire ;
+- **Duala** (`dua`) — pack communautaire.
+
+Yemba (`ybb`), medumba (`byv`), bassa (`bas`) et ghomala' (`bbj`) sont
+**retirés du prototype** : ni corpus de parole comparable, ni moteur validé.
+Klein les retire aussi du registre, des packs, des tests et de la documentation
+(voir `tasks/klein.md`, K10).
 
 ## 1. Langues disponibles
 
-| Code | Langue | Région | Moteur | État |
-|---|---|---|---|---|
-| `fub` | Fulfulde (Adamawa) | Adamaoua, Nord, Extrême-Nord | NLLB local + MyMemory | MT baseline, validation native en cours |
-| `ybb` | Yemba | Menoua, Ouest | Pack communautaire | 0/20 phrases validées au départ |
-| `byv` | Medumba | Ndé, Ouest | Pack communautaire | 0/20 phrases validées au départ |
-| `ewo` | Ewondo | Centre | Pack communautaire | 0/20 phrases validées au départ |
-| `dua` | Douala | Littoral | Pack communautaire | 0/20 phrases validées au départ |
-| `bas` | Bassa | Littoral | Pack communautaire | 0/20 phrases validées au départ |
-| `bbj` | Ghomala' | Ouest | Pack communautaire | 0/20 phrases validées au départ |
+| Code | Langue | Région | Moteur | Ressources connues | État |
+|---|---|---|---|---|---|
+| `fub` | Fulfulde (Adamawa) | Adamaoua, Nord, Extrême-Nord | NLLB local | Common Voice ASR ; 1 303 enregistrements TTS à une voix | MT baseline, 0/102 phrases validées |
+| `ewo` | Ewondo | Centre | Pack communautaire | Common Voice 27.0 : 14,36 h validées, 31 voix ; Ewondo-ASR ~3 h 11, 16 voix ; grammaires et dictionnaires | 0/20 phrases validées |
+| `dua` | Duala | Littoral | Pack communautaire | Common Voice 27.0 (heures à vérifier) ; dictionnaires et descriptions anciennes | 0/20 phrases validées |
 
-### Ce que « pack communautaire » veut dire
+Les classeurs T1/T2 et la fiche d'arbitrage sont prêts dans
+[`../data/review/`](../data/review/).
+
+### Pourquoi ces trois langues
+
+| Rang | Langue | Pourquoi elle ressort | Limite à prévoir |
+|---|---|---|---|
+| 1 | **Ewondo** | Deux corpus de parole avec transcriptions : Common Voice 27.0 annonce 14,36 h validées et 31 voix ; Ewondo-ASR annonce environ 3 h 11, 16 voix, avec transcription et tons marqués. Grammaires, dictionnaires et travaux linguistiques existent. | Une partie des enregistrements est lue à partir de textes ; pas de conversation spontanée ni toutes les variétés locales. Accès à Ewondo-ASR soumis à restrictions. |
+| 2 | **Duala** | Présence dans Common Voice 27.0, un jeu audio destiné à l'ASR, et une longue tradition de dictionnaires et de descriptions. | Le nombre d'heures validées n'est pas comparable à l'ewondo ; vérifier quantité, variété et conditions d'accès. |
+| 3 | **Fulfulde d'Adamawa** | Common Voice propose un corpus ASR ; un autre jeu contient 1 303 enregistrements lus par un locuteur. Forte tradition de ressources linguistiques. | Le jeu supplémentaire est un corpus **TTS à une seule voix** : insuffisant seul pour entraîner ou évaluer un système robuste. |
+
+Les volumes ci-dessus sont des annonces externes : les vérifier avant de les
+citer dans une release, une vidéo ou une présentation.
+
+## 2. Ce que « pack communautaire » veut dire
 
 Le pack est une **mémoire de traduction** : des phrases source et cible
 exactement appariées, relues par un locuteur natif. Le moteur ne traduit pas
-mot à mot et n’invente rien. Si la phrase n’est pas dans le pack, le texte
-original reste affiché et l’interface indique « phrase non validée ».
+mot à mot et n'invente rien. Si la phrase n'est pas dans le pack, le texte
+original reste affiché et l'interface indique « phrase non validée ».
 
-C’est volontaire : une traduction approximative de « frais », « solde » ou
+C'est volontaire : une traduction approximative de « frais », « solde » ou
 « pénalité » peut faire prendre une mauvaise décision financière. Le règlement
-SAFINUM considère d’ailleurs qu’une erreur sur un montant, une condition ou un
+SAFINUM considère d'ailleurs qu'une erreur sur un montant, une condition ou un
 avertissement est un défaut majeur.
 
-## 2. Détection de la langue source
+Niveaux de priorité :
+
+| Niveau | Contenu | Règle |
+|---|---|---|
+| **A** | solde, frais, total, PIN/OTP, erreurs, confirmation, sécurité | **pack validé uniquement** ; sinon, français + badge « non traduit » |
+| **B** | navigation, libellés, aides | pack, ou MT avec badge « automatique » |
+| **C** | texte non critique | MT autorisée, étiquetée |
+
+## 3. Détection de la langue source
 
 La détection est déterministe et explicable (`extension/languages.js` et
 `server/app.py`) :
@@ -39,46 +66,52 @@ La détection est déterministe et explicable (`extension/languages.js` et
 4. score, confiance et cas mixte.
 
 Le résultat est affiché dans le popup : « Source détectée : français (92 %) ».
-Si la page est courte ou ambiguë, l’indice HTML est prioritaire avec une
-confiance basse. La détection ne prétend pas reconnaître le fulfulde, le yemba
-ou le medumba : ce sont des langues **cibles**, pas les langues sources
-attendues de l’interface du challenge.
+Si la page est courte ou ambiguë, l'indice HTML est prioritaire avec une
+confiance basse. La détection ne prétend pas reconnaître le fulfulde, l'ewondo
+ou le duala : ce sont des langues **cibles**, pas les langues sources attendues
+de l'interface du challenge.
 
-## 3. Protection des données avant traduction
+## 4. Protection des données avant traduction
 
-Avant l’envoi au moteur, le content script remplace par des jetons :
+Avant l'envoi au moteur, le content script remplace par des jetons :
 
 - les montants et tous les chiffres (`[[NUM_n]]`) ;
 - les URLs (`[[URL_n]]`) ;
 - les emails (`[[EMAIL_n]]`) ;
 - les noms de bénéficiaires et de personnes (`[[NAME_n]]`).
 
-Les noms sont détectés après un mot déclencheur (`bénéficiaire`, `client`,
-`à`, `de`, `pour`, `M.`, `Mme`, etc.) ou dans une séquence de mots
+Les noms sont détectés après un mot déclencheur (« bénéficiaire », « client »,
+« à », « de », « pour », « M. », « Mme », etc.) ou dans une séquence de mots
 capitalisés. Les mots courants, les marques et les libellés financiers sont
 exclus pour éviter les faux positifs.
 
 Après traduction, chaque jeton doit être présent **exactement une fois**. Sinon
-la traduction est refusée et l’original est conservé. Les termes `FCFA`, `XAF`,
+la traduction est refusée et l'original est conservé. Les termes `FCFA`, `XAF`,
 `PIN`, `OTP`, `KYC` et `FINAKA` sont également contrôlés.
 
-## 4. Attributs traduits
+Le champ `context` ne doit pas être envoyé au backend : il peut contenir des
+valeurs de formulaire ou des zones `data-sensitive` (correctif M1).
 
-Le content script traduit désormais :
+## 5. Attributs traduits
+
+Le content script traduit :
 
 - les nœuds texte visibles ;
 - `title`, `aria-label`, `placeholder`, `alt` ;
 - la valeur des boutons `input[type=button|submit|reset]` ;
 - le texte des `<option>`.
 
-Il ne lit jamais la valeur d’un champ texte, d’un mot de passe, d’un OTP ou
-d’un champ marqué `data-sensitive`.
+Il ne lit jamais la valeur d'un champ texte, d'un mot de passe, d'un OTP ou
+d'un champ marqué `data-sensitive`.
 
-## 5. Ajouter une langue
+## 6. Ajouter ou retirer une langue
+
+### Ajouter
 
 1. Ajouter une entrée dans `extension/languages.js` avec `engine: "pack"`.
-2. Créer `extension/language-packs/<code>.json` (le script le fait).
-3. Remplir `data/language-packs/<code>.csv` avec 20 phrases finance.
+2. Ajouter l'entrée correspondante dans `LANGUAGE_REGISTRY` et
+   `PACK_TARGETS` de `server/app.py`.
+3. Créer `data/language-packs/<code>.csv` avec 20 phrases finance.
 4. Faire relire par un locuteur natif et passer `status` à `validated`.
 5. Importer :
 
@@ -86,23 +119,34 @@ d’un champ marqué `data-sensitive`.
 python3 scripts/import-language-pack.py data/language-packs/<code>.csv
 ```
 
-6. Reconstruire le ZIP :
+6. Vérifier et reconstruire :
 
 ```bash
+python3 scripts/check-language-packs.py
 ./scripts/package-extension.sh
 ```
 
-Le script refuse une entrée si un jeton ou un terme critique a disparu. C’est
-la barrière de sécurité minimale avant toute publication.
+### Retirer
 
-## 6. Limites assumées
+1. Supprimer l'entrée de `extension/languages.js` et de `server/app.py`
+   (`LANGUAGE_REGISTRY`, `PACK_TARGETS`).
+2. Supprimer `extension/language-packs/<code>.json` et
+   `data/language-packs/<code>.csv`.
+3. Mettre à jour `scripts/check-language-packs.py` (liste des langues
+   attendues) et `scripts/test-extension.js`.
+4. Mettre à jour la doc : `README.md`, `docs/LANGUAGES.md`,
+   `docs/TECHNICAL.md`, `docs/PRESELECTION.md`, `docs/SUBMISSION.md`.
+5. Publier le retrait dans la release : ne jamais laisser une langue morte
+   dans l'interface.
+
+## 7. Limites assumées
 
 - Le fulfulde reste une **baseline NLLB**, pas une traduction validée.
-- Les six autres langues sont des packs vides tant qu’un natif ne les remplit
-  pas. Le code est prêt, la donnée ne l’est pas.
-- Aucun modèle NLLB ne gère `ybb`, `byv`, `ewo`, `dua`, `bas` ou `bbj` :
-  `ybb_Latn`, `byv_Latn`, etc. sont inconnus du tokenizer NLLB.
-- MyMemory ne couvre pas ces langues : `fr|ybb`, `fr|byv` renvoient une erreur
-  de langue cible invalide.
+- L'ewondo et le duala sont des packs vides tant qu'un natif ne les remplit
+  pas. Le code est prêt, la donnée ne l'est pas.
+- Aucun modèle NLLB de cette version ne produit de traduction automatique pour
+  `ewo` ou `dua` : la MT est réservée au fulfulde.
+- Les corpus de parole disponibles ne suffisent pas, seuls, à garantir une
+  transcription robuste ; ils aident l'audio, pas la traduction écrite.
 - La qualité et la couverture seront mesurées dans `docs/EVAL.md` et
   `docs/LANGUAGE_VALIDATION.md`.

@@ -1,27 +1,44 @@
-# Validation linguistique — fulfulde et packs communautaires
+# Validation linguistique — fulfulde, ewondo et duala
+
+> **Méthode** : TRAPD (traduction, relecture, arbitrage, prétest,
+> documentation), pas la rétro-traduction. Trois natifs, deux traductions
+> indépendantes, un arbitre, un prétest avec 5 à 8 personnes peu
+> alphabétisées. La rétro-traduction reste un filtre d'exécution, jamais une
+> validation.
 
 ## 1. Langues et statuts
 
 | Langue | Code | Moteur | Statut | Ce qui reste à faire |
 |---|---|---|---|---|
-| Fulfulde (Adamawa) | `fub` | NLLB `fuv_Latn` + MyMemory | MT baseline | relecture native de 20 phrases |
-| Yemba | `ybb` | Pack communautaire | 0/20 phrases | remplir `data/language-packs/ybb.csv` |
-| Medumba | `byv` | Pack communautaire | 0/20 phrases | remplir `data/language-packs/byv.csv` |
-| Ewondo | `ewo` | Pack communautaire | 0/20 phrases | remplir le CSV |
-| Douala | `dua` | Pack communautaire | 0/20 phrases | remplir le CSV |
-| Bassa | `bas` | Pack communautaire | 0/20 phrases | remplir le CSV |
-| Ghomala' | `bbj` | Pack communautaire | 0/20 phrases | remplir le CSV |
+| Fulfulde (Adamawa) | `fub` | NLLB `fuv_Latn` | 0/102 phrases validées | TRAPD sur les 37 P0, puis les 65 autres |
+| Ewondo | `ewo` | Pack communautaire | 0/20 phrases | TRAPD sur `data/language-packs/ewo.csv` |
+| Duala | `dua` | Pack communautaire | 0/20 phrases | TRAPD sur `data/language-packs/dua.csv` |
 
-**Règle** : aucune langue autre que le fulfulde n’est présentée comme
-« traduction automatique ». Les six autres sont des mémoires de phrases
+Les classeurs de travail sont prêts dans [`../data/review/`](../data/review/) :
+T1 et T2 par langue, fiche d'arbitrage, fiche des 20 phrases inédites.
+
+**Patrimoine audio** (annonces externes, à vérifier) :
+
+| Langue | Corpus | Volume annoncé | Limite |
+|---|---|---|---|
+| Ewondo | Common Voice 27.0 | 14,36 h validées, 31 voix | lectures de textes, pas de spontané |
+| Ewondo | Ewondo-ASR | ~3 h 11, 16 voix, tons marqués | accès restreint |
+| Duala | Common Voice 27.0 | à vérifier | quantité non comparable |
+| Fulfulde | Common Voice Adamawa | ASR | — |
+| Fulfulde | Jeu TTS | 1 303 enregistrements | une seule voix, insuffisant seul |
+
+**Règle** : aucune langue autre que le fulfulde n'est présentée comme
+« traduction automatique ». L'ewondo et le duala sont des mémoires de phrases
 validées. Le popup et la page affichent explicitement cet état.
 
-## 2. Pourquoi ne pas utiliser NLLB pour le yemba et le medumba
+Yemba, medumba, bassa et ghomala' sont **retirés** du prototype (voir
+`tasks/klein.md`, K10).
 
-Le tokenizer NLLB-200 ne connaît pas les codes `ybb_Latn`, `byv_Latn`,
-`ewo_Latn`, `dua_Latn`, `bas_Latn` ou `bbj_Latn` : ils sont rejetés comme
-`unk`. MyMemory renvoie aussi une erreur de langue cible invalide pour `ybb`
-et `byv`. Inventer une traduction mot à mot serait dangereux sur des montants
+## 2. Pourquoi ne pas utiliser NLLB pour l'ewondo et le duala
+
+Le tokenizer NLLB-200 ne connaît pas les codes `ewo_Latn` et `dua_Latn`
+comme cibles entraînées pour cette version : on ne peut pas garantir une
+sortie. Inventer une traduction mot à mot serait dangereux sur des montants
 et des conditions financières.
 
 La seule voie responsable est :
@@ -46,11 +63,62 @@ Les jetons `[[NUM_n]]`, `[[NAME_n]]`, `[[URL_n]]` et `[[EMAIL_n]]` ne doivent
 pas être traduits ni déplacés. Les termes `FCFA`, `PIN`, `OTP` et `FINAKA`
 doivent rester identiques.
 
+## 3bis. Panel actuel (K1)
+
+**État au 7 novembre 2026** : un locuteur natif est identifié pour chaque
+langue cible. Cela permet de démarrer la traduction, mais **pas** de terminer
+TRAPD : il manque, par langue, un second traducteur indépendant et un arbitre.
+
+| Langue | Natif identifié | Rôle actuel | 2e traducteur | Arbitre | Statut K1 |
+|---|---|---|---|---|---|
+| Fulfulde (fub) | oui | traducteur 1 | à recruter | à recruter | partiel |
+| Ewondo (ewo) | oui | traducteur 1 | à recruter | à recruter | partiel |
+| Duala (dua) | oui | traducteur 1 | à recruter | à recruter | partiel |
+
+Consentements : utiliser [`CONSENT_TEMPLATE.md`](CONSENT_TEMPLATE.md). Aucun
+nom, numéro ou pièce d’identité ne doit être publié dans le dépôt.
+
+### Classeurs T1/T2
+
+Le kit est décrit dans [`../data/review/README.md`](../data/review/README.md).
+Il est généré par :
+
+```bash
+python3 scripts/make-native-kit.py
+```
+
+| Langue | Fichier T1 | Fichier T2 | Items |
+|---|---|---|---:|
+| Fulfulde | `data/review/fulfulde.t1.csv` | `data/review/fulfulde.t2.csv` | 212 |
+| Ewondo | `data/review/ewondo.t1.csv` | `data/review/ewondo.t2.csv` | 130 |
+| Duala | `data/review/duala.t1.csv` | `data/review/duala.t2.csv` | 130 |
+
+Après remplissage :
+
+```bash
+python3 scripts/merge-native-reviews.py --lang fub
+# l'arbitre remplit data/review/fulfulde.arbitrage.csv
+python3 scripts/import-native-reviews.py --lang fub --dry-run
+python3 scripts/import-native-reviews.py --lang fub
+python3 scripts/check-language-data.py
+python3 scripts/check-language-packs.py
+```
+
+L'import refuse une ligne validée si T1/T2 manquent, si les deux relecteurs
+sont la même personne, si l'arbitre est T1 ou T2, ou si la licence, la date
+ou la provenance humaine manque.
+
+> **Règle de sécurité** : tant que le panel n’est pas complet, les phrases
+> traduites restent `draft` / `a_traduire`. Elles ne passent pas
+> `validated` et ne sont pas appliquées par l’extension. Le script d'import
+> applique cette règle : une seule personne ne peut pas valider un pack.
+
 ## 4. Protocole pour le fulfulde (MT)
 
 ### Panel
 
-- 2 à 3 locuteurs natifs du fulfulde adamawa.
+- 3 locuteurs natifs du fulfulde adamawa : deux traducteurs indépendants et
+  un arbitre.
 - Au moins un linguiste ou enseignant de langues nationales.
 - Si possible, un agent de service client financier.
 
@@ -90,7 +158,7 @@ Un seul défaut majeur sur une phrase critique suffit à refuser la phrase.
 | Terminologie finance | ≥ 90 % |
 | Accord entre réviseurs | ≥ 80 % |
 
-## 5. Protocole pour les packs (yemba, medumba, etc.)
+## 5. Protocole pour les packs (ewondo, duala)
 
 1. Remplir la colonne `target` du CSV.
 2. Relire avec un second locuteur.
@@ -98,8 +166,8 @@ Un seul défaut majeur sur une phrase critique suffit à refuser la phrase.
 4. Importer :
 
 ```bash
-python3 scripts/import-language-pack.py data/language-packs/ybb.csv
-python3 scripts/import-language-pack.py data/language-packs/byv.csv
+python3 scripts/import-language-pack.py data/language-packs/ewo.csv
+python3 scripts/import-language-pack.py data/language-packs/dua.csv
 ```
 
 5. Vérifier que le script ne signale aucun jeton manquant.
@@ -146,8 +214,25 @@ En fallback cloud ciblé (MyMemory) sur les phrases rejetées, les 20 phrases de
 améliore la couverture, mais le cloud n’a pas la rétro-traduction locale : la
 validation native reste obligatoire.
 
+### Pré-évaluation des 20 phrases inédites (7 novembre 2026)
+
+Le script `scripts/generate-unseen-fub.py` a traduit les 20 phrases de
+`data/unseen_finance.txt` en simulant le pipeline de l'extension :
+protection des termes, protection des nombres, NLLB, restauration.
+
+| Résultat mécanique | Nombre | Suite |
+|---|---:|---|
+| Sortie acceptée par les contrôles de jetons/nombres | 12/20 | à juger par un natif |
+| Sortie refusée automatiquement | 8/20 | original conservé, non jugée |
+
+Les 8 refus sont principalement des nombres ou des termes critiques perdus
+(`FCFA`, `PIN`, montants). C'est le comportement attendu : le pipeline
+préfère refuser plutôt que d'afficher un montant faux. Les 12 sorties
+acceptées ne sont **pas** validées pour autant : un natif doit remplir
+`docs/UNSEEN_JUDGMENT.csv` avec `acceptable`, `trompeur` ou `faux`.
+
 **Conclusion** : le pipeline technique est fonctionnel, mais la qualité
-linguistique du fulfulde n’est **pas encore validée**. Les six packs sont
+linguistique du fulfulde n’est **pas encore validée**. Les deux packs sont
 vides. Il faut des locuteurs natifs avant de présenter le prototype comme
 « validé ». Le test réel confirme aussi que NLLB 600M est fragile sur les
 phrases longues : le découpage et la rétro-traduction réduisent le risque,
@@ -174,7 +259,8 @@ Commentaires :
 
 ## 8. Données à utiliser
 
-- `data/language-packs/ybb.csv` et `byv.csv` : 20 phrases finance.
+- `data/language-packs/ewo.csv` et `dua.csv` : 20 phrases finance chacune.
+- `data/language-packs/fub.csv` : 102 segments de la démo (37 P0 en tête).
 - `data/unseen_finance.txt` : phrases de test fulfulde.
 - `data/glossary.template.csv` : glossaire à remplir.
 - `docs/EVAL.md` : protocole de mesure (chrF++, COMET, latence).
@@ -189,5 +275,9 @@ Commentaires :
 - Utiliser des phrases de la page de démo comme jeu de test.
 - Corriger la traduction puis présenter la correction comme sortie du modèle.
 - Annoncer un score sans protocole ni nombre de phrases.
-- Remplir un pack yemba/medumba sans locuteur natif.
+- Remplir un pack ewondo/duala sans locuteur natif.
+- Utiliser la rétro-traduction comme méthode de validation (elle rate de vrais
+  problèmes et en signale de faux).
+- Présenter une langue retirée (yemba, medumba, bassa, ghomala') comme
+  disponible.
 - Traduire un contrat réel sans mention « traduction assistée ».

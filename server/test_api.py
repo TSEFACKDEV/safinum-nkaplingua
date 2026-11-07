@@ -41,11 +41,10 @@ def test_languages():
     assert response.status_code == 200
     data = response.json()
     codes = [item["code"] for item in data["targets"]]
-    assert "fub" in codes
-    assert "ybb" in codes
-    assert "byv" in codes
-    assert len(codes) == 7
+    assert codes == ["fub", "ewo", "dua"]
     assert data["target"][0]["model_code"] == "fuv_Latn"
+    assert data["target"][0]["audio"]
+    assert data["target"][1]["audio"]
 
 
 def test_detect_french_and_english():
@@ -199,6 +198,19 @@ def test_translate_rejects_unknown_target():
         },
     )
     assert response.status_code == 400
+
+
+def test_removed_languages_are_rejected():
+    for code in ("ybb", "byv", "bas", "bbj"):
+        response = client.post(
+            "/translate",
+            json={
+                "target": code,
+                "segments": [{"id": "s1", "text": "Bonjour", "context": ""}],
+            },
+        )
+        assert response.status_code == 400, code
+        assert "non supportée" in response.json()["detail"]
 
 
 def test_translate_rejects_pack_target_in_backend():

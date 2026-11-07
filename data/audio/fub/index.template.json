@@ -1,0 +1,18 @@
+{
+  "language": "fub",
+  "version": "0.1.0",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "license": "CC0-1.0 or CC-BY-4.0",
+  "entries": [
+    {
+      "id": "AUDIO-01",
+      "source_fr": "Les messages d’erreur et les alertes doivent rester clairs dans la langue de l’utilisateur.",
+      "file": "AUDIO-01.ogg",
+      "duration": null,
+      "speaker": null,
+      "reviewer": null,
+      "license": null
+    }
+  ]
+}

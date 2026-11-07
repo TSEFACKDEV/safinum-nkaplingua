@@ -39,9 +39,10 @@ versionné** :
 - les métadonnées : source, auteur, date, licence, statut de relecture ;
 - un contact pour la relecture et les mises à jour.
 
-Pour le yemba et le medumba, l’utilisateur de l’équipe est lui-même locuteur :
-il peut fournir un premier lot de 20 phrases, puis servir de relecteur
-principal. C’est le chemin le plus rapide et le plus crédible.
+Pour l'ewondo et le duala, le chemin le plus crédible est TRAPD : deux
+locuteurs natifs de variétés différentes traduisent, un troisième arbitre, puis
+un prétest avec 5 à 8 personnes peu alphabétisées. Le corpus Common Voice
+(CC0) sert de référence audio, pas de traduction.
 
 ## 3. Formats d’échange
 
@@ -64,7 +65,7 @@ Le dépôt utilise CSV pour la relecture et JSON pour l’exécution. Le script
   "source": "Le solde est de [[NUM_0]] FCFA.",
   "target": "…",
   "source_lang": "fr",
-  "target_lang": "ybb",
+  "target_lang": "ewo",
   "dialect": "Menoua",
   "orthography": "AGLC",
   "domain": "finance",
@@ -92,11 +93,20 @@ Le champ `review_status` est structurant :
 Centre / comité de langue
         │  CSV, TBX, LIFT, TMX
         ▼
-scripts/import-language-pack.py
-        │  normalisation Unicode NFC, contrôle des jetons
+data/review/<langue>.t1.csv + .t2.csv
+        │  deux traductions indépendantes
+        ▼
+scripts/merge-native-reviews.py
+        │  accord / désaccords
+        ▼
+data/review/<langue>.arbitrage.csv
+        │  arbitrage TRAPD
+        ▼
+scripts/import-native-reviews.py
+        │  licence, provenance human, jetons, termes
         ▼
 extension/language-packs/<code>.json
-        │  relecture native + tests
+        │  tests + packaging
         ▼
 ZIP de l’extension (hors ligne)
 ```
@@ -113,10 +123,12 @@ ZIP de l’extension (hors ligne)
 4. **Contrôle automatique** : jetons `[[NUM_n]]`, `[[NAME_n]]`, `[[URL_n]]`,
    `[[EMAIL_n]]` présents une seule fois ; termes `FCFA`, `PIN`, `OTP`,
    `FINAKA` conservés.
-5. **Relecture native** : deux relecteurs si possible ; désaccord tranché par
-   un troisième.
-6. **Tests** : les 20 phrases de `data/language-packs/` doivent passer.
-7. **Publication** : version, date, relecteur, licence et empreinte du fichier.
+5. **Relecture native** : deux traducteurs indépendants + un arbitre (TRAPD).
+   Le script d'import refuse une validation par une seule personne.
+6. **Tests** : `scripts/check-language-data.py`,
+   `scripts/check-language-packs.py` et les tests de l'extension.
+7. **Publication** : version, date, relecteur, licence (`CC0-1.0` ou
+   `CC-BY-4.0`), provenance `human` et empreinte du fichier.
 8. **Mise à jour** : ne jamais écraser un pack validé sans nouvelle revue.
 
 ## 6. Contrôles qualité
@@ -132,7 +144,7 @@ ZIP de l’extension (hors ligne)
 ## 7. Licence, éthique et protection des données
 
 - **Ne pas redistribuer** un dictionnaire ou un corpus sans autorisation
-  écrite. Les dictionnaires Yemba et Medumba ont des ayants droit.
+  écrite. Les dictionnaires yemba et medumba cités en référence ont des ayants droit.
 - **Attribuer** chaque lot : nom du centre, auteur, année, licence, URL.
 - **Minimiser** : le pack ne contient que des phrases finance génériques,
   jamais de données clients réelles.
@@ -145,24 +157,34 @@ ZIP de l’extension (hors ligne)
   le mode pack ne l’utilise jamais.
 - Faire relire la convention par un juriste si le projet passe en production.
 
-## 8. Plan Yemba / Medumba pour l’équipe
+## 8. Plan Fulfulde / Ewondo / Duala pour l’équipe
 
-L’utilisateur de l’équipe parle yemba et medumba. Proposition de plan en 48 h :
+Yemba, medumba, bassa et ghomala' ne sont plus dans le prototype : les
+ressources de parole et documentaires retenues sont désormais le fulfulde,
+l'ewondo et le duala (voir `docs/LANGUAGES.md` et `tasks/klein.md`, K10).
 
-1. Ouvrir `data/language-packs/ybb.csv` et `byv.csv`.
-2. Traduire les 20 phrases finance, sans toucher aux jetons.
-3. Relire à voix haute avec un second locuteur.
-4. Passer `status` à `validated`, mettre le nom du relecteur.
-5. Lancer :
+Plan en 72 h pour les trois langues :
+
+1. Générer les classeurs : `python3 scripts/make-native-kit.py`.
+2. Faire remplir `data/review/<langue>.t1.csv` et `.t2.csv` séparément.
+3. Fusionner : `python3 scripts/merge-native-reviews.py --lang <code>`.
+4. Faire remplir `data/review/<langue>.arbitrage.csv` par l'arbitre.
+5. Importer :
 
 ```bash
-python3 scripts/import-language-pack.py data/language-packs/ybb.csv
-python3 scripts/import-language-pack.py data/language-packs/byv.csv
+python3 scripts/import-native-reviews.py --lang fub --dry-run
+python3 scripts/import-native-reviews.py --lang fub
+python3 scripts/import-native-reviews.py --lang ewo --dry-run
+python3 scripts/import-native-reviews.py --lang ewo
+python3 scripts/import-native-reviews.py --lang dua --dry-run
+python3 scripts/import-native-reviews.py --lang dua
 ./scripts/package-extension.sh
 ```
 
 6. Tester les phrases dans le popup, puis dans la page de démo.
-7. Filmer la démonstration avec le pack yemba ou medumba.
+7. Vérifier `python3 scripts/check-language-data.py` et
+   `python3 scripts/check-language-packs.py`.
+7. Filmer la démonstration avec le pack ewondo ou duala.
 
 ## 9. Sources consultées
 
@@ -192,7 +214,7 @@ python3 scripts/import-language-pack.py data/language-packs/byv.csv
 
 ## 10. Ce qu’il ne faut pas faire
 
-- Promettre une traduction automatique yemba/medumba sans modèle validé.
+- Promettre une traduction automatique ewondo/duala sans modèle validé.
 - Scraper Glosbe, Kemelang ou un dictionnaire PDF et le revendre.
 - Envoyer des noms de clients réels à MyMemory.
 - Utiliser une traduction non relue pour un message de sécurité.
