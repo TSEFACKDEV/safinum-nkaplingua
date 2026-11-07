@@ -32,3 +32,4 @@ language-data:
         python3 scripts/check-language-data.py
         python3 scripts/check-native-kit.py
         python3 scripts/check-language-packs.py
+          python3 scripts/check-training-data.py

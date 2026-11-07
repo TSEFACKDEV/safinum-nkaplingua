@@ -1081,6 +1081,76 @@ mot `json`) avec les champs ci-dessous. Exemple de structure, en indentation :
 }
 ```
 
+## 2026-11-07T19:40:00+01:00 — Klein — K2 — blocked
+
+```json
+{
+  "timestamp": "2026-11-07T19:40:00+01:00",
+  "person": "Klein",
+  "branch": "klein",
+  "task": "K2",
+  "status": "blocked",
+  "summary": "Audit des huit fichiers d'entraînement : aucun n'est utilisable en l'état. La Bible ewondo est © Bible Society of Cameroon malgré le tag CC-BY de HF ; les Parquet audio n'ont pas de licence ; les CSV Favourez sont sans licence et issus d'un scraping de Bible.com.",
+  "files": [
+    "docs/TRAINING_DATA_AUDIT.md",
+    "data/training/README.md",
+    "data/training/sources.csv",
+    "scripts/check-training-data.py",
+    "docs/DATA_LICENSES.md"
+  ],
+  "tests": [
+    {
+      "command": "python3 scripts/check-training-data.py",
+      "result": "pass",
+      "note": "8 sources : 7 bloquées, 1 sous autorisation, 0 utilisable"
+    },
+    {
+      "command": "sha256sum des 8 fichiers",
+      "result": "pass",
+      "note": "empreintes consignées dans sources.csv"
+    }
+  ],
+  "evidence": "docs/TRAINING_DATA_AUDIT.md ; Bible.com v1854 : © Bible Society of Cameroon, 2012",
+  "next": "Demander une autorisation écrite à la Bible Society, OlameMend et Favourez",
+  "blockers": [
+    "aucune donnée parallèle français-ewondo libre",
+    "Bible ewondo sous copyright",
+    "audio sans licence",
+    "CSV sans licence"
+  ]
+}
+```
+
+## 2026-11-07T19:41:00+01:00 — Klein — K9 — in_progress
+
+```json
+{
+  "timestamp": "2026-11-07T19:41:00+01:00",
+  "person": "Klein",
+  "branch": "klein",
+  "task": "K9",
+  "status": "in_progress",
+  "summary": "Ajout des modèles de demande d'autorisation pour la Bible Society of Cameroon, OlameMend, Favourez et le corpus NOODL ; checklist de preuve et mise à jour du manifeste.",
+  "files": [
+    "docs/DATA_PERMISSIONS.md",
+    "data/training/README.md",
+    "docs/DATA_LICENSES.md"
+  ],
+  "tests": [
+    {
+      "command": "python3 scripts/check-training-data.py",
+      "result": "pass",
+      "note": "manifeste cohérent"
+    }
+  ],
+  "evidence": "docs/DATA_PERMISSIONS.md : quatre modèles + checklist",
+  "next": "Envoyer les demandes et archiver les réponses hors dépôt",
+  "blockers": [
+    "réponses des détenteurs non obtenues"
+  ]
+}
+```
+
 ## 2026-11-07T19:55:00+01:00 — Freedy — F1 — done
 
 ```json
