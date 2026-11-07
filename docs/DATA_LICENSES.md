@@ -95,6 +95,10 @@ sous CC0 ou CC BY, avec consentement écrit. MMS-TTS-ful (CC BY-NC) et NLLB
 | **Resulam** | Livres, phrasebooks et applications payants ; aucune licence ouverte | **Lien de référence** ; achat éventuel, aucune copie |
 | **Webonary (SIL Cameroon)** | Copyright propre à chaque dictionnaire ; `robots.txt` : `use=reference`, `ai-train=no` | **Référence seulement** ; accord écrit du propriétaire pour tout extrait |
 | **SIL Cameroon — archives** | Disponibilité et licence variables ; beaucoup « Contact the Archives » | Demander l’accès et la licence de chaque ressource |
+| **HF `ELRs/Ewondo_Bible` / `bible_2024.txt`** | Tag CC-BY-4.0, mais texte identique à Bible.com **NTE12 / ID 1854**, marqué **© Bible Society of Cameroon, 2012** | **Autorisation écrite requise** ; le tag du déposant ne transfère pas les droits |
+| **HF `OlameMend/Ewondo-TTS` / Parquet audio** | Aucune licence déclarée ; 7 967 exemples audio + transcription biblique | **Bloqué** ; ne pas entraîner ni redistribuer |
+| **HF `Favourez/ewondo_english` et `french_ewondo_dictionary`** | Aucune licence ; notebook de scraping Bible.com | **Bloqué** ; ne pas importer |
+| **Mozilla `Ewondo-French Parallel Corpus`** | **NOODL-1.0**, 3 631 unités | **Pas d’entraînement sans autorisation écrite** |
 | **Kemelang, Scribd, dictionnaire Helmlinger** | Pas de licence ouverte claire | **Référence seulement**, aucun scraping ni redistribution |
 | **CENALA** | Centre national de linguistique appliquée du **Bénin** | Ne pas le citer comme source camerounaise |
 | **Corpus Adamawa–français** | NOODL-1.0 | Évaluation interne ; pas d’entraînement sans autorisation |
@@ -104,6 +108,11 @@ L’audit détaillé (CGU, `robots.txt`, extraits, modèle de demande d’autori
 est dans [`REFERENCE_SOURCES.md`](REFERENCE_SOURCES.md). Le navigateur de
 références du glossaire est dans
 [`../data/reference/glossary-links.csv`](../data/reference/glossary-links.csv).
+
+L’audit des huit fichiers d’entraînement fournis (Parquet, Bible, CSV) est dans
+[`TRAINING_DATA_AUDIT.md`](TRAINING_DATA_AUDIT.md) : aucun n’est utilisable en
+l’état. Les modèles de demande d’autorisation sont dans
+[`DATA_PERMISSIONS.md`](DATA_PERMISSIONS.md).
 
 **Conséquence pour la compétition** : le pack niveau A ne peut contenir que des
 phrases écrites par des natifs et validées par le panel. Aucune donnée de

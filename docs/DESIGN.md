@@ -117,3 +117,103 @@ Base 4 px :
 - icônes de tailles et graisses incohérentes ;
 - animations qui retardent la lecture ;
 - multiplier les CTA primaires dans un même écran.
+## Surface popup — console de traduction
+
+Le popup est un **outil**, pas la page éditoriale FINAKA. Il abandonne le crème,
+le serif et l'or pour un panneau neutre, dense et précis : fond blanc, gris
+froid, monochrome, bouton primaire noir. L'icône forêt/or porte la
+marque ; l'interface reste une console.
+
+### Format
+
+- Largeur de référence : **380 px**.
+- Hauteur utile : **~426 px** ; 600 px maximum.
+- Le parcours principal (langue, traduire, restaurer) tient sans scroll.
+- Le test de texte et la confidentialité sont des accordéons.
+
+### Tokens du popup
+
+| Rôle | Valeur |
+|---|---|
+| Encre | `#111111` |
+| Encre secondaire | `#333333` |
+| Texte discret | `#666666` |
+| Ligne | `#E5E5E2` |
+| Ligne forte | `#DCDCD7` |
+| Surface | `#FFFFFF` |
+| Surface douce | `#FAFAF8` |
+| Fond page large | `#F2F2EF` |
+| Focus | `#111111` |
+| Sélection | `#ECECE8` |
+| Erreur | `#B42318` |
+
+L'or et le forêt restent dans l'icône ; le popup n'utilise ni or, ni crème, ni
+dégradé.
+
+### Typographie
+
+| Rôle | Style |
+|---|---|
+| Mot-symbole | Noto Sans 700, 15 px |
+| Titre | Noto Sans 700, 18 px |
+| Corps | Noto Sans 400, 12 px |
+| Libellé de rail | Noto Sans 800, 11 px, majuscules, tracking 0.08em |
+| Route / tag | mono système, 9–11 px |
+| Bouton primaire | Noto Sans 600, 13 px |
+| Statut / pied | Noto Sans 400, 11–12 px |
+
+Pas de Fraunces dans le popup : le serif reste réservé à la page FINAKA.
+
+### Composants
+
+- **Topbar** : 48 px, blanc, bord bas 1 px, icône 26 px, wordmark sans.
+- **Rail de langues** : un seul bloc bordé, cellule Source grise à gauche,
+  cellule Cible à droite, bouton sans bord et listbox custom, chevron dessiné.
+- **Ligne moteur** : `MT:` ou `PACK:`, mono, sans bord ni fond, alignée avec l'état de la langue.
+- **Listbox** : panneau arrondi 10 px, options de 30 px à 6 px de rayon, tag `MT`/`PACK`, coche à droite.
+- **Bouton primaire** : 44 px, noir, texte blanc, flèche.
+- **Actions secondaires** : deux boutons 34 px bordés, grille 1fr 1fr.
+- **Statut** : ligne de texte simple, rouge en erreur, `aria-live` ; aucun point décoratif.
+- **Test** : accordéon `details/summary`, chevron qui pivote, textarea et
+  bouton 34 px.
+- **Pied** : 1 px de bord haut, « Local · pseudonymisé » et
+  « Confidentialité » en `details`.
+
+### États
+
+- Prêt, traduction lancée, original restauré, sélection traduite.
+- Erreur d'injection, texte vide, traduction refusée, pack absent.
+- Ligne `MT:` vs `PACK:`.
+- Cloud autorisé / local uniquement.
+
+### Rayons
+
+| Élément | Rayon |
+|---|---|
+| Rail de langues, liste | 10 px |
+| Bouton primaire | 8 px |
+| Actions, champs, résultat, confidentialité | 6 px |
+| Cadre large | 12 px |
+| Icône | 7 px |
+| Checkbox | 3 px |
+
+### Mouvement
+
+- Chevron de l'accordéon : 160 ms.
+- Aucune animation d'entrée, aucun mouvement décoratif.
+- `prefers-reduced-motion` réduit les durées à 1 ms.
+
+### Accessibilité
+
+- Contraste : encre/blanc 18,9:1 ; discret/blanc 5,7:1 ;
+  discret/surface douce 5,3:1 ; erreur/blanc 6,3:1.
+- Focus visible noir 2 px ; le rail entier réagit au focus du bouton.
+- Cibles : primaire 44 px, actions 34 px, test 34 px, options 30 px.
+- `aria-live` sur le statut, le résultat et les métadonnées.
+- Ordre de tabulation : langue → traduire → restaurer → sélection → test →
+  confidentialité → case cloud.
+
+### Page large
+
+Au-delà de 560 px, le panneau de 380 px se centre sur un fond `#F2F2EF`, avec
+un bord 1 px et un rayon de 12 px. Le popup Chrome reste à 380 px.

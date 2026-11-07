@@ -66,6 +66,9 @@ python3 scripts/make-native-kit.py
 # Générer le navigateur de références du glossaire (liens seulement)
 python3 scripts/build-reference-links.py
 
+# Vérifier le manifeste des données d'entraînement (aucun fichier versionné)
+python3 scripts/check-training-data.py
+
 # Après remplissage : fusionner T1/T2, puis arbitrer
 python3 scripts/merge-native-reviews.py --lang fub
 # l'arbitre remplit data/review/fulfulde.arbitrage.csv

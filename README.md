@@ -28,10 +28,16 @@ Projet préparé pour le **SAFINUM Innovate Challenge 2026** (Yaoundé,
 </p>
 
 <p align="center">
-  <img src="docs/assets/popup.png" alt="Popup de l’extension NkapLingua" width="300" />
+  <img src="docs/assets/popup-redesign.png" alt="Popup de l’extension NkapLingua" width="300" />
+  <img src="docs/assets/popup-redesign-list.png" alt="Liste des langues du popup NkapLingua" width="300" />
 </p>
 
 Design system : [`docs/DESIGN.md`](docs/DESIGN.md).
+
+Autres états du popup : [test de texte](docs/assets/popup-redesign-test.png),
+[confidentialité](docs/assets/popup-redesign-privacy.png),
+[erreur](docs/assets/popup-redesign-error.png),
+[page large](docs/assets/popup-redesign-wide.png).
 
 ## Livrables
 
@@ -462,6 +468,8 @@ exigence par exigence dans [`docs/COMPLIANCE.md`](docs/COMPLIANCE.md).
 | [`data/review/README.md`](data/review/README.md) | kit natif T1/T2, arbitrage et consentement |
 | [`data/reference/README.md`](data/reference/README.md) | navigateur Glosbe / Webonary / Resulam, sans copie |
 | [`docs/REFERENCE_SOURCES.md`](docs/REFERENCE_SOURCES.md) | audit licences et conditions des sources externes |
+| [`docs/TRAINING_DATA_AUDIT.md`](docs/TRAINING_DATA_AUDIT.md) | audit des fichiers d’entraînement (Parquet, Bible, CSV) |
+| [`docs/DATA_PERMISSIONS.md`](docs/DATA_PERMISSIONS.md) | modèles de demande d’autorisation |
 | [`docs/VIDEO_SCRIPT.md`](docs/VIDEO_SCRIPT.md) | script de la vidéo de 3 minutes |
 | [`docs/SUBMISSION_CHECKLIST.md`](docs/SUBMISSION_CHECKLIST.md) | checklist avant soumission |
 

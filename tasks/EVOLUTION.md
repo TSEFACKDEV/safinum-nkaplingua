@@ -1080,3 +1080,170 @@ mot `json`) avec les champs ci-dessous. Exemple de structure, en indentation :
   ]
 }
 ```
+
+## 2026-11-07T19:40:00+01:00 — Klein — K2 — blocked
+
+```json
+{
+  "timestamp": "2026-11-07T19:40:00+01:00",
+  "person": "Klein",
+  "branch": "klein",
+  "task": "K2",
+  "status": "blocked",
+  "summary": "Audit des huit fichiers d'entraînement : aucun n'est utilisable en l'état. La Bible ewondo est © Bible Society of Cameroon malgré le tag CC-BY de HF ; les Parquet audio n'ont pas de licence ; les CSV Favourez sont sans licence et issus d'un scraping de Bible.com.",
+  "files": [
+    "docs/TRAINING_DATA_AUDIT.md",
+    "data/training/README.md",
+    "data/training/sources.csv",
+    "scripts/check-training-data.py",
+    "docs/DATA_LICENSES.md"
+  ],
+  "tests": [
+    {
+      "command": "python3 scripts/check-training-data.py",
+      "result": "pass",
+      "note": "8 sources : 7 bloquées, 1 sous autorisation, 0 utilisable"
+    },
+    {
+      "command": "sha256sum des 8 fichiers",
+      "result": "pass",
+      "note": "empreintes consignées dans sources.csv"
+    }
+  ],
+  "evidence": "docs/TRAINING_DATA_AUDIT.md ; Bible.com v1854 : © Bible Society of Cameroon, 2012",
+  "next": "Demander une autorisation écrite à la Bible Society, OlameMend et Favourez",
+  "blockers": [
+    "aucune donnée parallèle français-ewondo libre",
+    "Bible ewondo sous copyright",
+    "audio sans licence",
+    "CSV sans licence"
+  ]
+}
+```
+
+## 2026-11-07T19:41:00+01:00 — Klein — K9 — in_progress
+
+```json
+{
+  "timestamp": "2026-11-07T19:41:00+01:00",
+  "person": "Klein",
+  "branch": "klein",
+  "task": "K9",
+  "status": "in_progress",
+  "summary": "Ajout des modèles de demande d'autorisation pour la Bible Society of Cameroon, OlameMend, Favourez et le corpus NOODL ; checklist de preuve et mise à jour du manifeste.",
+  "files": [
+    "docs/DATA_PERMISSIONS.md",
+    "data/training/README.md",
+    "docs/DATA_LICENSES.md"
+  ],
+  "tests": [
+    {
+      "command": "python3 scripts/check-training-data.py",
+      "result": "pass",
+      "note": "manifeste cohérent"
+    }
+  ],
+  "evidence": "docs/DATA_PERMISSIONS.md : quatre modèles + checklist",
+  "next": "Envoyer les demandes et archiver les réponses hors dépôt",
+  "blockers": [
+    "réponses des détenteurs non obtenues"
+  ]
+}
+```
+
+## 2026-11-07T19:55:00+01:00 — Freedy — F1 — done
+
+```json
+{
+  "timestamp": "2026-11-07T19:55:00+01:00",
+  "person": "Freedy",
+  "branch": "freedy",
+  "task": "F1",
+  "status": "done",
+  "summary": "Popup redessiné en console compacte 380x428 : listbox des trois langues, arrondis cohérents, captures README et états test/confidentialité/erreur mis à jour.",
+  "files": [
+    "extension/popup.html",
+    "extension/popup.css",
+    "extension/popup.js",
+    "scripts/preview-popup.mjs",
+    "README.md",
+    "PRODUCT.md",
+    "docs/DESIGN.md",
+    "WORKSPACE.md",
+    ".impeccable/surfaces/popup.md",
+    "docs/assets/popup-redesign.png",
+    "docs/assets/popup-redesign-list.png",
+    "docs/assets/popup-redesign-test.png",
+    "docs/assets/popup-redesign-privacy.png",
+    "docs/assets/popup-redesign-error.png",
+    "docs/assets/popup-redesign-wide.png",
+    "docs/assets/popup-redesign-real.png",
+    "docs/assets/popup-redesign-real-list.png"
+  ],
+  "tests": [
+    {
+      "command": "node scripts/preview-popup.mjs",
+      "result": "pass",
+      "note": "états fermé, liste, test, confidentialité, erreur, large"
+    },
+    {
+      "command": "impeccable detect extension/popup.html extension/popup.css extension/popup.js",
+      "result": "pass",
+      "note": "0 anti-pattern"
+    },
+    {
+      "command": "chargement réel de l'extension Chrome",
+      "result": "pass",
+      "note": "3 langues, 380x428 fermé, 528 ouvert, 0 erreur page"
+    },
+    {
+      "command": "node scripts/test-extension.js",
+      "result": "pass",
+      "note": "registre, détection, packs, jetons, qualité"
+    }
+  ],
+  "evidence": "docs/assets/popup-redesign.png ; docs/assets/popup-redesign-list.png ; README.md § Aperçu",
+  "next": "Merger design/popup dans develop et pousser",
+  "blockers": []
+}
+```
+
+## 2026-11-07T20:00:00+01:00 — Freedy — F1 — done
+
+```json
+{
+  "timestamp": "2026-11-07T20:00:00+01:00",
+  "person": "Freedy",
+  "branch": "freedy",
+  "task": "F1",
+  "status": "done",
+  "summary": "Correction du libellé visible : Duala (code dua), remplace Douala dans le registre, le pack et le serveur.",
+  "files": [
+    "extension/languages.js",
+    "extension/language-packs/dua.json",
+    "server/app.py",
+    "docs/assets/popup-redesign-list.png",
+    "docs/assets/popup-redesign-real-list.png"
+  ],
+  "tests": [
+    {
+      "command": "node scripts/test-extension.js",
+      "result": "pass",
+      "note": "registre, détection, packs, jetons, qualité"
+    },
+    {
+      "command": "python3 scripts/check-language-packs.py",
+      "result": "pass",
+      "note": "3 fichiers, 3 feuilles"
+    },
+    {
+      "command": "chargement réel de l'extension Chrome",
+      "result": "pass",
+      "note": "options Fulfulde, Ewondo, Duala ; 0 erreur"
+    }
+  ],
+  "evidence": "docs/assets/popup-redesign-list.png : ligne Duala",
+  "next": "Pousser la correction sur develop",
+  "blockers": []
+}
+```
