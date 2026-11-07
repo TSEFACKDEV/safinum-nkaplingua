@@ -8,7 +8,7 @@ financiers numériques camerounais.
 **Langues cibles** : fulfulde (Adamawa) en traduction automatique, puis
 yemba, medumba, ewondo, douala, bassa et ghomala’ en packs communautaires.
 
-**Version** : prototype 0.5-dev — novembre 2026.
+**Version** : prototype 0.5 — novembre 2026.
 
 ---
 
