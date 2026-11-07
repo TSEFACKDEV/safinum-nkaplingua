@@ -4,10 +4,10 @@
 à entraîner un modèle de traduction pour NkapLingua, dans le respect des
 licences du concours (MIT, CC0-1.0, CC-BY-4.0, OFL).
 
-**Conclusion** : **aucun des huit fichiers n’est utilisable en l’état**. Un
-seul pourrait le devenir avec une autorisation écrite (la Bible ewondo) ; les
-autres sont sans licence, issus d’un scraping, ou protégés par le droit
-d’auteur.
+**Conclusion** : **aucun des huit fichiers de `~/Downloads` n’est utilisable
+en l’état**. Le zip `Langue.zip` contient toutefois **une source utilisable** :
+les paires **anglais → duala** (CC-BY-4.0). Les textes ewondo et fulfulde du
+zip restent sous autorisation.
 
 ## 1. Tableau récapitulatif
 
@@ -89,6 +89,27 @@ Le règlement du projet interdit explicitement d’utiliser un corpus NOODL pour
 l’entraînement, l’adaptation ou la création d’œuvres dérivées **sans
 autorisation écrite**. Il ne peut donc pas être utilisé en l’état.
 
+## 5bis. Le zip `Langue.zip` — une source utilisable
+
+Le zip contient trois corpus et un outil :
+
+| Élément | Source | Licence | Verdict |
+|---|---|---|---|
+| `Duala/texte/Duala_anglais.csv` | `michsethowusu/english-duala_sentence-pairs_mt560` (HF) | **CC-BY-4.0** ; original OPUS MT560 (Apache-2.0) | **Utilisable** pour un modèle anglais → duala |
+| `Ewondo/texte/Ewondo_textes.xlsx` + `source/Ewondo/*.txt` | `flagship-ai/cameroon_bibles` (HF) | fiche CC-BY-4.0, mais la fiche reconnaît que les droits appartiennent aux éditeurs | **Autorisation requise** |
+| `Fulfulde/texte/Fulfulde_Adamawa_francais.csv` | `AfriSpeech/africa-corpus` (HF) | **other** ; versets via YouVersion | **Autorisation requise** |
+| `Fulfulde/texte/africa-corpus-builder/` | GitHub AfriSpeech | **MIT** (code) | Utilisable comme outil, pas comme corpus |
+
+Le corpus **Duala** contient 15 351 paires `eng,dua`, alignées sur des
+versets/paragraphes religieux. Il ne contient **pas de français** : le modèle
+produit sera anglais → duala, puis utilisable derrière un pivot
+français → anglais. Le niveau A reste réservé aux packs validés.
+
+Les corpus **Ewondo** et **Fulfulde** sont bibliques et leurs droits ne sont
+pas clarifiés. Le fait que la fiche HF affiche CC-BY-4.0 ne suffit pas : la
+fiche `flagship-ai/cameroon_bibles` dit elle-même que les droits appartiennent
+aux éditeurs.
+
 ## 6. Ce qui reste réellement libre
 
 | Source | Licence | Ce qu’elle permet |
@@ -97,6 +118,7 @@ autorisation écrite**. Il ne peut donc pas être utilisé en l’état.
 | NLLB-200 | CC BY-NC 4.0 | démonstration fulfulde non commerciale |
 | Code NkapLingua | MIT | réutilisation |
 | Contributions natives | CC0-1.0 ou CC-BY-4.0 | packs validés |
+| `michsethowusu/english-duala_sentence-pairs_mt560` | CC-BY-4.0 | entraînement anglais → duala |
 | Bible Louis Segond 1910 | domaine public | texte français, pas de contrepartie ewondo libre |
 
 Aucune de ces sources ne fournit un corpus parallèle français → ewondo libre.
@@ -105,10 +127,12 @@ niveau A.
 
 ## 7. Décision
 
-- **Ne pas entraîner** sur les fichiers fournis.
+- **Ne pas entraîner** sur les fichiers Ewondo/Fulfulde non autorisés.
 - **Ne pas committer** les fichiers dans le dépôt.
-- Demander une autorisation écrite aux détenteurs (voir
-  [`DATA_PERMISSIONS.md`](DATA_PERMISSIONS.md)).
+- **Entraîner uniquement** le modèle anglais → duala sur les paires
+  CC-BY-4.0, avec attribution et mention « expérimental ».
+- Demander une autorisation écrite aux détenteurs pour l’ewondo et le
+  fulfulde (voir [`DATA_PERMISSIONS.md`](DATA_PERMISSIONS.md)).
 - Si une autorisation est obtenue, formater le corpus en JSONL
   `{"source": "...", "target": "..."}` et documenter la licence dans
   `data/training/sources.csv` avant tout entraînement.
@@ -125,3 +149,11 @@ niveau A.
   <https://mozilladatacollective.com/datasets/cmpedjr9y00wqnv07styloz0d>
 - Licence NOODL : <https://licensingafricandatasets.com/nwulite-obodo-license>
 - Louis Segond 1910, domaine public : <https://ebible.org/fraLSG/copyright.htm>
+- Duala-English, CC-BY-4.0 :
+  <https://huggingface.co/datasets/michsethowusu/english-duala_sentence-pairs_mt560>
+- Origine OPUS MT560 (Apache-2.0) :
+  <https://opus.nlpl.eu/MT560>
+- Ewondo bibles, fiche qui reconnaît les droits des éditeurs :
+  <https://huggingface.co/datasets/flagship-ai/cameroon_bibles>
+- Africa Corpus (licence other) :
+  <https://huggingface.co/datasets/AfriSpeech/africa-corpus>

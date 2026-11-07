@@ -99,6 +99,9 @@ sous CC0 ou CC BY, avec consentement écrit. MMS-TTS-ful (CC BY-NC) et NLLB
 | **HF `OlameMend/Ewondo-TTS` / Parquet audio** | Aucune licence déclarée ; 7 967 exemples audio + transcription biblique | **Bloqué** ; ne pas entraîner ni redistribuer |
 | **HF `Favourez/ewondo_english` et `french_ewondo_dictionary`** | Aucune licence ; notebook de scraping Bible.com | **Bloqué** ; ne pas importer |
 | **Mozilla `Ewondo-French Parallel Corpus`** | **NOODL-1.0**, 3 631 unités | **Pas d’entraînement sans autorisation écrite** |
+| **HF `michsethowusu/english-duala_sentence-pairs_mt560`** | **CC-BY-4.0**, 15 351 paires anglais–duala ; original OPUS MT560 (Apache-2.0) | **Entraînement anglais → duala autorisé** avec attribution |
+| **`flagship-ai/cameroon_bibles`** | Fiche CC-BY-4.0 mais la carte reconnaît les droits des éditeurs | **Autorisation requise** |
+| **`AfriSpeech/africa-corpus`** | Licence **other** ; versets via YouVersion | **Autorisation requise** |
 | **Kemelang, Scribd, dictionnaire Helmlinger** | Pas de licence ouverte claire | **Référence seulement**, aucun scraping ni redistribution |
 | **CENALA** | Centre national de linguistique appliquée du **Bénin** | Ne pas le citer comme source camerounaise |
 | **Corpus Adamawa–français** | NOODL-1.0 | Évaluation interne ; pas d’entraînement sans autorisation |
