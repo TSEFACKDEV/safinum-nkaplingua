@@ -45,17 +45,25 @@ fine-tuner M2M100 (MIT) sur le corpus adamawa.
 
 | Langue | Code | Source | Licence | Statut |
 |---|---|---|---|---|
+| Fulfulde | `fub` | natifs, phrases de la page et messages du site | CC0-1.0 ou CC-BY-4.0 (consentement écrit) | 0/102 |
 | Ewondo | `ewo` | natifs, corpus Common Voice 27.0 (CC0) comme référence | CC0-1.0 ou CC-BY-4.0 (consentement écrit) | 0/20 |
 | Duala | `dua` | natifs, corpus Common Voice (CC0) comme référence | CC0-1.0 ou CC-BY-4.0 (consentement écrit) | 0/20 |
 
 Yemba, medumba, bassa et ghomala' sont retirés du prototype (voir
 `tasks/klein.md`, K10) ; leurs feuilles de traduction ne sont plus maintenues.
 
-Les packs ne contiennent aucune donnée personnelle. Chaque entrée doit
-indiquer son relecteur, sa date et sa licence, et le JSON du pack doit porter
-un champ `license`. Les dictionnaires et corpus externes (NTeALan, Kemelang,
-Glosbe, PDF LLACAN) servent de **référence** et ne sont pas recopiés sans
-autorisation.
+Les packs ne contiennent aucune donnée personnelle. Chaque entrée validée doit
+indiquer :
+
+- `reviewer` : nom public du relecteur ou de l'arbitre ;
+- `reviewedAt` : date ISO ;
+- `license` : `CC0-1.0` ou `CC-BY-4.0` ;
+- `provenance` : `human` — aucune machine translation dans un pack validé.
+
+Le kit natif [`../data/review/`](../data/review/) trace les deux traductions
+T1/T2, l'arbitrage et les consentements. Les dictionnaires et corpus externes
+(NTeALan, Kemelang, Glosbe, PDF LLACAN) servent de **référence** et ne sont pas
+recopiés sans autorisation.
 
 ### Corpus de parole
 
@@ -70,6 +78,28 @@ autorisation.
 **Règle libre de droit** : les enregistrements utilisés dans le produit sont
 sous CC0 ou CC BY, avec consentement écrit. MMS-TTS-ful (CC BY-NC) et NLLB
 (CC BY-NC) restent réservés à la démonstration non commerciale.
+
+### Verdicts de licence — recherche du 7 novembre 2026
+
+| Source | Verdict | Usage autorisé dans NkapLingua |
+|---|---|---|
+| **OLC / ERDELAP**, Université de Dschang (manuels, Livre harmonisé) | Œuvres protégées, pas de licence ouverte explicite | **Référence seulement** ; accord écrit pour tout extrait ou lexique |
+| **ANACLAC**, comités de langues, ACAMLADU, Comité Beti | Savoir communautaire, pas de licence automatique | Relecture/validation avec consentement écrit ; attribution |
+| **SIL Cameroun / Dulu / LIFT** | Dulu à accès restreint ; LIFT est un format ouvert, pas une licence de contenu | Demander l’accès et la licence de chaque dictionnaire |
+| **NTeALan** | API et dictionnaires collaboratifs ; conditions d’utilisation à vérifier | Export après accord ; ne pas recopier sans licence |
+| **Common Voice 27.0 — Ewondo** | **CC0-1.0**, release 17/09/2026 | Audio, ASR, évaluation ; attribution recommandée |
+| **Common Voice 27.0 — Duala** | **CC0-1.0** ; 14,44 h enregistrées, 12,52 h validées, 13 voix | Audio, ASR, évaluation |
+| **Common Voice — Fulfulde Adamawa** | CC0-1.0 | Audio, ASR, évaluation |
+| **Ewondo-ASR** (ENS Yaoundé / Mozilla Data Collective) | Accès restreint | Ne pas redistribuer ; demander l’autorisation |
+| **Kemelang, Glosbe, Scribd, dictionnaire Helmlinger** | Pas de licence ouverte claire | **Référence seulement**, aucun scraping ni redistribution |
+| **CENALA** | Centre national de linguistique appliquée du **Bénin** | Ne pas le citer comme source camerounaise |
+| **Corpus Adamawa–français** | NOODL-1.0 | Évaluation interne ; pas d’entraînement sans autorisation |
+| **Audio contributeur** | CC0-1.0 ou CC-BY-4.0 avec consentement écrit | 15 phrases sans montant, deux relecteurs |
+
+**Conséquence pour la compétition** : le pack niveau A ne peut contenir que des
+phrases écrites par des natifs et validées par le panel. Aucune donnée de
+Bibala, Nerala, Mayege, Kontritok, Diloh ou Ovuma n’est copiée : ces applications
+sont des références de marché, pas des sources de corpus libres.
 
 ### Corpus de référence / évaluation
 

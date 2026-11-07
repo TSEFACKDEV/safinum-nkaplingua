@@ -17,9 +17,12 @@ Klein les retire aussi du registre, des packs, des tests et de la documentation
 
 | Code | Langue | Région | Moteur | Ressources connues | État |
 |---|---|---|---|---|---|
-| `fub` | Fulfulde (Adamawa) | Adamaoua, Nord, Extrême-Nord | NLLB local | Common Voice ASR ; 1 303 enregistrements TTS à une voix | MT baseline, validation native en cours |
+| `fub` | Fulfulde (Adamawa) | Adamaoua, Nord, Extrême-Nord | NLLB local | Common Voice ASR ; 1 303 enregistrements TTS à une voix | MT baseline, 0/102 phrases validées |
 | `ewo` | Ewondo | Centre | Pack communautaire | Common Voice 27.0 : 14,36 h validées, 31 voix ; Ewondo-ASR ~3 h 11, 16 voix ; grammaires et dictionnaires | 0/20 phrases validées |
 | `dua` | Duala | Littoral | Pack communautaire | Common Voice 27.0 (heures à vérifier) ; dictionnaires et descriptions anciennes | 0/20 phrases validées |
+
+Les classeurs T1/T2 et la fiche d'arbitrage sont prêts dans
+[`../data/review/`](../data/review/).
 
 ### Pourquoi ces trois langues
 

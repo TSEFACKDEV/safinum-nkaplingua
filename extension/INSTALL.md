@@ -19,12 +19,12 @@
 
 ## Langues
 
-- **Fulfulde (Adamawa)** : traduction automatique locale ou cloud.
-- **Yemba, medumba, ewondo, douala, bassa, ghomala’** : packs de phrases
-  validées. Une phrase absente du pack reste en français ; c’est volontaire.
+- **Fulfulde (Adamawa)** : traduction automatique locale.
+- **Ewondo et duala** : packs de phrases validées. Une phrase absente du pack
+  reste en français ; c’est volontaire.
 
-Le popup affiche le statut de chaque langue. Les packs vides au départ
-(`0/20`) doivent être remplis par des locuteurs natifs :
+Le popup affiche le statut de chaque langue. Les packs ewondo et duala, vides
+au départ (`0/20`), doivent être remplis par des locuteurs natifs :
 `data/language-packs/<code>.csv`, puis
 `python3 scripts/import-language-pack.py ...`.
 

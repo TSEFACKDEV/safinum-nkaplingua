@@ -9,7 +9,7 @@ financiers numériques camerounais.
 duala en packs communautaires. Yemba, medumba, bassa et ghomala’ sont retirés
 du prototype (voir `tasks/klein.md`, K10).
 
-**Version** : prototype 0.5 — novembre 2026.
+**Version** : prototype 0.6 — novembre 2026.
 
 ---
 
@@ -232,7 +232,8 @@ Puis ouvrir `http://127.0.0.1:8000/demo`.
 - Les phrases longues peuvent être mal traduites ou répétitives.
 - Les noms sont tokenisés de façon conservatrice ; un nom sans mot déclencheur
   peut rester en clair.
-- Les packs ewondo et duala sont vides tant qu’un natif ne les a pas remplis.
+- Les packs fulfulde, ewondo et duala sont vides tant que le panel TRAPD
+  (deux traducteurs + un arbitre par langue) ne les a pas remplis.
 - Pas de support des iframes cross-origin, shadow DOM fermés, images/canvas.
 - Pas de traduction audio (TTS fulfulde) dans le MVP.
 - Le backend local est optionnel ; le cloud MyMemory reste expérimental et
@@ -246,8 +247,8 @@ Puis ouvrir `http://127.0.0.1:8000/demo`.
 
 ## 10. Feuille de route technique
 
-1. Valider 20 phrases avec un locuteur natif.
-2. Remplir les packs ewondo et duala avec des locuteurs natifs.
+1. Valider 102 phrases fulfulde, 20 ewondo et 20 duala avec le panel TRAPD.
+2. Importer les traductions validées et vérifier les packs JSON.
 3. Tester sur l’interface fournie par le jury.
 4. Ajouter un mode bilingue côte à côte pour les conditions contractuelles.
 5. Ajouter une synthèse vocale dans les langues disposant d’une voix validée.

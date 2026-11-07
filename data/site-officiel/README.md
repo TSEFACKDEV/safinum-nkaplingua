@@ -16,10 +16,21 @@ que le jury verra pendant la démonstration.
 | `source_site` | provenance |
 | `statut` | `a_traduire`, `en_cours`, `traduit`, `valide` |
 
-Ces colonnes seront complétées par Klein (K11) :
+Colonnes ajoutées par Klein (K11) :
 
-- `target_fub`, `target_ewo`, `target_dua` ;
-- `reviewer`, `reviewed_at`, `license`.
+- `target_fub`, `target_ewo`, `target_dua` (vides tant que les natifs n’ont
+  pas traduit) ;
+- `statut_fub`, `statut_ewo`, `statut_dua` : statut par langue
+  (`a_traduire`, `en_cours`, `partiel`, `valide`, `rejete`) ;
+- `reviewer_fub`, `reviewer_ewo`, `reviewer_dua` ;
+- `reviewed_at_fub`, `reviewed_at_ewo`, `reviewed_at_dua` ;
+- `license_fub`, `license_ewo`, `license_dua` ;
+- `provenance_fub`, `provenance_ewo`, `provenance_dua` : `human` obligatoire
+  pour une ligne `valide`.
+
+Le fichier reste en `statut=a_traduire` : aucune phrase ne doit passer
+`valide` sans relecture native. Le statut global passe à `partiel` dès qu’une
+langue est validée, puis à `valide` quand les trois le sont.
 
 ## Règles
 
@@ -36,11 +47,14 @@ Ces colonnes seront complétées par Klein (K11) :
 ## Contrôle
 
 ```bash
+python3 scripts/check-language-data.py
 python3 - <<'PY'
 import csv
 rows=list(csv.DictReader(open('data/site-officiel/messages.fr-en.csv',encoding='utf-8')))
 print(len(rows), 'messages')
 print('A:', sum(1 for r in rows if r['niveau']=='A'))
 print('B:', sum(1 for r in rows if r['niveau']=='B'))
+for lang in ('fub','ewo','dua'):
+    print(lang, sum(1 for r in rows if r[f'statut_{lang}']=='valide'))
 PY
 ```

@@ -93,11 +93,20 @@ Le champ `review_status` est structurant :
 Centre / comité de langue
         │  CSV, TBX, LIFT, TMX
         ▼
-scripts/import-language-pack.py
-        │  normalisation Unicode NFC, contrôle des jetons
+data/review/<langue>.t1.csv + .t2.csv
+        │  deux traductions indépendantes
+        ▼
+scripts/merge-native-reviews.py
+        │  accord / désaccords
+        ▼
+data/review/<langue>.arbitrage.csv
+        │  arbitrage TRAPD
+        ▼
+scripts/import-native-reviews.py
+        │  licence, provenance human, jetons, termes
         ▼
 extension/language-packs/<code>.json
-        │  relecture native + tests
+        │  tests + packaging
         ▼
 ZIP de l’extension (hors ligne)
 ```
@@ -114,10 +123,12 @@ ZIP de l’extension (hors ligne)
 4. **Contrôle automatique** : jetons `[[NUM_n]]`, `[[NAME_n]]`, `[[URL_n]]`,
    `[[EMAIL_n]]` présents une seule fois ; termes `FCFA`, `PIN`, `OTP`,
    `FINAKA` conservés.
-5. **Relecture native** : deux relecteurs si possible ; désaccord tranché par
-   un troisième.
-6. **Tests** : les 20 phrases de `data/language-packs/` doivent passer.
-7. **Publication** : version, date, relecteur, licence et empreinte du fichier.
+5. **Relecture native** : deux traducteurs indépendants + un arbitre (TRAPD).
+   Le script d'import refuse une validation par une seule personne.
+6. **Tests** : `scripts/check-language-data.py`,
+   `scripts/check-language-packs.py` et les tests de l'extension.
+7. **Publication** : version, date, relecteur, licence (`CC0-1.0` ou
+   `CC-BY-4.0`), provenance `human` et empreinte du fichier.
 8. **Mise à jour** : ne jamais écraser un pack validé sans nouvelle revue.
 
 ## 6. Contrôles qualité
@@ -146,28 +157,33 @@ ZIP de l’extension (hors ligne)
   le mode pack ne l’utilise jamais.
 - Faire relire la convention par un juriste si le projet passe en production.
 
-## 8. Plan Ewondo / Duala pour l’équipe
+## 8. Plan Fulfulde / Ewondo / Duala pour l’équipe
 
 Yemba, medumba, bassa et ghomala' ne sont plus dans le prototype : les
-ressources de parole et documentaires retenues sont désormais l'ewondo,
-le duala et le fulfulde d'Adamawa (voir `docs/LANGUAGES.md` et
-`tasks/klein.md`, K10).
+ressources de parole et documentaires retenues sont désormais le fulfulde,
+l'ewondo et le duala (voir `docs/LANGUAGES.md` et `tasks/klein.md`, K10).
 
-Plan en 48 h pour l'ewondo et le duala :
+Plan en 72 h pour les trois langues :
 
-1. Ouvrir `data/language-packs/ewo.csv` et `dua.csv`.
-2. Traduire les 20 phrases finance, sans toucher aux jetons.
-3. Relire à voix haute avec un second locuteur (TRAPD).
-4. Passer `status` à `validated`, mettre le nom du relecteur.
-5. Lancer :
+1. Générer les classeurs : `python3 scripts/make-native-kit.py`.
+2. Faire remplir `data/review/<langue>.t1.csv` et `.t2.csv` séparément.
+3. Fusionner : `python3 scripts/merge-native-reviews.py --lang <code>`.
+4. Faire remplir `data/review/<langue>.arbitrage.csv` par l'arbitre.
+5. Importer :
 
 ```bash
-python3 scripts/import-language-pack.py data/language-packs/ewo.csv
-python3 scripts/import-language-pack.py data/language-packs/dua.csv
+python3 scripts/import-native-reviews.py --lang fub --dry-run
+python3 scripts/import-native-reviews.py --lang fub
+python3 scripts/import-native-reviews.py --lang ewo --dry-run
+python3 scripts/import-native-reviews.py --lang ewo
+python3 scripts/import-native-reviews.py --lang dua --dry-run
+python3 scripts/import-native-reviews.py --lang dua
 ./scripts/package-extension.sh
 ```
 
 6. Tester les phrases dans le popup, puis dans la page de démo.
+7. Vérifier `python3 scripts/check-language-data.py` et
+   `python3 scripts/check-language-packs.py`.
 7. Filmer la démonstration avec le pack ewondo ou duala.
 
 ## 9. Sources consultées

@@ -7,14 +7,18 @@ import csv
 import json
 import re
 import sys
+from datetime import date
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
 PACKS = ROOT / "extension" / "language-packs"
 CSV_DIR = ROOT / "data" / "language-packs"
-EXPECTED = {"fub", "ybb", "byv", "ewo", "dua", "bas", "bbj"}
+EXPECTED = {"fub", "ewo", "dua"}
+REMOVED = {"ybb", "byv", "bas", "bbj"}
 TOKEN_RE = re.compile(r"\[\[\s*(NUM|URL|EMAIL|NAME)\s*_\s*(\d+)\s*\]\]", re.I)
 DNT_TERMS = ["FCFA", "XAF", "PIN", "OTP", "KYC", "FINAKA"]
+STATUSES = {"draft", "reviewed", "validated", "deprecated"}
+ALLOWED_LICENSES = {"CC0-1.0", "CC-BY-4.0"}
 
 
 def tokens(text: str) -> list[str]:
@@ -42,18 +46,57 @@ def check_pack(path: Path) -> list[str]:
         errors.append(f"{path.name}: code {code!r} != {path.stem!r}")
     if code not in EXPECTED:
         errors.append(f"{path.name}: code inconnu {code!r}")
+    if not pack.get("label"):
+        errors.append(f"{path.name}: label manquant")
+    if not pack.get("nativeLabel"):
+        errors.append(f"{path.name}: nativeLabel manquant")
 
+    seen_sources: set[str] = set()
     for index, entry in enumerate(pack.get("entries", []), start=1):
         source = entry.get("source", "")
         target = entry.get("target", "")
         status = entry.get("status", "draft")
-        if status not in {"draft", "reviewed", "validated", "deprecated"}:
+        reviewer = (entry.get("reviewer") or "").strip()
+        license_id = (entry.get("license") or "").strip()
+        provenance = (entry.get("provenance") or "").strip().lower()
+        reviewed_at = (entry.get("reviewedAt") or "").strip()
+
+        if not source:
+            errors.append(f"{path.name}#{index}: source vide")
+            continue
+        if source in seen_sources:
+            errors.append(f"{path.name}#{index}: source dupliquée {source!r}")
+        seen_sources.add(source)
+
+        if status not in STATUSES:
             errors.append(f"{path.name}#{index}: statut inconnu {status!r}")
+            continue
         if status != "validated":
             continue
+
         if not target:
             errors.append(f"{path.name}#{index}: cible vide mais validée")
             continue
+        if not reviewer:
+            errors.append(f"{path.name}#{index}: relecteur manquant")
+        if license_id not in ALLOWED_LICENSES:
+            errors.append(
+                f"{path.name}#{index}: licence {license_id!r} absente ou "
+                "non autorisée"
+            )
+        if provenance != "human":
+            errors.append(
+                f"{path.name}#{index}: provenance {provenance!r} refusée "
+                "(attendu human)"
+            )
+        if reviewed_at:
+            try:
+                date.fromisoformat(reviewed_at)
+            except ValueError:
+                errors.append(
+                    f"{path.name}#{index}: reviewedAt non ISO {reviewed_at!r}"
+                )
+
         for token in tokens(source):
             if target.count(token) != 1:
                 errors.append(
@@ -67,6 +110,37 @@ def check_pack(path: Path) -> list[str]:
     return errors
 
 
+def check_sheet(path: Path) -> list[str]:
+    """Contrôle minimal d'une feuille de travail avant import."""
+    errors: list[str] = []
+    with path.open(encoding="utf-8", newline="") as handle:
+        rows = list(csv.DictReader(handle))
+    if not rows:
+        return [f"{path.name}: feuille vide"]
+    required = {"source", "target", "status", "reviewer", "context"}
+    missing = required - set(rows[0].keys())
+    if missing:
+        errors.append(
+            f"{path.name}: colonnes manquantes {', '.join(sorted(missing))}"
+        )
+    for index, row in enumerate(rows, start=2):
+        status = (row.get("status") or "draft").strip().lower()
+        if status not in STATUSES:
+            errors.append(
+                f"{path.name}#{index}: statut inconnu {status!r}"
+            )
+        if status == "validated":
+            if not (row.get("reviewer") or "").strip():
+                errors.append(f"{path.name}#{index}: relecteur manquant")
+            if (row.get("license") or "").strip() not in ALLOWED_LICENSES:
+                errors.append(f"{path.name}#{index}: licence manquante")
+            if (row.get("provenance") or "").strip().lower() != "human":
+                errors.append(
+                    f"{path.name}#{index}: provenance human attendue"
+                )
+    return errors
+
+
 def main() -> int:
     errors: list[str] = []
     present = {path.stem for path in PACKS.glob("*.json")}
@@ -74,19 +148,29 @@ def main() -> int:
     if missing:
         errors.append(f"packs manquants : {', '.join(sorted(missing))}")
 
+    for code in sorted(REMOVED):
+        removed_json = PACKS / f"{code}.json"
+        removed_csv = CSV_DIR / f"{code}.csv"
+        if removed_json.exists():
+            errors.append(f"pack retiré encore présent : {removed_json.name}")
+        if removed_csv.exists():
+            errors.append(f"feuille retirée encore présente : {removed_csv.name}")
+
     for path in sorted(PACKS.glob("*.json")):
         errors.extend(check_pack(path))
 
-    for code in sorted(EXPECTED - {"fub"}):
+    for code in sorted(EXPECTED):
         csv_path = CSV_DIR / f"{code}.csv"
         if not csv_path.exists():
             errors.append(f"feuille manquante : {csv_path.name}")
             continue
+        errors.extend(check_sheet(csv_path))
         with csv_path.open(encoding="utf-8", newline="") as handle:
             rows = list(csv.DictReader(handle))
-        if len(rows) < 20:
+        minimum = 100 if code == "fub" else 20
+        if len(rows) < minimum:
             errors.append(
-                f"{csv_path.name}: {len(rows)} lignes, 20 attendues"
+                f"{csv_path.name}: {len(rows)} lignes, {minimum} attendues"
             )
 
     if errors:
@@ -95,7 +179,7 @@ def main() -> int:
             print(f"  - {error}", file=sys.stderr)
         return 1
 
-    sheet_count = len(EXPECTED) - 1
+    sheet_count = len(EXPECTED)
     print(f"Packs OK — {len(present)} fichiers, {sheet_count} feuilles")
     return 0
 

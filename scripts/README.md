@@ -52,23 +52,67 @@ NK_MOCK=1 uvicorn app:app --host 127.0.0.1 --port 8000
 
 Utile pour tester l’extension et le rendu sans attendre le modèle.
 
-## 6. Packs linguistiques
+## 6. Packs linguistiques et kit natif
 
 ```bash
-# Vérifier les packs et les feuilles de traduction
+# Vérifier les packs, le glossaire, les messages et le kit natif
 python3 scripts/check-language-packs.py
+python3 scripts/check-language-data.py
+python3 scripts/check-native-kit.py
 
-# Importer un CSV rempli par un locuteur natif
-python3 scripts/import-language-pack.py data/language-packs/ybb.csv
-python3 scripts/import-language-pack.py data/language-packs/byv.csv
+# Générer les classeurs T1/T2 à remettre aux natifs
+python3 scripts/make-native-kit.py
+
+# Après remplissage : fusionner T1/T2, puis arbitrer
+python3 scripts/merge-native-reviews.py --lang fub
+# l'arbitre remplit data/review/fulfulde.arbitrage.csv
+
+# Importer l'arbitrage (dry-run puis réel)
+python3 scripts/import-native-reviews.py --lang fub --dry-run
+python3 scripts/import-native-reviews.py --lang fub
+
+# Si un seul natif est disponible : conserver son travail en brouillon
+python3 scripts/import-draft-kit.py --lang fub --dry-run
+python3 scripts/import-draft-kit.py --lang fub
 
 # Reconstruire les ZIP
 ./scripts/package-extension.sh
 ```
 
-Le script refuse une entrée si un jeton `[[NUM_n]]`, `[[NAME_n]]`,
-`[[URL_n]]` ou `[[EMAIL_n]]` manque, ou si un terme critique (`FCFA`, `PIN`,
-`OTP`, `FINAKA`) a été traduit.
+Le kit natif est décrit dans
+[`data/review/README.md`](../data/review/README.md). Il couvre 40 termes de
+glossaire, 70 messages du site officiel et les phrases de pack (102 en
+fulfulde, 20 en ewondo et duala).
+
+Le script d'import refuse une entrée validée si :
+
+- un jeton `[[NUM_n]]`, `[[NAME_n]]`, `[[URL_n]]` ou `[[EMAIL_n]]` manque ;
+- un terme critique (`FCFA`, `PIN`, `OTP`, `KYC`, `FINAKA`) a été traduit ;
+- le relecteur, la date ISO, la licence (`CC0-1.0` ou `CC-BY-4.0`) ou la
+  provenance `human` manque ;
+- T1 et T2 sont la même personne, ou l'arbitre est l'un des deux.
+
+Aucune machine translation n'entre dans un pack validé : la provenance
+`human` est obligatoire.
+
+## 6bis. Fiche d'évaluation du fulfulde
+
+```bash
+# Remplit candidate_fub / candidate_raw pour les 20 phrases inédites
+server/.venv/bin/python scripts/generate-unseen-fub.py
+```
+
+Le script protège les nombres et les termes critiques avant NLLB, puis marque
+`rejected_auto` si un montant, un terme ou un jeton est perdu. Les 20 phrases
+restent à juger par un natif dans `data/review/unseen_judgment.csv`.
+
+Après jugement :
+
+```bash
+python3 scripts/import-unseen-judgment.py --dry-run
+python3 scripts/import-unseen-judgment.py
+python3 scripts/check-language-data.py
+```
 
 ## 7. Évaluer le contenu inédit
 
@@ -87,5 +131,5 @@ rétro-traduction moyen et les raisons de refus sur les 20 phrases de
 node scripts/test-extension.js
 ```
 
-Vérifie le registre des sept langues, la détection FR/EN, les packs et la
+Vérifie le registre des trois langues, la détection FR/EN, les packs et la
 préservation des jetons, sans navigateur ni réseau.

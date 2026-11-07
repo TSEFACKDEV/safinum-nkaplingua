@@ -1,0 +1,44 @@
+{
+  "generated_at": "2026-11-07T18:20:27+01:00",
+  "version": "0.6.0",
+  "languages": {
+    "fub": {
+      "label": "fulfulde",
+      "t1": "data/review/fulfulde.t1.csv",
+      "t2": "data/review/fulfulde.t2.csv",
+      "rows": 212,
+      "p0": 90,
+      "p1": 122
+    },
+    "ewo": {
+      "label": "ewondo",
+      "t1": "data/review/ewondo.t1.csv",
+      "t2": "data/review/ewondo.t2.csv",
+      "rows": 130,
+      "p0": 73,
+      "p1": 57
+    },
+    "dua": {
+      "label": "duala",
+      "t1": "data/review/duala.t1.csv",
+      "t2": "data/review/duala.t2.csv",
+      "rows": 130,
+      "p0": 73,
+      "p1": 57
+    }
+  },
+  "sources": {
+    "data/glossary.template.csv": "55b2fdf72a0fbe86739e57c65ccdeb639decc3ac19ea44298b5fe00e7e1d1aac",
+    "data/site-officiel/messages.fr-en.csv": "fb13cf9ed49ba37a3a147dfba100255042cd440f9cd319e900ec14fe9b436ef5",
+    "data/language-packs/fub.csv": "67a26681611ab474174ddc504eb9ea59ce6f2fc3f98385dd0c98f9c9ef883f94",
+    "data/language-packs/ewo.csv": "eeaea3f32835dc4d1df24418519920b80c12753125673cfa55216afffb6023a1",
+    "data/language-packs/dua.csv": "eeaea3f32835dc4d1df24418519920b80c12753125673cfa55216afffb6023a1",
+    "data/unseen_finance.txt": "14bf47f151cff08165a8c3a821b2b032f9df23f73f3dacaa3b403a3eb80db3ee",
+    "docs/UNSEEN_JUDGMENT.csv": "8da13279f656c068b9b54eaa33164787c3086d9f374b1da8aba58fa190821681"
+  },
+  "notes": "T1 et T2 sont identiques au départ. Chaque traducteur remplit sans voir l'autre. L'arbitre utilise ensuite scripts/merge-native-reviews.py.",
+  "unseen": {
+    "file": "data/review/unseen_judgment.csv",
+    "rows": 20
+  }
+}
