@@ -1013,3 +1013,70 @@ mot `json`) avec les champs ci-dessous. Exemple de structure, en indentation :
   "blockers": []
 }
 ```
+
+## 2026-11-07T19:30:00+01:00 — Klein — K2 — in_progress
+
+```json
+{
+  "timestamp": "2026-11-07T19:30:00+01:00",
+  "person": "Klein",
+  "branch": "klein",
+  "task": "K2",
+  "status": "in_progress",
+  "summary": "Ajout d'un navigateur de références pour les 40 termes du glossaire : liens Glosbe, Webonary, Resulam et SIL Cameroon, sans aucune traduction copiée.",
+  "files": [
+    "data/reference/README.md",
+    "data/reference/glossary-links.csv",
+    "scripts/build-reference-links.py",
+    "data/review/README.md",
+    "data/README.md",
+    "scripts/README.md"
+  ],
+  "tests": [
+    {
+      "command": "python3 scripts/build-reference-links.py",
+      "result": "pass",
+      "note": "40 termes"
+    },
+    {
+      "command": "python3 scripts/check-language-data.py",
+      "result": "pass",
+      "note": "références 40 synchronisées"
+    }
+  ],
+  "evidence": "data/reference/glossary-links.csv : 40 lignes, aucune cible copiée",
+  "next": "Faire utiliser ces liens par les natifs et documenter la source dans commentaire",
+  "blockers": [
+    "panel TRAPD incomplet"
+  ]
+}
+```
+
+## 2026-11-07T19:31:00+01:00 — Klein — K9 — in_progress
+
+```json
+{
+  "timestamp": "2026-11-07T19:31:00+01:00",
+  "person": "Klein",
+  "branch": "klein",
+  "task": "K9",
+  "status": "in_progress",
+  "summary": "Audit Glosbe, Resulam et Webonary : Glosbe interdit la copie automatisée et son contenu est CC BY-NC-SA ; Resulam est payant sans licence ouverte ; Webonary reste sous copyright par dictionnaire. Verdict : référence manuelle uniquement.",
+  "files": [
+    "docs/REFERENCE_SOURCES.md",
+    "docs/DATA_LICENSES.md"
+  ],
+  "tests": [
+    {
+      "command": "python3 scripts/check-language-data.py",
+      "result": "pass",
+      "note": "aucune donnée externe dans les packs"
+    }
+  ],
+  "evidence": "docs/REFERENCE_SOURCES.md : CGU Glosbe, robots.txt Webonary, produits Resulam",
+  "next": "Demander une autorisation écrite si un partenaire veut fournir un lexique",
+  "blockers": [
+    "aucune autorisation écrite de Glosbe, Resulam ou SIL"
+  ]
+}
+```
