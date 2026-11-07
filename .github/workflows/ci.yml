@@ -58,6 +58,7 @@ jobs:
         run: |
           node scripts/test-extension.js
           python3 scripts/check-language-packs.py
+          python3 scripts/check-training-data.py
 
       - name: Install jsdom
         run: npm install --no-save --no-package-lock jsdom
@@ -125,6 +126,7 @@ jobs:
           python3 scripts/check-language-data.py
           python3 scripts/check-native-kit.py
           python3 scripts/check-language-packs.py
+          python3 scripts/check-training-data.py
 
   security:
     name: Secret scan

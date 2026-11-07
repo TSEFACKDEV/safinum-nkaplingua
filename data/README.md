@@ -52,6 +52,13 @@ liens Glosbe, Webonary, Resulam et SIL Cameroon. Aucune traduction n’est
 copiée. Voir [`reference/README.md`](reference/README.md) et
 [`../docs/REFERENCE_SOURCES.md`](../docs/REFERENCE_SOURCES.md).
 
+## `training/`
+
+Manifeste des données d’entraînement : [`training/sources.csv`](training/sources.csv)
+et règles dans [`training/README.md`](training/README.md). Aucun fichier de
+données n’est versionné ; aucun entraînement n’est autorisé en l’état. Voir
+[`../docs/TRAINING_DATA_AUDIT.md`](../docs/TRAINING_DATA_AUDIT.md).
+
 ## `review/`
 
 Kit de traduction native TRAPD généré par
