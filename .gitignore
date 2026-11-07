@@ -11,3 +11,5 @@ video/audio/
 video/clips/
 video/clips.txt
 video/*.mp4
+node_modules/
+package-lock.json

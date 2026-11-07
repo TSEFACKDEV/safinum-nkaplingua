@@ -9,15 +9,27 @@ Glossaire finance à remplir avec un locuteur natif du fulfulde adamawa.
 - `target_fub` : traduction validée — **ne pas inventer** ;
 - `domain` : mobile_money, credit, savings, kyc, security, support ;
 - `note` : contrainte d’usage ;
-- `status` : `à valider`, `validé`, `rejeté`.
+- `status` : `à valider`, `validated`, `validé`, `rejeté`.
 
-Règle : un terme n’est `validé` que si un locuteur natif l’a relu et si la
+Règle : un terme n’est `validated` que si un locuteur natif l’a relu et si la
 source est documentée.
+
+Le backend charge automatiquement les lignes `validated` avec un
+`target_fub` non vide. Il remplace le terme par un jeton avant NLLB, puis
+restaure la traduction validée. Si le modèle perd le jeton, la phrase est
+refusée et l’original est conservé. C’est ce qui garantit la cohérence
+terminologique sur du contenu inédit.
 
 ## `do_not_translate.txt`
 
 Termes qui doivent rester identiques : marques, codes, devises, acronymes.
 Utilisé par le contrôle de sûreté du backend.
+
+## `language-packs/`
+
+Feuilles de traduction communautaire pour le yemba, le medumba, l’ewondo, le
+douala, le bassa et le ghomala’. Voir
+[`../extension/language-packs/README.md`](../extension/language-packs/README.md).
 
 ## `unseen_finance.txt`
 

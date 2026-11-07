@@ -124,10 +124,40 @@ Quelques sorties observées :
 | Ne partagez jamais votre code PIN. | `Taa ɓe nganndi PIN-ɗaa.` | avertissement à faire valider |
 | Le bénéficiaire reçoit le montant net après déduction des frais. | sortie instable | phrase trop complexe : à découper |
 
+### Test réel sur CPU (modèle quantifié, 7 novembre 2026)
+
+Le modèle a été chargé avec `NK_QUANTIZE=1` sur une machine 7,6 Go de RAM.
+Quelques résultats bruts, sans relecture native :
+
+| Phrase source | Sortie NLLB | `ok` | `roundtrip` |
+|---|---|---|---|
+| Le solde est de 125 000 FCFA. | `Fedde ndee ko 125 000 FCFA.` | ✅ | 0,687 |
+| Ne partagez jamais votre code PIN. | `Ndaa meeɗde jokkondirde mon e PIN.` | ✅ | 0,623 |
+| Le bénéficiaire reçoit le montant net après déduction des frais de change. | `Jaɓɓorgo Fedde Ɓamtaare Fuuta (FPA)` | ❌ `low_roundtrip:0.23` | 0,231 |
+| Les informations personnelles collectées sont utilisées uniquement pour l’étude du dossier. | `Jaɓɓorgo Kewuuji pinal ngal jaɓɓorgo ko e nder deftere ndee.` | ❌ `low_roundtrip:0.36` | 0,361 |
+
+Le filtre fonctionne : les deux phrases longues manifestement hallucinées sont
+refusées et l’original reste affiché. Les deux phrases courtes passent, mais
+elles ne sont pas pour autant validées par un natif. C’est exactement le
+compromis du prototype : **précision avant couverture**.
+
+En fallback cloud ciblé (MyMemory) sur les phrases rejetées, les 20 phrases de
+`data/unseen_finance.txt` passent les contrôles de jetons et de qualité. Cela
+améliore la couverture, mais le cloud n’a pas la rétro-traduction locale : la
+validation native reste obligatoire.
+
 **Conclusion** : le pipeline technique est fonctionnel, mais la qualité
 linguistique du fulfulde n’est **pas encore validée**. Les six packs sont
 vides. Il faut des locuteurs natifs avant de présenter le prototype comme
-« validé ».
+« validé ». Le test réel confirme aussi que NLLB 600M est fragile sur les
+phrases longues : le découpage et la rétro-traduction réduisent le risque,
+ils ne le suppriment pas.
+
+Le backend applique un filtre de qualité et, si `NK_ROUNDTRIP=1`, une
+rétro-traduction de contrôle. Ces filtres réduisent les hallucinations mais ne
+remplacent pas la relecture native. Le script `scripts/evaluate-unseen.py`
+mesure le taux d’acceptation et la préservation des montants sur 20 phrases
+inédites.
 
 ## 7. Fiche de validation à remplir
 

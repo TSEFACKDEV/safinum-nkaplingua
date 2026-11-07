@@ -59,6 +59,12 @@ jobs:
           node scripts/test-extension.js
           python3 scripts/check-language-packs.py
 
+      - name: Install jsdom
+        run: npm install --no-save --no-package-lock jsdom
+
+      - name: Test content script in jsdom
+        run: node tests/content.test.js
+
       - name: Validate manifests
         run: |
           python3 - <<'PY'

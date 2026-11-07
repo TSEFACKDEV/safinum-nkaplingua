@@ -94,6 +94,14 @@ async function loadTarget() {
 
   populateLanguages();
   updateLanguageUI();
+
+  try {
+    const cloud = await api.storage.local.get("nkCloudFallback");
+    $("cloudFallback").checked = cloud?.nkCloudFallback !== false;
+  } catch {
+    $("cloudFallback").checked = true;
+  }
+
   setStatus(`Prêt. Langue cible : ${spec().label}. Détection FR/EN active.`);
 }
 
@@ -124,6 +132,20 @@ $("language").addEventListener("change", async () => {
 
   setStatus(
     `Langue cible : ${spec().label}. ${spec().statusLabel}.`
+  );
+});
+
+$("cloudFallback").addEventListener("change", async () => {
+  const enabled = $("cloudFallback").checked;
+  try {
+    await api.storage.local.set({ nkCloudFallback: enabled });
+  } catch {
+    // Le réglage reste valable pour la session.
+  }
+  setStatus(
+    enabled
+      ? "Cloud de secours autorisé pour les phrases rejetées."
+      : "Mode local uniquement : le cloud est désactivé."
   );
 });
 
@@ -214,6 +236,11 @@ $("translateText").addEventListener("click", async () => {
       `Source détectée : ${detectedLabel} · ` +
       `Moteur : ${providerLabel(response.provider)} · ` +
       `Cible : ${spec().label}`;
+
+    if (typeof response.translation.roundtrip === "number") {
+      meta.textContent +=
+        ` · cohérence ${Math.round(response.translation.roundtrip * 100)} %`;
+    }
     setStatus("Texte inédit traduit avec contrôle des montants et des noms.");
   } catch (error) {
     setStatus(`Erreur : ${error.message}`);

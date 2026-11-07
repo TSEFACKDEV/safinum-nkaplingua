@@ -23,7 +23,8 @@
   }
 
   const BATCH_SIZE = 8;
-  const MAX_ITEMS_PER_PASS = 180;
+  const MAX_TEXT_ITEMS = 180;
+  const MAX_ATTRIBUTE_ITEMS = 60;
 
   const SKIP_TAGS = new Set([
     "SCRIPT",
@@ -217,7 +218,7 @@
       }
     });
 
-    while (walker.nextNode() && items.length < MAX_ITEMS_PER_PASS) {
+    while (walker.nextNode() && items.length < MAX_TEXT_ITEMS) {
       const node = walker.currentNode;
       items.push({
         id: `n${items.length}`,
@@ -233,14 +234,15 @@
   function collectAttributeItems(root, items) {
     if (!root) return;
     const elements = root.querySelectorAll(ATTRIBUTE_SELECTOR);
+    let added = 0;
 
     for (const element of elements) {
-      if (items.length >= MAX_ITEMS_PER_PASS) break;
+      if (added >= MAX_ATTRIBUTE_ITEMS) break;
       if (element.closest("[data-nk-ignore]")) continue;
       if (isSensitive(element)) continue;
 
       const add = (attr, value) => {
-        if (items.length >= MAX_ITEMS_PER_PASS) return;
+        if (added >= MAX_ATTRIBUTE_ITEMS) return;
         if (!value || !value.trim() || !hasLetters(value)) return;
         if (DO_NOT_TRANSLATE.some((term) => value.trim() === term)) return;
         if (attributeOriginals.get(element)?.has(attr)) return;
@@ -252,6 +254,7 @@
           value,
           isNew: false
         });
+        added += 1;
       };
 
       if (element.hasAttribute("title")) {
@@ -283,9 +286,7 @@
     const items = [];
     if (!root) return items;
     collectTextItems(root, items);
-    if (items.length < MAX_ITEMS_PER_PASS) {
-      collectAttributeItems(root, items);
-    }
+    collectAttributeItems(root, items);
     return items;
   }
 
@@ -306,11 +307,13 @@
   function redact(text) {
     const tokens = [];
     let value = String(text);
-    let index = 0;
+    // Index par type : [[NUM_0]] et [[NAME_0]] peuvent coexister sans
+    // décaler les numéros suivants. Les packs sont ainsi stables.
+    const counters = { NUM: 0, URL: 0, EMAIL: 0, NAME: 0 };
 
     const addToken = (kind, original) => {
       // Placeholder ASCII : plus robuste avec les tokenizers multilingues.
-      const token = `[[${kind}_${index++}]]`;
+      const token = `[[${kind}_${counters[kind]++}]]`;
       tokens.push({ token, original });
       return token;
     };

@@ -70,7 +70,18 @@ Le script refuse une entrée si un jeton `[[NUM_n]]`, `[[NAME_n]]`,
 `[[URL_n]]` ou `[[EMAIL_n]]` manque, ou si un terme critique (`FCFA`, `PIN`,
 `OTP`, `FINAKA`) a été traduit.
 
-## 7. Tests rapides de l’extension
+## 7. Évaluer le contenu inédit
+
+```bash
+python3 scripts/evaluate-unseen.py --url http://127.0.0.1:8000 \
+  --output eval-unseen.json
+```
+
+Mesure le taux d’acceptation, la préservation des montants, le score de
+rétro-traduction moyen et les raisons de refus sur les 20 phrases de
+`data/unseen_finance.txt`.
+
+## 8. Tests rapides de l’extension
 
 ```bash
 node scripts/test-extension.js
