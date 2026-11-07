@@ -144,7 +144,10 @@ Moteur — NLLB-200 local, MyMemory ou pack
 - **Packs communautaires** : phrases validées, aucun appel cloud.
 - **Backend local optionnel** : mode 100 % local avec NLLB si disponible.
 - **Cloud de secours** : MyMemory, avec texte pseudonymisé et consentement
-  explicite par le clic de l’utilisateur.
+  explicite par le clic de l’utilisateur. Si le backend local rejette une
+  phrase (rétro-traduction ou qualité), l’extension demande une seconde
+  opinion au cloud pour cette phrase seulement. La case
+  « Autoriser MyMemory » du popup permet de rester en local strict.
 - **CI GitHub Actions** : tests backend mock, lint JS, lint Firefox, scan de
   secrets, packaging.
 
@@ -233,6 +236,30 @@ curl http://127.0.0.1:8000/health
 
 Le premier lancement télécharge le modèle NLLB (~2,4 Go). Sur CPU, comptez
 plusieurs dizaines de secondes pour la première traduction d’une page.
+
+### Performance et précision
+
+Le pipeline est réglable sans modifier le code :
+
+```bash
+# Meilleure qualité (4 faisceaux) mais plus lent
+NK_NUM_BEAMS=4 NK_DEVICE=cpu uvicorn app:app --host 127.0.0.1 --port 8000
+
+# Moins de RAM / CPU plus rapide (quantification dynamique)
+NK_QUANTIZE=1 NK_DEVICE=cpu uvicorn app:app --host 127.0.0.1 --port 8000
+
+# Désactiver la rétro-traduction si le CPU est trop lent
+NK_ROUNDTRIP=0 NK_DEVICE=cpu uvicorn app:app --host 127.0.0.1 --port 8000
+
+# Ajuster le filtre de fuite de français (0.25 par défaut)
+NK_QUALITY_FRENCH_LEAK=0.35 NK_DEVICE=cpu uvicorn app:app --host 127.0.0.1 --port 8000
+```
+
+Le modèle 600M est le défaut. Pour une meilleure qualité sur une machine
+16 Go, `NK_MODEL=facebook/nllb-200-distilled-1.3B` est possible ; le 3.3B n’est
+pas recommandé sur ce prototype. Le glossaire finance validé
+(`data/glossary.template.csv`) est appliqué avant le modèle : les termes
+métier ne sont pas laissés à l’improvisation de NLLB.
 
 ### Mode maquette (sans modèle)
 
@@ -327,7 +354,14 @@ curl -s http://127.0.0.1:8000/translate \
 
 Les jetons `[[NUM_n]]`, `[[URL_n]]`, `[[EMAIL_n]]` et `[[NAME_n]]` sont
 contrôlés : si un jeton manque ou est dupliqué, `ok` passe à `false` et
-l’extension conserve l’original.
+l’extension conserve l’original. Le backend rejette aussi les sorties
+identiques à la source, trop courtes, répétitives ou avec une fuite de français,
+et applique une rétro-traduction de contrôle (`roundtrip`). Désactiver ce filtre
+si le CPU est trop lent :
+
+```bash
+NK_ROUNDTRIP=0 NK_DEVICE=cpu uvicorn app:app --host 127.0.0.1 --port 8000
+```
 
 ### `GET /languages`
 
@@ -457,6 +491,9 @@ node --check extension/languages.js
 node --check extension/background.js
 node --check extension/content.js
 node --check extension/popup.js
+node scripts/test-extension.js
+npm install --no-save --no-package-lock jsdom
+node tests/content.test.js
 ./scripts/package-extension.sh
 ```
 
@@ -476,6 +513,8 @@ Conventions de commit : `feat:`, `fix:`, `docs:`, `test:`, `chore:`.
 - [ ] Glossaire finance validé (`data/glossary.template.csv`)
 - [ ] Fine-tuning / adaptation au fulfulde adamawa
 - [ ] Mode bilingue pour les contrats
+- [x] Filtre de qualité et rétro-traduction de contrôle
+- [x] Script d’évaluation sur 20 phrases inédites
 - [ ] Tests end-to-end sur 5 sites financiers réels
 - [ ] Packaging Chrome Web Store / AMO
 

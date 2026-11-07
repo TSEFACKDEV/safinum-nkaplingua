@@ -135,6 +135,42 @@ vm.runInContext(
     "jeton NAME perdu dans le pack"
   );
 
+  // Appel direct (popup « texte inédit ») : le background doit tokeniser
+  // les montants et les noms, puis les restaurer avant de répondre.
+  const rawAmount = await context.translateSegments(
+    [{ id: "raw-amount", text: "Le solde est de 125 000 FCFA." }],
+    "ybb",
+    "fr"
+  );
+  assert(rawAmount.translations[0].ok === true, "montant brut refusé");
+  assert(
+    rawAmount.translations[0].text.includes("125 000 FCFA"),
+    "montant brut non restauré"
+  );
+  assert(
+    !rawAmount.translations[0].text.includes("[[NUM_"),
+    "jeton NUM visible dans la réponse au popup"
+  );
+
+  const rawName = await context.translateSegments(
+    [{ id: "raw-name", text: "Le bénéficiaire Aïcha reçoit 25 000 FCFA." }],
+    "ybb",
+    "fr"
+  );
+  assert(rawName.translations[0].ok === true, "phrase avec nom brut refusée");
+  assert(
+    rawName.translations[0].text.includes("Aïcha"),
+    "nom brut non restauré"
+  );
+  assert(
+    rawName.translations[0].text.includes("25 000 FCFA"),
+    "montant avec nom brut non restauré"
+  );
+  assert(
+    !rawName.translations[0].text.includes("[[NAME_"),
+    "jeton NAME visible dans la réponse au popup"
+  );
+
   const miss = await context.translateSegments(
     [{ id: "c", text: "Une phrase inconnue." }],
     "ybb",
@@ -157,7 +193,63 @@ vm.runInContext(
     "raison pack_unverified attendue"
   );
 
-  console.log("Extension tests OK — registre, détection, packs, jetons");
+  const leak = context.validateTranslation(
+    "Le bénéficiaire reçoit le montant net après déduction des frais.",
+    "Le bénéficiaire reçoit le montant net sur votre compte.",
+    { engine: "mt" }
+  );
+  assert(leak.ok === false, "fuite de français acceptée");
+
+  const repetitive = context.validateTranslation(
+    "Le bénéficiaire reçoit le montant net après déduction des frais.",
+    "frais frais frais frais frais frais frais frais frais frais",
+    { engine: "mt" }
+  );
+  assert(repetitive.ok === false, "sortie répétitive acceptée");
+
+  const plausible = context.validateTranslation(
+    "Le solde est de [[NUM_0]] FCFA.",
+    "Fedde jaɓande nden ko [[NUM_0]] FCFA.",
+    { engine: "mt" }
+  );
+  assert(plausible.ok === true, "traduction plausible refusée");
+
+  const protectedTerms = LANG.protectTerms(
+    "Le solde est de 125 000 FCFA. Ne partagez jamais votre code PIN."
+  );
+  assert(
+    protectedTerms.text.includes("[[0]]"),
+    "FCFA non protégé avant le moteur MT"
+  );
+  assert(
+    protectedTerms.text.includes("[[1]]"),
+    "PIN non protégé avant le moteur MT"
+  );
+  const restoredTerms = LANG.restoreTerms(
+    protectedTerms.text,
+    protectedTerms.terms
+  );
+  assert(
+    restoredTerms.includes("FCFA") && restoredTerms.includes("PIN"),
+    "termes critiques non restaurés"
+  );
+
+  const finalized = context.finalizeTranslation(
+    {
+      id: "term",
+      text: "Solde fulfulde [[0]].",
+      ok: true,
+      reason: null
+    },
+    {
+      tokens: [],
+      terms: [{ token: "[[0]]", original: "FCFA" }],
+      originalText: "Le solde est de 125 000 FCFA."
+    }
+  );
+  assert(finalized.text.includes("FCFA"), "FCFA perdu à la finalisation");
+
+  console.log("Extension tests OK — registre, détection, packs, jetons, qualité");
 })().catch((error) => {
   console.error("FAIL", error);
   process.exit(1);

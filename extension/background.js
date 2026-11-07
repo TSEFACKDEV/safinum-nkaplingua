@@ -165,6 +165,7 @@ async function translateSegments(segments, target, source) {
     return { translations: [], provider: null };
   }
 
+  const allowCloud = await cloudAllowed();
   const targetSpec = LANG?.getTarget(target);
   if (!targetSpec) {
     return {
@@ -174,17 +175,32 @@ async function translateSegments(segments, target, source) {
     };
   }
 
+  // Deuxième barrière de pseudonymisation : elle protège aussi les appels
+  // directs au background (popup « texte inédit », test, futur client).
+  const prepared = segments.map((segment) => {
+    const redaction = LANG.redactSensitive(segment.text || "");
+    return {
+      ...segment,
+      text: redaction.text,
+      tokens: redaction.tokens,
+      originalText: segment.text || ""
+    };
+  });
+  const preparedById = new Map(
+    prepared.map((segment) => [segment.id, segment])
+  );
+
   const detected =
     source ||
     detectSourceLanguage(
-      segments.map((segment) => segment.text || "").join(" ")
+      prepared.map((segment) => segment.originalText).join(" ")
     );
 
   const results = new Map();
   const missing = [];
 
-  for (const segment of segments) {
-    const key = `${detected}:${target}:${segment.text}`;
+  for (const segment of prepared) {
+    const key = `${detected}:${target}:${segment.originalText}`;
     if (cache.has(key)) {
       results.set(segment.id, { ...cache.get(key), id: segment.id });
     } else {
@@ -223,15 +239,25 @@ async function translateSegments(segments, target, source) {
 
     const hits = packResults.filter((translation) => translation.ok);
     for (const translation of hits) {
-      results.set(translation.id, translation);
+      const final = finalizeTranslation(
+        translation,
+        preparedById.get(translation.id)
+      );
+      results.set(final.id, final);
       const original = missing.find((item) => item.id === translation.id);
-      if (original) cacheTranslation(detected, target, original.text, translation);
+      if (original) {
+        cacheTranslation(detected, target, original.originalText, final);
+      }
     }
     if (hits.length > 0) provider = "pack";
 
     if (targetSpec.engine === "pack") {
       for (const translation of packResults) {
-        results.set(translation.id, translation);
+        const final = finalizeTranslation(
+          translation,
+          preparedById.get(translation.id)
+        );
+        results.set(final.id, final);
       }
       return {
         translations: segments
@@ -256,6 +282,15 @@ async function translateSegments(segments, target, source) {
     };
   }
 
+  // Protection des termes critiques avant le moteur MT (FCFA, PIN, etc.).
+  // Les packs, eux, sont cherchés sur le texte brut pour rester compatibles
+  // avec les entrées validées.
+  for (const segment of remaining) {
+    const protectedTerms = LANG.protectTerms(segment.text);
+    segment.text = protectedTerms.text;
+    segment.terms = protectedTerms.terms;
+  }
+
   // 2) Backend local.
   let translations = null;
   if (TRANSLATION_MODE !== "cloud" && (await isLocalAvailable())) {
@@ -272,8 +307,39 @@ async function translateSegments(segments, target, source) {
     }
   }
 
-  // 3) Cloud de secours.
-  if (!translations && TRANSLATION_MODE !== "local") {
+  // 2b) Si le local est disponible mais rejette certaines phrases (jeton,
+  // qualité, rétro-traduction), on demande une seconde opinion au cloud
+  // pseudonymisé. Le local reste prioritaire pour les phrases acceptées.
+  if (translations && allowCloud) {
+    const rejected = translations.filter((translation) => !translation.ok);
+    if (rejected.length > 0) {
+      const rejectedSegments = remaining.filter((segment) =>
+        rejected.some((translation) => translation.id === segment.id)
+      );
+      try {
+        const fallback = await translateWithCloud(
+          rejectedSegments,
+          detected,
+          targetSpec
+        );
+        const fallbackById = new Map(
+          fallback.map((translation) => [translation.id, translation])
+        );
+        translations = translations.map((translation) => {
+          const candidate = fallbackById.get(translation.id);
+          return candidate?.ok ? candidate : translation;
+        });
+        if (fallback.some((translation) => translation.ok)) {
+          provider = "cloud";
+        }
+      } catch {
+        // Le cloud est un secours : on conserve le résultat local.
+      }
+    }
+  }
+
+  // 3) Cloud de secours complet si le local n'a rien produit.
+  if (!translations && allowCloud) {
     try {
       translations = await translateWithCloud(remaining, detected, targetSpec);
       provider = "cloud";
@@ -290,16 +356,22 @@ async function translateSegments(segments, target, source) {
     return {
       translations: [],
       provider: null,
-      error: "Aucun moteur de traduction disponible."
+      error: allowCloud
+        ? "Aucun moteur de traduction disponible."
+        : "Cloud désactivé et backend local indisponible. Lancez le backend ou autorisez le cloud."
     };
   }
 
   for (const translation of translations) {
-    results.set(translation.id, translation);
-    if (translation.ok) {
-      const original = remaining.find((item) => item.id === translation.id);
+    const final = finalizeTranslation(
+      translation,
+      preparedById.get(translation.id)
+    );
+    results.set(final.id, final);
+    if (final.ok) {
+      const original = remaining.find((item) => item.id === final.id);
       if (original) {
-        cacheTranslation(detected, target, original.text, translation);
+        cacheTranslation(detected, target, original.originalText, final);
       }
     }
   }
@@ -319,6 +391,38 @@ function cacheTranslation(source, target, text, translation) {
     const firstKey = cache.keys().next().value;
     cache.delete(firstKey);
   }
+}
+
+function finalizeTranslation(translation, segment) {
+  if (!translation || !translation.ok) return translation;
+
+  const restoredSensitive = LANG.restoreSensitive(
+    translation.text,
+    segment?.tokens || []
+  );
+  if (restoredSensitive === null) {
+    return {
+      id: translation.id,
+      text: segment?.originalText || translation.text,
+      ok: false,
+      reason: "token_lost"
+    };
+  }
+
+  const restoredTerms = LANG.restoreTerms(
+    restoredSensitive,
+    segment?.terms || []
+  );
+  if (restoredTerms === null) {
+    return {
+      id: translation.id,
+      text: segment?.originalText || translation.text,
+      ok: false,
+      reason: "token_lost:TERM"
+    };
+  }
+
+  return { ...translation, text: restoredTerms };
 }
 
 /* ------------------------------------------------------------------ */
@@ -407,6 +511,16 @@ async function translateWithPack(segments, targetSpec) {
 /* ------------------------------------------------------------------ */
 /* Backend local                                                      */
 /* ------------------------------------------------------------------ */
+
+async function cloudAllowed() {
+  if (TRANSLATION_MODE === "local") return false;
+  try {
+    const stored = await api.storage?.local?.get("nkCloudFallback");
+    return stored?.nkCloudFallback !== false;
+  } catch {
+    return true;
+  }
+}
 
 async function isLocalAvailable() {
   if (TRANSLATION_MODE === "cloud") return false;
@@ -518,6 +632,16 @@ async function translateCloudSegment(segment, sourceCode, targetSpec) {
     throw new Error(data?.responseDetails || "Cloud response error");
   }
 
+  const matchScore = Number(data?.responseData?.match || 0);
+  if (matchScore > 0 && matchScore < 0.6) {
+    return {
+      id: segment.id,
+      text: segment.text,
+      ok: false,
+      reason: "cloud_low_match"
+    };
+  }
+
   const translated = decodeHtml(
     String(data?.responseData?.translatedText || "")
   ).trim();
@@ -559,9 +683,9 @@ function toCloudPlaceholders(text) {
   let index = 0;
 
   const cloudText = String(text || "").replace(
-    /\[\[(NUM|URL|EMAIL|NAME)_(\d+)\]\]/g,
+    /\[\[(NUM|URL|EMAIL|NAME|TERM)_(\d+)\]\]/g,
     (match) => {
-      const token = `[[${index++}]]`;
+      const token = `[[C${index++}]]`;
       tokenMap.set(token, match);
       return token;
     }
@@ -572,8 +696,8 @@ function toCloudPlaceholders(text) {
 
 function restoreCloudTokens(text, tokenMap) {
   let value = String(text || "").replace(
-    /\[\s*\[\s*(\d+)\s*\]\s*\]/g,
-    (_match, number) => `[[${number}]]`
+    /\[\s*\[\s*C\s*(\d+)\s*\]\s*\]/g,
+    (_match, number) => `[[C${number}]]`
   );
 
   for (const [token, original] of tokenMap) {
@@ -589,7 +713,7 @@ function validateTranslation(source, translation, targetSpec) {
     return { ok: false, reason: "empty_translation" };
   }
 
-  const tokenPattern = /\[\[\s*(NUM|URL|EMAIL|NAME)\s*_\s*(\d+)\s*\]\]/gi;
+  const tokenPattern = /\[\[\s*(NUM|URL|EMAIL|NAME|TERM)\s*_\s*(\d+)\s*\]\]/gi;
   const sourceTokens = [
     ...String(source).matchAll(tokenPattern)
   ].map((match) => `[[${match[1].toUpperCase()}_${match[2]}]]`);
@@ -598,6 +722,15 @@ function validateTranslation(source, translation, targetSpec) {
     : String(translation);
 
   for (const token of sourceTokens) {
+    if (normalized.split(token).length - 1 !== 1) {
+      return { ok: false, reason: `token_lost:${token}` };
+    }
+  }
+
+  const bareTokens = [
+    ...String(source).matchAll(/\[\[(\d+)\]\]/g)
+  ].map((match) => `[[${match[1]}]]`);
+  for (const token of bareTokens) {
     if (normalized.split(token).length - 1 !== 1) {
       return { ok: false, reason: `token_lost:${token}` };
     }
@@ -614,6 +747,53 @@ function validateTranslation(source, translation, targetSpec) {
   // Le pack doit rester dans la même variété linguistique que la cible.
   if (targetSpec?.engine === "pack" && !normalized.trim()) {
     return { ok: false, reason: "pack_empty_target" };
+  }
+
+  const quality = qualityCheck(source, normalized);
+  if (!quality.ok) return quality;
+
+  return { ok: true, reason: null };
+}
+
+function qualityCheck(source, translation) {
+  const clean = (value) =>
+    LANG
+      .normalizePhrase(value)
+      .replace(/\[\[[^\]]+\]\]/g, " ")
+      .replace(/[^a-zà-ÿ0-9']+/g, " ")
+      .trim();
+
+  const sourceClean = clean(source);
+  const targetClean = clean(translation);
+  if (!targetClean) return { ok: false, reason: "empty_translation" };
+  if (sourceClean === targetClean) {
+    return { ok: false, reason: "untranslated" };
+  }
+
+  const sourceWords = sourceClean.split(/\s+/).filter(Boolean);
+  const targetWords = targetClean.split(/\s+/).filter(Boolean);
+  if (sourceWords.length >= 4) {
+    if (targetWords.length < Math.max(2, Math.floor(sourceWords.length * 0.35))) {
+      return { ok: false, reason: "too_short" };
+    }
+    if (targetWords.length > Math.max(12, Math.floor(sourceWords.length * 3))) {
+      return { ok: false, reason: "too_long" };
+    }
+    if (targetWords.length >= 8) {
+      const uniqueRatio = new Set(targetWords).size / targetWords.length;
+      if (uniqueRatio < 0.3) {
+        return { ok: false, reason: "repetitive" };
+      }
+      const frenchLeak = new Set([
+        "le", "la", "les", "des", "une", "et", "est", "sont", "pour",
+        "avec", "votre", "vos", "vous", "nous", "du", "de", "dans",
+        "sur", "ce", "cette", "ces", "qui", "que", "au", "aux", "par"
+      ]);
+      const leak = targetWords.filter((word) => frenchLeak.has(word)).length;
+      if (leak / targetWords.length > 0.25) {
+        return { ok: false, reason: "french_leak" };
+      }
+    }
   }
 
   return { ok: true, reason: null };

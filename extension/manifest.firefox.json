@@ -1,7 +1,7 @@
 {
   "manifest_version": 3,
   "name": "NkapLingua — SAFINUM 2026",
-  "version": "0.4.0",
+  "version": "0.5.0",
   "description": "Traduction financière non intrusive en fulfulde, yemba, medumba et autres langues camerounaises. Détection FR/EN, backend local ou cloud de secours.",
   "browser_specific_settings": {
     "gecko": {
