@@ -91,7 +91,7 @@ def main() -> int:
         return 1
 
     print(
-        f"Entraînement bloqué — {len(rows)} sources : "
+        f"Manifeste d'entraînement OK — {len(rows)} sources : "
         f"{counts['blocked']} bloquées, "
         f"{counts['permission_required']} sous autorisation, "
         f"{counts['usable']} utilisables ; aucun fichier de données versionné."

@@ -69,6 +69,15 @@ python3 scripts/build-reference-links.py
 # Vérifier le manifeste des données d'entraînement (aucun fichier versionné)
 python3 scripts/check-training-data.py
 
+# Entraîner le modèle anglais → duala (source CC-BY-4.0)
+server/.venv/bin/python scripts/train-duala-mt.py \
+  --csv /chemin/vers/Duala_anglais.csv \
+  --output dist/models/duala-en --max-pairs 2000 --epochs 1
+
+# Tester le pivot français → anglais → duala
+server/.venv/bin/python scripts/translate-duala-pivot.py \
+  --model dist/models/duala-en --text "Votre solde est disponible."
+
 # Après remplissage : fusionner T1/T2, puis arbitrer
 python3 scripts/merge-native-reviews.py --lang fub
 # l'arbitre remplit data/review/fulfulde.arbitrage.csv

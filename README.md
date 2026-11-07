@@ -469,6 +469,7 @@ exigence par exigence dans [`docs/COMPLIANCE.md`](docs/COMPLIANCE.md).
 | [`data/reference/README.md`](data/reference/README.md) | navigateur Glosbe / Webonary / Resulam, sans copie |
 | [`docs/REFERENCE_SOURCES.md`](docs/REFERENCE_SOURCES.md) | audit licences et conditions des sources externes |
 | [`docs/TRAINING_DATA_AUDIT.md`](docs/TRAINING_DATA_AUDIT.md) | audit des fichiers d’entraînement (Parquet, Bible, CSV) |
+| [`docs/DUALA_MT.md`](docs/DUALA_MT.md) | modèle expérimental anglais → duala (CC-BY-4.0) |
 | [`docs/DATA_PERMISSIONS.md`](docs/DATA_PERMISSIONS.md) | modèles de demande d’autorisation |
 | [`docs/VIDEO_SCRIPT.md`](docs/VIDEO_SCRIPT.md) | script de la vidéo de 3 minutes |
 | [`docs/SUBMISSION_CHECKLIST.md`](docs/SUBMISSION_CHECKLIST.md) | checklist avant soumission |

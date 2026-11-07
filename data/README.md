@@ -56,7 +56,8 @@ copiée. Voir [`reference/README.md`](reference/README.md) et
 
 Manifeste des données d’entraînement : [`training/sources.csv`](training/sources.csv)
 et règles dans [`training/README.md`](training/README.md). Aucun fichier de
-données n’est versionné ; aucun entraînement n’est autorisé en l’état. Voir
+données n’est versionné. L’ewondo et le fulfulde restent bloqués ; le duala est
+autorisé pour un modèle **anglais → duala** (CC-BY-4.0). Voir
 [`../docs/TRAINING_DATA_AUDIT.md`](../docs/TRAINING_DATA_AUDIT.md).
 
 ## `review/`
