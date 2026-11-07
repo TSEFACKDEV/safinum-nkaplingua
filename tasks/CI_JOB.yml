@@ -1,5 +1,5 @@
-# Fragment à ajouter dans .github/workflows/ci.yml, sous `jobs:`.
-# Nécessite un token GitHub avec le scope `workflow` pour être poussé.
+# Jobs intégrés dans .github/workflows/ci.yml.
+# Le token GitHub utilisé dispose désormais du scope `workflow`.
 process:
   name: Journal d'évolution
   runs-on: ubuntu-latest

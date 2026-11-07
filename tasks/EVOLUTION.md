@@ -976,3 +976,40 @@ mot `json`) avec les champs ci-dessous. Exemple de structure, en indentation :
   ]
 }
 ```
+
+## 2026-11-07T19:23:00+01:00 — Klein — K11 — in_progress
+
+```json
+{
+  "timestamp": "2026-11-07T19:23:00+01:00",
+  "person": "Klein",
+  "branch": "klein",
+  "task": "K11",
+  "status": "in_progress",
+  "summary": "Intégration effective des jobs CI journal d'évolution et données linguistiques dans .github/workflows/ci.yml ; le token GitHub dispose du scope workflow.",
+  "files": [
+    ".github/workflows/ci.yml",
+    "tasks/CI_JOB.yml"
+  ],
+  "tests": [
+    {
+      "command": "python3 scripts/check-evolution.py",
+      "result": "pass",
+      "note": "26 entrées"
+    },
+    {
+      "command": "python3 scripts/check-language-data.py",
+      "result": "pass",
+      "note": "70 messages, 40 termes"
+    },
+    {
+      "command": "python3 scripts/check-native-kit.py",
+      "result": "pass",
+      "note": "212/130/130"
+    }
+  ],
+  "evidence": ".github/workflows/ci.yml § process et language-data",
+  "next": "Attendre la CI verte sur la PR, puis merger",
+  "blockers": []
+}
+```

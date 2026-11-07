@@ -93,6 +93,39 @@ jobs:
           test -d dist/package/universal/language-packs
           unzip -l dist/nkaplingua-extension.zip | head -20
 
+  process:
+    name: Journal d'évolution
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Vérifier le journal append-only
+        run: python3 scripts/check-evolution.py
+
+  language-data:
+    name: Données linguistiques
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Vérifier les données et le kit natif
+        run: |
+          python3 scripts/check-language-data.py
+          python3 scripts/check-native-kit.py
+          python3 scripts/check-language-packs.py
+
   security:
     name: Secret scan
     runs-on: ubuntu-latest
