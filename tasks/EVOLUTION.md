@@ -100,3 +100,30 @@ mot `json`) avec les champs ci-dessous. Exemple de structure, en indentation :
   "blockers": []
 }
 ```
+
+## 2026-11-07T17:05:00+01:00 — Freedy — F0 — done
+
+```json
+{
+  "timestamp": "2026-11-07T17:05:00+01:00",
+  "person": "Freedy",
+  "branch": "freedy",
+  "task": "F0",
+  "status": "done",
+  "summary": "Ajout du prompt de reprise après pull/clone pour les trois lots",
+  "files": [
+    "tasks/START_PROMPT.md",
+    "tasks/EVOLUTION.md"
+  ],
+  "tests": [
+    {
+      "command": "python3 scripts/check-evolution.py",
+      "result": "pass",
+      "note": "journal valide avec la nouvelle entrée"
+    }
+  ],
+  "evidence": "tasks/START_PROMPT.md",
+  "next": "F1 — charte UI, écrans et badges",
+  "blockers": []
+}
+```
