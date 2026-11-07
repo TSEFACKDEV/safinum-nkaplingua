@@ -84,7 +84,7 @@ TARGET_ALIASES = {
 # une mémoire de traduction communautaire (phrases status=validated).
 PACK_TARGETS = {
     "ewo": "Ewondo",
-    "dua": "Douala",
+    "dua": "Duala",
 }
 
 LANGUAGE_REGISTRY = [
@@ -107,7 +107,7 @@ LANGUAGE_REGISTRY = [
     },
     {
         "code": "dua",
-        "label": "Douala",
+        "label": "Duala",
         "engine": "pack",
         "status": "community-pack",
         "license": "pack communautaire, validation native requise",

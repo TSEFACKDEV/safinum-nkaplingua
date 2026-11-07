@@ -47,7 +47,7 @@
     {
       code: "dua",
       iso6393: "dua",
-      label: "Douala",
+      label: "Duala",
       nativeLabel: "Duálá",
       shortLabel: "DUA",
       region: "Littoral · Wouri",

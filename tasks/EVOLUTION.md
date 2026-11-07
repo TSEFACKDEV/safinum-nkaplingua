@@ -1137,3 +1137,43 @@ mot `json`) avec les champs ci-dessous. Exemple de structure, en indentation :
   "blockers": []
 }
 ```
+
+## 2026-11-07T20:00:00+01:00 — Freedy — F1 — done
+
+```json
+{
+  "timestamp": "2026-11-07T20:00:00+01:00",
+  "person": "Freedy",
+  "branch": "freedy",
+  "task": "F1",
+  "status": "done",
+  "summary": "Correction du libellé visible : Duala (code dua), remplace Douala dans le registre, le pack et le serveur.",
+  "files": [
+    "extension/languages.js",
+    "extension/language-packs/dua.json",
+    "server/app.py",
+    "docs/assets/popup-redesign-list.png",
+    "docs/assets/popup-redesign-real-list.png"
+  ],
+  "tests": [
+    {
+      "command": "node scripts/test-extension.js",
+      "result": "pass",
+      "note": "registre, détection, packs, jetons, qualité"
+    },
+    {
+      "command": "python3 scripts/check-language-packs.py",
+      "result": "pass",
+      "note": "3 fichiers, 3 feuilles"
+    },
+    {
+      "command": "chargement réel de l'extension Chrome",
+      "result": "pass",
+      "note": "options Fulfulde, Ewondo, Duala ; 0 erreur"
+    }
+  ],
+  "evidence": "docs/assets/popup-redesign-list.png : ligne Duala",
+  "next": "Pousser la correction sur develop",
+  "blockers": []
+}
+```
