@@ -44,6 +44,14 @@ Une ligne `status=validated` exige :
 
 Voir [`../extension/language-packs/README.md`](../extension/language-packs/README.md).
 
+## `reference/`
+
+Navigateur de références pour les 40 termes du glossaire :
+[`reference/glossary-links.csv`](reference/glossary-links.csv) contient les
+liens Glosbe, Webonary, Resulam et SIL Cameroon. Aucune traduction n’est
+copiée. Voir [`reference/README.md`](reference/README.md) et
+[`../docs/REFERENCE_SOURCES.md`](../docs/REFERENCE_SOURCES.md).
+
 ## `review/`
 
 Kit de traduction native TRAPD généré par
