@@ -156,9 +156,14 @@ Moteur — NLLB-200 local, MyMemory ou pack
 
 | Langue | Code | Moteur | Ressources connues | État |
 |---|---|---|---|---|
-| Fulfulde (Adamawa) | `fub` | NLLB local | Common Voice ASR ; 1 303 enregistrements TTS | MT baseline, validation native en cours |
+| Fulfulde (Adamawa) | `fub` | NLLB local | Common Voice ASR ; 1 303 enregistrements TTS | MT baseline, 0/102 phrases validées |
 | Ewondo | `ewo` | Pack communautaire | Common Voice 27.0 : 14,36 h, 31 voix ; Ewondo-ASR ~3 h 11 | 0/20 phrases validées |
 | Duala | `dua` | Pack communautaire | Common Voice 27.0 (heures à vérifier) | 0/20 phrases validées |
+
+Le **kit natif TRAPD** est prêt dans [`data/review/`](data/review/) :
+classeurs T1/T2, fiche d'arbitrage et 20 phrases inédites. Aucune traduction
+n'est inventée : les colonnes cibles restent vides tant que les natifs n'ont
+pas travaillé.
 
 Yemba, medumba, bassa et ghomala’ ne font pas partie du prototype : ni corpus
 de parole comparable, ni moteur validé. Voir la justification détaillée dans
@@ -424,7 +429,8 @@ Détails : [`docs/DATA_LICENSES.md`](docs/DATA_LICENSES.md).
 
 Le projet distingue :
 
-- **qualité linguistique** : validation par un locuteur natif fulfulde ;
+- **qualité linguistique** : validation TRAPD par trois natifs par langue
+  (deux traducteurs indépendants et un arbitre) ;
 - **sécurité** : 100 % des montants et entités préservés ;
 - **contenu inédit** : phrases jamais utilisées pour l’entraînement ;
 - **latence** : mesurée sur CPU et GPU.
@@ -446,6 +452,8 @@ exigence par exigence dans [`docs/COMPLIANCE.md`](docs/COMPLIANCE.md).
 | [`docs/DESIGN.md`](docs/DESIGN.md) | palette, typographie, espacement, accessibilité |
 | [`docs/TECHNICAL.md`](docs/TECHNICAL.md) | architecture, intégration, dépendances, limites |
 | [`docs/LANGUAGE_VALIDATION.md`](docs/LANGUAGE_VALIDATION.md) | fulfulde, méthode de validation native |
+| [`docs/VALIDATION_REPORT.md`](docs/VALIDATION_REPORT.md) | état réel du panel, corpus, phrases inédites |
+| [`data/review/README.md`](data/review/README.md) | kit natif T1/T2, arbitrage et consentement |
 | [`docs/VIDEO_SCRIPT.md`](docs/VIDEO_SCRIPT.md) | script de la vidéo de 3 minutes |
 | [`docs/SUBMISSION_CHECKLIST.md`](docs/SUBMISSION_CHECKLIST.md) | checklist avant soumission |
 
@@ -464,7 +472,7 @@ exigence par exigence dans [`docs/COMPLIANCE.md`](docs/COMPLIANCE.md).
 │   ├── requirements.txt
 │   └── requirements-ci.txt
 ├── demo/                   # Page FINAKA fictive
-├── data/                   # Glossaire à valider, termes à ne pas traduire
+├── data/                   # Glossaire, packs, audio, kit natif T1/T2
 ├── docs/                   # Sécurité, licences, évaluation, pitch, Firefox
 ├── scripts/                # build Firefox, lancement Firefox
 ├── .github/workflows/      # CI GitHub Actions
@@ -513,7 +521,9 @@ Conventions de commit : `feat:`, `fix:`, `docs:`, `test:`, `chore:`.
 - [x] Détection FR/EN et choix de trois langues (fulfulde, ewondo, duala)
 - [x] Traduction des attributs et des options
 - [x] CI GitHub Actions
-- [ ] Remplir les packs ewondo et duala (20 phrases), avec locuteurs natifs
+- [x] Kit natif T1/T2, glossaire 40 termes et 70 messages du site
+- [x] Pré-évaluation mécanique des 20 phrases inédites (12 acceptées, 8 refusées)
+- [ ] Remplir les packs fulfulde, ewondo et duala avec les locuteurs natifs
 - [ ] Validation native de 100 phrases finance
 - [ ] Brancher les données OLC/ERDELAP (`docs/DATA_INTEGRATION.md`)
 - [ ] Glossaire finance validé (`data/glossary.template.csv`)

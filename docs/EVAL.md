@@ -113,6 +113,11 @@ il doit rester divulgué et optionnel pour les données réelles.
 
 Lecture honnête : le local seul est plus sûr mais couvre 45 % ; le cloud
 ciblé couvre 100 % de cet échantillon mais n’a pas de rétro-traduction locale.
+La pré-évaluation K5 du 7 novembre 2026, avec protection des nombres et des
+termes mais sans rétro-traduction, donne **12/20 sorties acceptées** par les
+contrôles et **8/20 refusées** (montant, terme critique ou jeton perdu). Les
+sorties acceptées restent à juger par un natif dans `docs/UNSEEN_JUDGMENT.csv`.
+
 La vérité terrain reste la relecture native.
 
 ## Ce qu’il ne faut pas faire

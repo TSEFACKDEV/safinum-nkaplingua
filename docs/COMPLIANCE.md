@@ -62,7 +62,7 @@ Limites connues :
 - pas de support des shadow DOM fermés ;
 - pas de traduction des images/canvas ;
 - qualité NLLB variable sur les phrases longues ;
-- les packs ewondo et duala sont vides tant qu’un natif ne les remplit pas ;
+- les packs fulfulde, ewondo et duala sont vides tant que le panel TRAPD ne les remplit pas ;
 - l’interface doit être une page web (pas une application mobile native).
 
 ## 5. Règles de sécurité
@@ -78,8 +78,8 @@ Limites connues :
 
 ## 6. Actions prioritaires avant soumission
 
-1. **Faire valider 20 phrases finance par un locuteur natif fulfulde.**
-2. **Remplir les packs ewondo et duala** avec des locuteurs natifs (TRAPD).
+1. **Faire valider les phrases finance par le panel TRAPD (3 natifs par langue).**
+2. **Remplir les packs fulfulde, ewondo et duala** avec le panel TRAPD.
 3. **Tester le ZIP universel sur Chrome et Firefox, sans backend local.**
 4. **Tester la tokenisation des noms et la traduction des attributs.**
 5. **Enregistrer la vidéo de 3 minutes** selon `docs/VIDEO_SCRIPT.md`.

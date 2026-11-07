@@ -106,7 +106,7 @@ server/app.py
 - **Audio optionnel** : Common Voice Adamawa Fulfulde, CC0.
 - **Centre linguistique** : publications utilisées comme référence
   orthographique et terminologique ; aucune donnée redistribuée sans licence.
-- **Glossaire finance** : à remplir et valider par un locuteur natif.
+- **Glossaire finance** : à remplir et valider par le panel TRAPD (trois natifs par langue).
 
 ## 8. Démonstration prévue
 
@@ -130,7 +130,7 @@ server/app.py
 
 ### Jour 1 — après-midi (6–12 h)
 
-- remplir 30 termes du glossaire avec un locuteur natif ;
+- remplir 40 termes du glossaire avec le panel TRAPD ;
 - tester 20 phrases finance ;
 - corriger les problèmes de segmentation ;
 - vérifier les montants, numéros et URLs.

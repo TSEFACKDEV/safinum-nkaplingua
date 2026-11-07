@@ -5,6 +5,14 @@ Usage :
     python3 scripts/import-language-pack.py data/language-packs/ewo.csv
 
 Le CSV doit contenir les colonnes : source, target, status, reviewer, context.
+Les colonnes optionnelles reviewed_at, license et provenance sont contrôlées
+pour les entrées validées :
+
+- reviewer non vide ;
+- license dans {CC0-1.0, CC-BY-4.0} ;
+- provenance = human (aucune machine translation dans un pack validé) ;
+- reviewed_at au format ISO (AAAA-MM-JJ).
+
 Seules les lignes avec une cible non vide sont importées. Les jetons
 [[NUM_n]], [[NAME_n]], [[URL_n]] et [[EMAIL_n]] sont contrôlés.
 """
@@ -21,6 +29,8 @@ from pathlib import Path
 
 TOKEN_RE = re.compile(r"\[\[\s*(NUM|URL|EMAIL|NAME)\s*_\s*(\d+)\s*\]\]", re.I)
 DNT_TERMS = ["FCFA", "XAF", "PIN", "OTP", "KYC", "FINAKA"]
+ALLOWED_LICENSES = {"CC0-1.0", "CC-BY-4.0"}
+STATUSES = {"draft", "reviewed", "validated", "deprecated"}
 
 
 def tokens(text: str) -> list[str]:
@@ -34,6 +44,30 @@ def has_term(text: str, term: str) -> bool:
     return bool(
         re.search(rf"(?<!\w){re.escape(term)}(?!\w)", text, flags=re.I)
     )
+
+
+def normalize_license(value: str) -> str:
+    """Ramène les écritures courantes à un identifiant SPDX."""
+    cleaned = value.strip().upper().replace("_", "-")
+    cleaned = re.sub(r"\s+", "-", cleaned)
+    aliases = {
+        "CC0": "CC0-1.0",
+        "CC0-1.0": "CC0-1.0",
+        "CC0-1": "CC0-1.0",
+        "CC-BY": "CC-BY-4.0",
+        "CC-BY-4.0": "CC-BY-4.0",
+        "CC-BY-4": "CC-BY-4.0",
+    }
+    return aliases.get(cleaned, value.strip())
+
+
+def parse_iso_date(value: str) -> str | None:
+    if not value:
+        return None
+    try:
+        return date.fromisoformat(value).isoformat()
+    except ValueError:
+        return None
 
 
 def validate(source: str, target: str) -> list[str]:
@@ -51,6 +85,18 @@ def validate(source: str, target: str) -> list[str]:
     return errors
 
 
+def load_existing(output: Path) -> dict:
+    if not output.exists():
+        return {}
+    try:
+        payload = json.loads(output.read_text(encoding="utf-8"))
+    except Exception as error:
+        raise SystemExit(f"JSON existant invalide : {error}")
+    if not isinstance(payload, dict):
+        raise SystemExit("Le pack existant doit être un objet JSON.")
+    return payload
+
+
 def main() -> int:
     parser = argparse.ArgumentParser()
     parser.add_argument("csv_path", type=Path)
@@ -64,6 +110,11 @@ def main() -> int:
         "--allow-draft",
         action="store_true",
         help="Importer aussi les lignes status=draft (non appliquées par l'extension).",
+    )
+    parser.add_argument(
+        "--version",
+        default=None,
+        help="Version du pack (par défaut : conserver la version existante).",
     )
     args = parser.parse_args()
 
@@ -79,8 +130,10 @@ def main() -> int:
         print(f"CSV introuvable : {args.csv_path}", file=sys.stderr)
         return 1
 
-    entries: list[dict] = []
+    entries_by_source: dict[str, dict] = {}
     errors: list[str] = []
+    reviewers: set[str] = set()
+    review_dates: list[str] = []
 
     with args.csv_path.open(encoding="utf-8", newline="") as handle:
         reader = csv.DictReader(handle)
@@ -88,6 +141,18 @@ def main() -> int:
             source = (row.get("source") or "").strip()
             target = (row.get("target") or "").strip()
             status = (row.get("status") or "draft").strip().lower()
+            reviewer = (row.get("reviewer") or "").strip()
+            license_id = normalize_license(row.get("license") or "")
+            provenance = (row.get("provenance") or "").strip().lower()
+            reviewed_at = parse_iso_date(
+                (row.get("reviewed_at") or "").strip()
+            )
+
+            if status not in STATUSES:
+                errors.append(
+                    f"ligne {line_number} : statut inconnu {status!r}"
+                )
+                continue
 
             if not source or not target:
                 continue
@@ -99,18 +164,47 @@ def main() -> int:
                 errors.append(f"ligne {line_number} : {', '.join(row_errors)}")
                 continue
 
-            entries.append(
-                {
-                    "source": source,
-                    "target": target,
-                    "status": status,
-                    "reviewer": (row.get("reviewer") or "").strip() or None,
-                    "reviewedAt": date.today().isoformat()
-                    if status == "validated"
-                    else None,
-                    "context": (row.get("context") or "").strip() or "finance",
-                }
-            )
+            if status == "validated":
+                if not reviewer:
+                    errors.append(
+                        f"ligne {line_number} : relecteur obligatoire pour "
+                        "une entrée validée"
+                    )
+                    continue
+                if license_id not in ALLOWED_LICENSES:
+                    errors.append(
+                        f"ligne {line_number} : licence {license_id!r} "
+                        "inconnue (attendu CC0-1.0 ou CC-BY-4.0)"
+                    )
+                    continue
+                if provenance != "human":
+                    errors.append(
+                        f"ligne {line_number} : provenance {provenance!r} "
+                        "refusée pour une entrée validée (attendu human)"
+                    )
+                    continue
+                if reviewed_at is None:
+                    errors.append(
+                        f"ligne {line_number} : reviewed_at ISO obligatoire "
+                        "pour une entrée validée"
+                    )
+                    continue
+
+            entry = {
+                "source": source,
+                "target": target,
+                "status": status,
+                "reviewer": reviewer or None,
+                "reviewedAt": reviewed_at,
+                "context": (row.get("context") or "").strip() or "finance",
+                "license": license_id or None,
+                "provenance": provenance or None,
+            }
+            entries_by_source[source] = entry
+            if reviewer:
+                reviewers.add(reviewer)
+            if reviewed_at:
+                review_dates.append(reviewed_at)
 
     if errors:
         print("Import refusé :", file=sys.stderr)
@@ -118,25 +212,37 @@ def main() -> int:
             print(f"  - {error}", file=sys.stderr)
         return 2
 
-    output.parent.mkdir(parents=True, exist_ok=True)
+    existing = load_existing(output)
     payload = {
-        "code": code,
-        "version": "0.2.0",
-        "status": "community-pack",
-        "sourceLanguage": "fr",
-        "orthography": "AGLC",
-        "reviewedBy": next(
-            (entry["reviewer"] for entry in entries if entry["reviewer"]),
-            None,
+        "code": existing.get("code", code),
+        "label": existing.get("label", code),
+        "nativeLabel": existing.get("nativeLabel", code),
+        "version": args.version or existing.get("version", "0.2.0"),
+        "status": existing.get("status", "community-pack"),
+        "sourceLanguage": existing.get("sourceLanguage", "fr"),
+        "orthography": existing.get("orthography", "AGLC"),
+        "reviewedBy": ", ".join(sorted(reviewers)) or None,
+        "reviewedAt": max(review_dates) if review_dates else None,
+        "notes": existing.get(
+            "notes",
+            "Mémoire de traduction communautaire. Seules les entrées "
+            "status=validated sont appliquées.",
         ),
-        "reviewedAt": date.today().isoformat(),
-        "entries": entries,
+        "entries": list(entries_by_source.values()),
     }
+
+    output.parent.mkdir(parents=True, exist_ok=True)
     output.write_text(
         json.dumps(payload, ensure_ascii=False, indent=2) + "\n",
         encoding="utf-8",
     )
-    print(f"{len(entries)} entrée(s) importée(s) vers {output}")
+    validated = sum(
+        1 for entry in payload["entries"] if entry["status"] == "validated"
+    )
+    print(
+        f"{len(payload['entries'])} entrée(s) importée(s) "
+        f"({validated} validée(s)) vers {output}"
+    )
     return 0
 
 

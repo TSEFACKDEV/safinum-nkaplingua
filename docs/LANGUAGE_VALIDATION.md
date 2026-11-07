@@ -10,9 +10,12 @@
 
 | Langue | Code | Moteur | Statut | Ce qui reste à faire |
 |---|---|---|---|---|
-| Fulfulde (Adamawa) | `fub` | NLLB `fuv_Latn` | MT baseline | TRAPD sur 40 phrases P0, puis 102 |
+| Fulfulde (Adamawa) | `fub` | NLLB `fuv_Latn` | 0/102 phrases validées | TRAPD sur les 37 P0, puis les 65 autres |
 | Ewondo | `ewo` | Pack communautaire | 0/20 phrases | TRAPD sur `data/language-packs/ewo.csv` |
 | Duala | `dua` | Pack communautaire | 0/20 phrases | TRAPD sur `data/language-packs/dua.csv` |
+
+Les classeurs de travail sont prêts dans [`../data/review/`](../data/review/) :
+T1 et T2 par langue, fiche d'arbitrage, fiche des 20 phrases inédites.
 
 **Patrimoine audio** (annonces externes, à vérifier) :
 
@@ -60,11 +63,62 @@ Les jetons `[[NUM_n]]`, `[[NAME_n]]`, `[[URL_n]]` et `[[EMAIL_n]]` ne doivent
 pas être traduits ni déplacés. Les termes `FCFA`, `PIN`, `OTP` et `FINAKA`
 doivent rester identiques.
 
+## 3bis. Panel actuel (K1)
+
+**État au 7 novembre 2026** : un locuteur natif est identifié pour chaque
+langue cible. Cela permet de démarrer la traduction, mais **pas** de terminer
+TRAPD : il manque, par langue, un second traducteur indépendant et un arbitre.
+
+| Langue | Natif identifié | Rôle actuel | 2e traducteur | Arbitre | Statut K1 |
+|---|---|---|---|---|---|
+| Fulfulde (fub) | oui | traducteur 1 | à recruter | à recruter | partiel |
+| Ewondo (ewo) | oui | traducteur 1 | à recruter | à recruter | partiel |
+| Duala (dua) | oui | traducteur 1 | à recruter | à recruter | partiel |
+
+Consentements : utiliser [`CONSENT_TEMPLATE.md`](CONSENT_TEMPLATE.md). Aucun
+nom, numéro ou pièce d’identité ne doit être publié dans le dépôt.
+
+### Classeurs T1/T2
+
+Le kit est décrit dans [`../data/review/README.md`](../data/review/README.md).
+Il est généré par :
+
+```bash
+python3 scripts/make-native-kit.py
+```
+
+| Langue | Fichier T1 | Fichier T2 | Items |
+|---|---|---|---:|
+| Fulfulde | `data/review/fulfulde.t1.csv` | `data/review/fulfulde.t2.csv` | 212 |
+| Ewondo | `data/review/ewondo.t1.csv` | `data/review/ewondo.t2.csv` | 130 |
+| Duala | `data/review/duala.t1.csv` | `data/review/duala.t2.csv` | 130 |
+
+Après remplissage :
+
+```bash
+python3 scripts/merge-native-reviews.py --lang fub
+# l'arbitre remplit data/review/fulfulde.arbitrage.csv
+python3 scripts/import-native-reviews.py --lang fub --dry-run
+python3 scripts/import-native-reviews.py --lang fub
+python3 scripts/check-language-data.py
+python3 scripts/check-language-packs.py
+```
+
+L'import refuse une ligne validée si T1/T2 manquent, si les deux relecteurs
+sont la même personne, si l'arbitre est T1 ou T2, ou si la licence, la date
+ou la provenance humaine manque.
+
+> **Règle de sécurité** : tant que le panel n’est pas complet, les phrases
+> traduites restent `draft` / `a_traduire`. Elles ne passent pas
+> `validated` et ne sont pas appliquées par l’extension. Le script d'import
+> applique cette règle : une seule personne ne peut pas valider un pack.
+
 ## 4. Protocole pour le fulfulde (MT)
 
 ### Panel
 
-- 2 à 3 locuteurs natifs du fulfulde adamawa.
+- 3 locuteurs natifs du fulfulde adamawa : deux traducteurs indépendants et
+  un arbitre.
 - Au moins un linguiste ou enseignant de langues nationales.
 - Si possible, un agent de service client financier.
 
@@ -159,6 +213,23 @@ En fallback cloud ciblé (MyMemory) sur les phrases rejetées, les 20 phrases de
 `data/unseen_finance.txt` passent les contrôles de jetons et de qualité. Cela
 améliore la couverture, mais le cloud n’a pas la rétro-traduction locale : la
 validation native reste obligatoire.
+
+### Pré-évaluation des 20 phrases inédites (7 novembre 2026)
+
+Le script `scripts/generate-unseen-fub.py` a traduit les 20 phrases de
+`data/unseen_finance.txt` en simulant le pipeline de l'extension :
+protection des termes, protection des nombres, NLLB, restauration.
+
+| Résultat mécanique | Nombre | Suite |
+|---|---:|---|
+| Sortie acceptée par les contrôles de jetons/nombres | 12/20 | à juger par un natif |
+| Sortie refusée automatiquement | 8/20 | original conservé, non jugée |
+
+Les 8 refus sont principalement des nombres ou des termes critiques perdus
+(`FCFA`, `PIN`, montants). C'est le comportement attendu : le pipeline
+préfère refuser plutôt que d'afficher un montant faux. Les 12 sorties
+acceptées ne sont **pas** validées pour autant : un natif doit remplir
+`docs/UNSEEN_JUDGMENT.csv` avec `acceptable`, `trompeur` ou `faux`.
 
 **Conclusion** : le pipeline technique est fonctionnel, mais la qualité
 linguistique du fulfulde n’est **pas encore validée**. Les deux packs sont

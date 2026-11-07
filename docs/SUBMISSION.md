@@ -91,8 +91,9 @@ https://tsefackdev.github.io/safinum-nkaplingua/demo/
 - [ ] Extension testée sur Chrome et Firefox.
 - [ ] Démo publique accessible.
 - [ ] Aucune donnée réelle dans la vidéo ou les captures.
-- [ ] Un locuteur natif a relu les phrases critiques.
-- [ ] Les packs ewondo et duala sont remplis ou affichés comme « 0/20 ».
+- [ ] Le panel TRAPD (3 natifs par langue) a relu les phrases critiques.
+- [ ] Les packs fulfulde, ewondo et duala sont remplis ou affichés comme
+  « 0/102 » et « 0/20 ».
 - [ ] Un nom de bénéficiaire est préservé.
 - [ ] Les attributs `title`, `aria-label`, `placeholder`, `alt` sont traduits.
 
