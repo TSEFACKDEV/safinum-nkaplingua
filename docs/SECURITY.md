@@ -130,6 +130,9 @@ Python. Si le backend local n’est pas disponible, elle bascule sur **MyMemory*
 - Si le backend local rejette une phrase (rétro-traduction, qualité), le
   background peut demander une seconde opinion au cloud **pour cette phrase
   seulement**. Le texte reste pseudonymisé.
+- L’utilisateur peut décocher « Autoriser MyMemory » dans le popup pour
+  rester en mode local strict ; dans ce cas, une phrase rejetée reste dans
+  sa langue source.
 - Si le service cloud échoue ou dépasse le quota, l’original est conservé.
 - Le service est divulgué dans `docs/DATA_LICENSES.md` et dans le popup.
 

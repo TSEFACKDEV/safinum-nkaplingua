@@ -146,7 +146,8 @@ Moteur — NLLB-200 local, MyMemory ou pack
 - **Cloud de secours** : MyMemory, avec texte pseudonymisé et consentement
   explicite par le clic de l’utilisateur. Si le backend local rejette une
   phrase (rétro-traduction ou qualité), l’extension demande une seconde
-  opinion au cloud pour cette phrase seulement.
+  opinion au cloud pour cette phrase seulement. La case
+  « Autoriser MyMemory » du popup permet de rester en local strict.
 - **CI GitHub Actions** : tests backend mock, lint JS, lint Firefox, scan de
   secrets, packaging.
 

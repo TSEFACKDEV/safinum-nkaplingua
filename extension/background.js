@@ -165,6 +165,7 @@ async function translateSegments(segments, target, source) {
     return { translations: [], provider: null };
   }
 
+  const allowCloud = await cloudAllowed();
   const targetSpec = LANG?.getTarget(target);
   if (!targetSpec) {
     return {
@@ -309,7 +310,7 @@ async function translateSegments(segments, target, source) {
   // 2b) Si le local est disponible mais rejette certaines phrases (jeton,
   // qualité, rétro-traduction), on demande une seconde opinion au cloud
   // pseudonymisé. Le local reste prioritaire pour les phrases acceptées.
-  if (translations && TRANSLATION_MODE !== "local") {
+  if (translations && allowCloud) {
     const rejected = translations.filter((translation) => !translation.ok);
     if (rejected.length > 0) {
       const rejectedSegments = remaining.filter((segment) =>
@@ -338,7 +339,7 @@ async function translateSegments(segments, target, source) {
   }
 
   // 3) Cloud de secours complet si le local n'a rien produit.
-  if (!translations && TRANSLATION_MODE !== "local") {
+  if (!translations && allowCloud) {
     try {
       translations = await translateWithCloud(remaining, detected, targetSpec);
       provider = "cloud";
@@ -355,7 +356,9 @@ async function translateSegments(segments, target, source) {
     return {
       translations: [],
       provider: null,
-      error: "Aucun moteur de traduction disponible."
+      error: allowCloud
+        ? "Aucun moteur de traduction disponible."
+        : "Cloud désactivé et backend local indisponible. Lancez le backend ou autorisez le cloud."
     };
   }
 
@@ -508,6 +511,16 @@ async function translateWithPack(segments, targetSpec) {
 /* ------------------------------------------------------------------ */
 /* Backend local                                                      */
 /* ------------------------------------------------------------------ */
+
+async function cloudAllowed() {
+  if (TRANSLATION_MODE === "local") return false;
+  try {
+    const stored = await api.storage?.local?.get("nkCloudFallback");
+    return stored?.nkCloudFallback !== false;
+  } catch {
+    return true;
+  }
+}
 
 async function isLocalAvailable() {
   if (TRANSLATION_MODE === "cloud") return false;
