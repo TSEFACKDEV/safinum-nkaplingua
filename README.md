@@ -42,6 +42,8 @@ Le niveau A (solde, frais, PIN/OTP, confirmation, erreurs) ne vient que d’un
 pack validé ; sans phrase validée, l’original reste affiché avec un badge
 « non traduit ». Aucun appel MT n’est fait sur ce niveau.
 
+Suivi détaillé du lot moteur : [docs/MARIUS_STATUS.md](docs/MARIUS_STATUS.md).
+
 ## Aperçu
 
 <p align="center">
