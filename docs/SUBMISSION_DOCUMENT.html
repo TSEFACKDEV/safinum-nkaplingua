@@ -548,7 +548,7 @@
             Elle fonctionne en 100 % local avec le backend `flagship-ai`/NLLB,
             ou avec les packs validés. L’utilisateur clique, choisit sa langue,
             et peut revenir à l’original à tout moment. Le fulfulde et l’ewondo
-            disposent d’un brouillon MT ; le duala utilise des phrases validées.
+            disposent d’un brouillon MT et d’un pack humain ; le duala utilise un pack humain.
             Les phrases critiques sans pack restent en français.
           </p>
         </div>
@@ -690,7 +690,7 @@
         <tr>
           <td><strong>Langues</strong></td>
           <td>Fulfulde (`fub`) + ewondo en MT brouillon ; duala en pack</td>
-          <td>Deux langues avec modèle, une langue en phrases validées.</td>
+          <td>Deux langues avec modèle, une langue en pack humain.</td>
         </tr>
         <tr>
           <td><strong>Traduction</strong></td>
@@ -888,8 +888,8 @@
         Le fulfulde adamawa et l’ewondo disposent d’un brouillon
         <span class="mono">flagship-ai</span>, avec NLLB en secours pour le
         fulfulde et l’orthographe AGLC comme référence. Le duala utilise un pack
-        de phrases validées par des locuteurs natifs. Aucun modèle ne prétend
-        produire une traduction validée : les phrases critiques sans pack
+        de phrases relues par des locuteurs. Aucun modèle ne prétend produire une
+        traduction validée : les phrases critiques sans pack
         restent en français.
       </p>
 
@@ -919,7 +919,7 @@
       <ul class="clean">
         <li>Les moteurs flagship-ai/NLLB sont des <strong>brouillons</strong>, pas des traductions certifiées.</li>
         <li>Les phrases courtes sont plus fiables que les phrases longues.</li>
-        <li>Les trois packs sont vides tant que le panel natif ne les remplit pas.</li>
+        <li>Les trois packs contiennent des brouillons humains (107/122/121 entrées) mais aucune entrée validée : un T2 indépendant et un arbitre restent nécessaires.</li>
         <li>Le backend filtre les sorties dégénérées ; les phrases critiques sans pack restent en français.</li>
         <li>La validation native est la prochaine étape obligatoire.</li>
         <li>Le prototype ne remplace pas une traduction contractuelle officielle.</li>
@@ -1021,7 +1021,7 @@
         <tr>
           <td>Packs fulfulde / ewondo / duala</td>
           <td>CC0-1.0 ou CC-BY-4.0</td>
-          <td>Mémoires de traduction validées, hors ligne.</td>
+          <td>Mémoires de traduction humaines, hors ligne.</td>
         </tr>
         <tr>
           <td>Common Voice Adamawa Fulfulde</td>
@@ -1044,7 +1044,7 @@
       <ul class="clean two-col-list">
         <li>Variété fulfulde à valider.</li>
         <li>Phrases longues fragiles.</li>
-        <li>Trois packs vides au départ.</li>
+        <li>Trois packs remplis de brouillons humains, aucune entrée validée.</li>
         <li>Phrases critiques sans pack laissées en français.</li>
         <li>Pas d’iframes cross-origin.</li>
         <li>Pas de shadow DOM fermé.</li>

@@ -19,6 +19,14 @@ TOKEN_RE = re.compile(r"\[\[\s*(NUM|URL|EMAIL|NAME)\s*_\s*(\d+)\s*\]\]", re.I)
 DNT_TERMS = ["FCFA", "XAF", "PIN", "OTP", "KYC", "FINAKA"]
 STATUSES = {"draft", "reviewed", "validated", "deprecated"}
 ALLOWED_LICENSES = {"CC0-1.0", "CC-BY-4.0"}
+REVIEW_LEVELS = {
+    "single-translator",
+    "second-translator-fallback",
+    "reused-message",
+    "composed-template",
+    "independent",
+    "validated",
+}
 
 
 def tokens(text: str) -> list[str]:
@@ -32,6 +40,12 @@ def has_term(text: str, term: str) -> bool:
     return bool(
         re.search(rf"(?<!\w){re.escape(term)}(?!\w)", text, flags=re.I)
     )
+
+
+def numbers(text: str) -> list[str]:
+    cleaned = TOKEN_RE.sub(" ", text or "")
+    cleaned = re.sub(r"(?<=\d)[\s\u00A0]+(?=\d)", "", cleaned)
+    return re.findall(r"\d+(?:[.,]\d+)?", cleaned)
 
 
 def check_pack(path: Path) -> list[str]:
@@ -71,12 +85,11 @@ def check_pack(path: Path) -> list[str]:
         if status not in STATUSES:
             errors.append(f"{path.name}#{index}: statut inconnu {status!r}")
             continue
-        if status != "validated":
-            continue
 
         if not target:
-            errors.append(f"{path.name}#{index}: cible vide mais validée")
+            errors.append(f"{path.name}#{index}: cible vide ({status})")
             continue
+
         if not reviewer:
             errors.append(f"{path.name}#{index}: relecteur manquant")
         if license_id not in ALLOWED_LICENSES:
@@ -89,13 +102,20 @@ def check_pack(path: Path) -> list[str]:
                 f"{path.name}#{index}: provenance {provenance!r} refusée "
                 "(attendu human)"
             )
-        if reviewed_at:
+        if not reviewed_at:
+            errors.append(f"{path.name}#{index}: reviewedAt manquant")
+        else:
             try:
                 date.fromisoformat(reviewed_at)
             except ValueError:
                 errors.append(
                     f"{path.name}#{index}: reviewedAt non ISO {reviewed_at!r}"
                 )
+        review_level = (entry.get("reviewLevel") or "").strip()
+        if status in {"reviewed", "draft"} and review_level not in REVIEW_LEVELS:
+            errors.append(
+                f"{path.name}#{index}: reviewLevel {review_level!r} invalide"
+            )
 
         for token in tokens(source):
             if target.count(token) != 1:
@@ -106,6 +126,14 @@ def check_pack(path: Path) -> list[str]:
             if has_term(source, term) and not has_term(target, term):
                 errors.append(
                     f"{path.name}#{index}: terme critique {term} manquant"
+                )
+        target_flat = re.sub(
+            r"(?<=\d)[\s\u00A0]+(?=\d)", "", target
+        )
+        for number in numbers(source):
+            if number not in target_flat:
+                errors.append(
+                    f"{path.name}#{index}: nombre {number} modifié"
                 )
     return errors
 
@@ -129,7 +157,8 @@ def check_sheet(path: Path) -> list[str]:
             errors.append(
                 f"{path.name}#{index}: statut inconnu {status!r}"
             )
-        if status == "validated":
+        target = (row.get("target") or "").strip()
+        if status in {"validated", "reviewed", "draft"} and target:
             if not (row.get("reviewer") or "").strip():
                 errors.append(f"{path.name}#{index}: relecteur manquant")
             if (row.get("license") or "").strip() not in ALLOWED_LICENSES:
@@ -137,6 +166,12 @@ def check_sheet(path: Path) -> list[str]:
             if (row.get("provenance") or "").strip().lower() != "human":
                 errors.append(
                     f"{path.name}#{index}: provenance human attendue"
+                )
+            if status in {"reviewed", "draft"} and (
+                row.get("review_level") or ""
+            ).strip() not in REVIEW_LEVELS:
+                errors.append(
+                    f"{path.name}#{index}: review_level manquant ou invalide"
                 )
     return errors
 

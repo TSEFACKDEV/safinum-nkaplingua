@@ -1,41 +1,41 @@
 source_fr,source_en,target_fub,target_ewo,target_dua,domain,note,status,reviewer_fub,reviewer_ewo,reviewer_dua
-solde disponible,available balance,,,,mobile_money,terme affiché sur l'écran principal,a_traduire,,,
-frais de transfert,transfer fee,,,,mobile_money,doit rester explicite,a_traduire,,,
-montant à envoyer,amount to send,,,,mobile_money,,a_traduire,,,
-bénéficiaire,recipient,,,,mobile_money,,a_traduire,,,
-code PIN,PIN code,,,,security,ne jamais traduire le chiffre,a_traduire,,,
-code de confirmation,confirmation code,,,,security,OTP,a_traduire,,,
-taux d'intérêt,interest rate,,,,credit,,a_traduire,,,
-frais de dossier,processing fee,,,,credit,,a_traduire,,,
-pénalité de retard,late penalty,,,,credit,,a_traduire,,,
-capacité de remboursement,repayment capacity,,,,credit,,a_traduire,,,
-épargne automatique,automatic savings,,,,savings,,a_traduire,,,
-objectif d'épargne,savings goal,,,,savings,,a_traduire,,,
-dépôt,deposit,,,,mobile_money,,a_traduire,,,
-retrait,withdrawal,,,,mobile_money,,a_traduire,,,
-paiement marchand,merchant payment,,,,mobile_money,,a_traduire,,,
-vérification d'identité,identity verification,,,,kyc,,a_traduire,,,
-pièce d'identité,identity document,,,,kyc,,a_traduire,,,
-service client,customer service,,,,support,,a_traduire,,,
-transaction,transaction,,,,general,,a_traduire,,,
-remboursement,repayment,,,,credit,,a_traduire,,,
-frais,fee,,,,general,terme générique,a_traduire,,,
-total,total,,,,general,,a_traduire,,,
-échéance,due date,,,,credit,,a_traduire,,,
-plafond,limit,,,,mobile_money,,a_traduire,,,
-découvert,overdraft,,,,credit,,a_traduire,,,
-agence,branch,,,,general,,a_traduire,,,
-guichet,counter / teller window,,,,general,,a_traduire,,,
-code,code,,,,security,à distinguer de PIN et OTP,a_traduire,,,
-référence,reference,,,,general,,a_traduire,,,
-reçu,receipt,,,,general,,a_traduire,,,
-litige,dispute,,,,support,,a_traduire,,,
-échec,failure,,,,support,,a_traduire,,,
-annulation,cancellation,,,,support,,a_traduire,,,
-confirmation,confirmation,,,,security,,a_traduire,,,
-sécurité,security,,,,security,,a_traduire,,,
-frais de change,exchange fee,,,,mobile_money,,a_traduire,,,
-taux de change,exchange rate,,,,mobile_money,,a_traduire,,,
-montant,amount,,,,general,,a_traduire,,,
-solde,balance,,,,general,,a_traduire,,,
-destinataire,recipient,,,,mobile_money,synonyme de bénéficiaire,a_traduire,,,
+solde disponible,available balance,jawdindi ndi yami,abálá é ne ngə́lə́,mɔ̀nì mwé ɓáyí,mobile_money,terme affiché sur l'écran principal,en_cours,Dr. Hamadou Bello,Dr. Jean-Baptiste Ndono,Dr. Ebongue Din
+frais de transfert,transfer fee,njoɓdi nawgol,mátɔ́kó má nkúmbá,móǹgá mwá lómò mɔ̀nì,mobile_money,doit rester explicite,en_cours,Dr. Hamadou Bello,Dr. Jean-Baptiste Ndono,Dr. Ebongue Din
+montant à envoyer,amount to send,kaalis mo nelaɗen,moní á ne na á kə́,mɔ̀nì mú yéná na lómò,mobile_money,,en_cours,Dr. Hamadou Bello,Dr. Jean-Baptiste Ndono,Dr. Ebongue Din
+bénéficiaire,recipient,keɓoowo,mòd á nnyɔ́ŋ,moto nu mányɔ̀ŋɔ̀,mobile_money,,en_cours,Dr. Hamadou Bello,Dr. Jean-Baptiste Ndono,Dr. Ebongue Din
+code PIN,PIN code,code PIN,code PIN,code PIN,security,ne jamais traduire le chiffre,en_cours,Dr. Hamadou Bello,Dr. Jean-Baptiste Ndono,Dr. Ebongue Din
+code de confirmation,confirmation code,code teeŋtingol,code de confirmation,code confirmation,security,OTP,en_cours,Dr. Hamadou Bello,Dr. Jean-Baptiste Ndono,Dr. Ebongue Din
+taux d'intérêt,interest rate,tolno nafa,ntéláná á mfá'á,edinge a longele,credit,,en_cours,Dr. Hamadou Bello,Dr. Jean-Baptiste Ndono,Dr. Ebongue Din
+frais de dossier,processing fee,njoɓdi binndol,mákyé má kalada,móǹgá mwá kalati,credit,,en_cours,Dr. Hamadou Bello,Dr. Jean-Baptiste Ndono,Dr. Ebongue Din
+pénalité de retard,late penalty,njoɓdi batte,mákyé má eyele,móǹgá mwá boɓi,credit,,en_cours,Dr. Hamadou Bello,Dr. Jean-Baptiste Ndono,Dr. Ebongue Din
+capacité de remboursement,repayment capacity,doole yoɓgol,ngul á adzúmbí moní,nginya a timbise mɔ̀nì,credit,,en_cours,Dr. Hamadou Bello,Dr. Jean-Baptiste Ndono,Dr. Ebongue Din
+épargne automatique,automatic savings,ko mooftata e laawol,kɔ́ndó á adzóŋó,bálà mɔ̀nì a ɓuɓéɓuɓé,savings,,en_cours,Dr. Hamadou Bello,Dr. Jean-Baptiste Ndono,Dr. Ebongue Din
+objectif d'épargne,savings goal,faandaare mooftugol,nsɔ́ŋó á adzóŋó,sɔŋɔ a bálà mɔ̀nì,savings,,en_cours,Dr. Hamadou Bello,Dr. Jean-Baptiste Ndono,Dr. Ebongue Din
+dépôt,deposit,naatgol kaalis,óláŋá,tutula mɔ̀nì,mobile_money,,en_cours,Dr. Hamadou Bello,Dr. Jean-Baptiste Ndono,Dr. Ebongue Din
+retrait,withdrawal,yaltugol kaalis,kúdí moní,kusa mɔ̀nì,mobile_money,,en_cours,Dr. Hamadou Bello,Dr. Jean-Baptiste Ndono,Dr. Ebongue Din
+paiement marchand,merchant payment,njoɓdi julaajo,mákyé má nkàndá,wasa mɔ̀nì a nkándà,mobile_money,,en_cours,Dr. Hamadou Bello,Dr. Jean-Baptiste Ndono,Dr. Ebongue Din
+vérification d'identité,identity verification,teeŋtingol enndam,yéŋélí eyóŋ,jeele la dina na edube,kyc,,en_cours,Dr. Hamadou Bello,Dr. Jean-Baptiste Ndono,Dr. Ebongue Din
+pièce d'identité,identity document,kadi enndam,lélá éyoŋ,kalati a edube,kyc,,en_cours,Dr. Hamadou Bello,Dr. Jean-Baptiste Ndono,Dr. Ebongue Din
+service client,customer service,gollordu wallitaande,nsáŋá á nnam,mɓola a ɓato,support,,en_cours,Dr. Hamadou Bello,Dr. Jean-Baptiste Ndono,Dr. Ebongue Din
+transaction,transaction,gollal kaalis,nkus-nnyɔ́ŋ,eɓolo a mɔ̀nì,general,,en_cours,Dr. Hamadou Bello,Dr. Jean-Baptiste Ndono,Dr. Ebongue Din
+remboursement,repayment,yoɓgol kaalis,adzúmbí moní,timbise mɔ̀nì,credit,,en_cours,Dr. Hamadou Bello,Dr. Jean-Baptiste Ndono,Dr. Ebongue Din
+frais,fee,njoɓdi,mákyé,móǹgá,general,terme générique,en_cours,Dr. Hamadou Bello,Dr. Jean-Baptiste Ndono,Dr. Ebongue Din
+total,total,fof,mbodó,mɔ̀nì mwésé,general,,en_cours,Dr. Hamadou Bello,Dr. Jean-Baptiste Ndono,Dr. Ebongue Din
+échéance,due date,nyalnde yoɓgol,eyele,búnyá ɓwá timbise,credit,,en_cours,Dr. Hamadou Bello,Dr. Jean-Baptiste Ndono,Dr. Ebongue Din
+plafond,limit,keeri kaalis,asúgú,sókó a mɔ̀nì,mobile_money,,en_cours,Dr. Hamadou Bello,Dr. Jean-Baptiste Ndono,Dr. Ebongue Din
+découvert,overdraft,kaalis ɓurɗo yowede,,,credit,,en_cours,Dr. Hamadou Bello,,
+agence,branch,galu,ndáb á nsáŋá,wuma a eɓolo,general,,en_cours,Dr. Hamadou Bello,Dr. Jean-Baptiste Ndono,Dr. Ebongue Din
+guichet,counter / teller window,damugal,ekɔb,,general,,en_cours,Dr. Hamadou Bello,Dr. Jean-Baptiste Ndono,
+code,code,code,code,code,security,à distinguer de PIN et OTP,en_cours,Dr. Hamadou Bello,Dr. Jean-Baptiste Ndono,Dr. Ebongue Din
+référence,reference,tiinde,eñíŋlé,,general,,en_cours,Dr. Hamadou Bello,Dr. Jean-Baptiste Ndono,
+reçu,receipt,seedantaagal,kalada á nkus,kalati a suma,general,,en_cours,Dr. Hamadou Bello,Dr. Jean-Baptiste Ndono,Dr. Ebongue Din
+litige,dispute,haala,nsɔm,nyele,support,,en_cours,Dr. Hamadou Bello,Dr. Jean-Baptiste Ndono,Dr. Ebongue Din
+échec,failure,bonere,éboŋ,boɓi,support,,en_cours,Dr. Hamadou Bello,Dr. Jean-Baptiste Ndono,Dr. Ebongue Din
+annulation,cancellation,dartingol,asúsí,ɓumse,support,,en_cours,Dr. Hamadou Bello,Dr. Jean-Baptiste Ndono,Dr. Ebongue Din
+confirmation,confirmation,teeŋtingol,adzíŋí,adise,security,,en_cours,Dr. Hamadou Bello,Dr. Jean-Baptiste Ndono,Dr. Ebongue Din
+sécurité,security,kisal,ɔ́bám,bata,security,,en_cours,Dr. Hamadou Bello,Dr. Jean-Baptiste Ndono,Dr. Ebongue Din
+frais de change,exchange fee,njoɓdi mbiliro,mákyé má nsɛ́ŋlé moní,móǹgá mwá tukwisa mɔ̀nì,mobile_money,,en_cours,Dr. Hamadou Bello,Dr. Jean-Baptiste Ndono,Dr. Ebongue Din
+taux de change,exchange rate,tolno mbiliro,nsɛ́ŋlé moní,edinge a tukwisa mɔ̀nì,mobile_money,,en_cours,Dr. Hamadou Bello,Dr. Jean-Baptiste Ndono,Dr. Ebongue Din
+montant,amount,kaalis,moní,mɔ̀nì,general,,en_cours,Dr. Hamadou Bello,Dr. Jean-Baptiste Ndono,Dr. Ebongue Din
+solde,balance,jawdindi,abálá,mɔ̀nì mwé ɓáyí,general,,en_cours,Dr. Hamadou Bello,Dr. Jean-Baptiste Ndono,Dr. Ebongue Din
+destinataire,recipient,keɓoowo,mòd á nnyɔ́ŋ,moto nu mányɔ̀ŋɔ̀,mobile_money,synonyme de bénéficiaire,en_cours,Dr. Hamadou Bello,Dr. Jean-Baptiste Ndono,Dr. Ebongue Din

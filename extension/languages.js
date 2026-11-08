@@ -90,6 +90,7 @@
 
   function normalizeText(value) {
     return String(value || "")
+      .normalize("NFC")
       .replace(/\u00a0/g, " ")
       .replace(/[’‘]/g, "'")
       .replace(/\s+/g, " ")

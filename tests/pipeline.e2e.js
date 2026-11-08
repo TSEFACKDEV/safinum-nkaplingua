@@ -99,6 +99,122 @@ const EWO_PACK = {
   ]
 };
 
+const REVIEWED_PACK = {
+  entries: [
+    {
+      source: "Votre solde est disponible.",
+      target: "Nde nje woni.",
+      status: "reviewed",
+      reviewer: "Relecteur T2",
+      reviewLevel: "second-translator-fallback",
+      license: "CC0-1.0",
+      provenance: "human",
+      reviewedAt: "2026-11-08"
+    },
+    {
+      source: "Bonjour.",
+      target: "Mbolani.",
+      status: "draft",
+      reviewer: "Traducteur T1",
+      reviewLevel: "single-translator",
+      license: "CC-BY-4.0",
+      provenance: "human",
+      reviewedAt: "2026-11-08"
+    }
+  ]
+};
+
+async function runReviewed() {
+  // 1. En mode strict, une entrée draft/reviewed ne doit pas passer.
+  const strict = createBackground({});
+  strict.overrides.dua = JSON.parse(JSON.stringify(REVIEWED_PACK));
+  const strictResponse = await strict.send({
+    type: "NK_TRANSLATE_SEGMENTS",
+    target: "dua",
+    source: "fr",
+    segments: [
+      { id: "r0", text: "Votre solde est disponible." },
+      { id: "r1", text: "Bonjour." }
+    ]
+  });
+  const strictById = new Map(
+    (strictResponse.translations || []).map((item) => [item.id, item])
+  );
+  assert(
+    strictById.get("r0")?.ok === false,
+    "niveau A non validé accepté en strict"
+  );
+  assert(
+    strictById.get("r1")?.ok === false &&
+      strictById.get("r1").reason === "pack_unverified",
+    `entrée draft acceptée en strict : ${JSON.stringify(strictById.get("r1"))}`
+  );
+  assert(strict.calls.length === 0, "réseau en mode strict pack");
+
+  // 2. En mode démo, reviewed/draft sont utilisables et étiquetés.
+  const demo = createBackground({});
+  demo.overrides.dua = JSON.parse(JSON.stringify(REVIEWED_PACK));
+  const demoResponse = await demo.send({
+    type: "NK_TRANSLATE_SEGMENTS",
+    target: "dua",
+    source: "fr",
+    demo: true,
+    segments: [
+      { id: "r0", text: "Votre solde est disponible." },
+      { id: "r1", text: "Bonjour." }
+    ]
+  });
+  const demoById = new Map(
+    (demoResponse.translations || []).map((item) => [item.id, item])
+  );
+  for (const id of ["r0", "r1"]) {
+    const item = demoById.get(id);
+    assert(item?.ok === true, `${id} refusé en démo`);
+    assert(item.humanReviewed === true, `${id} non marqué humain`);
+    assert(item.packStatus, `${id} sans statut de pack`);
+  }
+  assert(
+    demoById.get("r0").packStatus === "reviewed" &&
+      demoById.get("r0").reviewLevel === "second-translator-fallback",
+    "métadonnées reviewed absentes"
+  );
+  assert(
+    demoById.get("r1").packStatus === "draft" &&
+      demoById.get("r1").reviewLevel === "single-translator",
+    "métadonnées draft absentes"
+  );
+  assert(
+    demoById.get("r0").demoCritical === undefined,
+    "une entrée humaine ne doit pas être marquée demoCritical"
+  );
+
+  // 3. Le cache ne doit pas resservir l'entrée demo en strict.
+  const afterDemo = await demo.send({
+    type: "NK_TRANSLATE_SEGMENTS",
+    target: "dua",
+    source: "fr",
+    segments: [{ id: "r2", text: "Bonjour." }]
+  });
+  assert(
+    afterDemo.translations?.[0]?.ok === false,
+    "entrée draft resservie depuis le cache en strict"
+  );
+
+  return {
+    mode: "reviewed",
+    status: "pass",
+    cases: 5,
+    networkCalls: strict.calls.length + demo.calls.length,
+    details: {
+      strictRejected: true,
+      demoAccepted: true,
+      metadata: true,
+      noMTCritical: true,
+      cacheIsolated: true
+    }
+  };
+}
+
 async function runPack() {
   const background = createBackground({});
   background.overrides.dua = JSON.parse(JSON.stringify(EWO_PACK));
@@ -162,8 +278,9 @@ async function runEdge() {
   assert(byId.get("e2")?.ok === false, "texte long accepté sans pack");
   assert(byId.get("e3")?.ok === false, "jeton perdu accepté");
   assert(
-    byId.get("e3").reason?.startsWith("token_lost"),
-    `raison jeton ${byId.get("e3").reason}`
+    byId.get("e3").reason?.startsWith("token_lost") ||
+      byId.get("e3").reason?.startsWith("number_lost"),
+    `raison jeton/nombre ${byId.get("e3").reason}`
   );
   assert(background.calls.length === 0, "réseau sur edge");
 
@@ -179,7 +296,7 @@ async function runEdge() {
 function runBlocked(mode) {
   const reasons = {
     unseen: "Modèle NLLB non téléchargé : pipeline réel non exécutable ici.",
-    demo: "Pack 102/102 absent : couverture démo non mesurable."
+    demo: "Validation native indépendante absente : la couverture démo est mesurée par tests/site-demo.e2e.js."
   };
   return { mode, status: "blocked", reason: reasons[mode] };
 }
@@ -190,6 +307,7 @@ async function main() {
   const results = [];
 
   if (mode === "pack" || mode === "all") results.push(await runPack());
+  if (mode === "reviewed" || mode === "all") results.push(await runReviewed());
   if (mode === "edge" || mode === "all") results.push(await runEdge());
   if (mode === "unseen" || mode === "demo") results.push(runBlocked(mode));
 

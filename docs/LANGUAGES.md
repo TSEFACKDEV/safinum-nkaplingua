@@ -17,9 +17,9 @@ Klein les retire aussi du registre, des packs, des tests et de la documentation
 
 | Code | Langue | Région | Moteur | Ressources connues | État |
 |---|---|---|---|---|---|
-| `fub` | Fulfulde (Adamawa) | Adamaoua, Nord, Extrême-Nord | `flagship-ai` fr → fub ; NLLB `fuv_Latn` en secours | Common Voice ASR ; 1 303 enregistrements TTS à une voix | MT brouillon, 0/102 phrases validées |
-| `ewo` | Ewondo | Centre | `flagship-ai` fr → ewo, brouillon | Common Voice 27.0 : 14,36 h validées, 31 voix ; Ewondo-ASR ~3 h 11, 16 voix ; grammaires et dictionnaires | MT brouillon, 0/20 phrases validées |
-| `dua` | Duala | Littoral | Pack communautaire | Common Voice 27.0 (heures à vérifier) ; dictionnaires et descriptions anciennes | Pack, 0/20 phrases validées |
+| `fub` | Fulfulde (Adamawa) | Adamaoua, Nord, Extrême-Nord | `flagship-ai` fr → fub ; NLLB `fuv_Latn` en secours | Common Voice ASR ; 1 303 enregistrements TTS à une voix | Pack 107 entrées, **0 validée** (brouillons humains) |
+| `ewo` | Ewondo | Centre | `flagship-ai` fr → ewo, brouillon | Common Voice 27.0 : 14,36 h validées, 31 voix ; Ewondo-ASR ~3 h 11, 16 voix ; grammaires et dictionnaires | Pack 122 entrées, **0 validée** (121 draft, 1 reviewed) |
+| `dua` | Duala | Littoral | Pack communautaire | Common Voice 27.0 (heures à vérifier) ; dictionnaires et descriptions anciennes | Pack 121 entrées, **0 validée** (brouillons humains) |
 
 Les classeurs T1/T2 et la fiche d'arbitrage sont prêts dans
 [`../data/review/`](../data/review/).
@@ -154,7 +154,7 @@ python3 scripts/check-language-packs.py
 
 - Le fulfulde et l'ewondo restent des **MT brouillons**, pas des traductions
   validées. NLLB ne sert plus que de secours pour le fulfulde.
-- Le pack duala est vide tant qu'un natif ne le remplit pas. Le code est prêt,
+- Le pack duala contient 121 entrées humaines mais 0 validée. Le code est prêt,
   la donnée ne l'est pas.
 - NLLB ne couvre ni `ewo` ni `dua`. L'ewondo utilise `flagship-ai` en brouillon,
   le duala reste pack-only.

@@ -27,9 +27,14 @@ def write_pack(directory: Path, name: str, entries: list[dict]) -> None:
     )
 
 
-def run(directory: Path) -> subprocess.CompletedProcess[str]:
+def run(
+    directory: Path, allowlist: Path | None = None
+) -> subprocess.CompletedProcess[str]:
+    command = [sys.executable, str(SCRIPT), "--dir", str(directory)]
+    if allowlist is not None:
+        command.extend(["--allowlist", str(allowlist)])
     return subprocess.run(
-        [sys.executable, str(SCRIPT), "--dir", str(directory)],
+        command,
         capture_output=True,
         text=True,
         check=False,
@@ -53,7 +58,7 @@ def main() -> int:
         )
         result = run(directory)
         assert result.returncode == 0, result.stderr
-        assert "aucune cible partagée" in result.stdout, result.stdout
+        assert "aucune collision non arbitrée" in result.stdout, result.stdout
         checks += 1
 
     with tempfile.TemporaryDirectory() as temporary:
@@ -124,6 +129,32 @@ def main() -> int:
         result = run(directory)
         assert result.returncode == 2, result.stderr
         assert "entries" in result.stderr, result.stderr
+        checks += 1
+
+    with tempfile.TemporaryDirectory() as temporary:
+        directory = Path(temporary)
+
+        # 7. Collision explicitement acceptée par allowlist.
+        write_pack(
+            directory,
+            "a",
+            [{"source": "Votre solde", "target": "Nde nje"}],
+        )
+        write_pack(
+            directory,
+            "b",
+            [{"source": "Le total", "target": "Nde nje"}],
+        )
+        allowlist = directory / "allowlist.csv"
+        allowlist.write_text(
+            "target,source,reason\n"
+            "Nde nje,Votre solde,synonymes acceptés\n"
+            "Nde nje,Le total,synonymes acceptés\n",
+            encoding="utf-8",
+        )
+        result = run(directory, allowlist)
+        assert result.returncode == 0, result.stderr
+        assert "explicitement acceptée" in result.stderr, result.stderr
         checks += 1
 
     print(f"check-pack-collisions OK — {checks} cas")

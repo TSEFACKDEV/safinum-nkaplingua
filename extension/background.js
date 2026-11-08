@@ -179,6 +179,17 @@ function classifyCriticality(text) {
   return CRITICALITY_TERMS.test(normalized) ? "A" : "B";
 }
 
+function isUnchangedLiteral(text) {
+  let residue = String(text || "").replace(/\[\[[^\]]+\]\]/g, " ");
+  residue = residue.replace(
+    /\b(?:FCFA|XAF|PIN|OTP|KYC|FINAKA|MTN|MoMo|Orange Money|Wave|Visa|Mastercard|WhatsApp|IBAN|SWIFT)\b/gi,
+    " "
+  );
+  residue = residue.replace(/\b[A-Z]{1,4}\b/g, " ");
+  residue = residue.replace(/[0-9\s.,;:+\-–—/()%·]/g, " ");
+  return !/[A-Za-zÀ-ÖØ-öø-ÿɓɗŋƴɔɛə]/.test(residue);
+}
+
 function isShortLabel(text) {
   const words = String(text || "").trim().split(/\s+/).filter(Boolean);
   return words.length > 0 && words.length <= 4;
@@ -230,6 +241,19 @@ async function translateSegments(segments, target, source, options = {}) {
   const missing = [];
 
   for (const segment of prepared) {
+    // Montant, référence ou nom seuls : rien à traduire, on renvoie
+    // l'original sans appeler ni pack ni MT.
+    if (isUnchangedLiteral(segment.originalText)) {
+      results.set(segment.id, {
+        id: segment.id,
+        text: segment.originalText,
+        ok: true,
+        reason: null,
+        unchanged: true
+      });
+      continue;
+    }
+
     // Le niveau A ne lit jamais le cache : il doit être validé dans le pack.
     if (segment.criticality === "A") {
       missing.push(segment);
@@ -255,13 +279,17 @@ async function translateSegments(segments, target, source, options = {}) {
   let provider = null;
   let remaining = missing;
   let usedCloudLabels = false;
+  let usedPack = false;
+  let usedMt = false;
 
   // 1) Pack communautaire : prioritaire, car il contient des phrases
   //    relues par des locuteurs natifs.
   if (targetSpec.pack) {
     let packResults = [];
     try {
-      packResults = await translateWithPack(missing, targetSpec);
+      packResults = await translateWithPack(missing, targetSpec, {
+        demo: demoMode
+      });
     } catch (error) {
       if (targetSpec.engine === "pack") {
         return {
@@ -281,11 +309,16 @@ async function translateSegments(segments, target, source, options = {}) {
       );
       results.set(final.id, final);
       const original = missing.find((item) => item.id === translation.id);
-      if (original) {
+      // Un pack humain non validé ne doit jamais contaminer le cache du mode
+      // strict : seules les entrées `validated` sont mémorisées.
+      if (original && final.packStatus === "validated") {
         cacheTranslation(detected, target, original.originalText, final);
       }
     }
-    if (hits.length > 0) provider = "pack";
+    if (hits.length > 0) {
+      provider = "pack";
+      usedPack = true;
+    }
 
     if (targetSpec.engine === "pack") {
       for (const translation of packResults) {
@@ -354,6 +387,7 @@ async function translateSegments(segments, target, source, options = {}) {
         }
         if (hitIds.size > 0) {
           usedCloudLabels = true;
+          usedMt = true;
           provider = "cloud";
           remaining = remaining.filter(
             (segment) => !hitIds.has(segment.id)
@@ -386,6 +420,11 @@ async function translateSegments(segments, target, source, options = {}) {
   }
 
   if (remaining.length === 0) {
+    if (usedPack && usedMt) {
+      provider = "mixed";
+    } else if (usedCloudLabels && provider && provider !== "cloud") {
+      provider = "hybrid";
+    }
     return {
       translations: segments
         .map((segment) => results.get(segment.id))
@@ -413,6 +452,7 @@ async function translateSegments(segments, target, source, options = {}) {
         detected
       );
       translations = local.translations;
+      usedMt = true;
       provider = local.provider || "local";
     } catch {
       // Le backend local a échoué : on passe au cloud.
@@ -455,6 +495,7 @@ async function translateSegments(segments, target, source, options = {}) {
   if (!translations && allowCloud) {
     try {
       translations = await translateWithCloud(remaining, detected, targetSpec);
+      usedMt = true;
       provider = "cloud";
     } catch (error) {
       return {
@@ -485,7 +526,14 @@ async function translateSegments(segments, target, source, options = {}) {
     }
     results.set(final.id, final);
     // Un niveau A traduit en mode démo n'entre jamais dans le cache MT.
-    if (final.ok && prepared?.criticality !== "A") {
+    // Une entrée de pack non validée ne doit pas non plus être réutilisée
+    // hors démonstration.
+    if (
+      final.ok &&
+      prepared?.criticality !== "A" &&
+      final.packStatus !== "reviewed" &&
+      final.packStatus !== "draft"
+    ) {
       const original = remaining.find((item) => item.id === final.id);
       if (original) {
         cacheTranslation(detected, target, original.originalText, final);
@@ -493,7 +541,9 @@ async function translateSegments(segments, target, source, options = {}) {
     }
   }
 
-  if (usedCloudLabels && provider && provider !== "cloud") {
+  if (usedPack && usedMt) {
+    provider = "mixed";
+  } else if (usedCloudLabels && provider && provider !== "cloud") {
     provider = "hybrid";
   }
 
@@ -516,6 +566,32 @@ function cacheTranslation(source, target, text, translation) {
 
 function finalizeTranslation(translation, segment) {
   if (!translation || !translation.ok) return translation;
+
+  // Une entrée de pack peut contenir les montants en clair (1 500 FCFA)
+  // plutôt que des jetons. Dans ce cas, on vérifie que chaque valeur
+  // sensible d'origine est bien présente, sans tenter de restaurer un jeton
+  // absent.
+  if (
+    translation.packRaw &&
+    !/\[\[[^\]]+\]\]/.test(translation.text)
+  ) {
+    const normalizedTarget = LANG.normalizePhrase(translation.text);
+    for (const token of segment?.tokens || []) {
+      if (
+        !normalizedTarget.includes(
+          LANG.normalizePhrase(token.original)
+        )
+      ) {
+        return {
+          id: translation.id,
+          text: segment?.originalText || translation.text,
+          ok: false,
+          reason: "token_lost"
+        };
+      }
+    }
+    return { ...translation, text: translation.text };
+  }
 
   const restoredSensitive = LANG.restoreSensitive(
     translation.text,
@@ -576,24 +652,76 @@ async function loadPack(targetSpec) {
   return promise;
 }
 
+function packLooseKey(value) {
+  return LANG
+    .normalizePhrase(value)
+    .replace(/[.!?;:,]+$/g, "")
+    .replace(/\s+/g, " ")
+    .trim();
+}
+
 function indexPack(pack) {
   if (packIndexes.has(pack)) return packIndexes.get(pack);
   const index = new Map();
   for (const entry of pack.entries || []) {
     if (!entry?.source || !entry?.target) continue;
-    index.set(LANG.normalizePhrase(entry.source), entry);
+    // Index brut, index pseudonymisé (les montants/noms de la page sont
+    // remplacés par des jetons avant l'envoi au background) et variante
+    // ponctuation/espaces. Les clés brutes restent prioritaires.
+    const redaction = LANG.redactSensitive(entry.source);
+    const redacted = redaction.text;
+    // Version tokenisée de la cible : le content script envoie le texte
+    // pseudonymisé, et restaure les valeurs originales localement. Sans
+    // cette version, une cible humaine contenant « Safinum Pay » ou
+    // « 1 500 FCFA » ne pourrait pas être validée sans faire transiter les
+    // données sensibles par le background.
+    let targetTokenized = entry.target;
+    for (const { token, original } of redaction.tokens) {
+      targetTokenized = targetTokenized.split(original).join(token);
+    }
+    const derived =
+      targetTokenized === entry.target
+        ? entry
+        : { ...entry, target: targetTokenized };
+    const rawKeys = new Set([
+      LANG.normalizePhrase(entry.source),
+      packLooseKey(entry.source)
+    ]);
+    const redactedKeys = new Set([
+      LANG.normalizePhrase(redacted),
+      packLooseKey(redacted)
+    ]);
+    for (const key of rawKeys) {
+      if (key && !index.has(key)) index.set(key, entry);
+    }
+    for (const key of redactedKeys) {
+      if (key && !index.has(key)) index.set(key, derived);
+    }
   }
   packIndexes.set(pack, index);
   return index;
 }
 
-async function translateWithPack(segments, targetSpec) {
+async function translateWithPack(segments, targetSpec, options = {}) {
   const pack = await loadPack(targetSpec);
   const index = indexPack(pack);
+  const allowUnvalidated = options.demo === true;
 
   return segments.map((segment) => {
-    const key = LANG.normalizePhrase(segment.text);
-    const entry = index.get(key);
+    // On cherche d'abord le texte brut : les messages humains du site
+    // contiennent des montants réels (1 500 FCFA), pas des jetons.
+    // Le texte pseudonymisé reste le repli pour les packs à jetons.
+    const rawKey = LANG.normalizePhrase(
+      segment.originalText || segment.text
+    );
+    const redactedKey = LANG.normalizePhrase(segment.text);
+    const looseRawKey = packLooseKey(segment.originalText || segment.text);
+    const looseRedactedKey = packLooseKey(segment.text);
+    const entry =
+      index.get(rawKey) ||
+      index.get(redactedKey) ||
+      index.get(looseRawKey) ||
+      index.get(looseRedactedKey);
 
     if (!entry) {
       return {
@@ -604,18 +732,31 @@ async function translateWithPack(segments, targetSpec) {
       };
     }
 
-    if (entry.status !== "validated") {
+    const accepted =
+      entry.status === "validated" ||
+      (allowUnvalidated &&
+        (entry.status === "reviewed" || entry.status === "draft"));
+    if (!accepted) {
       return {
         id: segment.id,
         text: segment.text,
         ok: false,
-        reason: "pack_unverified"
+        reason: "pack_unverified",
+        packStatus: entry.status,
+        reviewLevel: entry.reviewLevel || null
       };
     }
 
     const translation = LANG.canonicalizeTokens(entry.target);
+    const targetHasTokens = /\[\[[^\]]+\]\]/.test(translation);
+    const sourceForValidation = targetHasTokens
+      ? segment.text
+      : LANG.restoreSensitive(
+          segment.text,
+          segment.tokens || []
+        ) || segment.originalText || segment.text;
     const validation = validateTranslation(
-      segment.text,
+      sourceForValidation,
       translation,
       targetSpec
     );
@@ -624,7 +765,12 @@ async function translateWithPack(segments, targetSpec) {
       id: segment.id,
       text: validation.ok ? translation : segment.text,
       ok: validation.ok,
-      reason: validation.reason
+      reason: validation.reason,
+      packStatus: entry.status,
+      reviewLevel: entry.reviewLevel || null,
+      humanReviewed: entry.status !== "validated",
+      packRaw: !targetHasTokens,
+      criticality: segment.criticality
     };
   });
 }
@@ -839,6 +985,56 @@ function restoreCloudTokens(text, tokenMap) {
   return value;
 }
 
+const TECHNICAL_IDENTITIES = new Set([
+  "code",
+  "code pin",
+  "code de confirmation",
+  "code confirmation",
+  "mobile money",
+  "safinum",
+  "safinum pay",
+  "finaka",
+  "fcfa",
+  "xaf",
+  "pin",
+  "otp",
+  "kyc",
+  "live",
+  "sms",
+  "fr → ff",
+  "fr -> ff",
+  "amina ngo bell",
+  "mtn",
+  "momo",
+  "orange money",
+  "wave",
+  "visa",
+  "mastercard",
+  "whatsapp",
+  "iban",
+  "swift"
+]);
+
+function isTechnicalIdentity(value) {
+  const text = String(value).trim();
+  const normalized = LANG.normalizePhrase(text);
+  if (TECHNICAL_IDENTITIES.has(normalized)) return true;
+  if (/^[A-Z]{2,}-\d{4}-[A-Z0-9]{4,}$/.test(text)) return true;
+  const residue = text
+    .replace(/\[\[[^\]]+\]\]/g, " ")
+    .replace(
+      /\b(?:FCFA|XAF|PIN|OTP|KYC|FINAKA|MTN|MoMo|Orange Money|Wave|Visa|Mastercard|WhatsApp|IBAN|SWIFT)\b/gi,
+      " "
+    )
+    .replace(/[^\wà-ÿ]/gi, " ");
+  return !/[a-zà-ÿɓɗŋƴɔɛə]/i.test(residue);
+}
+
+function rawNumbers(value) {
+  const cleaned = String(value).replace(/\[\[[^\]]+\]\]/g, " ");
+  return (cleaned.match(/\d+(?:[.,]\d+)?/g) || []);
+}
+
 function validateTranslation(source, translation, targetSpec) {
   if (!translation.trim()) {
     return { ok: false, reason: "empty_translation" };
@@ -875,6 +1071,25 @@ function validateTranslation(source, translation, targetSpec) {
     }
   }
 
+  // Les montants en clair doivent être présents à l'identique.
+  const flatTranslation = normalized.replace(
+    /(?<=\d)[\s\u00A0]+(?=\d)/g,
+    ""
+  );
+  for (const number of rawNumbers(source)) {
+    if (!flatTranslation.includes(number)) {
+      return { ok: false, reason: `number_lost:${number}` };
+    }
+  }
+
+  // Un sigle, un nom propre ou une ligne de montant peut rester identique.
+  if (
+    LANG.normalizePhrase(source) === LANG.normalizePhrase(normalized) &&
+    isTechnicalIdentity(source)
+  ) {
+    return { ok: true, reason: null };
+  }
+
   // Le pack doit rester dans la même variété linguistique que la cible.
   if (targetSpec?.engine === "pack" && !normalized.trim()) {
     return { ok: false, reason: "pack_empty_target" };
@@ -891,7 +1106,7 @@ function qualityCheck(source, translation) {
     LANG
       .normalizePhrase(value)
       .replace(/\[\[[^\]]+\]\]/g, " ")
-      .replace(/[^a-zà-ÿ0-9']+/g, " ")
+      .replace(/[^a-zà-ÿ0-9'ɓɗŋƴɔɛə\u0300-\u036f]+/g, " ")
       .trim();
 
   const sourceClean = clean(source);

@@ -1,0 +1,13 @@
+{
+  "mode": "reviewed",
+  "status": "pass",
+  "cases": 5,
+  "networkCalls": 0,
+  "details": {
+    "strictRejected": true,
+    "demoAccepted": true,
+    "metadata": true,
+    "noMTCritical": true,
+    "cacheIsolated": true
+  }
+}

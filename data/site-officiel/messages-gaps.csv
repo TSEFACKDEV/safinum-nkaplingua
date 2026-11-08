@@ -1,0 +1,6 @@
+id,source_fr,langues,contexte,raison,priorite
+GAP-001,Protocole de test,dua,En-tête du site,Aucune entrée dans le kit natif.,P1
+GAP-002,Banque en ligne,dua,Libellé d'interface,Aucune entrée dans le kit natif.,P1
+GAP-003,Compte courant,dua,Type de compte,Aucune entrée dans le kit natif ; le fulfulde et l'ewondo passent en MT de démonstration.,P0
+GAP-004,Référence,dua,Écran de confirmation,Les deux traducteurs ont laissé « Référence » en français ; le pack l'a rejeté.,P0
+GAP-005,nov. / oct.,dua,Activité récente,Les abréviations de mois restent en français ; non bloquant.,P2

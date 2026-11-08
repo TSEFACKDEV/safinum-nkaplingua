@@ -228,6 +228,8 @@ Depuis le 8 novembre 2026, `flagship-ai` est branché dans le backend local :
   phrases critiques peuvent être traduites par MT avec le badge « démo MT » ;
   les libellés courts fulfulde passent par MyMemory `fr|ff` si le cloud est
   autorisé. Résultats : [`SITE_TEST_SAFINUM.md`](SITE_TEST_SAFINUM.md).
+  Audit des relectures reçues et lignes rejetées :
+  [`NATIVE_REVIEW_AUDIT.md`](NATIVE_REVIEW_AUDIT.md).
 
 ---
 

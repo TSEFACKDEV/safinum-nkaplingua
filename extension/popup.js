@@ -29,6 +29,7 @@ function displayName(item) {
 function providerLabel(provider) {
   if (provider === "pack") return "pack communautaire";
   if (provider === "flagship") return "flagship-ai (brouillon)";
+  if (provider === "mixed") return "pack humain + MT (démo)";
   if (provider === "hybrid") return "MyMemory + flagship-ai (démo)";
   if (provider === "nllb") return "backend local NLLB";
   if (provider === "local") return "backend local";

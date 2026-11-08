@@ -2457,3 +2457,109 @@ mot `json`) avec les champs ci-dessous. Exemple de structure, en indentation :
   ]
 }
 ```
+
+## 2026-11-08T16:45:00+01:00 — Klein — K2 — in_progress
+
+```json
+{
+  "timestamp": "2026-11-08T16:45:00+01:00",
+  "person": "Klein",
+  "branch": "klein",
+  "task": "K2",
+  "status": "in_progress",
+  "summary": "Audit des classeurs T1/T2 reçus : 85 lignes fulfulde « Tafsiri: » recopiées du français rejetées, T2 identique à T1 sur 210/212 (99,1 %). Ewondo et duala plausibles mais T2 dérivé (95,4 % et 90,0 %) : aucune ligne validée. Packs reconstruits : fub 107, ewo 122, dua 121 entrées, toutes draft sauf 1 reviewed. Le mode démo applique les brouillons humains avec badge ; le mode strict reste validated-only. Test réel du site : 104 segments, 71 uniques, fub 71/71 (60 pack), ewo 71/71 (59 pack), dua 64/71 (58 pack, 4 libellés restants).",
+  "files": [
+    "scripts/audit-native-reviews.py",
+    "scripts/build-reviewed-packs.py",
+    "scripts/check-language-data.py",
+    "scripts/check-language-packs.py",
+    "scripts/check-pack-collisions.py",
+    "data/review/fulfulde.t1.csv",
+    "data/review/fulfulde.t2.csv",
+    "data/review/ewondo.t1.csv",
+    "data/review/ewondo.t2.csv",
+    "data/review/duala.t1.csv",
+    "data/review/duala.t2.csv",
+    "data/review/README.md",
+    "data/site-officiel/messages.fr-en.csv",
+    "data/site-officiel/messages-extra.csv",
+    "data/site-officiel/messages-gaps.csv",
+    "data/reference/collision-allowlist.csv",
+    "data/glossary.template.csv",
+    "data/language-packs/fub.csv",
+    "data/language-packs/ewo.csv",
+    "data/language-packs/dua.csv",
+    "data/language-packs/import/fub.csv",
+    "data/language-packs/import/ewo.csv",
+    "data/language-packs/import/dua.csv",
+    "extension/language-packs/fub.json",
+    "extension/language-packs/ewo.json",
+    "extension/language-packs/dua.json",
+    "extension/background.js",
+    "extension/content.js",
+    "extension/languages.js",
+    "extension/popup.js",
+    "tests/pipeline.e2e.js",
+    "tests/criticality.test.js",
+    "tests/check-pack-collisions.test.py",
+    "tests/import-glossary.test.py",
+    "docs/NATIVE_REVIEW_AUDIT.md",
+    "docs/SITE_TEST_SAFINUM.md",
+    "docs/LANGUAGE_VALIDATION.md",
+    "docs/VALIDATION_REPORT.md",
+    "docs/DATA_LICENSES.md",
+    "README.md",
+    "tasks/EVOLUTION.md"
+  ],
+  "tests": [
+    {
+      "command": "NK_MOCK=1 server/.venv/bin/python -m pytest -q server/test_api.py",
+      "result": "pass",
+      "note": "30 tests backend"
+    },
+    {
+      "command": "NK_MOCK=1 server/.venv/bin/python tests/api.robust.py",
+      "result": "pass",
+      "note": "17/17 contrats HTTP"
+    },
+    {
+      "command": "python3 scripts/audit-native-reviews.py",
+      "result": "pass",
+      "note": "472 lignes auditées ; fub 99 dures T1, ewo 5, dua 5 ; indépendance copied/derived"
+    },
+    {
+      "command": "python3 scripts/build-reviewed-packs.py --write",
+      "result": "pass",
+      "note": "packs fub 107, ewo 122, dua 121 ; 0 validée"
+    },
+    {
+      "command": "python3 scripts/check-language-data.py && python3 scripts/check-language-packs.py && python3 scripts/check-native-kit.py && python3 scripts/check-pack-collisions.py",
+      "result": "pass",
+      "note": "données, packs, kit, collisions arbitrées"
+    },
+    {
+      "command": "node tests/criticality.test.js && node tests/cloud-gating.test.js && node tests/content.test.js && node tests/privacy.test.js && node scripts/test-extension.js && node tests/pipeline.e2e.js --mode=all",
+      "result": "pass",
+      "note": "mode strict, reviewed/draft en démo, cache isolé, jetons, confidentialité"
+    },
+    {
+      "command": "Chrome headless + CDP sur https://safinum.cm/hackathon-test",
+      "result": "pass",
+      "note": "5 étapes, 104 segments, 71 uniques, 0 texte visible non collecté"
+    },
+    {
+      "command": "background réel + packs + backend flagship/MyMemory sur 71 segments",
+      "result": "pass",
+      "note": "fub 71/71 (60 pack, 1 MT critique), ewo 71/71 (59 pack, 1 MT critique), dua 64/71 (58 pack, 4 libellés restants)"
+    }
+  ],
+  "evidence": "docs/NATIVE_REVIEW_AUDIT.md ; docs/SITE_TEST_SAFINUM.md ; docs/test-results/native-review-audit.csv ; docs/test-results/reviewed-packs.json ; data/site-officiel/messages-gaps.csv",
+  "next": "Faire refaire les 85 lignes fulfulde « Tafsiri » et les 4 libellés duala de messages-gaps.csv ; obtenir un T2 indépendant et un arbitre distinct pour passer des drafts à validated",
+  "blockers": [
+    "aucune validation native : T2 dérive de T1 dans les trois langues",
+    "85 lignes fulfulde « Tafsiri » recopient le français",
+    "4 libellés duala du site restent en français",
+    "consentement écrit des relecteurs à confirmer"
+  ]
+}
+```
