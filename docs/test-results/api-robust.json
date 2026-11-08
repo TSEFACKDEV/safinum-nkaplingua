@@ -1,0 +1,87 @@
+[
+  {
+    "case": "health",
+    "ok": true,
+    "detail": "200 {\"status\":\"ok\",\"model\":\"facebook/nllb-200-distilled-600M\",\"mock\":true,\"loaded\":t"
+  },
+  {
+    "case": "languages-3",
+    "ok": true,
+    "detail": "200 ['fub', 'ewo', 'dua']"
+  },
+  {
+    "case": "detect-fr",
+    "ok": true,
+    "detail": "200 {\"code\":\"fr\",\"confidence\":0.99,\"scores\":{\"fr\":6.0,\"en\":0.0},\"mixed\":false}"
+  },
+  {
+    "case": "detect-en",
+    "ok": true,
+    "detail": "200 {\"code\":\"en\",\"confidence\":0.99,\"scores\":{\"fr\":0.0,\"en\":6.0},\"mixed\":false}"
+  },
+  {
+    "case": "detect-hint",
+    "ok": true,
+    "detail": "200 {\"code\":\"en\",\"confidence\":0.3,\"scores\":{\"fr\":1.0,\"en\":0.0},\"mixed\":false}"
+  },
+  {
+    "case": "translate-token",
+    "ok": true,
+    "detail": "200 [fulfulde] Le solde est de 1 000 FCFA."
+  },
+  {
+    "case": "translate-en-source",
+    "ok": true,
+    "detail": "200 {\"translations\":[{\"id\":\"b\",\"text\":\"[fulfulde] Your balance is available.\",\"ok\":true,\"reason\":null,\"r"
+  },
+  {
+    "case": "reject-unknown-target",
+    "ok": true,
+    "detail": "400"
+  },
+  {
+    "case": "reject-pack-target",
+    "ok": true,
+    "detail": "400"
+  },
+  {
+    "case": "reject-removed-language",
+    "ok": true,
+    "detail": "400"
+  },
+  {
+    "case": "reject-missing-segments",
+    "ok": true,
+    "detail": "422"
+  },
+  {
+    "case": "empty-segments",
+    "ok": true,
+    "detail": "200 {\"translations\":[],\"model\":\"facebook/nllb-200-distilled-600M\",\"target\":\"fub\"}"
+  },
+  {
+    "case": "cors-localhost",
+    "ok": true,
+    "detail": "200 {'vary': 'Origin, Access-Control-Request-Method, Access-Control-Request-Headers, Access-Control-Request-Private-Network', 'access-control-allow-methods': 'GET, POST', 'access-control-max-age': '600', 'access-control-allow-headers': 'Accept, Accept-Language, Content-Language, Content-Type', 'access-control-allow-origin': 'http://127.0.0.1:8000', 'content-length': '2', 'content-type': 'text/plain; charset=utf-8'}"
+  },
+  {
+    "case": "cors-extension",
+    "ok": true,
+    "detail": "200 chrome-extension://abcdefghijklmnop"
+  },
+  {
+    "case": "cors-refuse-evil",
+    "ok": true,
+    "detail": "400 None"
+  },
+  {
+    "case": "xss-text-only",
+    "ok": true,
+    "detail": "200 application/json {\"translations\":[{\"id\":\"x\",\"text\":\"[fulfulde] <script>alert(1)</script> Le solde est disponible.\",\"ok\":true,\"reason\":nul"
+  },
+  {
+    "case": "demo-html",
+    "ok": true,
+    "detail": "200 text/html; charset=utf-8"
+  }
+]

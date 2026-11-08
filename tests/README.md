@@ -21,6 +21,8 @@ Node 20+ (CI) ou 24 (poste de dev). Python 3.12 pour le backend.
 | `tests/check-pack-collisions.test.py` | détecteur de collisions : collision, normalisation, doublon de source, pack invalide (M4) | `python3 tests/check-pack-collisions.test.py` | **pass** |
 | `tests/criticality.test.js` | niveau A pack-only : aucun appel MT/cloud, original conservé ; niveau B autorisé (M3) | `node tests/criticality.test.js` | **pass** |
 | `tests/import-glossary.test.py` | contrôle lexical glossaire à l'import : terme validé absent → refus, présent → acceptation, langue/statut (M5) | `python3 tests/import-glossary.test.py` | **pass** |
+| `tests/pipeline.e2e.js` | pipeline pack/edge : zéro réseau, latence, jetons, références, pack miss (M9) | `node tests/pipeline.e2e.js --mode=all` | **pass** (unseen/demo bloqués) |
+| `tests/api.robust.py` | 17 contrats HTTP, CORS, refus, JSON sans HTML (M9) | `NK_MOCK=1 python3 tests/api.robust.py` | **pass** |
 | `scripts/test-extension.js` | registre des langues, détection, packs, jetons, qualité | `node scripts/test-extension.js` | **pass** |
 | `server/test_api.py` | contrats API, CORS, refus, mode mock | `NK_MOCK=1 python3 -m pytest -q server/test_api.py` | **pass** |
 
@@ -34,21 +36,22 @@ python3 scripts/check-training-data.py
 
 ## Tests annoncés mais absents du dépôt
 
-`tests/demo.e2e.js`, `tests/pipeline.e2e.js` et `tests/api.robust.py` sont des
-artefacts locaux de l'audit, pas encore versionnés. Leur ajout est prévu par la
-tâche M9 ; ils ne doivent pas être présentés comme exécutés tant qu'ils ne sont
-pas dans le dépôt.
+`tests/demo.e2e.js` reste un artefact local de l'audit, pas encore versionné.
+`tests/pipeline.e2e.js` et `tests/api.robust.py` sont désormais dans le dépôt.
+Les résultats générés sont dans
+[docs/test-results/](../docs/test-results/README.md).
 
 ## CI
 
 `.github/workflows/ci.yml` exécute :
 
-- `server/test_api.py` en mode `NK_MOCK=1` ;
+- `server/test_api.py` et `tests/api.robust.py` en mode `NK_MOCK=1` ;
 - `scripts/test-extension.js`, `tests/content.test.js`,
-  `tests/privacy.test.js`, `tests/cloud-gating.test.js` et
-  `tests/criticality.test.js` ;
+  `tests/privacy.test.js`, `tests/cloud-gating.test.js`,
+  `tests/criticality.test.js` et `tests/pipeline.e2e.js --mode=all` ;
 - `scripts/check-evolution.py`, `scripts/check-pack-collisions.py`,
-  `tests/check-pack-collisions.test.py`, les contrôles de packs et de données ;
+  `tests/check-pack-collisions.test.py`, `tests/import-glossary.test.py`,
+  les contrôles de packs et de données ;
 - `build-firefox.sh`, `web-ext lint` et `package-extension.sh`.
 
 Le test de confidentialité est la garde de non-régression de M1 : il échoue si

@@ -1,0 +1,8 @@
+{
+  "mode": "pack",
+  "status": "pass",
+  "cases": 3,
+  "latencyMs": 3.62,
+  "networkCalls": 0,
+  "provider": "pack"
+}

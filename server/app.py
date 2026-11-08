@@ -159,7 +159,7 @@ class Segment(BaseModel):
 
 
 class TranslateRequest(BaseModel):
-    segments: List[Segment] = Field(default_factory=list)
+    segments: List[Segment]
     target: str = "fub"
     source: str = "fr"
 

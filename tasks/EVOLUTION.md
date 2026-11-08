@@ -2008,3 +2008,68 @@ mot `json`) avec les champs ci-dessous. Exemple de structure, en indentation :
   "blockers": []
 }
 ```
+
+## 2026-11-08T08:00:00+01:00 — Marius — M9 — in_progress
+
+```json
+{
+  "timestamp": "2026-11-08T08:00:00+01:00",
+  "person": "Marius",
+  "branch": "marius",
+  "task": "M9",
+  "status": "in_progress",
+  "summary": "Ajout de tests/api.robust.py (17 contrats HTTP, CORS, refus, JSON sans HTML) et tests/pipeline.e2e.js (pack/edge : zéro réseau, latence 3,62 ms, jetons/références préservés). Le champ segments est désormais requis (422 au lieu de 200 silencieux). Les résultats sont versionnés dans docs/test-results/. Les modes unseen et demo restent bloqués : modèle NLLB absent et pack 102/102 vide.",
+  "files": [
+    "tests/api.robust.py",
+    "tests/pipeline.e2e.js",
+    "docs/test-results/api-robust.json",
+    "docs/test-results/pipeline-pack.json",
+    "docs/test-results/pipeline-edge.json",
+    "docs/test-results/pipeline-unseen.json",
+    "docs/test-results/pipeline-demo.json",
+    "docs/test-results/README.md",
+    "server/app.py",
+    ".github/workflows/ci.yml",
+    "tests/README.md"
+  ],
+  "tests": [
+    {
+      "command": "NK_MOCK=1 server/.venv/bin/python tests/api.robust.py",
+      "result": "pass",
+      "note": "17/17 cas"
+    },
+    {
+      "command": "node tests/pipeline.e2e.js --mode=all",
+      "result": "pass",
+      "note": "pack 3,62 ms, 0 réseau ; edge 4 cas ; unseen/demo non exécutés"
+    },
+    {
+      "command": "NK_MOCK=1 server/.venv/bin/python -m pytest -q server/test_api.py",
+      "result": "pass",
+      "note": "26 passed"
+    },
+    {
+      "command": "node tests/content.test.js && node tests/privacy.test.js && node tests/cloud-gating.test.js && node tests/criticality.test.js",
+      "result": "pass",
+      "note": "non-régression extension"
+    },
+    {
+      "command": "python3 tests/import-glossary.test.py && python3 scripts/check-language-packs.py",
+      "result": "pass",
+      "note": "glossaire et packs"
+    },
+    {
+      "command": "python3 scripts/check-evolution.py",
+      "result": "pass",
+      "note": "journal valide après ajout de l'entrée"
+    }
+  ],
+  "evidence": "docs/test-results/api-robust.json (17 cas ok) ; pipeline-pack.json latencyMs 3.62, networkCalls 0 ; pipeline-unseen.json et pipeline-demo.json status blocked",
+  "next": "Télécharger NLLB et remplir le pack 102/102 pour exécuter unseen/demo ; récupérer tests/demo.e2e.js de l'audit Freedy",
+  "blockers": [
+    "Modèle NLLB non téléchargé : mode unseen non exécutable",
+    "Pack 102/102 absent : mode demo non exécutable",
+    "tests/demo.e2e.js absent du dépôt (artefact local)"
+  ]
+}
+```

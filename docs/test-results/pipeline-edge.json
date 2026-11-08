@@ -1,0 +1,12 @@
+{
+  "mode": "edge",
+  "status": "pass",
+  "cases": 4,
+  "networkCalls": 0,
+  "details": {
+    "packMiss": true,
+    "empty": true,
+    "long": true,
+    "tokenLost": true
+  }
+}
