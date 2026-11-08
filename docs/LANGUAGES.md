@@ -24,6 +24,13 @@ Klein les retire aussi du registre, des packs, des tests et de la documentation
 Les classeurs T1/T2 et la fiche d'arbitrage sont prêts dans
 [`../data/review/`](../data/review/).
 
+> **Mise à jour du 8 novembre 2026** — des modèles externes existent
+> désormais : `flagship-ai/francais-fufulde` (CC-BY-4.0) et
+> `flagship-ai/cameroon-int8` / `francais-ewondo` (CC-BY-NC-4.0, sous-fiche
+> CC-BY-4.0 à trancher). Ce sont des **brouillons**, pas des moteurs validés :
+> le niveau A reste couvert par les packs. Voir
+> [`EXTERNAL_RESOURCES.md`](EXTERNAL_RESOURCES.md).
+
 ### Pourquoi ces trois langues
 
 | Rang | Langue | Pourquoi elle ressort | Limite à prévoir |

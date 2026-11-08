@@ -1388,3 +1388,50 @@ mot `json`) avec les champs ci-dessous. Exemple de structure, en indentation :
   ]
 }
 ```
+
+## 2026-11-08T10:00:00+01:00 — Klein — K2 — in_progress
+
+```json
+{
+  "timestamp": "2026-11-08T10:00:00+01:00",
+  "person": "Klein",
+  "branch": "klein",
+  "task": "K2",
+  "status": "in_progress",
+  "summary": "Inventaire externe : modèles flagship-ai fr→fulfulde/ewondo/bulu, audio Common Voice/AfriSpeech/SOREVA, corpus mt560 basaa/bulu, lexiques PanLex/Suzuya. Aucun modèle duala prêt ; le bulu est le meilleur candidat pour une 4e langue, sous réserve d'un natif.",
+  "files": [
+    "docs/EXTERNAL_RESOURCES.md",
+    "docs/TRAINING_DATA_AUDIT.md",
+    "docs/DATA_LICENSES.md",
+    "docs/DUALA_MT.md",
+    "data/reference/external-resources.csv",
+    "data/reference/panlex/panlex-targets.csv",
+    "data/reference/panlex/README.md",
+    "data/reference/fulfulde-suzuya.csv",
+    "data/reference/NOTICE.md",
+    "data/reference/README.md",
+    "data/training/README.md",
+    "README.md"
+  ],
+  "tests": [
+    {
+      "command": "python3 scripts/check-training-data.py",
+      "result": "pass",
+      "note": "11 sources : 7 bloquées, 3 sous autorisation, 1 utilisable ; aucun fichier versionné"
+    },
+    {
+      "command": "server/.venv/bin/python -c \"import ctranslate2; print(ctranslate2.__version__)\"",
+      "result": "pass",
+      "note": "ctranslate2 4.8.5 installé pour les modèles int8"
+    },
+    {
+      "command": "python3 scripts/check-evolution.py",
+      "result": "pass",
+      "note": "journal valide après ajout de l'entrée"
+    }
+  ],
+  "evidence": "docs/EXTERNAL_RESOURCES.md §4.1 (sorties flagship int8 sur 10 phrases) ; data/reference/external-resources.csv (87 ressources) ; docs/DUALA_MT.md §8",
+  "next": "Trancher la licence du sous-modèle francais-ewondo avec flagship-ai, décider du mode brouillon ewo/fub, puis du bulu comme 4e langue si un natif est disponible",
+  "blockers": []
+}
+```

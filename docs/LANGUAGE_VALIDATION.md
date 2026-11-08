@@ -31,6 +31,13 @@ T1 et T2 par langue, fiche d'arbitrage, fiche des 20 phrases inédites.
 « traduction automatique ». L'ewondo et le duala sont des mémoires de phrases
 validées. Le popup et la page affichent explicitement cet état.
 
+> **Mise à jour du 8 novembre 2026** — NLLB-200 ne couvre ni `ewo_Latn`, ni
+> `dua_Latn`, ni `fub_Latn` ; seul `fuv_Latn` est présent. Des modèles
+> `flagship-ai` peuvent fournir un brouillon fr → fulfulde et fr → ewondo,
+> mais ils ne changent pas la règle de validation : le niveau A reste sur les
+> packs, et toute sortie MT doit être relue par un natif. Voir
+> [`EXTERNAL_RESOURCES.md`](EXTERNAL_RESOURCES.md).
+
 Yemba, medumba, bassa et ghomala' sont **retirés** du prototype (voir
 `tasks/klein.md`, K10).
 

@@ -209,3 +209,45 @@ limitations:
   - variété régionale à valider
   - pas de traduction certifiée
 ```
+
+## Mise à jour du 8 novembre 2026 — modèles et corpus externes
+
+La recherche externe a identifié des ressources qui n’étaient pas dans le
+premier audit. Le niveau A ne change pas : **packs validés uniquement, jamais
+de MT**. Les ressources ci-dessous servent au niveau B/C, à l’évaluation ou à
+une quatrième langue candidate.
+
+| Ressource | Licence | Statut |
+|---|---|---|
+| `flagship-ai/francais-fufulde` / `fufulde-francais` | CC-BY-4.0 | conforme à la liste, brouillon MT |
+| `flagship-ai/francais-bulu` / `bulu-francais` | CC-BY-4.0 | conforme, langue candidate |
+| `flagship-ai/francais-ghomala` / `ghomala-francais` | CC-BY-4.0 | conforme, langue candidate |
+| `flagship-ai/cameroon-int8` / `francais-ewondo` | CC-BY-NC-4.0 (bundle) ; sous-fiche CC-BY-4.0 | **conflit à trancher**, traiter comme NC par précaution |
+| `mabobe-biyong/m2m100_418M-fr-ewo-rel-ft` | AFL-3.0 | libre hors liste, expérimental |
+| Common Voice 27.0 (`fub`, `ewo`, `dua`, `bas`, `bum`) | CC0-1.0 | audio/ASR ; ne pas re-héberger |
+| `AfriSpeech/african-speech-ipa` | CC-BY-4.0 | audio + IPA |
+| `OlameMend/soreva` | CC-BY-4.0 | évaluation ASR/TTS |
+| `facebook/bouquet` | CC-BY-4.0 | benchmark humain, `gated` |
+| `Favourez/bulu_english` / `fr_en_bulu.json` | MIT | 2 688 paires lexicales ; exclure la partie Bible |
+| `stfotso/french-ghomala-bandjoun` | Apache-2.0 | 15 190 paires, hors liste |
+| `mimba/text2text`, `mimba/afrilang` | CC-BY-NC-SA-4.0 | `gated`, non commercial |
+| `DS4H-ICTU/french-*` | inconnue | privé/gated, à demander |
+| `lbourdois/panlex` | CC0-1.0 | lexique seul |
+| `SuzuyaXIII/fulfulde` | MIT | lexique seul |
+
+**Précisions** :
+
+- `flagship-ai/cameroon-int8` est un bundle de 119 paires ; sa licence globale
+  est **CC-BY-NC-4.0**, mais la fiche du sous-modèle `francais-ewondo` indique
+  CC-BY-4.0. Demander une clarification écrite avant toute redistribution.
+- Les modèles `flagship-ai` sont entraînés sur un corpus « scripture + livres ».
+  Même avec une licence CC-BY-4.0 sur les poids, la provenance biblique doit
+  être déclarée et vérifiée avant un usage commercial.
+- Les corpus bibliques (`ELRs/Ewondo_Bible`, `flagship-ai/cameroon_bibles`,
+  `OlameMend/Corinth_dataset`, `Favourez/tupuri_english`) restent soumis à
+  l’autorisation de la Bible Society / des éditeurs.
+- Les lexiques PanLex et Suzuya sont dans `data/reference/` ; ils ne remplacent
+  pas la traduction native.
+
+Inventaire détaillé et liens :
+[`EXTERNAL_RESOURCES.md`](EXTERNAL_RESOURCES.md).

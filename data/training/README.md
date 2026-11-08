@@ -79,3 +79,15 @@ Les modèles de courrier pour l’ewondo et le fulfulde sont dans
 - **NLLB-200** (CC BY-NC 4.0) pour la démonstration fulfulde non commerciale.
 - **Louis Segond 1910** (domaine public) pour le français, sans contrepartie
   ewondo libre.
+
+## Mise à jour du 8 novembre 2026 — modèles pré-entraînés
+
+Des modèles français → fulfulde / ewondo / bulu existent désormais chez
+`flagship-ai` (MarianMT, CC-BY-4.0 pour le fulfulde et le bulu, CC-BY-NC-4.0
+pour le bundle ewondo). Ils ne changent pas les règles ci-dessus :
+
+- le niveau A reste **packs validés uniquement** ;
+- aucun entraînement sur les corpus bibliques sans autorisation ;
+- les modèles servent au niveau B/C, en mode brouillon avec relecture native.
+
+Voir [`../../docs/EXTERNAL_RESOURCES.md`](../../docs/EXTERNAL_RESOURCES.md).

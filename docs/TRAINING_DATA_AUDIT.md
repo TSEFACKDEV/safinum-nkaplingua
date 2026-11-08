@@ -157,3 +157,49 @@ niveau A.
   <https://huggingface.co/datasets/flagship-ai/cameroon_bibles>
 - Africa Corpus (licence other) :
   <https://huggingface.co/datasets/AfriSpeech/africa-corpus>
+
+## 9. Mise à jour du 8 novembre 2026 — ressources externes
+
+L’audit des huit fichiers de `~/Downloads` reste valable : aucun n’est
+utilisable en l’état. La recherche externe a toutefois identifié des
+**modèles pré-entraînés** et des **corpus audio** qui changent les options
+techniques, sans changer la règle du niveau A.
+
+| Ressource | Licence | Usage retenu |
+|---|---|---|
+| `flagship-ai/francais-fufulde` | CC-BY-4.0 | brouillon fr → fub, jamais niveau A |
+| `flagship-ai/francais-bulu` | CC-BY-4.0 | brouillon fr → bulu (langue candidate) |
+| `flagship-ai/cameroon-int8` / `francais-ewondo` | CC-BY-NC-4.0 (bundle) ; sous-fiche CC-BY-4.0 | brouillon fr → ewo, licence à trancher |
+| Common Voice 27.0 (`fub`, `ewo`, `dua`, `bas`, `bum`) | CC0-1.0 | audio/ASR, pas de redistribution |
+| `AfriSpeech/african-speech-ipa` (`ewo`, `dua`, `bas`, `bum`) | CC-BY-4.0 | audio + IPA, ASR/évaluation |
+| `OlameMend/soreva` (`ewo`, `dua`, `fub`, `bas`, etc.) | CC-BY-4.0 | évaluation ASR/TTS |
+| `facebook/bouquet` (`ewo`, `dua`, `bas`, `eto`, `ksf`, `tui`) | CC-BY-4.0 | benchmark humain, accès à accepter |
+| `michsethowusu/english-basaa` / `english-bulu` | CC-BY-4.0 | paires en → bas/bum, texte religieux |
+| `Favourez/bulu_english` / `fr_en_bulu.json` | MIT | 2 688 paires lexicales ; exclure le fichier Bible de 31 297 versets |
+| `stfotso/french-ghomala-bandjoun` | Apache-2.0 | 15 190 paires fr ↔ bbj |
+| `mimba/text2text` / `nnh_fra` | CC-BY-NC-SA-4.0 | 40 968 paires, gated |
+| `mimba/afrilang` / `fub_cm` | CC-BY-NC-SA-4.0 | audio fub, gated |
+| `DS4H-ICTU/french-*` | inconnue | privé/gated, à demander |
+
+**Corrections importantes** :
+
+- `NLLB-200` ne connaît pas `ewo_Latn`, `dua_Latn` ni `fub_Latn` ; seul
+  `fuv_Latn` est présent. La baseline NLLB actuelle est donc du fulfulde
+  nigérian, pas du fulfulde Adamawa.
+- `Favourez/bulu_english` contient deux choses : 2 688 paires lexicales
+  utilisables sous MIT et un fichier de 31 297 versets bibliques à traiter
+  comme du texte biblique (autorisation requise). Le tag MIT global ne suffit
+  pas pour la partie Bible.
+- `OlameMend/Corinth_dataset` est tagué CC-BY-4.0 mais contient la première
+  épître aux Corinthiens en ewondo : même règle que la Bible ewondo.
+- Le bundle `flagship-ai/cameroon-int8` est globalement CC-BY-NC-4.0, alors que
+  sa sous-fiche `francais-ewondo` affiche CC-BY-4.0. En cas de doute, retenir
+  la licence la plus restrictive (NC) et demander confirmation à l’auteur.
+
+**Décision** : le niveau A reste **packs validés uniquement**. Les modèles
+`flagship-ai` peuvent alimenter un mode brouillon pour l’ewondo et le
+fulfulde, avec protection des nombres et relecture native. Le duala n’a
+toujours pas de modèle prêt : formation complète sur les 15 351 paires ou
+traduction humaine.
+
+Inventaire complet : [`EXTERNAL_RESOURCES.md`](EXTERNAL_RESOURCES.md).

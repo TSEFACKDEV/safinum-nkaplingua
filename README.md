@@ -466,9 +466,10 @@ exigence par exigence dans [`docs/COMPLIANCE.md`](docs/COMPLIANCE.md).
 | [`docs/LANGUAGE_VALIDATION.md`](docs/LANGUAGE_VALIDATION.md) | fulfulde, méthode de validation native |
 | [`docs/VALIDATION_REPORT.md`](docs/VALIDATION_REPORT.md) | état réel du panel, corpus, phrases inédites |
 | [`data/review/README.md`](data/review/README.md) | kit natif T1/T2, arbitrage et consentement |
-| [`data/reference/README.md`](data/reference/README.md) | navigateur Glosbe / Webonary / Resulam, sans copie |
+| [`data/reference/README.md`](data/reference/README.md) | liens Glosbe / Webonary / Resulam + lexiques CC0/MIT |
 | [`docs/REFERENCE_SOURCES.md`](docs/REFERENCE_SOURCES.md) | audit licences et conditions des sources externes |
 | [`docs/TRAINING_DATA_AUDIT.md`](docs/TRAINING_DATA_AUDIT.md) | audit des fichiers d’entraînement (Parquet, Bible, CSV) |
+| [`docs/EXTERNAL_RESOURCES.md`](docs/EXTERNAL_RESOURCES.md) | inventaire datasets/modèles, quatrième langue, licences |
 | [`docs/DUALA_MT.md`](docs/DUALA_MT.md) | modèle expérimental anglais → duala (CC-BY-4.0) |
 | [`docs/DATA_PERMISSIONS.md`](docs/DATA_PERMISSIONS.md) | modèles de demande d’autorisation |
 | [`docs/VIDEO_SCRIPT.md`](docs/VIDEO_SCRIPT.md) | script de la vidéo de 3 minutes |
