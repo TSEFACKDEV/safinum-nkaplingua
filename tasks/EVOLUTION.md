@@ -2690,3 +2690,71 @@ mot `json`) avec les champs ci-dessous. Exemple de structure, en indentation :
   "blockers": []
 }
 ```
+
+## 2026-11-08T18:00:00+01:00 — Freedy — F3 — in_progress
+
+```json
+{
+  "timestamp": "2026-11-08T18:00:00+01:00",
+  "person": "Freedy",
+  "branch": "freedy",
+  "task": "F3",
+  "status": "in_progress",
+  "summary": "Parcours réel des 5 étapes SAFINUM avec NLLB : 31/192 segments traduits, 161 restent en français, 9 critiques en MT démo ; restauration 5/5, champs et boutons actifs, aucune erreur page.",
+  "files": [
+    "docs/AUDIT_2026-11-08.md",
+    "docs/test-results/real-site-5steps-2026-11-08.json",
+    "docs/test-results/README.md",
+    "docs/COMPLIANCE.md",
+    "docs/SUBMISSION_CHECKLIST.md",
+    "docs/SAFINUM_ELIGIBILITY.md",
+    "README.md",
+    "tasks/README.md"
+  ],
+  "tests": [
+    {
+      "command": "Playwright extension + site SAFINUM 5 étapes + NLLB réel",
+      "result": "fail",
+      "note": "31/192 traduits ; 6/7/9/5/4 par étape ; 0 erreur page ; restauration 5/5"
+    },
+    {
+      "command": "Contrôle champs/boutons/restauration sur les 5 étapes",
+      "result": "pass",
+      "note": "champs et cases conservés ; boutons actifs ; texte de bouton parfois traduit"
+    }
+  ],
+  "evidence": "docs/test-results/real-site-5steps-2026-11-08.json",
+  "next": "Réduire la démo à un paragraphe court, corriger compte/nom, re-mesurer les 3 langues avec un harnais fiable",
+  "blockers": []
+}
+```
+
+## 2026-11-08T18:15:00+01:00 — Freedy — F3 — in_progress
+
+```json
+{
+  "timestamp": "2026-11-08T18:15:00+01:00",
+  "person": "Freedy",
+  "branch": "freedy",
+  "task": "F3",
+  "status": "in_progress",
+  "summary": "Bascule FR→EN testée en réel : 7/44 segments traduits, 37 restent en anglais, compte et nom préservés, titre de l'onglet non traduit.",
+  "files": [
+    "docs/AUDIT_2026-11-08.md",
+    "docs/test-results/real-site-en-2026-11-08.json",
+    "docs/test-results/README.md",
+    "docs/SITE_TEST_SAFINUM.md",
+    "docs/COMPLIANCE.md"
+  ],
+  "tests": [
+    {
+      "command": "Playwright site SAFINUM + bouton EN + NLLB réel",
+      "result": "fail",
+      "note": "7/44 traduits, 37 en anglais, titre non traduit, 1 erreur ressource"
+    }
+  ],
+  "evidence": "docs/test-results/real-site-en-2026-11-08.json",
+  "next": "Corriger la traduction du titre et re-mesurer les 3 langues avec un harnais fiable",
+  "blockers": []
+}
+```

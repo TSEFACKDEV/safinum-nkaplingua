@@ -2,7 +2,7 @@
 
 > **Réconciliation du 8 novembre 2026** : le score de 88/78 ci-dessous repose
 > sur le test installé K2 (43/0, 5/5) qui **ne précise pas le backend**. Avec
-> NLLB seul, l’audit indépendant mesure **6/44 segments** sur l’étape 1,
+> NLLB seul, l’audit indépendant mesure **6/44 segments** sur l’étape 1, **31/192 sur les 5 étapes**,
 > **1/20 en production et 4/20 en démo** ; le score réaliste devient
 > **70–83, ~74**. Le 88/78 reste conditionnel à un backend flagship/reviewed
 > non reproduit ici. Voir
@@ -52,7 +52,7 @@ spécifique et que les défauts majeurs peuvent peser sur la qualification.
 
 | Exigence | État | Commentaire |
 |---|---|---|
-| 1. Adaptation de la langue de l’interface | ⚠️ | 3 langues et popup OK, mais **6/44 segments** sur l’étape 1 avec NLLB seul. |
+| 1. Adaptation de la langue de l’interface | ⚠️ | 3 langues et popup OK, mais **6/44 à l’étape 1 et 31/192 sur les 5 étapes** avec NLLB seul. |
 | 2. Parcours financier | ✅ | Solde, frais, bénéficiaire, récapitulatif, confirmation. |
 | 3. Préservation des informations | ⚠️ | Montants/référence souvent OK, mais **numéro de compte sans espace** et **nom minusculé** sur le site réel. |
 | 4. Fonctionnement sans modifier le service | ✅ | Extension, injection, aucun changement serveur. |

@@ -98,7 +98,8 @@ l'humain et parsé par le test.
 
 L’audit réel (`docs/AUDIT_2026-11-08.md`) change les priorités :
 
-1. **Couverture site** : 6/44 segments sur l’étape 1 ; 38 restent en français.
+1. **Couverture site** : 6/44 sur l’étape 1, **31/192 sur les 5 étapes** ;
+   161 restent en français.
 2. **Qualité NLLB** : 1/20 en production, 4/20 en démo ; le chiffre 12/20 n’est
    pas reproduit.
 3. **Préservation** : numéro de compte sans espace, nom minusculé, jeton
@@ -107,6 +108,8 @@ L’audit réel (`docs/AUDIT_2026-11-08.md`) change les priorités :
    français.
 5. **Message popup** : `low_roundtrip` présenté à tort comme un problème de
    montants/noms.
+6. **Titre EN** : non traduit ; le test K2 qui annonce un titre fulfulde n’est
+   pas reproduit.
 
 Conséquence : la démonstration doit être **réduite à un paragraphe court** et
 les packs doivent être priorisés. Ne pas cocher la définition de « fini » tant

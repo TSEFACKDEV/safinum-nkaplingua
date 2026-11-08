@@ -1,8 +1,7 @@
 # Validation linguistique — fulfulde, ewondo et duala
 
 > **Mise à jour du 8 novembre 2026** : le test réel NLLB donne **1/20 en
-> production, 4/20 en démo** sur les phrases inédites, et 6/44 segments sur
-> l’étape 1 du site. Voir [`AUDIT_2026-11-08.md`](AUDIT_2026-11-08.md).
+> production, 4/20 en démo** sur les phrases inédites, et 6/44 à l’étape 1 et **31/192 sur les 5 étapes**. Voir [`AUDIT_2026-11-08.md`](AUDIT_2026-11-08.md).
 
 > **Méthode** : TRAPD (traduction, relecture, arbitrage, prétest,
 > documentation), pas la rétro-traduction. Trois natifs, deux traductions

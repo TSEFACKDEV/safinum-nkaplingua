@@ -7,17 +7,17 @@ Ce document confronte le prototype NkapLingua au règlement officiel du
 
 | Exigence officielle | Statut | Preuve / remarque |
 |---|---|---|
-| 1. Adaptation de la langue de l’interface | ⚠️ | Extension MV3 et 3 langues. **Audit réel du 8 nov : 6/44 segments traduits sur l’étape 1 du site**, 38 restent en français. Packs 107/122/121 entrées, **0 validée**. |
+| 1. Adaptation de la langue de l’interface | ⚠️ | Extension MV3 et 3 langues. **Audit réel du 8 nov : 31/192 segments traduits sur les 5 étapes** (6/44 à l’étape 1), 161 restent en français. Packs 107/122/121 entrées, **0 validée**. |
 | 2. Parcours financier : solde, frais, transfert | ✅ | Page FINAKA : solde, frais, formulaire de transfert, récapitulatif |
 | 3. Préservation des montants, frais, bénéficiaires, conditions, alertes | ⚠️ | Jetons `[[NUM_n]]`/`[[NAME_n]]` et refus si jeton perdu. **Défauts réels : numéro de compte `CM 001 2345 6789 01` → `CM 001 23456789 01` ; `Amina` → `amina`**. À corriger avant de promettre la préservation. |
 | 4. Fonctionnement sans modifier le code source | ✅ | Injection à l’exécution, aucun changement serveur, toggle original ; le cloud est opt-in et désactivé par défaut |
-| 5. Adaptation à un nouveau contenu | ⚠️ | Popup « texte inédit », sélection et attributs. **NLLB réel : 1/20 en production, 4/20 en démo** ; les packs restent la seule voie niveau A. |
+| 5. Adaptation à un nouveau contenu | ⚠️ | Popup « texte inédit », sélection et attributs. **NLLB réel : 1/20 en production, 4/20 en démo ; 31/192 sur 5 étapes ; titre EN non traduit**. |
 
 ## 2. Grille d’évaluation (100 points)
 
 | Critère | Poids | Auto-évaluation | Commentaire |
 |---|---:|---|---|
-| Fonctionnalité du prototype | 25 | **14–17** | Pipeline solide, mais **6/44 segments** sur le site réel et 1/20 en production : la démo complète ne fonctionne pas. |
+| Fonctionnalité du prototype | 25 | **14–17** | Pipeline solide, mais **31/192 segments** sur les 5 étapes (6/44 à l’étape 1) et 1/20 en production : la démo complète ne fonctionne pas. |
 | Intégration et indépendance | 20 | 18–20 | Aucune modification du site ; `activeTab` + `scripting` |
 | Sécurité et préservation des informations | 20 | **14–17** | Pseudonymisation et jetons solides, mais numéro de compte et casse du nom altérés sur le site réel. |
 | Accessibilité et expérience utilisateur | 15 | 12–14 | Choix de 3 langues, détection affichée, toggle original, `lang`, popup natif ; pas encore de lecture audio |
@@ -34,7 +34,8 @@ Le test réel `https://safinum.cm/hackathon-test` + extension + NLLB donne :
 | Mesure | Résultat |
 |---|---:|
 | Segments traduits, étape 1 | **6 / 44** |
-| Segments laissés en français | **38** |
+| Segments traduits, 5 étapes | **31 / 192** |
+| Segments laissés en français, 5 étapes | **161** |
 | Phrases inédites acceptées, production | **1 / 20** |
 | Phrases inédites acceptées, démo | **4 / 20** |
 | Erreurs page/console | **0** |
@@ -44,7 +45,7 @@ Détails et preuves : [`AUDIT_2026-11-08.md`](AUDIT_2026-11-08.md).
 
 **Conséquence pour la soutenance** : ne pas promettre une page entièrement
 traduite. Démontrer un paragraphe court, le popup, la restauration et les
-garde-fous ; annoncer clairement les 6/44 et les 1/20/4/20.
+garde-fous ; annoncer clairement les 31/192 (6/44 à l’étape 1) et les 1/20/4/20.
 
 ## 3. Livrables attendus
 
@@ -99,7 +100,7 @@ Limites connues :
 
 ## 6. Actions prioritaires avant soumission
 
-0. **Réduire la promesse de démo** : 6/44 sur le site réel, 1/20 en production ; ne pas annoncer une page complète.
+0. **Réduire la promesse de démo** : 31/192 sur les 5 étapes, 1/20 en production ; ne pas annoncer une page complète.
 
 1. **Faire valider les phrases finance par le panel TRAPD (3 natifs par langue).**
 2. **Remplir les packs fulfulde, ewondo et duala** avec le panel TRAPD.
@@ -121,5 +122,5 @@ Limites connues :
 - « Aucune erreur possible » : le contrôle de sûreté réduit le risque, il ne
   l’élimine pas.
 - « Production ready » : c’est un prototype de hackathon.
-- « La page du site est traduite » : 6/44 segments seulement sur l’étape 1.
+- « La page du site est traduite » : 31/192 segments sur les 5 étapes, 6/44 à l’étape 1.
 - « 12/20 phrases inédites acceptées » : chiffre historique non reproduit ; 1/20 en production, 4/20 en démo.

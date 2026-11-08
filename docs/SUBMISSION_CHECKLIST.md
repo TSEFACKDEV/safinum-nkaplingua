@@ -1,8 +1,8 @@
 # Checklist de soumission — SAFINUM Innovate 2026
 
-> **État réel — audit du 8 novembre 2026** : 6/44 segments traduits sur
-> l’étape 1 du site, 1/20 phrases inédites en production, 4/20 en démo,
-> 0 phrase de pack validée. Ne pas promettre une page entièrement traduite.
+> **État réel — audit du 8 novembre 2026** : **31/192 segments traduits sur
+> les 5 étapes** (6/44 à l’étape 1), 1/20 phrases inédites en production,
+> 4/20 en démo, 0 phrase de pack validée. Ne pas promettre une page entièrement traduite.
 > Voir [`AUDIT_2026-11-08.md`](AUDIT_2026-11-08.md).
 
 ## 1. Livrables

@@ -7,6 +7,8 @@ Générés en local par les harnais du dépôt. Aucune donnée réelle.
 | Fichier | Commande / portée | Résultat |
 |---|---|---|
 | `real-site-step1-2026-11-08.json` | Site SAFINUM, étape 1, extension réelle + NLLB | **6/44 segments traduits**, 38 restent en français, 2 critiques en MT démo ; 0 erreur page |
+| `real-site-5steps-2026-11-08.json` | Site SAFINUM, **5 étapes**, extension réelle + NLLB | **31/192 segments traduits**, 161 en français, 9 critiques MT démo, restauration 5/5 |
+| `real-site-en-2026-11-08.json` | Bascule FR → EN, étape 1 | **7/44 traduits**, 37 en anglais, titre non traduit |
 | `real-unseen-2026-11-08.json` | 20 phrases inédites via le background réel | Production : **1/20** ; démo : **4/20** |
 | `real-tokens-2026-11-08.json` | Appels réels avec jetons | `[[NUM_0]]` conservé ; `[[NAME_0]]` perdu sur un cas |
 
@@ -39,8 +41,8 @@ Voir l’analyse complète : [`docs/AUDIT_2026-11-08.md`](../AUDIT_2026-11-08.md
 
 - la qualité NLLB est faible sur les phrases financières : **1/20 en
   production, 4/20 en démo** ;
-- la couverture réelle du site est de **6/44 segments sur l’étape 1**, pas
-  66/71 ;
+- la couverture réelle du site est de **6/44 sur l’étape 1** et **31/192 sur
+  les 5 étapes**, pas 66/71 ;
 - les packs ewondo et duala sont vides : **aucune phrase validée** ;
 - les étapes 2 à 5 du site n’ont pas été rejouées en NLLB réel ;
 - le message d’erreur du popup ne distingue pas `low_roundtrip` de

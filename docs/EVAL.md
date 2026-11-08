@@ -2,7 +2,8 @@
 
 > **Mise à jour du 8 novembre 2026** : les chiffres du 7 novembre (12/20,
 > 6/20) ne sont pas reproduits avec le backend NLLB réel disponible sur le
-> poste : **1/20 en production, 4/20 en démo**. Voir
+> poste : **1/20 en production, 4/20 en démo** ; sur le site, **31/192 sur
+> les 5 étapes** (6/44 à l’étape 1). Voir
 > [`AUDIT_2026-11-08.md`](AUDIT_2026-11-08.md).
 
 ## Objectif
