@@ -281,6 +281,20 @@ vm.runInContext(
     LANG.isCriticalText("Bonjour, comment allez-vous ?") === false,
     "salutation classée critique par erreur"
   );
+  assert(
+    LANG.isDemoPage({
+      hostname: "safinum.cm",
+      pathname: "/hackathon-test"
+    }) === true,
+    "site de test SAFINUM non reconnu"
+  );
+  assert(
+    LANG.isDemoPage({
+      hostname: "example.com",
+      pathname: "/hackathon-test"
+    }) === false,
+    "site inconnu classé démo"
+  );
 
   const critical = await context.translateSegments(
     [{ id: "crit", text: "Le solde est de 125 000 FCFA." }],
