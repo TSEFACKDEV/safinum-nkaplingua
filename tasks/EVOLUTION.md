@@ -1962,3 +1962,49 @@ mot `json`) avec les champs ci-dessous. Exemple de structure, en indentation :
   "blockers": []
 }
 ```
+
+## 2026-11-08T07:45:00+01:00 — Marius — M12 — done
+
+```json
+{
+  "timestamp": "2026-11-08T07:45:00+01:00",
+  "person": "Marius",
+  "branch": "marius",
+  "task": "M12",
+  "status": "done",
+  "summary": "Test réel Chrome 158 sur une page locale : le document principal est traduit, les Shadow DOM ouvert et fermé ne sont pas parcourus, les iframes ne le sont pas en injection top-frame. Avec injection allFrames et message par frameId (permissions des deux origines), les iframes même-origine et cross-origin sont traduites. chrome.dom.openOrClosedShadowRoot est disponible. Aucune promesse activeTab pour les iframes cross-origin ; limites documentées.",
+  "files": [
+    "docs/SHADOW_DOM_IFRAMES.md"
+  ],
+  "tests": [
+    {
+      "command": "harnais Playwright M12 (page locale, Shadow DOM ouvert/fermé, iframes)",
+      "result": "pass",
+      "note": "top traduit ; open/closed shadow intacts ; iframes top-frame intactes ; allFrames + host permissions : les deux iframes traduites"
+    },
+    {
+      "command": "chrome.dom.openOrClosedShadowRoot dans le content script",
+      "result": "pass",
+      "note": "fonction disponible ; Shadow fermé lisible via l'API, element.shadowRoot null"
+    },
+    {
+      "command": "node tests/content.test.js && node tests/privacy.test.js && node tests/cloud-gating.test.js && node tests/criticality.test.js",
+      "result": "pass",
+      "note": "non-régression extension"
+    },
+    {
+      "command": "NK_MOCK=1 server/.venv/bin/python -m pytest -q server/test_api.py",
+      "result": "pass",
+      "note": "26 passed"
+    },
+    {
+      "command": "python3 scripts/check-evolution.py",
+      "result": "pass",
+      "note": "journal valide après ajout de l'entrée"
+    }
+  ],
+  "evidence": "docs/SHADOW_DOM_IFRAMES.md : tableau des résultats ; sortie du harnais « OPEN_SHADOW non traduit », « FRAMES_AFTER_ALLFRAMES : nde nje »",
+  "next": "M9 — harnais e2e/API et preuves de latence",
+  "blockers": []
+}
+```
