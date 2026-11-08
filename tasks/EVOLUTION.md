@@ -1430,7 +1430,7 @@ mot `json`) avec les champs ci-dessous. Exemple de structure, en indentation :
       "note": "journal valide après ajout de l'entrée"
     }
   ],
-  "evidence": "docs/EXTERNAL_RESOURCES.md §4.1 (sorties flagship int8 sur 10 phrases) ; data/reference/external-resources.csv (87 ressources) ; docs/DUALA_MT.md §8",
+  "evidence": "docs/EXTERNAL_RESOURCES.md §4.1 (sorties flagship int8 sur 10 phrases) ; data/reference/external-resources.csv (88 ressources) ; docs/DUALA_MT.md §8",
   "next": "Trancher la licence du sous-modèle francais-ewondo avec flagship-ai, décider du mode brouillon ewo/fub, puis du bulu comme 4e langue si un natif est disponible",
   "blockers": []
 }

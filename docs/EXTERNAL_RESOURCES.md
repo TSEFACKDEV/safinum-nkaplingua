@@ -90,6 +90,7 @@ licence le permettait.
 | `SuzuyaXIII/fulfulde` | Lexique EN/FR/Fulfulde | 922 entrées | MIT | ouvert | **Référence** |
 | `lbourdois/panlex` / `fub` | Lexique | 2 105 entrées | CC0-1.0 | ouvert | **Référence** |
 | `michaelanietie/fulani-english-pair-dataset` (Kaggle) | Paires en → fuv | 3 032 paires | Apache-2.0 | ouvert | **Référence** (fuv, pas fub) |
+| `ahmedbah/fulfulde` (Kaggle) | Corpus fub (accès par e-mail) | inconnu | CC-BY-NC-SA-4.0 | e-mail | **Gated** |
 | `DS4H-ICTU/french-FULFULDE-ADAMAOUA` | Corpus fr ↔ fub | inconnu | inconnue | privé/gated | **Gated** |
 | NOODL — Adamawa Fulfulde–French Parallel Corpus of Narratives 1.2 | Corpus fr ↔ fub | ~1 977 lignes | NOODL-1.0 | Mozilla Data Collective | **Autorisation requise** |
 | `AfriSpeech/africa-corpus` / fulfulde | Texte biblique | 243 053 lignes | `other` | ouvert | **Autorisation requise** |
