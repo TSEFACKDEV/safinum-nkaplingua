@@ -93,6 +93,11 @@ context.__NK_PACK_OVERRIDES__ = {
         status: "validated"
       },
       {
+        source: "Opération [[NAME_0]].",
+        target: "Nde [[NAME_0]].",
+        status: "validated"
+      },
+      {
         source: "Phrase non validée.",
         target: "Phrase ewo.",
         status: "draft"
@@ -169,6 +174,21 @@ vm.runInContext(
   assert(
     !rawName.translations[0].text.includes("[[NAME_"),
     "jeton NAME visible dans la réponse au popup"
+  );
+
+  const rawReference = await context.translateSegments(
+    [{ id: "raw-ref", text: "Opération SAF-2026-AB12CD." }],
+    "ewo",
+    "fr"
+  );
+  assert(rawReference.translations[0].ok === true, "référence refusée");
+  assert(
+    rawReference.translations[0].text.includes("SAF-2026-AB12CD"),
+    "référence non restaurée"
+  );
+  assert(
+    !rawReference.translations[0].text.includes("[[NAME_"),
+    "jeton de référence visible dans la réponse"
   );
 
   const miss = await context.translateSegments(

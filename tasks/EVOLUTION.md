@@ -1790,3 +1790,66 @@ mot `json`) avec les champs ci-dessous. Exemple de structure, en indentation :
   ]
 }
 ```
+
+## 2026-11-08T07:00:00+01:00 — Marius — M7 — in_progress
+
+```json
+{
+  "timestamp": "2026-11-08T07:00:00+01:00",
+  "person": "Marius",
+  "branch": "marius",
+  "task": "M7",
+  "status": "in_progress",
+  "summary": "Test réel Chrome for Testing 158 sur safinum.cm/hackathon-test : 5 étapes + bascule EN, 23 à 45 segments traduits par étape, 10 à 13 segments niveau A laissés en français, 0 pageerror/console.error, montants/noms/téléphone/références préservés, champs et boutons du site intacts, restauration exacte. Le test a révélé que les références SAF-2026-XXXX n'étaient pas tokenisées : correctif dans languages.js/content.js + tests. Firefox reste à tester.",
+  "files": [
+    "extension/languages.js",
+    "extension/content.js",
+    "scripts/test-extension.js",
+    "tests/content.test.js",
+    "docs/SITE_TEST_2026-11-08.md",
+    "tests/README.md"
+  ],
+  "tests": [
+    {
+      "command": "node .cache/m7/m7_test.js (harnais Playwright local)",
+      "result": "pass",
+      "note": "5 étapes + EN : 36/29/23/29/28/45 segments traduits, 10/12/11/13/11/1 niveau A, 0 erreur page, montants et références préservés, restauration exacte"
+    },
+    {
+      "command": "node scripts/test-extension.js",
+      "result": "pass",
+      "note": "référence SAF-2026-AB12CD tokenisée puis restaurée"
+    },
+    {
+      "command": "node tests/content.test.js",
+      "result": "pass",
+      "note": "référence préservée dans le DOM après traduction"
+    },
+    {
+      "command": "node tests/privacy.test.js && node tests/cloud-gating.test.js && node tests/criticality.test.js",
+      "result": "pass",
+      "note": "non-régression M1/M2/M3"
+    },
+    {
+      "command": "NK_MOCK=1 server/.venv/bin/python -m pytest -q server/test_api.py",
+      "result": "pass",
+      "note": "26 passed"
+    },
+    {
+      "command": "python3 scripts/check-language-packs.py && python3 scripts/check-pack-collisions.py",
+      "result": "pass",
+      "note": "packs et collisions"
+    },
+    {
+      "command": "python3 scripts/check-evolution.py",
+      "result": "pass",
+      "note": "journal valide après ajout de l'entrée"
+    }
+  ],
+  "evidence": "docs/SITE_TEST_2026-11-08.md ; sortie « M7 OK — 5 étapes + EN, montants/noms/références préservés, boutons intacts, 0 erreur » ; avant correctif : « 4-recapitulatif: référence perdue SAF-2026-OMMWS3 »",
+  "next": "Tester Firefox avec un binaire chargeable, puis couvrir les iframes et Shadow DOM fermés (M12)",
+  "blockers": [
+    "Firefox non testé : Snap Firefox ne peut pas créer son profil (système de fichiers en lecture seule) et web-ext run n'accepte pas --headless"
+  ]
+}
+```

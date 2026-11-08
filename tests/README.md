@@ -66,3 +66,11 @@ npx --yes web-ext lint --source-dir dist/firefox
 - `web-ext lint` : **0 erreur, 0 warning, 0 notice** ;
 - CI GitHub vérifiée après push : **5 jobs verts** sur `develop` et `marius`
   (runs du 8 novembre 2026).
+
+## Test navigateur manuel — M7
+
+Le parcours réel sur `https://safinum.cm/hackathon-test` (5 étapes + FR/EN)
+est décrit dans [docs/SITE_TEST_2026-11-08.md](../docs/SITE_TEST_2026-11-08.md).
+Il nécessite un Chrome for Testing, Playwright et un backend local de test ; il
+n'est **pas exécuté par la CI**. Résultat Chrome : 0 erreur page, montants,
+noms et références préservés. Firefox reste à tester.

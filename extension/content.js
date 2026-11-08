@@ -318,6 +318,12 @@
       (match) => addToken("EMAIL", match)
     );
 
+    // Références d'opération (SAF-2026-XXXX) : entité opaque, jamais traduite.
+    value = value.replace(
+      /\b[A-Z]{2,}-\d{4}-[A-Z0-9]{4,}\b/g,
+      (match) => addToken("NAME", match)
+    );
+
     // Noms de bénéficiaires et personnes : après un mot déclencheur.
     value = value.replace(NAME_TRIGGER_RE, (match, trigger, candidate) => {
       if (!looksLikeName(candidate)) return match;

@@ -25,6 +25,7 @@ const html = `<!doctype html>
 <body>
   <h1>Solde disponible</h1>
   <p id="solde">Le solde est de 125 000 FCFA.</p>
+  <p id="reference">Opération SAF-2026-AB12CD.</p>
   <p id="transfert">Transfert à Aïcha.</p>
   <p id="nom-montant">Le bénéficiaire Aïcha reçoit 25 000 FCFA.</p>
   <p id="frais">Les frais de transfert sont de 1 000 FCFA.</p>
@@ -112,6 +113,11 @@ function sendMessage(message) {
     body.includes("XX Le solde est de 125 000 FCFA."),
     "texte du solde non traduit"
   );
+  assert(
+    body.includes("SAF-2026-AB12CD"),
+    "référence d'opération non préservée"
+  );
+  assert(!body.includes("[[NAME_"), "jeton de référence non restauré");
   assert(
     body.includes("Transfert à Aïcha."),
     "nom du bénéficiaire non préservé"
