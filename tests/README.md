@@ -64,5 +64,5 @@ npx --yes web-ext lint --source-dir dist/firefox
 
 - 3 ZIP construits : **377 Ko** chacun (< 10 Mo) ;
 - `web-ext lint` : **0 erreur, 0 warning, 0 notice** ;
-- ces vérifications sont locales : la CI GitHub n’a pas été observée depuis ce
-  poste et ne doit pas être déclarée verte avant un push réel.
+- CI GitHub vérifiée après push : **5 jobs verts** sur `develop` et `marius`
+  (runs du 8 novembre 2026).

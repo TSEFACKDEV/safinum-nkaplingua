@@ -36,7 +36,7 @@ https://github.com/TSEFACKDEV/safinum-nkaplingua
 
 - Dépôt public
 - Branches : `main`, `develop`, `klein`, `freedy`, `marius`
-- CI GitHub Actions : workflow fourni ; état distant à vérifier après push
+- CI GitHub Actions verte sur `develop` et `marius` (8 novembre 2026)
 
 ### 4. Extension
 
@@ -115,6 +115,7 @@ https://tsefackdev.github.io/safinum-nkaplingua/demo/
   collisions avant le build.
 - `web-ext lint` sur `dist/firefox` : **0 erreur, 0 warning, 0 notice**.
 - Tests locaux : **26 tests API** (mode mock), tests jsdom
-  `content`/`privacy`/`cloud-gating`, registre et packs, **6 cas** de collisions.
-- Ces vérifications sont locales. La CI GitHub n’a pas été observée depuis ce
-  poste et ne doit pas être présentée comme verte avant un push réel.
+  `content`/`privacy`/`cloud-gating`/`criticality`, registre et packs,
+  **6 cas** de collisions.
+- CI GitHub vérifiée après push : **5 jobs verts** sur `develop` et `marius`
+  (backend, journal, données linguistiques, extension, scan de secrets).

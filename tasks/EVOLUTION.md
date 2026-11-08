@@ -1746,3 +1746,47 @@ mot `json`) avec les champs ci-dessous. Exemple de structure, en indentation :
   ]
 }
 ```
+
+## 2026-11-08T06:52:00+01:00 — Marius — M10 — in_progress
+
+```json
+{
+  "timestamp": "2026-11-08T06:52:00+01:00",
+  "person": "Marius",
+  "branch": "marius",
+  "task": "M10",
+  "status": "in_progress",
+  "summary": "Après push de a89e427, la CI GitHub est verte sur develop et marius : 5 jobs sur 5 (backend, journal, données linguistiques, extension, scan de secrets) pour chaque run. Les docs de soumission et tests/README ne disent plus que la CI est non observée. Reste uniquement le chargement réel des ZIP dans Chrome/Firefox.",
+  "files": [
+    "docs/SUBMISSION.md",
+    "tests/README.md"
+  ],
+  "tests": [
+    {
+      "command": "gh run view 42451073346 --json jobs",
+      "result": "pass",
+      "note": "develop : Backend, Journal, Secret scan, Données linguistiques, Extension — tous success"
+    },
+    {
+      "command": "gh run view 42451073378 --json jobs",
+      "result": "pass",
+      "note": "marius : 5 jobs success"
+    },
+    {
+      "command": "gh run view 42451073346/42451073378 --json status,conclusion",
+      "result": "pass",
+      "note": "completed / success pour les deux runs"
+    },
+    {
+      "command": "python3 scripts/check-evolution.py",
+      "result": "pass",
+      "note": "journal valide après ajout de l'entrée"
+    }
+  ],
+  "evidence": "https://github.com/TSEFACKDEV/safinum-nkaplingua/actions/runs/42451073346 et /42451073378 ; jobs listés en succès ; docs/SUBMISSION.md § État vérifié",
+  "next": "Charger nkaplingua-chrome.zip et nkaplingua-firefox.zip dans des navigateurs réels, puis repasser M10 en done",
+  "blockers": [
+    "ZIP non chargés dans Chrome/Firefox réels sur ce poste"
+  ]
+}
+```
