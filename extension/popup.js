@@ -194,9 +194,9 @@ async function loadTarget() {
 
   try {
     const cloud = await api.storage.local.get("nkCloudFallback");
-    $("cloudFallback").checked = cloud?.nkCloudFallback !== false;
+    $("cloudFallback").checked = cloud?.nkCloudFallback === true;
   } catch {
-    $("cloudFallback").checked = true;
+    $("cloudFallback").checked = false;
   }
 
   setStatus("Prêt · détection FR/EN");

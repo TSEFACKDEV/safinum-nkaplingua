@@ -1448,3 +1448,69 @@ mot `json`) avec les champs ci-dessous. Exemple de structure, en indentation :
   "blockers": []
 }
 ```
+
+## 2026-11-08T06:22:00+01:00 — Marius — M2 — done
+
+```json
+{
+  "timestamp": "2026-11-08T06:22:00+01:00",
+  "person": "Marius",
+  "branch": "marius",
+  "task": "M2",
+  "status": "done",
+  "summary": "MyMemory n'est plus autorisé par défaut : cloudAllowed() exige nkCloudFallback === true, la case du popup est décochée et son texte décrit l'opt-in. Ajout de tests/cloud-gating.test.js : pack validé sans aucune requête réseau, cloud jamais appelé sans opt-in, appel cloud seulement avec opt-in.",
+  "files": [
+    "extension/background.js",
+    "extension/popup.js",
+    "extension/popup.html",
+    "tests/cloud-gating.test.js",
+    "tests/README.md",
+    ".github/workflows/ci.yml"
+  ],
+  "tests": [
+    {
+      "command": "node tests/cloud-gating.test.js",
+      "result": "pass",
+      "note": "rouge avant : MyMemory appelé sans opt-in ; vert après ; hit de pack avec 0 requête réseau"
+    },
+    {
+      "command": "node tests/privacy.test.js",
+      "result": "pass",
+      "note": "non-régression M1"
+    },
+    {
+      "command": "node tests/content.test.js",
+      "result": "pass",
+      "note": "texte, attributs, jetons, restauration"
+    },
+    {
+      "command": "node scripts/test-extension.js",
+      "result": "pass",
+      "note": "registre, détection, packs, jetons, qualité"
+    },
+    {
+      "command": "NK_MOCK=1 server/.venv/bin/python -m pytest -q server/test_api.py",
+      "result": "pass",
+      "note": "25 passed"
+    },
+    {
+      "command": "python3 scripts/check-language-packs.py",
+      "result": "pass",
+      "note": "3 fichiers, 3 feuilles"
+    },
+    {
+      "command": "node --check extension/background.js && node --check extension/popup.js",
+      "result": "pass",
+      "note": "syntaxe JS"
+    },
+    {
+      "command": "python3 scripts/check-evolution.py",
+      "result": "pass",
+      "note": "journal valide après ajout de l'entrée"
+    }
+  ],
+  "evidence": "avant : https://api.mymemory.translated.net/get?... appelé sans opt-in ; après : aucun appel cloud avec stockage vide, appel uniquement avec nkCloudFallback=true, pack ewo simulé avec 0 requête ; sortie « cloud-gating OK — pack sans réseau, cloud off par défaut, opt-in respecté »",
+  "next": "M4 — détecteur de collisions de packs (M3 reste bloqué par les packs vides de Klein)",
+  "blockers": []
+}
+```

@@ -17,6 +17,7 @@ Node 20+ (CI) ou 24 (poste de dev). Python 3.12 pour le backend.
 |---|---|---|---|
 | `tests/content.test.js` | content script en jsdom : texte, noms, attributs, options, restauration, jetons | `node tests/content.test.js` | **pass** |
 | `tests/privacy.test.js` | aucune valeur de formulaire, zone `[data-sensitive]` ou montant brut ne quitte la page ; aucun `context` transmis (M1) | `node tests/privacy.test.js` | **pass** |
+| `tests/cloud-gating.test.js` | pack sans réseau ; MyMemory jamais appelé sans opt-in ; case décochée par défaut (M2) | `node tests/cloud-gating.test.js` | **pass** |
 | `scripts/test-extension.js` | registre des langues, détection, packs, jetons, qualité | `node scripts/test-extension.js` | **pass** |
 | `server/test_api.py` | contrats API, CORS, refus, mode mock | `NK_MOCK=1 python3 -m pytest -q server/test_api.py` | **pass** |
 
@@ -40,8 +41,8 @@ pas dans le dépôt.
 `.github/workflows/ci.yml` exécute :
 
 - `server/test_api.py` en mode `NK_MOCK=1` ;
-- `scripts/test-extension.js`, `tests/content.test.js` et
-  `tests/privacy.test.js` ;
+- `scripts/test-extension.js`, `tests/content.test.js`,
+  `tests/privacy.test.js` et `tests/cloud-gating.test.js` ;
 - `scripts/check-evolution.py`, les contrôles de packs et de données ;
 - `build-firefox.sh`, `web-ext lint` et `package-extension.sh`.
 

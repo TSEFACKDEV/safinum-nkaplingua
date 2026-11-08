@@ -5,8 +5,8 @@
  * Trois modes de traduction :
  *  1. mémoire de traduction communautaire (packs validés) ;
  *  2. backend local NLLB (127.0.0.1:8000) si disponible ;
- *  3. service cloud MyMemory en secours, pour qu’un simple fichier
- *     d’extension fonctionne sans installation Python.
+ *  3. service cloud MyMemory, uniquement si l’utilisateur l’autorise
+ *     explicitement (opt-in), jamais dans le chemin de démonstration.
  *
  * Dans tous les cas :
  *  - seuls des textes pseudonymisés sont envoyés ;
@@ -516,9 +516,11 @@ async function cloudAllowed() {
   if (TRANSLATION_MODE === "local") return false;
   try {
     const stored = await api.storage?.local?.get("nkCloudFallback");
-    return stored?.nkCloudFallback !== false;
+    // Opt-in explicite : l'absence de choix vaut refus. MyMemory n'est
+    // jamais contacté par défaut (audit R7, défaut local-only).
+    return stored?.nkCloudFallback === true;
   } catch {
-    return true;
+    return false;
   }
 }
 
