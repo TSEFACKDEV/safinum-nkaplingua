@@ -26,6 +26,32 @@
   const MAX_TEXT_ITEMS = 180;
   const MAX_ATTRIBUTE_ITEMS = 60;
 
+  // Badge provisoire du niveau A non traduit. Style aligné sur la charte
+  // (or #C9A45C) ; Freedy peut le remplacer sans changer le marqueur.
+  const BADGE_STYLE = `
+    [data-nk-untranslated="A"]::after {
+      content: "non traduit";
+      display: inline-block;
+      margin-left: 6px;
+      padding: 0 6px;
+      border: 1px solid #c9a45c;
+      border-radius: 999px;
+      background: #fff8e1;
+      color: #5c4a12;
+      font: 500 10px/1.6 system-ui, -apple-system, "Segoe UI", sans-serif;
+      vertical-align: middle;
+      white-space: nowrap;
+    }
+  `;
+
+  function ensureBadgeStyle() {
+    if (document.getElementById("nk-badge-style")) return;
+    const style = document.createElement("style");
+    style.id = "nk-badge-style";
+    style.textContent = BADGE_STYLE;
+    (document.head || document.documentElement).appendChild(style);
+  }
+
   const SKIP_TAGS = new Set([
     "SCRIPT",
     "STYLE",
@@ -454,6 +480,7 @@
     for (const element of document.querySelectorAll("[data-nk-untranslated]")) {
       element.removeAttribute("data-nk-untranslated");
     }
+    document.getElementById("nk-badge-style")?.remove();
 
     translatedNodes.clear();
     translatedAttributes.length = 0;
@@ -561,6 +588,7 @@
             if (result?.reason === "untranslated_critical") {
               const element = segment.item.element;
               if (element) {
+                ensureBadgeStyle();
                 element.setAttribute("data-nk-untranslated", "A");
               }
             }

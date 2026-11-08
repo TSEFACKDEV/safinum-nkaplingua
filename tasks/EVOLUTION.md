@@ -1908,3 +1908,57 @@ mot `json`) avec les champs ci-dessous. Exemple de structure, en indentation :
   "blockers": []
 }
 ```
+
+## 2026-11-08T07:30:00+01:00 — Marius — M3 — done
+
+```json
+{
+  "timestamp": "2026-11-08T07:30:00+01:00",
+  "person": "Marius",
+  "branch": "marius",
+  "task": "M3",
+  "status": "done",
+  "summary": "Badge « non traduit » du niveau A implémenté sans remplacer de nœud : marqueur data-nk-untranslated=\"A\" et règle CSS ::after provisoire (or #C9A45C), injectée une seule fois et retirée à la restauration. Vérifié en jsdom et sur le site réel Chrome (computed style « non traduit »). M7 complet repasse avec le badge : 0 erreur page.",
+  "files": [
+    "extension/content.js",
+    "tests/content.test.js",
+    "docs/SITE_TEST_2026-11-08.md",
+    "docs/assets/badge-non-traduit.png"
+  ],
+  "tests": [
+    {
+      "command": "node tests/content.test.js",
+      "result": "pass",
+      "note": "segment critique non traduit marqué, style injecté, marqueur et style retirés à la restauration"
+    },
+    {
+      "command": "node .cache/m7/m7_test.js (harnais Playwright local)",
+      "result": "pass",
+      "note": "5 étapes + EN, badge rendu, 0 pageerror/console.error, montants et références préservés"
+    },
+    {
+      "command": "getComputedStyle(el, '::after').content (Chrome 158)",
+      "result": "pass",
+      "note": "content « non traduit », background rgb(255,248,225), color rgb(92,74,18)"
+    },
+    {
+      "command": "node tests/privacy.test.js && node tests/cloud-gating.test.js && node tests/criticality.test.js",
+      "result": "pass",
+      "note": "non-régression M1/M2/M3"
+    },
+    {
+      "command": "NK_MOCK=1 server/.venv/bin/python -m pytest -q server/test_api.py",
+      "result": "pass",
+      "note": "26 passed"
+    },
+    {
+      "command": "python3 scripts/check-evolution.py",
+      "result": "pass",
+      "note": "journal valide après ajout de l'entrée"
+    }
+  ],
+  "evidence": "docs/assets/badge-non-traduit.png ; computed style vérifié sur https://safinum.cm/hackathon-test ; content.js ensureBadgeStyle + [data-nk-untranslated=\"A\"]::after",
+  "next": "M12 — tester les Shadow DOM ouverts/fermés et les iframes, documenter ce qui marche",
+  "blockers": []
+}
+```
