@@ -197,9 +197,9 @@ async function loadTarget() {
 
   try {
     const cloud = await api.storage.local.get("nkCloudFallback");
-    $("cloudFallback").checked = cloud?.nkCloudFallback !== false;
+    $("cloudFallback").checked = cloud?.nkCloudFallback === true;
   } catch {
-    $("cloudFallback").checked = true;
+    $("cloudFallback").checked = false;
   }
 
   setStatus("Prêt · détection FR/EN");
@@ -347,7 +347,10 @@ $("translateText").addEventListener("click", async () => {
         setStatus(
           "Cette phrase existe dans le pack mais n'est pas encore validée par un locuteur natif."
         );
-      } else if (response?.translation?.reason === "critical_pack_only") {
+      } else if (
+        response?.translation?.reason === "untranslated_critical" ||
+        response?.translation?.reason === "critical_pack_only"
+      ) {
         setStatus(
           "Phrase critique (solde, frais, PIN/OTP, etc.) : aucun pack validé. " +
             "Elle reste en français ; le niveau A exige une validation native."

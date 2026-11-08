@@ -5,8 +5,8 @@
  * Trois modes de traduction :
  *  1. mémoire de traduction communautaire (packs validés) ;
  *  2. backend local flagship-ai (brouillon) ou NLLB (127.0.0.1:8000) ;
- *  3. service cloud MyMemory en secours, uniquement pour les paires qui
- *     disposent d’un code cloud (pas l’ewondo).
+ *  3. service cloud MyMemory, uniquement si l’utilisateur l’autorise
+ *     explicitement (opt-in) et si la paire a un code cloud (pas l’ewondo).
  *
  * Dans tous les cas :
  *  - seuls des textes pseudonymisés sont envoyés ;
@@ -149,7 +149,7 @@ async function translateText(text, target, source) {
     : { code: "fr", confidence: 0 };
   const detected = source || (detectedInfo.code === "en" ? "en" : "fr");
   const result = await translateSegments(
-    [{ id: "text", text: clean, context: "" }],
+    [{ id: "text", text: clean }],
     target,
     detected
   );
@@ -160,6 +160,20 @@ async function translateText(text, target, source) {
     provider: result.provider || null,
     detected: detectedInfo
   };
+}
+
+const CRITICALITY_TERMS =
+  /\b(solde|frais|montant|total|beneficiaire|pin|otp|confirmer|confirmation|annuler|annulation|erreur|securite|reessayer|reference|transaction|paiement|virement|transfert|compte|debit|credit|taux|interet|echeance|penalite|retard|echec)\b/i;
+
+/**
+ * Niveau A : segment critique (solde, frais, PIN, confirmation, erreur…).
+ * Il ne peut venir que d'un pack validé, jamais d'une MT ni d'un fuzzy.
+ */
+function classifyCriticality(text) {
+  const normalized = String(text || "")
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "");
+  return CRITICALITY_TERMS.test(normalized) ? "A" : "B";
 }
 
 async function translateSegments(segments, target, source) {
@@ -189,7 +203,8 @@ async function translateSegments(segments, target, source) {
       ...segment,
       text: redaction.text,
       tokens: redaction.tokens,
-      originalText: segment.text || ""
+      originalText: segment.text || "",
+      criticality: classifyCriticality(segment.text || "")
     };
   });
   const preparedById = new Map(
@@ -206,11 +221,13 @@ async function translateSegments(segments, target, source) {
   const missing = [];
 
   for (const segment of prepared) {
+    // Le niveau A ne lit jamais le cache : il doit être validé dans le pack.
+    if (segment.criticality === "A") {
+      missing.push(segment);
+      continue;
+    }
     const key = `${detected}:${target}:${segment.originalText}`;
-    const critical = LANG?.isCriticalText?.(segment.originalText);
-    // Ne jamais servir une phrase critique depuis le cache MT : elle doit
-    // repasser par le pack validé et, sinon, rester en français.
-    if (!critical && cache.has(key)) {
+    if (cache.has(key)) {
       results.set(segment.id, { ...cache.get(key), id: segment.id });
     } else {
       missing.push(segment);
@@ -268,6 +285,18 @@ async function translateSegments(segments, target, source) {
         );
         results.set(final.id, final);
       }
+      // Niveau A absent du pack : original conservé, aucun moteur MT.
+      for (const segment of missing) {
+        if (segment.criticality !== "A") continue;
+        if (results.get(segment.id)?.ok) continue;
+        results.set(segment.id, {
+          id: segment.id,
+          text: segment.originalText,
+          ok: false,
+          reason: "untranslated_critical",
+          criticality: "A"
+        });
+      }
       return {
         translations: segments
           .map((segment) => results.get(segment.id))
@@ -282,23 +311,21 @@ async function translateSegments(segments, target, source) {
     );
   }
 
-  // Niveau A : une phrase critique sans entrée de pack validée ne doit
-  // jamais atteindre la MT (locale ou cloud).
-  const criticalBlocked = remaining.filter((segment) =>
-    LANG?.isCriticalText?.(segment.originalText)
+  // Niveau A absent du pack : on conserve l'original et on ne contacte
+  // jamais le backend local ni le cloud, même si le cloud est autorisé.
+  const criticalMisses = remaining.filter(
+    (segment) => segment.criticality === "A"
   );
-  if (criticalBlocked.length > 0) {
-    const blockedIds = new Set(criticalBlocked.map((segment) => segment.id));
-    for (const segment of criticalBlocked) {
-      results.set(segment.id, {
-        id: segment.id,
-        text: segment.originalText,
-        ok: false,
-        reason: "critical_pack_only"
-      });
-    }
-    remaining = remaining.filter((segment) => !blockedIds.has(segment.id));
+  for (const segment of criticalMisses) {
+    results.set(segment.id, {
+      id: segment.id,
+      text: segment.originalText,
+      ok: false,
+      reason: "untranslated_critical",
+      criticality: "A"
+    });
   }
+  remaining = remaining.filter((segment) => segment.criticality !== "A");
 
   if (remaining.length === 0) {
     return {
@@ -546,9 +573,11 @@ async function cloudAllowed() {
   if (TRANSLATION_MODE === "local") return false;
   try {
     const stored = await api.storage?.local?.get("nkCloudFallback");
-    return stored?.nkCloudFallback !== false;
+    // Opt-in explicite : l'absence de choix vaut refus. MyMemory n'est
+    // jamais contacté par défaut (audit R7, défaut local-only).
+    return stored?.nkCloudFallback === true;
   } catch {
-    return true;
+    return false;
   }
 }
 
@@ -588,10 +617,11 @@ async function translateWithLocal(segments, target, source) {
       body: JSON.stringify({
         source,
         target,
+        // `context` n'est jamais transmis : il peut contenir un textarea,
+        // une zone [data-sensitive] ou des montants non tokenisés (M1).
         segments: segments.map((segment) => ({
           id: segment.id,
-          text: segment.text,
-          context: segment.context || ""
+          text: segment.text
         }))
       }),
       signal: controller.signal

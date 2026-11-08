@@ -31,47 +31,7 @@ python3 scripts/check-evolution.py
 Un titre lisible, puis un bloc de code JSON (délimité par trois backticks et le
 mot `json`) avec les champs ci-dessous. Exemple de structure, en indentation :
 
-    ## 2026-11-07T18:00:00+01:00 — Klein — K3 — in_progress
-
-    {
-      "timestamp": "2026-11-07T18:00:00+01:00",
-      "person": "Klein",
-      "branch": "klein",
-      "task": "K3",
-      "status": "in_progress",
-      "summary": "37 phrases P0 : première traduction indépendante terminée",
-      "files": ["data/language-packs/fub.csv"],
-      "tests": [
-        {
-          "command": "python3 scripts/import-language-pack.py data/language-packs/fub.csv",
-          "result": "not_run",
-          "note": "import après arbitrage"
-        }
-      ],
-      "evidence": "fub.csv, lignes 1-37, colonne target",
-      "next": "Deuxième traduction indépendante + arbitrage",
-      "blockers": []
-    }
-
-## 3. Champs obligatoires
-
-| Champ | Type | Règle |
-|---|---|---|
-| `timestamp` | string | ISO 8601 avec fuseau, ex. `2026-11-07T18:00:00+01:00` |
-| `person` | string | `Freedy`, `Klein` ou `Marius` |
-| `branch` | string | `freedy`, `klein` ou `marius` |
-| `task` | string | `F0`…`F6`, `K1`…`K9`, `M1`…`M13` |
-| `status` | string | `in_progress`, `blocked` ou `done` |
-| `summary` | string | 1 à 3 phrases, concret |
-| `files` | array | fichiers réellement modifiés |
-| `tests` | array | `{command, result, note}` ; `result` ∈ `pass`, `fail`, `blocked`, `not_run` |
-| `evidence` | string | lien, capture, ligne de CSV, sortie de test |
-| `next` | string | prochaine action |
-| `blockers` | array | obligatoire si `status=blocked` |
-
-## 4. Entrée initiale
-
-## 2026-11-07T16:42:00+01:00 — Freedy — F0 — done
+    ## 2026-11-07T16:42:00+01:00 — Freedy — F0 — done
 
 ```json
 {
@@ -1386,6 +1346,942 @@ mot `json`) avec les champs ci-dessous. Exemple de structure, en indentation :
     "pas de paire français-duala",
     "pas de GPU compatible"
   ]
+}
+```
+
+## 2026-11-08T06:14:00+01:00 — Marius — M1 — done
+
+```json
+{
+  "timestamp": "2026-11-08T06:14:00+01:00",
+  "person": "Marius",
+  "branch": "marius",
+  "task": "M1",
+  "status": "done",
+  "summary": "Reprise depuis main 87941b4 : suppression de blockContext() et du champ context dans le message content → background → /translate. Ajout de tests/privacy.test.js (rouge avant : textarea, zone data-sensitive et montants bruts dans context ; vert après) et de tests/README.md ; la CI exécute désormais le test de confidentialité.",
+  "files": [
+    "extension/content.js",
+    "extension/background.js",
+    "tests/privacy.test.js",
+    "tests/README.md",
+    ".github/workflows/ci.yml"
+  ],
+  "tests": [
+    {
+      "command": "node tests/privacy.test.js",
+      "result": "pass",
+      "note": "rouge avant correctif : context contenait CONFIDENTIEL, 9876, CODE-1234, 1 000 et 25 000 ; vert après"
+    },
+    {
+      "command": "node tests/content.test.js",
+      "result": "pass",
+      "note": "texte, attributs, jetons, restauration"
+    },
+    {
+      "command": "node scripts/test-extension.js",
+      "result": "pass",
+      "note": "registre, détection, packs, jetons, qualité"
+    },
+    {
+      "command": "NK_MOCK=1 server/.venv/bin/python -m pytest -q server/test_api.py",
+      "result": "pass",
+      "note": "25 passed"
+    },
+    {
+      "command": "python3 scripts/check-language-packs.py",
+      "result": "pass",
+      "note": "3 fichiers, 3 feuilles"
+    },
+    {
+      "command": "node --check extension/background.js && node --check extension/content.js",
+      "result": "pass",
+      "note": "syntaxe JS"
+    },
+    {
+      "command": "python3 scripts/check-evolution.py",
+      "result": "pass",
+      "note": "journal valide après ajout de l'entrée"
+    }
+  ],
+  "evidence": "tests/privacy.test.js ; avant : context='Votre code confidentiel est requis. CONFIDENTIEL — dossier 9876 Code secret : CODE-1234' ; après : aucun champ context dans NK_TRANSLATE_SEGMENTS ; sortie « privacy OK — aucun context, aucune valeur de formulaire dans les messages »",
+  "next": "M2 — retirer MyMemory du chemin de démo : cloudAllowed() en opt-in explicite, case décochée par défaut, parcours pack-only sans réseau",
+  "blockers": []
+}
+```
+
+## 2026-11-08T06:22:00+01:00 — Marius — M2 — done
+
+```json
+{
+  "timestamp": "2026-11-08T06:22:00+01:00",
+  "person": "Marius",
+  "branch": "marius",
+  "task": "M2",
+  "status": "done",
+  "summary": "MyMemory n'est plus autorisé par défaut : cloudAllowed() exige nkCloudFallback === true, la case du popup est décochée et son texte décrit l'opt-in. Ajout de tests/cloud-gating.test.js : pack validé sans aucune requête réseau, cloud jamais appelé sans opt-in, appel cloud seulement avec opt-in.",
+  "files": [
+    "extension/background.js",
+    "extension/popup.js",
+    "extension/popup.html",
+    "tests/cloud-gating.test.js",
+    "tests/README.md",
+    ".github/workflows/ci.yml"
+  ],
+  "tests": [
+    {
+      "command": "node tests/cloud-gating.test.js",
+      "result": "pass",
+      "note": "rouge avant : MyMemory appelé sans opt-in ; vert après ; hit de pack avec 0 requête réseau"
+    },
+    {
+      "command": "node tests/privacy.test.js",
+      "result": "pass",
+      "note": "non-régression M1"
+    },
+    {
+      "command": "node tests/content.test.js",
+      "result": "pass",
+      "note": "texte, attributs, jetons, restauration"
+    },
+    {
+      "command": "node scripts/test-extension.js",
+      "result": "pass",
+      "note": "registre, détection, packs, jetons, qualité"
+    },
+    {
+      "command": "NK_MOCK=1 server/.venv/bin/python -m pytest -q server/test_api.py",
+      "result": "pass",
+      "note": "25 passed"
+    },
+    {
+      "command": "python3 scripts/check-language-packs.py",
+      "result": "pass",
+      "note": "3 fichiers, 3 feuilles"
+    },
+    {
+      "command": "node --check extension/background.js && node --check extension/popup.js",
+      "result": "pass",
+      "note": "syntaxe JS"
+    },
+    {
+      "command": "python3 scripts/check-evolution.py",
+      "result": "pass",
+      "note": "journal valide après ajout de l'entrée"
+    }
+  ],
+  "evidence": "avant : https://api.mymemory.translated.net/get?... appelé sans opt-in ; après : aucun appel cloud avec stockage vide, appel uniquement avec nkCloudFallback=true, pack ewo simulé avec 0 requête ; sortie « cloud-gating OK — pack sans réseau, cloud off par défaut, opt-in respecté »",
+  "next": "M4 — détecteur de collisions de packs (M3 reste bloqué par les packs vides de Klein)",
+  "blockers": []
+}
+```
+
+## 2026-11-08T06:26:00+01:00 — Marius — M4 — done
+
+```json
+{
+  "timestamp": "2026-11-08T06:26:00+01:00",
+  "person": "Marius",
+  "branch": "marius",
+  "task": "M4",
+  "status": "done",
+  "summary": "Ajout de scripts/check-pack-collisions.py : normalisation NFC/casse/espaces des sources et cibles, détection de deux sources différentes pour une même cible, codes 0/1/2. Le script est exécuté par package-extension.sh et par la CI ; tests/check-pack-collisions.test.py couvre collision, normalisation, doublon de source et pack invalide.",
+  "files": [
+    "scripts/check-pack-collisions.py",
+    "tests/check-pack-collisions.test.py",
+    "scripts/package-extension.sh",
+    ".github/workflows/ci.yml",
+    "scripts/README.md",
+    "tests/README.md"
+  ],
+  "tests": [
+    {
+      "command": "python3 scripts/check-pack-collisions.py",
+      "result": "pass",
+      "note": "3 packs actuels, 0 collision"
+    },
+    {
+      "command": "python3 tests/check-pack-collisions.test.py",
+      "result": "pass",
+      "note": "6 cas : cibles distinctes, collision, normalisation, doublon de source, JSON invalide, entries absent"
+    },
+    {
+      "command": "./scripts/package-extension.sh",
+      "result": "pass",
+      "note": "contrôle exécuté avant build ; 3 ZIP de 369 Ko"
+    },
+    {
+      "command": "python3 scripts/check-language-packs.py",
+      "result": "pass",
+      "note": "3 fichiers, 3 feuilles"
+    },
+    {
+      "command": "node tests/privacy.test.js && node tests/cloud-gating.test.js",
+      "result": "pass",
+      "note": "non-régression M1/M2"
+    },
+    {
+      "command": "NK_MOCK=1 server/.venv/bin/python -m pytest -q server/test_api.py",
+      "result": "pass",
+      "note": "25 passed"
+    },
+    {
+      "command": "python3 scripts/check-evolution.py",
+      "result": "pass",
+      "note": "journal valide après ajout de l'entrée"
+    }
+  ],
+  "evidence": "sortie « Collisions OK — 3 pack(s), aucune cible partagée par deux sources différentes » ; test « check-pack-collisions OK — 6 cas » ; build « Collisions OK » puis 3 ZIP",
+  "next": "M13 — verrou de concurrence backend (deux requêtes FR/EN simultanées)",
+  "blockers": []
+}
+```
+
+## 2026-11-08T06:30:00+01:00 — Marius — M13 — done
+
+```json
+{
+  "timestamp": "2026-11-08T06:30:00+01:00",
+  "person": "Marius",
+  "branch": "marius",
+  "task": "M13",
+  "status": "done",
+  "summary": "Le tokenizer NLLB partagé a désormais une section critique verrouillée : _MODEL_LOCK couvre src_lang, l'encodage, la génération et le décodage dans _generate_locked(). Test concurrent FR/EN avec tokenizer factice : il échoue sans verrou et passe avec.",
+  "files": [
+    "server/app.py",
+    "server/test_api.py"
+  ],
+  "tests": [
+    {
+      "command": "NK_MOCK=1 server/.venv/bin/python -m pytest -q server/test_api.py",
+      "result": "pass",
+      "note": "26 passed, dont test_concurrent_sources_do_not_mix"
+    },
+    {
+      "command": "vérification de sensibilité sans verrou",
+      "result": "pass",
+      "note": "avec _MODEL_LOCK remplacé par nullcontext, le test échoue ; le verrou est donc bien couvert"
+    },
+    {
+      "command": "python3 -m py_compile server/app.py server/test_api.py",
+      "result": "pass",
+      "note": "syntaxe Python"
+    },
+    {
+      "command": "node tests/privacy.test.js && node tests/cloud-gating.test.js && node tests/content.test.js",
+      "result": "pass",
+      "note": "non-régression extension"
+    },
+    {
+      "command": "python3 scripts/check-language-packs.py && python3 scripts/check-pack-collisions.py",
+      "result": "pass",
+      "note": "packs et collisions"
+    },
+    {
+      "command": "python3 scripts/check-evolution.py",
+      "result": "pass",
+      "note": "journal valide après ajout de l'entrée"
+    }
+  ],
+  "evidence": "server/app.py _MODEL_LOCK + _generate_locked ; sortie pytest « 26 passed » ; sans verrou : « OK — échoue sans verrou » (AssertionError)",
+  "next": "M10 — packaging et CI : build Firefox, web-ext lint, 3 ZIP, documentation du statut",
+  "blockers": []
+}
+```
+
+## 2026-11-08T06:36:00+01:00 — Marius — M10 — in_progress
+
+```json
+{
+  "timestamp": "2026-11-08T06:36:00+01:00",
+  "person": "Marius",
+  "branch": "marius",
+  "task": "M10",
+  "status": "in_progress",
+  "summary": "Packaging vérifié localement : 3 ZIP de 377 Ko (< 10 Mo) avec contrôle de collisions avant build, build Firefox et web-ext lint à 0 erreur/warning/notice, manifests valides, scan de secrets et suite CI équivalente verte. Restent la CI GitHub distante et le chargement réel des ZIP dans Chrome/Firefox.",
+  "files": [
+    "docs/SUBMISSION.md",
+    "tests/README.md"
+  ],
+  "tests": [
+    {
+      "command": "./scripts/package-extension.sh",
+      "result": "pass",
+      "note": "3 ZIP : 376965, 377097 et 377069 octets ; contrôle collisions exécuté"
+    },
+    {
+      "command": "./scripts/build-firefox.sh && npx --yes web-ext lint --source-dir dist/firefox",
+      "result": "pass",
+      "note": "0 erreur, 0 warning, 0 notice"
+    },
+    {
+      "command": "NK_MOCK=1 server/.venv/bin/python -m pytest -q server/test_api.py",
+      "result": "pass",
+      "note": "26 passed"
+    },
+    {
+      "command": "node tests/content.test.js && node tests/privacy.test.js && node tests/cloud-gating.test.js",
+      "result": "pass",
+      "note": "jsdom : contenu, confidentialité, verrou cloud"
+    },
+    {
+      "command": "python3 scripts/check-language-packs.py && python3 scripts/check-pack-collisions.py && python3 tests/check-pack-collisions.test.py",
+      "result": "pass",
+      "note": "packs, collisions, 6 cas"
+    },
+    {
+      "command": "validation JSON des 3 manifests + scan de secrets CI",
+      "result": "pass",
+      "note": "manifests ok ; aucun motif de secret"
+    },
+    {
+      "command": "python3 scripts/check-evolution.py",
+      "result": "pass",
+      "note": "journal valide après ajout de l'entrée"
+    }
+  ],
+  "evidence": "ZIP : dist/nkaplingua-extension.zip 377097 octets ; web-ext « errors 0 / notices 0 / warnings 0 » ; statut local documenté dans docs/SUBMISSION.md et tests/README.md",
+  "next": "Pousser puis vérifier la CI GitHub, charger nkaplingua-chrome.zip et nkaplingua-firefox.zip dans Chrome/Firefox réels, puis repasser M10 en done",
+  "blockers": [
+    "CI GitHub non observée : aucun push effectué",
+    "ZIP non chargés dans Chrome/Firefox réels sur ce poste"
+  ]
+}
+```
+
+## 2026-11-08T06:44:00+01:00 — Marius — M3 — in_progress
+
+```json
+{
+  "timestamp": "2026-11-08T06:44:00+01:00",
+  "person": "Marius",
+  "branch": "marius",
+  "task": "M3",
+  "status": "in_progress",
+  "summary": "Classification A/B par segment : un terme critique (solde, frais, total, bénéficiaire, PIN/OTP, confirmer, annuler, erreur, sécurité, réessayer, référence) force le pack validé uniquement. Si le pack ne contient pas la phrase, l'original est conservé avec raison untranslated_critical et aucun appel local/cloud. Le content script pose l'attribut data-nk-untranslated ; le badge visuel reste à styler avec Freedy.",
+  "files": [
+    "extension/background.js",
+    "extension/content.js",
+    "tests/criticality.test.js",
+    "tests/cloud-gating.test.js",
+    "tests/README.md",
+    ".github/workflows/ci.yml"
+  ],
+  "tests": [
+    {
+      "command": "node tests/criticality.test.js",
+      "result": "pass",
+      "note": "A absent du pack : original + untranslated_critical, 0 requête ; A pack validé : pack ; A cible MT + cloud autorisé : 0 appel MT ; B : MT autorisée"
+    },
+    {
+      "command": "node tests/cloud-gating.test.js",
+      "result": "pass",
+      "note": "phrase de test passée en niveau B pour ne pas confondre M2 et M3"
+    },
+    {
+      "command": "node tests/privacy.test.js && node tests/content.test.js",
+      "result": "pass",
+      "note": "non-régression M1 et DOM"
+    },
+    {
+      "command": "NK_MOCK=1 server/.venv/bin/python -m pytest -q server/test_api.py",
+      "result": "pass",
+      "note": "26 passed"
+    },
+    {
+      "command": "python3 scripts/check-language-packs.py && python3 scripts/check-pack-collisions.py",
+      "result": "pass",
+      "note": "packs et collisions"
+    },
+    {
+      "command": "python3 scripts/check-evolution.py",
+      "result": "pass",
+      "note": "journal valide après ajout de l'entrée"
+    }
+  ],
+  "evidence": "sortie « criticality OK — niveau A pack-only, zéro MT, niveau B autorisé » ; background.js classifyCriticality + untranslated_critical ; content.js data-nk-untranslated",
+  "next": "Appliquer le badge visuel « non traduit » dès que Freedy fournit le style, puis reprendre M7 sur navigateur réel",
+  "blockers": [
+    "Badge visuel par segment non stylé : dépend de Freedy (F1)",
+    "Test navigateur réel bloqué sur ce poste : Chrome branded refuse --load-extension, Chromium de test crashe (crashpad)"
+  ]
+}
+```
+
+## 2026-11-08T06:52:00+01:00 — Marius — M10 — in_progress
+
+```json
+{
+  "timestamp": "2026-11-08T06:52:00+01:00",
+  "person": "Marius",
+  "branch": "marius",
+  "task": "M10",
+  "status": "in_progress",
+  "summary": "Après push de a89e427, la CI GitHub est verte sur develop et marius : 5 jobs sur 5 (backend, journal, données linguistiques, extension, scan de secrets) pour chaque run. Les docs de soumission et tests/README ne disent plus que la CI est non observée. Reste uniquement le chargement réel des ZIP dans Chrome/Firefox.",
+  "files": [
+    "docs/SUBMISSION.md",
+    "tests/README.md"
+  ],
+  "tests": [
+    {
+      "command": "gh run view 42451073346 --json jobs",
+      "result": "pass",
+      "note": "develop : Backend, Journal, Secret scan, Données linguistiques, Extension — tous success"
+    },
+    {
+      "command": "gh run view 42451073378 --json jobs",
+      "result": "pass",
+      "note": "marius : 5 jobs success"
+    },
+    {
+      "command": "gh run view 42451073346/42451073378 --json status,conclusion",
+      "result": "pass",
+      "note": "completed / success pour les deux runs"
+    },
+    {
+      "command": "python3 scripts/check-evolution.py",
+      "result": "pass",
+      "note": "journal valide après ajout de l'entrée"
+    }
+  ],
+  "evidence": "https://github.com/TSEFACKDEV/safinum-nkaplingua/actions/runs/42451073346 et /42451073378 ; jobs listés en succès ; docs/SUBMISSION.md § État vérifié",
+  "next": "Charger nkaplingua-chrome.zip et nkaplingua-firefox.zip dans des navigateurs réels, puis repasser M10 en done",
+  "blockers": [
+    "ZIP non chargés dans Chrome/Firefox réels sur ce poste"
+  ]
+}
+```
+
+## 2026-11-08T07:00:00+01:00 — Marius — M7 — in_progress
+
+```json
+{
+  "timestamp": "2026-11-08T07:00:00+01:00",
+  "person": "Marius",
+  "branch": "marius",
+  "task": "M7",
+  "status": "in_progress",
+  "summary": "Test réel Chrome for Testing 158 sur safinum.cm/hackathon-test : 5 étapes + bascule EN, 23 à 45 segments traduits par étape, 10 à 13 segments niveau A laissés en français, 0 pageerror/console.error, montants/noms/téléphone/références préservés, champs et boutons du site intacts, restauration exacte. Le test a révélé que les références SAF-2026-XXXX n'étaient pas tokenisées : correctif dans languages.js/content.js + tests. Firefox reste à tester.",
+  "files": [
+    "extension/languages.js",
+    "extension/content.js",
+    "scripts/test-extension.js",
+    "tests/content.test.js",
+    "docs/SITE_TEST_2026-11-08.md",
+    "tests/README.md"
+  ],
+  "tests": [
+    {
+      "command": "node .cache/m7/m7_test.js (harnais Playwright local)",
+      "result": "pass",
+      "note": "5 étapes + EN : 36/29/23/29/28/45 segments traduits, 10/12/11/13/11/1 niveau A, 0 erreur page, montants et références préservés, restauration exacte"
+    },
+    {
+      "command": "node scripts/test-extension.js",
+      "result": "pass",
+      "note": "référence SAF-2026-AB12CD tokenisée puis restaurée"
+    },
+    {
+      "command": "node tests/content.test.js",
+      "result": "pass",
+      "note": "référence préservée dans le DOM après traduction"
+    },
+    {
+      "command": "node tests/privacy.test.js && node tests/cloud-gating.test.js && node tests/criticality.test.js",
+      "result": "pass",
+      "note": "non-régression M1/M2/M3"
+    },
+    {
+      "command": "NK_MOCK=1 server/.venv/bin/python -m pytest -q server/test_api.py",
+      "result": "pass",
+      "note": "26 passed"
+    },
+    {
+      "command": "python3 scripts/check-language-packs.py && python3 scripts/check-pack-collisions.py",
+      "result": "pass",
+      "note": "packs et collisions"
+    },
+    {
+      "command": "python3 scripts/check-evolution.py",
+      "result": "pass",
+      "note": "journal valide après ajout de l'entrée"
+    }
+  ],
+  "evidence": "docs/SITE_TEST_2026-11-08.md ; sortie « M7 OK — 5 étapes + EN, montants/noms/références préservés, boutons intacts, 0 erreur » ; avant correctif : « 4-recapitulatif: référence perdue SAF-2026-OMMWS3 »",
+  "next": "Tester Firefox avec un binaire chargeable, puis couvrir les iframes et Shadow DOM fermés (M12)",
+  "blockers": [
+    "Firefox non testé : Snap Firefox ne peut pas créer son profil (système de fichiers en lecture seule) et web-ext run n'accepte pas --headless"
+  ]
+}
+```
+
+## 2026-11-08T07:15:00+01:00 — Marius — M5 — done
+
+```json
+{
+  "timestamp": "2026-11-08T07:15:00+01:00",
+  "person": "Marius",
+  "branch": "marius",
+  "task": "M5",
+  "status": "done",
+  "summary": "Le contrôle lexical glossaire est intégré à l'import : pour chaque terme validé de la langue cible, si la source contient le terme, la cible doit contenir exactement la traduction validée ; sinon l'import est refusé. Ajout de tests/import-glossary.test.py (5 cas). Le backend protège/restaure déjà les termes du glossaire validés et le background contrôle les termes critiques identiques (FCFA, PIN, OTP, KYC).",
+  "files": [
+    "scripts/import-language-pack.py",
+    "tests/import-glossary.test.py",
+    "scripts/README.md",
+    "tests/README.md",
+    ".github/workflows/ci.yml"
+  ],
+  "tests": [
+    {
+      "command": "python3 tests/import-glossary.test.py",
+      "result": "pass",
+      "note": "5 cas : terme validé absent → refus, présent → acceptation, glossaire non validé, autre langue, FCFA traduit → refus"
+    },
+    {
+      "command": "python3 scripts/check-language-packs.py",
+      "result": "pass",
+      "note": "3 fichiers, 3 feuilles"
+    },
+    {
+      "command": "node scripts/test-extension.js && node tests/content.test.js",
+      "result": "pass",
+      "note": "registre, jetons, restauration"
+    },
+    {
+      "command": "node tests/privacy.test.js && node tests/cloud-gating.test.js && node tests/criticality.test.js",
+      "result": "pass",
+      "note": "non-régression M1/M2/M3"
+    },
+    {
+      "command": "NK_MOCK=1 server/.venv/bin/python -m pytest -q server/test_api.py",
+      "result": "pass",
+      "note": "26 passed"
+    },
+    {
+      "command": "python3 scripts/check-evolution.py",
+      "result": "pass",
+      "note": "journal valide après ajout de l'entrée"
+    }
+  ],
+  "evidence": "sortie « import-glossary OK — 5 cas » ; scripts/import-language-pack.py load_glossary + validate ; glossaire actuel : 0 terme validé, donc le contrôle est sans effet tant que K2 n'est pas rempli",
+  "next": "M3 — badge visuel du niveau A non traduit, puis M12 (Shadow DOM/iframes)",
+  "blockers": []
+}
+```
+
+## 2026-11-08T07:30:00+01:00 — Marius — M3 — done
+
+```json
+{
+  "timestamp": "2026-11-08T07:30:00+01:00",
+  "person": "Marius",
+  "branch": "marius",
+  "task": "M3",
+  "status": "done",
+  "summary": "Badge « non traduit » du niveau A implémenté sans remplacer de nœud : marqueur data-nk-untranslated=\"A\" et règle CSS ::after provisoire (or #C9A45C), injectée une seule fois et retirée à la restauration. Vérifié en jsdom et sur le site réel Chrome (computed style « non traduit »). M7 complet repasse avec le badge : 0 erreur page.",
+  "files": [
+    "extension/content.js",
+    "tests/content.test.js",
+    "docs/SITE_TEST_2026-11-08.md",
+    "docs/assets/badge-non-traduit.png"
+  ],
+  "tests": [
+    {
+      "command": "node tests/content.test.js",
+      "result": "pass",
+      "note": "segment critique non traduit marqué, style injecté, marqueur et style retirés à la restauration"
+    },
+    {
+      "command": "node .cache/m7/m7_test.js (harnais Playwright local)",
+      "result": "pass",
+      "note": "5 étapes + EN, badge rendu, 0 pageerror/console.error, montants et références préservés"
+    },
+    {
+      "command": "getComputedStyle(el, '::after').content (Chrome 158)",
+      "result": "pass",
+      "note": "content « non traduit », background rgb(255,248,225), color rgb(92,74,18)"
+    },
+    {
+      "command": "node tests/privacy.test.js && node tests/cloud-gating.test.js && node tests/criticality.test.js",
+      "result": "pass",
+      "note": "non-régression M1/M2/M3"
+    },
+    {
+      "command": "NK_MOCK=1 server/.venv/bin/python -m pytest -q server/test_api.py",
+      "result": "pass",
+      "note": "26 passed"
+    },
+    {
+      "command": "python3 scripts/check-evolution.py",
+      "result": "pass",
+      "note": "journal valide après ajout de l'entrée"
+    }
+  ],
+  "evidence": "docs/assets/badge-non-traduit.png ; computed style vérifié sur https://safinum.cm/hackathon-test ; content.js ensureBadgeStyle + [data-nk-untranslated=\"A\"]::after",
+  "next": "M12 — tester les Shadow DOM ouverts/fermés et les iframes, documenter ce qui marche",
+  "blockers": []
+}
+```
+
+## 2026-11-08T07:45:00+01:00 — Marius — M12 — done
+
+```json
+{
+  "timestamp": "2026-11-08T07:45:00+01:00",
+  "person": "Marius",
+  "branch": "marius",
+  "task": "M12",
+  "status": "done",
+  "summary": "Test réel Chrome 158 sur une page locale : le document principal est traduit, les Shadow DOM ouvert et fermé ne sont pas parcourus, les iframes ne le sont pas en injection top-frame. Avec injection allFrames et message par frameId (permissions des deux origines), les iframes même-origine et cross-origin sont traduites. chrome.dom.openOrClosedShadowRoot est disponible. Aucune promesse activeTab pour les iframes cross-origin ; limites documentées.",
+  "files": [
+    "docs/SHADOW_DOM_IFRAMES.md"
+  ],
+  "tests": [
+    {
+      "command": "harnais Playwright M12 (page locale, Shadow DOM ouvert/fermé, iframes)",
+      "result": "pass",
+      "note": "top traduit ; open/closed shadow intacts ; iframes top-frame intactes ; allFrames + host permissions : les deux iframes traduites"
+    },
+    {
+      "command": "chrome.dom.openOrClosedShadowRoot dans le content script",
+      "result": "pass",
+      "note": "fonction disponible ; Shadow fermé lisible via l'API, element.shadowRoot null"
+    },
+    {
+      "command": "node tests/content.test.js && node tests/privacy.test.js && node tests/cloud-gating.test.js && node tests/criticality.test.js",
+      "result": "pass",
+      "note": "non-régression extension"
+    },
+    {
+      "command": "NK_MOCK=1 server/.venv/bin/python -m pytest -q server/test_api.py",
+      "result": "pass",
+      "note": "26 passed"
+    },
+    {
+      "command": "python3 scripts/check-evolution.py",
+      "result": "pass",
+      "note": "journal valide après ajout de l'entrée"
+    }
+  ],
+  "evidence": "docs/SHADOW_DOM_IFRAMES.md : tableau des résultats ; sortie du harnais « OPEN_SHADOW non traduit », « FRAMES_AFTER_ALLFRAMES : nde nje »",
+  "next": "M9 — harnais e2e/API et preuves de latence",
+  "blockers": []
+}
+```
+
+## 2026-11-08T08:00:00+01:00 — Marius — M9 — in_progress
+
+```json
+{
+  "timestamp": "2026-11-08T08:00:00+01:00",
+  "person": "Marius",
+  "branch": "marius",
+  "task": "M9",
+  "status": "in_progress",
+  "summary": "Ajout de tests/api.robust.py (17 contrats HTTP, CORS, refus, JSON sans HTML) et tests/pipeline.e2e.js (pack/edge : zéro réseau, latence 3,62 ms, jetons/références préservés). Le champ segments est désormais requis (422 au lieu de 200 silencieux). Les résultats sont versionnés dans docs/test-results/. Les modes unseen et demo restent bloqués : modèle NLLB absent et pack 102/102 vide.",
+  "files": [
+    "tests/api.robust.py",
+    "tests/pipeline.e2e.js",
+    "docs/test-results/api-robust.json",
+    "docs/test-results/pipeline-pack.json",
+    "docs/test-results/pipeline-edge.json",
+    "docs/test-results/pipeline-unseen.json",
+    "docs/test-results/pipeline-demo.json",
+    "docs/test-results/README.md",
+    "server/app.py",
+    ".github/workflows/ci.yml",
+    "tests/README.md"
+  ],
+  "tests": [
+    {
+      "command": "NK_MOCK=1 server/.venv/bin/python tests/api.robust.py",
+      "result": "pass",
+      "note": "17/17 cas"
+    },
+    {
+      "command": "node tests/pipeline.e2e.js --mode=all",
+      "result": "pass",
+      "note": "pack 3,62 ms, 0 réseau ; edge 4 cas ; unseen/demo non exécutés"
+    },
+    {
+      "command": "NK_MOCK=1 server/.venv/bin/python -m pytest -q server/test_api.py",
+      "result": "pass",
+      "note": "26 passed"
+    },
+    {
+      "command": "node tests/content.test.js && node tests/privacy.test.js && node tests/cloud-gating.test.js && node tests/criticality.test.js",
+      "result": "pass",
+      "note": "non-régression extension"
+    },
+    {
+      "command": "python3 tests/import-glossary.test.py && python3 scripts/check-language-packs.py",
+      "result": "pass",
+      "note": "glossaire et packs"
+    },
+    {
+      "command": "python3 scripts/check-evolution.py",
+      "result": "pass",
+      "note": "journal valide après ajout de l'entrée"
+    }
+  ],
+  "evidence": "docs/test-results/api-robust.json (17 cas ok) ; pipeline-pack.json latencyMs 3.62, networkCalls 0 ; pipeline-unseen.json et pipeline-demo.json status blocked",
+  "next": "Télécharger NLLB et remplir le pack 102/102 pour exécuter unseen/demo ; récupérer tests/demo.e2e.js de l'audit Freedy",
+  "blockers": [
+    "Modèle NLLB non téléchargé : mode unseen non exécutable",
+    "Pack 102/102 absent : mode demo non exécutable",
+    "tests/demo.e2e.js absent du dépôt (artefact local)"
+  ]
+}
+```
+
+## 2026-11-08T08:15:00+01:00 — Marius — M10 — done
+
+```json
+{
+  "timestamp": "2026-11-08T08:15:00+01:00",
+  "person": "Marius",
+  "branch": "marius",
+  "task": "M10",
+  "status": "done",
+  "summary": "Packaging complet : 3 ZIP de 370 Ko, contrôle de collisions avant build, web-ext lint 0/0/0. Le paquet Chrome chargé dans Chrome for Testing 158 démarre son service worker et affiche les 3 langues dans le popup. Firefox 159 téléchargé hors Snap installe le paquet comme add-on temporaire via web-ext run. CI GitHub verte sur develop et marius.",
+  "files": [
+    "docs/SUBMISSION.md",
+    "tests/README.md"
+  ],
+  "tests": [
+    {
+      "command": "./scripts/package-extension.sh",
+      "result": "pass",
+      "note": "3 ZIP 370 Ko, collisions OK"
+    },
+    {
+      "command": "chargement de dist/package/chrome dans Chrome for Testing 158",
+      "result": "pass",
+      "note": "service worker chrome-extension://.../background.js actif ; popup 3 langues ; 0 erreur page"
+    },
+    {
+      "command": "web-ext run --source-dir dist/firefox --firefox=.cache/firefox/firefox/firefox --arg=-headless",
+      "result": "pass",
+      "note": "« Installed ... as a temporary add-on » (Firefox 159)"
+    },
+    {
+      "command": "npx web-ext lint --source-dir dist/firefox",
+      "result": "pass",
+      "note": "0 erreur, 0 warning, 0 notice"
+    },
+    {
+      "command": "gh run list / gh run view",
+      "result": "pass",
+      "note": "5/5 jobs verts sur develop et marius"
+    },
+    {
+      "command": "python3 scripts/check-evolution.py",
+      "result": "pass",
+      "note": "journal valide après ajout de l'entrée"
+    }
+  ],
+  "evidence": "sortie Chrome « SW chrome-extension://.../background.js », options popup « Fulfulde MT / Ewondo PACK / Duala PACK » ; sortie Firefox « Installed ... as a temporary add-on » ; docs/SUBMISSION.md § État vérifié",
+  "next": "M7 Firefox site automation, puis traiter M6/M8/M11 (blocages données/modèle)",
+  "blockers": []
+}
+```
+
+## 2026-11-08T08:30:00+01:00 — Marius — M7 — in_progress
+
+```json
+{
+  "timestamp": "2026-11-08T08:30:00+01:00",
+  "person": "Marius",
+  "branch": "marius",
+  "task": "M7",
+  "status": "in_progress",
+  "summary": "Tentative Firefox réelle avec Firefox 159 téléchargé hors Snap et Selenium/geckodriver : l'extension s'installe en add-on temporaire, le content script s'injecte (marqueur DOM présent), mais le background répond « Cloud désactivé et backend local indisponible ». Les host_permissions MV3 ne sont pas accordées à un add-on temporaire, donc le fetch vers 127.0.0.1:8000 est refusé ; les packs étant vides, 0 segment n'est traduit. Le test Chrome complet reste la référence.",
+  "files": [],
+  "tests": [
+    {
+      "command": "Selenium Firefox 159 + install_addon(nkaplingua-test.xpi, temporary=True)",
+      "result": "pass",
+      "note": "add-on nkaplingua@safinum.cm installé ; marqueur data-nk-autotrigger présent"
+    },
+    {
+      "command": "browser.runtime.sendMessage NK_TRANSLATE_SEGMENTS depuis le content script Firefox",
+      "result": "fail",
+      "note": "réponse « Cloud désactivé et backend local indisponible. Lancez le backend ou autorisez le cloud. »"
+    },
+    {
+      "command": "node .cache/m7/m7_test.js (Chrome 158)",
+      "result": "pass",
+      "note": "référence M7 : 5 étapes + EN, 0 erreur, montants/références préservés"
+    },
+    {
+      "command": "node tests/content.test.js && node tests/privacy.test.js && node tests/cloud-gating.test.js && node tests/criticality.test.js",
+      "result": "pass",
+      "note": "aucune régression côté code"
+    },
+    {
+      "command": "NK_MOCK=1 server/.venv/bin/python -m pytest -q server/test_api.py",
+      "result": "pass",
+      "note": "26 passed"
+    },
+    {
+      "command": "python3 scripts/check-evolution.py",
+      "result": "pass",
+      "note": "journal valide après ajout de l'entrée"
+    }
+  ],
+  "evidence": "Firefox 159 : « Installed ... as a temporary add-on » ; data-nk-debug = {\"lang\":\"object\",\"browser\":\"object\",\"hasTranslate\":\"function\"} ; réponse background « backend local indisponible » ; 0 segment traduit",
+  "next": "Accorder explicitement les host_permissions dans un profil Firefox réel (ou construire un pack de test couvrant la page) puis rejouer le parcours",
+  "blockers": [
+    "Firefox MV3 : host_permissions non accordées à l'add-on temporaire, backend local inaccessible",
+    "Firefox n'a pas de pack fub rempli pour compenser sans backend"
+  ]
+}
+```
+
+## 2026-11-08T08:40:00+01:00 — Marius — M6 — blocked
+
+```json
+{
+  "timestamp": "2026-11-08T08:40:00+01:00",
+  "person": "Marius",
+  "branch": "marius",
+  "task": "M6",
+  "status": "blocked",
+  "summary": "Les 20 phrases de data/unseen_finance.txt sont prêtes, mais la comparaison des 4 formats de jetons exige le modèle NLLB. Le modèle n'est pas téléchargé et torch/transformers ne sont pas installés dans l'environnement de test ; aucun résultat de format ne peut être produit sans inventer des mesures.",
+  "files": [],
+  "tests": [
+    {
+      "command": "wc -l data/unseen_finance.txt",
+      "result": "pass",
+      "note": "20 phrases disponibles"
+    },
+    {
+      "command": "server/.venv/bin/python -c 'import torch, transformers'",
+      "result": "not_run",
+      "note": "ModuleNotFoundError: torch absent"
+    },
+    {
+      "command": "téléchargement facebook/nllb-200-distilled-600M",
+      "result": "not_run",
+      "note": "modèle ~2,4 Go absent de models/"
+    }
+  ],
+  "evidence": "models/ absent ; torch absent ; data/unseen_finance.txt = 20 lignes",
+  "next": "Installer torch/transformers, télécharger NLLB, comparer [[NUM_0]], [[0]], [[N0]] et X0 sur les 20 phrases, mesurer token_lost et latence",
+  "blockers": [
+    "Modèle NLLB-200 non téléchargé",
+    "torch/transformers absents du venv de test",
+    "Aucune mesure réelle des 4 formats disponible"
+  ]
+}
+```
+
+## 2026-11-08T08:45:00+01:00 — Marius — M8 — blocked
+
+```json
+{
+  "timestamp": "2026-11-08T08:45:00+01:00",
+  "person": "Marius",
+  "branch": "marius",
+  "task": "M8",
+  "status": "blocked",
+  "summary": "Les 15 phrases audio sans montant et le template d'index existent, mais aucun fichier OGG, aucun index.json rempli et aucun consentement audio ne sont fournis par Klein. Le bouton « Écouter » et le service local ne peuvent pas être testés avec de vrais fichiers ; je n'ai pas fabriqué d'audio.",
+  "files": [],
+  "tests": [
+    {
+      "command": "python3 -c 'csv data/audio/fub/phrases.csv : 15 lignes, has_amount=no'",
+      "result": "pass",
+      "note": "15/15 sans montant"
+    },
+    {
+      "command": "ls data/audio/fub/index.json",
+      "result": "not_run",
+      "note": "index.json absent (seul index.template.json)"
+    },
+    {
+      "command": "lecture de 15 OGG",
+      "result": "not_run",
+      "note": "aucun fichier audio versionné"
+    }
+  ],
+  "evidence": "data/audio/fub : index.template.json + phrases.csv seulement ; 15 lignes has_amount=no ; aucun OGG ; aucun consentement",
+  "next": "Recevoir de Klein les 15 OGG, l'index.json (phrase, fichier, durée, relecteur, licence) et les consentements, puis implémenter le bouton conditionnel",
+  "blockers": [
+    "15 fichiers OGG absents",
+    "index.json absent",
+    "consentements audio non signés",
+    "licences audio non documentées"
+  ]
+}
+```
+
+## 2026-11-08T08:50:00+01:00 — Marius — M11 — blocked
+
+```json
+{
+  "timestamp": "2026-11-08T08:50:00+01:00",
+  "person": "Marius",
+  "branch": "marius",
+  "task": "M11",
+  "status": "blocked",
+  "summary": "docs/ORTHOGRAPHY.md indique explicitement que ɲ → ny est une hypothèse à valider, que la table de validation est vide et qu'il ne faut pas remplacer ɲ dans l'extension tant que les natifs n'ont pas tranché. Aucune table validée fournie par Klein ; implémenter un normaliseur maintenant risquerait de changer le sens des mots.",
+  "files": [],
+  "tests": [
+    {
+      "command": "lecture de docs/ORTHOGRAPHY.md",
+      "result": "pass",
+      "note": "table de validation vide, règle keep_ɲ_or_map_to_ny non tranchée"
+    },
+    {
+      "command": "normalisation ɲ → ny sur 10 exemples",
+      "result": "not_run",
+      "note": "table native absente, pas de règle validée"
+    }
+  ],
+  "evidence": "docs/ORTHOGRAPHY.md §3 : table vide ; §4 : ne pas remplacer ɲ par ny dans l'extension ; aucune table validée dans data/",
+  "next": "Recevoir la table ɲ/ny, tons et exceptions validée par les natifs, puis implémenter le normaliseur déterministe avec 10 tests",
+  "blockers": [
+    "Table orthographique ɲ/ny non validée par les natifs",
+    "Aucune règle validée pour les noms propres et emprunts"
+  ]
+}
+```
+
+## 2026-11-08T09:05:00+01:00 — Marius — M10 — done
+
+```json
+{
+  "timestamp": "2026-11-08T09:05:00+01:00",
+  "person": "Marius",
+  "branch": "marius",
+  "task": "M10",
+  "status": "done",
+  "summary": "Corrections R0 de discours : le README affiche un état réel (packs 0/102 et 0/20, glossaire 0 validé, audio 0, MT duala échouée, test Chrome, Firefox, CI), EVAL distingue 45 % texte brut / 30 % inédites / 23 % démo, et les docs ne présentent plus MyMemory comme un secours automatique. COMPLIANCE, SECURITY, TECHNICAL, DATA_LICENSES, VIDEO_SCRIPT et SUBMISSION alignés.",
+  "files": [
+    "README.md",
+    "docs/EVAL.md",
+    "docs/COMPLIANCE.md",
+    "docs/SECURITY.md",
+    "docs/TECHNICAL.md",
+    "docs/DATA_LICENSES.md",
+    "docs/VIDEO_SCRIPT.md",
+    "docs/SUBMISSION.md"
+  ],
+  "tests": [
+    {
+      "command": "grep -RIn 'cloud de secours|bascule sur un service cloud|84–95|sept langues' README.md docs/*.md",
+      "result": "pass",
+      "note": "aucune formulation automatique restante ; seul le 45 % texte brut est conservé, explicitement distingué"
+    },
+    {
+      "command": "python3 scripts/check-evolution.py",
+      "result": "pass",
+      "note": "journal valide après ajout de l'entrée"
+    }
+  ],
+  "evidence": "README.md § État réel au 8 novembre 2026 ; docs/EVAL.md § Résultats réels ; docs/COMPLIANCE.md total objectif 80+",
+  "next": "Poursuivre M7 (Firefox) et M9 (unseen/demo) dès que les données/modèle seront disponibles",
+  "blockers": []
 }
 ```
 

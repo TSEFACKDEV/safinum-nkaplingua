@@ -39,14 +39,14 @@ doute, traiter le modèle ewondo comme non commercial jusqu’à clarification
 écrite de `flagship-ai`. Les modèles fp32 `francais-fufulde` et
 `francais-bulu` sont explicitement CC BY 4.0.
 
-### Service cloud de secours
+### Service cloud expérimental (opt-in)
 
 | Élément | Valeur |
 |---|---|
 | Service | MyMemory Translation API |
 | Type | API externe gratuite, usage soumis aux conditions du service |
 | Source | https://mymemory.translated.net/doc/spec.php |
-| Usage | mode cloud de secours si le backend local n’est pas disponible |
+| Usage | **expérimental, uniquement avec opt-in explicite** ; jamais dans le chemin de démonstration |
 | Données | texte pseudonymisé (montants, URLs, emails et noms de bénéficiaires remplacés) |
 | Remarque | ne pas utiliser avec des données réelles sensibles ; le mode local est prioritaire |
 

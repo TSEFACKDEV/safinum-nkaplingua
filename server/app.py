@@ -37,6 +37,7 @@ import difflib
 import os
 import re
 import sys
+import threading
 from functools import lru_cache
 from pathlib import Path
 from typing import List, Optional
@@ -86,6 +87,11 @@ FLAGSHIP_REPETITION_PENALTY = float(
 )
 FLAGSHIP_TARGETS = {"fub", "ewo"}
 FLAGSHIP_DISABLED = FLAGSHIP_MODE in {"0", "false", "off", "no", "none"}
+
+# Le tokenizer NLLB est partagé : `src_lang` est un état mutable. Un verrou
+# sérialise la section tokenize → generate → decode pour éviter qu'une requête
+# FR et une requête EN se mélangent (M13).
+_MODEL_LOCK = threading.Lock()
 
 # Contrôle de cohérence par rétro-traduction : NLLB traduit la sortie
 # fulfulde vers le français, puis on compare avec la source. Un score trop
@@ -197,7 +203,7 @@ class Segment(BaseModel):
 
 
 class TranslateRequest(BaseModel):
-    segments: List[Segment] = Field(default_factory=list)
+    segments: List[Segment]
     target: str = "fub"
     source: str = "fr"
 
@@ -679,6 +685,51 @@ def split_sentences(text: str, max_chars: int = 220) -> List[str]:
     return result
 
 
+def _generate_locked(
+    tokenizer,
+    model,
+    device: str,
+    texts: List[str],
+    source_lang: str,
+    target_lang: str,
+) -> List[str]:
+    """Section critique unique autour du tokenizer et du modèle partagés.
+
+    `tokenizer.src_lang` est un état global : sans verrou, deux requêtes
+    simultanées FR/EN peuvent se mélanger. Le verrou couvre l'encodage, la
+    génération et le décodage ; les requêtes sont donc sérialisées.
+    """
+    import torch
+
+    with _MODEL_LOCK:
+        tokenizer.src_lang = source_lang
+        encoded = tokenizer(
+            texts,
+            return_tensors="pt",
+            padding=True,
+            truncation=True,
+            max_length=MAX_INPUT_TOKENS,
+        ).to(device)
+
+        target_token_id = tokenizer.convert_tokens_to_ids(target_lang)
+        if target_token_id == tokenizer.unk_token_id:
+            raise RuntimeError(f"Code de langue NLLB inconnu : {target_lang}")
+
+        with torch.inference_mode():
+            generated = model.generate(
+                **encoded,
+                forced_bos_token_id=target_token_id,
+                max_new_tokens=MAX_NEW_TOKENS,
+                num_beams=NUM_BEAMS,
+                repetition_penalty=REPETITION_PENALTY,
+                no_repeat_ngram_size=NO_REPEAT_NGRAM,
+                length_penalty=1.0,
+                early_stopping=True,
+            )
+
+        return tokenizer.batch_decode(generated, skip_special_tokens=True)
+
+
 def generate_batch(
     texts: List[str], source_lang: str, target_lang: str
 ) -> List[str]:
@@ -687,37 +738,12 @@ def generate_batch(
     if MOCK_MODE:
         return [f"[fulfulde] {text}" for text in texts]
 
-    import torch
-
     if tokenizer is None or model is None:
         raise RuntimeError("Modèle non chargé.")
 
-    tokenizer.src_lang = source_lang
-    encoded = tokenizer(
-        texts,
-        return_tensors="pt",
-        padding=True,
-        truncation=True,
-        max_length=MAX_INPUT_TOKENS,
-    ).to(device)
-
-    target_token_id = tokenizer.convert_tokens_to_ids(target_lang)
-    if target_token_id == tokenizer.unk_token_id:
-        raise RuntimeError(f"Code de langue NLLB inconnu : {target_lang}")
-
-    with torch.inference_mode():
-        generated = model.generate(
-            **encoded,
-            forced_bos_token_id=target_token_id,
-            max_new_tokens=MAX_NEW_TOKENS,
-            num_beams=NUM_BEAMS,
-            repetition_penalty=REPETITION_PENALTY,
-            no_repeat_ngram_size=NO_REPEAT_NGRAM,
-            length_penalty=1.0,
-            early_stopping=True,
-        )
-
-    return tokenizer.batch_decode(generated, skip_special_tokens=True)
+    return _generate_locked(
+        tokenizer, model, device, texts, source_lang, target_lang
+    )
 
 
 def safe_generate_batch(

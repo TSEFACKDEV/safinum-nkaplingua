@@ -249,6 +249,12 @@
       (match) => addToken("EMAIL", match)
     );
 
+    // Références d'opération (SAF-2026-XXXX) : entité opaque, jamais traduite.
+    value = value.replace(
+      /\b[A-Z]{2,}-\d{4}-[A-Z0-9]{4,}\b/g,
+      (match) => addToken("NAME", match)
+    );
+
     value = value.replace(NAME_TRIGGER_RE, (match, _trigger, candidate) => {
       if (!looksLikeName(candidate)) return match;
       const start = match.indexOf(candidate);

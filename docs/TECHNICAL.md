@@ -113,18 +113,19 @@ financière existante, sans modifier son code source.
   n’est pas touché.
 - **Aucune API côté banque** : l’extension lit uniquement le DOM rendu.
 - **Aucune dépendance à un identifiant de page** : le pipeline est générique.
-- **Fonctionne sans backend** : un service cloud de secours (MyMemory) prend le
-  relais si le backend local n’est pas lancé, uniquement pour les paires qui
-  ont un code cloud. L’ewondo n’a pas de code cloud et ne part jamais vers
-  MyMemory.
-- **Seconde opinion ciblée** : si le backend local rejette une phrase non
-  critique, le background peut redemander cette phrase au cloud, puis garder
-  la meilleure sortie conforme. Le local reste prioritaire.
+- **Mode pack sans backend** : les packs validés fonctionnent seuls. Le cloud
+  MyMemory reste **expérimental et opt-in** ; il n’est contacté que si
+  l’utilisateur l’autorise explicitement et si la paire a un code cloud.
+  L’ewondo n’a pas de code cloud et ne part jamais vers MyMemory.
+- **Seconde opinion ciblée** (cloud opt-in uniquement) : si le backend local
+  rejette une phrase non critique, le background peut redemander uniquement
+  cette phrase au cloud, puis garder la meilleure sortie conforme. Le local
+  reste prioritaire.
 - **Trois langues cibles** : fulfulde et ewondo en MT brouillon, duala en pack
   communautaire. Le niveau A reste pack-only.
-- **Barrière niveau A** : `isCriticalText()` bloque solde, frais, montant, PIN,
-  OTP, transaction, confirmation, etc. avant tout appel MT ; le backend refuse
-  aussi un segment marqué `critical`.
+- **Barrière niveau A** : `isCriticalText()` / `classifyCriticality()` bloque
+  solde, frais, montant, PIN, OTP, transaction, confirmation, etc. avant tout
+  appel MT ; le backend refuse aussi un segment marqué `critical`.
 - **Détection source** : FR/EN, avec indice HTML, mots-outils et confiance.
 - **Permissions minimales** : `activeTab`, `scripting`, `storage`,
   `contextMenus`; pas de `*://*/*`.
@@ -145,7 +146,7 @@ reconnus par le code.
 | `flagship-ai/cameroon-int8` | int8, ~80 Mo/paire | CC BY-NC 4.0 (bundle) ; sous-fiche `francais-ewondo` CC BY 4.0 | brouillon MT ewondo/fulfulde |
 | `flagship-ai/francais-fufulde` | 299 Mo | CC BY 4.0 | référence fp32 / alternative |
 | `facebook/nllb-200-distilled-600M` | 600M | CC BY-NC 4.0 | secours fulfulde |
-| MyMemory Translation API | — | service externe gratuit | cloud de secours si paire disponible |
+| MyMemory Translation API | — | service externe | cloud expérimental, opt-in uniquement |
 | Packs fulfulde, ewondo et duala | 0.1 | à définir avec les contributeurs (CC0 / CC BY) | mémoires de traduction validées |
 | FastAPI | >=0.115 | MIT | API |
 | Uvicorn | >=0.30 | BSD | serveur |
@@ -167,7 +168,7 @@ reconnus par le code.
 - documentation de sécurité et de licences.
 
 **Composants tiers** : flagship-ai, NLLB, CTranslate2, FastAPI, PyTorch,
-Transformers, MyMemory (mode cloud de secours uniquement). Les packs
+Transformers, MyMemory (cloud expérimental, opt-in uniquement). Les packs
 communautaires sont la contribution propre de l’équipe et des relecteurs
 natifs.
 

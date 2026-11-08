@@ -25,6 +25,8 @@ const html = `<!doctype html>
 <body>
   <h1>Solde disponible</h1>
   <p id="solde">Le solde est de 125 000 FCFA.</p>
+  <p id="reference">Opération SAF-2026-AB12CD.</p>
+  <p id="critique">Solde critique.</p>
   <p id="transfert">Transfert à Aïcha.</p>
   <p id="nom-montant">Le bénéficiaire Aïcha reçoit 25 000 FCFA.</p>
   <p id="frais">Les frais de transfert sont de 1 000 FCFA.</p>
@@ -61,6 +63,14 @@ window.chrome = {
           detected: { code: "fr", confidence: 0.9 },
           translations: message.segments.map((segment) => {
             seen.push(segment.text);
+            if (segment.text.includes("Solde critique")) {
+              return {
+                id: segment.id,
+                text: segment.text,
+                ok: false,
+                reason: "untranslated_critical"
+              };
+            }
             return {
               id: segment.id,
               text: `XX ${segment.text}`,
@@ -111,6 +121,20 @@ function sendMessage(message) {
   assert(
     body.includes("XX Le solde est de 125 000 FCFA."),
     "texte du solde non traduit"
+  );
+  assert(
+    body.includes("SAF-2026-AB12CD"),
+    "référence d'opération non préservée"
+  );
+  assert(!body.includes("[[NAME_"), "jeton de référence non restauré");
+  assert(
+    window.document.getElementById("critique").getAttribute("data-nk-untranslated") ===
+      "A",
+    "niveau A non marqué"
+  );
+  assert(
+    window.document.getElementById("nk-badge-style"),
+    "style du badge non injecté"
   );
   assert(
     body.includes("Transfert à Aïcha."),
@@ -179,6 +203,16 @@ function sendMessage(message) {
     window.document.getElementById("btn").getAttribute("title") ===
       "Vérifier le bénéficiaire",
     "restauration title échouée"
+  );
+  assert(
+    !window.document
+      .getElementById("critique")
+      .hasAttribute("data-nk-untranslated"),
+    "marqueur de niveau A non retiré à la restauration"
+  );
+  assert(
+    !window.document.getElementById("nk-badge-style"),
+    "style du badge non retiré à la restauration"
   );
   assert(
     window.document.getElementById("pin").getAttribute("placeholder") ===

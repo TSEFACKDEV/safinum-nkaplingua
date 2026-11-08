@@ -13,15 +13,38 @@ NkapLingua est une extension navigateur autonome qui traduit les interfaces
 financières numériques en **trois langues camerounaises** sans modifier le site
 source et sans lire les champs sensibles. Le **fulfulde d’Adamawa** et
 l’**ewondo** utilisent un **brouillon MT** `flagship-ai` (NLLB en secours pour
-le fulfulde) ; le **duala** utilise un **pack de phrases validées**. Elle
-fonctionne **100 % local** avec le backend fourni dans le dépôt (le cloud
-MyMemory est expérimental, désactivé par défaut et jamais utilisé pour
-l’ewondo). Les phrases critiques (solde, frais, PIN/OTP, etc.) ne passent
-jamais par la MT sans pack validé : elles restent en français. Le détail est
-dans [`docs/LANGUAGES.md`](docs/LANGUAGES.md).
+le fulfulde) ; le **duala** utilise un **pack de phrases validées**.
+
+Le mode « pack » ne demande aucune installation Python. Le backend local
+`flagship-ai`/NLLB télécharge les modèles au premier lancement ; le cloud
+MyMemory est expérimental, **désactivé par défaut**, opt-in explicite et jamais
+utilisé pour l’ewondo. Les phrases critiques (solde, frais, PIN/OTP, etc.) ne
+passent jamais par la MT sans pack validé : elles restent en français. Les
+packs sont encore vides : voir le statut réel ci-dessous. Le détail est dans
+[`docs/LANGUAGES.md`](docs/LANGUAGES.md).
 
 Projet préparé pour le **SAFINUM Innovate Challenge 2026** (Yaoundé,
 26–28 novembre 2026).
+
+## État réel au 8 novembre 2026
+
+| Élément | État vérifié |
+|---|---|
+| Pack fulfulde | 102 phrases sources, **0 traduite** (`fub.json` : `entries: []`) |
+| Packs ewondo / duala | 20 phrases sources chacun, **0 traduite** |
+| Glossaire finance | 40 termes, **0 validé** |
+| Audio | **0 enregistrement** ; 15 phrases sans montant prêtes |
+| MT duala (pilote) | **échoué** : répétitions, non utilisable pour le niveau A |
+| Test site officiel (Chrome 158) | **5 étapes + EN**, 0 erreur page, montants/noms/références préservés |
+| Firefox 159 | paquet chargé en add-on temporaire ; parcours site non automatisé |
+| CI GitHub Actions | **5 jobs verts** sur `develop` et `marius` |
+| Tests | 26 tests API + 17 contrats HTTP + jsdom + pipeline pack/edge |
+
+Le niveau A (solde, frais, PIN/OTP, confirmation, erreurs) ne vient que d’un
+pack validé ; sans phrase validée, l’original reste affiché avec un badge
+« non traduit ». Aucun appel MT n’est fait sur ce niveau.
+
+Suivi détaillé du lot moteur : [docs/MARIUS_STATUS.md](docs/MARIUS_STATUS.md).
 
 ## Aperçu
 
@@ -286,9 +309,9 @@ NK_QUALITY_FRENCH_LEAK=0.35 NK_DEVICE=cpu uvicorn app:app --host 127.0.0.1 --por
 
 Le modèle 600M est le défaut. Pour une meilleure qualité sur une machine
 16 Go, `NK_MODEL=facebook/nllb-200-distilled-1.3B` est possible ; le 3.3B n’est
-pas recommandé sur ce prototype. Le glossaire finance validé
-(`data/glossary.template.csv`) est appliqué avant le modèle : les termes
-métier ne sont pas laissés à l’improvisation de NLLB.
+pas recommandé sur ce prototype. Le glossaire finance
+(`data/glossary.template.csv`) est appliqué avant le modèle dès qu'un terme est
+validé ; il est actuellement **en cours de validation (0 terme validé)**.
 
 ### Mode maquette (sans modèle)
 

@@ -26,6 +26,32 @@
   const MAX_TEXT_ITEMS = 180;
   const MAX_ATTRIBUTE_ITEMS = 60;
 
+  // Badge provisoire du niveau A non traduit. Style aligné sur la charte
+  // (or #C9A45C) ; Freedy peut le remplacer sans changer le marqueur.
+  const BADGE_STYLE = `
+    [data-nk-untranslated="A"]::after {
+      content: "non traduit";
+      display: inline-block;
+      margin-left: 6px;
+      padding: 0 6px;
+      border: 1px solid #c9a45c;
+      border-radius: 999px;
+      background: #fff8e1;
+      color: #5c4a12;
+      font: 500 10px/1.6 system-ui, -apple-system, "Segoe UI", sans-serif;
+      vertical-align: middle;
+      white-space: nowrap;
+    }
+  `;
+
+  function ensureBadgeStyle() {
+    if (document.getElementById("nk-badge-style")) return;
+    const style = document.createElement("style");
+    style.id = "nk-badge-style";
+    style.textContent = BADGE_STYLE;
+    (document.head || document.documentElement).appendChild(style);
+  }
+
   const SKIP_TAGS = new Set([
     "SCRIPT",
     "STYLE",
@@ -43,10 +69,6 @@
     "OBJECT",
     "EMBED"
   ]);
-
-  const BLOCK_SELECTOR =
-    "p,li,h1,h2,h3,h4,h5,h6,td,th,button,label,figcaption,blockquote," +
-    "option,div,section,article,header,footer,main,aside,nav";
 
   const DO_NOT_TRANSLATE = [
     "FCFA",
@@ -198,13 +220,6 @@
     return false;
   }
 
-  function blockContext(element) {
-    if (!element) return "";
-    const block = element.closest(BLOCK_SELECTOR) || element;
-    const text = (block.innerText || block.textContent || "").trim();
-    return text.slice(0, 600);
-  }
-
   function collectTextItems(root, items) {
     if (!root) return;
     const walker = document.createTreeWalker(root, NodeFilter.SHOW_TEXT, {
@@ -327,6 +342,12 @@
     value = value.replace(
       /[\w.+-]+@[\w-]+\.[\w.-]+/gi,
       (match) => addToken("EMAIL", match)
+    );
+
+    // Références d'opération (SAF-2026-XXXX) : entité opaque, jamais traduite.
+    value = value.replace(
+      /\b[A-Z]{2,}-\d{4}-[A-Z0-9]{4,}\b/g,
+      (match) => addToken("NAME", match)
     );
 
     // Noms de bénéficiaires et personnes : après un mot déclencheur.
@@ -455,6 +476,12 @@
       element.removeAttribute("data-nk-translated");
     }
 
+    // Marqueurs de niveau A non traduit.
+    for (const element of document.querySelectorAll("[data-nk-untranslated]")) {
+      element.removeAttribute("data-nk-untranslated");
+    }
+    document.getElementById("nk-badge-style")?.remove();
+
     translatedNodes.clear();
     translatedAttributes.length = 0;
     translatedElements.clear();
@@ -518,14 +545,13 @@
       const sourceInfo = detectSourceLanguage(pageText());
       const source = sourceInfo.code === "en" ? "en" : "fr";
 
-      const segments = items.map((item, index) => {
+      const segments = items.map((item) => {
         const { text, tokens } = redact(item.value || "");
         return {
           id: item.id,
           item,
           tokens,
-          text,
-          context: blockContext(item.element)
+          text
         };
       });
 
@@ -538,10 +564,9 @@
           type: "NK_TRANSLATE_SEGMENTS",
           target: targetCode,
           source,
-          segments: batch.map(({ id, text, context }) => ({
+          segments: batch.map(({ id, text }) => ({
             id,
-            text,
-            context
+            text
           }))
         });
 
@@ -561,8 +586,16 @@
         for (const segment of batch) {
           const result = byId.get(segment.id);
           if (!result || !result.ok) {
-            if (result?.reason === "critical_pack_only") {
+            if (
+              result?.reason === "untranslated_critical" ||
+              result?.reason === "critical_pack_only"
+            ) {
               criticalCount += 1;
+              const element = segment.item.element;
+              if (element) {
+                ensureBadgeStyle();
+                element.setAttribute("data-nk-untranslated", "A");
+              }
             }
             flaggedNodes.add(segment.item.node || segment.item.element);
             flaggedCount += 1;
@@ -697,7 +730,10 @@
       }
 
       if (!response.translation?.ok) {
-        if (response.translation?.reason === "critical_pack_only") {
+        if (
+          response.translation?.reason === "untranslated_critical" ||
+          response.translation?.reason === "critical_pack_only"
+        ) {
           showToast(
             `Phrase critique : aucun pack ${spec.label} validé. ` +
               "Elle reste en français ; le niveau A exige une validation native."

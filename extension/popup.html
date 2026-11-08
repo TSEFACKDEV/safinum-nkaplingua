@@ -107,9 +107,9 @@
           <summary>Confidentialité</summary>
           <div class="privacy-body">
             <p>
-              Le backend local est prioritaire. S’il n’est pas lancé,
-              l’extension utilise MyMemory avec un texte pseudonymisé :
-              montants, URLs, emails et noms de bénéficiaires remplacés par des
+              Le backend local est prioritaire. MyMemory n’est utilisé que si
+              vous l’autorisez explicitement ci-dessous : dans ce cas, montants,
+              URLs, emails et noms de bénéficiaires sont remplacés par des
               jetons. Aucun mot de passe, code PIN, OTP ou valeur de formulaire
               n’est lu. Pour un usage réel, lancer le backend NLLB local.
             </p>
@@ -119,8 +119,8 @@
               service cloud.
             </p>
             <label class="cloud-toggle">
-              <input id="cloudFallback" type="checkbox" checked />
-              <span>Autoriser MyMemory si le backend local rejette une phrase</span>
+              <input id="cloudFallback" type="checkbox" />
+              <span>Autoriser MyMemory (expérimental, opt-in)</span>
             </label>
           </div>
         </details>

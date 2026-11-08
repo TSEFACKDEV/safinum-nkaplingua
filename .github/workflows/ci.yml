@@ -33,7 +33,9 @@ jobs:
       - name: Run API tests without model
         env:
           NK_MOCK: "1"
-        run: pytest -q server/test_api.py
+        run: |
+          pytest -q server/test_api.py
+          python tests/api.robust.py
 
   extension:
     name: Extension (JS + Firefox lint)
@@ -58,13 +60,21 @@ jobs:
         run: |
           node scripts/test-extension.js
           python3 scripts/check-language-packs.py
+          python3 scripts/check-pack-collisions.py
+          python3 tests/check-pack-collisions.test.py
+          python3 tests/import-glossary.test.py
           python3 scripts/check-training-data.py
 
       - name: Install jsdom
         run: npm install --no-save --no-package-lock jsdom
 
-      - name: Test content script in jsdom
-        run: node tests/content.test.js
+      - name: Test content, privacy, cloud and criticality in jsdom
+        run: |
+          node tests/content.test.js
+          node tests/privacy.test.js
+          node tests/cloud-gating.test.js
+          node tests/criticality.test.js
+          node tests/pipeline.e2e.js --mode=all
 
       - name: Validate manifests
         run: |

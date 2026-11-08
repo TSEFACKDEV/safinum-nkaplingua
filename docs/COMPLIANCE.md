@@ -7,10 +7,10 @@ Ce document confronte le prototype NkapLingua au règlement officiel du
 
 | Exigence officielle | Statut | Preuve / remarque |
 |---|---|---|
-| 1. Adaptation de la langue de l’interface | ✅ | Extension Manifest V3 ; fulfulde et ewondo en MT brouillon, duala en pack ; page FINAKA de démonstration |
+| 1. Adaptation de la langue de l’interface | ✅ / ⚠️ | Extension Manifest V3 ; fulfulde et ewondo en MT brouillon, duala en pack. **Packs encore vides (0/102, 0/20, 0/20)** : le parcours validé reste à remplir par les natifs |
 | 2. Parcours financier : solde, frais, transfert | ✅ | Page FINAKA : solde, frais, formulaire de transfert, récapitulatif |
 | 3. Préservation des montants, frais, bénéficiaires, conditions, alertes | ✅ / ⚠️ | Jetons `[[NUM_n]]` et `[[NAME_n]]`, contrôle des termes critiques, refus si un jeton manque ; phrases niveau A bloquées si le pack n’est pas validé ; qualité linguistique à valider |
-| 4. Fonctionnement sans modifier le code source | ✅ | Injection à l’exécution, aucun changement serveur, toggle original ; extension autonome avec cloud de secours |
+| 4. Fonctionnement sans modifier le code source | ✅ | Injection à l’exécution, aucun changement serveur, toggle original ; le cloud est opt-in et désactivé par défaut |
 | 5. Adaptation à un nouveau contenu | ✅ / ⚠️ | Popup « texte inédit », traduction de sélection et d’attributs ; qualité `flagship-ai`/NLLB variable sur les phrases longues, packs limités aux phrases validées |
 
 ## 2. Grille d’évaluation (100 points)
@@ -19,11 +19,11 @@ Ce document confronte le prototype NkapLingua au règlement officiel du
 |---|---:|---|---|
 | Fonctionnalité du prototype | 25 | 20–23 | Le pipeline fonctionne ; la qualité native doit être validée |
 | Intégration et indépendance | 20 | 18–20 | Aucune modification du site ; `activeTab` + `scripting` |
-| Sécurité et préservation des informations | 20 | 17–19 | Pseudonymisation des noms, contrôle des jetons, local prioritaire ; cloud de secours divulgué |
+| Sécurité et préservation des informations | 20 | 17–19 | Pseudonymisation des noms, contrôle des jetons, local prioritaire ; cloud opt-in désactivé par défaut |
 | Accessibilité et expérience utilisateur | 15 | 12–14 | Choix de 3 langues, détection affichée, toggle original, `lang`, popup natif ; pas encore de lecture audio |
 | Adaptation à un nouveau contenu | 10 | 7–9 | Oui, mais dépend de la qualité `flagship-ai`/NLLB sur phrases longues ; packs limités aux phrases validées |
 | Faisabilité technique et documentation | 10 | 9–10 | README, doc technique, doc langues, doc d’intégration, licences, CI |
-| **Total indicatif** | **100** | **84–95** | Objectif : sécuriser la qualité linguistique avant la démo |
+| **Total indicatif** | **100** | **objectif 80+** | Sous réserve de la validation native et du remplissage des packs ; auto-évaluation, pas une note du jury |
 
 > Ces notes sont une auto-évaluation, pas une note du jury.
 
@@ -52,7 +52,8 @@ Points à vérifier le jour J :
 - [ ] Un message nouveau ajouté par le jury est traduit.
 - [ ] Les attributs `title`, `aria-label`, `placeholder`, `alt` sont traduits.
 - [ ] Un nom de bénéficiaire est préservé et tokenisé.
-- [ ] L’extension fonctionne aussi sans backend (mode cloud de secours).
+- [ ] L’extension fonctionne sans backend en mode pack (packs 0/102 et 0/20 à
+  remplir) ; le cloud expérimental est opt-in, jamais automatique.
 - [ ] Le backend local est lancé si l’on veut le mode 100 % local.
 - [ ] Une langue en mode pack affiche l’original si la phrase n’est pas validée.
 

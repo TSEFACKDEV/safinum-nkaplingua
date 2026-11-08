@@ -4,8 +4,13 @@ Le CI et le mode maquette utilisent NK_MOCK=1 : le pipeline complet
 (validation, découpage, routes) est testé, mais la traduction est simulée.
 """
 
+import contextlib
 import os
 import sys
+import threading
+import time
+import types
+from concurrent.futures import ThreadPoolExecutor
 
 os.environ.setdefault("NK_MOCK", "1")
 sys.path.insert(0, os.path.dirname(__file__))
@@ -14,6 +19,7 @@ from fastapi.testclient import TestClient  # noqa: E402
 
 import app as app_module  # noqa: E402
 from app import (  # noqa: E402
+    _generate_locked,
     app,
     detect_language,
     protect_terms,
@@ -422,3 +428,68 @@ def test_split_sentences_keeps_finance_parts():
     assert len(parts) == 2
     assert parts[0].startswith("Le solde")
     assert parts[1].startswith("Les frais")
+
+
+def test_concurrent_sources_do_not_mix(monkeypatch):
+    """Deux appels FR/EN simultanés ne doivent pas partager `src_lang`.
+
+    Le vrai NLLB n'est pas téléchargé : un tokenizer factice capture la langue
+    après une pause. Sans verrou, les deux threads liraient la dernière valeur
+    posée et le test échouerait.
+    """
+
+    class FakeEncoding(dict):
+        def __init__(self, source, texts):
+            super().__init__(input_ids=[(source, text) for text in texts])
+
+        def to(self, device):
+            return self
+
+    class FakeTokenizer:
+        unk_token_id = -1
+        src_lang = "fra_Latn"
+
+        def __call__(self, texts, **kwargs):
+            time.sleep(0.1)
+            return FakeEncoding(self.src_lang, list(texts))
+
+        def convert_tokens_to_ids(self, token):
+            return 1
+
+        def batch_decode(self, generated, skip_special_tokens=True):
+            return [f"{source}:{text}" for source, text in generated]
+
+    class FakeModel:
+        def generate(self, input_ids, **kwargs):
+            return input_ids
+
+    fake_torch = types.SimpleNamespace(
+        inference_mode=lambda: contextlib.nullcontext()
+    )
+    monkeypatch.setitem(sys.modules, "torch", fake_torch)
+
+    tokenizer = FakeTokenizer()
+    barrier = threading.Barrier(3)
+
+    def call(source_lang):
+        barrier.wait()
+        return _generate_locked(
+            tokenizer,
+            FakeModel(),
+            "cpu",
+            [f"text-{source_lang}"],
+            source_lang,
+            "fuv_Latn",
+        )
+
+    with ThreadPoolExecutor(max_workers=2) as pool:
+        futures = [
+            pool.submit(call, "fra_Latn"),
+            pool.submit(call, "eng_Latn"),
+        ]
+        barrier.wait()
+        results = [future.result() for future in futures]
+
+    flattened = [item for batch in results for item in batch]
+    assert "fra_Latn:text-fra_Latn" in flattened
+    assert "eng_Latn:text-eng_Latn" in flattened

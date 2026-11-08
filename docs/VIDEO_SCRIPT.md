@@ -104,9 +104,10 @@ phrase courte déjà chargée.
 
 **Voix off** :
 
-> « L’extension utilise le backend local s’il est disponible. Sinon, elle
-> bascule sur un service cloud avec un texte pseudonymisé. Dans les deux cas :
-> pas de cookies, pas de mot de passe, pas de code PIN. »
+> « L’extension utilise le backend local s’il est disponible. Le service cloud
+> expérimental n’est contacté que si l’utilisateur l’autorise explicitement,
+> avec un texte pseudonymisé. Dans les deux cas : pas de cookies, pas de mot de
+> passe, pas de code PIN. »
 
 **Écran** : montrer `docs/DATA_LICENSES.md` ou le tableau des composants.
 
