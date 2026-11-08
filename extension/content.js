@@ -44,10 +44,6 @@
     "EMBED"
   ]);
 
-  const BLOCK_SELECTOR =
-    "p,li,h1,h2,h3,h4,h5,h6,td,th,button,label,figcaption,blockquote," +
-    "option,div,section,article,header,footer,main,aside,nav";
-
   const DO_NOT_TRANSLATE = [
     "FCFA",
     "XAF",
@@ -196,13 +192,6 @@
     if (element.closest("a") && /^https?:\/\//i.test(text.trim())) return true;
 
     return false;
-  }
-
-  function blockContext(element) {
-    if (!element) return "";
-    const block = element.closest(BLOCK_SELECTOR) || element;
-    const text = (block.innerText || block.textContent || "").trim();
-    return text.slice(0, 600);
   }
 
   function collectTextItems(root, items) {
@@ -518,14 +507,13 @@
       const sourceInfo = detectSourceLanguage(pageText());
       const source = sourceInfo.code === "en" ? "en" : "fr";
 
-      const segments = items.map((item, index) => {
+      const segments = items.map((item) => {
         const { text, tokens } = redact(item.value || "");
         return {
           id: item.id,
           item,
           tokens,
-          text,
-          context: blockContext(item.element)
+          text
         };
       });
 
@@ -537,10 +525,9 @@
           type: "NK_TRANSLATE_SEGMENTS",
           target: targetCode,
           source,
-          segments: batch.map(({ id, text, context }) => ({
+          segments: batch.map(({ id, text }) => ({
             id,
-            text,
-            context
+            text
           }))
         });
 

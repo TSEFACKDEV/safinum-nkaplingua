@@ -63,8 +63,10 @@ jobs:
       - name: Install jsdom
         run: npm install --no-save --no-package-lock jsdom
 
-      - name: Test content script in jsdom
-        run: node tests/content.test.js
+      - name: Test content script and privacy in jsdom
+        run: |
+          node tests/content.test.js
+          node tests/privacy.test.js
 
       - name: Validate manifests
         run: |

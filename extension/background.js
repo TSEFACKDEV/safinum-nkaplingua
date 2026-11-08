@@ -147,7 +147,7 @@ async function translateText(text, target, source) {
     : { code: "fr", confidence: 0 };
   const detected = source || (detectedInfo.code === "en" ? "en" : "fr");
   const result = await translateSegments(
-    [{ id: "text", text: clean, context: "" }],
+    [{ id: "text", text: clean }],
     target,
     detected
   );
@@ -558,10 +558,11 @@ async function translateWithLocal(segments, target, source) {
       body: JSON.stringify({
         source,
         target,
+        // `context` n'est jamais transmis : il peut contenir un textarea,
+        // une zone [data-sensitive] ou des montants non tokenisés (M1).
         segments: segments.map((segment) => ({
           id: segment.id,
-          text: segment.text,
-          context: segment.context || ""
+          text: segment.text
         }))
       }),
       signal: controller.signal

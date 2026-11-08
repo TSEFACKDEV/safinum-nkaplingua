@@ -1388,3 +1388,63 @@ mot `json`) avec les champs ci-dessous. Exemple de structure, en indentation :
   ]
 }
 ```
+
+## 2026-11-08T06:14:00+01:00 — Marius — M1 — done
+
+```json
+{
+  "timestamp": "2026-11-08T06:14:00+01:00",
+  "person": "Marius",
+  "branch": "marius",
+  "task": "M1",
+  "status": "done",
+  "summary": "Reprise depuis main 87941b4 : suppression de blockContext() et du champ context dans le message content → background → /translate. Ajout de tests/privacy.test.js (rouge avant : textarea, zone data-sensitive et montants bruts dans context ; vert après) et de tests/README.md ; la CI exécute désormais le test de confidentialité.",
+  "files": [
+    "extension/content.js",
+    "extension/background.js",
+    "tests/privacy.test.js",
+    "tests/README.md",
+    ".github/workflows/ci.yml"
+  ],
+  "tests": [
+    {
+      "command": "node tests/privacy.test.js",
+      "result": "pass",
+      "note": "rouge avant correctif : context contenait CONFIDENTIEL, 9876, CODE-1234, 1 000 et 25 000 ; vert après"
+    },
+    {
+      "command": "node tests/content.test.js",
+      "result": "pass",
+      "note": "texte, attributs, jetons, restauration"
+    },
+    {
+      "command": "node scripts/test-extension.js",
+      "result": "pass",
+      "note": "registre, détection, packs, jetons, qualité"
+    },
+    {
+      "command": "NK_MOCK=1 server/.venv/bin/python -m pytest -q server/test_api.py",
+      "result": "pass",
+      "note": "25 passed"
+    },
+    {
+      "command": "python3 scripts/check-language-packs.py",
+      "result": "pass",
+      "note": "3 fichiers, 3 feuilles"
+    },
+    {
+      "command": "node --check extension/background.js && node --check extension/content.js",
+      "result": "pass",
+      "note": "syntaxe JS"
+    },
+    {
+      "command": "python3 scripts/check-evolution.py",
+      "result": "pass",
+      "note": "journal valide après ajout de l'entrée"
+    }
+  ],
+  "evidence": "tests/privacy.test.js ; avant : context='Votre code confidentiel est requis. CONFIDENTIEL — dossier 9876 Code secret : CODE-1234' ; après : aucun champ context dans NK_TRANSLATE_SEGMENTS ; sortie « privacy OK — aucun context, aucune valeur de formulaire dans les messages »",
+  "next": "M2 — retirer MyMemory du chemin de démo : cloudAllowed() en opt-in explicite, case décochée par défaut, parcours pack-only sans réseau",
+  "blockers": []
+}
+```
