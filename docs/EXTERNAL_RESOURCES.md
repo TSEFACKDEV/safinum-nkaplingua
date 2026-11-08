@@ -224,6 +224,10 @@ Depuis le 8 novembre 2026, `flagship-ai` est branché dans le backend local :
   pas d'entrée `validated`, la phrase reste en français.
 - Test de bout en bout : `ewo` → « Mina, eyë miakòbò ya? », `fub` →
   « Jaŋngo, noy on ɗon njahata? », `critical` → `critical_pack_only`.
+- **Mode démo SAFINUM** : sur `safinum.cm/hackathon-test` uniquement, les
+  phrases critiques peuvent être traduites par MT avec le badge « démo MT » ;
+  les libellés courts fulfulde passent par MyMemory `fr|ff` si le cloud est
+  autorisé. Résultats : [`SITE_TEST_SAFINUM.md`](SITE_TEST_SAFINUM.md).
 
 ---
 

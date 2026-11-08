@@ -177,8 +177,31 @@ async function main() {
     `niveau B refusé : ${JSON.stringify(nonCriticalResponse)}`
   );
 
+  // 5. Mode démo SAFINUM : la phrase critique peut passer en MT, mais elle
+  //    est explicitement marquée `demoCritical` (jamais « validée »).
+  const demo = createBackground({ nkCloudFallback: true });
+  const demoResponse = await demo.send({
+    type: "NK_TRANSLATE_SEGMENTS",
+    target: "fub",
+    source: "fr",
+    demo: true,
+    segments: [{ id: "d1", text: "Votre solde est disponible." }]
+  });
+  assert(
+    demoResponse.translations?.[0]?.ok === true,
+    `mode démo : traduction refusée ${JSON.stringify(demoResponse)}`
+  );
+  assert(
+    demoResponse.translations[0].demoCritical === true,
+    "mode démo : marqueur demoCritical absent"
+  );
+  assert(
+    demo.calls.some((url) => url.includes(CLOUD_HOST)),
+    "mode démo : la MT n’a pas été appelée"
+  );
+
   console.log(
-    "criticality OK — niveau A pack-only, zéro MT, niveau B autorisé"
+    "criticality OK — niveau A pack-only, zéro MT, niveau B autorisé, démo étiquetée"
   );
 }
 

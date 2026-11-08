@@ -32,6 +32,11 @@ PAIR_BY_TARGET = {
     "ewo": "francais-ewondo",
 }
 
+REVERSE_PAIR_BY_TARGET = {
+    "fub": "fufulde-francais",
+    "ewo": "ewondo-francais",
+}
+
 
 class FlagshipUnavailable(RuntimeError):
     """Le modèle demandé n'est pas installé ou ne peut pas être chargé."""
@@ -84,10 +89,11 @@ class FlagshipTranslator:
         no_repeat_ngram_size: int = 3,
         repetition_penalty: float = 1.15,
         max_decoding_length: int = 256,
+        pair: str | None = None,
     ) -> None:
         self.model_dir = Path(model_dir).expanduser()
         self.target = target
-        self.pair = PAIR_BY_TARGET.get(target)
+        self.pair = pair or PAIR_BY_TARGET.get(target)
         if not self.pair:
             raise FlagshipUnavailable(f"Pas de modèle flagship pour {target!r}.")
         self.path = self.model_dir / self.pair
@@ -139,7 +145,7 @@ class FlagshipTranslator:
                     f"Chargement impossible du modèle {self.pair}: {exc}"
                 ) from exc
 
-    def _translate_chunk(self, chunk: str) -> str:
+    def _translate_chunk(self, chunk: str, config: dict | None = None) -> str:
         if not chunk.strip() or not LETTER_RE.search(chunk):
             return chunk
 
@@ -152,13 +158,35 @@ class FlagshipTranslator:
         if not tokens:
             return chunk
 
+        options = config or {}
+        # Un libellé court (« Montant », « Sécurité ») ne doit pas devenir une
+        # phrase entière. On plafonne la longueur de décodage selon la source.
+        source_len = len(tokens)
+        if "max_decoding_length" in options:
+            max_decoding_length = int(options["max_decoding_length"])
+        elif source_len <= 8:
+            max_decoding_length = max(20, min(48, source_len * 4 + 12))
+        else:
+            max_decoding_length = max(24, min(128, source_len * 2 + 12))
+
         with self._lock:
             result = self._translator.translate_batch(
                 [tokens],
-                beam_size=self.beam_size,
-                no_repeat_ngram_size=self.no_repeat_ngram_size,
-                repetition_penalty=self.repetition_penalty,
-                max_decoding_length=self.max_decoding_length,
+                beam_size=int(options.get("beam_size", self.beam_size)),
+                length_penalty=float(
+                    options.get("length_penalty", 1.0)
+                ),
+                no_repeat_ngram_size=int(
+                    options.get(
+                        "no_repeat_ngram_size", self.no_repeat_ngram_size
+                    )
+                ),
+                repetition_penalty=float(
+                    options.get(
+                        "repetition_penalty", self.repetition_penalty
+                    )
+                ),
+                max_decoding_length=max_decoding_length,
             )
 
         if not result or not result[0].hypotheses:
@@ -169,7 +197,9 @@ class FlagshipTranslator:
         )
         return output.strip() or chunk
 
-    def translate(self, texts: List[str]) -> List[str]:
+    def translate(
+        self, texts: List[str], config: dict | None = None
+    ) -> List[str]:
         self._load()
         outputs: List[str] = []
         for text in texts:
@@ -179,7 +209,9 @@ class FlagshipTranslator:
                 if is_placeholder(piece) or not LETTER_RE.search(piece):
                     translated_pieces.append(piece)
                 else:
-                    translated_pieces.append(self._translate_chunk(piece))
+                    translated_pieces.append(
+                        self._translate_chunk(piece, config=config)
+                    )
             outputs.append(
                 normalize_spacing(
                     " ".join(piece for piece in translated_pieces if piece)

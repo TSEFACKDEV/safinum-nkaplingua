@@ -46,9 +46,9 @@ doute, traiter le modèle ewondo comme non commercial jusqu’à clarification
 | Service | MyMemory Translation API |
 | Type | API externe gratuite, usage soumis aux conditions du service |
 | Source | https://mymemory.translated.net/doc/spec.php |
-| Usage | **expérimental, uniquement avec opt-in explicite** ; jamais dans le chemin de démonstration |
+| Usage | **expérimental, uniquement avec opt-in explicite** ; en mode démo SAFINUM, utilisé pour les libellés courts `fr|ff` ; jamais pour l'ewondo |
 | Données | texte pseudonymisé (montants, URLs, emails et noms de bénéficiaires remplacés) |
-| Remarque | ne pas utiliser avec des données réelles sensibles ; le mode local est prioritaire |
+| Remarque | ne pas utiliser avec des données réelles sensibles ; le mode local est prioritaire ; conditions et quota MyMemory à vérifier |
 
 ### Packs communautaires
 

@@ -22,6 +22,7 @@ const content = fs.readFileSync(
 
 const html = `<!doctype html>
 <html lang="fr">
+<head><title>Page de test NkapLingua</title></head>
 <body>
   <h1>Solde disponible</h1>
   <p id="solde">Le solde est de 125 000 FCFA.</p>
@@ -123,6 +124,10 @@ function sendMessage(message) {
     "texte du solde non traduit"
   );
   assert(
+    window.document.title.startsWith("XX "),
+    "titre de l’onglet non traduit"
+  );
+  assert(
     body.includes("SAF-2026-AB12CD"),
     "référence d'opération non préservée"
   );
@@ -198,6 +203,10 @@ function sendMessage(message) {
   assert(
     window.document.body.textContent.includes("Le solde est de 125 000 FCFA."),
     "restauration texte échouée"
+  );
+  assert(
+    !window.document.title.startsWith("XX "),
+    "restauration du titre échouée"
   );
   assert(
     window.document.getElementById("btn").getAttribute("title") ===

@@ -2399,3 +2399,61 @@ mot `json`) avec les champs ci-dessous. Exemple de structure, en indentation :
   ]
 }
 ```
+
+## 2026-11-08T14:00:00+01:00 — Klein — K2 — in_progress
+
+```json
+{
+  "timestamp": "2026-11-08T14:00:00+01:00",
+  "person": "Klein",
+  "branch": "klein",
+  "task": "K2",
+  "status": "in_progress",
+  "summary": "Test réel du site https://safinum.cm/hackathon-test : 104 segments collectés, 71 uniques, 0 texte visible non collecté. Mode démo SAFINUM ajouté (MT critique autorisée avec badge), titre/select/attributs couverts, pré-pass MyMemory fr|ff pour les libellés fulfulde, filtre english_leak. Fulfulde 66/71 ok, ewondo 61/71, duala sans MT.",
+  "files": [
+    "docs/SITE_TEST_SAFINUM.md",
+    "docs/LANGUAGE_VALIDATION.md",
+    "docs/EXTERNAL_RESOURCES.md",
+    "docs/DATA_LICENSES.md",
+    "extension/languages.js",
+    "extension/content.js",
+    "extension/background.js",
+    "extension/popup.js",
+    "server/flagship_mt.py",
+    "server/app.py",
+    "tests/criticality.test.js",
+    "tests/content.test.js",
+    "README.md",
+    "tasks/EVOLUTION.md"
+  ],
+  "tests": [
+    {
+      "command": "NK_MOCK=1 server/.venv/bin/python -m pytest -q server/test_api.py",
+      "result": "pass",
+      "note": "30 tests, dont mode démo et filtre english_leak"
+    },
+    {
+      "command": "node tests/criticality.test.js && node tests/cloud-gating.test.js && node tests/content.test.js && node scripts/test-extension.js",
+      "result": "pass",
+      "note": "niveau A strict, démo étiquetée, cloud opt-in, titre et couverture"
+    },
+    {
+      "command": "Chrome headless + CDP sur https://safinum.cm/hackathon-test",
+      "result": "pass",
+      "note": "5 étapes, 104 segments, 0 texte visible non collecté, titre traduit"
+    },
+    {
+      "command": "background réel + backend flagship + MyMemory sur 71 segments",
+      "result": "pass",
+      "note": "fub 66/71, ewo 61/71 ; 5 échecs fub et 5 ewo sont des fragments de jetons"
+    }
+  ],
+  "evidence": "docs/SITE_TEST_SAFINUM.md ; sorties Montant->Limgal, Sécurité->Jam, etc. ; captures CDP locales",
+  "next": "Utiliser le mode démo Fulfulde pour la vidéo, faire relire l'ewondo par un professionnel, et ne pas présenter le duala comme MT",
+  "blockers": [
+    "ewondo local insuffisant sur les libellés d'interface",
+    "aucun natif pour valider le niveau A",
+    "MyMemory est cloud, opt-in, et ne couvre pas l'ewondo"
+  ]
+}
+```

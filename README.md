@@ -507,6 +507,7 @@ exigence par exigence dans [`docs/COMPLIANCE.md`](docs/COMPLIANCE.md).
 | [`docs/TRAINING_DATA_AUDIT.md`](docs/TRAINING_DATA_AUDIT.md) | audit des fichiers d’entraînement (Parquet, Bible, CSV) |
 | [`docs/EXTERNAL_RESOURCES.md`](docs/EXTERNAL_RESOURCES.md) | inventaire datasets/modèles, quatrième langue, licences |
 | [`docs/DUALA_MT.md`](docs/DUALA_MT.md) | modèle expérimental anglais → duala (CC-BY-4.0) |
+| [`docs/SITE_TEST_SAFINUM.md`](docs/SITE_TEST_SAFINUM.md) | test réel du site SAFINUM, couverture et qualité |
 | [`docs/DATA_PERMISSIONS.md`](docs/DATA_PERMISSIONS.md) | modèles de demande d’autorisation |
 | [`docs/VIDEO_SCRIPT.md`](docs/VIDEO_SCRIPT.md) | script de la vidéo de 3 minutes |
 | [`docs/SUBMISSION_CHECKLIST.md`](docs/SUBMISSION_CHECKLIST.md) | checklist avant soumission |

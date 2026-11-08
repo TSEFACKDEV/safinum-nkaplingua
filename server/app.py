@@ -564,6 +564,18 @@ FRENCH_LEAK_WORDS = {
     "ce", "cette", "ces", "qui", "que", "au", "aux", "par", "plus",
 }
 
+# Mots anglais qui trahissent une sortie non traduite sur l'ewondo/fulfulde.
+ENGLISH_LEAK_WORDS = {
+    "the", "and", "is", "are", "to", "of", "for", "with", "this",
+    "that", "these", "those", "your", "our", "you", "we", "amount",
+    "security", "summary", "transfer", "balance", "fee", "fees",
+    "confirmation", "new", "view", "make", "name", "account",
+    "current", "recent", "payment", "salary", "electricity", "bill",
+    "success", "status", "reference", "phone", "operation", "modify",
+    "continue", "back", "confirm", "send", "received", "merchant",
+    "available", "total", "net",
+}
+
 
 def quality_check(
     source: str,
@@ -581,6 +593,15 @@ def quality_check(
 
     source_words = source_clean.split()
     target_words = target_clean.split()
+
+    # Une sortie majoritairement anglaise n'est pas une traduction vers
+    # l'ewondo/le fulfulde : on préfère conserver la source.
+    if target_words and not allow_source_leak:
+        english_leak = sum(
+            1 for word in target_words if word in ENGLISH_LEAK_WORDS
+        )
+        if english_leak / len(target_words) >= 0.5:
+            return False, "english_leak"
 
     # Les phrases très courtes (libellés, boutons) sont peu comparables.
     if len(source_words) >= 4:

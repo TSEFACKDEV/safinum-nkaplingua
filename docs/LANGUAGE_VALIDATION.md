@@ -37,7 +37,9 @@ d'un pack communautaire. Le popup et la page affichent explicitement cet état.
 > branché dans le backend. Ils ne changent pas la règle de validation : le
 > niveau A reste sur les packs, les phrases critiques sans pack restent en
 > français, et toute sortie MT doit être relue par un natif. Voir
-> [`EXTERNAL_RESOURCES.md`](EXTERNAL_RESOURCES.md).
+> [`EXTERNAL_RESOURCES.md`](EXTERNAL_RESOURCES.md). Résultats du test réel du
+> site SAFINUM et alternatives au recrutement natif :
+> [`SITE_TEST_SAFINUM.md`](SITE_TEST_SAFINUM.md).
 
 Yemba, medumba, bassa et ghomala' sont **retirés** du prototype (voir
 `tasks/klein.md`, K10).

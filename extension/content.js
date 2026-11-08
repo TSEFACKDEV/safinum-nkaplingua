@@ -42,6 +42,19 @@
       vertical-align: middle;
       white-space: nowrap;
     }
+    [data-nk-demo-critical="A"]::after {
+      content: "démo MT";
+      display: inline-block;
+      margin-left: 6px;
+      padding: 0 6px;
+      border: 1px solid #0284c7;
+      border-radius: 999px;
+      background: #e0f2fe;
+      color: #075985;
+      font: 500 10px/1.6 system-ui, -apple-system, "Segoe UI", sans-serif;
+      vertical-align: middle;
+      white-space: nowrap;
+    }
   `;
 
   function ensureBadgeStyle() {
@@ -150,6 +163,8 @@
   let toastHost = null;
   let selectionHost = null;
   let currentTarget = "fub";
+  let translatedTitleOriginal = null;
+  const DEMO_PAGE = LANG.isDemoPage?.() === true;
 
   /* ------------------------------------------------------------------ */
   /* Détection de langue                                                */
@@ -207,6 +222,10 @@
     if (!text.trim()) return true;
     if (!hasLetters(text)) return true;
 
+    // Codes de langue, initiales d'avatar, sigles courts : on ne les traduit
+    // pas (EN, FR, AN, CM…). Cela évite de casser un sélecteur de langue.
+    if (/^[A-Z]{1,4}$/.test(text.trim())) return true;
+
     if (
       DO_NOT_TRANSLATE.some(
         (term) => text.trim().toLowerCase() === term.toLowerCase()
@@ -259,6 +278,7 @@
       const add = (attr, value) => {
         if (added >= MAX_ATTRIBUTE_ITEMS) return;
         if (!value || !value.trim() || !hasLetters(value)) return;
+        if (/^[A-Z]{1,4}$/.test(value.trim())) return;
         if (DO_NOT_TRANSLATE.some((term) => value.trim() === term)) return;
         if (attributeOriginals.get(element)?.has(attr)) return;
         items.push({
@@ -297,9 +317,22 @@
     }
   }
 
+  function collectTitleItem(items) {
+    if (translatedTitleOriginal !== null) return;
+    const title = document.title;
+    if (!title || !title.trim() || !hasLetters(title)) return;
+    items.push({
+      id: `t${items.length}`,
+      kind: "title",
+      value: title,
+      isNew: false
+    });
+  }
+
   function collectItems(root = document.body) {
     const items = [];
     if (!root) return items;
+    collectTitleItem(items);
     collectTextItems(root, items);
     collectAttributeItems(root, items);
     return items;
@@ -450,6 +483,13 @@
   function applyItemTranslation(item, text, targetCode) {
     if (item.kind === "text") {
       applyTextTranslation(item, text, targetCode);
+    } else if (item.kind === "title") {
+      const clean = String(text || "").trim();
+      if (!clean) return;
+      if (translatedTitleOriginal === null) {
+        translatedTitleOriginal = item.value;
+      }
+      document.title = clean;
     } else {
       applyAttributeTranslation(item, text, targetCode);
     }
@@ -471,14 +511,22 @@
       }
     }
 
+    if (translatedTitleOriginal !== null) {
+      document.title = translatedTitleOriginal;
+      translatedTitleOriginal = null;
+    }
+
     for (const element of translatedElements) {
       element.removeAttribute("lang");
       element.removeAttribute("data-nk-translated");
     }
 
     // Marqueurs de niveau A non traduit.
-    for (const element of document.querySelectorAll("[data-nk-untranslated]")) {
+    for (const element of document.querySelectorAll(
+      "[data-nk-untranslated], [data-nk-demo-critical]"
+    )) {
       element.removeAttribute("data-nk-untranslated");
+      element.removeAttribute("data-nk-demo-critical");
     }
     document.getElementById("nk-badge-style")?.remove();
 
@@ -558,12 +606,14 @@
       let provider = null;
       let flaggedCount = 0;
       let criticalCount = 0;
+      let demoCriticalCount = 0;
 
       for (const batch of chunks(segments, BATCH_SIZE)) {
         const response = await api.runtime.sendMessage({
           type: "NK_TRANSLATE_SEGMENTS",
           target: targetCode,
           source,
+          demo: DEMO_PAGE,
           segments: batch.map(({ id, text }) => ({
             id,
             text
@@ -609,6 +659,15 @@
             continue;
           }
 
+          if (result.demoCritical) {
+            demoCriticalCount += 1;
+            const element = segment.item.element;
+            if (element) {
+              ensureBadgeStyle();
+              element.setAttribute("data-nk-demo-critical", "A");
+            }
+          }
+
           applyItemTranslation(segment.item, restored, targetCode);
           translatedCount += 1;
         }
@@ -624,9 +683,11 @@
           ? "pack communautaire"
           : provider === "flagship"
             ? "flagship-ai (brouillon)"
-            : provider === "nllb" || provider === "local"
-              ? "backend local"
-              : "cloud";
+            : provider === "hybrid"
+              ? "MyMemory + flagship-ai (démo)"
+              : provider === "nllb" || provider === "local"
+                ? "backend local"
+                : "cloud";
 
       if (spec.engine === "pack" && translatedCount === 0) {
         showToast(
@@ -642,11 +703,15 @@
         );
       } else {
         showToast(
-          `${translatedCount} segment(s) traduits en ${spec.label} ` +
+          (DEMO_PAGE ? "Mode démo SAFINUM (données fictives) — " : "") +
+            `${translatedCount} segment(s) traduits en ${spec.label} ` +
             `(source : ${sourceText} · ${engine}` +
             (flaggedCount ? ` · ${flaggedCount} non traduit(s)` : "") +
             (criticalCount
               ? ` · ${criticalCount} critique(s) laissée(s) en français`
+              : "") +
+            (demoCriticalCount
+              ? ` · ${demoCriticalCount} critique(s) en MT démo non validée`
               : "") +
             "). Les montants et entités ont été préservés."
         );
@@ -721,6 +786,7 @@
         type: "NK_TRANSLATE_TEXT",
         target: targetCode,
         source: sourceInfo.code === "en" ? "en" : "fr",
+        demo: DEMO_PAGE,
         text: redacted
       });
 
@@ -755,14 +821,28 @@
         return;
       }
 
-      showSelectionTooltip(text, restored, anchorRect, spec, response.provider);
+      showSelectionTooltip(
+        text,
+        restored,
+        anchorRect,
+        spec,
+        response.provider,
+        response.translation?.demoCritical === true
+      );
     } catch (error) {
       console.error("[NkapLingua]", error);
       showToast("Erreur de traduction de la sélection.");
     }
   }
 
-  function showSelectionTooltip(original, translation, rect, spec, provider) {
+  function showSelectionTooltip(
+    original,
+    translation,
+    rect,
+    spec,
+    provider,
+    demoCritical = false
+  ) {
     selectionHost?.remove();
 
     let top = 24;
@@ -870,7 +950,14 @@
 
     box.append(tag, originalEl, translationEl);
 
-    if (spec.engine === "pack" || provider === "pack") {
+    if (demoCritical) {
+      const note = document.createElement("p");
+      note.className = "note";
+      note.textContent =
+        "Mode démo SAFINUM — phrase critique traduite par MT, non validée. " +
+        "Données fictives, aucune transaction réelle.";
+      box.append(note);
+    } else if (spec.engine === "pack" || provider === "pack") {
       const note = document.createElement("p");
       note.className = "note";
       note.textContent =
@@ -879,9 +966,10 @@
     } else {
       const note = document.createElement("p");
       note.className = "note";
-      note.textContent =
-        "Traduction automatique (brouillon) — à relire par un natif. " +
-        "Les phrases critiques (solde, frais, PIN/OTP) ne sont pas traduites automatiquement.";
+      note.textContent = DEMO_PAGE
+        ? "Mode démo SAFINUM — traduction automatique non validée, à relire."
+        : "Traduction automatique (brouillon) — à relire par un natif. " +
+          "Les phrases critiques (solde, frais, PIN/OTP) ne sont pas traduites automatiquement.";
       box.append(note);
     }
 

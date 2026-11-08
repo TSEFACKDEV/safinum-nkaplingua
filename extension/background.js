@@ -104,7 +104,8 @@ api.runtime.onMessage.addListener((message, _sender, sendResponse) => {
     translateSegments(
       message.segments || [],
       message.target || DEFAULT_TARGET,
-      message.source
+      message.source,
+      { demo: Boolean(message.demo) }
     )
       .then(sendResponse)
       .catch((error) => sendResponse({ error: String(error) }));
@@ -115,7 +116,8 @@ api.runtime.onMessage.addListener((message, _sender, sendResponse) => {
     translateText(
       message.text || "",
       message.target || DEFAULT_TARGET,
-      message.source
+      message.source,
+      Boolean(message.demo)
     )
       .then(sendResponse)
       .catch((error) => sendResponse({ error: String(error) }));
@@ -140,7 +142,7 @@ function detectSourceLanguage(text, hint) {
 /* Entrée publique                                                    */
 /* ------------------------------------------------------------------ */
 
-async function translateText(text, target, source) {
+async function translateText(text, target, source, demo = false) {
   const clean = String(text || "").trim();
   if (!clean) return { translation: null, error: "empty_text" };
 
@@ -151,7 +153,8 @@ async function translateText(text, target, source) {
   const result = await translateSegments(
     [{ id: "text", text: clean }],
     target,
-    detected
+    detected,
+    { demo }
   );
 
   if (result.error) return result;
@@ -176,10 +179,16 @@ function classifyCriticality(text) {
   return CRITICALITY_TERMS.test(normalized) ? "A" : "B";
 }
 
-async function translateSegments(segments, target, source) {
+function isShortLabel(text) {
+  const words = String(text || "").trim().split(/\s+/).filter(Boolean);
+  return words.length > 0 && words.length <= 4;
+}
+
+async function translateSegments(segments, target, source, options = {}) {
   if (!Array.isArray(segments) || segments.length === 0) {
     return { translations: [], provider: null };
   }
+  const demoMode = Boolean(options.demo);
 
   const targetSpec = LANG?.getTarget(target);
   if (!targetSpec) {
@@ -245,6 +254,7 @@ async function translateSegments(segments, target, source) {
 
   let provider = null;
   let remaining = missing;
+  let usedCloudLabels = false;
 
   // 1) Pack communautaire : prioritaire, car il contient des phrases
   //    relues par des locuteurs natifs.
@@ -311,21 +321,69 @@ async function translateSegments(segments, target, source) {
     );
   }
 
-  // Niveau A absent du pack : on conserve l'original et on ne contacte
-  // jamais le backend local ni le cloud, même si le cloud est autorisé.
-  const criticalMisses = remaining.filter(
-    (segment) => segment.criticality === "A"
-  );
-  for (const segment of criticalMisses) {
-    results.set(segment.id, {
-      id: segment.id,
-      text: segment.originalText,
-      ok: false,
-      reason: "untranslated_critical",
-      criticality: "A"
-    });
+  // Mode démo SAFINUM : MyMemory (fr|ff) est bien meilleur que le modèle
+  // local sur les libellés courts du site (Montant, Sécurité, Confirmation…).
+  // On le tente en premier uniquement pour ces libellés, et uniquement si
+  // l'utilisateur a explicitement autorisé le cloud.
+  if (demoMode && allowCloud && targetSpec.cloudCode) {
+    const shortLabels = remaining.filter((segment) =>
+      isShortLabel(segment.originalText)
+    );
+    if (shortLabels.length > 0) {
+      try {
+        const cloudResults = await translateWithCloud(
+          shortLabels,
+          detected,
+          targetSpec
+        );
+        const cloudById = new Map(
+          cloudResults.map((translation) => [translation.id, translation])
+        );
+        const hitIds = new Set();
+        for (const segment of shortLabels) {
+          const result = cloudById.get(segment.id);
+          if (!result?.ok) continue;
+          const prepared = preparedById.get(segment.id);
+          const final = finalizeTranslation(result, prepared);
+          if (!final.ok) continue;
+          if (demoMode && prepared?.criticality === "A") {
+            final.demoCritical = true;
+          }
+          results.set(final.id, final);
+          hitIds.add(segment.id);
+        }
+        if (hitIds.size > 0) {
+          usedCloudLabels = true;
+          provider = "cloud";
+          remaining = remaining.filter(
+            (segment) => !hitIds.has(segment.id)
+          );
+        }
+      } catch {
+        // MyMemory indisponible : le moteur local reste prioritaire.
+      }
+    }
   }
-  remaining = remaining.filter((segment) => segment.criticality !== "A");
+
+  // Niveau A absent du pack : en mode strict, on conserve l'original et on
+  // ne contacte jamais le backend local ni le cloud. En mode démo SAFINUM
+  // (site fictif), la MT est autorisée mais le résultat sera marqué
+  // `demoCritical` et affiché avec un badge « démo MT ».
+  if (!demoMode) {
+    const criticalMisses = remaining.filter(
+      (segment) => segment.criticality === "A"
+    );
+    for (const segment of criticalMisses) {
+      results.set(segment.id, {
+        id: segment.id,
+        text: segment.originalText,
+        ok: false,
+        reason: "untranslated_critical",
+        criticality: "A"
+      });
+    }
+    remaining = remaining.filter((segment) => segment.criticality !== "A");
+  }
 
   if (remaining.length === 0) {
     return {
@@ -420,17 +478,23 @@ async function translateSegments(segments, target, source) {
   }
 
   for (const translation of translations) {
-    const final = finalizeTranslation(
-      translation,
-      preparedById.get(translation.id)
-    );
+    const prepared = preparedById.get(translation.id);
+    const final = finalizeTranslation(translation, prepared);
+    if (demoMode && final.ok && prepared?.criticality === "A") {
+      final.demoCritical = true;
+    }
     results.set(final.id, final);
-    if (final.ok) {
+    // Un niveau A traduit en mode démo n'entre jamais dans le cache MT.
+    if (final.ok && prepared?.criticality !== "A") {
       const original = remaining.find((item) => item.id === final.id);
       if (original) {
         cacheTranslation(detected, target, original.originalText, final);
       }
     }
+  }
+
+  if (usedCloudLabels && provider && provider !== "cloud") {
+    provider = "hybrid";
   }
 
   return {
