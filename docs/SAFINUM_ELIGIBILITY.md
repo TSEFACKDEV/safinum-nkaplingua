@@ -1,5 +1,13 @@
 # Éligibilité SAFINUM — auto-évaluation
 
+> **Réconciliation du 8 novembre 2026** : le score de 88/78 ci-dessous repose
+> sur le test installé K2 (43/0, 5/5) qui **ne précise pas le backend**. Avec
+> NLLB seul, l’audit indépendant mesure **6/44 segments** sur l’étape 1,
+> **1/20 en production et 4/20 en démo** ; le score réaliste devient
+> **70–83, ~74**. Le 88/78 reste conditionnel à un backend flagship/reviewed
+> non reproduit ici. Voir
+> [`AUDIT_2026-11-08.md`](AUDIT_2026-11-08.md).
+
 **Date** : 8 novembre 2026  
 **Référence** : PDF officiel « PRESELECTION EPREUVE SAFINUM INNOVATE
 CHALLENGE En » (section 8, critères sur 100 points).
@@ -23,7 +31,14 @@ CHALLENGE En » (section 8, critères sur 100 points).
 | **Total brut** | **100** |  | **88** |  |
 
 **Pénalité linguistique prudente : -10.**  
-**Score prudent : 78/100.**
+**Score prudent : 78/100 (scénario K2, backend non spécifié).**
+
+| Scénario | Score NLLB seul |
+|---|---:|
+| Audit indépendant du 8 nov | **70–83, réaliste ~74** |
+
+Le 78/100 n’est pas un chiffre universel : il dépend d’un backend
+flagship/reviewed qui n’est pas présent dans l’audit NLLB.
 
 Pourquoi -10 : 0 ligne `validated`, 85 lignes fulfulde « Tafsiri » rejetées,
 4 libellés duala non couverts, et le nouveau contenu critique MT est
@@ -37,14 +52,14 @@ spécifique et que les défauts majeurs peuvent peser sur la qualification.
 
 | Exigence | État | Commentaire |
 |---|---|---|
-| 1. Adaptation de la langue de l’interface | ✅ | 3 langues, 5 étapes, titre, attributs, options. |
+| 1. Adaptation de la langue de l’interface | ⚠️ | 3 langues et popup OK, mais **6/44 segments** sur l’étape 1 avec NLLB seul. |
 | 2. Parcours financier | ✅ | Solde, frais, bénéficiaire, récapitulatif, confirmation. |
-| 3. Préservation des informations | ✅ | Montants, frais, référence, noms ; tests automatiques. |
+| 3. Préservation des informations | ⚠️ | Montants/référence souvent OK, mais **numéro de compte sans espace** et **nom minusculé** sur le site réel. |
 | 4. Fonctionnement sans modifier le service | ✅ | Extension, injection, aucun changement serveur. |
 | 5. Adaptation à un nouveau contenu | ⚠️ | Techniquement oui ; qualité MT faible ; duala pack-only. |
 
-**Conclusion minimum** : **5/5 capacités démontrées**, avec une réserve
-qualité sur la 5e.
+**Conclusion minimum** : **5/5 capacités techniques**, mais la qualité réelle
+n’est pas démontrée avec NLLB seul ; le score 88/78 est conditionnel.
 
 ---
 
@@ -68,6 +83,7 @@ qualité sur la 5e.
 |---|---:|
 | Vidéo + PDF soumis, prototype démontré, pas de surpromesse | **75–85 %** |
 | En plus, 4 libellés duala et un T2 indépendant | **85–90 %** |
+| Backend NLLB seul (audit 8 nov) | **70–83, ~74** |
 | Si la validation native est un prérequis éliminatoire | **50–60 %** |
 | Si la vidéo manque | **< 50 %** |
 

@@ -1,5 +1,12 @@
 # Test de l’extension installée — site SAFINUM
 
+> **Réconciliation du 8 novembre 2026** : ce test annonce 43/0 sur le premier
+> écran et 5/5 étapes. Il **ne précise pas le backend** (flagship-ai, NLLB,
+> MyMemory ou pack de démo). Avec le backend NLLB seul, l’audit indépendant
+> mesure **6/44 segments** sur l’étape 1. Les deux résultats ne décrivent donc
+> pas le même environnement ; voir
+> [`AUDIT_2026-11-08.md`](AUDIT_2026-11-08.md).
+
 **Date** : 8 novembre 2026  
 **Site** : <https://safinum.cm/hackathon-test>  
 **Paquet** : `dist/package/chrome` (production) et copie de test avec permission
