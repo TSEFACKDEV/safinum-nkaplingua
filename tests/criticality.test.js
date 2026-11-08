@@ -200,6 +200,51 @@ async function main() {
     "mode démo : la MT n’a pas été appelée"
   );
 
+  // 6. Mode démo : une entrée de pack humain non validée peut couvrir un
+  //    niveau A, mais elle est marquée `humanReviewed`, jamais `demoCritical`.
+  const humanPack = createBackground({});
+  humanPack.overrides.ewo = {
+    entries: [
+      {
+        source: "Votre solde est disponible.",
+        target: "Nde nje woni.",
+        status: "reviewed",
+        reviewer: "Relecteur T2",
+        license: "CC0-1.0",
+        provenance: "human",
+        reviewedAt: "2026-11-08",
+        reviewLevel: "second-translator-fallback"
+      }
+    ]
+  };
+  const humanDemo = await humanPack.send({
+    type: "NK_TRANSLATE_SEGMENTS",
+    target: "ewo",
+    source: "fr",
+    demo: true,
+    segments: [{ id: "h1", text: "Votre solde est disponible." }]
+  });
+  const human = humanDemo.translations?.[0];
+  assert(human?.ok === true, `pack humain refusé en démo : ${JSON.stringify(humanDemo)}`);
+  assert(human.humanReviewed === true, "marqueur humanReviewed absent");
+  assert(human.packStatus === "reviewed", `statut ${human.packStatus}`);
+  assert(human.demoCritical === undefined, "pack humain marqué demoCritical");
+  assert(humanPack.calls.length === 0, "réseau sur pack humain");
+
+  // 7. Le même pack reste refusé en strict, sans appel MT.
+  const humanStrict = await humanPack.send({
+    type: "NK_TRANSLATE_SEGMENTS",
+    target: "ewo",
+    source: "fr",
+    segments: [{ id: "h2", text: "Votre solde est disponible." }]
+  });
+  assert(
+    humanStrict.translations?.[0]?.ok === false &&
+      humanStrict.translations[0].reason === "untranslated_critical",
+    `pack humain accepté en strict : ${JSON.stringify(humanStrict)}`
+  );
+  assert(humanPack.calls.length === 0, "réseau sur pack humain strict");
+
   console.log(
     "criticality OK — niveau A pack-only, zéro MT, niveau B autorisé, démo étiquetée"
   );

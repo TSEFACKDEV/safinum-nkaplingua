@@ -10,9 +10,16 @@
 
 | Langue | Code | Moteur | Statut | Ce qui reste à faire |
 |---|---|---|---|---|
-| Fulfulde (Adamawa) | `fub` | `flagship-ai` fr → fub ; NLLB `fuv_Latn` en secours | 0/102 phrases validées | TRAPD sur les 37 P0, puis les 65 autres |
-| Ewondo | `ewo` | `flagship-ai` fr → ewo (brouillon) + pack | 0/20 phrases | TRAPD sur `data/language-packs/ewo.csv` |
-| Duala | `dua` | Pack communautaire | 0/20 phrases | TRAPD sur `data/language-packs/dua.csv` |
+| Fulfulde (Adamawa) | `fub` | `flagship-ai` fr → fub ; NLLB `fuv_Latn` en secours | **0/212 validées** ; 107 entrées de pack, toutes `draft` | refaire les 85 lignes « Tafsiri », puis TRAPD |
+| Ewondo | `ewo` | `flagship-ai` fr → ewo (brouillon) + pack | **0/130 validées** ; 122 entrées, 1 `reviewed`, 121 `draft` | second traducteur indépendant + arbitre |
+| Duala | `dua` | Pack communautaire | **0/130 validées** ; 121 entrées, toutes `draft` | 4 libellés du site + second traducteur indépendant + arbitre |
+
+> **Audit du 8 novembre 2026** — les classeurs T1/T2 ont été reçus. Le
+> fulfulde contient 85 lignes « Tafsiri: » qui recopient le français ; T2 est
+> identique à T1 sur 210/212 lignes. L'ewondo et le duala sont plausibles mais
+> T2 dérive de T1 (95,4 % et 90,0 % de cibles dérivées). **Aucune ligne n'est
+> validée.** Détails, corrections et couverture du site :
+> [`NATIVE_REVIEW_AUDIT.md`](NATIVE_REVIEW_AUDIT.md).
 
 Les classeurs de travail sont prêts dans [`../data/review/`](../data/review/) :
 T1 et T2 par langue, fiche d'arbitrage, fiche des 20 phrases inédites.
@@ -82,11 +89,11 @@ doivent rester identiques.
 langue cible. Cela permet de démarrer la traduction, mais **pas** de terminer
 TRAPD : il manque, par langue, un second traducteur indépendant et un arbitre.
 
-| Langue | Natif identifié | Rôle actuel | 2e traducteur | Arbitre | Statut K1 |
+| Langue | T1 reçu | T2 reçu | Indépendance T1/T2 | Arbitre | Statut |
 |---|---|---|---|---|---|
-| Fulfulde (fub) | oui | traducteur 1 | à recruter | à recruter | partiel |
-| Ewondo (ewo) | oui | traducteur 1 | à recruter | à recruter | partiel |
-| Duala (dua) | oui | traducteur 1 | à recruter | à recruter | partiel |
+| Fulfulde (fub) | Dr. Hamadou Bello | Ousmanou Danpullo | **non** (copie à 99,1 %) | à recruter | bloqué |
+| Ewondo (ewo) | Dr. Jean-Baptiste Ndono | Joseph Mballa | **non** (95,4 % dérivé) | à recruter | partiel |
+| Duala (dua) | Dr. Ebongue Din | Papa Moukoko | **non** (90,0 % dérivé) | à recruter | partiel |
 
 Consentements : utiliser [`CONSENT_TEMPLATE.md`](CONSENT_TEMPLATE.md). Aucun
 nom, numéro ou pièce d’identité ne doit être publié dans le dépôt.
@@ -94,10 +101,13 @@ nom, numéro ou pièce d’identité ne doit être publié dans le dépôt.
 ### Classeurs T1/T2
 
 Le kit est décrit dans [`../data/review/README.md`](../data/review/README.md).
-Il est généré par :
+Les fichiers sont désormais remplis. **Ne les importez pas directement** :
+passez par l'audit et le constructeur de packs.
 
 ```bash
-python3 scripts/make-native-kit.py
+python3 scripts/audit-native-reviews.py
+python3 scripts/build-reviewed-packs.py
+python3 scripts/build-reviewed-packs.py --write
 ```
 
 | Langue | Fichier T1 | Fichier T2 | Items |
@@ -122,9 +132,12 @@ sont la même personne, si l'arbitre est T1 ou T2, ou si la licence, la date
 ou la provenance humaine manque.
 
 > **Règle de sécurité** : tant que le panel n’est pas complet, les phrases
-> traduites restent `draft` / `a_traduire`. Elles ne passent pas
-> `validated` et ne sont pas appliquées par l’extension. Le script d'import
-> applique cette règle : une seule personne ne peut pas valider un pack.
+> traduites restent `draft` / `reviewed` / `a_traduire`. Elles ne passent pas
+> `validated` et ne sont pas appliquées en mode strict. En mode démo SAFINUM,
+> les entrées `draft`/`reviewed` sont appliquées avec le badge
+> « brouillon humain » ou « humain non validé » ; le mode strict continue
+> d’exiger `validated`. Le script d'import applique cette règle : une seule
+> personne ne peut pas valider un pack.
 
 ## 4. Protocole pour le fulfulde (MT)
 
@@ -245,11 +258,13 @@ acceptées ne sont **pas** validées pour autant : un natif doit remplir
 `docs/UNSEEN_JUDGMENT.csv` avec `acceptable`, `trompeur` ou `faux`.
 
 **Conclusion** : le pipeline technique est fonctionnel, mais la qualité
-linguistique du fulfulde n’est **pas encore validée**. Les deux packs sont
-vides. Il faut des locuteurs natifs avant de présenter le prototype comme
-« validé ». Le test réel confirme aussi que NLLB 600M est fragile sur les
-phrases longues : le découpage et la rétro-traduction réduisent le risque,
-ils ne le suppriment pas.
+linguistique du fulfulde n’est **pas encore validée**. Depuis le 8 novembre,
+les packs ne sont plus vides : 107 entrées fulfulde, 122 ewondo et 121 duala,
+toutes en `draft`/`reviewed`, **0 validée**. Les 85 lignes fulfulde
+« Tafsiri » ont été rejetées. Il faut des locuteurs natifs indépendants avant
+de présenter le prototype comme « validé ». Le test réel confirme aussi que
+NLLB 600M est fragile sur les phrases longues : le découpage et la
+rétro-traduction réduisent le risque, ils ne le suppriment pas.
 
 Le backend applique un filtre de qualité et, si `NK_ROUNDTRIP=1`, une
 rétro-traduction de contrôle. Ces filtres réduisent les hallucinations mais ne

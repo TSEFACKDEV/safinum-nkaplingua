@@ -1,21 +1,21 @@
-source,target,status,reviewer,context,reviewed_at,license,provenance
-Le solde est de [[NUM_0]] FCFA.,,draft,,finance,,,
-Les frais de transfert sont de [[NUM_1]] FCFA.,,draft,,finance,,,
-Le montant total débité sera de [[NUM_2]] FCFA.,,draft,,finance,,,
-Ne partagez jamais votre code PIN.,,draft,,finance,,,
-Vérifiez le nom du bénéficiaire avant de confirmer.,,draft,,finance,,,
-Le bénéficiaire reçoit le montant net après déduction des frais.,,draft,,finance,,,
-Le taux d'intérêt mensuel est de 2 %.,,draft,,finance,,,
-"En cas de retard, une pénalité de 1 % par jour est appliquée.",,draft,,finance,,,
-Votre compte a été crédité de [[NUM_0]] FCFA.,,draft,,finance,,,
-Votre compte a été débité de [[NUM_0]] FCFA.,,draft,,finance,,,
-Le transfert a été effectué avec succès.,,draft,,finance,,,
-Le transfert est en attente de confirmation.,,draft,,finance,,,
-Code PIN incorrect. Veuillez réessayer.,,draft,,finance,,,
-Ne communiquez jamais votre code OTP à un tiers.,,draft,,finance,,,
-Cette transaction est sécurisée par FINAKA.,,draft,,finance,,,
-Le solde disponible est insuffisant.,,draft,,finance,,,
-Les informations personnelles sont utilisées uniquement pour l'étude de votre dossier.,,draft,,finance,,,
-Vous pouvez annuler la transaction avant confirmation.,,draft,,finance,,,
-Des frais supplémentaires peuvent s'appliquer.,,draft,,finance,,,
-Contactez le service client pour plus d'informations.,,draft,,finance,,,
+source,target,status,reviewer,context,reviewed_at,license,provenance,review_level,original_reviewer
+Le solde est de [[NUM_0]] FCFA.,Mɔ̀nì mwé ɓáyí mu yé ne [[NUM_0]] FCFA.,draft,Dr. Ebongue Din,finance,2026-11-08,CC-BY-4.0,human,single-translator,Papa Moukoko
+Les frais de transfert sont de [[NUM_1]] FCFA.,Móǹgá mwá lómò mɔ̀nì mu yé ne [[NUM_1]] FCFA.,draft,Dr. Ebongue Din,finance,2026-11-08,CC-BY-4.0,human,single-translator,Papa Moukoko
+Le montant total débité sera de [[NUM_2]] FCFA.,Mɔ̀nì mwésé mú mákusane mú maɓa ne [[NUM_2]] FCFA.,draft,Dr. Ebongue Din,finance,2026-11-08,CC-BY-4.0,human,single-translator,Papa Moukoko
+Ne partagez jamais votre code PIN.,Suka ɓoléyé code PIN ɔŋ na moto a pé.,draft,Dr. Ebongue Din,finance,2026-11-08,CC-BY-4.0,human,single-translator,Papa Moukoko
+Vérifiez le nom du bénéficiaire avant de confirmer.,Jeele dina la moto nu mányɔ̀ŋɔ̀ oboso na o adise.,draft,Dr. Ebongue Din,finance,2026-11-08,CC-BY-4.0,human,single-translator,Papa Moukoko
+Le bénéficiaire reçoit le montant net après déduction des frais.,Moto nu mányɔ̀ŋɔ̀ a mányɔ̀ŋɔ̀ mɔ̀nì ma pɔ́kɔ̂ ombusa kula móǹgá.,draft,Dr. Ebongue Din,finance,2026-11-08,CC-BY-4.0,human,single-translator,Papa Moukoko
+Le taux d'intérêt mensuel est de 2 %.,Edinge a longele a mɔ́dí e yé 2 %.,draft,Dr. Ebongue Din,finance,2026-11-08,CC-BY-4.0,human,single-translator,Papa Moukoko
+"En cas de retard, une pénalité de 1 % par jour est appliquée.","Yɛ̂ pé boɓi ɓwâ pele, móǹgá mwá 1 % mwá búnyá mu máɓolee.",draft,Dr. Ebongue Din,finance,2026-11-08,CC-BY-4.0,human,single-translator,Papa Moukoko
+Votre compte a été crédité de [[NUM_0]] FCFA.,Kompa ɔŋ e nyóŋɛ̂ [[NUM_0]] FCFA.,draft,Dr. Ebongue Din,finance,2026-11-08,CC-BY-4.0,human,single-translator,Papa Moukoko
+Votre compte a été débité de [[NUM_0]] FCFA.,Kompa ɔŋ e kusâ [[NUM_0]] FCFA.,draft,Dr. Ebongue Din,finance,2026-11-08,CC-BY-4.0,human,single-translator,Papa Moukoko
+Le transfert a été effectué avec succès.,Soma mɔ̀nì e ɓoɓí na ɓwám.,draft,Dr. Ebongue Din,finance,2026-11-08,CC-BY-4.0,human,single-translator,Papa Moukoko
+Le transfert est en attente de confirmation.,Soma mɔ̀nì e yé a jaŋgi a adise.,draft,Dr. Ebongue Din,finance,2026-11-08,CC-BY-4.0,human,single-translator,Papa Moukoko
+Code PIN incorrect. Veuillez réessayer.,Code PIN e titi téŋɛ̂. Byápé.,draft,Dr. Ebongue Din,finance,2026-11-08,CC-BY-4.0,human,single-translator,Papa Moukoko
+Ne communiquez jamais votre code OTP à un tiers.,Suka ɓoléyé code OTP ɔŋ na moto a pé.,draft,Dr. Ebongue Din,finance,2026-11-08,CC-BY-4.0,human,single-translator,Papa Moukoko
+Cette transaction est sécurisée par FINAKA.,Nu eɓolo e yé e batamɛ̂ na FINAKA.,draft,Dr. Ebongue Din,finance,2026-11-08,CC-BY-4.0,human,single-translator,Papa Moukoko
+Le solde disponible est insuffisant.,Mɔ̀nì mwé ɓáyí mu sumbidi.,draft,Dr. Ebongue Din,finance,2026-11-08,CC-BY-4.0,human,single-translator,Papa Moukoko
+Les informations personnelles sont utilisées uniquement pour l'étude de votre dossier.,Bina ɓɔŋ ɓa moto ɓa maɓolane ndé o jeele kalati ɔŋ.,draft,Dr. Ebongue Din,finance,2026-11-08,CC-BY-4.0,human,single-translator,Papa Moukoko
+Vous pouvez annuler la transaction avant confirmation.,O ne na o ɓumse soma oboso na adise.,draft,Dr. Ebongue Din,finance,2026-11-08,CC-BY-4.0,human,single-translator,Papa Moukoko
+Des frais supplémentaires peuvent s'appliquer.,Móǹgá mepé me ne na me ɓata.,draft,Dr. Ebongue Din,finance,2026-11-08,CC-BY-4.0,human,single-translator,Papa Moukoko
+Contactez le service client pour plus d'informations.,Bena mɓola a ɓato ású bina mepé.,draft,Dr. Ebongue Din,finance,2026-11-08,CC-BY-4.0,human,single-translator,Papa Moukoko

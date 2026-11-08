@@ -1,0 +1,473 @@
+lang,item_id,type,priorite,source_fr,target_t1,target_t2,issues_t1,issues_t2,hard_t1,hard_t2,reviewer_t1,reviewer_t2,relation,comment_derived
+fub,FUB-001,phrase,P0,Erreur et sécurité,Tafsiri: Erreur et sécurité,Tafsiri: Erreur et sécurité,"mt_prefix,french_leak,no_lang_char","mt_prefix,french_leak,no_lang_char",True,True,Dr. Hamadou Bello,Ousmanou Danpullo,exact,True
+fub,FUB-002,phrase,P0,Les messages d’erreur et les alertes doivent rester clairs dans la langue de l’utilisateur.,Tafsiri: Les messages d’erreur et les alerte,Tafsiri: Les messages d’erreur et les alerte,"mt_prefix,source_copy_truncated,no_lang_char","mt_prefix,source_copy_truncated,no_lang_char",True,True,Dr. Hamadou Bello,Ousmanou Danpullo,exact,True
+fub,FUB-003,phrase,P0,Confiance,Tafsiri: Confiance,Tafsiri: Confiance,"mt_prefix,no_lang_char","mt_prefix,no_lang_char",True,True,Dr. Hamadou Bello,Ousmanou Danpullo,exact,True
+fub,FUB-004,phrase,P0,Le numéro du bénéficiaire est invalide.,Tafsiri: Le numéro du bénéficiaire est inval,Tafsiri: Le numéro du bénéficiaire est inval,"mt_prefix,source_copy_truncated,french_leak,no_lang_char","mt_prefix,source_copy_truncated,french_leak,no_lang_char",True,True,Dr. Hamadou Bello,Ousmanou Danpullo,exact,True
+fub,FUB-005,phrase,P0,Vérifiez le numéro et réessayez. Aucun montant n’a été débité.,Tafsiri: Vérifiez le numéro et réessayez. Au,Tafsiri: Vérifiez le numéro et réessayez. Au,"mt_prefix,source_copy_truncated,no_lang_char","mt_prefix,source_copy_truncated,no_lang_char",True,True,Dr. Hamadou Bello,Ousmanou Danpullo,exact,True
+fub,FUB-006,phrase,P0,Alerte de sécurité,Tafsiri: Alerte de sécurité,Tafsiri: Alerte de sécurité,"mt_prefix,french_leak,no_lang_char","mt_prefix,french_leak,no_lang_char",True,True,Dr. Hamadou Bello,Ousmanou Danpullo,exact,True
+fub,FUB-007,phrase,P0,"Ne communiquez jamais votre code PIN ou un code de confirmation à une tierce personne, même si elle se présente comme un agent de la banque.",Tafsiri: Ne communiquez jamais votre code PI,Tafsiri: Ne communiquez jamais votre code PI,"mt_prefix,source_copy_truncated,french_leak,dnt_missing,too_short,no_lang_char","mt_prefix,source_copy_truncated,french_leak,dnt_missing,too_short,no_lang_char",True,True,Dr. Hamadou Bello,Ousmanou Danpullo,exact,True
+fub,FUB-008,phrase,P0,Crédit instantané,Tafsiri: Crédit instantané,Tafsiri: Crédit instantané,"mt_prefix,no_lang_char","mt_prefix,no_lang_char",True,True,Dr. Hamadou Bello,Ousmanou Danpullo,exact,True
+fub,FUB-009,phrase,P0,Récapitulatif,Tafsiri: Récapitulatif,Tafsiri: Récapitulatif,"mt_prefix,no_lang_char","mt_prefix,no_lang_char",True,True,Dr. Hamadou Bello,Ousmanou Danpullo,exact,True
+fub,FUB-010,phrase,P0,Relisez chaque ligne. Le transfert ne pourra pas être annulé après confirmation.,Tafsiri: Relisez chaque ligne. Le transfert ,Tafsiri: Relisez chaque ligne. Le transfert ,"mt_prefix,source_copy_truncated,no_lang_char","mt_prefix,source_copy_truncated,no_lang_char",True,True,Dr. Hamadou Bello,Ousmanou Danpullo,exact,True
+fub,FUB-011,phrase,P0,Montant envoyé,Tafsiri: Montant envoyé,Tafsiri: Montant envoyé,"mt_prefix,french_leak,no_lang_char","mt_prefix,french_leak,no_lang_char",True,True,Dr. Hamadou Bello,Ousmanou Danpullo,exact,True
+fub,FUB-012,phrase,P0,[[NUM_0]] FCFA,[[NUM_0]] FCFA,[[NUM_0]] FCFA,no_lang_char,no_lang_char,False,False,Dr. Hamadou Bello,Ousmanou Danpullo,exact,True
+fub,FUB-013,phrase,P0,Frais de transfert,Tafsiri: Frais de transfert,Tafsiri: Frais de transfert,"mt_prefix,french_leak,no_lang_char","mt_prefix,french_leak,no_lang_char",True,True,Dr. Hamadou Bello,Ousmanou Danpullo,exact,True
+fub,FUB-014,phrase,P0,Total débité,Tafsiri: Total débité,Tafsiri: Total débité,"mt_prefix,french_leak,english_leak,no_lang_char","mt_prefix,french_leak,english_leak,no_lang_char",True,True,Dr. Hamadou Bello,Ousmanou Danpullo,exact,True
+fub,FUB-015,phrase,P0,Solde après opération,Tafsiri: Solde après opération,Tafsiri: Solde après opération,"mt_prefix,french_leak,no_lang_char","mt_prefix,french_leak,no_lang_char",True,True,Dr. Hamadou Bello,Ousmanou Danpullo,exact,True
+fub,FUB-016,phrase,P0,Vérifiez que le nom du bénéficiaire est correct avant de confirmer.,Tafsiri: Vérifiez que le nom du bénéficiaire,Tafsiri: Vérifiez que le nom du bénéficiaire,"mt_prefix,source_copy_truncated,french_leak,no_lang_char","mt_prefix,source_copy_truncated,french_leak,no_lang_char",True,True,Dr. Hamadou Bello,Ousmanou Danpullo,exact,True
+fub,FUB-017,phrase,P0,Confirmer le transfert,Tafsiri: Confirmer le transfert,Tafsiri: Confirmer le transfert,"mt_prefix,french_verb,french_leak,no_lang_char","mt_prefix,french_verb,french_leak,no_lang_char",True,True,Dr. Hamadou Bello,Ousmanou Danpullo,exact,True
+fub,FUB-018,phrase,P0,Modifier,Tafsiri: Modifier,Tafsiri: Modifier,"mt_prefix,french_verb,no_lang_char","mt_prefix,french_verb,no_lang_char",True,True,Dr. Hamadou Bello,Ousmanou Danpullo,exact,True
+fub,FUB-019,phrase,P0,À comprendre,Tafsiri: À comprendre,Tafsiri: À comprendre,"mt_prefix,no_lang_char","mt_prefix,no_lang_char",True,True,Dr. Hamadou Bello,Ousmanou Danpullo,exact,True
+fub,FUB-020,phrase,P0,Préparer un transfert,Tafsiri: Préparer un transfert,Tafsiri: Préparer un transfert,"mt_prefix,french_verb,french_leak,no_lang_char","mt_prefix,french_verb,french_leak,no_lang_char",True,True,Dr. Hamadou Bello,Ousmanou Danpullo,exact,True
+fub,FUB-021,phrase,P0,Vérifiez le bénéficiaire et les frais avant de confirmer.,Tafsiri: Vérifiez le bénéficiaire et les fra,Tafsiri: Vérifiez le bénéficiaire et les fra,"mt_prefix,source_copy_truncated,no_lang_char","mt_prefix,source_copy_truncated,no_lang_char",True,True,Dr. Hamadou Bello,Ousmanou Danpullo,exact,True
+fub,FUB-022,phrase,P0,Étape [[NUM_0]] / [[NUM_1]],Étape [[NUM_0]] / [[NUM_1]],Étape [[NUM_0]] / [[NUM_1]],"source_copy,no_lang_char","source_copy,no_lang_char",True,True,Dr. Hamadou Bello,Ousmanou Danpullo,exact,True
+fub,FUB-023,phrase,P0,Bénéficiaire,Tafsiri: Bénéficiaire,Tafsiri: Bénéficiaire,"mt_prefix,no_lang_char","mt_prefix,no_lang_char",True,True,Dr. Hamadou Bello,Ousmanou Danpullo,exact,True
+fub,FUB-024,phrase,P0,Numéro mobile money,Tafsiri: Numéro mobile money,Tafsiri: Numéro mobile money,"mt_prefix,no_lang_char","mt_prefix,no_lang_char",True,True,Dr. Hamadou Bello,Ousmanou Danpullo,exact,True
+fub,FUB-025,phrase,P0,Montant à envoyer,Tafsiri: Montant à envoyer,Tafsiri: Montant à envoyer,"mt_prefix,french_verb,french_leak,no_lang_char","mt_prefix,french_verb,french_leak,no_lang_char",True,True,Dr. Hamadou Bello,Ousmanou Danpullo,exact,True
+fub,FUB-026,phrase,P0,Motif du transfert,Tafsiri: Motif du transfert,Tafsiri: Motif du transfert,"mt_prefix,french_leak,no_lang_char","mt_prefix,french_leak,no_lang_char",True,True,Dr. Hamadou Bello,Ousmanou Danpullo,exact,True
+fub,FUB-027,phrase,P0,Frais de transfert : [[NUM_0]] FCFA,Frais de transfert : [[NUM_0]] FCFA,Frais de transfert : [[NUM_0]] FCFA,"source_copy,french_leak,no_lang_char","source_copy,french_leak,no_lang_char",True,True,Dr. Hamadou Bello,Ousmanou Danpullo,exact,True
+fub,FUB-028,phrase,P0,Le montant total débité sera de [[NUM_0]] FCFA. Les frais sont affichés avant la confirmation.,Kaalis mo yoɓetee fgol ko [[NUM_0]] FCFA. Les frais sont affichés avant la confirmation.,Kaalis mo yoɓetee fgol ko [[NUM_0]] FCFA. Les frais sont affichés avant la confirmation.,"french_leak,english_leak","french_leak,english_leak",True,True,Dr. Hamadou Bello,Ousmanou Danpullo,exact,True
+fub,FUB-029,phrase,P0,Sécurité de l’opération,Tafsiri: Sécurité de l’opération,Tafsiri: Sécurité de l’opération,"mt_prefix,french_leak,no_lang_char","mt_prefix,french_leak,no_lang_char",True,True,Dr. Hamadou Bello,Ousmanou Danpullo,exact,True
+fub,FUB-030,phrase,P0,Code PIN secret,Tafsiri: Code PIN secret,Tafsiri: Code PIN secret,"mt_prefix,no_lang_char","mt_prefix,no_lang_char",True,True,Dr. Hamadou Bello,Ousmanou Danpullo,exact,True
+fub,FUB-031,phrase,P0,Ne partagez jamais ce code.,Tafsiri: Ne partagez jamais ce code.,Tafsiri: Ne partagez jamais ce code.,"mt_prefix,french_leak,no_lang_char","mt_prefix,french_leak,no_lang_char",True,True,Dr. Hamadou Bello,Ousmanou Danpullo,exact,True
+fub,FUB-032,phrase,P0,Code de confirmation,Tafsiri: Code de confirmation,Tafsiri: Code de confirmation,"mt_prefix,no_lang_char","mt_prefix,no_lang_char",True,True,Dr. Hamadou Bello,Ousmanou Danpullo,exact,True
+fub,FUB-033,phrase,P0,Reçu par SMS.,Tafsiri: Reçu par SMS.,Tafsiri: Reçu par SMS.,"mt_prefix,french_leak,no_lang_char","mt_prefix,french_leak,no_lang_char",True,True,Dr. Hamadou Bello,Ousmanou Danpullo,exact,True
+fub,FUB-034,phrase,P0,Continuer vers la confirmation,Tafsiri: Continuer vers la confirmation,Tafsiri: Continuer vers la confirmation,"mt_prefix,french_verb,french_leak,english_leak,no_lang_char","mt_prefix,french_verb,french_leak,english_leak,no_lang_char",True,True,Dr. Hamadou Bello,Ousmanou Danpullo,exact,True
+fub,FUB-035,phrase,P0,Enregistrer,Tafsiri: Enregistrer,Tafsiri: Enregistrer,"mt_prefix,french_verb,no_lang_char","mt_prefix,french_verb,no_lang_char",True,True,Dr. Hamadou Bello,Ousmanou Danpullo,exact,True
+fub,FUB-036,phrase,P0,Démonstration uniquement. Aucun argent réel ne sera transféré.,Tafsiri: Démonstration uniquement. Aucun arg,Tafsiri: Démonstration uniquement. Aucun arg,"mt_prefix,source_copy_truncated,no_lang_char","mt_prefix,source_copy_truncated,no_lang_char",True,True,Dr. Hamadou Bello,Ousmanou Danpullo,exact,True
+fub,FUB-037,phrase,P0,Avant confirmation,Tafsiri: Avant confirmation,Tafsiri: Avant confirmation,"mt_prefix,english_leak,no_lang_char","mt_prefix,english_leak,no_lang_char",True,True,Dr. Hamadou Bello,Ousmanou Danpullo,exact,True
+fub,FUB-038,phrase,P1,Conditions du crédit,Tafsiri: Conditions du crédit,Tafsiri: Conditions du crédit,"mt_prefix,french_leak,no_lang_char","mt_prefix,french_leak,no_lang_char",True,True,Dr. Hamadou Bello,Ousmanou Danpullo,exact,True
+fub,FUB-039,phrase,P1,"Une offre de [[NUM_0]] FCFA, avec des conditions affichées avant la souscription.","Une offre de [[NUM_0]] FCFA, avec des conditions affichées avant la souscription.","Une offre de [[NUM_0]] FCFA, avec des conditions affichées avant la souscription.","source_copy,french_leak,no_lang_char","source_copy,french_leak,no_lang_char",True,True,Dr. Hamadou Bello,Ousmanou Danpullo,exact,True
+fub,FUB-040,phrase,P1,Offre [[NUM_0]] FCFA,Offre [[NUM_0]] FCFA,Offre [[NUM_0]] FCFA,"source_copy,no_lang_char","source_copy,no_lang_char",True,True,Dr. Hamadou Bello,Ousmanou Danpullo,exact,True
+fub,FUB-041,phrase,P1,Taux mensuel,Tafsiri: Taux mensuel,Tafsiri: Taux mensuel,"mt_prefix,french_leak,no_lang_char","mt_prefix,french_leak,no_lang_char",True,True,Dr. Hamadou Bello,Ousmanou Danpullo,exact,True
+fub,FUB-042,phrase,P1,Frais de dossier,Tafsiri: Frais de dossier,Tafsiri: Frais de dossier,"mt_prefix,french_leak,no_lang_char","mt_prefix,french_leak,no_lang_char",True,True,Dr. Hamadou Bello,Ousmanou Danpullo,exact,True
+fub,FUB-043,phrase,P1,Délai,Tafsiri: Délai,Tafsiri: Délai,"mt_prefix,no_lang_char","mt_prefix,no_lang_char",True,True,Dr. Hamadou Bello,Ousmanou Danpullo,exact,True
+fub,FUB-044,phrase,P1,[[NUM_0]] jours,[[NUM_0]] jours,[[NUM_0]] jours,"source_copy,no_lang_char","source_copy,no_lang_char",True,True,Dr. Hamadou Bello,Ousmanou Danpullo,exact,True
+fub,FUB-045,phrase,P1,"Avant de souscrire, vérifiez votre capacité de remboursement. Un crédit doit être remboursé. Les informations personnelles collectées sont utilisées uniquement pour l’étude de votre dossier.","Tafsiri: Avant de souscrire, vérifiez votre ","Tafsiri: Avant de souscrire, vérifiez votre ","mt_prefix,source_copy_truncated,too_short,no_lang_char","mt_prefix,source_copy_truncated,too_short,no_lang_char",True,True,Dr. Hamadou Bello,Ousmanou Danpullo,exact,True
+fub,FUB-046,phrase,P1,Pénalité de retard : [[NUM_0]] % par jour,Pénalité de retard : [[NUM_0]] % par jour,Pénalité de retard : [[NUM_0]] % par jour,"source_copy,french_leak,no_lang_char","source_copy,french_leak,no_lang_char",True,True,Dr. Hamadou Bello,Ousmanou Danpullo,exact,True
+fub,FUB-047,phrase,P1,Elle s’applique sur le montant restant dû. Le service client peut proposer un échelonnement sous conditions.,Tafsiri: Elle s’applique sur le montant rest,Tafsiri: Elle s’applique sur le montant rest,"mt_prefix,source_copy_truncated,french_leak,no_lang_char","mt_prefix,source_copy_truncated,french_leak,no_lang_char",True,True,Dr. Hamadou Bello,Ousmanou Danpullo,exact,True
+fub,FUB-048,phrase,P1,Voir les conditions complètes,Tafsiri: Voir les conditions complètes,Tafsiri: Voir les conditions complètes,"mt_prefix,no_lang_char","mt_prefix,no_lang_char",True,True,Dr. Hamadou Bello,Ousmanou Danpullo,exact,True
+fub,FUB-049,phrase,P1,Traduction fulfulde,Tafsiri: Traduction fulfulde,Tafsiri: Traduction fulfulde,"mt_prefix,no_lang_char","mt_prefix,no_lang_char",True,True,Dr. Hamadou Bello,Ousmanou Danpullo,exact,True
+fub,FUB-050,phrase,P1,Actif,Tafsiri: Actif,Tafsiri: Actif,"mt_prefix,no_lang_char","mt_prefix,no_lang_char",True,True,Dr. Hamadou Bello,Ousmanou Danpullo,exact,True
+fub,FUB-051,phrase,P1,Langue de la page,Tafsiri: Langue de la page,Tafsiri: Langue de la page,"mt_prefix,no_lang_char","mt_prefix,no_lang_char",True,True,Dr. Hamadou Bello,Ousmanou Danpullo,exact,True
+fub,FUB-052,phrase,P1,Français,Tafsiri: Français,Tafsiri: Français,"mt_prefix,no_lang_char","mt_prefix,no_lang_char",True,True,Dr. Hamadou Bello,Ousmanou Danpullo,exact,True
+fub,FUB-053,phrase,P1,FR → FF,Tafsiri: FR → FF,Tafsiri: FR → FF,"mt_prefix,no_lang_char","mt_prefix,no_lang_char",True,True,Dr. Hamadou Bello,Ousmanou Danpullo,exact,True
+fub,FUB-054,phrase,P1,"Montants, frais et bénéficiaires préservés.","Tafsiri: Montants, frais et bénéficiaires pr","Tafsiri: Montants, frais et bénéficiaires pr","mt_prefix,source_copy_truncated,no_lang_char","mt_prefix,source_copy_truncated,no_lang_char",True,True,Dr. Hamadou Bello,Ousmanou Danpullo,exact,True
+fub,FUB-055,phrase,P1,Aucune valeur de formulaire ni code PIN lu.,Tafsiri: Aucune valeur de formulaire ni code,Tafsiri: Aucune valeur de formulaire ni code,"mt_prefix,source_copy_truncated,dnt_missing,no_lang_char","mt_prefix,source_copy_truncated,dnt_missing,no_lang_char",True,True,Dr. Hamadou Bello,Ousmanou Danpullo,exact,True
+fub,FUB-056,phrase,P1,Retour à l’original à tout moment.,Tafsiri: Retour à l’original à tout moment.,Tafsiri: Retour à l’original à tout moment.,"mt_prefix,no_lang_char","mt_prefix,no_lang_char",True,True,Dr. Hamadou Bello,Ousmanou Danpullo,exact,True
+fub,FUB-057,phrase,P1,"Le site financier n’est pas modifié. La traduction est une couche locale, réversible, appliquée dans le navigateur.",Tafsiri: Le site financier n’est pas modifié,Tafsiri: Le site financier n’est pas modifié,"mt_prefix,source_copy_truncated,french_leak,no_lang_char","mt_prefix,source_copy_truncated,french_leak,no_lang_char",True,True,Dr. Hamadou Bello,Ousmanou Danpullo,exact,True
+fub,FUB-058,phrase,P1,Votre compte,Tafsiri: Votre compte,Tafsiri: Votre compte,"mt_prefix,no_lang_char","mt_prefix,no_lang_char",True,True,Dr. Hamadou Bello,Ousmanou Danpullo,exact,True
+fub,FUB-059,phrase,P1,Épargne automatique,Tafsiri: Épargne automatique,Tafsiri: Épargne automatique,"mt_prefix,no_lang_char","mt_prefix,no_lang_char",True,True,Dr. Hamadou Bello,Ousmanou Danpullo,exact,True
+fub,FUB-060,phrase,P1,sur [[NUM_0]] FCFA,sur [[NUM_0]] FCFA,sur [[NUM_0]] FCFA,"source_copy,no_lang_char","source_copy,no_lang_char",True,True,Dr. Hamadou Bello,Ousmanou Danpullo,exact,True
+fub,FUB-061,phrase,P1,Il reste [[NUM_0]] semaines,Il reste [[NUM_0]] semaines,Il reste [[NUM_0]] semaines,"source_copy,no_lang_char","source_copy,no_lang_char",True,True,Dr. Hamadou Bello,Ousmanou Danpullo,exact,True
+fub,FUB-062,phrase,P1,[[NUM_0]] FCFA / semaine,[[NUM_0]] FCFA / semaine,[[NUM_0]] FCFA / semaine,"source_copy,no_lang_char","source_copy,no_lang_char",True,True,Dr. Hamadou Bello,Ousmanou Danpullo,exact,True
+fub,FUB-063,phrase,P1,Activer l’épargne,Tafsiri: Activer l’épargne,Tafsiri: Activer l’épargne,"mt_prefix,no_lang_char","mt_prefix,no_lang_char",True,True,Dr. Hamadou Bello,Ousmanou Danpullo,exact,True
+fub,FUB-064,phrase,P1,Test jury,Tafsiri: Test jury,Tafsiri: Test jury,"mt_prefix,no_lang_char","mt_prefix,no_lang_char",True,True,Dr. Hamadou Bello,Ousmanou Danpullo,exact,True
+fub,FUB-065,phrase,P1,Activité récente,Tafsiri: Activité récente,Tafsiri: Activité récente,"mt_prefix,no_lang_char","mt_prefix,no_lang_char",True,True,Dr. Hamadou Bello,Ousmanou Danpullo,exact,True
+fub,FUB-066,phrase,P1,Transfert à [[NAME_0]],Tafsiri: Transfert à [[NAME_0]],Tafsiri: Transfert à [[NAME_0]],"mt_prefix,french_leak,english_leak,no_lang_char","mt_prefix,french_leak,english_leak,no_lang_char",True,True,Dr. Hamadou Bello,Ousmanou Danpullo,exact,True
+fub,FUB-067,phrase,P1,Aujourd’hui · [[NUM_0]]:[[NUM_1]],Aujourd’hui · [[NUM_0]]:[[NUM_1]],Aujourd’hui · [[NUM_0]]:[[NUM_1]],"source_copy,no_lang_char","source_copy,no_lang_char",True,True,Dr. Hamadou Bello,Ousmanou Danpullo,exact,True
+fub,FUB-068,phrase,P1,−[[NUM_0]] FCFA,−[[NUM_0]] FCFA,−[[NUM_0]] FCFA,no_lang_char,no_lang_char,False,False,Dr. Hamadou Bello,Ousmanou Danpullo,exact,True
+fub,FUB-069,phrase,P1,Paiement marchand,Tafsiri: Paiement marchand,Tafsiri: Paiement marchand,"mt_prefix,no_lang_char","mt_prefix,no_lang_char",True,True,Dr. Hamadou Bello,Ousmanou Danpullo,exact,True
+fub,FUB-070,phrase,P1,Hier · [[NUM_0]]:[[NUM_1]],Hier · [[NUM_0]]:[[NUM_1]],Hier · [[NUM_0]]:[[NUM_1]],"source_copy,no_lang_char","source_copy,no_lang_char",True,True,Dr. Hamadou Bello,Ousmanou Danpullo,exact,True
+fub,FUB-071,phrase,P1,Dépôt reçu,Tafsiri: Dépôt reçu,Tafsiri: Dépôt reçu,"mt_prefix,no_lang_char","mt_prefix,no_lang_char",True,True,Dr. Hamadou Bello,Ousmanou Danpullo,exact,True
+fub,FUB-072,phrase,P1,+[[NUM_0]] FCFA,+[[NUM_0]] FCFA,+[[NUM_0]] FCFA,no_lang_char,no_lang_char,False,False,Dr. Hamadou Bello,Ousmanou Danpullo,exact,True
+fub,FUB-073,phrase,P1,Frais de service,Tafsiri: Frais de service,Tafsiri: Frais de service,"mt_prefix,french_leak,english_leak,no_lang_char","mt_prefix,french_leak,english_leak,no_lang_char",True,True,Dr. Hamadou Bello,Ousmanou Danpullo,exact,True
+fub,FUB-074,phrase,P1,Lundi · [[NUM_0]]:[[NUM_1]],Lundi · [[NUM_0]]:[[NUM_1]],Lundi · [[NUM_0]]:[[NUM_1]],"source_copy,no_lang_char","source_copy,no_lang_char",True,True,Dr. Hamadou Bello,Ousmanou Danpullo,exact,True
+fub,FUB-075,phrase,P1,Voir toutes les opérations,Tafsiri: Voir toutes les opérations,Tafsiri: Voir toutes les opérations,"mt_prefix,no_lang_char","mt_prefix,no_lang_char",True,True,Dr. Hamadou Bello,Ousmanou Danpullo,exact,True
+fub,FUB-076,phrase,P1,Objectif,Tafsiri: Objectif,Tafsiri: Objectif,"mt_prefix,no_lang_char","mt_prefix,no_lang_char",True,True,Dr. Hamadou Bello,Ousmanou Danpullo,exact,True
+fub,FUB-077,phrase,P1,"Bonjour, Aïcha.","Tafsiri: Bonjour, Aïcha.","Tafsiri: Bonjour, Aïcha.","mt_prefix,no_lang_char","mt_prefix,no_lang_char",True,True,Dr. Hamadou Bello,Ousmanou Danpullo,exact,True
+fub,FUB-078,phrase,P1,"Votre argent, clair et accessible, où que vous soyez.","Tafsiri: Votre argent, clair et accessible, ","Tafsiri: Votre argent, clair et accessible, ","mt_prefix,source_copy_truncated,no_lang_char","mt_prefix,source_copy_truncated,no_lang_char",True,True,Dr. Hamadou Bello,Ousmanou Danpullo,exact,True
+fub,FUB-079,phrase,P1,Solde disponible · mis à jour à l’instant,Tafsiri: Solde disponible · mis à jour à l’i,Tafsiri: Solde disponible · mis à jour à l’i,"mt_prefix,source_copy_truncated,french_leak,no_lang_char","mt_prefix,source_copy_truncated,french_leak,no_lang_char",True,True,Dr. Hamadou Bello,Ousmanou Danpullo,exact,True
+fub,FUB-080,phrase,P1,Transférer,Tafsiri: Transférer,Tafsiri: Transférer,"mt_prefix,french_verb,no_lang_char","mt_prefix,french_verb,no_lang_char",True,True,Dr. Hamadou Bello,Ousmanou Danpullo,exact,True
+fub,FUB-081,phrase,P1,Payer,Tafsiri: Payer,Tafsiri: Payer,"mt_prefix,french_verb,no_lang_char","mt_prefix,french_verb,no_lang_char",True,True,Dr. Hamadou Bello,Ousmanou Danpullo,exact,True
+fub,FUB-082,phrase,P1,Épargner,Tafsiri: Épargner,Tafsiri: Épargner,"mt_prefix,no_lang_char","mt_prefix,no_lang_char",True,True,Dr. Hamadou Bello,Ousmanou Danpullo,exact,True
+fub,FUB-083,phrase,P1,"Votre banque, en fulfulde.","Tafsiri: Votre banque, en fulfulde.","Tafsiri: Votre banque, en fulfulde.","mt_prefix,no_lang_char","mt_prefix,no_lang_char",True,True,Dr. Hamadou Bello,Ousmanou Danpullo,exact,True
+fub,FUB-084,phrase,P1,"Une couche de traduction locale, sans modifier le site et sans envoyer vos données à un serveur distant.","Tafsiri: Une couche de traduction locale, sa","Tafsiri: Une couche de traduction locale, sa","mt_prefix,source_copy_truncated,french_leak,no_lang_char","mt_prefix,source_copy_truncated,french_leak,no_lang_char",True,True,Dr. Hamadou Bello,Ousmanou Danpullo,exact,True
+fub,FUB-085,phrase,P1,Montants et bénéficiaires préservés,Tafsiri: Montants et bénéficiaires préservés,Tafsiri: Montants et bénéficiaires préservés,"mt_prefix,no_lang_char","mt_prefix,no_lang_char",True,True,Dr. Hamadou Bello,Ousmanou Danpullo,exact,True
+fub,FUB-086,phrase,P1,Transfert national,Tafsiri: Transfert national,Tafsiri: Transfert national,"mt_prefix,no_lang_char","mt_prefix,no_lang_char",True,True,Dr. Hamadou Bello,Ousmanou Danpullo,exact,True
+fub,FUB-087,phrase,P1,Texte inédit,Tafsiri: Texte inédit,Tafsiri: Texte inédit,"mt_prefix,no_lang_char","mt_prefix,no_lang_char",True,True,Dr. Hamadou Bello,Ousmanou Danpullo,exact,True
+fub,FUB-088,phrase,P1,Un message qui n’est pas pré-traduit dans la page.,Tafsiri: Un message qui n’est pas pré-tradui,Tafsiri: Un message qui n’est pas pré-tradui,"mt_prefix,source_copy_truncated,french_leak,no_lang_char","mt_prefix,source_copy_truncated,french_leak,no_lang_char",True,True,Dr. Hamadou Bello,Ousmanou Danpullo,exact,True
+fub,FUB-089,phrase,P1,Live,Tafsiri: Live,Tafsiri: Live,"mt_prefix,no_lang_char","mt_prefix,no_lang_char",True,True,Dr. Hamadou Bello,Ousmanou Danpullo,exact,True
+fub,FUB-090,phrase,P1,Les transferts internationaux sont soumis à des frais de change. Le taux appliqué est affiché avant la validation de l’opération. Le bénéficiaire reçoit le montant net après déduction des frais.,Tafsiri: Les transferts internationaux sont ,Tafsiri: Les transferts internationaux sont ,"mt_prefix,source_copy_truncated,too_short,no_lang_char","mt_prefix,source_copy_truncated,too_short,no_lang_char",True,True,Dr. Hamadou Bello,Ousmanou Danpullo,exact,True
+fub,FUB-091,phrase,P1,Remplacer par un autre texte,Tafsiri: Remplacer par un autre texte,Tafsiri: Remplacer par un autre texte,"mt_prefix,french_verb,no_lang_char","mt_prefix,french_verb,no_lang_char",True,True,Dr. Hamadou Bello,Ousmanou Danpullo,exact,True
+fub,FUB-092,phrase,P1,Le jury peut aussi coller un paragraphe dans l’extension pour tester la traduction en direct.,Tafsiri: Le jury peut aussi coller un paragr,Tafsiri: Le jury peut aussi coller un paragr,"mt_prefix,source_copy_truncated,no_lang_char","mt_prefix,source_copy_truncated,no_lang_char",True,True,Dr. Hamadou Bello,Ousmanou Danpullo,exact,True
+fub,FUB-093,phrase,P1,FINAKA · démonstration SAFINUM [[NUM_0]],FINAKA · démonstration SAFINUM [[NUM_0]],FINAKA · démonstration SAFINUM [[NUM_0]],"source_copy,no_lang_char","source_copy,no_lang_char",True,True,Dr. Hamadou Bello,Ousmanou Danpullo,exact,True
+fub,FUB-094,phrase,P1,Données fictives · aucune transaction réelle · traduction assistée,Tafsiri: Données fictives · aucune transacti,Tafsiri: Données fictives · aucune transacti,"mt_prefix,source_copy_truncated,french_leak,no_lang_char","mt_prefix,source_copy_truncated,french_leak,no_lang_char",True,True,Dr. Hamadou Bello,Ousmanou Danpullo,exact,True
+fub,FUB-095,phrase,P1,Banque digitale · Cameroun,Tafsiri: Banque digitale · Cameroun,Tafsiri: Banque digitale · Cameroun,"mt_prefix,no_lang_char","mt_prefix,no_lang_char",True,True,Dr. Hamadou Bello,Ousmanou Danpullo,exact,True
+fub,FUB-096,phrase,P1,Vue d’ensemble,Tafsiri: Vue d’ensemble,Tafsiri: Vue d’ensemble,"mt_prefix,no_lang_char","mt_prefix,no_lang_char",True,True,Dr. Hamadou Bello,Ousmanou Danpullo,exact,True
+fub,FUB-097,phrase,P1,Transferts,Tafsiri: Transferts,Tafsiri: Transferts,"mt_prefix,no_lang_char","mt_prefix,no_lang_char",True,True,Dr. Hamadou Bello,Ousmanou Danpullo,exact,True
+fub,FUB-098,phrase,P1,Épargne,Tafsiri: Épargne,Tafsiri: Épargne,"mt_prefix,no_lang_char","mt_prefix,no_lang_char",True,True,Dr. Hamadou Bello,Ousmanou Danpullo,exact,True
+fub,FUB-099,phrase,P1,Assistance,Tafsiri: Assistance,Tafsiri: Assistance,"mt_prefix,no_lang_char","mt_prefix,no_lang_char",True,True,Dr. Hamadou Bello,Ousmanou Danpullo,exact,True
+fub,FUB-100,phrase,P1,Démo · données fictives,Tafsiri: Démo · données fictives,Tafsiri: Démo · données fictives,"mt_prefix,french_leak,no_lang_char","mt_prefix,french_leak,no_lang_char",True,True,Dr. Hamadou Bello,Ousmanou Danpullo,exact,True
+fub,FUB-101,phrase,P1,Aïcha,Tafsiri: Aïcha,Tafsiri: Aïcha,"mt_prefix,no_lang_char","mt_prefix,no_lang_char",True,True,Dr. Hamadou Bello,Ousmanou Danpullo,exact,True
+fub,FUB-102,phrase,P1,Compte principal · Mobile money,Tafsiri: Compte principal · Mobile money,Tafsiri: Compte principal · Mobile money,"mt_prefix,no_lang_char","mt_prefix,no_lang_char",True,True,Dr. Hamadou Bello,Ousmanou Danpullo,exact,True
+fub,G01,glossaire,P0,solde disponible,jawdindi ndi yami,jawdindi ndi yami,no_lang_char,no_lang_char,False,False,Dr. Hamadou Bello,Ousmanou Danpullo,exact,True
+fub,G02,glossaire,P0,frais de transfert,njoɓdi nawgol,njoɓdi nawgol,,,False,False,Dr. Hamadou Bello,Ousmanou Danpullo,exact,True
+fub,G03,glossaire,P0,montant à envoyer,kaalis mo nelaɗen,kaalis mo nelaɗen,,,False,False,Dr. Hamadou Bello,Ousmanou Danpullo,exact,True
+fub,G04,glossaire,P0,bénéficiaire,mo nelaɗo,mo nelaɗo,,,False,False,Dr. Hamadou Bello,Ousmanou Danpullo,exact,True
+fub,G05,glossaire,P0,code PIN,code PIN,code PIN,no_lang_char,no_lang_char,False,False,Dr. Hamadou Bello,Ousmanou Danpullo,exact,True
+fub,G06,glossaire,P0,code de confirmation,code teeŋtingol,code teeŋtingol,,,False,False,Dr. Hamadou Bello,Ousmanou Danpullo,exact,True
+fub,G07,glossaire,P1,taux d'intérêt,tolno nafa,tolno nafa,no_lang_char,no_lang_char,False,False,Dr. Hamadou Bello,Ousmanou Danpullo,exact,True
+fub,G08,glossaire,P1,frais de dossier,njoɓdi binndol,njoɓdi binndol,,,False,False,Dr. Hamadou Bello,Ousmanou Danpullo,exact,True
+fub,G09,glossaire,P1,pénalité de retard,njoɓdi batte,njoɓdi batte,,,False,False,Dr. Hamadou Bello,Ousmanou Danpullo,exact,True
+fub,G10,glossaire,P1,capacité de remboursement,doole yoɓgol,doole yoɓgol,,,False,False,Dr. Hamadou Bello,Ousmanou Danpullo,exact,True
+fub,G11,glossaire,P1,épargne automatique,ko mooftata e laawol,ko mooftata e laawol,no_lang_char,no_lang_char,False,False,Dr. Hamadou Bello,Ousmanou Danpullo,exact,True
+fub,G12,glossaire,P1,objectif d'épargne,faandaare mooftugol,faandaare mooftugol,no_lang_char,no_lang_char,False,False,Dr. Hamadou Bello,Ousmanou Danpullo,exact,True
+fub,G13,glossaire,P0,dépôt,naatgol kaalis,naatgol kaalis,no_lang_char,no_lang_char,False,False,Dr. Hamadou Bello,Ousmanou Danpullo,exact,True
+fub,G14,glossaire,P0,retrait,yaltugol kaalis,yaltugol kaalis,no_lang_char,no_lang_char,False,False,Dr. Hamadou Bello,Ousmanou Danpullo,exact,True
+fub,G15,glossaire,P0,paiement marchand,njoɓdi julaajo,njoɓdi julaajo,,,False,False,Dr. Hamadou Bello,Ousmanou Danpullo,exact,True
+fub,G16,glossaire,P0,vérification d'identité,teeŋtingol enndam,teeŋtingol enndam,,,False,False,Dr. Hamadou Bello,Ousmanou Danpullo,exact,True
+fub,G17,glossaire,P0,pièce d'identité,kadi enndam,kadi enndam,no_lang_char,no_lang_char,False,False,Dr. Hamadou Bello,Ousmanou Danpullo,exact,True
+fub,G18,glossaire,P1,service client,gollordu wallitaande,gollordu wallitaande,no_lang_char,no_lang_char,False,False,Dr. Hamadou Bello,Ousmanou Danpullo,exact,True
+fub,G19,glossaire,P1,transaction,gollal kaalis,gollal kaalis,no_lang_char,no_lang_char,False,False,Dr. Hamadou Bello,Ousmanou Danpullo,exact,True
+fub,G20,glossaire,P1,remboursement,yoɓgol kaalis,yoɓgol kaalis,,,False,False,Dr. Hamadou Bello,Ousmanou Danpullo,exact,True
+fub,G21,glossaire,P1,frais,njoɓdi,njoɓdi,,,False,False,Dr. Hamadou Bello,Ousmanou Danpullo,exact,True
+fub,G22,glossaire,P1,total,fgol,fgol,no_lang_char,no_lang_char,False,False,Dr. Hamadou Bello,Ousmanou Danpullo,exact,True
+fub,G23,glossaire,P1,échéance,nyalnde yoɓgol,nyalnde yoɓgol,,,False,False,Dr. Hamadou Bello,Ousmanou Danpullo,exact,True
+fub,G24,glossaire,P0,plafond,keeri kaalis,keeri kaalis,no_lang_char,no_lang_char,False,False,Dr. Hamadou Bello,Ousmanou Danpullo,exact,True
+fub,G25,glossaire,P1,découvert,kaalis ɓurɗo yowede,kaalis ɓurɗo yowede,,,False,False,Dr. Hamadou Bello,Ousmanou Danpullo,exact,True
+fub,G26,glossaire,P1,agence,galu,galu,no_lang_char,no_lang_char,False,False,Dr. Hamadou Bello,Ousmanou Danpullo,exact,True
+fub,G27,glossaire,P1,guichet,damugal,damugal,no_lang_char,no_lang_char,False,False,Dr. Hamadou Bello,Ousmanou Danpullo,exact,True
+fub,G28,glossaire,P0,code,code,code,no_lang_char,no_lang_char,False,False,Dr. Hamadou Bello,Ousmanou Danpullo,exact,True
+fub,G29,glossaire,P1,référence,tiinde,tiinde,no_lang_char,no_lang_char,False,False,Dr. Hamadou Bello,Ousmanou Danpullo,exact,True
+fub,G30,glossaire,P1,reçu,seedantaagal,seedantaagal,no_lang_char,no_lang_char,False,False,Dr. Hamadou Bello,Ousmanou Danpullo,exact,True
+fub,G31,glossaire,P1,litige,haala,haala,no_lang_char,no_lang_char,False,False,Dr. Hamadou Bello,Ousmanou Danpullo,exact,True
+fub,G32,glossaire,P1,échec,bonere,bonere,no_lang_char,no_lang_char,False,False,Dr. Hamadou Bello,Ousmanou Danpullo,exact,True
+fub,G33,glossaire,P1,annulation,dartingol,dartingol,no_lang_char,no_lang_char,False,False,Dr. Hamadou Bello,Ousmanou Danpullo,exact,True
+fub,G34,glossaire,P0,confirmation,teeŋtingol,teeŋtingol,,,False,False,Dr. Hamadou Bello,Ousmanou Danpullo,exact,True
+fub,G35,glossaire,P0,sécurité,kisal,kisal,no_lang_char,no_lang_char,False,False,Dr. Hamadou Bello,Ousmanou Danpullo,exact,True
+fub,G36,glossaire,P0,frais de change,njoɓdi mbiliro,njoɓdi mbiliro,,,False,False,Dr. Hamadou Bello,Ousmanou Danpullo,exact,True
+fub,G37,glossaire,P0,taux de change,tolno mbiliro,tolno mbiliro,no_lang_char,no_lang_char,False,False,Dr. Hamadou Bello,Ousmanou Danpullo,exact,True
+fub,G38,glossaire,P1,montant,kaalis,kaalis,no_lang_char,no_lang_char,False,False,Dr. Hamadou Bello,Ousmanou Danpullo,exact,True
+fub,G39,glossaire,P1,solde,jawdindi,jawdindi,no_lang_char,no_lang_char,False,False,Dr. Hamadou Bello,Ousmanou Danpullo,exact,True
+fub,G40,glossaire,P0,destinataire,mo nelaɗo,mo nelaɗo,,,False,False,Dr. Hamadou Bello,Ousmanou Danpullo,exact,True
+fub,SO-001,message,P1,Bonjour,Jam tiiɗi,Jam jam,,no_lang_char,False,False,Dr. Hamadou Bello,Ousmanou Danpullo,divergent,True
+fub,SO-002,message,P1,Votre compte,Asaaku ma,Asaaku ma,no_lang_char,no_lang_char,False,False,Dr. Hamadou Bello,Ousmanou Danpullo,exact,True
+fub,SO-003,message,P0,Consultez votre solde et lancez un transfert en toute sécurité.,"Yiy jawdindi ma, ngona e kisal ngam nelugol kaalis.","Yiy jawdindi ma, ngona e kisal ngam nelugol kaalis.",no_lang_char,no_lang_char,False,False,Dr. Hamadou Bello,Ousmanou Danpullo,exact,True
+fub,SO-004,message,P1,Effectuer un transfert,Nelu kaalis,Nelu kaalis,no_lang_char,no_lang_char,False,False,Dr. Hamadou Bello,Ousmanou Danpullo,exact,True
+fub,SO-005,message,P0,Consulter les frais,Yiy njoɓdi,Yiy njoɓdi,,,False,False,Dr. Hamadou Bello,Ousmanou Danpullo,exact,True
+fub,SO-006,message,P1,Transactions récentes,Golle kaalis ɓennuɗe,Golle kaalis ɓennuɗe,,,False,False,Dr. Hamadou Bello,Ousmanou Danpullo,exact,True
+fub,SO-007,message,P0,Solde disponible,Jawdindi ndi yami,Jawdindi ndi yami,no_lang_char,no_lang_char,False,False,Dr. Hamadou Bello,Ousmanou Danpullo,exact,True
+fub,SO-008,message,P0,Numéro de compte,Limre asaaku,Limre asaaku,no_lang_char,no_lang_char,False,False,Dr. Hamadou Bello,Ousmanou Danpullo,exact,True
+fub,SO-009,message,P0,Frais de transfert,Njoɓdi nawgol,Njoɓdi nawgol,,,False,False,Dr. Hamadou Bello,Ousmanou Danpullo,exact,True
+fub,SO-010,message,P0,Choisissez le type de transfert et le montant. Les frais sont calculés automatiquement.,Suus sariya nawgol e kaalis. Njoɓdi limtetee ko e laawol gollingol.,Suus sariya nawgol e kaalis. Njoɓdi limtetee ko e laawol gollingol.,,,False,False,Dr. Hamadou Bello,Ousmanou Danpullo,exact,True
+fub,SO-011,message,P1,Type d'opération,Suus gollal,Suus gollal,no_lang_char,no_lang_char,False,False,Dr. Hamadou Bello,Ousmanou Danpullo,exact,True
+fub,SO-012,message,P0,Montant à envoyer,Kaalis mo nelaɗen,Kaalis mo nelaɗen,,,False,False,Dr. Hamadou Bello,Ousmanou Danpullo,exact,True
+fub,SO-013,message,P0,Frais,Njoɓdi,Njoɓdi,,,False,False,Dr. Hamadou Bello,Ousmanou Danpullo,exact,True
+fub,SO-014,message,P1,Gratuit,Ko yoɓataa,Ko yoɓataa,,,False,False,Dr. Hamadou Bello,Ousmanou Danpullo,exact,True
+fub,SO-015,message,P0,Total à débiter,Kaalis mo yoɓetee fgol,Kaalis mo yoɓetee fgol,,,False,False,Dr. Hamadou Bello,Ousmanou Danpullo,exact,True
+fub,SO-016,message,P0,Solde après opération,Jawdindi ɓaawo gollal,Jawdindi ɓaawo gollal,,,False,False,Dr. Hamadou Bello,Ousmanou Danpullo,exact,True
+fub,SO-017,message,P1,Continuer,Wontu yeeso,Wontu yeeso,no_lang_char,no_lang_char,False,False,Dr. Hamadou Bello,Ousmanou Danpullo,exact,True
+fub,SO-018,message,P1,Retour,Rutto,Rutto,no_lang_char,no_lang_char,False,False,Dr. Hamadou Bello,Ousmanou Danpullo,exact,True
+fub,SO-019,message,P0,Bénéficiaire,Mo nelaɗo,Mo nelaɗo,,,False,False,Dr. Hamadou Bello,Ousmanou Danpullo,exact,True
+fub,SO-020,message,P0,Renseignez les informations du destinataire. Vérifiez toujours le numéro avant de valider.,Lonndu kabaaru mo nelaɗo. Teeŋtu limre nde ko adii yoɓgol.,Lonndu kabaaru mo nelaɗo. Teeŋtu limre nde ko adii yoɓgol.,,,False,False,Dr. Hamadou Bello,Ousmanou Danpullo,exact,True
+fub,SO-021,message,P0,Nom du bénéficiaire,Innde mo nelaɗo,Innde mo nelaɗo,,,False,False,Dr. Hamadou Bello,Ousmanou Danpullo,exact,True
+fub,SO-022,message,P0,Numéro de téléphone,Limre cinndel,Limre cinndel,no_lang_char,no_lang_char,False,False,Dr. Hamadou Bello,Ousmanou Danpullo,exact,True
+fub,SO-023,message,P1,Motif du transfert,Dalilla nawgol,Dalilla nawgol,no_lang_char,no_lang_char,False,False,Dr. Hamadou Bello,Ousmanou Danpullo,exact,True
+fub,SO-024,message,P1,Note (optionnel),Sariya (so ina haani),Sariya (so ina haani),no_lang_char,no_lang_char,False,False,Dr. Hamadou Bello,Ousmanou Danpullo,exact,True
+fub,SO-025,message,P0,J'ai vérifié le nom et le numéro du bénéficiaire.,Mi teeŋtii innde e limre mo nelaɗo.,Mi teeŋtii innde e limre mo nelaɗo.,,,False,False,Dr. Hamadou Bello,Ousmanou Danpullo,exact,True
+fub,SO-026,message,P0,Ce bénéficiaire n'a jamais été utilisé sur ce compte. Vérifiez le numéro avant de continuer.,Oon mo nelaɗo huutoraaka e ndii asaaku. Teeŋtu limre ko adii yeeso.,Oon mo nelaɗo huutoraaka e ndii asaaku. Teeŋtu limre ko adii yeeso.,,,False,False,Dr. Hamadou Bello,Ousmanou Danpullo,exact,True
+fub,SO-027,message,P1,Récapitulatif,Koolol,Koolol,no_lang_char,no_lang_char,False,False,Dr. Hamadou Bello,Ousmanou Danpullo,exact,True
+fub,SO-028,message,P0,Vérifiez les informations avant de confirmer le transfert.,Teeŋtu kabaaru ko adii yoɓgol nawgol.,Teeŋtu kabaaru ko adii yoɓgol nawgol.,,,False,False,Dr. Hamadou Bello,Ousmanou Danpullo,exact,True
+fub,SO-029,message,P0,Montant,Kaalis,Kaalis,no_lang_char,no_lang_char,False,False,Dr. Hamadou Bello,Ousmanou Danpullo,exact,True
+fub,SO-030,message,P0,Total débité,Kaalis yoɓaaɗo fgol,Kaalis yoɓaaɗo fgol,,,False,False,Dr. Hamadou Bello,Ousmanou Danpullo,exact,True
+fub,SO-031,message,P1,Téléphone,Cinndel,Cinndel,no_lang_char,no_lang_char,False,False,Dr. Hamadou Bello,Ousmanou Danpullo,exact,True
+fub,SO-032,message,P0,Référence,Tiinde,Tiinde,no_lang_char,no_lang_char,False,False,Dr. Hamadou Bello,Ousmanou Danpullo,exact,True
+fub,SO-033,message,P1,Opération,Gollal,Gollal,no_lang_char,no_lang_char,False,False,Dr. Hamadou Bello,Ousmanou Danpullo,exact,True
+fub,SO-034,message,P0,Je confirme que les informations ci-dessus sont correctes.,Mi teeŋtii kabaaru les ɗoo ko goonga.,Mi teeŋtii kabaaru les ɗoo ko goonga.,,,False,False,Dr. Hamadou Bello,Ousmanou Danpullo,exact,True
+fub,SO-035,message,P0,Confirmer le transfert,Teeŋtu nawgol,Teeŋtu nawgol,,,False,False,Dr. Hamadou Bello,Ousmanou Danpullo,exact,True
+fub,SO-036,message,P1,Modifier,Waylu,Waylu,no_lang_char,no_lang_char,False,False,Dr. Hamadou Bello,Ousmanou Danpullo,exact,True
+fub,SO-037,message,P1,Transfert effectué,Nawgol naatii,Nawgol naatii,no_lang_char,no_lang_char,False,False,Dr. Hamadou Bello,Ousmanou Danpullo,exact,True
+fub,SO-038,message,P1,Votre transfert a été envoyé avec succès.,Nawgol ma nelaama e jam.,Nawgol ma nelaama e jam.,no_lang_char,no_lang_char,False,False,Dr. Hamadou Bello,Ousmanou Danpullo,exact,True
+fub,SO-039,message,P1,Statut,Tollirgol,Tollirgol,no_lang_char,no_lang_char,False,False,Dr. Hamadou Bello,Ousmanou Danpullo,exact,True
+fub,SO-040,message,P1,Succès,Nasara,Nasara,no_lang_char,no_lang_char,False,False,Dr. Hamadou Bello,Ousmanou Danpullo,exact,True
+fub,SO-041,message,P1,Nouveau transfert,Nawgol hesrol,Nawgol hesrol,no_lang_char,no_lang_char,False,False,Dr. Hamadou Bello,Ousmanou Danpullo,exact,True
+fub,SO-042,message,P1,Message important,Kabaaru mawɗo,Kabaaru mawɗo,,,False,False,Dr. Hamadou Bello,Ousmanou Danpullo,exact,True
+fub,SO-043,message,P1,Fermer,Uddu,Uddu,no_lang_char,no_lang_char,False,False,Dr. Hamadou Bello,Ousmanou Danpullo,exact,True
+fub,SO-044,message,P0,Une erreur est survenue,Fenaande waɗii,Fenaande waɗii,,,False,False,Dr. Hamadou Bello,Ousmanou Danpullo,exact,True
+fub,SO-045,message,P0,Alerte de sécurité,Tintina kisal,Tintina kisal,no_lang_char,no_lang_char,False,False,Dr. Hamadou Bello,Ousmanou Danpullo,exact,True
+fub,SO-046,message,P0,Sécurité,Kisal,Kisal,no_lang_char,no_lang_char,False,False,Dr. Hamadou Bello,Ousmanou Danpullo,exact,True
+fub,SO-047,message,P0,Vérifiez toujours le nom et le numéro du bénéficiaire avant de confirmer un transfert.,Teeŋtu innde e limre mo nelaɗo ko adii yoɓgol fgol.,Teeŋtu innde e limre mo nelaɗo ko adii yoɓgol fgol.,,,False,False,Dr. Hamadou Bello,Ousmanou Danpullo,exact,True
+fub,SO-048,message,P1,Connexion sécurisée,Tesku kisal,Tesku kisal,no_lang_char,no_lang_char,False,False,Dr. Hamadou Bello,Ousmanou Danpullo,exact,True
+fub,SO-049,message,P1,Safinum Pay — environnement de démonstration. Ne saisissez aucune donnée personnelle réelle.,Safinum Pay — nokku ƴeewndo. Huutoraaka kabaaru hoore ma goonga.,Safinum Pay — nokku ƴeewndo. Huutoraaka kabaaru hoore ma goonga.,,,False,False,Dr. Hamadou Bello,Ousmanou Danpullo,exact,True
+fub,SO-050,message,P1,"Environnement de test — données fictives, aucune transaction réelle.","Nokku ƴeewndo — kabaaru fenaande, alaa gollal goonga.","Nokku ƴeewndo — kabaaru fenaande, alaa gollal goonga.",,,False,False,Dr. Hamadou Bello,Ousmanou Danpullo,exact,True
+fub,SO-051,message,P1,"Bonjour, Amina.","Jam tiiɗi, Amina.","Jam jam, Amina.",,no_lang_char,False,False,Dr. Hamadou Bello,Ousmanou Danpullo,divergent,True
+fub,SO-052,message,P1,Amina Ngo Bell,Amina Ngo Bell,Amina Ngo Bell,no_lang_char,no_lang_char,False,False,Dr. Hamadou Bello,Ousmanou Danpullo,exact,True
+fub,SO-053,message,P1,Transfert instantané et gratuit,Nawgoljaawngol ko yoɓataa,Nawgoljaawngol ko yoɓataa,,,False,False,Dr. Hamadou Bello,Ousmanou Danpullo,exact,True
+fub,SO-054,message,P0,"Frais de 1,5 % (min. 100 FCFA, max. 2 500 FCFA)","Njoɓdi ko 1,5 % (min. 100 FCFA, max. 2 500 FCFA)","Njoɓdi ko 1,5 % (min. 100 FCFA, max. 2 500 FCFA)",,,False,False,Dr. Hamadou Bello,Ousmanou Danpullo,exact,True
+fub,SO-055,message,P0,"Frais de 2 % (min. 200 FCFA, max. 5 000 FCFA)","Njoɓdi ko 2 % (min. 200 FCFA, max. 5 000 FCFA)","Njoɓdi ko 2 % (min. 200 FCFA, max. 5 000 FCFA)",,,False,False,Dr. Hamadou Bello,Ousmanou Danpullo,exact,True
+fub,SO-056,message,P1,Mobile Money,Mobile Money,Mobile Money,no_lang_char,no_lang_char,False,False,Dr. Hamadou Bello,Ousmanou Danpullo,exact,True
+fub,SO-057,message,P1,Compte Safinum,Asaaku Safinum,Asaaku Safinum,no_lang_char,no_lang_char,False,False,Dr. Hamadou Bello,Ousmanou Danpullo,exact,True
+fub,SO-058,message,P1,Autre banque,Banke goɗɗo,Banke goɗɗo,,,False,False,Dr. Hamadou Bello,Ousmanou Danpullo,exact,True
+fub,SO-059,message,P1,Paiement marchand,Njoɓdi julaajo,Njoɓdi julaajo,,,False,False,Dr. Hamadou Bello,Ousmanou Danpullo,exact,True
+fub,SO-060,message,P1,Paiement de services,Njoɓdi gollal,Njoɓdi gollal,,,False,False,Dr. Hamadou Bello,Ousmanou Danpullo,exact,True
+fub,SO-061,message,P1,Salaire reçu,Njoɓdi lebbi naatii,Njoɓdi lebbi naatii,,,False,False,Dr. Hamadou Bello,Ousmanou Danpullo,exact,True
+fub,SO-062,message,P1,Transfert reçu,Kaalis naatii,Kaalis naatii,no_lang_char,no_lang_char,False,False,Dr. Hamadou Bello,Ousmanou Danpullo,exact,True
+fub,SO-063,message,P1,Facture électricité,Njoɓdi naange eletrik,Njoɓdi naange eletrik,,,False,False,Dr. Hamadou Bello,Ousmanou Danpullo,exact,True
+fub,SO-064,message,P0,Le montant doit être supérieur à zéro.,Kaalis ina foti ɓurde zero.,Kaalis ina foti ɓurde zero.,,,False,False,Dr. Hamadou Bello,Ousmanou Danpullo,exact,True
+fub,SO-065,message,P0,Solde insuffisant pour effectuer ce transfert.,Jawdindi ina famɗi ngam waɗde ndii gollal.,Jawdindi ina famɗi ngam waɗde ndii gollal.,,,False,False,Dr. Hamadou Bello,Ousmanou Danpullo,exact,True
+fub,SO-066,message,P0,Veuillez renseigner le nom et le numéro du bénéficiaire.,Mawnu innde e limre mo nelaɗo.,Mawnu innde e limre mo nelaɗo.,,,False,False,Dr. Hamadou Bello,Ousmanou Danpullo,exact,True
+fub,SO-067,message,P0,Alerte de sécurité : vérifiez le numéro du bénéficiaire avant de continuer.,Tintina kisal : teeŋtu limre mo nelaɗo ko adii yeeso.,Tintina kisal : teeŋtu limre mo nelaɗo ko adii yeeso.,,,False,False,Dr. Hamadou Bello,Ousmanou Danpullo,exact,True
+fub,SO-068,message,P0,Alerte de sécurité : ce bénéficiaire n'a jamais été utilisé sur ce compte.,Tintina kisal : oon mo nelaɗo huutoraaka e ndii asaaku.,Tintina kisal : oon mo nelaɗo huutoraaka e ndii asaaku.,,,False,False,Dr. Hamadou Bello,Ousmanou Danpullo,exact,True
+fub,SO-069,message,P0,Erreur réseau : le service est temporairement indisponible. Réessayez.,Fenaande rese : gollal ina daɗi. Enndu kadi.,Fenaande rese : gollal ina daɗi. Enndu kadi.,,,False,False,Dr. Hamadou Bello,Ousmanou Danpullo,exact,True
+fub,SO-070,message,P0,Vous devez confirmer les informations avant de valider le transfert.,A foti teeŋtude kabaaru ko adii yoɓgol.,A foti teeŋtude kabaaru ko adii yoɓgol.,,,False,False,Dr. Hamadou Bello,Ousmanou Danpullo,exact,True
+ewo,EWO-001,phrase,P0,Le solde est de [[NUM_0]] FCFA.,Abálá á ne [[NUM_0]] FCFA.,Abálá á ne [[NUM_0]] FCFA.,no_lang_char,no_lang_char,False,False,Dr. Jean-Baptiste Ndono,Joseph Mballa,exact,False
+ewo,EWO-002,phrase,P0,Les frais de transfert sont de [[NUM_1]] FCFA.,Mákyé má nkus má ne [[NUM_1]] FCFA.,Mákyé má nkus má ne [[NUM_1]] FCFA.,no_lang_char,no_lang_char,False,False,Dr. Jean-Baptiste Ndono,Joseph Mballa,exact,False
+ewo,EWO-003,phrase,P0,Le montant total débité sera de [[NUM_2]] FCFA.,Mbodó á ne na á kúsí á ne [[NUM_2]] FCFA.,Mbodó á ne na á kúsí á ne [[NUM_2]] FCFA.,no_lang_char,no_lang_char,False,False,Dr. Jean-Baptiste Ndono,Joseph Mballa,exact,False
+ewo,EWO-004,phrase,P0,Ne partagez jamais votre code PIN.,Kə́ ve code PIN wō na mòd fə́.,Kə́ ve code PIN wō na mòd fə́.,,,False,False,Dr. Jean-Baptiste Ndono,Joseph Mballa,exact,False
+ewo,EWO-005,phrase,P0,Vérifiez le nom du bénéficiaire avant de confirmer.,Yéŋə́ ezóŋ á mòd á nnyɔ́ŋ ósu na ó sínyí.,Yéŋə́ ezóŋ á mòd á nnyɔ́ŋ ósu na ó sínyí.,,,False,False,Dr. Jean-Baptiste Ndono,Joseph Mballa,exact,False
+ewo,EWO-006,phrase,P0,Le bénéficiaire reçoit le montant net après déduction des frais.,Mòd á nnyɔ́ŋ á nnyɔ́ŋ moní éyɔ́ŋ mákyé má manía kúdé.,Mòd á nnyɔ́ŋ á nnyɔ́ŋ moní éyɔ́ŋ mákyé má manía kúdé.,,,False,False,Dr. Jean-Baptiste Ndono,Joseph Mballa,exact,False
+ewo,EWO-007,phrase,P0,Le taux d'intérêt mensuel est de 2 %.,Ntéláná á mfá'á á ngɔ́n á ne 2 %.,Ntéláná á mfá'á á ngɔ́n á ne 2 %.,,,False,False,Dr. Jean-Baptiste Ndono,Joseph Mballa,exact,False
+ewo,EWO-008,phrase,P0,"En cas de retard, une pénalité de 1 % par jour est appliquée.","Éyɔ́ŋ á bɔ́ya eyele, mákyé má afa á 1 % émos ésə́ má ne nkus.","Éyɔ́ŋ á bɔ́ya eyele, mákyé má afa á 1 % émos ésə́ má ne nkus.",,,False,False,Dr. Jean-Baptiste Ndono,Joseph Mballa,exact,False
+ewo,EWO-009,phrase,P0,Votre compte a été crédité de [[NUM_0]] FCFA.,Kɔ́ndó wō á nnyɔ́ŋya [[NUM_0]] FCFA.,Kɔ́ndó wō á nnyɔ́ŋya [[NUM_0]] FCFA.,,,False,False,Dr. Jean-Baptiste Ndono,Joseph Mballa,exact,False
+ewo,EWO-010,phrase,P0,Votre compte a été débité de [[NUM_0]] FCFA.,Kɔ́ndó wō á kúsíya [[NUM_0]] FCFA.,Kɔ́ndó wō á kúsíya [[NUM_0]] FCFA.,,,False,False,Dr. Jean-Baptiste Ndono,Joseph Mballa,exact,False
+ewo,EWO-011,phrase,P0,Le transfert a été effectué avec succès.,Nkus á bɔ́ya ne adzáŋ.,Nkus á bɔ́ya ne adzáŋ.,,,False,False,Dr. Jean-Baptiste Ndono,Joseph Mballa,exact,False
+ewo,EWO-012,phrase,P0,Le transfert est en attente de confirmation.,Nkus á yábə́ nsínyí.,Nkus á yábə́ nsínyí.,,,False,False,Dr. Jean-Baptiste Ndono,Joseph Mballa,exact,False
+ewo,EWO-013,phrase,P0,Code PIN incorrect. Veuillez réessayer.,Code PIN á ne áboŋ. Bámbáná dábə́.,Code PIN á ne áboŋ. Bámbáná dábə́.,,,False,False,Dr. Jean-Baptiste Ndono,Joseph Mballa,exact,False
+ewo,EWO-014,phrase,P0,Ne communiquez jamais votre code OTP à un tiers.,Kə́ ve code OTP wō na mòd fə́.,Kə́ ve code OTP wō na mòd fə́.,,,False,False,Dr. Jean-Baptiste Ndono,Joseph Mballa,exact,False
+ewo,EWO-015,phrase,P0,Cette transaction est sécurisée par FINAKA.,Esama éní é ne ébámbáná ne FINAKA.,Esama éní é ne ébámbáná ne FINAKA.,no_lang_char,no_lang_char,False,False,Dr. Jean-Baptiste Ndono,Joseph Mballa,exact,False
+ewo,EWO-016,phrase,P0,Le solde disponible est insuffisant.,Abálá é ne ngə́lə́ á tékə́ yáne.,Abálá é ne ngə́lə́ á tékə́ yáne.,,,False,False,Dr. Jean-Baptiste Ndono,Joseph Mballa,exact,False
+ewo,EWO-017,phrase,P0,Les informations personnelles sont utilisées uniquement pour l'étude de votre dossier.,Bíə́mə́ bí mòd bí ne mbálan ású nsɔ́ŋó kalada wō etə́.,Bíə́mə́ bí mòd bí ne mbálan ású nsɔ́ŋó kalada wō etə́.,,,False,False,Dr. Jean-Baptiste Ndono,Joseph Mballa,exact,False
+ewo,EWO-018,phrase,P0,Vous pouvez annuler la transaction avant confirmation.,Wa yálá súsí esama ósu na ó sínyí.,Wa yálá súsí esama ósu na ó sínyí.,no_lang_char,no_lang_char,False,False,Dr. Jean-Baptiste Ndono,Joseph Mballa,exact,False
+ewo,EWO-019,phrase,P0,Des frais supplémentaires peuvent s'appliquer.,Mákyé fə́ má ne kɔ́ndáná.,Mákyé fə́ má ne kɔ́ndáná.,,,False,False,Dr. Jean-Baptiste Ndono,Joseph Mballa,exact,False
+ewo,EWO-020,phrase,P0,Contactez le service client pour plus d'informations.,Kɔ́bɔ́ ne nsáŋá á nnam ású bíə́mə́ fə́.,Kɔ́bɔ́ ne nsáŋá á nnam ású bíə́mə́ fə́.,,,False,False,Dr. Jean-Baptiste Ndono,Joseph Mballa,exact,False
+ewo,G01,glossaire,P0,solde disponible,abálá é ne ngə́lə́,abálá é ne ngə́lə́,,,False,False,Dr. Jean-Baptiste Ndono,Joseph Mballa,exact,False
+ewo,G02,glossaire,P0,frais de transfert,mákyé má nkus/mátɔ́kó má nkúmbá,mákyé má nkus,,no_lang_char,False,False,Dr. Jean-Baptiste Ndono,Joseph Mballa,alternative,False
+ewo,G03,glossaire,P0,montant à envoyer,moní á ne na á kə́,moní á ne na á kə́,,,False,False,Dr. Jean-Baptiste Ndono,Joseph Mballa,exact,False
+ewo,G04,glossaire,P0,bénéficiaire,mòd á nnyɔ́ŋ / mòd á nnam,mòd á nnyɔ́ŋ,,,False,False,Dr. Jean-Baptiste Ndono,Joseph Mballa,alternative,False
+ewo,G05,glossaire,P0,code PIN,code PIN,code PIN,no_lang_char,no_lang_char,False,False,Dr. Jean-Baptiste Ndono,Joseph Mballa,exact,False
+ewo,G06,glossaire,P0,code de confirmation,code de confirmation,code de confirmation,no_lang_char,no_lang_char,False,False,Dr. Jean-Baptiste Ndono,Joseph Mballa,exact,False
+ewo,G07,glossaire,P1,taux d'intérêt,ntéláná á mfá'á,ntéláná á mfá'á,no_lang_char,no_lang_char,False,False,Dr. Jean-Baptiste Ndono,Joseph Mballa,exact,True
+ewo,G08,glossaire,P1,frais de dossier,mákyé má kalada,mákyé má kalada,no_lang_char,no_lang_char,False,False,Dr. Jean-Baptiste Ndono,Joseph Mballa,exact,False
+ewo,G09,glossaire,P1,pénalité de retard,mákyé má eyele,mákyé má eyele,no_lang_char,no_lang_char,False,False,Dr. Jean-Baptiste Ndono,Joseph Mballa,exact,False
+ewo,G10,glossaire,P1,capacité de remboursement,ngul á adzúmbí moní,ngul á adzúmbí moní,no_lang_char,no_lang_char,False,False,Dr. Jean-Baptiste Ndono,Joseph Mballa,exact,False
+ewo,G11,glossaire,P1,épargne automatique,kɔ́ndó á adzóŋó / adzóŋó automatic,adzóŋó automatic,english_leak,english_leak,True,True,Dr. Jean-Baptiste Ndono,Joseph Mballa,alternative,False
+ewo,G12,glossaire,P1,objectif d'épargne,nsɔ́ŋó á adzóŋó,nsɔ́ŋó á adzóŋó,,,False,False,Dr. Jean-Baptiste Ndono,Joseph Mballa,exact,False
+ewo,G13,glossaire,P0,dépôt,fúbílí moní / óláŋá,fúbílí moní,,no_lang_char,False,False,Dr. Jean-Baptiste Ndono,Joseph Mballa,alternative,False
+ewo,G14,glossaire,P0,retrait,kúdí moní,kúdí moní,no_lang_char,no_lang_char,False,False,Dr. Jean-Baptiste Ndono,Joseph Mballa,exact,False
+ewo,G15,glossaire,P0,paiement marchand,mákyé má nkàndá / màfúbílí má nkat,mákyé má nkàndá,no_lang_char,no_lang_char,False,False,Dr. Jean-Baptiste Ndono,Joseph Mballa,alternative,False
+ewo,G16,glossaire,P0,vérification d'identité,yéŋélí eyóŋ / nsámbá eyóŋ,yéŋélí eyóŋ,,,False,False,Dr. Jean-Baptiste Ndono,Joseph Mballa,alternative,False
+ewo,G17,glossaire,P0,pièce d'identité,kalada eyóŋ / lélá éyoŋ,kalada eyóŋ,,,False,False,Dr. Jean-Baptiste Ndono,Joseph Mballa,alternative,False
+ewo,G18,glossaire,P1,service client,nsáŋá á nnam / service client,service client,"french_leak,english_leak","source_copy,french_leak,english_leak,no_lang_char",True,True,Dr. Jean-Baptiste Ndono,Joseph Mballa,alternative,False
+ewo,G19,glossaire,P1,transaction,esama / nkus-nnyɔ́ŋ,esama,,no_lang_char,False,False,Dr. Jean-Baptiste Ndono,Joseph Mballa,alternative,False
+ewo,G20,glossaire,P1,remboursement,adzúmbí moní,adzúmbí moní,no_lang_char,no_lang_char,False,False,Dr. Jean-Baptiste Ndono,Joseph Mballa,exact,True
+ewo,G21,glossaire,P1,frais,mákyé,mákyé,no_lang_char,no_lang_char,False,False,Dr. Jean-Baptiste Ndono,Joseph Mballa,exact,True
+ewo,G22,glossaire,P1,total,mbodó,mbodó,no_lang_char,no_lang_char,False,False,Dr. Jean-Baptiste Ndono,Joseph Mballa,exact,False
+ewo,G23,glossaire,P1,échéance,eyele / émos á adzúmbí,eyele,no_lang_char,no_lang_char,False,False,Dr. Jean-Baptiste Ndono,Joseph Mballa,alternative,False
+ewo,G24,glossaire,P0,plafond,asúgú / nnamba,asúgú moní,no_lang_char,no_lang_char,False,False,Dr. Jean-Baptiste Ndono,Joseph Mballa,divergent,False
+ewo,G25,glossaire,P1,découvert,découvert / adzúmbí moní,découvert,no_lang_char,"source_copy,no_lang_char",False,True,Dr. Jean-Baptiste Ndono,Joseph Mballa,alternative,True
+ewo,G26,glossaire,P1,agence,agence / ndáb á nsáŋá,agence,,"source_copy,no_lang_char",False,True,Dr. Jean-Baptiste Ndono,Joseph Mballa,alternative,False
+ewo,G27,glossaire,P1,guichet,guichet / ekɔb,guichet,,"source_copy,no_lang_char",False,True,Dr. Jean-Baptiste Ndono,Joseph Mballa,alternative,True
+ewo,G28,glossaire,P0,code,code,code,no_lang_char,no_lang_char,False,False,Dr. Jean-Baptiste Ndono,Joseph Mballa,exact,True
+ewo,G29,glossaire,P1,référence,eñíŋlé / référence,référence,,"source_copy,no_lang_char",False,True,Dr. Jean-Baptiste Ndono,Joseph Mballa,alternative,True
+ewo,G30,glossaire,P1,reçu,kalada á nkus / reçu,kalada á nkus,no_lang_char,no_lang_char,False,False,Dr. Jean-Baptiste Ndono,Joseph Mballa,alternative,True
+ewo,G31,glossaire,P1,litige,nsón / nsɔm,nsón,,no_lang_char,False,False,Dr. Jean-Baptiste Ndono,Joseph Mballa,alternative,True
+ewo,G32,glossaire,P1,échec,eboŋle / éboŋ,eboŋle,,,False,False,Dr. Jean-Baptiste Ndono,Joseph Mballa,alternative,True
+ewo,G33,glossaire,P1,annulation,asúsí,asúsí,no_lang_char,no_lang_char,False,False,Dr. Jean-Baptiste Ndono,Joseph Mballa,exact,True
+ewo,G34,glossaire,P0,confirmation,nsinyi / adzíŋí,nsinyi,,no_lang_char,False,False,Dr. Jean-Baptiste Ndono,Joseph Mballa,alternative,False
+ewo,G35,glossaire,P0,sécurité,ɔ́bám / nsɔŋɔlɔ,ɔ́bám,,,False,False,Dr. Jean-Baptiste Ndono,Joseph Mballa,alternative,False
+ewo,G36,glossaire,P0,frais de change,mákyé má nsɛ́ŋlé moní,mákyé má nsɛ́ŋlé moní,,,False,False,Dr. Jean-Baptiste Ndono,Joseph Mballa,exact,False
+ewo,G37,glossaire,P0,taux de change,nsɛ́ŋlé moní / ntéláná moní,nsɛ́ŋlé moní,,,False,False,Dr. Jean-Baptiste Ndono,Joseph Mballa,alternative,False
+ewo,G38,glossaire,P1,montant,moní / mbodó,moní,no_lang_char,no_lang_char,False,False,Dr. Jean-Baptiste Ndono,Joseph Mballa,alternative,True
+ewo,G39,glossaire,P1,solde,abálá,abálá,no_lang_char,no_lang_char,False,False,Dr. Jean-Baptiste Ndono,Joseph Mballa,exact,True
+ewo,G40,glossaire,P0,destinataire,mòd á nnyɔ́ŋ,mòd á nnyɔ́ŋ,,,False,False,Dr. Jean-Baptiste Ndono,Joseph Mballa,exact,False
+ewo,SO-001,message,P1,Bonjour,Mbolani,Mbolani,no_lang_char,no_lang_char,False,False,Dr. Jean-Baptiste Ndono,Joseph Mballa,exact,False
+ewo,SO-002,message,P1,Votre compte,Kɔ́ndó wō,Kɔ́ndó wō,,,False,False,Dr. Jean-Baptiste Ndono,Joseph Mballa,exact,True
+ewo,SO-003,message,P0,Consultez votre solde et lancez un transfert en toute sécurité.,"Də́ŋə́ abálá wō, ó kɔ́bɔ́ fə́ nkus á nə́m ewɔ́lɔ́.",Də́ŋə́ abálá wō ne ó lóm moní ne ɔ́bám.,,,False,False,Dr. Jean-Baptiste Ndono,Joseph Mballa,divergent,False
+ewo,SO-004,message,P1,Effectuer un transfert,Bɔ́ nkus,Bɔ́ nkus,,,False,False,Dr. Jean-Baptiste Ndono,Joseph Mballa,exact,False
+ewo,SO-005,message,P0,Consulter les frais,Də́ŋə́ mákyé,Də́ŋə́ mákyé,,,False,False,Dr. Jean-Baptiste Ndono,Joseph Mballa,exact,False
+ewo,SO-006,message,P1,Transactions récentes,Bésama bí abóban eyele,Bésama bí abóban eyele,no_lang_char,no_lang_char,False,False,Dr. Jean-Baptiste Ndono,Joseph Mballa,exact,False
+ewo,SO-007,message,P0,Solde disponible,Abálá é ne ngə́lə́,Abálá é ne ngə́lə́,,,False,False,Dr. Jean-Baptiste Ndono,Joseph Mballa,exact,False
+ewo,SO-008,message,P0,Numéro de compte,Nɔ́mbələ á kɔ́ndó,Nɔ́mbələ á kɔ́ndó,,,False,False,Dr. Jean-Baptiste Ndono,Joseph Mballa,exact,True
+ewo,SO-009,message,P0,Frais de transfert,Mákyé má nkus,Mákyé má nkus,no_lang_char,no_lang_char,False,False,Dr. Jean-Baptiste Ndono,Joseph Mballa,exact,False
+ewo,SO-010,message,P0,Choisissez le type de transfert et le montant. Les frais sont calculés automatiquement.,Tə́ŋí nsɔm á nkus ábɔ́ŋ moní. Mákyé má balan automatic.,Tə́ŋí nsɔm á nkus ábɔ́ŋ moní. Mákyé má fásbáná emos ésə́.,english_leak,,True,False,Dr. Jean-Baptiste Ndono,Joseph Mballa,divergent,True
+ewo,SO-011,message,P1,Type d'opération,Nsɔm á esama,Nsɔm á esama,,,False,False,Dr. Jean-Baptiste Ndono,Joseph Mballa,exact,False
+ewo,SO-012,message,P0,Montant à envoyer,Moní á ne na á kə́,Moní á ne na á kə́,,,False,False,Dr. Jean-Baptiste Ndono,Joseph Mballa,exact,False
+ewo,SO-013,message,P0,Frais,Mákyé,Mákyé,no_lang_char,no_lang_char,False,False,Dr. Jean-Baptiste Ndono,Joseph Mballa,exact,True
+ewo,SO-014,message,P1,Gratuit,Á tékə́ mákyé,Á tékə́ mákyé,,,False,False,Dr. Jean-Baptiste Ndono,Joseph Mballa,exact,False
+ewo,SO-015,message,P0,Total à débiter,Mbodó á ne na á kúsí,Mbodó á ne na á kúsí,no_lang_char,no_lang_char,False,False,Dr. Jean-Baptiste Ndono,Joseph Mballa,exact,False
+ewo,SO-016,message,P0,Solde après opération,Abálá á mvús nkus,Abálá á mvús nkus,no_lang_char,no_lang_char,False,False,Dr. Jean-Baptiste Ndono,Joseph Mballa,exact,False
+ewo,SO-017,message,P1,Continuer,Kə́ ósu,Kə́ ósu,,,False,False,Dr. Jean-Baptiste Ndono,Joseph Mballa,exact,False
+ewo,SO-018,message,P1,Retour,Kiri mvús,Kiri mvús,no_lang_char,no_lang_char,False,False,Dr. Jean-Baptiste Ndono,Joseph Mballa,exact,False
+ewo,SO-019,message,P0,Bénéficiaire,Mòd á nnyɔ́ŋ,Mòd á nnyɔ́ŋ,,,False,False,Dr. Jean-Baptiste Ndono,Joseph Mballa,exact,True
+ewo,SO-020,message,P0,Renseignez les informations du destinataire. Vérifiez toujours le numéro avant de valider.,Lóndó bíə́mə́ bí mòd á nnyɔ́ŋ. Yéŋə́ nɔ́mbələ ósu na ó sínyí.,Lóndó bíə́mə́ bí mòd á nnyɔ́ŋ. Yéŋə́ nɔ́mbələ ósu na ó sínyí.,,,False,False,Dr. Jean-Baptiste Ndono,Joseph Mballa,exact,False
+ewo,SO-021,message,P0,Nom du bénéficiaire,Ezóŋ é mòd á nnyɔ́ŋ,Ezóŋ é mòd á nnyɔ́ŋ,,,False,False,Dr. Jean-Baptiste Ndono,Joseph Mballa,exact,False
+ewo,SO-022,message,P0,Numéro de téléphone,Nɔ́mbələ á télafon,Nɔ́mbələ á télafon,,,False,False,Dr. Jean-Baptiste Ndono,Joseph Mballa,exact,True
+ewo,SO-023,message,P1,Motif du transfert,Nzólé á nkus,Nzólé á nkus,no_lang_char,no_lang_char,False,False,Dr. Jean-Baptiste Ndono,Joseph Mballa,exact,False
+ewo,SO-024,message,P1,Note (optionnel),Nsɔ́ŋó (á ne eyáŋá),Nsɔ́ŋó (á ne eyáŋá),,,False,False,Dr. Jean-Baptiste Ndono,Joseph Mballa,exact,False
+ewo,SO-025,message,P0,J'ai vérifié le nom et le numéro du bénéficiaire.,Me yéŋéya ezóŋ á nɔ́mbələ á mòd á nnyɔ́ŋ.,Me yéŋéya ezóŋ ne nɔ́mbələ á mòd á nnyɔ́ŋ.,,,False,False,Dr. Jean-Baptiste Ndono,Joseph Mballa,near,False
+ewo,SO-026,message,P0,Ce bénéficiaire n'a jamais été utilisé sur ce compte. Vérifiez le numéro avant de continuer.,Mòd á nnyɔ́ŋ nyó a tékə́ yáne bóban á kɔ́ndó nyó. Yéŋə́ nɔ́mbələ ósu na ó kə́ ósu.,Mòd á nnyɔ́ŋ nyó a tékə́ yáne bóban á kɔ́ndó nyó. Yéŋə́ nɔ́mbələ ósu na ó kə́ ósu.,,,False,False,Dr. Jean-Baptiste Ndono,Joseph Mballa,exact,False
+ewo,SO-027,message,P1,Récapitulatif,Afúlásí,Afúlásí,no_lang_char,no_lang_char,False,False,Dr. Jean-Baptiste Ndono,Joseph Mballa,exact,False
+ewo,SO-028,message,P0,Vérifiez les informations avant de confirmer le transfert.,Yéŋə́ bíə́mə́ ósu na ó sínyí nkus.,Yéŋə́ bíə́mə́ ósu na ó sínyí nkus.,,,False,False,Dr. Jean-Baptiste Ndono,Joseph Mballa,exact,False
+ewo,SO-029,message,P0,Montant,Moní / Mbodó,Moní,no_lang_char,no_lang_char,False,False,Dr. Jean-Baptiste Ndono,Joseph Mballa,alternative,True
+ewo,SO-030,message,P0,Total débité,Mbodó á kúsíya,Mbodó á kúsíya,no_lang_char,no_lang_char,False,False,Dr. Jean-Baptiste Ndono,Joseph Mballa,exact,False
+ewo,SO-031,message,P1,Téléphone,Télafon,Télafon,no_lang_char,no_lang_char,False,False,Dr. Jean-Baptiste Ndono,Joseph Mballa,exact,False
+ewo,SO-032,message,P0,Référence,Eñíŋlé / Référence,Référence,,"source_copy,no_lang_char",False,True,Dr. Jean-Baptiste Ndono,Joseph Mballa,alternative,True
+ewo,SO-033,message,P1,Opération,Esama,Esama,no_lang_char,no_lang_char,False,False,Dr. Jean-Baptiste Ndono,Joseph Mballa,exact,True
+ewo,SO-034,message,P0,Je confirme que les informations ci-dessus sont correctes.,Me tɔ́ŋlé na bíə́mə́ bí ne yɔ́bɔ yé ne ébən.,Me tɔ́ŋlé na bíə́mə́ bí ne ébən.,,,False,False,Dr. Jean-Baptiste Ndono,Joseph Mballa,divergent,False
+ewo,SO-035,message,P0,Confirmer le transfert,Sínyí nkus,Sínyí nkus,no_lang_char,no_lang_char,False,False,Dr. Jean-Baptiste Ndono,Joseph Mballa,exact,False
+ewo,SO-036,message,P1,Modifier,Tsíŋí / Modifier,Tsíŋí,french_verb,,True,False,Dr. Jean-Baptiste Ndono,Joseph Mballa,alternative,False
+ewo,SO-037,message,P1,Transfert effectué,Nkus á bɔ́ya,Nkus á bɔ́ya,,,False,False,Dr. Jean-Baptiste Ndono,Joseph Mballa,exact,False
+ewo,SO-038,message,P1,Votre transfert a été envoyé avec succès.,Nkus wō á lómya ne adzáŋ.,Nkus wō á lómya ne adzáŋ.,,,False,False,Dr. Jean-Baptiste Ndono,Joseph Mballa,exact,False
+ewo,SO-039,message,P1,Statut,Ntéláná / Statut,Statut,no_lang_char,"source_copy,no_lang_char",False,True,Dr. Jean-Baptiste Ndono,Joseph Mballa,alternative,False
+ewo,SO-040,message,P1,Succès,Adzáŋ / Succès,Adzáŋ,,,False,False,Dr. Jean-Baptiste Ndono,Joseph Mballa,alternative,False
+ewo,SO-041,message,P1,Nouveau transfert,Mfə́fə́ nkus,Mfə́fə́ nkus,,,False,False,Dr. Jean-Baptiste Ndono,Joseph Mballa,exact,True
+ewo,SO-042,message,P1,Message important,Mŋkát á mfi,Mŋkát á mfi,,,False,False,Dr. Jean-Baptiste Ndono,Joseph Mballa,exact,False
+ewo,SO-043,message,P1,Fermer,Fúdbá,Fúdbá,no_lang_char,no_lang_char,False,False,Dr. Jean-Baptiste Ndono,Joseph Mballa,exact,True
+ewo,SO-044,message,P0,Une erreur est survenue,Eboŋle é bɔ́ya,Eboŋle é bɔ́ya,,,False,False,Dr. Jean-Baptiste Ndono,Joseph Mballa,exact,False
+ewo,SO-045,message,P0,Alerte de sécurité,Méyáŋá má ɔ́bám,Méyáŋá má ɔ́bám,,,False,False,Dr. Jean-Baptiste Ndono,Joseph Mballa,exact,False
+ewo,SO-046,message,P0,Sécurité,Ɔ́bám,Ɔ́bám,no_lang_char,no_lang_char,False,False,Dr. Jean-Baptiste Ndono,Joseph Mballa,exact,True
+ewo,SO-047,message,P0,Vérifiez toujours le nom et le numéro du bénéficiaire avant de confirmer un transfert.,Yéŋə́ ezóŋ á nɔ́mbələ á mòd á nnyɔ́ŋ ósu na ó sínyí nkus.,Yéŋə́ ezóŋ á nɔ́mbələ á mòd á nnyɔ́ŋ ósu na ó sínyí.,,,False,False,Dr. Jean-Baptiste Ndono,Joseph Mballa,near,False
+ewo,SO-048,message,P1,Connexion sécurisée,Nláŋáná á ɔ́bám,Nláŋáná á ɔ́bám,,,False,False,Dr. Jean-Baptiste Ndono,Joseph Mballa,exact,False
+ewo,SO-049,message,P1,Safinum Pay — environnement de démonstration. Ne saisissez aucune donnée personnelle réelle.,Safinum Pay — vèyá á esáŋá. Kə́ lóndó bíə́mə́ bí eñíŋ wō.,Safinum Pay — vèyá á esáŋá. Kə́ lóndó bíə́mə́ bí eñíŋ wō.,,,False,False,Dr. Jean-Baptiste Ndono,Joseph Mballa,exact,False
+ewo,SO-050,message,P1,"Environnement de test — données fictives, aucune transaction réelle.",Vèyá á esáŋá — bíə́mə́ bí ngə́lə́.,Vèyá á esáŋá — bíə́mə́ bí ngə́lə́.,,,False,False,Dr. Jean-Baptiste Ndono,Joseph Mballa,exact,False
+ewo,SO-051,message,P1,"Bonjour, Amina.","Mbolani, Amina.","Mbolani, Amina.",no_lang_char,no_lang_char,False,False,Dr. Jean-Baptiste Ndono,Joseph Mballa,exact,False
+ewo,SO-052,message,P1,Amina Ngo Bell,Amina Ngo Bell,Amina Ngo Bell,no_lang_char,no_lang_char,False,False,Dr. Jean-Baptiste Ndono,Joseph Mballa,exact,False
+ewo,SO-053,message,P1,Transfert instantané et gratuit,Nkus á oyá-oyá á tékə́ mákyé,Nkus á oyá-oyá á tékə́ mákyé,,,False,False,Dr. Jean-Baptiste Ndono,Joseph Mballa,exact,False
+ewo,SO-054,message,P0,"Frais de 1,5 % (min. 100 FCFA, max. 2 500 FCFA)","Mákyé á 1,5 % (min. 100 FCFA, max. 2 500 FCFA)","Mákyé á 1,5 % (min. 100 FCFA, max. 2 500 FCFA)",no_lang_char,no_lang_char,False,False,Dr. Jean-Baptiste Ndono,Joseph Mballa,exact,False
+ewo,SO-055,message,P0,"Frais de 2 % (min. 200 FCFA, max. 5 000 FCFA)","Mákyé á 2 % (min. 200 FCFA, max. 5 000 FCFA)","Mákyé á 2 % (min. 200 FCFA, max. 5 000 FCFA)",no_lang_char,no_lang_char,False,False,Dr. Jean-Baptiste Ndono,Joseph Mballa,exact,False
+ewo,SO-056,message,P1,Mobile Money,Mobile Money,Mobile Money,no_lang_char,no_lang_char,False,False,Dr. Jean-Baptiste Ndono,Joseph Mballa,exact,False
+ewo,SO-057,message,P1,Compte Safinum,Kɔ́ndó á Safinum,Kɔ́ndó á Safinum,,,False,False,Dr. Jean-Baptiste Ndono,Joseph Mballa,exact,False
+ewo,SO-058,message,P1,Autre banque,Banque fə́,Banque fə́,,,False,False,Dr. Jean-Baptiste Ndono,Joseph Mballa,exact,False
+ewo,SO-059,message,P1,Paiement marchand,Mákyé má nkàndá,Mákyé má nkàndá,no_lang_char,no_lang_char,False,False,Dr. Jean-Baptiste Ndono,Joseph Mballa,exact,False
+ewo,SO-060,message,P1,Paiement de services,Mákyé má nsáŋá,Mákyé má nsáŋá,,,False,False,Dr. Jean-Baptiste Ndono,Joseph Mballa,exact,False
+ewo,SO-061,message,P1,Salaire reçu,Fáwá á nnyɔ́ŋya,Fáwá á nnyɔ́ŋya,,,False,False,Dr. Jean-Baptiste Ndono,Joseph Mballa,exact,False
+ewo,SO-062,message,P1,Transfert reçu,Nkus á nnyɔ́ŋya,Nkus á nnyɔ́ŋya,,,False,False,Dr. Jean-Baptiste Ndono,Joseph Mballa,exact,False
+ewo,SO-063,message,P1,Facture électricité,Facture électricité,Facture électricité,"source_copy,french_leak,no_lang_char","source_copy,french_leak,no_lang_char",True,True,Dr. Jean-Baptiste Ndono,Joseph Mballa,exact,False
+ewo,SO-064,message,P0,Le montant doit être supérieur à zéro.,Moní á yian yə́bə́ étə́ŋ éyɔŋ zéró.,Moní á yian yə́bə́ étə́ŋ éyɔŋ zéró.,,,False,False,Dr. Jean-Baptiste Ndono,Joseph Mballa,exact,False
+ewo,SO-065,message,P0,Solde insuffisant pour effectuer ce transfert.,Abálá á tékə́ yáne kɔ́ŋ na á bɔ nkus nyó.,Abálá á tékə́ yáne ású nkus nyó.,,,False,False,Dr. Jean-Baptiste Ndono,Joseph Mballa,divergent,True
+ewo,SO-066,message,P0,Veuillez renseigner le nom et le numéro du bénéficiaire.,Və́ ezóŋ á nɔ́mbələ á mòd á nnyɔ́ŋ.,Lóndó ezóŋ ne nɔ́mbələ á mòd á nnyɔ́ŋ.,,,False,False,Dr. Jean-Baptiste Ndono,Joseph Mballa,divergent,False
+ewo,SO-067,message,P0,Alerte de sécurité : vérifiez le numéro du bénéficiaire avant de continuer.,Méyáŋá má ɔ́bám : yéŋə́ nɔ́mbələ á mòd á nnyɔ́ŋ ósu na ó kə́ ósu.,Méyáŋá má ɔ́bám : yéŋə́ nɔ́mbələ á mòd á nnyɔ́ŋ ósu.,,,False,False,Dr. Jean-Baptiste Ndono,Joseph Mballa,near,False
+ewo,SO-068,message,P0,Alerte de sécurité : ce bénéficiaire n'a jamais été utilisé sur ce compte.,Méyáŋá má ɔ́bám : mòd á nnyɔ́ŋ nyó a tékə́ yáne bóban á kɔ́ndó nyó.,Méyáŋá má ɔ́bám : mòd á nnyɔ́ŋ nyó a tékə́ yáne bóban.,,,False,False,Dr. Jean-Baptiste Ndono,Joseph Mballa,near,False
+ewo,SO-069,message,P0,Erreur réseau : le service est temporairement indisponible. Réessayez.,Eboŋle é réseau : nsáŋá á ne tə́té. Bámbáná dábə́.,Erreur réseau : nsáŋá á ne tə́té. Bámbáná dábə́.,,french_leak,False,True,Dr. Jean-Baptiste Ndono,Joseph Mballa,near,False
+ewo,SO-070,message,P0,Vous devez confirmer les informations avant de valider le transfert.,Wa yian sínyí bíə́mə́ ósu na ó kát nkus.,Wa yian sínyí bíə́mə́ ósu na ó valider nkus.,,french_verb,False,True,Dr. Jean-Baptiste Ndono,Joseph Mballa,near,False
+dua,DUA-001,phrase,P0,Le solde est de [[NUM_0]] FCFA.,Mɔ̀nì mwé ɓáyí mu yé ne [[NUM_0]] FCFA.,Mɔ̀nì mé ɓáyí mu yé ne [[NUM_0]] FCFA.,,,False,False,Dr. Ebongue Din,Papa Moukoko,near,False
+dua,DUA-002,phrase,P0,Les frais de transfert sont de [[NUM_1]] FCFA.,Móǹgá mwá lómò mɔ̀nì mu yé ne [[NUM_1]] FCFA.,Longele la lómò mɔ̀nì mu yé ne [[NUM_1]] FCFA.,,,False,False,Dr. Ebongue Din,Papa Moukoko,divergent,False
+dua,DUA-003,phrase,P0,Le montant total débité sera de [[NUM_2]] FCFA.,Mɔ̀nì mwésé mú mákusane mú maɓa ne [[NUM_2]] FCFA.,Mɔ̀nì mwésé mú mákusane mú maɓa ne [[NUM_2]] FCFA.,,,False,False,Dr. Ebongue Din,Papa Moukoko,exact,False
+dua,DUA-004,phrase,P0,Ne partagez jamais votre code PIN.,Suka ɓoléyé code PIN ɔŋ na moto a pé.,Suka ɓoléyé code PIN ɔŋ na moto a pé.,,,False,False,Dr. Ebongue Din,Papa Moukoko,exact,False
+dua,DUA-005,phrase,P0,Vérifiez le nom du bénéficiaire avant de confirmer.,Jeele dina la moto nu mányɔ̀ŋɔ̀ oboso na o adise.,Jeele dina la moto nu mányɔ̀ŋɔ̀ oboso na o adise.,,,False,False,Dr. Ebongue Din,Papa Moukoko,exact,False
+dua,DUA-006,phrase,P0,Le bénéficiaire reçoit le montant net après déduction des frais.,Moto nu mányɔ̀ŋɔ̀ a mányɔ̀ŋɔ̀ mɔ̀nì ma pɔ́kɔ̂ ombusa kula móǹgá.,Moto nu mányɔ̀ŋɔ̀ a mányɔ̀ŋɔ̀ mɔ̀nì ma pɔ́kɔ̂ ombusa kula longele.,,,False,False,Dr. Ebongue Din,Papa Moukoko,near,False
+dua,DUA-007,phrase,P0,Le taux d'intérêt mensuel est de 2 %.,Edinge a longele a mɔ́dí e yé 2 %.,Edinge a longele a mɔ́dí e yé 2 %.,,,False,False,Dr. Ebongue Din,Papa Moukoko,exact,False
+dua,DUA-008,phrase,P0,"En cas de retard, une pénalité de 1 % par jour est appliquée.","Yɛ̂ pé boɓi ɓwâ pele, móǹgá mwá 1 % mwá búnyá mu máɓolee.","Yɛ̂ pé boɓi ɓwâ pele, longele la 1 % mwá búnyá mu máɓolee.",,,False,False,Dr. Ebongue Din,Papa Moukoko,near,False
+dua,DUA-009,phrase,P0,Votre compte a été crédité de [[NUM_0]] FCFA.,Kompa ɔŋ e nyóŋɛ̂ [[NUM_0]] FCFA.,Kompa ɔŋ e nyóŋɛ̂ [[NUM_0]] FCFA.,,,False,False,Dr. Ebongue Din,Papa Moukoko,exact,False
+dua,DUA-010,phrase,P0,Votre compte a été débité de [[NUM_0]] FCFA.,Kompa ɔŋ e kusâ [[NUM_0]] FCFA.,Kompa ɔŋ e kusâ [[NUM_0]] FCFA.,,,False,False,Dr. Ebongue Din,Papa Moukoko,exact,False
+dua,DUA-011,phrase,P0,Le transfert a été effectué avec succès.,Soma mɔ̀nì e ɓoɓí na ɓwám.,Soma mɔ̀nì e ɓoɓí na ɓwám.,,,False,False,Dr. Ebongue Din,Papa Moukoko,exact,False
+dua,DUA-012,phrase,P0,Le transfert est en attente de confirmation.,Soma mɔ̀nì e yé a jaŋgi a adise.,Soma mɔ̀nì e yé a jaŋgi a adise.,,,False,False,Dr. Ebongue Din,Papa Moukoko,exact,False
+dua,DUA-013,phrase,P0,Code PIN incorrect. Veuillez réessayer.,Code PIN e titi téŋɛ̂. Byápé.,Code PIN e titi téŋɛ̂. Byápé.,,,False,False,Dr. Ebongue Din,Papa Moukoko,exact,False
+dua,DUA-014,phrase,P0,Ne communiquez jamais votre code OTP à un tiers.,Suka ɓoléyé code OTP ɔŋ na moto a pé.,Suka ɓoléyé code OTP ɔŋ na moto a pé.,,,False,False,Dr. Ebongue Din,Papa Moukoko,exact,False
+dua,DUA-015,phrase,P0,Cette transaction est sécurisée par FINAKA.,Nu eɓolo e yé e batamɛ̂ na FINAKA.,Nu eɓolo e yé e batamɛ̂ na FINAKA.,,,False,False,Dr. Ebongue Din,Papa Moukoko,exact,False
+dua,DUA-016,phrase,P0,Le solde disponible est insuffisant.,Mɔ̀nì mwé ɓáyí mu sumbidi.,Mɔ̀nì mé ɓáyí mu sumbidi.,,,False,False,Dr. Ebongue Din,Papa Moukoko,near,False
+dua,DUA-017,phrase,P0,Les informations personnelles sont utilisées uniquement pour l'étude de votre dossier.,Bina ɓɔŋ ɓa moto ɓa maɓolane ndé o jeele kalati ɔŋ.,Bina ɓɔŋ bá moto ɓa maɓolane ndé o jeele kalati ɔŋ.,,,False,False,Dr. Ebongue Din,Papa Moukoko,near,False
+dua,DUA-018,phrase,P0,Vous pouvez annuler la transaction avant confirmation.,O ne na o ɓumse soma oboso na adise.,O ne na o ɓumse soma oboso na adise.,,,False,False,Dr. Ebongue Din,Papa Moukoko,exact,False
+dua,DUA-019,phrase,P0,Des frais supplémentaires peuvent s'appliquer.,Móǹgá mepé me ne na me ɓata.,Longele mepé me ne na me ɓata.,,,False,False,Dr. Ebongue Din,Papa Moukoko,divergent,False
+dua,DUA-020,phrase,P0,Contactez le service client pour plus d'informations.,Bena mɓola a ɓato ású bina mepé.,Bena mɓola a ɓato ású bina mepé.,,,False,False,Dr. Ebongue Din,Papa Moukoko,exact,False
+dua,G01,glossaire,P0,solde disponible,mɔ̀nì mwé ɓáyí,mɔ̀nì mé ɓáyí,,,False,False,Dr. Ebongue Din,Papa Moukoko,near,False
+dua,G02,glossaire,P0,frais de transfert,móǹgá mwá lómò mɔ̀nì,longele la soma mɔ̀nì,,,False,False,Dr. Ebongue Din,Papa Moukoko,divergent,False
+dua,G03,glossaire,P0,montant à envoyer,mɔ̀nì mú yéná na lómò,mɔ̀nì mú yéná na lómò,,,False,False,Dr. Ebongue Din,Papa Moukoko,exact,False
+dua,G04,glossaire,P0,bénéficiaire,moto nu mányɔ̀ŋɔ̀,moto nu mányɔ̀ŋɔ̀,,,False,False,Dr. Ebongue Din,Papa Moukoko,exact,False
+dua,G05,glossaire,P0,code PIN,code PIN,code PIN,no_lang_char,no_lang_char,False,False,Dr. Ebongue Din,Papa Moukoko,exact,False
+dua,G06,glossaire,P0,code de confirmation,code confirmation,code confirmation,no_lang_char,no_lang_char,False,False,Dr. Ebongue Din,Papa Moukoko,exact,False
+dua,G07,glossaire,P1,taux d'intérêt,edinge a longele,edinge a longele,no_lang_char,no_lang_char,False,False,Dr. Ebongue Din,Papa Moukoko,exact,False
+dua,G08,glossaire,P1,frais de dossier,móǹgá mwá kalati,longele la kalati,no_lang_char,no_lang_char,False,False,Dr. Ebongue Din,Papa Moukoko,divergent,False
+dua,G09,glossaire,P1,pénalité de retard,móǹgá mwá boɓi,longele la boɓi,,,False,False,Dr. Ebongue Din,Papa Moukoko,divergent,False
+dua,G10,glossaire,P1,capacité de remboursement,nginya a timbise mɔ̀nì,nginya a timbise mɔ̀nì,,,False,False,Dr. Ebongue Din,Papa Moukoko,exact,False
+dua,G11,glossaire,P1,épargne automatique,bálà mɔ̀nì a ɓuɓéɓuɓé,bálà mɔ̀nì a ɓuɓéɓuɓé,,,False,False,Dr. Ebongue Din,Papa Moukoko,exact,False
+dua,G12,glossaire,P1,objectif d'épargne,sɔŋɔ a bálà mɔ̀nì,sɔŋɔ a bálà mɔ̀nì,,,False,False,Dr. Ebongue Din,Papa Moukoko,exact,False
+dua,G13,glossaire,P0,dépôt,tutula mɔ̀nì,tutula mɔ̀nì,,,False,False,Dr. Ebongue Din,Papa Moukoko,exact,False
+dua,G14,glossaire,P0,retrait,kusa mɔ̀nì,kula mɔ̀nì,,,False,False,Dr. Ebongue Din,Papa Moukoko,near,False
+dua,G15,glossaire,P0,paiement marchand,wasa mɔ̀nì a nkándà,wasa mɔ̀nì a nkándà,,,False,False,Dr. Ebongue Din,Papa Moukoko,exact,False
+dua,G16,glossaire,P0,vérification d'identité,jeele la dina na edube,jeele la dina na edube,no_lang_char,no_lang_char,False,False,Dr. Ebongue Din,Papa Moukoko,exact,False
+dua,G17,glossaire,P0,pièce d'identité,kalati a edube,kalati a edube,no_lang_char,no_lang_char,False,False,Dr. Ebongue Din,Papa Moukoko,exact,False
+dua,G18,glossaire,P1,service client,mɓola a ɓato / service client,mɓola a ɓato,"french_leak,english_leak",,True,False,Dr. Ebongue Din,Papa Moukoko,alternative,False
+dua,G19,glossaire,P1,transaction,eɓolo a mɔ̀nì / soma,eɓolo a mɔ̀nì,,,False,False,Dr. Ebongue Din,Papa Moukoko,alternative,False
+dua,G20,glossaire,P1,remboursement,timbise mɔ̀nì,timbise mɔ̀nì,,,False,False,Dr. Ebongue Din,Papa Moukoko,exact,False
+dua,G21,glossaire,P1,frais,móǹgá,longele,no_lang_char,no_lang_char,False,False,Dr. Ebongue Din,Papa Moukoko,divergent,False
+dua,G22,glossaire,P1,total,mɔ̀nì mwésé,mɔ̀nì mwésé,,,False,False,Dr. Ebongue Din,Papa Moukoko,exact,False
+dua,G23,glossaire,P1,échéance,búnyá ɓwá timbise,búnyá ɓwá timbise,,,False,False,Dr. Ebongue Din,Papa Moukoko,exact,False
+dua,G24,glossaire,P0,plafond,sókó a mɔ̀nì,sókó a mɔ̀nì,,,False,False,Dr. Ebongue Din,Papa Moukoko,exact,False
+dua,G25,glossaire,P1,découvert,découvert,découvert,"source_copy,no_lang_char","source_copy,no_lang_char",True,True,Dr. Ebongue Din,Papa Moukoko,exact,False
+dua,G26,glossaire,P1,agence,wuma a eɓolo / agence,wuma a eɓolo,,,False,False,Dr. Ebongue Din,Papa Moukoko,alternative,False
+dua,G27,glossaire,P1,guichet,guichet,guichet,"source_copy,no_lang_char","source_copy,no_lang_char",True,True,Dr. Ebongue Din,Papa Moukoko,exact,False
+dua,G28,glossaire,P0,code,code,code,no_lang_char,no_lang_char,False,False,Dr. Ebongue Din,Papa Moukoko,exact,False
+dua,G29,glossaire,P1,référence,référence,référence,"source_copy,no_lang_char","source_copy,no_lang_char",True,True,Dr. Ebongue Din,Papa Moukoko,exact,False
+dua,G30,glossaire,P1,reçu,kalati a suma / reçu,kalati a suma,no_lang_char,no_lang_char,False,False,Dr. Ebongue Din,Papa Moukoko,alternative,False
+dua,G31,glossaire,P1,litige,nyele / matuka,nyele,no_lang_char,no_lang_char,False,False,Dr. Ebongue Din,Papa Moukoko,alternative,False
+dua,G32,glossaire,P1,échec,boɓi,boɓi,,,False,False,Dr. Ebongue Din,Papa Moukoko,exact,False
+dua,G33,glossaire,P1,annulation,ɓumse,ɓumse,,,False,False,Dr. Ebongue Din,Papa Moukoko,exact,False
+dua,G34,glossaire,P0,confirmation,adise,adise,no_lang_char,no_lang_char,False,False,Dr. Ebongue Din,Papa Moukoko,exact,False
+dua,G35,glossaire,P0,sécurité,bata,bata,no_lang_char,no_lang_char,False,False,Dr. Ebongue Din,Papa Moukoko,exact,False
+dua,G36,glossaire,P0,frais de change,móǹgá mwá tukwisa mɔ̀nì,longele la tukwisa mɔ̀nì,,,False,False,Dr. Ebongue Din,Papa Moukoko,divergent,False
+dua,G37,glossaire,P0,taux de change,edinge a tukwisa mɔ̀nì,edinge a tukwisa mɔ̀nì,,,False,False,Dr. Ebongue Din,Papa Moukoko,exact,False
+dua,G38,glossaire,P1,montant,mɔ̀nì,mɔ̀nì,,,False,False,Dr. Ebongue Din,Papa Moukoko,exact,False
+dua,G39,glossaire,P1,solde,mɔ̀nì mwé ɓáyí,mɔ̀nì mé ɓáyí,,,False,False,Dr. Ebongue Din,Papa Moukoko,near,True
+dua,G40,glossaire,P0,destinataire,moto nu mányɔ̀ŋɔ̀,moto nu mányɔ̀ŋɔ̀,,,False,False,Dr. Ebongue Din,Papa Moukoko,exact,False
+dua,SO-001,message,P1,Bonjour,Idiba / Ã mbɔti,Idiba,,no_lang_char,False,False,Dr. Ebongue Din,Papa Moukoko,alternative,False
+dua,SO-002,message,P1,Votre compte,Kompa ɔŋ,Kompa ɔŋ,,,False,False,Dr. Ebongue Din,Papa Moukoko,exact,True
+dua,SO-003,message,P0,Consultez votre solde et lancez un transfert en toute sécurité.,"Jeŋe mɔ̀nì mwé ɓáyí, o lome pé mɔ̀nì na bata.","Jeŋe mɔ̀nì mé ɓáyí, o lome mɔ̀nì na bata.",,,False,False,Dr. Ebongue Din,Papa Moukoko,near,False
+dua,SO-004,message,P1,Effectuer un transfert,Lómò mɔ̀nì,Lómò mɔ̀nì,,,False,False,Dr. Ebongue Din,Papa Moukoko,exact,False
+dua,SO-005,message,P0,Consulter les frais,Jeŋe móǹgá,Jeŋe longele,,,False,False,Dr. Ebongue Din,Papa Moukoko,divergent,False
+dua,SO-006,message,P1,Transactions récentes,Bina ba mɔ̀nì ba ɓoɓí ɓosɔ̂,Bina ba mɔ̀nì ba ɓoɓí ɓosɔ̂,,,False,False,Dr. Ebongue Din,Papa Moukoko,exact,False
+dua,SO-007,message,P0,Solde disponible,Mɔ̀nì mwé ɓáyí,Mɔ̀nì mé ɓáyí,,,False,False,Dr. Ebongue Din,Papa Moukoko,near,False
+dua,SO-008,message,P0,Numéro de compte,Nombara a kompa,Nombara a kompa,no_lang_char,no_lang_char,False,False,Dr. Ebongue Din,Papa Moukoko,exact,False
+dua,SO-009,message,P0,Frais de transfert,Móǹgá mwá lómò mɔ̀nì,Longele la soma mɔ̀nì,,,False,False,Dr. Ebongue Din,Papa Moukoko,divergent,False
+dua,SO-010,message,P0,Choisissez le type de transfert et le montant. Les frais sont calculés automatiquement.,Pɔ́ yá lómò na ɓwéyá ɓwá mɔ̀nì. Móǹgá mu maɓolane ɓuɓéɓuɓé.,Pɔ́ yá lómò na ɓwéyá ɓwá mɔ̀nì. Longele mu maɓolane ɓuɓéɓuɓé.,,,False,False,Dr. Ebongue Din,Papa Moukoko,near,False
+dua,SO-011,message,P1,Type d'opération,Epepe a eɓolo,Epepe a eɓolo,,,False,False,Dr. Ebongue Din,Papa Moukoko,exact,False
+dua,SO-012,message,P0,Montant à envoyer,Mɔ̀nì mú yéná na lómò,Mɔ̀nì mú yéná na lómò,,,False,False,Dr. Ebongue Din,Papa Moukoko,exact,False
+dua,SO-013,message,P0,Frais,Móǹgá,Longele,no_lang_char,no_lang_char,False,False,Dr. Ebongue Din,Papa Moukoko,divergent,False
+dua,SO-014,message,P1,Gratuit,Esikaye móǹgá,Esikaye longele,no_lang_char,no_lang_char,False,False,Dr. Ebongue Din,Papa Moukoko,divergent,False
+dua,SO-015,message,P0,Total à débiter,Mɔ̀nì mwésé mú mákusane,Mɔ̀nì mwésé mú mákusane,,,False,False,Dr. Ebongue Din,Papa Moukoko,exact,False
+dua,SO-016,message,P0,Solde après opération,Mɔ̀nì mwé ɓáyí ombusa soma,Mɔ̀nì mé ɓáyí ombusa soma,,,False,False,Dr. Ebongue Din,Papa Moukoko,near,False
+dua,SO-017,message,P1,Continuer,Kɛ́ oboso,Kɛ́ oboso,,,False,False,Dr. Ebongue Din,Papa Moukoko,exact,False
+dua,SO-018,message,P1,Retour,Timbia ombusa,Timbia ombusa,no_lang_char,no_lang_char,False,False,Dr. Ebongue Din,Papa Moukoko,exact,False
+dua,SO-019,message,P0,Bénéficiaire,Moto nu mányɔ̀ŋɔ̀,Moto nu mányɔ̀ŋɔ̀,,,False,False,Dr. Ebongue Din,Papa Moukoko,exact,False
+dua,SO-020,message,P0,Renseignez les informations du destinataire. Vérifiez toujours le numéro avant de valider.,Londe bina bá moto nu mányɔ̀ŋɔ̀. Jeele nombara oboso na o disese.,Londe bina bá moto nu mányɔ̀ŋɔ̀. Jeele nombara oboso na o disese.,,,False,False,Dr. Ebongue Din,Papa Moukoko,exact,False
+dua,SO-021,message,P0,Nom du bénéficiaire,Dina la moto nu mányɔ̀ŋɔ̀,Dina la moto nu mányɔ̀ŋɔ̀,,,False,False,Dr. Ebongue Din,Papa Moukoko,exact,False
+dua,SO-022,message,P0,Numéro de téléphone,Nombara a telefon,Nombara a telefon,no_lang_char,no_lang_char,False,False,Dr. Ebongue Din,Papa Moukoko,exact,False
+dua,SO-023,message,P1,Motif du transfert,Njóm a lómò mɔ̀nì,Njóm a lómò mɔ̀nì,,,False,False,Dr. Ebongue Din,Papa Moukoko,exact,False
+dua,SO-024,message,P1,Note (optionnel),Bedangwedi (yaya),Bedangwedi (yaya),no_lang_char,no_lang_char,False,False,Dr. Ebongue Din,Papa Moukoko,exact,False
+dua,SO-025,message,P0,J'ai vérifié le nom et le numéro du bénéficiaire.,Na jeeleyɛ̂ dina na nombara a moto nu mányɔ̀ŋɔ̀.,Na jeeleyɛ̂ dina na nombara a moto nu mányɔ̀ŋɔ̀.,,,False,False,Dr. Ebongue Din,Papa Moukoko,exact,False
+dua,SO-026,message,P0,Ce bénéficiaire n'a jamais été utilisé sur ce compte. Vérifiez le numéro avant de continuer.,Nu moto nu mányɔ̀ŋɔ̀ asóɓanó ɓo polo a mí kompa. Jeele nombara oboso na o kɛ́ oboso.,Nu moto nu mányɔ̀ŋɔ̀ asóɓanó ɓo polo a mí kompa. Jeele nombara oboso na o kɛ́ oboso.,,,False,False,Dr. Ebongue Din,Papa Moukoko,exact,False
+dua,SO-027,message,P1,Récapitulatif,Tombise,Tombise,no_lang_char,no_lang_char,False,False,Dr. Ebongue Din,Papa Moukoko,exact,False
+dua,SO-028,message,P0,Vérifiez les informations avant de confirmer le transfert.,Jeele bina oboso na o adise lómò mɔ̀nì.,Jeele bina oboso na o adise lómò mɔ̀nì.,,,False,False,Dr. Ebongue Din,Papa Moukoko,exact,False
+dua,SO-029,message,P0,Montant,Mɔ̀nì,Mɔ̀nì,,,False,False,Dr. Ebongue Din,Papa Moukoko,exact,False
+dua,SO-030,message,P0,Total débité,Mɔ̀nì mwésé mú kusané,Mɔ̀nì mwésé mú kusané,,,False,False,Dr. Ebongue Din,Papa Moukoko,exact,False
+dua,SO-031,message,P1,Téléphone,Telefon,Telefon,no_lang_char,no_lang_char,False,False,Dr. Ebongue Din,Papa Moukoko,exact,True
+dua,SO-032,message,P0,Référence,Référence,Référence,"source_copy,no_lang_char","source_copy,no_lang_char",True,True,Dr. Ebongue Din,Papa Moukoko,exact,False
+dua,SO-033,message,P1,Opération,Eɓolo,Eɓolo,,,False,False,Dr. Ebongue Din,Papa Moukoko,exact,False
+dua,SO-034,message,P0,Je confirme que les informations ci-dessus sont correctes.,Na madise na bina ɓé na omóŋ ɓé téŋɛ̂.,Na madise na bina ɓé na omóŋ ɓé téŋɛ̂.,,,False,False,Dr. Ebongue Din,Papa Moukoko,exact,False
+dua,SO-035,message,P0,Confirmer le transfert,Adise lómò mɔ̀nì,Adise lómò mɔ̀nì,,,False,False,Dr. Ebongue Din,Papa Moukoko,exact,False
+dua,SO-036,message,P1,Modifier,Tukwa,Tukwa,no_lang_char,no_lang_char,False,False,Dr. Ebongue Din,Papa Moukoko,exact,False
+dua,SO-037,message,P1,Transfert effectué,Lómò mɔ̀nì e ɓoɓí,Lómò mɔ̀nì e ɓoɓí,,,False,False,Dr. Ebongue Din,Papa Moukoko,exact,False
+dua,SO-038,message,P1,Votre transfert a été envoyé avec succès.,Lómò mɔ̀nì ɔŋ e loméyɛ̂ na ɓwám.,Lómò mɔ̀nì ɔŋ e loméyɛ̂ na ɓwám.,,,False,False,Dr. Ebongue Din,Papa Moukoko,exact,False
+dua,SO-039,message,P1,Statut,Ejaŋgi,Ejaŋgi,,,False,False,Dr. Ebongue Din,Papa Moukoko,exact,False
+dua,SO-040,message,P1,Succès,Ɓwám,Ɓwám,no_lang_char,no_lang_char,False,False,Dr. Ebongue Din,Papa Moukoko,exact,False
+dua,SO-041,message,P1,Nouveau transfert,Péne a lómò mɔ̀nì,Péne a lómò mɔ̀nì,,,False,False,Dr. Ebongue Din,Papa Moukoko,exact,False
+dua,SO-042,message,P1,Message important,Mweŋge mwá mfi,Mweŋge mwá mfi,,,False,False,Dr. Ebongue Din,Papa Moukoko,exact,False
+dua,SO-043,message,P1,Fermer,Diɓa,Diɓa,,,False,False,Dr. Ebongue Din,Papa Moukoko,exact,True
+dua,SO-044,message,P0,Une erreur est survenue,Wuma eɓanɛ̂,Wuma eɓanɛ̂,,,False,False,Dr. Ebongue Din,Papa Moukoko,exact,False
+dua,SO-045,message,P0,Alerte de sécurité,Bokwe bi bata,Bokwe bi bata,no_lang_char,no_lang_char,False,False,Dr. Ebongue Din,Papa Moukoko,exact,True
+dua,SO-046,message,P0,Sécurité,Bata,Bata,no_lang_char,no_lang_char,False,False,Dr. Ebongue Din,Papa Moukoko,exact,True
+dua,SO-047,message,P0,Vérifiez toujours le nom et le numéro du bénéficiaire avant de confirmer un transfert.,Jeele pɔ́n dina na nombara a moto nu mányɔ̀ŋɔ̀ oboso na o adise.,Jeele pɔ́n dina na nombara a moto nu mányɔ̀ŋɔ̀ oboso na o adise.,,,False,False,Dr. Ebongue Din,Papa Moukoko,exact,False
+dua,SO-048,message,P1,Connexion sécurisée,Mulongu mu batamɛ̂,Mulongu mu batamɛ̂,,,False,False,Dr. Ebongue Din,Papa Moukoko,exact,False
+dua,SO-049,message,P1,Safinum Pay — environnement de démonstration. Ne saisissez aucune donnée personnelle réelle.,Safinum Pay — eɓolo a jeele. Suka londe bina ɓɔŋ bá moto.,Safinum Pay — eɓolo a jeele. Suka londe bina ɓɔŋ bá moto.,,,False,False,Dr. Ebongue Din,Papa Moukoko,exact,False
+dua,SO-050,message,P1,"Environnement de test — données fictives, aucune transaction réelle.","Wuma a jeele — bina ba wite, soma téŋɛ̂ e titi.","Wuma a jeele — bina ba wite, soma téŋɛ̂ e titi.",,,False,False,Dr. Ebongue Din,Papa Moukoko,exact,False
+dua,SO-051,message,P1,"Bonjour, Amina.","Idiba, Amina.","Idiba, Amina.",no_lang_char,no_lang_char,False,False,Dr. Ebongue Din,Papa Moukoko,exact,False
+dua,SO-052,message,P1,Amina Ngo Bell,Amina Ngo Bell,Amina Ngo Bell,no_lang_char,no_lang_char,False,False,Dr. Ebongue Din,Papa Moukoko,exact,False
+dua,SO-053,message,P1,Transfert instantané et gratuit,Lómò mɔ̀nì a ɓuɓéɓuɓé na esikaye móǹgá,Lómò mɔ̀nì a ɓuɓéɓuɓé na esikaye longele,,,False,False,Dr. Ebongue Din,Papa Moukoko,near,False
+dua,SO-054,message,P0,"Frais de 1,5 % (min. 100 FCFA, max. 2 500 FCFA)","Móǹgá mwá 1,5 % (min. 100 FCFA, max. 2 500 FCFA)","Longele la 1,5 % (min. 100 FCFA, max. 2 500 FCFA)",no_lang_char,no_lang_char,False,False,Dr. Ebongue Din,Papa Moukoko,divergent,False
+dua,SO-055,message,P0,"Frais de 2 % (min. 200 FCFA, max. 5 000 FCFA)","Móǹgá mwá 2 % (min. 200 FCFA, max. 5 000 FCFA)","Longele la 2 % (min. 200 FCFA, max. 5 000 FCFA)",no_lang_char,no_lang_char,False,False,Dr. Ebongue Din,Papa Moukoko,divergent,False
+dua,SO-056,message,P1,Mobile Money,Mobile Money,Mobile Money,no_lang_char,no_lang_char,False,False,Dr. Ebongue Din,Papa Moukoko,exact,True
+dua,SO-057,message,P1,Compte Safinum,Kompa a Safinum,Kompa a Safinum,no_lang_char,no_lang_char,False,False,Dr. Ebongue Din,Papa Moukoko,exact,True
+dua,SO-058,message,P1,Autre banque,Banque epé,Banque epé,no_lang_char,no_lang_char,False,False,Dr. Ebongue Din,Papa Moukoko,exact,False
+dua,SO-059,message,P1,Paiement marchand,Wasa mɔ̀nì a nkándà,Wasa mɔ̀nì a nkándà,,,False,False,Dr. Ebongue Din,Papa Moukoko,exact,False
+dua,SO-060,message,P1,Paiement de services,Soma mɔ̀nì a mɓola,Soma mɔ̀nì a mɓola,,,False,False,Dr. Ebongue Din,Papa Moukoko,exact,False
+dua,SO-061,message,P1,Salaire reçu,Fáwá e nyóŋɛ̂,Fáwá e nyóŋɛ̂,,,False,False,Dr. Ebongue Din,Papa Moukoko,exact,False
+dua,SO-062,message,P1,Transfert reçu,Lómò mɔ̀nì mu nyóŋɛ̂,Lómò mɔ̀nì mu nyóŋɛ̂,,,False,False,Dr. Ebongue Din,Papa Moukoko,exact,False
+dua,SO-063,message,P1,Facture électricité,Facture a mwinda,Facture a mwinda,no_lang_char,no_lang_char,False,False,Dr. Ebongue Din,Papa Moukoko,exact,False
+dua,SO-064,message,P0,Le montant doit être supérieur à zéro.,Mɔ̀nì mu yiane ɓa móŋlé ombon a zéró.,Mɔ̀nì mu yiane ɓa móŋlé ombon a zéró.,,,False,False,Dr. Ebongue Din,Papa Moukoko,exact,False
+dua,SO-065,message,P0,Solde insuffisant pour effectuer ce transfert.,Mɔ̀nì mwé ɓáyí mu titi ɓwá lómò mɔ̀nì.,Mɔ̀nì mé ɓáyí mu titi ɓwá lómò mɔ̀nì.,,,False,False,Dr. Ebongue Din,Papa Moukoko,near,False
+dua,SO-066,message,P0,Veuillez renseigner le nom et le numéro du bénéficiaire.,Londe dina na nombara a moto nu mányɔ̀ŋɔ̀.,Londe dina na nombara a moto nu mányɔ̀ŋɔ̀.,,,False,False,Dr. Ebongue Din,Papa Moukoko,exact,False
+dua,SO-067,message,P0,Alerte de sécurité : vérifiez le numéro du bénéficiaire avant de continuer.,Bokwe bi bata : jeele nombara a moto nu mányɔ̀ŋɔ̀ oboso na o kɛ́ oboso.,Bokwe bi bata : jeele nombara a moto nu mányɔ̀ŋɔ̀ oboso na o kɛ́ oboso.,,,False,False,Dr. Ebongue Din,Papa Moukoko,exact,False
+dua,SO-068,message,P0,Alerte de sécurité : ce bénéficiaire n'a jamais été utilisé sur ce compte.,Bokwe bi bata : nu moto nu mányɔ̀ŋɔ̀ asóɓanó ɓo polo a mí kompa.,Bokwe bi bata : nu moto nu mányɔ̀ŋɔ̀ asóɓanó ɓo polo a mí kompa.,,,False,False,Dr. Ebongue Din,Papa Moukoko,exact,False
+dua,SO-069,message,P0,Erreur réseau : le service est temporairement indisponible. Réessayez.,Boɓan ba réseau : eɓolo e titié ndedi. Byápé.,Boɓi ba réseau : eɓolo e titié ndedi. Byápé.,,,False,False,Dr. Ebongue Din,Papa Moukoko,near,False
+dua,SO-070,message,P0,Vous devez confirmer les informations avant de valider le transfert.,O yiane adise bina oboso na o kusa soma.,O yiane adise bina oboso na o kusa soma.,no_lang_char,no_lang_char,False,False,Dr. Ebongue Din,Papa Moukoko,exact,False

@@ -7,9 +7,9 @@ Ce document confronte le prototype NkapLingua au règlement officiel du
 
 | Exigence officielle | Statut | Preuve / remarque |
 |---|---|---|
-| 1. Adaptation de la langue de l’interface | ✅ / ⚠️ | Extension Manifest V3 ; fulfulde et ewondo en MT brouillon, duala en pack. **Packs encore vides (0/102, 0/20, 0/20)** : le parcours validé reste à remplir par les natifs |
+| 1. Adaptation de la langue de l’interface | ✅ / ⚠️ | Extension Manifest V3 ; fulfulde et ewondo en MT brouillon + pack, duala en pack. **Packs remplis de brouillons humains (107/122/121 entrées), 0 validée** : il manque un T2 indépendant et un arbitre |
 | 2. Parcours financier : solde, frais, transfert | ✅ | Page FINAKA : solde, frais, formulaire de transfert, récapitulatif |
-| 3. Préservation des montants, frais, bénéficiaires, conditions, alertes | ✅ / ⚠️ | Jetons `[[NUM_n]]` et `[[NAME_n]]`, contrôle des termes critiques, refus si un jeton manque ; phrases niveau A bloquées si le pack n’est pas validé ; qualité linguistique à valider |
+| 3. Préservation des montants, frais, bénéficiaires, conditions, alertes | ✅ / ⚠️ | Jetons `[[NUM_n]]` et `[[NAME_n]]`, contrôle des termes critiques, refus si un jeton manque ; phrases niveau A bloquées si le pack n’est pas validé en mode strict ; qualité linguistique à valider |
 | 4. Fonctionnement sans modifier le code source | ✅ | Injection à l’exécution, aucun changement serveur, toggle original ; le cloud est opt-in et désactivé par défaut |
 | 5. Adaptation à un nouveau contenu | ✅ / ⚠️ | Popup « texte inédit », traduction de sélection et d’attributs ; qualité `flagship-ai`/NLLB variable sur les phrases longues, packs limités aux phrases validées |
 
@@ -52,8 +52,8 @@ Points à vérifier le jour J :
 - [ ] Un message nouveau ajouté par le jury est traduit.
 - [ ] Les attributs `title`, `aria-label`, `placeholder`, `alt` sont traduits.
 - [ ] Un nom de bénéficiaire est préservé et tokenisé.
-- [ ] L’extension fonctionne sans backend en mode pack (packs 0/102 et 0/20 à
-  remplir) ; le cloud expérimental est opt-in, jamais automatique.
+- [ ] L’extension fonctionne sans backend en mode pack (packs 107/122/121, 0 validée, à
+  valider) ; le cloud expérimental est opt-in, jamais automatique.
 - [ ] Le backend local est lancé si l’on veut le mode 100 % local.
 - [ ] Une langue en mode pack affiche l’original si la phrase n’est pas validée.
 
@@ -96,7 +96,7 @@ Limites connues :
 - « Toutes les langues du Cameroun » : le prototype couvre le fulfulde et
   l’ewondo en MT brouillon, le duala en pack, pas les 280 langues du pays.
 - « Traduction automatique validée ewondo/duala » : faux ; l’ewondo est un
-  brouillon non validé, le duala un pack de phrases validées.
+  brouillon non validé, le duala un pack humain non validé.
 - « Aucune erreur possible » : le contrôle de sûreté réduit le risque, il ne
   l’élimine pas.
 - « Production ready » : c’est un prototype de hackathon.

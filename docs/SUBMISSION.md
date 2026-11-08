@@ -92,8 +92,8 @@ https://tsefackdev.github.io/safinum-nkaplingua/demo/
 - [ ] Démo publique accessible.
 - [ ] Aucune donnée réelle dans la vidéo ou les captures.
 - [ ] Le panel TRAPD (3 natifs par langue) a relu les phrases critiques.
-- [ ] Les packs fulfulde, ewondo et duala sont remplis ou affichés comme
-  « 0/102 » et « 0/20 ».
+- [ ] Les packs fulfulde, ewondo et duala sont remplis de brouillons humains :
+  107, 122 et 121 entrées, **0 validée**.
 - [ ] Un nom de bénéficiaire est préservé.
 - [ ] Les attributs `title`, `aria-label`, `placeholder`, `alt` sont traduits.
 
@@ -108,20 +108,20 @@ https://tsefackdev.github.io/safinum-nkaplingua/demo/
   traduction.
 - Les opérations sont simulées ; aucune transaction réelle.
 - Le fulfulde est une baseline NLLB, à valider par un locuteur natif.
-- L’ewondo et le duala ne sont pas de la traduction automatique : uniquement
-  des phrases validées.
+- L’ewondo combine MT brouillon et pack humain ; le duala utilise uniquement
+  un pack humain. Aucune phrase n’est encore validée par un panel indépendant.
 
 ## État vérifié localement — 8 novembre 2026
 
-- 3 ZIP construits : **370 Ko** chacun (< 10 Mo), avec exécution du détecteur de
+- 3 ZIP construits : **386 Ko** chacun (< 10 Mo), avec exécution du détecteur de
   collisions avant le build.
 - `web-ext lint` sur `dist/firefox` : **0 erreur, 0 warning, 0 notice**.
-- **Chrome for Testing 158** : extension packagée chargée, service worker
+- **Chrome headless 149** : extension packagée chargée, service worker
   actif, popup avec les 3 langues, 0 erreur.
 - **Firefox 159** (binaire téléchargé, hors Snap) : paquet installé comme
   add-on temporaire par `web-ext run`.
-- Tests locaux : **26 tests API unitaires + 17 contrats robustes**, tests jsdom
+- Tests locaux : **30 tests API unitaires + 17 contrats robustes**, tests jsdom
   `content`/`privacy`/`cloud-gating`/`criticality`, pipeline pack/edge,
-  registre et packs, **6 cas** de collisions.
+  registre et packs, **7 cas** de collisions.
 - CI GitHub vérifiée après push : **5 jobs verts** sur `develop` et `marius`
   (backend, journal, données linguistiques, extension, scan de secrets).

@@ -79,6 +79,13 @@ def has_term(text: str, term: str) -> bool:
     )
 
 
+def numbers(text: str) -> list[str]:
+    """Extrait les nombres bruts, en ignorant les jetons [[NUM_n]]."""
+    cleaned = TOKEN_RE.sub(" ", text or "")
+    cleaned = re.sub(r"(?<=\d)[\s\u00A0]+(?=\d)", "", cleaned)
+    return re.findall(r"\d+(?:[.,]\d+)?", cleaned)
+
+
 def normalize_license(value: str) -> str:
     """Ramène les écritures courantes à un identifiant SPDX."""
     cleaned = value.strip().upper().replace("_", "-")
@@ -108,6 +115,13 @@ def validate(
 ) -> list[str]:
     errors: list[str] = []
     source_tokens = tokens(source)
+    target_without_tokens = TOKEN_RE.sub(" ", target or "")
+    target_flat = re.sub(
+        r"(?<=\d)[\s\u00A0]+(?=\d)", "", target_without_tokens
+    )
+    for number in numbers(source):
+        if number not in target_flat:
+            errors.append(f"nombre modifié : {number}")
 
     for token in source_tokens:
         if target.count(token) != 1:
@@ -199,6 +213,10 @@ def main() -> int:
             reviewed_at = parse_iso_date(
                 (row.get("reviewed_at") or "").strip()
             )
+            review_level = (row.get("review_level") or "").strip() or None
+            original_reviewer = (
+                row.get("original_reviewer") or ""
+            ).strip() or None
 
             if status not in STATUSES:
                 errors.append(
@@ -216,11 +234,11 @@ def main() -> int:
                 errors.append(f"ligne {line_number} : {', '.join(row_errors)}")
                 continue
 
-            if status == "validated":
+            if status in {"validated", "reviewed", "draft"}:
                 if not reviewer:
                     errors.append(
                         f"ligne {line_number} : relecteur obligatoire pour "
-                        "une entrée validée"
+                        f"une entrée {status}"
                     )
                     continue
                 if license_id not in ALLOWED_LICENSES:
@@ -232,13 +250,13 @@ def main() -> int:
                 if provenance != "human":
                     errors.append(
                         f"ligne {line_number} : provenance {provenance!r} "
-                        "refusée pour une entrée validée (attendu human)"
+                        f"refusée pour une entrée {status} (attendu human)"
                     )
                     continue
                 if reviewed_at is None:
                     errors.append(
                         f"ligne {line_number} : reviewed_at ISO obligatoire "
-                        "pour une entrée validée"
+                        f"pour une entrée {status}"
                     )
                     continue
 
@@ -251,6 +269,8 @@ def main() -> int:
                 "context": (row.get("context") or "").strip() or "finance",
                 "license": license_id or None,
                 "provenance": provenance or None,
+                "reviewLevel": review_level,
+                "originalReviewer": original_reviewer,
             }
             entries_by_source[source] = entry
             if reviewer:
@@ -278,8 +298,26 @@ def main() -> int:
         "notes": existing.get(
             "notes",
             "Mémoire de traduction communautaire. Seules les entrées "
-            "status=validated sont appliquées.",
+            "status=validated sont appliquées en mode strict ; les entrées "
+            "reviewed/draft sont réservées à la démonstration.",
         ),
+        "validation": {
+            "validated": sum(
+                1
+                for entry in entries_by_source.values()
+                if entry["status"] == "validated"
+            ),
+            "reviewed": sum(
+                1
+                for entry in entries_by_source.values()
+                if entry["status"] == "reviewed"
+            ),
+            "draft": sum(
+                1
+                for entry in entries_by_source.values()
+                if entry["status"] == "draft"
+            ),
+        },
         "entries": list(entries_by_source.values()),
     }
 

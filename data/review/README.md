@@ -4,9 +4,13 @@ Ce dossier contient les classeurs à remettre aux traducteurs et à l’arbitre
 du panel **TRAPD** pour le fulfulde (`fub`), l’ewondo (`ewo`) et le duala
 (`dua`).
 
-> **État au 7 novembre 2026** : un locuteur natif est identifié par langue.
-> Les classeurs sont prêts, mais **aucune traduction n’est encore saisie**.
-> Il manque, par langue, un second traducteur indépendant et un arbitre.
+> **État au 8 novembre 2026** : les classeurs T1/T2 ont été reçus et remplis.
+> L'audit a trouvé **85 lignes fulfulde « Tafsiri: »** qui recopient le
+> français, et T2 est identique à T1 sur 210/212 lignes. En ewondo et duala,
+> T2 dérive de T1 (95,4 % et 90,0 %). **Aucune ligne n'est validée.**
+> Ne pas importer les classeurs directement : lancer
+> `scripts/audit-native-reviews.py` puis `scripts/build-reviewed-packs.py`.
+> Détails : [`../../docs/NATIVE_REVIEW_AUDIT.md`](../../docs/NATIVE_REVIEW_AUDIT.md).
 
 ## 1. Fichiers
 
@@ -19,9 +23,10 @@ du panel **TRAPD** pour le fulfulde (`fub`), l’ewondo (`ewo`) et le duala
 | `unseen_judgment.csv` | jugement des 20 phrases inédites (évaluation) |
 | `manifest.json` | nombres de lignes, priorités, empreintes des sources |
 
-Les fichiers T1 et T2 sont **identiques au départ**. Ne jamais donner le T1
-rempli au traducteur 2 : l’indépendance des deux traductions est la base de
-TRAPD.
+Les fichiers T1 et T2 étaient **identiques au départ**. Ils sont maintenant
+remplis, mais l'audit montre que T2 a vu T1 dans les trois langues. Pour une
+vraie validation TRAPD, il faut un nouveau T2 réalisé **sans voir** T1, puis
+un arbitre distinct.
 
 ## 2. Volume et priorités
 
@@ -37,6 +42,14 @@ Chaque classeur mélange trois types d’items :
 - `message` : 70 messages du site officiel (35 niveau A, 35 niveau B) ;
 - `phrase` : 20 phrases de pack (ewondo/duala) ou 102 phrases de la page
   (fulfulde, dont les 37 premières en P0).
+
+**Commandes de sécurité** :
+
+```bash
+python3 scripts/audit-native-reviews.py
+python3 scripts/build-reviewed-packs.py          # simulation
+python3 scripts/build-reviewed-packs.py --write  # écrit les packs
+```
 
 **Commencer par les lignes `P0`.** Elles couvrent le solde, les frais, le
 total, le PIN/OTP, les erreurs, la confirmation et la sécurité. Le niveau A

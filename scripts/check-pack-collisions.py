@@ -22,6 +22,7 @@ Usage :
 from __future__ import annotations
 
 import argparse
+import csv
 import json
 import sys
 import unicodedata
@@ -29,6 +30,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
 DEFAULT_DIR = ROOT / "extension" / "language-packs"
+DEFAULT_ALLOWLIST = ROOT / "data" / "reference" / "collision-allowlist.csv"
 
 
 def normalize(text: str) -> str:
@@ -60,6 +62,24 @@ def load_packs(directory: Path) -> tuple[dict[str, list], list[str]]:
         packs[path.name] = entries
 
     return packs, errors
+
+
+def load_allowlist(path: Path) -> dict[str, set[str]]:
+    """Charge les collisions explicitement acceptées.
+
+    Format : target,source,reason. Une collision n'est ignorée que si
+    toutes ses sources figurent dans l'allowlist pour cette cible.
+    """
+    allowed: dict[str, set[str]] = {}
+    if not path.exists():
+        return allowed
+    with path.open(encoding="utf-8", newline="") as handle:
+        for row in csv.DictReader(handle):
+            target = normalize(row.get("target") or "")
+            source = normalize(row.get("source") or "")
+            if target and source:
+                allowed.setdefault(target, set()).add(source)
+    return allowed
 
 
 def find_collisions(packs: dict[str, list]) -> list[dict]:
@@ -120,10 +140,29 @@ def main() -> int:
         default=DEFAULT_DIR,
         help="dossier des packs JSON (défaut : extension/language-packs)",
     )
+    parser.add_argument(
+        "--allowlist",
+        type=Path,
+        default=DEFAULT_ALLOWLIST,
+        help="collisions explicitement acceptées (CSV)",
+    )
     args = parser.parse_args()
 
     packs, errors = load_packs(args.dir)
     collisions = find_collisions(packs)
+    allowed = load_allowlist(args.allowlist)
+    accepted: list[dict] = []
+    remaining: list[dict] = []
+    for collision in collisions:
+        sources = {
+            normalize(occurrence["source"])
+            for occurrence in collision["sources"]
+        }
+        if sources and sources <= allowed.get(collision["target_key"], set()):
+            accepted.append(collision)
+        else:
+            remaining.append(collision)
+    collisions = remaining
 
     if errors:
         print("Packs illisibles :", file=sys.stderr)
@@ -152,9 +191,29 @@ def main() -> int:
         )
         return 1
 
+    if accepted:
+        try:
+            allowlist_label = args.allowlist.relative_to(ROOT)
+        except ValueError:
+            allowlist_label = args.allowlist
+        print(
+            f"{len(accepted)} collision(s) explicitement acceptée(s) "
+            f"dans {allowlist_label} :",
+            file=sys.stderr,
+        )
+        for collision in accepted:
+            sources = ", ".join(
+                f"« {occurrence['source']} »"
+                for occurrence in collision["sources"]
+            )
+            print(
+                f"  - « {collision['target']} » ← {sources}",
+                file=sys.stderr,
+            )
+
     print(
-        f"Collisions OK — {len(packs)} pack(s), aucune cible partagée par "
-        "deux sources différentes"
+        f"Collisions OK — {len(packs)} pack(s), aucune collision non "
+        "arbitrée"
     )
     return 0
 

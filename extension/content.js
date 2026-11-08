@@ -42,6 +42,19 @@
       vertical-align: middle;
       white-space: nowrap;
     }
+    [data-nk-untranslated="B"]::after {
+      content: "non traduit";
+      display: inline-block;
+      margin-left: 6px;
+      padding: 0 6px;
+      border: 1px solid #9ca3af;
+      border-radius: 999px;
+      background: #f3f4f6;
+      color: #4b5563;
+      font: 500 10px/1.6 system-ui, -apple-system, "Segoe UI", sans-serif;
+      vertical-align: middle;
+      white-space: nowrap;
+    }
     [data-nk-demo-critical="A"]::after {
       content: "démo MT";
       display: inline-block;
@@ -51,6 +64,32 @@
       border-radius: 999px;
       background: #e0f2fe;
       color: #075985;
+      font: 500 10px/1.6 system-ui, -apple-system, "Segoe UI", sans-serif;
+      vertical-align: middle;
+      white-space: nowrap;
+    }
+    [data-nk-human-reviewed="reviewed"]::after {
+      content: "humain non validé";
+      display: inline-block;
+      margin-left: 6px;
+      padding: 0 6px;
+      border: 1px solid #0f766e;
+      border-radius: 999px;
+      background: #ccfbf1;
+      color: #115e59;
+      font: 500 10px/1.6 system-ui, -apple-system, "Segoe UI", sans-serif;
+      vertical-align: middle;
+      white-space: nowrap;
+    }
+    [data-nk-human-reviewed="draft"]::after {
+      content: "brouillon humain";
+      display: inline-block;
+      margin-left: 6px;
+      padding: 0 6px;
+      border: 1px solid #b45309;
+      border-radius: 999px;
+      background: #fef3c7;
+      color: #92400e;
       font: 500 10px/1.6 system-ui, -apple-system, "Segoe UI", sans-serif;
       vertical-align: middle;
       white-space: nowrap;
@@ -523,10 +562,12 @@
 
     // Marqueurs de niveau A non traduit.
     for (const element of document.querySelectorAll(
-      "[data-nk-untranslated], [data-nk-demo-critical]"
+      "[data-nk-untranslated], [data-nk-demo-critical], " +
+        "[data-nk-human-reviewed]"
     )) {
       element.removeAttribute("data-nk-untranslated");
       element.removeAttribute("data-nk-demo-critical");
+      element.removeAttribute("data-nk-human-reviewed");
     }
     document.getElementById("nk-badge-style")?.remove();
 
@@ -607,6 +648,7 @@
       let flaggedCount = 0;
       let criticalCount = 0;
       let demoCriticalCount = 0;
+      let humanReviewedCount = 0;
 
       for (const batch of chunks(segments, BATCH_SIZE)) {
         const response = await api.runtime.sendMessage({
@@ -646,6 +688,20 @@
                 ensureBadgeStyle();
                 element.setAttribute("data-nk-untranslated", "A");
               }
+            } else if (
+              result?.reason === "pack_miss" ||
+              result?.reason === "empty_translation"
+            ) {
+              const visible = String(segment.item.value || "")
+                .replace(/\[\[[^\]]+\]\]/g, "")
+                .replace(/[^A-Za-zÀ-ÖØ-öø-ÿɓɗŋƴɔɛə]/g, "");
+              if (visible.length >= 2 && segment.item.element) {
+                ensureBadgeStyle();
+                segment.item.element.setAttribute(
+                  "data-nk-untranslated",
+                  "B"
+                );
+              }
             }
             flaggedNodes.add(segment.item.node || segment.item.element);
             flaggedCount += 1;
@@ -657,6 +713,19 @@
             flaggedNodes.add(segment.item.node || segment.item.element);
             flaggedCount += 1;
             continue;
+          }
+
+          if (result.humanReviewed) {
+            humanReviewedCount += 1;
+            // On ne badge que les segments critiques pour ne pas saturer
+            // l'écran ; le récapitulatif compte toutes les entrées humaines.
+            if (result.criticality === "A" && segment.item.element) {
+              ensureBadgeStyle();
+              segment.item.element.setAttribute(
+                "data-nk-human-reviewed",
+                result.packStatus === "reviewed" ? "reviewed" : "draft"
+              );
+            }
           }
 
           if (result.demoCritical) {
@@ -680,10 +749,14 @@
           : "");
       const engine =
         provider === "pack"
-          ? "pack communautaire"
+          ? humanReviewedCount
+            ? "pack humain (non validé)"
+            : "pack communautaire"
           : provider === "flagship"
             ? "flagship-ai (brouillon)"
-            : provider === "hybrid"
+            : provider === "mixed"
+              ? "pack humain + MT (démo)"
+              : provider === "hybrid"
               ? "MyMemory + flagship-ai (démo)"
               : provider === "nllb" || provider === "local"
                 ? "backend local"
@@ -712,6 +785,9 @@
               : "") +
             (demoCriticalCount
               ? ` · ${demoCriticalCount} critique(s) en MT démo non validée`
+              : "") +
+            (humanReviewedCount
+              ? ` · ${humanReviewedCount} relecture(s) humaine(s) non validée(s)`
               : "") +
             "). Les montants et entités ont été préservés."
         );
@@ -815,7 +891,21 @@
         return;
       }
 
-      const restored = restoreTokens(response.translation.text, tokens);
+      let restored = null;
+      if (
+        response.translation?.packRaw &&
+        !/\[\[[^\]]+\]\]/.test(response.translation.text)
+      ) {
+        restored = response.translation.text;
+        for (const token of tokens) {
+          if (!restored.includes(token.original)) {
+            restored = null;
+            break;
+          }
+        }
+      } else {
+        restored = restoreTokens(response.translation.text, tokens);
+      }
       if (!restored) {
         showToast("Traduction non fiable : montants ou entités modifiés.");
         return;
@@ -827,7 +917,8 @@
         anchorRect,
         spec,
         response.provider,
-        response.translation?.demoCritical === true
+        response.translation?.demoCritical === true,
+        response.translation || {}
       );
     } catch (error) {
       console.error("[NkapLingua]", error);
@@ -841,7 +932,8 @@
     rect,
     spec,
     provider,
-    demoCritical = false
+    demoCritical = false,
+    translationMeta = {}
   ) {
     selectionHost?.remove();
 
@@ -930,9 +1022,11 @@
     tag.className = "tag";
     const tagText = document.createElement("span");
     tagText.textContent =
-      spec.engine === "pack"
-        ? `${spec.label} · pack`
-        : `${spec.label} · MT brouillon`;
+      translationMeta.humanReviewed
+        ? `${spec.label} · pack humain non validé`
+        : spec.engine === "pack"
+          ? `${spec.label} · pack`
+          : `${spec.label} · MT brouillon`;
     const close = document.createElement("button");
     close.type = "button";
     close.textContent = "Fermer";
@@ -950,7 +1044,17 @@
 
     box.append(tag, originalEl, translationEl);
 
-    if (demoCritical) {
+    if (translationMeta.humanReviewed) {
+      const note = document.createElement("p");
+      note.className = "note";
+      note.textContent =
+        `Pack humain non validé (${translationMeta.packStatus || "draft"}` +
+        (translationMeta.reviewLevel
+          ? `, ${translationMeta.reviewLevel}`
+          : "") +
+        "). Relecture native indépendante requise avant usage réel.";
+      box.append(note);
+    } else if (demoCritical) {
       const note = document.createElement("p");
       note.className = "note";
       note.textContent =

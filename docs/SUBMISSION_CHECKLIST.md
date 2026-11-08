@@ -68,9 +68,10 @@ message pendant la démo.
 
 **Quelle est la limite principale ?**
 La qualité linguistique du brouillon `flagship-ai` sur les phrases longues et
-les tournures finance. Les packs sont vides tant qu’un natif ne les remplit
-pas ; les phrases critiques restent donc en français. La validation native est
-la prochaine étape.
+les tournures finance. Les packs contiennent des brouillons humains
+(107/122/121) mais restent à valider par un T2 indépendant et un arbitre ; en
+mode strict, les phrases critiques restent donc en français. La validation
+native est la prochaine étape.
 
 **Est-ce que ça marche sur l’interface du jury ?**
 Oui si c’est une page web. Le pipeline est générique ; nous ne dépendons pas

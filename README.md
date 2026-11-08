@@ -13,15 +13,18 @@ NkapLingua est une extension navigateur autonome qui traduit les interfaces
 financières numériques en **trois langues camerounaises** sans modifier le site
 source et sans lire les champs sensibles. Le **fulfulde d’Adamawa** et
 l’**ewondo** utilisent un **brouillon MT** `flagship-ai` (NLLB en secours pour
-le fulfulde) ; le **duala** utilise un **pack de phrases validées**.
+le fulfulde) et un **pack humain** ; le **duala** utilise uniquement un pack
+humain. Les packs contiennent des brouillons humains, pas encore des phrases
+validées par un panel indépendant.
 
 Le mode « pack » ne demande aucune installation Python. Le backend local
 `flagship-ai`/NLLB télécharge les modèles au premier lancement ; le cloud
 MyMemory est expérimental, **désactivé par défaut**, opt-in explicite et jamais
 utilisé pour l’ewondo. Les phrases critiques (solde, frais, PIN/OTP, etc.) ne
-passent jamais par la MT sans pack validé : elles restent en français. Les
-packs sont encore vides : voir le statut réel ci-dessous. Le détail est dans
-[`docs/LANGUAGES.md`](docs/LANGUAGES.md).
+passent jamais par la MT sans pack validé : en mode strict, elles restent en
+français. En mode démo SAFINUM, les brouillons humains sont appliqués avec un
+badge explicite. Aucun pack n’est encore validé : voir le statut réel
+ci-dessous et [`docs/NATIVE_REVIEW_AUDIT.md`](docs/NATIVE_REVIEW_AUDIT.md).
 
 Projet préparé pour le **SAFINUM Innovate Challenge 2026** (Yaoundé,
 26–28 novembre 2026).
@@ -30,19 +33,21 @@ Projet préparé pour le **SAFINUM Innovate Challenge 2026** (Yaoundé,
 
 | Élément | État vérifié |
 |---|---|
-| Pack fulfulde | 102 phrases sources, **0 traduite** (`fub.json` : `entries: []`) |
-| Packs ewondo / duala | 20 phrases sources chacun, **0 traduite** |
+| Pack fulfulde | **107 entrées** `draft`, **0 validée** ; 85 lignes « Tafsiri » rejetées |
+| Packs ewondo / duala | **122** et **121 entrées**, **0 validée** (1 `reviewed` en ewondo) |
 | Glossaire finance | 40 termes, **0 validé** |
 | Audio | **0 enregistrement** ; 15 phrases sans montant prêtes |
 | MT duala (pilote) | **échoué** : répétitions, non utilisable pour le niveau A |
-| Test site officiel (Chrome 158) | **5 étapes + EN**, 0 erreur page, montants/noms/références préservés |
+| Test site officiel (Chrome headless) | **5 étapes**, 104 segments, 71 uniques, 0 texte visible non collecté ; fub 71/71, ewo 71/71, dua 64/71 |
 | Firefox 159 | paquet chargé en add-on temporaire ; parcours site non automatisé |
 | CI GitHub Actions | **5 jobs verts** sur `develop` et `marius` |
-| Tests | 26 tests API + 17 contrats HTTP + jsdom + pipeline pack/edge |
+| Tests | 30 tests API + 17 contrats HTTP + jsdom + pipeline pack/revue/edge |
 
 Le niveau A (solde, frais, PIN/OTP, confirmation, erreurs) ne vient que d’un
-pack validé ; sans phrase validée, l’original reste affiché avec un badge
-« non traduit ». Aucun appel MT n’est fait sur ce niveau.
+pack validé en mode strict ; sans phrase validée, l’original reste affiché
+avec un badge « non traduit ». En mode démo SAFINUM, une entrée humaine
+`draft`/`reviewed` peut couvrir le niveau A avec le badge « brouillon
+humain » ; une phrase sans pack passe en MT avec le badge « démo MT ».
 
 Suivi détaillé du lot moteur : [docs/MARIUS_STATUS.md](docs/MARIUS_STATUS.md).
 
@@ -157,7 +162,7 @@ Background (service worker Chrome / event page Firefox)
       ▼
 Moteur — flagship-ai, NLLB, MyMemory ou pack
   ├─ brouillon français → fulfulde / ewondo
-  ├─ phrases validées pour les trois langues
+  ├─ pack humain (brouillons) pour les trois langues
   ├─ post-contrôle des jetons et termes critiques
   └─ refus si un montant, un nom ou une entité est modifié
 ```
@@ -180,7 +185,7 @@ Moteur — flagship-ai, NLLB, MyMemory ou pack
 - **Refus sécurisé** si un jeton ou un terme critique manque.
 - **Aucune lecture** des mots de passe, codes OTP, PIN ou valeurs de formulaire.
 - **Extension autonome** : un seul ZIP ; les packs fonctionnent sans serveur.
-- **Packs communautaires** : phrases validées, aucun appel cloud.
+- **Packs communautaires** : phrases humaines, validation native en cours, aucun appel cloud.
 - **Backend local optionnel** : mode 100 % local avec flagship-ai/NLLB si
   disponible ; obligatoire pour la MT ewondo/fulfulde.
 - **Cloud expérimental** : MyMemory, désactivé par défaut. Si l’utilisateur
@@ -194,9 +199,9 @@ Moteur — flagship-ai, NLLB, MyMemory ou pack
 
 | Langue | Code | Moteur | Ressources connues | État |
 |---|---|---|---|---|
-| Fulfulde (Adamawa) | `fub` | `flagship-ai` + NLLB secours | Common Voice ASR ; 1 303 enregistrements TTS | MT brouillon, 0/102 phrases validées |
-| Ewondo | `ewo` | `flagship-ai` brouillon | Common Voice 27.0 : 14,36 h, 31 voix ; Ewondo-ASR ~3 h 11 | MT brouillon, 0/20 phrases validées |
-| Duala | `dua` | Pack communautaire | Common Voice 27.0 (heures à vérifier) | 0/20 phrases validées |
+| Fulfulde (Adamawa) | `fub` | `flagship-ai` + NLLB secours + pack | Common Voice ASR ; 1 303 enregistrements TTS | 107 entrées de pack, **0 validée** (brouillons humains) |
+| Ewondo | `ewo` | `flagship-ai` brouillon + pack | Common Voice 27.0 : 14,36 h, 31 voix ; Ewondo-ASR ~3 h 11 | 122 entrées de pack, **0 validée** (121 draft, 1 reviewed) |
+| Duala | `dua` | Pack communautaire | Common Voice 27.0 (heures à vérifier) | 121 entrées de pack, **0 validée** (brouillons humains) |
 
 Le **kit natif TRAPD** est prêt dans [`data/review/`](data/review/) :
 classeurs T1/T2, fiche d’arbitrage et 20 phrases inédites. Aucune traduction
@@ -508,6 +513,7 @@ exigence par exigence dans [`docs/COMPLIANCE.md`](docs/COMPLIANCE.md).
 | [`docs/EXTERNAL_RESOURCES.md`](docs/EXTERNAL_RESOURCES.md) | inventaire datasets/modèles, quatrième langue, licences |
 | [`docs/DUALA_MT.md`](docs/DUALA_MT.md) | modèle expérimental anglais → duala (CC-BY-4.0) |
 | [`docs/SITE_TEST_SAFINUM.md`](docs/SITE_TEST_SAFINUM.md) | test réel du site SAFINUM, couverture et qualité |
+| [`docs/NATIVE_REVIEW_AUDIT.md`](docs/NATIVE_REVIEW_AUDIT.md) | audit des relectures natives, lignes rejetées et corrections |
 | [`docs/DATA_PERMISSIONS.md`](docs/DATA_PERMISSIONS.md) | modèles de demande d’autorisation |
 | [`docs/VIDEO_SCRIPT.md`](docs/VIDEO_SCRIPT.md) | script de la vidéo de 3 minutes |
 | [`docs/SUBMISSION_CHECKLIST.md`](docs/SUBMISSION_CHECKLIST.md) | checklist avant soumission |

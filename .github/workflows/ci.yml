@@ -75,6 +75,7 @@ jobs:
           node tests/cloud-gating.test.js
           node tests/criticality.test.js
           node tests/pipeline.e2e.js --mode=all
+          node tests/site-demo.e2e.js
 
       - name: Validate manifests
         run: |
@@ -137,6 +138,9 @@ jobs:
           python3 scripts/check-native-kit.py
           python3 scripts/check-language-packs.py
           python3 scripts/check-training-data.py
+          python3 scripts/audit-native-reviews.py
+          python3 scripts/build-reviewed-packs.py
+          python3 tests/audit-native-reviews.test.py
 
   security:
     name: Secret scan

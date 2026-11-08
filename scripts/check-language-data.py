@@ -43,6 +43,12 @@ def has_term(text: str, term: str) -> bool:
     )
 
 
+def numbers(text: str) -> list[str]:
+    cleaned = TOKEN_RE.sub(" ", text or "")
+    cleaned = re.sub(r"(?<=\d)[\s\u00A0]+(?=\d)", "", cleaned)
+    return re.findall(r"\d+(?:[.,]\d+)?", cleaned)
+
+
 def normalize_license(value: str) -> str:
     cleaned = value.strip().upper().replace("_", "-")
     cleaned = re.sub(r"\s+", "-", cleaned)
@@ -70,6 +76,12 @@ def check_terms(source: str, target: str, label: str) -> list[str]:
     for term in DNT_TERMS:
         if has_term(source, term) and not has_term(target, term):
             errors.append(f"{label}: terme critique {term} manquant")
+    target_flat = re.sub(
+        r"(?<=\d)[\s\u00A0]+(?=\d)", "", target
+    )
+    for number in numbers(source):
+        if number not in target_flat:
+            errors.append(f"{label}: nombre {number} modifié")
     return errors
 
 
@@ -176,6 +188,10 @@ def check_messages() -> tuple[list[str], dict]:
                         source_fr, target, f"messages#{index}/{lang}"
                     )
                 )
+                if not reviewer:
+                    errors.append(
+                        f"messages#{index}/{lang}: relecteur manquant"
+                    )
             if lang_status == "valide":
                 counts[lang] += 1
                 if not target:
@@ -376,12 +392,62 @@ def check_unseen() -> list[str]:
     return errors
 
 
+
+def check_extra_messages() -> tuple[list[str], dict]:
+    """Contrôle les gabarits ajoutés au-delà des 70 messages du site."""
+    errors: list[str] = []
+    path = ROOT / "data" / "site-officiel" / "messages-extra.csv"
+    if not path.exists():
+        return [f"messages-extra : {path.name} manquant"], {}
+    rows = read_csv(path)
+    seen: set[str] = set()
+    counts = {lang: 0 for lang in LANGS}
+    for index, row in enumerate(rows, start=2):
+        message_id = (row.get("id") or "").strip()
+        source = (row.get("source_fr") or "").strip()
+        if not message_id or message_id in seen:
+            errors.append(f"messages-extra#{index}: id vide ou dupliqué")
+        seen.add(message_id)
+        if not source:
+            errors.append(f"messages-extra#{index}: source_fr vide")
+            continue
+        for lang in LANGS:
+            target = (row.get(f"target_{lang}") or "").strip()
+            reviewer = (row.get(f"reviewer_{lang}") or "").strip()
+            if not target:
+                continue
+            counts[lang] += 1
+            errors.extend(
+                check_terms(
+                    source, target, f"messages-extra#{index}/{lang}"
+                )
+            )
+            if not reviewer:
+                errors.append(
+                    f"messages-extra#{index}/{lang}: relecteur manquant"
+                )
+            if normalize_license(row.get("license") or "") not in ALLOWED_LICENSES:
+                errors.append(
+                    f"messages-extra#{index}/{lang}: licence invalide"
+                )
+            if not iso_date((row.get("reviewed_at") or "").strip()):
+                errors.append(
+                    f"messages-extra#{index}/{lang}: date non ISO"
+                )
+            if (row.get("provenance") or "").strip().lower() != "human":
+                errors.append(
+                    f"messages-extra#{index}/{lang}: provenance human attendue"
+                )
+    return errors, counts
+
 def main() -> int:
     errors: list[str] = []
     glossary_errors, glossary_counts = check_glossary()
     message_errors, message_counts = check_messages()
     errors.extend(glossary_errors)
     errors.extend(message_errors)
+    extra_errors, extra_counts = check_extra_messages()
+    errors.extend(extra_errors)
     errors.extend(check_variants())
     errors.extend(check_audio())
     errors.extend(check_unseen())
@@ -400,8 +466,9 @@ def main() -> int:
         f"{glossary_counts['dua']}) ; "
         f"messages 70 (validés fub/ewo/dua : "
         f"{message_counts['fub']}/{message_counts['ewo']}/"
-        f"{message_counts['dua']}) ; variantes 10 ; audio 15 ; unseen 20 ; "
-        "références 40"
+        f"{message_counts['dua']}) ; "
+        f"gabarits site {sum(extra_counts.values())} ; variantes 10 ; "
+        "audio 15 ; unseen 20 ; références 40"
     )
     return 0
 

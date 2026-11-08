@@ -54,15 +54,17 @@ doute, traiter le modèle ewondo comme non commercial jusqu’à clarification
 
 | Langue | Code | Source | Licence | Statut |
 |---|---|---|---|---|
-| Fulfulde | `fub` | natifs, phrases de la page et messages du site | CC0-1.0 ou CC-BY-4.0 (consentement écrit) | 0/102 |
-| Ewondo | `ewo` | natifs, corpus Common Voice 27.0 (CC0) comme référence | CC0-1.0 ou CC-BY-4.0 (consentement écrit) | 0/20 |
-| Duala | `dua` | natifs, corpus Common Voice (CC0) comme référence | CC0-1.0 ou CC-BY-4.0 (consentement écrit) | 0/20 |
+| Fulfulde | `fub` | T1 Dr. Hamadou Bello (CC-BY-4.0), T2 Ousmanou Danpullo (CC0-1.0) ; 85 lignes « Tafsiri » rejetées | CC-BY-4.0 pour les entrées T1 ; CC0-1.0 pour T2 | 107 entrées `draft`, **0 validée** |
+| Ewondo | `ewo` | T1 Dr. Jean-Baptiste Ndono (CC-BY-4.0), T2 Joseph Mballa (CC0-1.0) | CC-BY-4.0 pour les entrées T1 ; CC0-1.0 pour T2 | 122 entrées (121 `draft`, 1 `reviewed`), **0 validée** |
+| Duala | `dua` | T1 Dr. Ebongue Din (CC-BY-4.0), T2 Papa Moukoko (CC0-1.0) | CC-BY-4.0 pour les entrées T1 ; CC0-1.0 pour T2 | 121 entrées `draft`, **0 validée** |
 
 Yemba, medumba, bassa et ghomala' sont retirés du prototype (voir
 `tasks/klein.md`, K10) ; leurs feuilles de traduction ne sont plus maintenues.
 
-Les packs ne contiennent aucune donnée personnelle. Chaque entrée validée doit
-indiquer :
+Les packs ne contiennent aucune donnée de formulaire, aucun montant réel et
+aucun identifiant privé. Les noms publics des relecteurs sont utilisés comme
+attribution ; leur consentement écrit à la publication et à la licence doit
+être confirmé avant toute diffusion. Chaque entrée validée doit indiquer :
 
 - `reviewer` : nom public du relecteur ou de l'arbitre ;
 - `reviewedAt` : date ISO ;

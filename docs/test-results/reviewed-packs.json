@@ -1,0 +1,766 @@
+{
+  "generated_at": "2026-11-08T16:23:42",
+  "policy": {
+    "validated": "jamais sans T1/T2 indépendants + arbitre",
+    "draft": "T1 seul, ou traduction réutilisée d'un message",
+    "reviewed": "T1 rejeté mécaniquement, T2 utilisé"
+  },
+  "languages": {
+    "fub": {
+      "rows": 212,
+      "selected": 128,
+      "rejected": 84,
+      "by_type": {
+        "phrase": 18,
+        "glossaire": 40,
+        "message": 70
+      },
+      "by_status": {
+        "draft": 128
+      },
+      "by_origin": {
+        "crosswalk": 15,
+        "t1": 113
+      },
+      "corrections": {
+        "fgol→fof": 5,
+        "Mo nelaɗo→Keɓoowo": 2,
+        "mo nelaɗo→keɓoowo": 10,
+        "Nawgoljaawngol→Nawgol jaawngol": 1,
+        "Njoɓdi naange eletrik→Njoɓdi elektrik": 1
+      },
+      "rejections": [
+        {
+          "item_id": "FUB-001",
+          "source_fr": "Erreur et sécurité",
+          "reasons": [
+            "french_leak",
+            "mt_prefix"
+          ]
+        },
+        {
+          "item_id": "FUB-002",
+          "source_fr": "Les messages d’erreur et les alertes doivent rester clairs dans la langue de l’utilisateur.",
+          "reasons": [
+            "mt_prefix",
+            "source_copy_truncated"
+          ]
+        },
+        {
+          "item_id": "FUB-003",
+          "source_fr": "Confiance",
+          "reasons": [
+            "mt_prefix"
+          ]
+        },
+        {
+          "item_id": "FUB-004",
+          "source_fr": "Le numéro du bénéficiaire est invalide.",
+          "reasons": [
+            "french_leak",
+            "mt_prefix",
+            "source_copy_truncated"
+          ]
+        },
+        {
+          "item_id": "FUB-005",
+          "source_fr": "Vérifiez le numéro et réessayez. Aucun montant n’a été débité.",
+          "reasons": [
+            "mt_prefix",
+            "source_copy_truncated"
+          ]
+        },
+        {
+          "item_id": "FUB-007",
+          "source_fr": "Ne communiquez jamais votre code PIN ou un code de confirmation à une tierce personne, même si elle se présente comme un agent de la banque.",
+          "reasons": [
+            "dnt_missing",
+            "french_leak",
+            "mt_prefix",
+            "source_copy_truncated"
+          ]
+        },
+        {
+          "item_id": "FUB-008",
+          "source_fr": "Crédit instantané",
+          "reasons": [
+            "mt_prefix"
+          ]
+        },
+        {
+          "item_id": "FUB-010",
+          "source_fr": "Relisez chaque ligne. Le transfert ne pourra pas être annulé après confirmation.",
+          "reasons": [
+            "mt_prefix",
+            "source_copy_truncated"
+          ]
+        },
+        {
+          "item_id": "FUB-011",
+          "source_fr": "Montant envoyé",
+          "reasons": [
+            "french_leak",
+            "mt_prefix"
+          ]
+        },
+        {
+          "item_id": "FUB-016",
+          "source_fr": "Vérifiez que le nom du bénéficiaire est correct avant de confirmer.",
+          "reasons": [
+            "french_leak",
+            "mt_prefix",
+            "source_copy_truncated"
+          ]
+        },
+        {
+          "item_id": "FUB-019",
+          "source_fr": "À comprendre",
+          "reasons": [
+            "mt_prefix"
+          ]
+        },
+        {
+          "item_id": "FUB-020",
+          "source_fr": "Préparer un transfert",
+          "reasons": [
+            "french_leak",
+            "french_verb",
+            "mt_prefix"
+          ]
+        },
+        {
+          "item_id": "FUB-021",
+          "source_fr": "Vérifiez le bénéficiaire et les frais avant de confirmer.",
+          "reasons": [
+            "mt_prefix",
+            "source_copy_truncated"
+          ]
+        },
+        {
+          "item_id": "FUB-022",
+          "source_fr": "Étape [[NUM_0]] / [[NUM_1]]",
+          "reasons": [
+            "missing_token"
+          ]
+        },
+        {
+          "item_id": "FUB-024",
+          "source_fr": "Numéro mobile money",
+          "reasons": [
+            "mt_prefix"
+          ]
+        },
+        {
+          "item_id": "FUB-027",
+          "source_fr": "Frais de transfert : [[NUM_0]] FCFA",
+          "reasons": [
+            "french_leak",
+            "source_copy"
+          ]
+        },
+        {
+          "item_id": "FUB-028",
+          "source_fr": "Le montant total débité sera de [[NUM_0]] FCFA. Les frais sont affichés avant la confirmation.",
+          "reasons": [
+            "english_leak",
+            "french_leak"
+          ]
+        },
+        {
+          "item_id": "FUB-029",
+          "source_fr": "Sécurité de l’opération",
+          "reasons": [
+            "french_leak",
+            "mt_prefix"
+          ]
+        },
+        {
+          "item_id": "FUB-030",
+          "source_fr": "Code PIN secret",
+          "reasons": [
+            "mt_prefix"
+          ]
+        },
+        {
+          "item_id": "FUB-031",
+          "source_fr": "Ne partagez jamais ce code.",
+          "reasons": [
+            "french_leak",
+            "mt_prefix"
+          ]
+        },
+        {
+          "item_id": "FUB-033",
+          "source_fr": "Reçu par SMS.",
+          "reasons": [
+            "french_leak",
+            "mt_prefix"
+          ]
+        },
+        {
+          "item_id": "FUB-034",
+          "source_fr": "Continuer vers la confirmation",
+          "reasons": [
+            "english_leak",
+            "french_leak",
+            "french_verb",
+            "mt_prefix"
+          ]
+        },
+        {
+          "item_id": "FUB-035",
+          "source_fr": "Enregistrer",
+          "reasons": [
+            "french_verb",
+            "mt_prefix"
+          ]
+        },
+        {
+          "item_id": "FUB-036",
+          "source_fr": "Démonstration uniquement. Aucun argent réel ne sera transféré.",
+          "reasons": [
+            "mt_prefix",
+            "source_copy_truncated"
+          ]
+        },
+        {
+          "item_id": "FUB-037",
+          "source_fr": "Avant confirmation",
+          "reasons": [
+            "english_leak",
+            "mt_prefix"
+          ]
+        },
+        {
+          "item_id": "FUB-038",
+          "source_fr": "Conditions du crédit",
+          "reasons": [
+            "french_leak",
+            "mt_prefix"
+          ]
+        },
+        {
+          "item_id": "FUB-039",
+          "source_fr": "Une offre de [[NUM_0]] FCFA, avec des conditions affichées avant la souscription.",
+          "reasons": [
+            "french_leak",
+            "source_copy"
+          ]
+        },
+        {
+          "item_id": "FUB-040",
+          "source_fr": "Offre [[NUM_0]] FCFA",
+          "reasons": [
+            "source_copy"
+          ]
+        },
+        {
+          "item_id": "FUB-041",
+          "source_fr": "Taux mensuel",
+          "reasons": [
+            "french_leak",
+            "mt_prefix"
+          ]
+        },
+        {
+          "item_id": "FUB-043",
+          "source_fr": "Délai",
+          "reasons": [
+            "mt_prefix"
+          ]
+        },
+        {
+          "item_id": "FUB-044",
+          "source_fr": "[[NUM_0]] jours",
+          "reasons": [
+            "source_copy"
+          ]
+        },
+        {
+          "item_id": "FUB-045",
+          "source_fr": "Avant de souscrire, vérifiez votre capacité de remboursement. Un crédit doit être remboursé. Les informations personnelles collectées sont utilisées uniquement pour l’étude de votre dossier.",
+          "reasons": [
+            "mt_prefix",
+            "source_copy_truncated"
+          ]
+        },
+        {
+          "item_id": "FUB-046",
+          "source_fr": "Pénalité de retard : [[NUM_0]] % par jour",
+          "reasons": [
+            "french_leak",
+            "source_copy"
+          ]
+        },
+        {
+          "item_id": "FUB-047",
+          "source_fr": "Elle s’applique sur le montant restant dû. Le service client peut proposer un échelonnement sous conditions.",
+          "reasons": [
+            "french_leak",
+            "mt_prefix",
+            "source_copy_truncated"
+          ]
+        },
+        {
+          "item_id": "FUB-048",
+          "source_fr": "Voir les conditions complètes",
+          "reasons": [
+            "mt_prefix"
+          ]
+        },
+        {
+          "item_id": "FUB-049",
+          "source_fr": "Traduction fulfulde",
+          "reasons": [
+            "mt_prefix"
+          ]
+        },
+        {
+          "item_id": "FUB-050",
+          "source_fr": "Actif",
+          "reasons": [
+            "mt_prefix"
+          ]
+        },
+        {
+          "item_id": "FUB-051",
+          "source_fr": "Langue de la page",
+          "reasons": [
+            "mt_prefix"
+          ]
+        },
+        {
+          "item_id": "FUB-052",
+          "source_fr": "Français",
+          "reasons": [
+            "mt_prefix"
+          ]
+        },
+        {
+          "item_id": "FUB-053",
+          "source_fr": "FR → FF",
+          "reasons": [
+            "mt_prefix"
+          ]
+        },
+        {
+          "item_id": "FUB-054",
+          "source_fr": "Montants, frais et bénéficiaires préservés.",
+          "reasons": [
+            "mt_prefix",
+            "source_copy_truncated"
+          ]
+        },
+        {
+          "item_id": "FUB-055",
+          "source_fr": "Aucune valeur de formulaire ni code PIN lu.",
+          "reasons": [
+            "dnt_missing",
+            "mt_prefix",
+            "source_copy_truncated"
+          ]
+        },
+        {
+          "item_id": "FUB-056",
+          "source_fr": "Retour à l’original à tout moment.",
+          "reasons": [
+            "mt_prefix"
+          ]
+        },
+        {
+          "item_id": "FUB-057",
+          "source_fr": "Le site financier n’est pas modifié. La traduction est une couche locale, réversible, appliquée dans le navigateur.",
+          "reasons": [
+            "french_leak",
+            "mt_prefix",
+            "source_copy_truncated"
+          ]
+        },
+        {
+          "item_id": "FUB-060",
+          "source_fr": "sur [[NUM_0]] FCFA",
+          "reasons": [
+            "source_copy"
+          ]
+        },
+        {
+          "item_id": "FUB-061",
+          "source_fr": "Il reste [[NUM_0]] semaines",
+          "reasons": [
+            "source_copy"
+          ]
+        },
+        {
+          "item_id": "FUB-062",
+          "source_fr": "[[NUM_0]] FCFA / semaine",
+          "reasons": [
+            "dnt_missing",
+            "missing_token",
+            "source_copy_truncated"
+          ]
+        },
+        {
+          "item_id": "FUB-063",
+          "source_fr": "Activer l’épargne",
+          "reasons": [
+            "mt_prefix"
+          ]
+        },
+        {
+          "item_id": "FUB-064",
+          "source_fr": "Test jury",
+          "reasons": [
+            "mt_prefix"
+          ]
+        },
+        {
+          "item_id": "FUB-065",
+          "source_fr": "Activité récente",
+          "reasons": [
+            "mt_prefix"
+          ]
+        },
+        {
+          "item_id": "FUB-066",
+          "source_fr": "Transfert à [[NAME_0]]",
+          "reasons": [
+            "english_leak",
+            "french_leak",
+            "mt_prefix"
+          ]
+        },
+        {
+          "item_id": "FUB-067",
+          "source_fr": "Aujourd’hui · [[NUM_0]]:[[NUM_1]]",
+          "reasons": [
+            "source_copy"
+          ]
+        },
+        {
+          "item_id": "FUB-070",
+          "source_fr": "Hier · [[NUM_0]]:[[NUM_1]]",
+          "reasons": [
+            "source_copy"
+          ]
+        },
+        {
+          "item_id": "FUB-071",
+          "source_fr": "Dépôt reçu",
+          "reasons": [
+            "mt_prefix"
+          ]
+        },
+        {
+          "item_id": "FUB-073",
+          "source_fr": "Frais de service",
+          "reasons": [
+            "english_leak",
+            "french_leak",
+            "mt_prefix"
+          ]
+        },
+        {
+          "item_id": "FUB-074",
+          "source_fr": "Lundi · [[NUM_0]]:[[NUM_1]]",
+          "reasons": [
+            "source_copy"
+          ]
+        },
+        {
+          "item_id": "FUB-075",
+          "source_fr": "Voir toutes les opérations",
+          "reasons": [
+            "mt_prefix"
+          ]
+        },
+        {
+          "item_id": "FUB-076",
+          "source_fr": "Objectif",
+          "reasons": [
+            "mt_prefix"
+          ]
+        },
+        {
+          "item_id": "FUB-077",
+          "source_fr": "Bonjour, Aïcha.",
+          "reasons": [
+            "mt_prefix"
+          ]
+        },
+        {
+          "item_id": "FUB-078",
+          "source_fr": "Votre argent, clair et accessible, où que vous soyez.",
+          "reasons": [
+            "mt_prefix",
+            "source_copy_truncated"
+          ]
+        },
+        {
+          "item_id": "FUB-079",
+          "source_fr": "Solde disponible · mis à jour à l’instant",
+          "reasons": [
+            "french_leak",
+            "mt_prefix",
+            "source_copy_truncated"
+          ]
+        },
+        {
+          "item_id": "FUB-080",
+          "source_fr": "Transférer",
+          "reasons": [
+            "french_verb",
+            "mt_prefix"
+          ]
+        },
+        {
+          "item_id": "FUB-081",
+          "source_fr": "Payer",
+          "reasons": [
+            "french_verb",
+            "mt_prefix"
+          ]
+        },
+        {
+          "item_id": "FUB-082",
+          "source_fr": "Épargner",
+          "reasons": [
+            "mt_prefix"
+          ]
+        },
+        {
+          "item_id": "FUB-083",
+          "source_fr": "Votre banque, en fulfulde.",
+          "reasons": [
+            "mt_prefix"
+          ]
+        },
+        {
+          "item_id": "FUB-084",
+          "source_fr": "Une couche de traduction locale, sans modifier le site et sans envoyer vos données à un serveur distant.",
+          "reasons": [
+            "french_leak",
+            "mt_prefix",
+            "source_copy_truncated"
+          ]
+        },
+        {
+          "item_id": "FUB-085",
+          "source_fr": "Montants et bénéficiaires préservés",
+          "reasons": [
+            "mt_prefix"
+          ]
+        },
+        {
+          "item_id": "FUB-086",
+          "source_fr": "Transfert national",
+          "reasons": [
+            "mt_prefix"
+          ]
+        },
+        {
+          "item_id": "FUB-087",
+          "source_fr": "Texte inédit",
+          "reasons": [
+            "mt_prefix"
+          ]
+        },
+        {
+          "item_id": "FUB-088",
+          "source_fr": "Un message qui n’est pas pré-traduit dans la page.",
+          "reasons": [
+            "french_leak",
+            "mt_prefix",
+            "source_copy_truncated"
+          ]
+        },
+        {
+          "item_id": "FUB-089",
+          "source_fr": "Live",
+          "reasons": [
+            "mt_prefix"
+          ]
+        },
+        {
+          "item_id": "FUB-090",
+          "source_fr": "Les transferts internationaux sont soumis à des frais de change. Le taux appliqué est affiché avant la validation de l’opération. Le bénéficiaire reçoit le montant net après déduction des frais.",
+          "reasons": [
+            "mt_prefix",
+            "source_copy_truncated"
+          ]
+        },
+        {
+          "item_id": "FUB-091",
+          "source_fr": "Remplacer par un autre texte",
+          "reasons": [
+            "french_verb",
+            "mt_prefix"
+          ]
+        },
+        {
+          "item_id": "FUB-092",
+          "source_fr": "Le jury peut aussi coller un paragraphe dans l’extension pour tester la traduction en direct.",
+          "reasons": [
+            "mt_prefix",
+            "source_copy_truncated"
+          ]
+        },
+        {
+          "item_id": "FUB-093",
+          "source_fr": "FINAKA · démonstration SAFINUM [[NUM_0]]",
+          "reasons": [
+            "source_copy"
+          ]
+        },
+        {
+          "item_id": "FUB-094",
+          "source_fr": "Données fictives · aucune transaction réelle · traduction assistée",
+          "reasons": [
+            "french_leak",
+            "mt_prefix",
+            "source_copy_truncated"
+          ]
+        },
+        {
+          "item_id": "FUB-095",
+          "source_fr": "Banque digitale · Cameroun",
+          "reasons": [
+            "mt_prefix"
+          ]
+        },
+        {
+          "item_id": "FUB-096",
+          "source_fr": "Vue d’ensemble",
+          "reasons": [
+            "mt_prefix"
+          ]
+        },
+        {
+          "item_id": "FUB-097",
+          "source_fr": "Transferts",
+          "reasons": [
+            "mt_prefix"
+          ]
+        },
+        {
+          "item_id": "FUB-098",
+          "source_fr": "Épargne",
+          "reasons": [
+            "mt_prefix"
+          ]
+        },
+        {
+          "item_id": "FUB-099",
+          "source_fr": "Assistance",
+          "reasons": [
+            "mt_prefix"
+          ]
+        },
+        {
+          "item_id": "FUB-100",
+          "source_fr": "Démo · données fictives",
+          "reasons": [
+            "french_leak",
+            "mt_prefix"
+          ]
+        },
+        {
+          "item_id": "FUB-101",
+          "source_fr": "Aïcha",
+          "reasons": [
+            "mt_prefix"
+          ]
+        },
+        {
+          "item_id": "FUB-102",
+          "source_fr": "Compte principal · Mobile money",
+          "reasons": [
+            "mt_prefix"
+          ]
+        }
+      ]
+    },
+    "ewo": {
+      "rows": 130,
+      "selected": 128,
+      "rejected": 2,
+      "by_type": {
+        "phrase": 20,
+        "glossaire": 39,
+        "message": 69
+      },
+      "by_status": {
+        "draft": 127,
+        "reviewed": 1
+      },
+      "by_origin": {
+        "t1": 127,
+        "t2": 1
+      },
+      "corrections": {},
+      "rejections": [
+        {
+          "item_id": "G25",
+          "source_fr": "découvert",
+          "reasons": [
+            "source_copy"
+          ]
+        },
+        {
+          "item_id": "SO-063",
+          "source_fr": "Facture électricité",
+          "reasons": [
+            "french_leak",
+            "source_copy"
+          ]
+        }
+      ]
+    },
+    "dua": {
+      "rows": 130,
+      "selected": 126,
+      "rejected": 4,
+      "by_type": {
+        "phrase": 20,
+        "glossaire": 37,
+        "message": 69
+      },
+      "by_status": {
+        "draft": 126
+      },
+      "by_origin": {
+        "t1": 126
+      },
+      "corrections": {},
+      "rejections": [
+        {
+          "item_id": "G25",
+          "source_fr": "découvert",
+          "reasons": [
+            "source_copy"
+          ]
+        },
+        {
+          "item_id": "G27",
+          "source_fr": "guichet",
+          "reasons": [
+            "source_copy"
+          ]
+        },
+        {
+          "item_id": "G29",
+          "source_fr": "référence",
+          "reasons": [
+            "source_copy"
+          ]
+        },
+        {
+          "item_id": "SO-032",
+          "source_fr": "Référence",
+          "reasons": [
+            "source_copy"
+          ]
+        }
+      ]
+    }
+  }
+}
