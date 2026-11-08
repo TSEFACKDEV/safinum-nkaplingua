@@ -36,7 +36,7 @@ https://github.com/TSEFACKDEV/safinum-nkaplingua
 
 - Dépôt public
 - Branches : `main`, `develop`, `klein`, `freedy`, `marius`
-- CI GitHub Actions verte
+- CI GitHub Actions : workflow fourni ; état distant à vérifier après push
 
 ### 4. Extension
 
@@ -45,7 +45,7 @@ https://github.com/TSEFACKDEV/safinum-nkaplingua/releases/latest/download/nkapli
 ```
 
 - ZIP universel **Chrome / Edge / Firefox**
-- ~373 Ko (limite : 10 Mo)
+- ~377 Ko mesurés localement le 8 novembre 2026 (limite : 10 Mo)
 - Backend local recommandé pour la démonstration ; cloud MyMemory expérimental (opt-in)
 - Mode 100 % local disponible avec le backend du dépôt
 - 3 langues : fulfulde en MT, ewondo et duala en packs communautaires
@@ -108,3 +108,13 @@ https://tsefackdev.github.io/safinum-nkaplingua/demo/
 - Le fulfulde est une baseline NLLB, à valider par un locuteur natif.
 - L’ewondo et le duala ne sont pas de la traduction automatique : uniquement
   des phrases validées.
+
+## État vérifié localement — 8 novembre 2026
+
+- 3 ZIP construits : **377 Ko** chacun (< 10 Mo), avec exécution du détecteur de
+  collisions avant le build.
+- `web-ext lint` sur `dist/firefox` : **0 erreur, 0 warning, 0 notice**.
+- Tests locaux : **26 tests API** (mode mock), tests jsdom
+  `content`/`privacy`/`cloud-gating`, registre et packs, **6 cas** de collisions.
+- Ces vérifications sont locales. La CI GitHub n’a pas été observée depuis ce
+  poste et ne doit pas être présentée comme verte avant un push réel.

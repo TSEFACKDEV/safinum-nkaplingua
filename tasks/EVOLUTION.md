@@ -1627,3 +1627,63 @@ mot `json`) avec les champs ci-dessous. Exemple de structure, en indentation :
   "blockers": []
 }
 ```
+
+## 2026-11-08T06:36:00+01:00 — Marius — M10 — in_progress
+
+```json
+{
+  "timestamp": "2026-11-08T06:36:00+01:00",
+  "person": "Marius",
+  "branch": "marius",
+  "task": "M10",
+  "status": "in_progress",
+  "summary": "Packaging vérifié localement : 3 ZIP de 377 Ko (< 10 Mo) avec contrôle de collisions avant build, build Firefox et web-ext lint à 0 erreur/warning/notice, manifests valides, scan de secrets et suite CI équivalente verte. Restent la CI GitHub distante et le chargement réel des ZIP dans Chrome/Firefox.",
+  "files": [
+    "docs/SUBMISSION.md",
+    "tests/README.md"
+  ],
+  "tests": [
+    {
+      "command": "./scripts/package-extension.sh",
+      "result": "pass",
+      "note": "3 ZIP : 376965, 377097 et 377069 octets ; contrôle collisions exécuté"
+    },
+    {
+      "command": "./scripts/build-firefox.sh && npx --yes web-ext lint --source-dir dist/firefox",
+      "result": "pass",
+      "note": "0 erreur, 0 warning, 0 notice"
+    },
+    {
+      "command": "NK_MOCK=1 server/.venv/bin/python -m pytest -q server/test_api.py",
+      "result": "pass",
+      "note": "26 passed"
+    },
+    {
+      "command": "node tests/content.test.js && node tests/privacy.test.js && node tests/cloud-gating.test.js",
+      "result": "pass",
+      "note": "jsdom : contenu, confidentialité, verrou cloud"
+    },
+    {
+      "command": "python3 scripts/check-language-packs.py && python3 scripts/check-pack-collisions.py && python3 tests/check-pack-collisions.test.py",
+      "result": "pass",
+      "note": "packs, collisions, 6 cas"
+    },
+    {
+      "command": "validation JSON des 3 manifests + scan de secrets CI",
+      "result": "pass",
+      "note": "manifests ok ; aucun motif de secret"
+    },
+    {
+      "command": "python3 scripts/check-evolution.py",
+      "result": "pass",
+      "note": "journal valide après ajout de l'entrée"
+    }
+  ],
+  "evidence": "ZIP : dist/nkaplingua-extension.zip 377097 octets ; web-ext « errors 0 / notices 0 / warnings 0 » ; statut local documenté dans docs/SUBMISSION.md et tests/README.md",
+  "next": "Pousser puis vérifier la CI GitHub, charger nkaplingua-chrome.zip et nkaplingua-firefox.zip dans Chrome/Firefox réels, puis repasser M10 en done",
+  "blockers": [
+    "CI GitHub non observée : aucun push effectué",
+    "ZIP non chargés dans Chrome/Firefox réels sur ce poste"
+  ]
+}
+```

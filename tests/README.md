@@ -51,3 +51,16 @@ pas dans le dépôt.
 Le test de confidentialité est la garde de non-régression de M1 : il échoue si
 un `context` non vide ou une valeur de formulaire réapparaît dans un message
 vers le moteur.
+
+## Packaging vérifié — 8 novembre 2026
+
+```bash
+./scripts/package-extension.sh   # contrôle collisions + 3 ZIP
+./scripts/build-firefox.sh
+npx --yes web-ext lint --source-dir dist/firefox
+```
+
+- 3 ZIP construits : **377 Ko** chacun (< 10 Mo) ;
+- `web-ext lint` : **0 erreur, 0 warning, 0 notice** ;
+- ces vérifications sont locales : la CI GitHub n’a pas été observée depuis ce
+  poste et ne doit pas être déclarée verte avant un push réel.
