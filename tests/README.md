@@ -66,8 +66,12 @@ vers le moteur.
 npx --yes web-ext lint --source-dir dist/firefox
 ```
 
-- 3 ZIP construits : **377 Ko** chacun (< 10 Mo) ;
+- 3 ZIP construits : **370 Ko** chacun (< 10 Mo) ;
 - `web-ext lint` : **0 erreur, 0 warning, 0 notice** ;
+- **Chrome for Testing 158** : paquet chargé, service worker actif, popup avec
+  les 3 langues, 0 erreur ;
+- **Firefox 159** (binaire hors Snap) : paquet installé comme add-on temporaire
+  par `web-ext run` ;
 - CI GitHub vérifiée après push : **5 jobs verts** sur `develop` et `marius`
   (runs du 8 novembre 2026).
 
