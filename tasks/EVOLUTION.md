@@ -2617,3 +2617,76 @@ mot `json`) avec les champs ci-dessous. Exemple de structure, en indentation :
   ]
 }
 ```
+
+## 2026-11-08T17:32:00+01:00 — Freedy — F3 — in_progress
+
+```json
+{
+  "timestamp": "2026-11-08T17:32:00+01:00",
+  "person": "Freedy",
+  "branch": "freedy",
+  "task": "F3",
+  "status": "in_progress",
+  "summary": "Test réel du site SAFINUM avec extension + NLLB : étape 1 seulement, 6/44 segments traduits, 38 restent en français, numéro de compte et casse du nom altérés.",
+  "files": [
+    "docs/AUDIT_2026-11-08.md",
+    "docs/test-results/real-site-step1-2026-11-08.json",
+    "docs/SITE_TEST_SAFINUM.md",
+    "docs/COMPLIANCE.md"
+  ],
+  "tests": [
+    {
+      "command": "Playwright extension + https://safinum.cm/hackathon-test + NLLB réel",
+      "result": "fail",
+      "note": "6/44 traduits, 38 en français, 2 critiques en MT démo, 0 erreur page"
+    },
+    {
+      "command": "node scripts/test-extension.js",
+      "result": "pass",
+      "note": "registre, détection, packs, jetons, qualité, niveau A"
+    }
+  ],
+  "evidence": "docs/test-results/real-site-step1-2026-11-08.json",
+  "next": "Réduire la démo à un paragraphe court et corriger la tokenisation compte/nom",
+  "blockers": []
+}
+```
+
+## 2026-11-08T17:35:00+01:00 — Freedy — F4 — in_progress
+
+```json
+{
+  "timestamp": "2026-11-08T17:35:00+01:00",
+  "person": "Freedy",
+  "branch": "freedy",
+  "task": "F4",
+  "status": "in_progress",
+  "summary": "Tests profonds réels : 1/20 phrases inédites en production, 4/20 en démo ; suite mock/CI verte ; message d'erreur low_roundtrip trompeur.",
+  "files": [
+    "docs/AUDIT_2026-11-08.md",
+    "docs/test-results/real-unseen-2026-11-08.json",
+    "docs/test-results/real-tokens-2026-11-08.json",
+    "docs/test-results/README.md"
+  ],
+  "tests": [
+    {
+      "command": "20 phrases inédites via background réel + NLLB",
+      "result": "fail",
+      "note": "production 1/20 ; démo 4/20"
+    },
+    {
+      "command": "node tests/content.test.js && node tests/privacy.test.js && node tests/cloud-gating.test.js && node tests/criticality.test.js",
+      "result": "pass",
+      "note": "après installation locale de jsdom"
+    },
+    {
+      "command": "NK_MOCK=1 python tests/api.robust.py && NK_MOCK=1 pytest -q server/test_api.py",
+      "result": "pass",
+      "note": "17/17 contrats, 30 tests"
+    }
+  ],
+  "evidence": "docs/test-results/real-unseen-2026-11-08.json ; docs/AUDIT_2026-11-08.md",
+  "next": "Corriger la taxonomie d'erreur et refaire le test des 5 étapes",
+  "blockers": []
+}
+```

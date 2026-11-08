@@ -1,5 +1,10 @@
 # Évaluation — contenu inédit
 
+> **Mise à jour du 8 novembre 2026** : les chiffres du 7 novembre (12/20,
+> 6/20) ne sont pas reproduits avec le backend NLLB réel disponible sur le
+> poste : **1/20 en production, 4/20 en démo**. Voir
+> [`AUDIT_2026-11-08.md`](AUDIT_2026-11-08.md).
+
 ## Objectif
 
 Prouver que le système traduit du **texte jamais vu**, pas seulement des

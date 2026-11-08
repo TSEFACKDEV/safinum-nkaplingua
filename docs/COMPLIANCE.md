@@ -7,25 +7,44 @@ Ce document confronte le prototype NkapLingua au règlement officiel du
 
 | Exigence officielle | Statut | Preuve / remarque |
 |---|---|---|
-| 1. Adaptation de la langue de l’interface | ✅ / ⚠️ | Extension Manifest V3 ; fulfulde et ewondo en MT brouillon + pack, duala en pack. **Packs remplis de brouillons humains (107/122/121 entrées), 0 validée** : il manque un T2 indépendant et un arbitre |
+| 1. Adaptation de la langue de l’interface | ⚠️ | Extension MV3 et 3 langues. **Audit réel du 8 nov : 6/44 segments traduits sur l’étape 1 du site**, 38 restent en français. Packs 107/122/121 entrées, **0 validée**. |
 | 2. Parcours financier : solde, frais, transfert | ✅ | Page FINAKA : solde, frais, formulaire de transfert, récapitulatif |
-| 3. Préservation des montants, frais, bénéficiaires, conditions, alertes | ✅ / ⚠️ | Jetons `[[NUM_n]]` et `[[NAME_n]]`, contrôle des termes critiques, refus si un jeton manque ; phrases niveau A bloquées si le pack n’est pas validé en mode strict ; qualité linguistique à valider |
+| 3. Préservation des montants, frais, bénéficiaires, conditions, alertes | ⚠️ | Jetons `[[NUM_n]]`/`[[NAME_n]]` et refus si jeton perdu. **Défauts réels : numéro de compte `CM 001 2345 6789 01` → `CM 001 23456789 01` ; `Amina` → `amina`**. À corriger avant de promettre la préservation. |
 | 4. Fonctionnement sans modifier le code source | ✅ | Injection à l’exécution, aucun changement serveur, toggle original ; le cloud est opt-in et désactivé par défaut |
-| 5. Adaptation à un nouveau contenu | ✅ / ⚠️ | Popup « texte inédit », traduction de sélection et d’attributs ; qualité `flagship-ai`/NLLB variable sur les phrases longues, packs limités aux phrases validées |
+| 5. Adaptation à un nouveau contenu | ⚠️ | Popup « texte inédit », sélection et attributs. **NLLB réel : 1/20 en production, 4/20 en démo** ; les packs restent la seule voie niveau A. |
 
 ## 2. Grille d’évaluation (100 points)
 
 | Critère | Poids | Auto-évaluation | Commentaire |
 |---|---:|---|---|
-| Fonctionnalité du prototype | 25 | 20–23 | Le pipeline fonctionne ; la qualité native doit être validée |
+| Fonctionnalité du prototype | 25 | **14–17** | Pipeline solide, mais **6/44 segments** sur le site réel et 1/20 en production : la démo complète ne fonctionne pas. |
 | Intégration et indépendance | 20 | 18–20 | Aucune modification du site ; `activeTab` + `scripting` |
-| Sécurité et préservation des informations | 20 | 17–19 | Pseudonymisation des noms, contrôle des jetons, local prioritaire ; cloud opt-in désactivé par défaut |
+| Sécurité et préservation des informations | 20 | **14–17** | Pseudonymisation et jetons solides, mais numéro de compte et casse du nom altérés sur le site réel. |
 | Accessibilité et expérience utilisateur | 15 | 12–14 | Choix de 3 langues, détection affichée, toggle original, `lang`, popup natif ; pas encore de lecture audio |
-| Adaptation à un nouveau contenu | 10 | 7–9 | Oui, mais dépend de la qualité `flagship-ai`/NLLB sur phrases longues ; packs limités aux phrases validées |
-| Faisabilité technique et documentation | 10 | 9–10 | README, doc technique, doc langues, doc d’intégration, licences, CI |
-| **Total indicatif** | **100** | **objectif 80+** | Sous réserve de la validation native et du remplissage des packs ; auto-évaluation, pas une note du jury |
+| Adaptation à un nouveau contenu | 10 | **4–6** | Oui techniquement, mais la qualité NLLB réelle est insuffisante sur les phrases financières. |
+| Faisabilité technique et documentation | 10 | **8–9** | Documentation riche, mais plusieurs chiffres antérieurs (12/20, 66/71) ne sont pas reproduits ; l’audit du 8 nov corrige. |
+| **Total indicatif** | **100** | **70–83, réaliste ~74** | Auto-évaluation après audit réel ; pas une note du jury. |
 
 > Ces notes sont une auto-évaluation, pas une note du jury.
+
+## 2bis. Audit d’exécution du 8 novembre 2026
+
+Le test réel `https://safinum.cm/hackathon-test` + extension + NLLB donne :
+
+| Mesure | Résultat |
+|---|---:|
+| Segments traduits, étape 1 | **6 / 44** |
+| Segments laissés en français | **38** |
+| Phrases inédites acceptées, production | **1 / 20** |
+| Phrases inédites acceptées, démo | **4 / 20** |
+| Erreurs page/console | **0** |
+| Restauration | OK à 1,5 s ; contrôle instable à 0,8 s |
+
+Détails et preuves : [`AUDIT_2026-11-08.md`](AUDIT_2026-11-08.md).
+
+**Conséquence pour la soutenance** : ne pas promettre une page entièrement
+traduite. Démontrer un paragraphe court, le popup, la restauration et les
+garde-fous ; annoncer clairement les 6/44 et les 1/20/4/20.
 
 ## 3. Livrables attendus
 
@@ -63,7 +82,7 @@ Limites connues :
 - pas de support des shadow DOM fermés ;
 - pas de traduction des images/canvas ;
 - qualité `flagship-ai`/NLLB variable sur les phrases longues ;
-- les packs fulfulde, ewondo et duala sont vides tant que le panel TRAPD ne les remplit pas ;
+- les packs fulfulde, ewondo et duala n’ont **aucune phrase validée** tant que le panel TRAPD ne les remplit pas ;
 - sans pack validé, les phrases critiques restent en français ;
 - l’interface doit être une page web (pas une application mobile native).
 
@@ -79,6 +98,8 @@ Limites connues :
 | Respecter la propriété intellectuelle | ✅ licences documentées ; NLLB et bundle flagship CC BY-NC pour le hackathon |
 
 ## 6. Actions prioritaires avant soumission
+
+0. **Réduire la promesse de démo** : 6/44 sur le site réel, 1/20 en production ; ne pas annoncer une page complète.
 
 1. **Faire valider les phrases finance par le panel TRAPD (3 natifs par langue).**
 2. **Remplir les packs fulfulde, ewondo et duala** avec le panel TRAPD.
@@ -100,3 +121,5 @@ Limites connues :
 - « Aucune erreur possible » : le contrôle de sûreté réduit le risque, il ne
   l’élimine pas.
 - « Production ready » : c’est un prototype de hackathon.
+- « La page du site est traduite » : 6/44 segments seulement sur l’étape 1.
+- « 12/20 phrases inédites acceptées » : chiffre historique non reproduit ; 1/20 en production, 4/20 en démo.

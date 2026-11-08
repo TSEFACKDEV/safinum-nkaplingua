@@ -38,7 +38,7 @@ Projet préparé pour le **SAFINUM Innovate Challenge 2026** (Yaoundé,
 | Glossaire finance | 40 termes, **0 validé** |
 | Audio | **0 enregistrement** ; 15 phrases sans montant prêtes |
 | MT duala (pilote) | **échoué** : répétitions, non utilisable pour le niveau A |
-| Test site officiel (Chrome headless) | **5 étapes**, 104 segments, 71 uniques, 0 texte visible non collecté ; fub 71/71, ewo 71/71, dua 64/71 |
+| Test site officiel (couverture) | 5 étapes, 104 segments, 71 uniques, 0 texte visible non collecté — **mais qualité réelle NLLB : 6/44 sur l’étape 1** |
 | Firefox 159 | paquet chargé en add-on temporaire ; parcours site non automatisé |
 | CI GitHub Actions | **5 jobs verts** sur `develop` et `marius` |
 | Tests | 30 tests API + 17 contrats HTTP + jsdom + pipeline pack/revue/edge |

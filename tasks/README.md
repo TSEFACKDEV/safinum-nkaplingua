@@ -88,10 +88,29 @@ l'humain et parsé par le test.
 - `tests/privacy.test.js` **vert** (plus de fuite de `context`).
 - Zéro requête réseau sur le parcours pack-only (preuve DevTools).
 - Test réel sur `https://safinum.cm/hackathon-test` : 5 étapes, FR/EN,
-  erreurs injectées, aucune erreur Vue.
+  erreurs injectées, aucune erreur Vue, **seuil de couverture mesuré**.
+  L’audit du 8 nov mesure 6/44 segments sur l’étape 1 : ce n’est pas suffisant.
 - 15 phrases audio **sans montant**, avec consentement et licence.
 - Rapport de validation rempli, licences des packs documentées.
 - CI verte, packaging Chrome/Firefox, vidéo à jour.
+
+## 5bis. Écarts bloquants après l’audit du 8 novembre
+
+L’audit réel (`docs/AUDIT_2026-11-08.md`) change les priorités :
+
+1. **Couverture site** : 6/44 segments sur l’étape 1 ; 38 restent en français.
+2. **Qualité NLLB** : 1/20 en production, 4/20 en démo ; le chiffre 12/20 n’est
+   pas reproduit.
+3. **Préservation** : numéro de compte sans espace, nom minusculé, jeton
+   `[[NAME_0]]` perdu.
+4. **Packs** : 0 phrase validée ; ewondo et duala ne peuvent pas sortir du
+   français.
+5. **Message popup** : `low_roundtrip` présenté à tort comme un problème de
+   montants/noms.
+
+Conséquence : la démonstration doit être **réduite à un paragraphe court** et
+les packs doivent être priorisés. Ne pas cocher la définition de « fini » tant
+que ces cinq points ne sont pas mesurés.
 
 ## 6. Détail des lots
 

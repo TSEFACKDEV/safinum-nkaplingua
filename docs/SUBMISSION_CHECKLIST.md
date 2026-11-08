@@ -1,5 +1,10 @@
 # Checklist de soumission — SAFINUM Innovate 2026
 
+> **État réel — audit du 8 novembre 2026** : 6/44 segments traduits sur
+> l’étape 1 du site, 1/20 phrases inédites en production, 4/20 en démo,
+> 0 phrase de pack validée. Ne pas promettre une page entièrement traduite.
+> Voir [`AUDIT_2026-11-08.md`](AUDIT_2026-11-08.md).
+
 ## 1. Livrables
 
 - [ ] Description de la solution : `README.md` + `docs/PRESELECTION.md`
@@ -26,15 +31,16 @@
 ## 3. Avant la démonstration devant le jury
 
 - [ ] Backend démarré sur la machine de démonstration
-- [ ] Modèles `flagship-ai/cameroon-int8` téléchargés dans `dist/models/flagship-int8`
+- [ ] **Bloqué** : modèles `flagship-ai/cameroon-int8` absents dans l’audit ; NLLB seul est plus faible
 - [ ] Modèle NLLB téléchargé en secours (ou mode `NK_MOCK=1` pour l’UI)
-- [ ] `GET /health` confirme `flagship.models.ewo` et `flagship.models.fub`
+- [ ] `GET /health` confirme `flagship.models.ewo` et `flagship.models.fub` (faux dans l’environnement audité)
+- [ ] **Ne pas démontrer la page entière** : 6/44 segments seulement ; préparer un paragraphe court
 - [ ] Extension épinglée dans la barre d’outils
 - [ ] Page de l’interface fournie par le jury ouverte
-- [ ] Test de traduction sur un court paragraphe
-- [ ] Test du toggle « Restaurer l’original »
-- [ ] Test d’un message d’erreur
-- [ ] Test d’un contenu inédit court
+- [ ] Test de traduction sur un court paragraphe (pas la page entière)
+- [ ] Test du toggle « Restaurer l’original » (vérifier à 1,5 s)
+- [ ] Test d’un message d’erreur (distinguer qualité et jeton)
+- [ ] Test d’un contenu inédit court, en connaissant le 1/20
 - [ ] Test d’un nom de bénéficiaire (`Aïcha`) : montant et nom préservés
 - [ ] Test des attributs (`title`, `aria-label`, `placeholder`, `alt`)
 - [ ] Test d’une langue en pack : phrase validée, puis phrase absente
@@ -67,11 +73,10 @@ Popup « texte inédit » et traduction de sélection ; le jury peut saisir un
 message pendant la démo.
 
 **Quelle est la limite principale ?**
-La qualité linguistique du brouillon `flagship-ai` sur les phrases longues et
-les tournures finance. Les packs contiennent des brouillons humains
+La qualité réelle du backend disponible : NLLB seul donne 6/44 segments sur
+l’étape 1 et 1/20 en production. Les packs contiennent des brouillons humains
 (107/122/121) mais restent à valider par un T2 indépendant et un arbitre ; en
-mode strict, les phrases critiques restent donc en français. La validation
-native est la prochaine étape.
+mode strict, les phrases critiques restent donc en français.
 
 **Est-ce que ça marche sur l’interface du jury ?**
 Oui si c’est une page web. Le pipeline est générique ; nous ne dépendons pas

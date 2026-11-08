@@ -1,5 +1,11 @@
 # Rapport de validation linguistique — NkapLingua 0.6
 
+> **Mise à jour du 8 novembre 2026** : le backend NLLB réel disponible donne
+> **1/20 en production, 4/20 en démo** sur les phrases inédites, et 6/44
+> segments sur l’étape 1 du site. Voir
+> [`AUDIT_2026-11-08.md`](AUDIT_2026-11-08.md). Les chiffres du 7 novembre
+> restent historiques.
+
 **Date** : 8 novembre 2026 (état intermédiaire, non signé)
 **Version** : 0.6.0  
 **Langues** : fulfulde (`fub`), ewondo (`ewo`), duala (`dua`)  
