@@ -1514,3 +1514,64 @@ mot `json`) avec les champs ci-dessous. Exemple de structure, en indentation :
   "blockers": []
 }
 ```
+
+## 2026-11-08T06:26:00+01:00 — Marius — M4 — done
+
+```json
+{
+  "timestamp": "2026-11-08T06:26:00+01:00",
+  "person": "Marius",
+  "branch": "marius",
+  "task": "M4",
+  "status": "done",
+  "summary": "Ajout de scripts/check-pack-collisions.py : normalisation NFC/casse/espaces des sources et cibles, détection de deux sources différentes pour une même cible, codes 0/1/2. Le script est exécuté par package-extension.sh et par la CI ; tests/check-pack-collisions.test.py couvre collision, normalisation, doublon de source et pack invalide.",
+  "files": [
+    "scripts/check-pack-collisions.py",
+    "tests/check-pack-collisions.test.py",
+    "scripts/package-extension.sh",
+    ".github/workflows/ci.yml",
+    "scripts/README.md",
+    "tests/README.md"
+  ],
+  "tests": [
+    {
+      "command": "python3 scripts/check-pack-collisions.py",
+      "result": "pass",
+      "note": "3 packs actuels, 0 collision"
+    },
+    {
+      "command": "python3 tests/check-pack-collisions.test.py",
+      "result": "pass",
+      "note": "6 cas : cibles distinctes, collision, normalisation, doublon de source, JSON invalide, entries absent"
+    },
+    {
+      "command": "./scripts/package-extension.sh",
+      "result": "pass",
+      "note": "contrôle exécuté avant build ; 3 ZIP de 369 Ko"
+    },
+    {
+      "command": "python3 scripts/check-language-packs.py",
+      "result": "pass",
+      "note": "3 fichiers, 3 feuilles"
+    },
+    {
+      "command": "node tests/privacy.test.js && node tests/cloud-gating.test.js",
+      "result": "pass",
+      "note": "non-régression M1/M2"
+    },
+    {
+      "command": "NK_MOCK=1 server/.venv/bin/python -m pytest -q server/test_api.py",
+      "result": "pass",
+      "note": "25 passed"
+    },
+    {
+      "command": "python3 scripts/check-evolution.py",
+      "result": "pass",
+      "note": "journal valide après ajout de l'entrée"
+    }
+  ],
+  "evidence": "sortie « Collisions OK — 3 pack(s), aucune cible partagée par deux sources différentes » ; test « check-pack-collisions OK — 6 cas » ; build « Collisions OK » puis 3 ZIP",
+  "next": "M13 — verrou de concurrence backend (deux requêtes FR/EN simultanées)",
+  "blockers": []
+}
+```

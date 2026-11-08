@@ -69,6 +69,9 @@ python3 scripts/build-reference-links.py
 # Vérifier le manifeste des données d'entraînement (aucun fichier versionné)
 python3 scripts/check-training-data.py
 
+# Détecter deux sources différentes pour une même cible
+python3 scripts/check-pack-collisions.py
+
 # Entraîner le modèle anglais → duala (source CC-BY-4.0)
 server/.venv/bin/python scripts/train-duala-mt.py \
   --csv /chemin/vers/Duala_anglais.csv \
@@ -109,6 +112,22 @@ Le script d'import refuse une entrée validée si :
 
 Aucune machine translation n'entre dans un pack validé : la provenance
 `human` est obligatoire.
+
+### 6.1 Collisions de cibles
+
+`scripts/check-pack-collisions.py` lit `extension/language-packs/*.json`,
+normalise sources et cibles (Unicode NFC, espaces réduits, casse repliée) et
+signale toute cible associée à deux sources différentes.
+
+- code 0 : aucune collision ;
+- code 1 : collision(s) — le build et la CI échouent ;
+- code 2 : pack illisible ou champ `entries` invalide.
+
+Une collision n'est pas toujours une erreur : deux formulations peuvent
+légitimement converger. En revanche, elle interdit la validation automatique ;
+l'arbitre doit trancher. `./scripts/package-extension.sh` exécute ce contrôle
+avant de créer les ZIP, et `tests/check-pack-collisions.test.py` couvre les cas
+collision, normalisation, doublon de source et pack invalide.
 
 ## 6bis. Fiche d'évaluation du fulfulde
 

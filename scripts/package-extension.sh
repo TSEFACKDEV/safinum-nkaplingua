@@ -3,6 +3,10 @@ set -euo pipefail
 
 ROOT="$(cd "$(dirname "$0")/.." && pwd)"
 OUT="$ROOT/dist"
+
+# Une cible partagée par deux sources différentes interdit la validation
+# automatique : on refuse de construire un ZIP sans arbitrage (M4).
+python3 "$ROOT/scripts/check-pack-collisions.py"
 CHROME="$OUT/package/chrome"
 FIREFOX="$OUT/package/firefox"
 UNIVERSAL="$OUT/package/universal"
