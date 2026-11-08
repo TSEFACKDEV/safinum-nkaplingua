@@ -514,6 +514,8 @@ exigence par exigence dans [`docs/COMPLIANCE.md`](docs/COMPLIANCE.md).
 | [`docs/DUALA_MT.md`](docs/DUALA_MT.md) | modèle expérimental anglais → duala (CC-BY-4.0) |
 | [`docs/SITE_TEST_SAFINUM.md`](docs/SITE_TEST_SAFINUM.md) | test réel du site SAFINUM, couverture et qualité |
 | [`docs/NATIVE_REVIEW_AUDIT.md`](docs/NATIVE_REVIEW_AUDIT.md) | audit des relectures natives, lignes rejetées et corrections |
+| [`docs/INSTALLED_EXTENSION_TEST.md`](docs/INSTALLED_EXTENSION_TEST.md) | test de l’extension installée sur le site SAFINUM |
+| [`docs/SAFINUM_ELIGIBILITY.md`](docs/SAFINUM_ELIGIBILITY.md) | auto-évaluation d’éligibilité selon les critères officiels |
 | [`docs/DATA_PERMISSIONS.md`](docs/DATA_PERMISSIONS.md) | modèles de demande d’autorisation |
 | [`docs/VIDEO_SCRIPT.md`](docs/VIDEO_SCRIPT.md) | script de la vidéo de 3 minutes |
 | [`docs/SUBMISSION_CHECKLIST.md`](docs/SUBMISSION_CHECKLIST.md) | checklist avant soumission |

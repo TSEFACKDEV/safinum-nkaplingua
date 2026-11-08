@@ -2563,3 +2563,57 @@ mot `json`) avec les champs ci-dessous. Exemple de structure, en indentation :
   ]
 }
 ```
+
+## 2026-11-08T17:30:00+01:00 — Klein — K2 — in_progress
+
+```json
+{
+  "timestamp": "2026-11-08T17:30:00+01:00",
+  "person": "Klein",
+  "branch": "klein",
+  "task": "K2",
+  "status": "in_progress",
+  "summary": "Vérification d'assemblage : origin/marius, origin/freedy et origin/design/popup sont des ancêtres de HEAD (0 commit unique) ; leurs travaux sont déjà dans le paquet. Extension installée dans Chromium/Chrome for Testing : popup 3 langues, service worker actif. Parcours réel SAFINUM 5/5 étapes en fulfulde, montants et référence préservés, titre traduit, restauration OK. Premier écran : fub 43 traduits/0 non traduit, ewo 43/0, dua 35/8 (3 libellés + dates). Nouveau contenu fub traité avec badge démo MT mais qualité faible. Auto-évaluation officielle : 88/100 brut, 78/100 prudent, éligibilité estimée 75–85% si vidéo et PDF soumis.",
+  "files": [
+    "docs/INSTALLED_EXTENSION_TEST.md",
+    "docs/SAFINUM_ELIGIBILITY.md",
+    "README.md",
+    "tasks/EVOLUTION.md"
+  ],
+  "tests": [
+    {
+      "command": "git merge-base --is-ancestor origin/marius HEAD ; origin/freedy ; origin/design/popup",
+      "result": "pass",
+      "note": "0 commit unique : Marius et Freedy déjà assemblés"
+    },
+    {
+      "command": "Chromium/Chrome for Testing 156 + extension non empaquetée + site SAFINUM",
+      "result": "pass",
+      "note": "popup 3 langues, service worker actif, parcours 5/5 en fulfulde, montants/référence préservés, restauration"
+    },
+    {
+      "command": "Premier écran fub/ewo/dua avec l'extension installée",
+      "result": "pass",
+      "note": "fub 43/0 non traduit ; ewo 43/0 ; dua 35/8 (Protocole de test, Banque en ligne, Compte courant, dates)"
+    },
+    {
+      "command": "Nouveau contenu + restauration",
+      "result": "pass",
+      "note": "nouveau texte fub traité avec badge démo MT, montant préservé ; restauration titre/page OK"
+    },
+    {
+      "command": "Popup du paquet de production",
+      "result": "pass",
+      "note": "3 langues, texte inédit critique bloqué en strict, texte non critique traité"
+    }
+  ],
+  "evidence": "docs/INSTALLED_EXTENSION_TEST.md ; docs/SAFINUM_ELIGIBILITY.md ; résultats CDP locaux",
+  "next": "Enregistrer la vidéo de 3 minutes, remplacer l'asset PDF de release, faire traduire les 4 libellés duala, obtenir un T2 indépendant et un arbitre",
+  "blockers": [
+    "aucune validation native (0 validée)",
+    "3 libellés duala visibles + dates non traduits",
+    "qualité du nouveau contenu MT insuffisante",
+    "vidéo et asset PDF de release à finaliser"
+  ]
+}
+```
