@@ -531,6 +531,7 @@
 
       let provider = null;
       let flaggedCount = 0;
+      let criticalCount = 0;
 
       for (const batch of chunks(segments, BATCH_SIZE)) {
         const response = await api.runtime.sendMessage({
@@ -560,6 +561,9 @@
         for (const segment of batch) {
           const result = byId.get(segment.id);
           if (!result || !result.ok) {
+            if (result?.reason === "critical_pack_only") {
+              criticalCount += 1;
+            }
             flaggedNodes.add(segment.item.node || segment.item.element);
             flaggedCount += 1;
             continue;
@@ -585,9 +589,11 @@
       const engine =
         provider === "pack"
           ? "pack communautaire"
-          : provider === "local"
-            ? "backend local"
-            : "cloud";
+          : provider === "flagship"
+            ? "flagship-ai (brouillon)"
+            : provider === "nllb" || provider === "local"
+              ? "backend local"
+              : "cloud";
 
       if (spec.engine === "pack" && translatedCount === 0) {
         showToast(
@@ -595,11 +601,20 @@
             `Les textes restent en ${sourceLabel(sourceInfo.code)}. ` +
             `Contribuez via data/language-packs/${spec.code}.csv.`
         );
+      } else if (translatedCount === 0 && criticalCount > 0) {
+        showToast(
+          `Aucune phrase traduite en ${spec.label} : ` +
+            `${criticalCount} phrase(s) critique(s) sans pack validé. ` +
+            "Elles restent en français ; le niveau A exige une validation native."
+        );
       } else {
         showToast(
           `${translatedCount} segment(s) traduits en ${spec.label} ` +
             `(source : ${sourceText} · ${engine}` +
             (flaggedCount ? ` · ${flaggedCount} non traduit(s)` : "") +
+            (criticalCount
+              ? ` · ${criticalCount} critique(s) laissée(s) en français`
+              : "") +
             "). Les montants et entités ont été préservés."
         );
       }
@@ -682,7 +697,12 @@
       }
 
       if (!response.translation?.ok) {
-        if (response.translation?.reason === "pack_miss") {
+        if (response.translation?.reason === "critical_pack_only") {
+          showToast(
+            `Phrase critique : aucun pack ${spec.label} validé. ` +
+              "Elle reste en français ; le niveau A exige une validation native."
+          );
+        } else if (response.translation?.reason === "pack_miss") {
           showToast(
             `Phrase non validée dans le pack ${spec.label}. ` +
               `Ajoutez-la dans data/language-packs/${spec.code}.csv.`
@@ -794,7 +814,9 @@
     tag.className = "tag";
     const tagText = document.createElement("span");
     tagText.textContent =
-      spec.engine === "pack" ? `${spec.label} · pack` : spec.label;
+      spec.engine === "pack"
+        ? `${spec.label} · pack`
+        : `${spec.label} · MT brouillon`;
     const close = document.createElement("button");
     close.type = "button";
     close.textContent = "Fermer";
@@ -817,6 +839,13 @@
       note.className = "note";
       note.textContent =
         "Phrase issue du pack communautaire. Validation native requise avant usage réel.";
+      box.append(note);
+    } else {
+      const note = document.createElement("p");
+      note.className = "note";
+      note.textContent =
+        "Traduction automatique (brouillon) — à relire par un natif. " +
+        "Les phrases critiques (solde, frais, PIN/OTP) ne sont pas traduites automatiquement.";
       box.append(note);
     }
 

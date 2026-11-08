@@ -1435,3 +1435,71 @@ mot `json`) avec les champs ci-dessous. Exemple de structure, en indentation :
   "blockers": []
 }
 ```
+
+## 2026-11-08T12:00:00+01:00 — Klein — K2 — in_progress
+
+```json
+{
+  "timestamp": "2026-11-08T12:00:00+01:00",
+  "person": "Klein",
+  "branch": "klein",
+  "task": "K2",
+  "status": "in_progress",
+  "summary": "Backend flagship-ai branché : brouillon fr→ewo et fr→fub (CTranslate2 int8, NLLB en secours pour fub), duala pack-only. Barrière niveau A dans l'extension et le backend : les phrases critiques sans pack validé restent en français. Tests backend, extension et bout en bout passés.",
+  "files": [
+    "server/app.py",
+    "server/flagship_mt.py",
+    "server/test_api.py",
+    "server/requirements.txt",
+    "extension/languages.js",
+    "extension/background.js",
+    "extension/content.js",
+    "extension/popup.js",
+    "scripts/test-extension.js",
+    "docs/TECHNICAL.md",
+    "docs/LANGUAGES.md",
+    "docs/LANGUAGE_VALIDATION.md",
+    "docs/DATA_LICENSES.md",
+    "docs/DEMO.md",
+    "docs/SECURITY.md",
+    "docs/COMPLIANCE.md",
+    "docs/SUBMISSION_CHECKLIST.md",
+    "docs/PRESELECTION.md",
+    "docs/PITCH.md",
+    "docs/SUBMISSION.md",
+    "docs/EVAL.md",
+    "docs/VIDEO_SCRIPT.md",
+    "docs/SUBMISSION_DOCUMENT.html",
+    "docs/EXTERNAL_RESOURCES.md",
+    "README.md"
+  ],
+  "tests": [
+    {
+      "command": "NK_MOCK=1 server/.venv/bin/python -m pytest -q server/test_api.py",
+      "result": "pass",
+      "note": "29 tests, dont ewondo mock, segments critiques ewo/fub bloqués et découpage des jetons"
+    },
+    {
+      "command": "node scripts/test-extension.js",
+      "result": "pass",
+      "note": "registre, packs, jetons, qualité, isCriticalText et critical_pack_only"
+    },
+    {
+      "command": "node tests/content.test.js",
+      "result": "pass",
+      "note": "content script jsdom, texte/attributs/restauration"
+    },
+    {
+      "command": "NK_MOCK=0 NK_FLAGSHIP_MODEL_DIR=dist/models/flagship-int8 ...",
+      "result": "pass",
+      "note": "ewo -> « Mina, eyë miakòbò ya? » ; fub -> « Jaŋngo, noy on ɗon njahata? » ; critique -> critical_pack_only"
+    }
+  ],
+  "evidence": "server/flagship_mt.py ; docs/EXTERNAL_RESOURCES.md §4.5 ; sorties locales ewondo/fufulde et test extension bout en bout",
+  "next": "Mettre à jour le HTML/PDF de soumission et la vidéo, puis remplir les packs avec des natifs ; sans natif, les phrases critiques restent en français",
+  "blockers": [
+    "aucun natif disponible pour les trois langues",
+    "licence du sous-modèle francais-ewondo à clarifier"
+  ]
+}
+```

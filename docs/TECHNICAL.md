@@ -5,9 +5,11 @@ financiers numériques camerounais.
 
 **Challenge** : SAFINUM Innovate Challenge 2026 — Hackathon Preselection.
 
-**Langues cibles** : fulfulde (Adamawa) en traduction automatique, ewondo et
-duala en packs communautaires. Yemba, medumba, bassa et ghomala’ sont retirés
-du prototype (voir `tasks/klein.md`, K10).
+**Langues cibles** : fulfulde (Adamawa) et ewondo en **MT brouillon**
+(`flagship-ai`, avec NLLB en secours pour le fulfulde), duala en **pack
+communautaire**. Aucune sortie MT n’est présentée comme validée : le niveau A
+reste couvert par les packs. Yemba, medumba, bassa et ghomala’ sont retirés du
+prototype (voir `tasks/klein.md`, K10).
 
 **Version** : prototype 0.6 — novembre 2026.
 
@@ -52,16 +54,18 @@ financière existante, sans modifier son code source.
 ┌──────────────────────────────────────────────────────────────┐
 │ Background (Chrome service worker / Firefox event page)      │
 │  - cache local                                               │
-│  - packs communautaires validés                              │
-│  - backend local prioritaire si disponible                   │
-│  - sinon service cloud MyMemory (texte pseudonymisé)         │
+│  - packs communautaires validés d’abord                      │
+│  - phrases niveau A sans pack : bloquées, jamais de MT       │
+│  - backend local flagship-ai / NLLB si disponible            │
+│  - cloud MyMemory seulement si une paire cloud existe        │
 └──────────────────────────────┬───────────────────────────────┘
                                │ local ou HTTPS
                                ▼
 ┌──────────────────────────────────────────────────────────────┐
 │ Moteur de traduction                                         │
-│  - NLLB-200 local (FastAPI) ou MyMemory cloud                │
-│  - découpage en phrases                                      │
+│  - flagship-ai Marian/CTranslate2 (brouillon)                │
+│  - NLLB-200 local en secours pour le fulfulde                │
+│  - découpage en phrases, jetons préservés                    │
 │  - post-contrôle : jetons + termes critiques                 │
 │  - refus si un montant/entité est modifié                    │
 └──────────────────────────────────────────────────────────────┘
@@ -78,8 +82,9 @@ financière existante, sans modifier son code source.
 | Registre langues | `extension/languages.js` | cibles, détection FR/EN, normalisation |
 | Packs | `extension/language-packs/*.json` | mémoires de traduction validées |
 | Popup | `extension/popup.html/js/css` | choix de langue, texte inédit |
-| Backend | `server/app.py` | API FastAPI + NLLB, détection, `/languages` |
-| Tests | `server/test_api.py` | tests sans modèle (`NK_MOCK=1`) |
+| Backend | `server/app.py` | API FastAPI, routage packs/flagship/NLLB, `/languages` |
+| Moteur flagship | `server/flagship_mt.py` | CTranslate2 int8, découpage des jetons, brouillon MT |
+| Tests | `server/test_api.py` | tests sans modèle (`NK_MOCK=1`), blocage niveau A |
 | CI | `.github/workflows/ci.yml` | tests, lint, scan de secrets |
 | Démo | `demo/index.html` | page FINAKA fictive |
 
@@ -92,11 +97,15 @@ financière existante, sans modifier son code source.
    champs sensibles.
 5. Il détecte la langue source (français ou anglais) avec un score de confiance.
 6. Il remplace les nombres, URLs, emails et noms de bénéficiaires par des jetons.
-7. Il envoie les segments au background. Si la cible est un pack, le background
-   cherche la phrase exacte dans le pack ; sinon il appelle le backend local.
-8. Le backend découpe en phrases, traduit avec NLLB et vérifie les jetons.
+7. Il envoie les segments au background. Le background cherche d’abord une
+   entrée **validée** dans le pack. Si la phrase contient un terme du niveau A
+   (solde, frais, PIN/OTP, etc.) et n’est pas dans le pack, elle est bloquée et
+   reste en français : elle ne part jamais vers la MT.
+8. Pour les phrases non critiques, le backend découpe en phrases, traduit avec
+   `flagship-ai` (ou NLLB en secours pour le fulfulde) et vérifie les jetons.
 9. Le content script restaure les jetons et écrit le texte via `textContent`.
-10. L’utilisateur peut restaurer l’original à tout moment.
+10. L’utilisateur peut restaurer l’original à tout moment ; l’interface indique
+    « MT brouillon — à relire par un natif ».
 
 ## 4. Approche d’intégration
 
@@ -105,11 +114,17 @@ financière existante, sans modifier son code source.
 - **Aucune API côté banque** : l’extension lit uniquement le DOM rendu.
 - **Aucune dépendance à un identifiant de page** : le pipeline est générique.
 - **Fonctionne sans backend** : un service cloud de secours (MyMemory) prend le
-  relais si le backend local n’est pas lancé ; le texte reste pseudonymisé.
-- **Seconde opinion ciblée** : si le backend local rejette une phrase, le
-  background redemande uniquement cette phrase au cloud, puis garde la
-  meilleure sortie conforme. Le local reste prioritaire.
-- **Trois langues cibles** : fulfulde en MT, ewondo et duala en packs communautaires.
+  relais si le backend local n’est pas lancé, uniquement pour les paires qui
+  ont un code cloud. L’ewondo n’a pas de code cloud et ne part jamais vers
+  MyMemory.
+- **Seconde opinion ciblée** : si le backend local rejette une phrase non
+  critique, le background peut redemander cette phrase au cloud, puis garder
+  la meilleure sortie conforme. Le local reste prioritaire.
+- **Trois langues cibles** : fulfulde et ewondo en MT brouillon, duala en pack
+  communautaire. Le niveau A reste pack-only.
+- **Barrière niveau A** : `isCriticalText()` bloque solde, frais, montant, PIN,
+  OTP, transaction, confirmation, etc. avant tout appel MT ; le backend refuse
+  aussi un segment marqué `critical`.
 - **Détection source** : FR/EN, avec indice HTML, mots-outils et confiance.
 - **Permissions minimales** : `activeTab`, `scripting`, `storage`,
   `contextMenus`; pas de `*://*/*`.
@@ -127,13 +142,16 @@ reconnus par le code.
 
 | Dépendance | Version | Licence | Usage |
 |---|---|---|---|
-| `facebook/nllb-200-distilled-600M` | 600M | CC BY-NC 4.0 | traduction locale |
-| MyMemory Translation API | — | service externe gratuit | traduction cloud de secours |
-| Packs ewondo et duala | 0.1 | à définir avec les contributeurs (CC0 / CC BY) | mémoires de traduction validées |
+| `flagship-ai/cameroon-int8` | int8, ~80 Mo/paire | CC BY-NC 4.0 (bundle) ; sous-fiche `francais-ewondo` CC BY 4.0 | brouillon MT ewondo/fulfulde |
+| `flagship-ai/francais-fufulde` | 299 Mo | CC BY 4.0 | référence fp32 / alternative |
+| `facebook/nllb-200-distilled-600M` | 600M | CC BY-NC 4.0 | secours fulfulde |
+| MyMemory Translation API | — | service externe gratuit | cloud de secours si paire disponible |
+| Packs fulfulde, ewondo et duala | 0.1 | à définir avec les contributeurs (CC0 / CC BY) | mémoires de traduction validées |
 | FastAPI | >=0.115 | MIT | API |
 | Uvicorn | >=0.30 | BSD | serveur |
-| PyTorch | >=2.3 | BSD | inférence |
-| Transformers | >=4.44 | Apache-2.0 | chargement NLLB |
+| PyTorch | >=2.3 | BSD | inférence NLLB |
+| CTranslate2 | >=4.4 | MIT | inférence flagship int8 |
+| Transformers | >=4.44 | Apache-2.0 | tokenizers Marian/NLLB |
 | SentencePiece | >=0.2 | Apache-2.0 | tokenizer |
 | corpus Adamawa Fulfulde–French 1.2 | — | NOODL-1.0 | évaluation |
 | Common Voice Adamawa Fulfulde | — | CC0 1.0 | audio optionnel |
@@ -142,14 +160,16 @@ reconnus par le code.
 
 - pipeline DOM non intrusif ;
 - pseudonymisation et contrôle de préservation ;
-- découpage en phrases pour stabiliser NLLB ;
+- découpage en phrases et des jetons pour stabiliser la MT ;
+- barrière niveau A avant tout appel MT ;
 - interface de traduction réversible ;
 - tests et CI ;
 - documentation de sécurité et de licences.
 
-**Composants tiers** : NLLB, FastAPI, PyTorch, Transformers, MyMemory (mode
-cloud de secours uniquement). Les packs communautaires sont la contribution
-propre de l’équipe et des relecteurs natifs.
+**Composants tiers** : flagship-ai, NLLB, CTranslate2, FastAPI, PyTorch,
+Transformers, MyMemory (mode cloud de secours uniquement). Les packs
+communautaires sont la contribution propre de l’équipe et des relecteurs
+natifs.
 
 ## 6. Sécurité et intégrité
 
@@ -159,20 +179,28 @@ propre de l’équipe et des relecteurs natifs.
 - Jetons `[[NUM_n]]`, `[[URL_n]]`, `[[EMAIL_n]]`, `[[NAME_n]]` : contrôle
   d’unicité.
 - Termes critiques (`FCFA`, `PIN`, `OTP`, etc.) : contrôle de présence.
+- **Niveau A** : une phrase contenant solde/frais/montant/PIN/OTP/transaction/
+  confirmation/etc. est bloquée avant la MT si le pack n’a pas d’entrée
+  `validated`. Le backend refuse aussi un segment `critical=true`.
 - Refus des entrées de pack non `validated`.
 - Filtre de qualité : sortie identique à la source, trop courte, trop longue,
   répétitive ou avec fuite de français.
-- Rétro-traduction de contrôle (`NK_ROUNDTRIP=1`) : similarité source ↔ retour
-  français ≥ 0,45, sinon l’original est conservé.
+- Rétro-traduction de contrôle (`NK_ROUNDTRIP=1`, NLLB uniquement) : similarité
+  source ↔ retour français ≥ 0,45, sinon l’original est conservé.
 - Refus de la traduction si un jeton ou un terme critique manque.
+- Les jetons sont retirés avant l’appel `flagship-ai`, puis remis dans l’ordre :
+  un montant ou un nom ne peut pas être « avalé » par le modèle.
 - UI en Shadow DOM, texte injecté via `textContent` (pas de `innerHTML`).
 - CSP de l’extension verrouillée ; aucun code distant.
 
 ## 7. Traitement linguistique
 
-- Fulfulde (`fub`) : NLLB `fuv_Latn`, découpage en phrases courtes.
-- Ewondo (`ewo`) et duala (`dua`) : packs de phrases validées, sans modèle
-  inventé. Corpus de parole connus : Common Voice 27.0 (14,36 h pour l'ewondo),
+- Fulfulde (`fub`) : `flagship-ai/francais-fufulde` (brouillon, CC-BY-4.0) ;
+  NLLB `fuv_Latn` en secours si le modèle manque ou si la source est l’anglais.
+- Ewondo (`ewo`) : `flagship-ai/cameroon-int8` / `francais-ewondo` (brouillon,
+  licence à trancher). Pas de cloud : MyMemory n’a pas de paire ewondo.
+- Duala (`dua`) : pack communautaire uniquement, aucun modèle de traduction
+  prêt. Corpus de parole connus : Common Voice 27.0 (14,36 h pour l'ewondo),
   Ewondo-ASR (~3 h 11), Common Voice duala (à vérifier).
 - Détection source FR/EN : `extension/languages.js` et `/detect`.
 - Orthographe de référence : AGLC.
@@ -181,14 +209,17 @@ propre de l’équipe et des relecteurs natifs.
 - Les phrases longues et certaines tournures financières restent fragiles :
   voir `docs/LANGUAGE_VALIDATION.md`, `docs/LANGUAGES.md`, `docs/EVAL.md` et
   `docs/DATA_INTEGRATION.md`.
-- Le décodage utilise 2 faisceaux, un plafond de 128 nouveaux jetons et un
-  découpage à 220 caractères pour limiter les répétitions.
+- `flagship-ai` : 5 faisceaux, `no_repeat_ngram_size=3`,
+  `repetition_penalty=1.15`, plafond de 256 jetons. NLLB : 2 faisceaux,
+  plafond de 128 jetons. Découpage à 220 caractères dans les deux cas.
 - `scripts/evaluate-unseen.py` mesure le taux d’acceptation, la préservation
   des montants et le score de rétro-traduction sur 20 phrases inédites.
 - Glossaire finance : les termes `validated` de
-  `data/glossary.template.csv` sont protégés par des jetons avant NLLB, puis
+  `data/glossary.template.csv` sont protégés par des jetons avant la MT, puis
   restaurés avec la traduction validée. Cela améliore la cohérence sur le
   contenu inédit sans réentraîner le modèle.
+- Les phrases critiques ne passent jamais par la MT, même si le glossaire est
+  vide : elles restent en français jusqu’à validation d’un pack.
 
 ## 8. Tests et reproductibilité
 
@@ -215,25 +246,58 @@ npx --yes web-ext lint --source-dir dist/firefox
 ./scripts/package-extension.sh
 ```
 
+### Test manuel du moteur flagship
+
+```bash
+# Modèles int8 : ewondo, fufulde, bulu (≈232 Mo)
+server/.venv/bin/hf download flagship-ai/cameroon-int8 \
+  --include "francais-ewondo/*" \
+  --include "francais-fufulde/*" \
+  --local-dir dist/models/flagship-int8
+
+cd server
+NK_MOCK=0 NK_ROUNDTRIP=0 NK_FLAGSHIP_MT=auto \
+  NK_FLAGSHIP_MODEL_DIR=../dist/models/flagship-int8 \
+  ../server/.venv/bin/uvicorn app:app --host 127.0.0.1 --port 8000
+```
+
+Vérifier ensuite :
+
+```bash
+curl -s http://127.0.0.1:8000/health | python3 -m json.tool
+curl -s -X POST http://127.0.0.1:8000/translate \
+  -H 'Content-Type: application/json' \
+  -d '{"target":"ewo","source":"fr","segments":[{"id":"s1","text":"Bonjour, comment allez-vous ?"}]}'
+```
+
 ### Démonstration
 
 ```bash
 cd server
 source .venv/bin/activate
-NK_DEVICE=cpu uvicorn app:app --host 127.0.0.1 --port 8000
+NK_DEVICE=cpu NK_FLAGSHIP_MT=auto \
+  NK_FLAGSHIP_MODEL_DIR=../dist/models/flagship-int8 \
+  uvicorn app:app --host 127.0.0.1 --port 8000
 ```
 
 Puis ouvrir `http://127.0.0.1:8000/demo`.
 
 ## 9. Limites connues
 
+- `flagship-ai` est un brouillon entraîné sur un corpus « scripture + livres » :
+  il est faible sur les termes financiers modernes et les montants. Il ne doit
+  jamais servir au niveau A.
+- Le bundle `cameroon-int8` est CC BY-NC 4.0 ; la sous-fiche `francais-ewondo`
+  indique CC BY 4.0. En cas de doute, considérer l’ewondo comme non commercial
+  jusqu’à clarification écrite de `flagship-ai`.
 - NLLB n’est pas spécialisé sur le fulfulde adamawa ; la variété produite peut
-  différer.
+  différer. Il ne sert plus que de secours pour le fulfulde.
 - Les phrases longues peuvent être mal traduites ou répétitives.
 - Les noms sont tokenisés de façon conservatrice ; un nom sans mot déclencheur
   peut rester en clair.
 - Les packs fulfulde, ewondo et duala sont vides tant que le panel TRAPD
-  (deux traducteurs + un arbitre par langue) ne les a pas remplis.
+  (deux traducteurs + un arbitre par langue) ne les a pas remplis. Sans pack
+  validé, toutes les phrases critiques restent en français.
 - Pas de support des iframes cross-origin, shadow DOM fermés, images/canvas.
 - Pas de traduction audio (TTS fulfulde) dans le MVP.
 - Le backend local est optionnel ; le cloud MyMemory reste expérimental et
@@ -242,7 +306,9 @@ Puis ouvrir `http://127.0.0.1:8000/demo`.
   avec des données réelles sensibles.
 - Le champ `context` doit être supprimé ou nettoyé (correctif M1) : il peut
   contenir des valeurs de formulaire ou des zones `data-sensitive`.
-- NLLB est CC BY-NC 4.0 : usage non commercial pour le hackathon.
+- NLLB et le bundle `flagship-ai/cameroon-int8` sont CC BY-NC 4.0 : usage
+  non commercial pour le hackathon. Les modèles fp32 `francais-fufulde`,
+  `francais-bulu` et `francais-ghomala` sont CC BY 4.0.
 - Le prototype n’est pas une traduction certifiée pour un contrat.
 
 ## 10. Feuille de route technique

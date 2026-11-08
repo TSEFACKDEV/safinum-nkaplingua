@@ -48,7 +48,7 @@ https://github.com/TSEFACKDEV/safinum-nkaplingua/releases/latest/download/nkapli
 - ~373 Ko (limite : 10 Mo)
 - Backend local recommandé pour la démonstration ; cloud MyMemory expérimental (opt-in)
 - Mode 100 % local disponible avec le backend du dépôt
-- 3 langues : fulfulde en MT, ewondo et duala en packs communautaires
+- 3 langues : fulfulde et ewondo en MT brouillon (`flagship-ai`), duala en pack communautaire
 - Détection FR/EN, protection des montants et des noms, attributs traduits
 
 Variantes :

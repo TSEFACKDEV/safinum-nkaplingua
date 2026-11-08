@@ -4,13 +4,13 @@
 
 - **Nom du projet** : NkapLingua
 - **Hackathon** : SAFINUM Innovate Challenge 2026
-- **Langues cibles** : fulfulde adamawa (`fub`) en MT ; ewondo (`ewo`) et
-  duala (`dua`) en packs de phrases validées. Trois langues retenues pour leurs
-  corpus de parole et leurs ressources documentaires ; yemba, medumba, bassa et
-  ghomala' retirés du prototype.
+- **Langues cibles** : fulfulde adamawa (`fub`) et ewondo (`ewo`) en MT
+  brouillon ; duala (`dua`) en pack de phrases validées. Trois langues retenues
+  pour leurs corpus de parole et leurs ressources documentaires ; yemba,
+  medumba, bassa et ghomala' retirés du prototype.
 - **Plateforme** : extension navigateur Chrome/Edge/Firefox (Manifest V3)
-- **Moteur** : NLLB-200 600M (CC BY-NC 4.0, usage hackathon non commercial),
-  français → fulfulde (`fuv_Latn`) ; packs communautaires pour les autres
+- **Moteur** : `flagship-ai` (Marian/CTranslate2, brouillon fr → fulfulde et
+  fr → ewondo), NLLB-200 en secours pour le fulfulde ; pack pour le duala
 - **Données** : corpus open data Adamawa Fulfulde–French (NOODL-1.0), références
   de l’OLC/ERDELAP et des comités de langues, glossaire finance à valider
 
@@ -50,16 +50,16 @@ serveur de la banque.
 | Exigence | Réponse NkapLingua |
 |---|---|
 | Extension navigateur | Manifest V3, Chrome/Edge |
-| Au moins une langue | Fulfulde `fub` (MT) + ewondo `ewo` et duala `dua` (packs) |
+| Au moins une langue | Fulfulde `fub` + ewondo `ewo` en MT brouillon ; duala `dua` en pack |
 | Page financière ou autre | Pipeline DOM générique + page de démo FINAKA |
 | Sans modifier le contexte | Segmentation par bloc, glossaire, préservation des entités |
 | Sans modifier le site source | Injection à l’exécution, rendu réversible |
-| Contenu inédit | NLLB-200 + test en direct dans le popup |
+| Contenu inédit | `flagship-ai`/NLLB + test en direct dans le popup |
 | Sécurité plateforme | `activeTab`, pas de code distant, CSP verrouillée |
 | Sécurité utilisateur | Pas de mots de passe/OTP/cookies, backend local |
-| Orientation finance | Frais, crédit, épargne, alertes, KYC |
+| Orientation finance | Frais, crédit, épargne, alertes, KYC ; phrases critiques jamais en MT |
 | Données du centre | OLC/ERDELAP et comités cités ; pipeline `docs/DATA_INTEGRATION.md` |
-| Licences | NLLB-200 CC BY-NC 4.0 (hackathon), corpus NOODL, Common Voice CC0 |
+| Licences | `flagship-ai` CC BY-NC/CC BY, NLLB CC BY-NC 4.0, corpus NOODL, Common Voice CC0 |
 
 ## 5. Architecture
 
@@ -81,7 +81,7 @@ background.js
    │
    ▼
 server/app.py
-   ├─ NLLB-200 600M
+   ├─ flagship-ai (brouillon) + NLLB secours
    ├─ post-contrôle des jetons
    └─ refus si un montant/entité change
 ```
@@ -99,8 +99,10 @@ server/app.py
 
 ## 7. Données et licences
 
-- **Modèle** : `facebook/nllb-200-distilled-600M`, licence CC BY-NC 4.0
-  (usage non commercial pour le hackathon).
+- **Modèles** : `flagship-ai/cameroon-int8` (CC BY-NC 4.0, sous-fiche ewondo
+  CC BY 4.0) et `facebook/nllb-200-distilled-600M` (CC BY-NC 4.0), usage
+  non commercial pour le hackathon. Les modèles fp32 fulfulde/bulu sont
+  CC BY 4.0.
 - **Corpus d’évaluation** : Adamawa Fulfulde–French Parallel Corpus of
   Narratives 1.2, licence NOODL-1.0, Mozilla Data Collective.
 - **Audio optionnel** : Common Voice Adamawa Fulfulde, CC0.

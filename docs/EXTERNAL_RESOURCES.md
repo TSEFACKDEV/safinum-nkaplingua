@@ -204,6 +204,27 @@ CC-BY-4.0.
   (`fuv`), pas pour le fulfulde Adamawa (`fub`). Les modèles `flagship-ai` sont
   mieux alignés sur le fulfulde camerounais.
 
+### 4.5 Intégration dans le backend
+
+Depuis le 8 novembre 2026, `flagship-ai` est branché dans le backend local :
+
+- `server/flagship_mt.py` charge les modèles int8 à la demande (CTranslate2) et
+  retire les jetons `[[NUM_n]]` / `[[n]]` avant l'appel, puis les remet dans
+  l'ordre. Cela évite qu'un montant ou un nom soit avalé par le modèle.
+- `server/app.py` route :
+  - `fub` → `francais-fufulde` si présent, sinon NLLB `fuv_Latn` ;
+  - `ewo` → `francais-ewondo` si présent, sinon erreur 503 (pas de NLLB) ;
+  - `dua` → pack communautaire uniquement.
+- Variables d'environnement : `NK_FLAGSHIP_MT=auto|0`, `NK_FLAGSHIP_MODEL_DIR`,
+  `NK_FLAGSHIP_DEVICE=cpu`, `NK_FLAGSHIP_COMPUTE_TYPE=int8`.
+- Le backend refuse aussi un segment marqué `critical=true` : le niveau A ne
+  passe jamais par la MT.
+- L'extension bloque les phrases contenant solde/frais/montant/PIN/OTP/
+  transaction/confirmation/etc. avant l'appel local ou cloud. Si le pack n'a
+  pas d'entrée `validated`, la phrase reste en français.
+- Test de bout en bout : `ewo` → « Mina, eyë miakòbò ya? », `fub` →
+  « Jaŋngo, noy on ɗon njahata? », `critical` → `critical_pack_only`.
+
 ---
 
 ## 5. Quatrième langue : candidats
@@ -376,8 +397,10 @@ certains interdisent la redistribution (Common Voice).
 ## 9. Conclusion opérationnelle
 
 - **Niveau A** : aucun changement. Packs validés uniquement, jamais de MT.
-- **Niveau B/C** : `flagship-ai` peut fournir un brouillon français → ewondo,
-  français → fulfulde et français → bulu. Le duala reste sans modèle.
+- **Niveau B/C** : `flagship-ai` fournit désormais le brouillon français →
+  ewondo et français → fulfulde dans le backend. Le français → bulu est prêt
+  côté modèle mais n'est pas branché (langue candidate). Le duala reste sans
+  modèle.
 - **Licence** : `francais-fufulde`, `francais-bulu` et `francais-ghomala` sont
   CC-BY-4.0 ; `francais-ewondo` est ambigu (CC-BY-4.0 vs CC-BY-NC-4.0) ; le
   bundle global est CC-BY-NC-4.0.

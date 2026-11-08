@@ -61,15 +61,19 @@ Ouvrir DevTools → onglet Réseau.
 
 « Une seule requête : `127.0.0.1:8000`. Pas de cloud, pas de cookies, pas de
 mot de passe. Les montants sont remplacés par des jetons avant l’envoi, puis
-restaurés. Si un jeton manque, la traduction est refusée. »
+restaurés. Si un jeton manque, la traduction est refusée. Et une phrase
+critique — solde, frais, PIN, OTP — n’est jamais envoyée à la MT sans pack
+validé : elle reste en français. »
 
 ### 2:10 — Données et limites
 
 Montrer `docs/DATA_LICENSES.md`.
 
-« Le modèle est NLLB, sous licence CC BY-NC 4.0 pour ce hackathon non
-commercial. Le corpus est open data. Les recherches du centre linguistique
-sont citées comme référence. Nous ne distribuons aucune donnée sans licence. »
+« Le moteur principal est `flagship-ai` (Marian), avec NLLB en secours pour le
+fulfulde. Les licences sont CC BY-NC 4.0 pour le bundle et CC BY 4.0 pour les
+modèles fp32 fulfulde/bulu. Le corpus est open data. Les recherches du centre
+linguistique sont citées comme référence. Nous ne distribuons aucune donnée
+sans licence. »
 
 « Le modèle est un baseline. Nous avons un protocole d’évaluation et une
 validation native. Nous ne prétendons pas que c’est déjà une traduction

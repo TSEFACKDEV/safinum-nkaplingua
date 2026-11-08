@@ -4,9 +4,9 @@ NkapLingua ne prétend pas traduire automatiquement toutes les langues du
 Cameroun. Le prototype retient **trois langues**, choisies pour leurs
 ressources existantes (corpus de parole, grammaires, dictionnaires) :
 
-- **Fulfulde d'Adamawa** (`fub`) — traduction automatique ;
-- **Ewondo** (`ewo`) — pack communautaire ;
-- **Duala** (`dua`) — pack communautaire.
+- **Fulfulde d'Adamawa** (`fub`) — MT brouillon (`flagship-ai`, NLLB en secours) ;
+- **Ewondo** (`ewo`) — MT brouillon (`flagship-ai`) + pack communautaire ;
+- **Duala** (`dua`) — pack communautaire uniquement.
 
 Yemba (`ybb`), medumba (`byv`), bassa (`bas`) et ghomala' (`bbj`) sont
 **retirés du prototype** : ni corpus de parole comparable, ni moteur validé.
@@ -17,18 +17,19 @@ Klein les retire aussi du registre, des packs, des tests et de la documentation
 
 | Code | Langue | Région | Moteur | Ressources connues | État |
 |---|---|---|---|---|---|
-| `fub` | Fulfulde (Adamawa) | Adamaoua, Nord, Extrême-Nord | NLLB local | Common Voice ASR ; 1 303 enregistrements TTS à une voix | MT baseline, 0/102 phrases validées |
-| `ewo` | Ewondo | Centre | Pack communautaire | Common Voice 27.0 : 14,36 h validées, 31 voix ; Ewondo-ASR ~3 h 11, 16 voix ; grammaires et dictionnaires | 0/20 phrases validées |
-| `dua` | Duala | Littoral | Pack communautaire | Common Voice 27.0 (heures à vérifier) ; dictionnaires et descriptions anciennes | 0/20 phrases validées |
+| `fub` | Fulfulde (Adamawa) | Adamaoua, Nord, Extrême-Nord | `flagship-ai` fr → fub ; NLLB `fuv_Latn` en secours | Common Voice ASR ; 1 303 enregistrements TTS à une voix | MT brouillon, 0/102 phrases validées |
+| `ewo` | Ewondo | Centre | `flagship-ai` fr → ewo, brouillon | Common Voice 27.0 : 14,36 h validées, 31 voix ; Ewondo-ASR ~3 h 11, 16 voix ; grammaires et dictionnaires | MT brouillon, 0/20 phrases validées |
+| `dua` | Duala | Littoral | Pack communautaire | Common Voice 27.0 (heures à vérifier) ; dictionnaires et descriptions anciennes | Pack, 0/20 phrases validées |
 
 Les classeurs T1/T2 et la fiche d'arbitrage sont prêts dans
 [`../data/review/`](../data/review/).
 
-> **Mise à jour du 8 novembre 2026** — des modèles externes existent
-> désormais : `flagship-ai/francais-fufulde` (CC-BY-4.0) et
+> **Mise à jour du 8 novembre 2026** — le backend est branché :
+> `flagship-ai/francais-fufulde` (CC-BY-4.0) pour le fulfulde et
 > `flagship-ai/cameroon-int8` / `francais-ewondo` (CC-BY-NC-4.0, sous-fiche
-> CC-BY-4.0 à trancher). Ce sont des **brouillons**, pas des moteurs validés :
-> le niveau A reste couvert par les packs. Voir
+> CC-BY-4.0 à trancher) pour l'ewondo. Ce sont des **brouillons**, pas des
+> moteurs validés : le niveau A reste couvert par les packs. Les phrases
+> critiques sans pack restent en français. Voir
 > [`EXTERNAL_RESOURCES.md`](EXTERNAL_RESOURCES.md).
 
 ### Pourquoi ces trois langues
@@ -48,6 +49,9 @@ Le pack est une **mémoire de traduction** : des phrases source et cible
 exactement appariées, relues par un locuteur natif. Le moteur ne traduit pas
 mot à mot et n'invente rien. Si la phrase n'est pas dans le pack, le texte
 original reste affiché et l'interface indique « phrase non validée ».
+Exception : pour les phrases **non critiques** en fulfulde et en ewondo, un
+brouillon MT peut être proposé avec la mention « à relire par un natif ». Une
+phrase critique sans pack reste toujours en français.
 
 C'est volontaire : une traduction approximative de « frais », « solde » ou
 « pénalité » peut faire prendre une mauvaise décision financière. Le règlement
@@ -148,11 +152,14 @@ python3 scripts/check-language-packs.py
 
 ## 7. Limites assumées
 
-- Le fulfulde reste une **baseline NLLB**, pas une traduction validée.
-- L'ewondo et le duala sont des packs vides tant qu'un natif ne les remplit
-  pas. Le code est prêt, la donnée ne l'est pas.
-- Aucun modèle NLLB de cette version ne produit de traduction automatique pour
-  `ewo` ou `dua` : la MT est réservée au fulfulde.
+- Le fulfulde et l'ewondo restent des **MT brouillons**, pas des traductions
+  validées. NLLB ne sert plus que de secours pour le fulfulde.
+- Le pack duala est vide tant qu'un natif ne le remplit pas. Le code est prêt,
+  la donnée ne l'est pas.
+- NLLB ne couvre ni `ewo` ni `dua`. L'ewondo utilise `flagship-ai` en brouillon,
+  le duala reste pack-only.
+- Sans pack validé, les phrases critiques (solde, frais, PIN/OTP, etc.) ne sont
+  pas traduites automatiquement : elles restent en français.
 - Les corpus de parole disponibles ne suffisent pas, seuls, à garantir une
   transcription robuste ; ils aident l'audio, pas la traduction écrite.
 - La qualité et la couverture seront mesurées dans `docs/EVAL.md` et

@@ -26,7 +26,9 @@
 ## 3. Avant la démonstration devant le jury
 
 - [ ] Backend démarré sur la machine de démonstration
-- [ ] Modèle NLLB téléchargé (ou mode `NK_MOCK=1` pour l’UI)
+- [ ] Modèles `flagship-ai/cameroon-int8` téléchargés dans `dist/models/flagship-int8`
+- [ ] Modèle NLLB téléchargé en secours (ou mode `NK_MOCK=1` pour l’UI)
+- [ ] `GET /health` confirme `flagship.models.ewo` et `flagship.models.fub`
 - [ ] Extension épinglée dans la barre d’outils
 - [ ] Page de l’interface fournie par le jury ouverte
 - [ ] Test de traduction sur un court paragraphe
@@ -41,17 +43,20 @@
 ## 4. Questions probables du jury
 
 **Quelles langues ?**
-Fulfulde (Adamawa) en traduction automatique, plus ewondo et duala en packs de
-phrases validées. Ces trois langues sont retenues pour leurs corpus de parole
-et leurs ressources documentaires.
+Fulfulde (Adamawa) et ewondo en **MT brouillon** (`flagship-ai`), duala en pack
+de phrases validées. Ces trois langues sont retenues pour leurs corpus de
+parole et leurs ressources documentaires.
 
 **Pourquoi NLLB ?**
-Meilleure qualité que M2M100 sur les phrases courtes fulfulde. Licence
-CC BY-NC 4.0, utilisable pour ce hackathon non commercial.
+NLLB n’est plus le moteur principal : `flagship-ai` fournit le brouillon
+fulfulde/ewondo. NLLB reste un secours pour le fulfulde (CC BY-NC 4.0,
+hackathon non commercial).
 
 **Comment garantissez-vous les montants et les noms ?**
 Pseudonymisation côté extension (NUM, NAME), contrôle d’unicité côté backend,
-refus de la traduction si un jeton manque.
+refus de la traduction si un jeton manque. Surtout, une phrase contenant
+solde/frais/PIN/OTP/transaction/confirmation est bloquée avant la MT si le pack
+n’a pas d’entrée validée : elle reste en français.
 
 **Comment fonctionne l’intégration ?**
 Extension navigateur, `activeTab` + `scripting`, aucun changement du code
@@ -62,9 +67,10 @@ Popup « texte inédit » et traduction de sélection ; le jury peut saisir un
 message pendant la démo.
 
 **Quelle est la limite principale ?**
-La qualité linguistique de NLLB sur les phrases longues et certaines tournures
-finance. Les six autres langues sont des packs vides tant qu’un natif ne les
-remplit pas. La validation native est la prochaine étape.
+La qualité linguistique du brouillon `flagship-ai` sur les phrases longues et
+les tournures finance. Les packs sont vides tant qu’un natif ne les remplit
+pas ; les phrases critiques restent donc en français. La validation native est
+la prochaine étape.
 
 **Est-ce que ça marche sur l’interface du jury ?**
 Oui si c’est une page web. Le pipeline est générique ; nous ne dépendons pas

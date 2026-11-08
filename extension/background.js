@@ -4,14 +4,16 @@
  *
  * Trois modes de traduction :
  *  1. mémoire de traduction communautaire (packs validés) ;
- *  2. backend local NLLB (127.0.0.1:8000) si disponible ;
- *  3. service cloud MyMemory en secours, pour qu’un simple fichier
- *     d’extension fonctionne sans installation Python.
+ *  2. backend local flagship-ai (brouillon) ou NLLB (127.0.0.1:8000) ;
+ *  3. service cloud MyMemory en secours, uniquement pour les paires qui
+ *     disposent d’un code cloud (pas l’ewondo).
  *
  * Dans tous les cas :
  *  - seuls des textes pseudonymisés sont envoyés ;
  *  - aucune valeur de formulaire, aucun cookie, aucun code PIN n’est lu ;
- *  - les montants, URLs, emails et noms sont contrôlés après traduction.
+ *  - les montants, URLs, emails et noms sont contrôlés après traduction ;
+ *  - une phrase contenant un terme du niveau A (solde, frais, PIN/OTP, etc.)
+ *    n’est jamais envoyée à la MT : elle exige une entrée de pack validée.
  */
 
 // Chrome service worker : charge le registre partagé. Firefox et les tests
@@ -165,7 +167,6 @@ async function translateSegments(segments, target, source) {
     return { translations: [], provider: null };
   }
 
-  const allowCloud = await cloudAllowed();
   const targetSpec = LANG?.getTarget(target);
   if (!targetSpec) {
     return {
@@ -174,6 +175,11 @@ async function translateSegments(segments, target, source) {
       error: `Langue cible non supportée : ${target}`
     };
   }
+
+  // MyMemory n'a pas de paire pour l'ewondo : on ne l'appelle jamais avec
+  // un code cloud absent (sinon on traduirait vers le fulfulde par erreur).
+  const allowCloud =
+    Boolean(targetSpec.cloudCode) && (await cloudAllowed());
 
   // Deuxième barrière de pseudonymisation : elle protège aussi les appels
   // directs au background (popup « texte inédit », test, futur client).
@@ -201,7 +207,10 @@ async function translateSegments(segments, target, source) {
 
   for (const segment of prepared) {
     const key = `${detected}:${target}:${segment.originalText}`;
-    if (cache.has(key)) {
+    const critical = LANG?.isCriticalText?.(segment.originalText);
+    // Ne jamais servir une phrase critique depuis le cache MT : elle doit
+    // repasser par le pack validé et, sinon, rester en français.
+    if (!critical && cache.has(key)) {
       results.set(segment.id, { ...cache.get(key), id: segment.id });
     } else {
       missing.push(segment);
@@ -273,6 +282,24 @@ async function translateSegments(segments, target, source) {
     );
   }
 
+  // Niveau A : une phrase critique sans entrée de pack validée ne doit
+  // jamais atteindre la MT (locale ou cloud).
+  const criticalBlocked = remaining.filter((segment) =>
+    LANG?.isCriticalText?.(segment.originalText)
+  );
+  if (criticalBlocked.length > 0) {
+    const blockedIds = new Set(criticalBlocked.map((segment) => segment.id));
+    for (const segment of criticalBlocked) {
+      results.set(segment.id, {
+        id: segment.id,
+        text: segment.originalText,
+        ok: false,
+        reason: "critical_pack_only"
+      });
+    }
+    remaining = remaining.filter((segment) => !blockedIds.has(segment.id));
+  }
+
   if (remaining.length === 0) {
     return {
       translations: segments
@@ -295,12 +322,13 @@ async function translateSegments(segments, target, source) {
   let translations = null;
   if (TRANSLATION_MODE !== "cloud" && (await isLocalAvailable())) {
     try {
-      translations = await translateWithLocal(
+      const local = await translateWithLocal(
         remaining,
         targetSpec.code,
         detected
       );
-      provider = "local";
+      translations = local.translations;
+      provider = local.provider || "local";
     } catch {
       // Le backend local a échoué : on passe au cloud.
       localAvailable = false;
@@ -354,7 +382,9 @@ async function translateSegments(segments, target, source) {
 
   if (!translations) {
     return {
-      translations: [],
+      translations: segments
+        .map((segment) => results.get(segment.id))
+        .filter(Boolean),
       provider: null,
       error: allowCloud
         ? "Aucun moteur de traduction disponible."
@@ -578,7 +608,11 @@ async function translateWithLocal(segments, target, source) {
   if (!Array.isArray(data.translations)) {
     throw new Error("Réponse backend invalide.");
   }
-  return data.translations;
+  return {
+    translations: data.translations,
+    provider: data.provider || "local",
+    model: data.model || null
+  };
 }
 
 /* ------------------------------------------------------------------ */
@@ -586,6 +620,9 @@ async function translateWithLocal(segments, target, source) {
 /* ------------------------------------------------------------------ */
 
 async function translateWithCloud(segments, source, targetSpec) {
+  if (!targetSpec.cloudCode) {
+    throw new Error(`Cloud non disponible pour ${targetSpec.label}.`);
+  }
   const sourceCode = source === "en" ? "en" : "fr";
   const results = await mapWithConcurrency(
     segments,
@@ -608,7 +645,7 @@ async function translateCloudSegment(segment, sourceCode, targetSpec) {
 
   const params = new URLSearchParams({
     q: cloudText,
-    langpair: `${sourceCode}|${targetSpec.cloudCode || "ff"}`
+    langpair: `${sourceCode}|${targetSpec.cloudCode}`
   });
 
   const controller = new AbortController();

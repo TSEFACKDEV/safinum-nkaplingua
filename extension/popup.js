@@ -28,8 +28,11 @@ function displayName(item) {
 
 function providerLabel(provider) {
   if (provider === "pack") return "pack communautaire";
-  if (provider === "local") return "backend local NLLB";
+  if (provider === "flagship") return "flagship-ai (brouillon)";
+  if (provider === "nllb") return "backend local NLLB";
+  if (provider === "local") return "backend local";
   if (provider === "cloud") return "MyMemory (cloud)";
+  if (provider === "mock") return "mode maquette";
   return "moteur inconnu";
 }
 
@@ -57,7 +60,7 @@ function updateLanguageUI() {
   $("heroTitle").textContent = "Traduire cette page";
   $("engineTag").textContent = current.engine === "pack" ? "PACK:" : "MT:";
   $("targetStatus").textContent = String(current.statusLabel || "")
-    .replace(/^MT\s*—\s*/i, "")
+    .replace(/^MT(?:\s+brouillon)?\s*—\s*/i, "")
     .replace(/^Pack communautaire\s*—\s*/i, "");
   $("targetNote").title = current.region || "";
   $("targetNote").dataset.engine = current.engine;
@@ -343,6 +346,11 @@ $("translateText").addEventListener("click", async () => {
       } else if (response?.translation?.reason === "pack_unverified") {
         setStatus(
           "Cette phrase existe dans le pack mais n'est pas encore validée par un locuteur natif."
+        );
+      } else if (response?.translation?.reason === "critical_pack_only") {
+        setStatus(
+          "Phrase critique (solde, frais, PIN/OTP, etc.) : aucun pack validé. " +
+            "Elle reste en français ; le niveau A exige une validation native."
         );
       } else {
         setStatus(

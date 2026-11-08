@@ -14,21 +14,30 @@ ressource utilisée, il faut pouvoir répondre à :
 
 ## Ressources utilisées dans ce prototype
 
-### Modèle de traduction
+### Modèles de traduction
 
-| Élément | Valeur |
-|---|---|
-| Modèle | `facebook/nllb-200-distilled-600M` |
-| Licence | **CC BY-NC 4.0** |
-| Usage | traduction français → fulfulde (`fuv_Latn`) |
-| Source | https://huggingface.co/facebook/nllb-200-distilled-600M |
-| Remarque | usage non commercial autorisé pour le hackathon ; accord nécessaire pour une exploitation commerciale |
+| Élément | Licence | Usage |
+|---|---|---|
+| `flagship-ai/cameroon-int8` (sous-modèles `francais-ewondo`, `francais-fufulde`) | **CC BY-NC 4.0** (bundle) ; sous-fiche ewondo **CC BY 4.0** | brouillon français → ewondo / fulfulde |
+| `flagship-ai/francais-fufulde` (fp32) | **CC BY 4.0** | référence / alternative fulfulde |
+| `facebook/nllb-200-distilled-600M` | **CC BY-NC 4.0** | secours français/anglais → fulfulde (`fuv_Latn`) |
 
-**Pourquoi NLLB et pas M2M100 ?** M2M100 est sous MIT, mais sa sortie `ff`
-s’est révélée très instable sur le fulfulde (répétitions, anglais). NLLB
-`fuv_Latn` produit des phrases courtes nettement plus cohérentes. Pour une
-version commerciale, il faudra soit obtenir un accord pour NLLB, soit
-fine-tuner M2M100 (MIT) sur le corpus adamawa.
+**Ordre de routage** : le backend utilise `flagship-ai` en priorité pour
+l’ewondo et le fulfulde. Si le modèle flagship manque ou échoue, le fulfulde
+retombe sur NLLB ; l’ewondo n’a pas de secours NLLB et renvoie une erreur
+explicite. Le duala reste pack-only.
+
+**Pourquoi NLLB en secours et pas M2M100 ?** M2M100 est sous MIT, mais sa
+sortie `ff` s’est révélée très instable sur le fulfulde (répétitions, anglais).
+NLLB `fuv_Latn` produit des phrases courtes plus cohérentes. Pour une version
+commerciale, il faudra soit obtenir un accord pour NLLB, soit fine-tuner un
+modèle libre (M2M100 ou Marian) sur le corpus adamawa.
+
+**Conflit de licence ewondo** : le bundle `cameroon-int8` est globalement
+CC BY-NC 4.0, mais sa sous-fiche `francais-ewondo` affiche CC BY 4.0. En cas de
+doute, traiter le modèle ewondo comme non commercial jusqu’à clarification
+écrite de `flagship-ai`. Les modèles fp32 `francais-fufulde` et
+`francais-bulu` sont explicitement CC BY 4.0.
 
 ### Service cloud de secours
 
