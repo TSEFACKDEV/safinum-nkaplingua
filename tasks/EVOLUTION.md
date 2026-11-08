@@ -1575,3 +1575,55 @@ mot `json`) avec les champs ci-dessous. Exemple de structure, en indentation :
   "blockers": []
 }
 ```
+
+## 2026-11-08T06:30:00+01:00 — Marius — M13 — done
+
+```json
+{
+  "timestamp": "2026-11-08T06:30:00+01:00",
+  "person": "Marius",
+  "branch": "marius",
+  "task": "M13",
+  "status": "done",
+  "summary": "Le tokenizer NLLB partagé a désormais une section critique verrouillée : _MODEL_LOCK couvre src_lang, l'encodage, la génération et le décodage dans _generate_locked(). Test concurrent FR/EN avec tokenizer factice : il échoue sans verrou et passe avec.",
+  "files": [
+    "server/app.py",
+    "server/test_api.py"
+  ],
+  "tests": [
+    {
+      "command": "NK_MOCK=1 server/.venv/bin/python -m pytest -q server/test_api.py",
+      "result": "pass",
+      "note": "26 passed, dont test_concurrent_sources_do_not_mix"
+    },
+    {
+      "command": "vérification de sensibilité sans verrou",
+      "result": "pass",
+      "note": "avec _MODEL_LOCK remplacé par nullcontext, le test échoue ; le verrou est donc bien couvert"
+    },
+    {
+      "command": "python3 -m py_compile server/app.py server/test_api.py",
+      "result": "pass",
+      "note": "syntaxe Python"
+    },
+    {
+      "command": "node tests/privacy.test.js && node tests/cloud-gating.test.js && node tests/content.test.js",
+      "result": "pass",
+      "note": "non-régression extension"
+    },
+    {
+      "command": "python3 scripts/check-language-packs.py && python3 scripts/check-pack-collisions.py",
+      "result": "pass",
+      "note": "packs et collisions"
+    },
+    {
+      "command": "python3 scripts/check-evolution.py",
+      "result": "pass",
+      "note": "journal valide après ajout de l'entrée"
+    }
+  ],
+  "evidence": "server/app.py _MODEL_LOCK + _generate_locked ; sortie pytest « 26 passed » ; sans verrou : « OK — échoue sans verrou » (AssertionError)",
+  "next": "M10 — packaging et CI : build Firefox, web-ext lint, 3 ZIP, documentation du statut",
+  "blockers": []
+}
+```
