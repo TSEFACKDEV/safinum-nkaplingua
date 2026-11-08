@@ -106,6 +106,7 @@ Le script d'import refuse une entrée validée si :
 
 - un jeton `[[NUM_n]]`, `[[NAME_n]]`, `[[URL_n]]` ou `[[EMAIL_n]]` manque ;
 - un terme critique (`FCFA`, `PIN`, `OTP`, `KYC`, `FINAKA`) a été traduit ;
+- un terme validé du glossaire est absent ou non exact dans la cible ;
 - le relecteur, la date ISO, la licence (`CC0-1.0` ou `CC-BY-4.0`) ou la
   provenance `human` manque ;
 - T1 et T2 sont la même personne, ou l'arbitre est l'un des deux.

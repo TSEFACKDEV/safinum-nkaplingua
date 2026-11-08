@@ -20,6 +20,7 @@ Node 20+ (CI) ou 24 (poste de dev). Python 3.12 pour le backend.
 | `tests/cloud-gating.test.js` | pack sans réseau ; MyMemory jamais appelé sans opt-in ; case décochée par défaut (M2) | `node tests/cloud-gating.test.js` | **pass** |
 | `tests/check-pack-collisions.test.py` | détecteur de collisions : collision, normalisation, doublon de source, pack invalide (M4) | `python3 tests/check-pack-collisions.test.py` | **pass** |
 | `tests/criticality.test.js` | niveau A pack-only : aucun appel MT/cloud, original conservé ; niveau B autorisé (M3) | `node tests/criticality.test.js` | **pass** |
+| `tests/import-glossary.test.py` | contrôle lexical glossaire à l'import : terme validé absent → refus, présent → acceptation, langue/statut (M5) | `python3 tests/import-glossary.test.py` | **pass** |
 | `scripts/test-extension.js` | registre des langues, détection, packs, jetons, qualité | `node scripts/test-extension.js` | **pass** |
 | `server/test_api.py` | contrats API, CORS, refus, mode mock | `NK_MOCK=1 python3 -m pytest -q server/test_api.py` | **pass** |
 

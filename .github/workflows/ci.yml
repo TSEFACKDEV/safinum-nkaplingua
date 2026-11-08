@@ -60,6 +60,7 @@ jobs:
           python3 scripts/check-language-packs.py
           python3 scripts/check-pack-collisions.py
           python3 tests/check-pack-collisions.test.py
+          python3 tests/import-glossary.test.py
           python3 scripts/check-training-data.py
 
       - name: Install jsdom

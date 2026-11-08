@@ -1853,3 +1853,58 @@ mot `json`) avec les champs ci-dessous. Exemple de structure, en indentation :
   ]
 }
 ```
+
+## 2026-11-08T07:15:00+01:00 — Marius — M5 — done
+
+```json
+{
+  "timestamp": "2026-11-08T07:15:00+01:00",
+  "person": "Marius",
+  "branch": "marius",
+  "task": "M5",
+  "status": "done",
+  "summary": "Le contrôle lexical glossaire est intégré à l'import : pour chaque terme validé de la langue cible, si la source contient le terme, la cible doit contenir exactement la traduction validée ; sinon l'import est refusé. Ajout de tests/import-glossary.test.py (5 cas). Le backend protège/restaure déjà les termes du glossaire validés et le background contrôle les termes critiques identiques (FCFA, PIN, OTP, KYC).",
+  "files": [
+    "scripts/import-language-pack.py",
+    "tests/import-glossary.test.py",
+    "scripts/README.md",
+    "tests/README.md",
+    ".github/workflows/ci.yml"
+  ],
+  "tests": [
+    {
+      "command": "python3 tests/import-glossary.test.py",
+      "result": "pass",
+      "note": "5 cas : terme validé absent → refus, présent → acceptation, glossaire non validé, autre langue, FCFA traduit → refus"
+    },
+    {
+      "command": "python3 scripts/check-language-packs.py",
+      "result": "pass",
+      "note": "3 fichiers, 3 feuilles"
+    },
+    {
+      "command": "node scripts/test-extension.js && node tests/content.test.js",
+      "result": "pass",
+      "note": "registre, jetons, restauration"
+    },
+    {
+      "command": "node tests/privacy.test.js && node tests/cloud-gating.test.js && node tests/criticality.test.js",
+      "result": "pass",
+      "note": "non-régression M1/M2/M3"
+    },
+    {
+      "command": "NK_MOCK=1 server/.venv/bin/python -m pytest -q server/test_api.py",
+      "result": "pass",
+      "note": "26 passed"
+    },
+    {
+      "command": "python3 scripts/check-evolution.py",
+      "result": "pass",
+      "note": "journal valide après ajout de l'entrée"
+    }
+  ],
+  "evidence": "sortie « import-glossary OK — 5 cas » ; scripts/import-language-pack.py load_glossary + validate ; glossaire actuel : 0 terme validé, donc le contrôle est sans effet tant que K2 n'est pas rempli",
+  "next": "M3 — badge visuel du niveau A non traduit, puis M12 (Shadow DOM/iframes)",
+  "blockers": []
+}
+```

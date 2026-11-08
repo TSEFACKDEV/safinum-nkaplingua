@@ -11,7 +11,9 @@ pour les entrées validées :
 - reviewer non vide ;
 - license dans {CC0-1.0, CC-BY-4.0} ;
 - provenance = human (aucune machine translation dans un pack validé) ;
-- reviewed_at au format ISO (AAAA-MM-JJ).
+- reviewed_at au format ISO (AAAA-MM-JJ) ;
+- termes validés du glossaire : si la source contient un terme validé, la
+  cible doit contenir exactement la traduction validée.
 
 Seules les lignes avec une cible non vide sont importées. Les jetons
 [[NUM_n]], [[NAME_n]], [[URL_n]] et [[EMAIL_n]] sont contrôlés.
@@ -31,6 +33,37 @@ TOKEN_RE = re.compile(r"\[\[\s*(NUM|URL|EMAIL|NAME)\s*_\s*(\d+)\s*\]\]", re.I)
 DNT_TERMS = ["FCFA", "XAF", "PIN", "OTP", "KYC", "FINAKA"]
 ALLOWED_LICENSES = {"CC0-1.0", "CC-BY-4.0"}
 STATUSES = {"draft", "reviewed", "validated", "deprecated"}
+GLOSSARY_DEFAULT = (
+    Path(__file__).resolve().parent.parent / "data" / "glossary.template.csv"
+)
+VALIDATED_STATUSES = {"validated", "valide", "validé"}
+
+
+def load_glossary(path: Path, code: str) -> list[tuple[str, str]]:
+    """Charge les termes validés du glossaire pour une langue cible.
+
+    Le glossaire est la source des traductions de référence : si un terme
+    source y figure, le pack doit contenir exactement la cible validée.
+    """
+    if not path.exists():
+        return []
+
+    entries: list[tuple[str, str]] = []
+    with path.open(encoding="utf-8", newline="") as handle:
+        for row in csv.DictReader(handle):
+            status = (row.get("status") or "").strip().lower()
+            if status not in VALIDATED_STATUSES:
+                continue
+            target = (row.get(f"target_{code}") or "").strip()
+            if not target:
+                continue
+            for column in ("source_fr", "source_en"):
+                source = (row.get(column) or "").strip()
+                if source:
+                    entries.append((source, target))
+
+    # Les termes les plus longs d'abord (comme le backend).
+    return sorted(entries, key=lambda item: len(item[0]), reverse=True)
 
 
 def tokens(text: str) -> list[str]:
@@ -70,7 +103,9 @@ def parse_iso_date(value: str) -> str | None:
         return None
 
 
-def validate(source: str, target: str) -> list[str]:
+def validate(
+    source: str, target: str, glossary: list[tuple[str, str]] | None = None
+) -> list[str]:
     errors: list[str] = []
     source_tokens = tokens(source)
 
@@ -81,6 +116,13 @@ def validate(source: str, target: str) -> list[str]:
     for term in DNT_TERMS:
         if has_term(source, term) and not has_term(target, term):
             errors.append(f"terme critique manquant : {term}")
+
+    for term_source, term_target in glossary or []:
+        if has_term(source, term_source) and not has_term(target, term_target):
+            errors.append(
+                f"terme de glossaire manquant : {term_source!r} → "
+                f"{term_target!r}"
+            )
 
     return errors
 
@@ -116,9 +158,19 @@ def main() -> int:
         default=None,
         help="Version du pack (par défaut : conserver la version existante).",
     )
+    parser.add_argument(
+        "--glossary",
+        type=Path,
+        default=GLOSSARY_DEFAULT,
+        help=(
+            "Glossaire de référence (défaut : data/glossary.template.csv). "
+            "Seuls les termes validés de la langue cible sont contrôlés."
+        ),
+    )
     args = parser.parse_args()
 
     code = args.csv_path.stem
+    glossary = load_glossary(args.glossary, code)
     output = args.output or (
         Path(__file__).resolve().parent.parent
         / "extension"
@@ -159,7 +211,7 @@ def main() -> int:
             if status != "validated" and not args.allow_draft:
                 continue
 
-            row_errors = validate(source, target)
+            row_errors = validate(source, target, glossary)
             if row_errors:
                 errors.append(f"ligne {line_number} : {', '.join(row_errors)}")
                 continue
