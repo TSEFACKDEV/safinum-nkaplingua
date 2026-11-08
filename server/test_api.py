@@ -29,6 +29,7 @@ from app import (  # noqa: E402
     split_sentences,
     validate,
 )
+from flagship_mt import split_placeholders  # noqa: E402
 
 client = TestClient(app)
 
@@ -40,6 +41,8 @@ def test_health():
     assert data["status"] == "ok"
     assert data["mock"] is True
     assert data["loaded"] is True
+    assert "flagship" in data
+    assert data["flagship"]["mode"] in {"auto", "0", "1", "false", "true"}
 
 
 def test_languages():
@@ -48,7 +51,11 @@ def test_languages():
     data = response.json()
     codes = [item["code"] for item in data["targets"]]
     assert codes == ["fub", "ewo", "dua"]
-    assert data["target"][0]["model_code"] == "fuv_Latn"
+    assert data["target"][0]["engine"] == "mt"
+    assert "flagship" in data["target"][0]["model_code"]
+    assert data["target"][1]["engine"] == "mt"
+    assert data["target"][1]["status"] == "mt-draft"
+    assert data["target"][2]["engine"] == "pack"
     assert data["target"][0]["audio"]
     assert data["target"][1]["audio"]
 
@@ -248,6 +255,85 @@ def test_translate_auto_source():
     )
     assert response.status_code == 200
     assert response.json()["translations"][0]["ok"] is True
+
+
+def test_translate_ewondo_draft_in_mock():
+    response = client.post(
+        "/translate",
+        json={
+            "target": "ewo",
+            "segments": [
+                {
+                    "id": "s1",
+                    "text": "Bonjour, comment allez-vous ?",
+                    "context": "greeting",
+                }
+            ],
+        },
+    )
+    assert response.status_code == 200
+    data = response.json()
+    assert data["provider"] == "mock"
+    assert data["translations"][0]["ok"] is True
+    assert "[ewondo]" in data["translations"][0]["text"]
+
+
+def test_critical_segment_never_uses_mt():
+    response = client.post(
+        "/translate",
+        json={
+            "target": "fub",
+            "segments": [
+                {
+                    "id": "s1",
+                    "text": "Le solde est de 125 000 FCFA.",
+                    "context": "finance",
+                    "critical": True,
+                }
+            ],
+        },
+    )
+    assert response.status_code == 200
+    data = response.json()
+    translation = data["translations"][0]
+    assert translation["ok"] is False
+    assert translation["reason"] == "critical_pack_only"
+    assert translation["text"] == "Le solde est de 125 000 FCFA."
+    assert data["provider"] == "none"
+
+
+def test_critical_ewondo_segment_is_blocked_without_model():
+    response = client.post(
+        "/translate",
+        json={
+            "target": "ewo",
+            "segments": [
+                {
+                    "id": "s1",
+                    "text": "Le solde est de 125 000 FCFA.",
+                    "context": "finance",
+                    "critical": True,
+                }
+            ],
+        },
+    )
+    assert response.status_code == 200
+    data = response.json()
+    assert data["translations"][0]["reason"] == "critical_pack_only"
+    assert data["provider"] == "none"
+
+
+def test_split_placeholders_keeps_order():
+    parts = split_placeholders(
+        "Le solde est de [[NUM_0]] FCFA et le code [[0]] est secret."
+    )
+    assert parts == [
+        "Le solde est de ",
+        "[[NUM_0]]",
+        " FCFA et le code ",
+        "[[0]]",
+        " est secret.",
+    ]
 
 
 def test_validate_rejects_missing_token():

@@ -31,47 +31,7 @@ python3 scripts/check-evolution.py
 Un titre lisible, puis un bloc de code JSON (délimité par trois backticks et le
 mot `json`) avec les champs ci-dessous. Exemple de structure, en indentation :
 
-    ## 2026-11-07T18:00:00+01:00 — Klein — K3 — in_progress
-
-    {
-      "timestamp": "2026-11-07T18:00:00+01:00",
-      "person": "Klein",
-      "branch": "klein",
-      "task": "K3",
-      "status": "in_progress",
-      "summary": "37 phrases P0 : première traduction indépendante terminée",
-      "files": ["data/language-packs/fub.csv"],
-      "tests": [
-        {
-          "command": "python3 scripts/import-language-pack.py data/language-packs/fub.csv",
-          "result": "not_run",
-          "note": "import après arbitrage"
-        }
-      ],
-      "evidence": "fub.csv, lignes 1-37, colonne target",
-      "next": "Deuxième traduction indépendante + arbitrage",
-      "blockers": []
-    }
-
-## 3. Champs obligatoires
-
-| Champ | Type | Règle |
-|---|---|---|
-| `timestamp` | string | ISO 8601 avec fuseau, ex. `2026-11-07T18:00:00+01:00` |
-| `person` | string | `Freedy`, `Klein` ou `Marius` |
-| `branch` | string | `freedy`, `klein` ou `marius` |
-| `task` | string | `F0`…`F6`, `K1`…`K9`, `M1`…`M13` |
-| `status` | string | `in_progress`, `blocked` ou `done` |
-| `summary` | string | 1 à 3 phrases, concret |
-| `files` | array | fichiers réellement modifiés |
-| `tests` | array | `{command, result, note}` ; `result` ∈ `pass`, `fail`, `blocked`, `not_run` |
-| `evidence` | string | lien, capture, ligne de CSV, sortie de test |
-| `next` | string | prochaine action |
-| `blockers` | array | obligatoire si `status=blocked` |
-
-## 4. Entrée initiale
-
-## 2026-11-07T16:42:00+01:00 — Freedy — F0 — done
+    ## 2026-11-07T16:42:00+01:00 — Freedy — F0 — done
 
 ```json
 {
@@ -2322,5 +2282,120 @@ mot `json`) avec les champs ci-dessous. Exemple de structure, en indentation :
   "evidence": "README.md § État réel au 8 novembre 2026 ; docs/EVAL.md § Résultats réels ; docs/COMPLIANCE.md total objectif 80+",
   "next": "Poursuivre M7 (Firefox) et M9 (unseen/demo) dès que les données/modèle seront disponibles",
   "blockers": []
+}
+```
+
+## 2026-11-08T10:00:00+01:00 — Klein — K2 — in_progress
+
+```json
+{
+  "timestamp": "2026-11-08T10:00:00+01:00",
+  "person": "Klein",
+  "branch": "klein",
+  "task": "K2",
+  "status": "in_progress",
+  "summary": "Inventaire externe : modèles flagship-ai fr→fulfulde/ewondo/bulu, audio Common Voice/AfriSpeech/SOREVA, corpus mt560 basaa/bulu, lexiques PanLex/Suzuya. Aucun modèle duala prêt ; le bulu est le meilleur candidat pour une 4e langue, sous réserve d'un natif.",
+  "files": [
+    "docs/EXTERNAL_RESOURCES.md",
+    "docs/TRAINING_DATA_AUDIT.md",
+    "docs/DATA_LICENSES.md",
+    "docs/DUALA_MT.md",
+    "data/reference/external-resources.csv",
+    "data/reference/panlex/panlex-targets.csv",
+    "data/reference/panlex/README.md",
+    "data/reference/fulfulde-suzuya.csv",
+    "data/reference/NOTICE.md",
+    "data/reference/README.md",
+    "data/training/README.md",
+    "README.md"
+  ],
+  "tests": [
+    {
+      "command": "python3 scripts/check-training-data.py",
+      "result": "pass",
+      "note": "11 sources : 7 bloquées, 3 sous autorisation, 1 utilisable ; aucun fichier versionné"
+    },
+    {
+      "command": "server/.venv/bin/python -c \"import ctranslate2; print(ctranslate2.__version__)\"",
+      "result": "pass",
+      "note": "ctranslate2 4.8.5 installé pour les modèles int8"
+    },
+    {
+      "command": "python3 scripts/check-evolution.py",
+      "result": "pass",
+      "note": "journal valide après ajout de l'entrée"
+    }
+  ],
+  "evidence": "docs/EXTERNAL_RESOURCES.md §4.1 (sorties flagship int8 sur 10 phrases) ; data/reference/external-resources.csv (88 ressources) ; docs/DUALA_MT.md §8",
+  "next": "Trancher la licence du sous-modèle francais-ewondo avec flagship-ai, décider du mode brouillon ewo/fub, puis du bulu comme 4e langue si un natif est disponible",
+  "blockers": []
+}
+```
+
+## 2026-11-08T12:00:00+01:00 — Klein — K2 — in_progress
+
+```json
+{
+  "timestamp": "2026-11-08T12:00:00+01:00",
+  "person": "Klein",
+  "branch": "klein",
+  "task": "K2",
+  "status": "in_progress",
+  "summary": "Backend flagship-ai branché : brouillon fr→ewo et fr→fub (CTranslate2 int8, NLLB en secours pour fub), duala pack-only. Barrière niveau A dans l'extension et le backend : les phrases critiques sans pack validé restent en français. Tests backend, extension et bout en bout passés.",
+  "files": [
+    "server/app.py",
+    "server/flagship_mt.py",
+    "server/test_api.py",
+    "server/requirements.txt",
+    "extension/languages.js",
+    "extension/background.js",
+    "extension/content.js",
+    "extension/popup.js",
+    "scripts/test-extension.js",
+    "docs/TECHNICAL.md",
+    "docs/LANGUAGES.md",
+    "docs/LANGUAGE_VALIDATION.md",
+    "docs/DATA_LICENSES.md",
+    "docs/DEMO.md",
+    "docs/SECURITY.md",
+    "docs/COMPLIANCE.md",
+    "docs/SUBMISSION_CHECKLIST.md",
+    "docs/PRESELECTION.md",
+    "docs/PITCH.md",
+    "docs/SUBMISSION.md",
+    "docs/EVAL.md",
+    "docs/VIDEO_SCRIPT.md",
+    "docs/SUBMISSION_DOCUMENT.html",
+    "docs/EXTERNAL_RESOURCES.md",
+    "README.md"
+  ],
+  "tests": [
+    {
+      "command": "NK_MOCK=1 server/.venv/bin/python -m pytest -q server/test_api.py",
+      "result": "pass",
+      "note": "29 tests, dont ewondo mock, segments critiques ewo/fub bloqués et découpage des jetons"
+    },
+    {
+      "command": "node scripts/test-extension.js",
+      "result": "pass",
+      "note": "registre, packs, jetons, qualité, isCriticalText et critical_pack_only"
+    },
+    {
+      "command": "node tests/content.test.js",
+      "result": "pass",
+      "note": "content script jsdom, texte/attributs/restauration"
+    },
+    {
+      "command": "NK_MOCK=0 NK_FLAGSHIP_MODEL_DIR=dist/models/flagship-int8 ...",
+      "result": "pass",
+      "note": "ewo -> « Mina, eyë miakòbò ya? » ; fub -> « Jaŋngo, noy on ɗon njahata? » ; critique -> critical_pack_only"
+    }
+  ],
+  "evidence": "server/flagship_mt.py ; docs/EXTERNAL_RESOURCES.md §4.5 ; sorties locales ewondo/fufulde et test extension bout en bout",
+  "next": "Mettre à jour le HTML/PDF de soumission et la vidéo, puis remplir les packs avec des natifs ; sans natif, les phrases critiques restent en français",
+  "blockers": [
+    "aucun natif disponible pour les trois langues",
+    "licence du sous-modèle francais-ewondo à clarifier"
+  ]
 }
 ```

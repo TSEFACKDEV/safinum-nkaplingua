@@ -79,8 +79,8 @@ const hinted = LANG.detectLanguage("Solde", "en-US");
 assert(hinted.code === "en", "indice HTML non prioritaire sur texte court");
 
 context.__NK_PACK_OVERRIDES__ = {
-  ewo: {
-    code: "ewo",
+  dua: {
+    code: "dua",
     entries: [
       {
         source: "Le solde est de [[NUM_0]] FCFA.",
@@ -105,6 +105,7 @@ context.__NK_PACK_OVERRIDES__ = {
     ]
   }
 };
+context.__NK_PACK_OVERRIDES__.ewo = { code: "ewo", entries: [] };
 
 vm.runInContext(
   fs.readFileSync(path.join(root, "extension/background.js"), "utf8"),
@@ -114,7 +115,7 @@ vm.runInContext(
 (async () => {
   const hit = await context.translateSegments(
     [{ id: "a", text: "Le solde est de [[NUM_0]] FCFA." }],
-    "ewo",
+    "dua",
     "fr"
   );
   assert(hit.provider === "pack", "provider pack attendu");
@@ -131,7 +132,7 @@ vm.runInContext(
         text: "Le bénéficiaire [[NAME_0]] reçoit [[NUM_0]] FCFA."
       }
     ],
-    "ewo",
+    "dua",
     "fr"
   );
   assert(nameHit.translations[0].ok === true, "phrase avec NAME refusée");
@@ -144,7 +145,7 @@ vm.runInContext(
   // les montants et les noms, puis les restaurer avant de répondre.
   const rawAmount = await context.translateSegments(
     [{ id: "raw-amount", text: "Le solde est de 125 000 FCFA." }],
-    "ewo",
+    "dua",
     "fr"
   );
   assert(rawAmount.translations[0].ok === true, "montant brut refusé");
@@ -159,7 +160,7 @@ vm.runInContext(
 
   const rawName = await context.translateSegments(
     [{ id: "raw-name", text: "Le bénéficiaire Aïcha reçoit 25 000 FCFA." }],
-    "ewo",
+    "dua",
     "fr"
   );
   assert(rawName.translations[0].ok === true, "phrase avec nom brut refusée");
@@ -178,7 +179,7 @@ vm.runInContext(
 
   const rawReference = await context.translateSegments(
     [{ id: "raw-ref", text: "Opération SAF-2026-AB12CD." }],
-    "ewo",
+    "dua",
     "fr"
   );
   assert(rawReference.translations[0].ok === true, "référence refusée");
@@ -193,7 +194,7 @@ vm.runInContext(
 
   const miss = await context.translateSegments(
     [{ id: "c", text: "Une phrase inconnue." }],
-    "ewo",
+    "dua",
     "fr"
   );
   assert(miss.translations[0].ok === false, "phrase inconnue acceptée");
@@ -204,7 +205,7 @@ vm.runInContext(
 
   const draft = await context.translateSegments(
     [{ id: "d", text: "Phrase non validée." }],
-    "ewo",
+    "dua",
     "fr"
   );
   assert(draft.translations[0].ok === false, "phrase draft acceptée");
@@ -269,7 +270,37 @@ vm.runInContext(
   );
   assert(finalized.text.includes("FCFA"), "FCFA perdu à la finalisation");
 
-  console.log("Extension tests OK — registre, détection, packs, jetons, qualité");
+  const ewo = LANG.getTarget("ewo");
+  assert(ewo.engine === "mt", "ewo doit passer en mode MT brouillon");
+  assert(!ewo.cloudCode, "ewo ne doit pas avoir de code cloud");
+  assert(
+    LANG.isCriticalText("Le solde est de 125 000 FCFA.") === true,
+    "phrase finance non classée critique"
+  );
+  assert(
+    LANG.isCriticalText("Bonjour, comment allez-vous ?") === false,
+    "salutation classée critique par erreur"
+  );
+
+  const critical = await context.translateSegments(
+    [{ id: "crit", text: "Le solde est de 125 000 FCFA." }],
+    "ewo",
+    "fr"
+  );
+  assert(
+    critical.translations[0].ok === false,
+    "phrase critique traduite par MT"
+  );
+  assert(
+    critical.translations[0].reason === "untranslated_critical",
+    "raison untranslated_critical attendue"
+  );
+  assert(
+    critical.translations[0].text.includes("125 000 FCFA"),
+    "montant critique non conservé dans le texte source"
+  );
+
+  console.log("Extension tests OK — registre, détection, packs, jetons, qualité, niveau A");
 })().catch((error) => {
   console.error("FAIL", error);
   process.exit(1);

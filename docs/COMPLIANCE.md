@@ -7,11 +7,11 @@ Ce document confronte le prototype NkapLingua au règlement officiel du
 
 | Exigence officielle | Statut | Preuve / remarque |
 |---|---|---|
-| 1. Adaptation de la langue de l’interface | ✅ / ⚠️ | Extension Manifest V3 ; fulfulde en MT, ewondo et duala en packs. **Packs encore vides (0/102, 0/20, 0/20)** : le parcours validé reste à remplir par les natifs |
+| 1. Adaptation de la langue de l’interface | ✅ / ⚠️ | Extension Manifest V3 ; fulfulde et ewondo en MT brouillon, duala en pack. **Packs encore vides (0/102, 0/20, 0/20)** : le parcours validé reste à remplir par les natifs |
 | 2. Parcours financier : solde, frais, transfert | ✅ | Page FINAKA : solde, frais, formulaire de transfert, récapitulatif |
-| 3. Préservation des montants, frais, bénéficiaires, conditions, alertes | ✅ / ⚠️ | Jetons `[[NUM_n]]` et `[[NAME_n]]`, contrôle des termes critiques, refus si un jeton manque ; la qualité linguistique reste à valider |
+| 3. Préservation des montants, frais, bénéficiaires, conditions, alertes | ✅ / ⚠️ | Jetons `[[NUM_n]]` et `[[NAME_n]]`, contrôle des termes critiques, refus si un jeton manque ; phrases niveau A bloquées si le pack n’est pas validé ; qualité linguistique à valider |
 | 4. Fonctionnement sans modifier le code source | ✅ | Injection à l’exécution, aucun changement serveur, toggle original ; le cloud est opt-in et désactivé par défaut |
-| 5. Adaptation à un nouveau contenu | ✅ / ⚠️ | Popup « texte inédit », traduction de sélection et d’attributs ; qualité NLLB variable sur les phrases longues, packs limités aux phrases validées |
+| 5. Adaptation à un nouveau contenu | ✅ / ⚠️ | Popup « texte inédit », traduction de sélection et d’attributs ; qualité `flagship-ai`/NLLB variable sur les phrases longues, packs limités aux phrases validées |
 
 ## 2. Grille d’évaluation (100 points)
 
@@ -21,7 +21,7 @@ Ce document confronte le prototype NkapLingua au règlement officiel du
 | Intégration et indépendance | 20 | 18–20 | Aucune modification du site ; `activeTab` + `scripting` |
 | Sécurité et préservation des informations | 20 | 17–19 | Pseudonymisation des noms, contrôle des jetons, local prioritaire ; cloud opt-in désactivé par défaut |
 | Accessibilité et expérience utilisateur | 15 | 12–14 | Choix de 3 langues, détection affichée, toggle original, `lang`, popup natif ; pas encore de lecture audio |
-| Adaptation à un nouveau contenu | 10 | 7–9 | Oui, mais dépend de la qualité NLLB sur phrases longues ; packs limités aux phrases validées |
+| Adaptation à un nouveau contenu | 10 | 7–9 | Oui, mais dépend de la qualité `flagship-ai`/NLLB sur phrases longues ; packs limités aux phrases validées |
 | Faisabilité technique et documentation | 10 | 9–10 | README, doc technique, doc langues, doc d’intégration, licences, CI |
 | **Total indicatif** | **100** | **objectif 80+** | Sous réserve de la validation native et du remplissage des packs ; auto-évaluation, pas une note du jury |
 
@@ -62,8 +62,9 @@ Limites connues :
 - pas de support des iframes cross-origin ;
 - pas de support des shadow DOM fermés ;
 - pas de traduction des images/canvas ;
-- qualité NLLB variable sur les phrases longues ;
+- qualité `flagship-ai`/NLLB variable sur les phrases longues ;
 - les packs fulfulde, ewondo et duala sont vides tant que le panel TRAPD ne les remplit pas ;
+- sans pack validé, les phrases critiques restent en français ;
 - l’interface doit être une page web (pas une application mobile native).
 
 ## 5. Règles de sécurité
@@ -75,7 +76,7 @@ Limites connues :
 | Ne pas contourner les mécanismes de sécurité | ✅ aucune modification du site |
 | Préserver montants, frais, bénéficiaires, confirmations | ✅ jetons NUM/NAME + contrôle ; noms hors déclencheur à surveiller |
 | Divulguer les outils et composants tiers | ✅ `docs/DATA_LICENSES.md`, `docs/TECHNICAL.md` |
-| Respecter la propriété intellectuelle | ✅ licences documentées ; NLLB CC BY-NC pour le hackathon |
+| Respecter la propriété intellectuelle | ✅ licences documentées ; NLLB et bundle flagship CC BY-NC pour le hackathon |
 
 ## 6. Actions prioritaires avant soumission
 
@@ -92,10 +93,10 @@ Limites connues :
 ## 7. Ce qu’il ne faut pas promettre
 
 - « 100 % de précision » : faux et non mesuré.
-- « Toutes les langues du Cameroun » : le prototype couvre le fulfulde en MT
-  l’ewondo et le duala en packs, pas les 280 langues du pays.
-- « Traduction automatique ewondo/duala » : faux, ce sont des packs de
-  phrases validées.
+- « Toutes les langues du Cameroun » : le prototype couvre le fulfulde et
+  l’ewondo en MT brouillon, le duala en pack, pas les 280 langues du pays.
+- « Traduction automatique validée ewondo/duala » : faux ; l’ewondo est un
+  brouillon non validé, le duala un pack de phrases validées.
 - « Aucune erreur possible » : le contrôle de sûreté réduit le risque, il ne
   l’élimine pas.
 - « Production ready » : c’est un prototype de hackathon.

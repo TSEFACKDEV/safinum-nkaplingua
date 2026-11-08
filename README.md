@@ -11,15 +11,17 @@
 
 NkapLingua est une extension navigateur autonome qui traduit les interfaces
 financières numériques en **trois langues camerounaises** sans modifier le site
-source et sans lire les champs sensibles. Le **fulfulde d’Adamawa** utilise
-NLLB ; l’**ewondo** et le **duala** utilisent des **packs de phrases validées**.
+source et sans lire les champs sensibles. Le **fulfulde d’Adamawa** et
+l’**ewondo** utilisent un **brouillon MT** `flagship-ai` (NLLB en secours pour
+le fulfulde) ; le **duala** utilise un **pack de phrases validées**.
 
-Le mode « pack » ne demande aucune installation Python. Le fulfulde passe par
-le backend NLLB local, qui télécharge le modèle au premier lancement ; le cloud
-MyMemory est expérimental, **désactivé par défaut** et opt-in explicite. Les
-packs ewondo/duala sont encore vides : voir le statut réel ci-dessous. Ces trois
-langues sont retenues pour leurs corpus de parole et leurs ressources
-documentaires ; le détail est dans [`docs/LANGUAGES.md`](docs/LANGUAGES.md).
+Le mode « pack » ne demande aucune installation Python. Le backend local
+`flagship-ai`/NLLB télécharge les modèles au premier lancement ; le cloud
+MyMemory est expérimental, **désactivé par défaut**, opt-in explicite et jamais
+utilisé pour l’ewondo. Les phrases critiques (solde, frais, PIN/OTP, etc.) ne
+passent jamais par la MT sans pack validé : elles restent en français. Les
+packs sont encore vides : voir le statut réel ci-dessous. Le détail est dans
+[`docs/LANGUAGES.md`](docs/LANGUAGES.md).
 
 Projet préparé pour le **SAFINUM Innovate Challenge 2026** (Yaoundé,
 26–28 novembre 2026).
@@ -127,8 +129,9 @@ financière :
 Le site source n’est jamais modifié. Aucune ligne de code n’est ajoutée au
 serveur de la banque. L’extension utilise le backend local s’il est disponible ;
 le cloud **MyMemory** reste expérimental et désactivé par défaut ; s'il est
-autorisé explicitement, il reçoit un texte pseudonymisé. Les langues en mode
-pack ne contactent aucun service cloud.
+autorisé explicitement, il reçoit un texte pseudonymisé. Le duala et les
+phrases critiques ne contactent aucun service cloud ; l’ewondo n’a pas de
+paire cloud et ne part jamais vers MyMemory.
 Aucun mot de passe, code PIN, OTP ou valeur de formulaire n’est lu.
 
 ```text
@@ -146,14 +149,15 @@ Content script
       ▼
 Background (service worker Chrome / event page Firefox)
   ├─ cache local
-  ├─ packs communautaires validés (ewondo, duala)
-  ├─ backend local si disponible (127.0.0.1:8000)
-  └─ cloud MyMemory expérimental (opt-in, texte pseudonymisé)
+  ├─ packs communautaires validés (fulfulde, ewondo, duala)
+  ├─ phrases niveau A sans pack : bloquées, jamais de MT
+  ├─ backend local flagship-ai / NLLB (127.0.0.1:8000)
+  └─ cloud MyMemory expérimental (opt-in, seulement si paire cloud)
       │
       ▼
-Moteur — NLLB-200 local, MyMemory ou pack
-  ├─ traduction français/anglais → fulfulde
-  ├─ phrases validées pour les autres langues
+Moteur — flagship-ai, NLLB, MyMemory ou pack
+  ├─ brouillon français → fulfulde / ewondo
+  ├─ phrases validées pour les trois langues
   ├─ post-contrôle des jetons et termes critiques
   └─ refus si un montant, un nom ou une entité est modifié
 ```
@@ -162,6 +166,10 @@ Moteur — NLLB-200 local, MyMemory ou pack
 
 - **Extension Manifest V3** pour Chrome/Edge et Firefox 140+.
 - **Trois langues cibles** : fulfulde d’Adamawa, ewondo, duala.
+- **MT brouillon** `flagship-ai` pour le fulfulde et l’ewondo, NLLB en secours
+  pour le fulfulde ; duala en pack.
+- **Barrière niveau A** : solde, frais, montant, PIN/OTP, transaction,
+  confirmation, etc. ne sont jamais envoyés à la MT sans pack validé.
 - **Détection FR/EN** avant traduction, avec score de confiance affiché.
 - **Traduction réversible** : bouton « Restaurer l’original ».
 - **Contenu inédit** : test dans le popup ou traduction de la sélection.
@@ -171,13 +179,14 @@ Moteur — NLLB-200 local, MyMemory ou pack
   bénéficiaires avant envoi.
 - **Refus sécurisé** si un jeton ou un terme critique manque.
 - **Aucune lecture** des mots de passe, codes OTP, PIN ou valeurs de formulaire.
-- **Extension autonome** : un seul ZIP, aucun serveur à installer.
+- **Extension autonome** : un seul ZIP ; les packs fonctionnent sans serveur.
 - **Packs communautaires** : phrases validées, aucun appel cloud.
-- **Backend local optionnel** : mode 100 % local avec NLLB si disponible.
+- **Backend local optionnel** : mode 100 % local avec flagship-ai/NLLB si
+  disponible ; obligatoire pour la MT ewondo/fulfulde.
 - **Cloud expérimental** : MyMemory, désactivé par défaut. Si l’utilisateur
-  l’autorise et que le backend local rejette une phrase (rétro-traduction ou
-  qualité), l’extension demande une seconde opinion pour cette phrase
-  seulement.
+  l’autorise et que le backend local rejette une phrase non critique,
+  l’extension peut demander une seconde opinion pour cette phrase seulement.
+  L’ewondo n’a pas de paire cloud et ne part jamais vers MyMemory.
 - **CI GitHub Actions** : tests backend mock, lint JS, lint Firefox, scan de
   secrets, packaging.
 
@@ -185,8 +194,8 @@ Moteur — NLLB-200 local, MyMemory ou pack
 
 | Langue | Code | Moteur | Ressources connues | État |
 |---|---|---|---|---|
-| Fulfulde (Adamawa) | `fub` | NLLB local | Common Voice ASR ; 1 303 enregistrements TTS | MT baseline, 0/102 phrases validées |
-| Ewondo | `ewo` | Pack communautaire | Common Voice 27.0 : 14,36 h, 31 voix ; Ewondo-ASR ~3 h 11 | 0/20 phrases validées |
+| Fulfulde (Adamawa) | `fub` | `flagship-ai` + NLLB secours | Common Voice ASR ; 1 303 enregistrements TTS | MT brouillon, 0/102 phrases validées |
+| Ewondo | `ewo` | `flagship-ai` brouillon | Common Voice 27.0 : 14,36 h, 31 voix ; Ewondo-ASR ~3 h 11 | MT brouillon, 0/20 phrases validées |
 | Duala | `dua` | Pack communautaire | Common Voice 27.0 (heures à vérifier) | 0/20 phrases validées |
 
 Le **kit natif TRAPD** est prêt dans [`data/review/`](data/review/) :
@@ -443,20 +452,23 @@ Détails : [`docs/SECURITY.md`](docs/SECURITY.md).
 
 | Ressource | Licence | Usage |
 |---|---|---|
-| **NLLB-200 distilled 600M** | CC BY-NC 4.0 | traduction, hackathon non commercial |
+| **flagship-ai/cameroon-int8** | CC BY-NC 4.0 (bundle) ; sous-fiche ewondo CC BY 4.0 | brouillon fulfulde/ewondo |
+| **flagship-ai/francais-fufulde** (fp32) | CC BY 4.0 | référence / alternative fulfulde |
+| **NLLB-200 distilled 600M** | CC BY-NC 4.0 | secours fulfulde, hackathon non commercial |
 | **Adamawa Fulfulde–French Parallel Corpus 1.2** | NOODL-1.0 | évaluation / adaptation |
 | **Common Voice Adamawa Fulfulde** | CC0 1.0 | audio optionnel |
 | **Common Voice Ewondo / Duala** | CC0 1.0 | audio, ASR |
 | **Ewondo-ASR** | accès restreint | évaluation ASR, à vérifier |
 | **Jeu TTS fulfulde (1 303 enregistrements)** | à vérifier | écoute, pas d’entraînement |
-| **MyMemory API** | service externe gratuit | cloud expérimental, désactivé par défaut |
-| **Packs ewondo et duala** | à définir avec les contributeurs (CC0 / CC BY) | mémoires de traduction validées |
+| **MyMemory API** | service externe gratuit | cloud expérimental, désactivé par défaut, jamais pour l’ewondo |
+| **Packs fulfulde, ewondo et duala** | à définir avec les contributeurs (CC0 / CC BY) | mémoires de traduction validées |
 | **Recherches du centre linguistique** | à confirmer | référence orthographique et terminologique |
 | **Code NkapLingua** | MIT | réutilisation libre |
 
-> NLLB est autorisé pour ce hackathon non commercial. Pour une exploitation
-> commerciale, il faudra un accord, ou un autre modèle libre. Le pack validé
-> et la voix humaine sous CC0/CC BY sont la seule voie 100 % libre.
+> `flagship-ai` et NLLB sont autorisés pour ce hackathon non commercial. Pour
+> une exploitation commerciale, il faudra un accord ou un autre modèle libre.
+> Le pack validé et la voix humaine sous CC0/CC BY restent la seule voie
+> 100 % libre. Les phrases critiques sans pack ne passent jamais en MT.
 
 Détails : [`docs/DATA_LICENSES.md`](docs/DATA_LICENSES.md).
 
@@ -472,9 +484,10 @@ Le projet distingue :
 
 Protocole et métriques : [`docs/EVAL.md`](docs/EVAL.md).
 
-> Le modèle NLLB est un **baseline**. Les phrases courtes sont nettement plus
-> fiables que les phrases longues. Une validation native est indispensable
-> avant toute démonstration.
+> Les moteurs `flagship-ai` et NLLB sont des **brouillons**. Les phrases courtes
+> sont nettement plus fiables que les phrases longues. Une validation native
+> est indispensable avant toute démonstration ; sans pack validé, les phrases
+> critiques restent en français.
 
 ## Conformité SAFINUM
 
@@ -489,9 +502,10 @@ exigence par exigence dans [`docs/COMPLIANCE.md`](docs/COMPLIANCE.md).
 | [`docs/LANGUAGE_VALIDATION.md`](docs/LANGUAGE_VALIDATION.md) | fulfulde, méthode de validation native |
 | [`docs/VALIDATION_REPORT.md`](docs/VALIDATION_REPORT.md) | état réel du panel, corpus, phrases inédites |
 | [`data/review/README.md`](data/review/README.md) | kit natif T1/T2, arbitrage et consentement |
-| [`data/reference/README.md`](data/reference/README.md) | navigateur Glosbe / Webonary / Resulam, sans copie |
+| [`data/reference/README.md`](data/reference/README.md) | liens Glosbe / Webonary / Resulam + lexiques CC0/MIT |
 | [`docs/REFERENCE_SOURCES.md`](docs/REFERENCE_SOURCES.md) | audit licences et conditions des sources externes |
 | [`docs/TRAINING_DATA_AUDIT.md`](docs/TRAINING_DATA_AUDIT.md) | audit des fichiers d’entraînement (Parquet, Bible, CSV) |
+| [`docs/EXTERNAL_RESOURCES.md`](docs/EXTERNAL_RESOURCES.md) | inventaire datasets/modèles, quatrième langue, licences |
 | [`docs/DUALA_MT.md`](docs/DUALA_MT.md) | modèle expérimental anglais → duala (CC-BY-4.0) |
 | [`docs/DATA_PERMISSIONS.md`](docs/DATA_PERMISSIONS.md) | modèles de demande d’autorisation |
 | [`docs/VIDEO_SCRIPT.md`](docs/VIDEO_SCRIPT.md) | script de la vidéo de 3 minutes |

@@ -10,8 +10,8 @@
 
 | Langue | Code | Moteur | Statut | Ce qui reste à faire |
 |---|---|---|---|---|
-| Fulfulde (Adamawa) | `fub` | NLLB `fuv_Latn` | 0/102 phrases validées | TRAPD sur les 37 P0, puis les 65 autres |
-| Ewondo | `ewo` | Pack communautaire | 0/20 phrases | TRAPD sur `data/language-packs/ewo.csv` |
+| Fulfulde (Adamawa) | `fub` | `flagship-ai` fr → fub ; NLLB `fuv_Latn` en secours | 0/102 phrases validées | TRAPD sur les 37 P0, puis les 65 autres |
+| Ewondo | `ewo` | `flagship-ai` fr → ewo (brouillon) + pack | 0/20 phrases | TRAPD sur `data/language-packs/ewo.csv` |
 | Duala | `dua` | Pack communautaire | 0/20 phrases | TRAPD sur `data/language-packs/dua.csv` |
 
 Les classeurs de travail sont prêts dans [`../data/review/`](../data/review/) :
@@ -27,21 +27,32 @@ T1 et T2 par langue, fiche d'arbitrage, fiche des 20 phrases inédites.
 | Fulfulde | Common Voice Adamawa | ASR | — |
 | Fulfulde | Jeu TTS | 1 303 enregistrements | une seule voix, insuffisant seul |
 
-**Règle** : aucune langue autre que le fulfulde n'est présentée comme
-« traduction automatique ». L'ewondo et le duala sont des mémoires de phrases
-validées. Le popup et la page affichent explicitement cet état.
+**Règle** : aucune langue n'est présentée comme « traduction validée ». Le
+fulfulde et l'ewondo disposent d'une **MT brouillon** (`flagship-ai`), le duala
+d'un pack communautaire. Le popup et la page affichent explicitement cet état.
+
+> **Mise à jour du 8 novembre 2026** — NLLB-200 ne couvre ni `ewo_Latn`, ni
+> `dua_Latn`, ni `fub_Latn` ; seul `fuv_Latn` est présent. Les modèles
+> `flagship-ai` fournissent désormais un brouillon fr → fulfulde et fr → ewondo,
+> branché dans le backend. Ils ne changent pas la règle de validation : le
+> niveau A reste sur les packs, les phrases critiques sans pack restent en
+> français, et toute sortie MT doit être relue par un natif. Voir
+> [`EXTERNAL_RESOURCES.md`](EXTERNAL_RESOURCES.md).
 
 Yemba, medumba, bassa et ghomala' sont **retirés** du prototype (voir
 `tasks/klein.md`, K10).
 
-## 2. Pourquoi ne pas utiliser NLLB pour l'ewondo et le duala
+## 2. NLLB ne couvre pas l'ewondo et le duala
 
 Le tokenizer NLLB-200 ne connaît pas les codes `ewo_Latn` et `dua_Latn`
 comme cibles entraînées pour cette version : on ne peut pas garantir une
 sortie. Inventer une traduction mot à mot serait dangereux sur des montants
 et des conditions financières.
 
-La seule voie responsable est :
+`flagship-ai` fournit un brouillon ewondo, mais il ne remplace pas la
+validation native. Le duala n'a aucun modèle prêt : il reste pack-only.
+
+La seule voie responsable pour le niveau A est :
 
 1. collecter des phrases finance ;
 2. les faire traduire et relire par des locuteurs natifs ;

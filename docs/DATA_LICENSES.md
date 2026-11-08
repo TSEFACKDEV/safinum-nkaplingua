@@ -14,21 +14,30 @@ ressource utilisée, il faut pouvoir répondre à :
 
 ## Ressources utilisées dans ce prototype
 
-### Modèle de traduction
+### Modèles de traduction
 
-| Élément | Valeur |
-|---|---|
-| Modèle | `facebook/nllb-200-distilled-600M` |
-| Licence | **CC BY-NC 4.0** |
-| Usage | traduction français → fulfulde (`fuv_Latn`) |
-| Source | https://huggingface.co/facebook/nllb-200-distilled-600M |
-| Remarque | usage non commercial autorisé pour le hackathon ; accord nécessaire pour une exploitation commerciale |
+| Élément | Licence | Usage |
+|---|---|---|
+| `flagship-ai/cameroon-int8` (sous-modèles `francais-ewondo`, `francais-fufulde`) | **CC BY-NC 4.0** (bundle) ; sous-fiche ewondo **CC BY 4.0** | brouillon français → ewondo / fulfulde |
+| `flagship-ai/francais-fufulde` (fp32) | **CC BY 4.0** | référence / alternative fulfulde |
+| `facebook/nllb-200-distilled-600M` | **CC BY-NC 4.0** | secours français/anglais → fulfulde (`fuv_Latn`) |
 
-**Pourquoi NLLB et pas M2M100 ?** M2M100 est sous MIT, mais sa sortie `ff`
-s’est révélée très instable sur le fulfulde (répétitions, anglais). NLLB
-`fuv_Latn` produit des phrases courtes nettement plus cohérentes. Pour une
-version commerciale, il faudra soit obtenir un accord pour NLLB, soit
-fine-tuner M2M100 (MIT) sur le corpus adamawa.
+**Ordre de routage** : le backend utilise `flagship-ai` en priorité pour
+l’ewondo et le fulfulde. Si le modèle flagship manque ou échoue, le fulfulde
+retombe sur NLLB ; l’ewondo n’a pas de secours NLLB et renvoie une erreur
+explicite. Le duala reste pack-only.
+
+**Pourquoi NLLB en secours et pas M2M100 ?** M2M100 est sous MIT, mais sa
+sortie `ff` s’est révélée très instable sur le fulfulde (répétitions, anglais).
+NLLB `fuv_Latn` produit des phrases courtes plus cohérentes. Pour une version
+commerciale, il faudra soit obtenir un accord pour NLLB, soit fine-tuner un
+modèle libre (M2M100 ou Marian) sur le corpus adamawa.
+
+**Conflit de licence ewondo** : le bundle `cameroon-int8` est globalement
+CC BY-NC 4.0, mais sa sous-fiche `francais-ewondo` affiche CC BY 4.0. En cas de
+doute, traiter le modèle ewondo comme non commercial jusqu’à clarification
+écrite de `flagship-ai`. Les modèles fp32 `francais-fufulde` et
+`francais-bulu` sont explicitement CC BY 4.0.
 
 ### Service cloud expérimental (opt-in)
 
@@ -209,3 +218,45 @@ limitations:
   - variété régionale à valider
   - pas de traduction certifiée
 ```
+
+## Mise à jour du 8 novembre 2026 — modèles et corpus externes
+
+La recherche externe a identifié des ressources qui n’étaient pas dans le
+premier audit. Le niveau A ne change pas : **packs validés uniquement, jamais
+de MT**. Les ressources ci-dessous servent au niveau B/C, à l’évaluation ou à
+une quatrième langue candidate.
+
+| Ressource | Licence | Statut |
+|---|---|---|
+| `flagship-ai/francais-fufulde` / `fufulde-francais` | CC-BY-4.0 | conforme à la liste, brouillon MT |
+| `flagship-ai/francais-bulu` / `bulu-francais` | CC-BY-4.0 | conforme, langue candidate |
+| `flagship-ai/francais-ghomala` / `ghomala-francais` | CC-BY-4.0 | conforme, langue candidate |
+| `flagship-ai/cameroon-int8` / `francais-ewondo` | CC-BY-NC-4.0 (bundle) ; sous-fiche CC-BY-4.0 | **conflit à trancher**, traiter comme NC par précaution |
+| `mabobe-biyong/m2m100_418M-fr-ewo-rel-ft` | AFL-3.0 | libre hors liste, expérimental |
+| Common Voice 27.0 (`fub`, `ewo`, `dua`, `bas`, `bum`) | CC0-1.0 | audio/ASR ; ne pas re-héberger |
+| `AfriSpeech/african-speech-ipa` | CC-BY-4.0 | audio + IPA |
+| `OlameMend/soreva` | CC-BY-4.0 | évaluation ASR/TTS |
+| `facebook/bouquet` | CC-BY-4.0 | benchmark humain, `gated` |
+| `Favourez/bulu_english` / `fr_en_bulu.json` | MIT | 2 688 paires lexicales ; exclure la partie Bible |
+| `stfotso/french-ghomala-bandjoun` | Apache-2.0 | 15 190 paires, hors liste |
+| `mimba/text2text`, `mimba/afrilang` | CC-BY-NC-SA-4.0 | `gated`, non commercial |
+| `DS4H-ICTU/french-*` | inconnue | privé/gated, à demander |
+| `lbourdois/panlex` | CC0-1.0 | lexique seul |
+| `SuzuyaXIII/fulfulde` | MIT | lexique seul |
+
+**Précisions** :
+
+- `flagship-ai/cameroon-int8` est un bundle de 119 paires ; sa licence globale
+  est **CC-BY-NC-4.0**, mais la fiche du sous-modèle `francais-ewondo` indique
+  CC-BY-4.0. Demander une clarification écrite avant toute redistribution.
+- Les modèles `flagship-ai` sont entraînés sur un corpus « scripture + livres ».
+  Même avec une licence CC-BY-4.0 sur les poids, la provenance biblique doit
+  être déclarée et vérifiée avant un usage commercial.
+- Les corpus bibliques (`ELRs/Ewondo_Bible`, `flagship-ai/cameroon_bibles`,
+  `OlameMend/Corinth_dataset`, `Favourez/tupuri_english`) restent soumis à
+  l’autorisation de la Bible Society / des éditeurs.
+- Les lexiques PanLex et Suzuya sont dans `data/reference/` ; ils ne remplacent
+  pas la traduction native.
+
+Inventaire détaillé et liens :
+[`EXTERNAL_RESOURCES.md`](EXTERNAL_RESOURCES.md).

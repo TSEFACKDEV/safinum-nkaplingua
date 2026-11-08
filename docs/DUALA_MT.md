@@ -124,3 +124,35 @@ git), pas dans l’extension.
 - script : [`../scripts/train-duala-mt.py`](../scripts/train-duala-mt.py) ;
 - manifeste : [`../data/training/sources.csv`](../data/training/sources.csv) ;
 - audit : [`TRAINING_DATA_AUDIT.md`](TRAINING_DATA_AUDIT.md).
+
+## 8. Mise à jour du 8 novembre 2026 — aucun modèle duala prêt
+
+La recherche externe n’a trouvé **aucun modèle de traduction duala** :
+
+- `flagship-ai/cameroon-int8` couvre 119 paires (ewondo, fufulde, bulu,
+  ghomala, medumba, tupuri, etc.) mais **pas le duala** ;
+- `mabobe-biyong` propose fr → bas, bul, ful, eto, med, yem, etc., mais **pas
+  fr → dua** ;
+- NLLB-200 ne connaît pas `dua_Latn` ; M2M100 non plus.
+
+Le corpus `michsethowusu/english-duala_sentence-pairs_mt560` (15 351 paires,
+CC-BY-4.0) reste donc la seule base sérieuse. Deux options :
+
+1. **Entraîner sur le corpus complet** (15 351 paires, plusieurs époques,
+   GPU si possible) avec un décodage anti-répétition
+   (`no_repeat_ngram_size=3`, `repetition_penalty=1.15`) et une évaluation
+   native. C’est la seule voie vers un modèle duala réellement utilisable.
+2. **Renoncer au MT duala pour le hackathon** et garder les packs validés +
+   la traduction humaine. C’est l’option la plus sûre pour le niveau A.
+
+Ressources d’évaluation disponibles pour le duala :
+
+| Ressource | Volume | Licence |
+|---|---:|---|
+| Common Voice 27.0 — Duala | 292,4 Mo | CC0-1.0 |
+| `AfriSpeech/african-speech-ipa` — `douala_dua` | 20,12 h | CC-BY-4.0 |
+| `OlameMend/soreva` — `dua_cm` | 150 phrases | CC-BY-4.0 |
+| `facebook/bouquet` — `dua_Latn` | benchmark humain | CC-BY-4.0, gated |
+
+Voir [`EXTERNAL_RESOURCES.md`](EXTERNAL_RESOURCES.md) pour l’inventaire
+complet.

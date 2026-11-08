@@ -5,9 +5,13 @@
  * Il ne contient aucun accès réseau : tout est local et synchrone.
  *
  * Trois familles de cibles :
- *  - "mt"   : traduction automatique (backend NLLB local ou MyMemory) ;
+ *  - "mt"   : traduction automatique (backend local flagship-ai/NLLB ou
+ *             MyMemory quand une paire cloud existe) ;
  *  - "pack" : mémoire de traduction communautaire, phrases validées seulement ;
  *  - "term" : glossaire terminologique (prévu, non actif dans cette version).
+ *
+ * Le niveau A (solde, frais, PIN/OTP, etc.) est bloqué avant tout appel MT :
+ * `isCriticalText()` sert de barrière commune au background et aux tests.
  */
 
 (function (global) {
@@ -25,8 +29,8 @@
       cloudCode: "ff",
       nllbCode: "fuv_Latn",
       pack: "language-packs/fub.json",
-      status: "mt-baseline",
-      statusLabel: "MT — validation native en cours",
+      status: "mt-draft",
+      statusLabel: "MT brouillon — validation native en cours",
       orthography: "AGLC",
       verified: false
     },
@@ -37,10 +41,10 @@
       nativeLabel: "Ewondo",
       shortLabel: "EWO",
       region: "Centre · Nyong-et-Mfoumou",
-      engine: "pack",
+      engine: "mt",
       pack: "language-packs/ewo.json",
-      status: "community-pack",
-      statusLabel: "Pack communautaire — phrases validées",
+      status: "mt-draft",
+      statusLabel: "MT brouillon — validation native requise",
       orthography: "AGLC",
       verified: false
     },
@@ -301,6 +305,53 @@
     "FINAKA"
   ];
 
+  // Termes qui déclenchent le niveau A : jamais de MT, pack validé only.
+  const CRITICAL_TERMS = [
+    "solde",
+    "frais",
+    "montant",
+    "total",
+    "pin",
+    "otp",
+    "code secret",
+    "transaction",
+    "paiement",
+    "bénéficiaire",
+    "beneficiaire",
+    "sécurité",
+    "securite",
+    "confirmation",
+    "erreur",
+    "échec",
+    "echec",
+    "retard",
+    "pénalité",
+    "penalite",
+    "débit",
+    "debit",
+    "crédit",
+    "credit",
+    "taux",
+    "intérêt",
+    "interet",
+    "échéance",
+    "echeance",
+    "virement",
+    "transfert",
+    "compte"
+  ];
+
+  function isCriticalText(text) {
+    const value = normalizePhrase(text);
+    return CRITICAL_TERMS.some((term) => {
+      const pattern = new RegExp(
+        `(?:^|[^\\w])${escapeRegExp(term)}(?:[^\\w]|$)`,
+        "i"
+      );
+      return pattern.test(value);
+    });
+  }
+
   function protectTerms(text) {
     let value = String(text || "");
     const terms = [];
@@ -364,6 +415,7 @@
     redactSensitive,
     restoreSensitive,
     protectTerms,
-    restoreTerms
+    restoreTerms,
+    isCriticalText
   };
 })(globalThis);

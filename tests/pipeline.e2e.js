@@ -87,8 +87,8 @@ const EWO_PACK = {
       status: "validated"
     },
     {
-      source: "Le montant [[NUM_0]] FCFA.",
-      target: "Nde FCFA.",
+      source: "La ligne [[NUM_0]] est disponible.",
+      target: "Nde disponible.",
       status: "validated"
     },
     {
@@ -101,12 +101,12 @@ const EWO_PACK = {
 
 async function runPack() {
   const background = createBackground({});
-  background.overrides.ewo = JSON.parse(JSON.stringify(EWO_PACK));
+  background.overrides.dua = JSON.parse(JSON.stringify(EWO_PACK));
 
   const started = process.hrtime.bigint();
   const response = await background.send({
     type: "NK_TRANSLATE_SEGMENTS",
-    target: "ewo",
+    target: "dua",
     source: "fr",
     segments: [
       { id: "p0", text: "Votre solde est disponible." },
@@ -140,18 +140,18 @@ async function runPack() {
 
 async function runEdge() {
   const background = createBackground({});
-  background.overrides.ewo = JSON.parse(JSON.stringify(EWO_PACK));
+  background.overrides.dua = JSON.parse(JSON.stringify(EWO_PACK));
   const longText = "Le solde et les frais de cette opération doivent rester lisibles. ".repeat(6);
 
   const response = await background.send({
     type: "NK_TRANSLATE_SEGMENTS",
-    target: "ewo",
+    target: "dua",
     source: "fr",
     segments: [
       { id: "e0", text: "Phrase inconnue du pack." },
       { id: "e1", text: "" },
       { id: "e2", text: longText },
-      { id: "e3", text: "Le montant 1 000 FCFA." }
+      { id: "e3", text: "La ligne 1 000 est disponible." }
     ]
   });
   const byId = new Map((response.translations || []).map((item) => [item.id, item]));

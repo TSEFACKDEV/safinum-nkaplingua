@@ -37,7 +37,10 @@ utilisent des phrases validées par des locuteurs natifs (TRAPD).
 - Segmentation par nœuds texte, pas de `innerHTML`.
 - Pseudonymisation des montants, numéros, URLs, emails et noms.
 - Post-contrôle : si un chiffre ou un nom change, la traduction est refusée.
-- Backend local, modèle NLLB-200 (CC BY-NC 4.0, usage hackathon non commercial).
+- Backend local, brouillon `flagship-ai` + NLLB en secours (CC BY-NC 4.0,
+  usage hackathon non commercial).
+- Les phrases critiques (solde, frais, PIN/OTP) ne passent jamais en MT sans
+  pack validé : elles restent en français.
 - Aucune lecture des mots de passe, OTP ou valeurs de formulaire.
 
 ### 5. L’impact (30 s)
@@ -52,12 +55,12 @@ utilisent des phrases validées par des locuteurs natifs (TRAPD).
 | Exigence | Réponse |
 |---|---|
 | Extension navigateur | Manifest V3, Chrome/Edge |
-| Au moins une langue | Fulfulde `fub` (MT) + ewondo `ewo` et duala `dua` (packs) |
+| Au moins une langue | Fulfulde `fub` + ewondo `ewo` en MT brouillon ; duala `dua` en pack |
 | Page financière ou autre | Pipeline DOM générique + page FINAKA |
 | Sans modifier le contexte | Segmentation par bloc, glossaire, jetons |
 | Sans modifier le site source | Injection à l’exécution, réversible |
-| Contenu inédit | NLLB-200 + test en direct |
-| Sécurité | `activeTab`, pas de PII, backend local |
+| Contenu inédit | `flagship-ai`/NLLB + test en direct |
+| Sécurité | `activeTab`, pas de PII, backend local, niveau A pack-only |
 | Orientation finance | Frais, crédit, épargne, alertes |
 | Données du centre | Références citées ; corpus ouvert NOODL |
 | Licences | NLLB-200 CC BY-NC 4.0 (hackathon), corpus NOODL, Common Voice CC0 |

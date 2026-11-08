@@ -57,7 +57,7 @@
   {
     "case": "empty-segments",
     "ok": true,
-    "detail": "200 {\"translations\":[],\"model\":\"facebook/nllb-200-distilled-600M\",\"target\":\"fub\"}"
+    "detail": "200 {\"translations\":[],\"model\":\"facebook/nllb-200-distilled-600M\",\"provider\":\"none\","
   },
   {
     "case": "cors-localhost",

@@ -61,15 +61,20 @@ Avant la démo :
 
 ## Filtres automatiques de précision
 
-Le backend applique désormais trois garde-fous sur le contenu inédit :
+Le backend applique désormais quatre garde-fous sur le contenu inédit :
 
 1. **Jetons** : montants, noms, URLs et emails doivent être présents une seule
    fois.
 2. **Qualité** : rejet des sorties identiques à la source, trop courtes, trop
    longues, répétitives ou avec une fuite de français.
-3. **Rétro-traduction** (`NK_ROUNDTRIP=1`, actif par défaut) : NLLB traduit la
-   sortie fulfulde vers le français, puis on compare avec la source. Un score
-   inférieur à `NK_ROUNDTRIP_MIN` (0,45 par défaut) refuse la traduction.
+3. **Rétro-traduction** (`NK_ROUNDTRIP=1`, actif par défaut, NLLB uniquement) :
+   NLLB traduit la sortie fulfulde vers le français, puis on compare avec la
+   source. Un score inférieur à `NK_ROUNDTRIP_MIN` (0,45 par défaut) refuse la
+   traduction. Le chemin `flagship-ai` ne fait pas de rétro-traduction tant
+   qu’un modèle inverse n’est pas installé.
+4. **Niveau A** : une phrase contenant solde/frais/montant/PIN/OTP/
+   transaction/confirmation/etc. est bloquée avant la MT si le pack n’a pas
+   d’entrée `validated`. Elle reste en français.
 
 La rétro-traduction double le temps d’inférence. Pour une démonstration sur CPU
 lent :

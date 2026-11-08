@@ -1,8 +1,10 @@
 # Références de consultation — glossaire finance
 
-Ce dossier ne contient **aucune traduction copiée**. Il contient uniquement
-des liens vers des sources externes, pour que les natifs puissent vérifier le
-sens d’un terme avant d’écrire leur propre traduction.
+Ce dossier contient des liens vers des sources externes et **deux lexiques
+libres explicitement attribués**. Il ne contient **aucune traduction issue de
+Glosbe, Resulam ou Webonary** : ces sources restent des points de consultation,
+pour que les natifs puissent vérifier le sens d’un terme avant d’écrire leur
+propre traduction.
 
 ## Fichier
 
@@ -24,6 +26,19 @@ Génération :
 ```bash
 python3 scripts/build-reference-links.py
 ```
+
+## Lexiques libres
+
+| Fichier | Source | Licence | Volume |
+|---|---|---|---:|
+| [`panlex/panlex-targets.csv`](panlex/panlex-targets.csv) | `lbourdois/panlex` (PanLex) | CC0-1.0 | 3 573 entrées |
+| [`fulfulde-suzuya.csv`](fulfulde-suzuya.csv) | `SuzuyaXIII/fulfulde` | MIT | 922 entrées |
+
+Ce sont des **lexiques**, pas des corpus parallèles : ils servent à vérifier
+une orthographe ou un terme, jamais à remplacer la traduction native. Voir
+[`NOTICE.md`](NOTICE.md) pour les attributions et
+[`../../docs/EXTERNAL_RESOURCES.md`](../../docs/EXTERNAL_RESOURCES.md) pour
+l’inventaire complet.
 
 ## Règles
 

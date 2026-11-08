@@ -1,11 +1,21 @@
 """
 NkapLingua — backend local de traduction.
 
-Modèle : facebook/nllb-200-distilled-600M (CC BY-NC 4.0).
-Langue cible : fulfulde (NLLB utilise le code "fuv_Latn", fulfulde nigérian,
-très proche du fulfulde adamawa parlé au Cameroun).
+Deux moteurs sont possibles :
+
+- **flagship-ai** (MarianMT/CTranslate2, brouillon) pour le fulfulde (`fub`)
+  et l'ewondo (`ewo`). Les poids ne sont pas versionnés : voir
+  `NK_FLAGSHIP_MODEL_DIR`.
+- **NLLB-200** (CC BY-NC 4.0) pour le fulfulde, en secours si le modèle
+  flagship est absent. NLLB utilise `fuv_Latn` (fulfulde nigérian), très proche
+  du fulfulde adamawa.
+
+Le duala reste en pack communautaire : aucun modèle de traduction validé.
 
 Le backend écoute uniquement sur 127.0.0.1 et ne journalise pas le texte.
+Le niveau A (solde, frais, PIN/OTP, etc.) ne doit jamais passer par la MT :
+l'extension bloque ces phrases si le pack n'a pas d'entrée validée, et le
+backend refuse aussi un segment marqué `critical`.
 
 Lancement :
     pip install -r requirements.txt
@@ -14,15 +24,10 @@ Lancement :
 Mode maquette (sans modèle, pour tester l'extension) :
     NK_MOCK=1 uvicorn app:app --host 127.0.0.1 --port 8000
 
-Langues cibles :
-  - fub : traduction automatique NLLB-200 (fuv_Latn) ;
-  - ewo, dua : packs communautaires gérés par l'extension (le backend ne
-    produit pas de traduction automatique pour ces langues, faute de modèle
-    validé).
-
-Note licence : NLLB est CC BY-NC 4.0, donc autorisé pour ce hackathon
-non commercial. Pour une exploitation commerciale, il faudra un accord ou
-un autre modèle.
+Note licence : NLLB est CC BY-NC 4.0 ; le bundle flagship `cameroon-int8`
+est CC BY-NC 4.0 (la sous-fiche `francais-ewondo` indique CC BY 4.0, conflit
+à clarifier). Les modèles fp32 `francais-fufulde` et `francais-bulu` sont
+CC BY 4.0. Usage hackathon non commercial, avec attribution.
 """
 
 from __future__ import annotations
@@ -31,6 +36,7 @@ import csv
 import difflib
 import os
 import re
+import sys
 import threading
 from functools import lru_cache
 from pathlib import Path
@@ -41,6 +47,17 @@ from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import FileResponse
 from pydantic import BaseModel, Field
 
+# Permettre `python server/app.py` depuis la racine du dépôt.
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+
+from flagship_mt import (  # noqa: E402
+    FlagshipTranslator,
+    FlagshipUnavailable,
+    PAIR_BY_TARGET,
+    is_model_available,
+)
+
+ROOT = Path(__file__).resolve().parent.parent
 MODEL_NAME = os.getenv("NK_MODEL", "facebook/nllb-200-distilled-600M")
 MAX_INPUT_TOKENS = int(os.getenv("NK_MAX_INPUT_TOKENS", "256"))
 MAX_NEW_TOKENS = int(os.getenv("NK_MAX_NEW_TOKENS", "128"))
@@ -51,6 +68,25 @@ NO_REPEAT_NGRAM = int(os.getenv("NK_NO_REPEAT_NGRAM", "4"))
 DEVICE_PREFERENCE = os.getenv("NK_DEVICE", "auto").lower()
 MOCK_MODE = os.getenv("NK_MOCK", "0") == "1"
 QUANTIZE_MODEL = os.getenv("NK_QUANTIZE", "0") == "1"
+
+# --- Moteur flagship-ai (brouillon MT) -------------------------------
+# "auto" : utilise le modèle s'il est présent ; "0" le désactive.
+FLAGSHIP_MODE = os.getenv("NK_FLAGSHIP_MT", "auto").strip().lower()
+FLAGSHIP_MODEL_DIR = Path(
+    os.getenv(
+        "NK_FLAGSHIP_MODEL_DIR",
+        str(ROOT / "dist" / "models" / "flagship-int8"),
+    )
+).expanduser()
+FLAGSHIP_DEVICE = os.getenv("NK_FLAGSHIP_DEVICE", "cpu")
+FLAGSHIP_COMPUTE_TYPE = os.getenv("NK_FLAGSHIP_COMPUTE_TYPE", "int8")
+FLAGSHIP_BEAM_SIZE = int(os.getenv("NK_FLAGSHIP_BEAM_SIZE", "5"))
+FLAGSHIP_NO_REPEAT = int(os.getenv("NK_FLAGSHIP_NO_REPEAT", "3"))
+FLAGSHIP_REPETITION_PENALTY = float(
+    os.getenv("NK_FLAGSHIP_REPETITION_PENALTY", "1.15")
+)
+FLAGSHIP_TARGETS = {"fub", "ewo"}
+FLAGSHIP_DISABLED = FLAGSHIP_MODE in {"0", "false", "off", "no", "none"}
 
 # Le tokenizer NLLB est partagé : `src_lang` est un état mutable. Un verrou
 # sérialise la section tokenize → generate → decode pour éviter qu'une requête
@@ -89,7 +125,6 @@ TARGET_ALIASES = {
 # Langues sans modèle de traduction validé : l'extension applique uniquement
 # une mémoire de traduction communautaire (phrases status=validated).
 PACK_TARGETS = {
-    "ewo": "Ewondo",
     "dua": "Duala",
 }
 
@@ -98,17 +133,24 @@ LANGUAGE_REGISTRY = [
         "code": "fub",
         "label": "Fulfulde (Adamawa)",
         "engine": "mt",
-        "model_code": "fuv_Latn",
-        "status": "mt-baseline",
-        "license": "NLLB-200: CC BY-NC 4.0 (non commercial)",
+        "model_code": "flagship-francais-fufulde / fuv_Latn (secours)",
+        "status": "mt-draft",
+        "license": (
+            "flagship-ai CC-BY-4.0 (brouillon) ; "
+            "NLLB-200 CC BY-NC 4.0 en secours"
+        ),
         "audio": "Common Voice ASR ; 1 303 enregistrements TTS à une voix",
     },
     {
         "code": "ewo",
         "label": "Ewondo",
-        "engine": "pack",
-        "status": "community-pack",
-        "license": "pack communautaire, validation native requise",
+        "engine": "mt",
+        "model_code": "flagship-francais-ewondo",
+        "status": "mt-draft",
+        "license": (
+            "flagship-ai CC-BY-NC-4.0 (bundle) / CC-BY-4.0 (sous-fiche) "
+            "— brouillon, validation native requise"
+        ),
         "audio": "Common Voice 27.0 : 14,36 h validées, 31 voix ; Ewondo-ASR ~3 h 11, 16 voix",
     },
     {
@@ -156,6 +198,8 @@ class Segment(BaseModel):
     id: str
     text: str
     context: str = ""
+    # Niveau A (solde, frais, PIN/OTP, etc.) : jamais de MT.
+    critical: bool = False
 
 
 class TranslateRequest(BaseModel):
@@ -180,6 +224,7 @@ class Translation(BaseModel):
 class TranslateResponse(BaseModel):
     translations: List[Translation]
     model: str
+    provider: str = "nllb"
     target: str
 
 
@@ -257,6 +302,52 @@ def load_model():
     return tokenizer, model, device
 
 
+def flagship_available(target: str) -> bool:
+    """Vérifie la présence du modèle sans le charger."""
+    if FLAGSHIP_DISABLED or target not in FLAGSHIP_TARGETS:
+        return False
+    return is_model_available(FLAGSHIP_MODEL_DIR, target)
+
+
+@lru_cache(maxsize=2)
+def load_flagship_translator(target: str) -> FlagshipTranslator | None:
+    """Charge un modèle flagship à la demande ; None s'il est absent."""
+    if not flagship_available(target):
+        return None
+    try:
+        return FlagshipTranslator(
+            model_dir=FLAGSHIP_MODEL_DIR,
+            target=target,
+            device=FLAGSHIP_DEVICE,
+            compute_type=FLAGSHIP_COMPUTE_TYPE,
+            beam_size=FLAGSHIP_BEAM_SIZE,
+            no_repeat_ngram_size=FLAGSHIP_NO_REPEAT,
+            repetition_penalty=FLAGSHIP_REPETITION_PENALTY,
+        )
+    except FlagshipUnavailable:
+        return None
+
+
+def generate_flagship_batch(texts: List[str], target: str) -> List[str]:
+    translator = load_flagship_translator(target)
+    if translator is None:
+        raise FlagshipUnavailable(
+            f"Modèle flagship indisponible pour {target}."
+        )
+    return translator.translate(texts)
+
+
+MOCK_PREFIX = {
+    "fub": "[fulfulde]",
+    "ewo": "[ewondo]",
+}
+
+
+def mock_translate(texts: List[str], target: str) -> List[str]:
+    prefix = MOCK_PREFIX.get(target, "[mock]")
+    return [f"{prefix} {text}" for text in texts]
+
+
 @lru_cache(maxsize=1)
 def load_glossary() -> tuple[tuple[str, str], ...]:
     """Charge les termes finance validés (target_fub non vide)."""
@@ -289,6 +380,17 @@ def protect_terms(
     terms: list[dict] = []
     entries = load_glossary() if glossary is None else glossary
 
+    # Les jetons déjà présents (envoyés par l'extension) ne doivent pas être
+    # réutilisés : sinon un FCFA brut et un [[0]] existant se confondent.
+    existing = [
+        int(match.group(1))
+        for match in BARE_TOKEN_RE.finditer(value)
+    ] + [
+        int(match.group(1))
+        for match in NORMALIZED_BARE_TOKEN_RE.finditer(value)
+    ]
+    next_index = max(existing, default=-1) + 1
+
     # Glossaire d'abord : « code PIN » doit être capturé avant « PIN ».
     for source, target in entries:
         pattern = re.compile(
@@ -298,7 +400,8 @@ def protect_terms(
             match = pattern.search(value)
             if not match:
                 break
-            token = f"[[{len(terms)}]]"
+            token = f"[[{next_index}]]"
+            next_index += 1
             terms.append(
                 {
                     "token": token,
@@ -317,7 +420,8 @@ def protect_terms(
             match = pattern.search(value)
             if not match:
                 break
-            token = f"[[{len(terms)}]]"
+            token = f"[[{next_index}]]"
+            next_index += 1
             terms.append(
                 {
                     "token": token,
@@ -674,6 +778,14 @@ def health():
         "quality": QUALITY_ENABLED,
         "french_leak_max": FRENCH_LEAK_MAX,
         "quantized": QUANTIZE_MODEL,
+        "flagship": {
+            "mode": FLAGSHIP_MODE,
+            "dir": str(FLAGSHIP_MODEL_DIR),
+            "models": {
+                target: flagship_available(target)
+                for target in sorted(FLAGSHIP_TARGETS)
+            },
+        },
     }
 
 
@@ -708,7 +820,10 @@ def detect(request: DetectRequest):
 def translate(request: TranslateRequest):
     if not request.segments:
         return TranslateResponse(
-            translations=[], model=MODEL_NAME, target=request.target
+            translations=[],
+            model=MODEL_NAME,
+            provider="none",
+            target=request.target,
         )
 
     if request.target in PACK_TARGETS:
@@ -716,16 +831,9 @@ def translate(request: TranslateRequest):
             status_code=400,
             detail=(
                 f"La langue {PACK_TARGETS[request.target]} fonctionne en mode "
-                "pack communautaire dans l'extension ; le backend NLLB ne "
-                "produit pas de traduction automatique validée pour cette langue."
+                "pack communautaire dans l'extension ; le backend ne produit "
+                "pas de traduction automatique validée pour cette langue."
             ),
-        )
-
-    target_lang = TARGET_ALIASES.get(request.target)
-    if not target_lang:
-        raise HTTPException(
-            status_code=400,
-            detail=f"Langue cible non supportée par ce prototype : {request.target}",
         )
 
     source_code = request.source
@@ -743,11 +851,64 @@ def translate(request: TranslateRequest):
             detail=f"Langue source non supportée : {request.source}",
         )
 
+    target_lang = TARGET_ALIASES.get(request.target)
+    use_flagship = False
+    needs_mt = any(not segment.critical for segment in request.segments)
+    if not MOCK_MODE:
+        # Les modèles flagship sont français -> langue : pas de source
+        # anglaise pour l'ewondo, et le fulfulde anglais retombe sur NLLB.
+        use_flagship = (
+            source_code == "fr" and flagship_available(request.target)
+        )
+        if request.target == "ewo" and not use_flagship and needs_mt:
+            if source_code != "fr":
+                raise HTTPException(
+                    status_code=400,
+                    detail=(
+                        "Le brouillon MT ewondo est disponible depuis le "
+                        "français uniquement."
+                    ),
+                )
+            raise HTTPException(
+                status_code=503,
+                detail=(
+                    "Le modèle brouillon ewondo n'est pas installé. "
+                    "Téléchargez flagship-ai/cameroon-int8 ou utilisez "
+                    "le pack communautaire."
+                ),
+            )
+        if (
+            not use_flagship
+            and not target_lang
+            and request.target not in MOCK_PREFIX
+            and (needs_mt or request.target != "ewo")
+        ):
+            raise HTTPException(
+                status_code=400,
+                detail=(
+                    "Langue cible non supportée par ce prototype : "
+                    f"{request.target}"
+                ),
+            )
+
+    if (
+        MOCK_MODE
+        and request.target not in TARGET_ALIASES
+        and request.target not in MOCK_PREFIX
+    ):
+        raise HTTPException(
+            status_code=400,
+            detail=f"Langue cible non supportée par ce prototype : {request.target}",
+        )
+
     # On protège les termes critiques, puis on découpe chaque segment en
     # phrases : NLLB est plus stable sur des entrées courtes.
     protected_by_id = {}
     expanded = []
     for segment in request.segments:
+        # Niveau A : on ne protège même pas, on ne traduit pas.
+        if segment.critical:
+            continue
         protected, terms = protect_terms(segment.text)
         protected_by_id[segment.id] = {
             "source": protected,
@@ -767,11 +928,46 @@ def translate(request: TranslateRequest):
 
     outputs: List[str] = []
     texts = [item["text"] for item in expanded]
-    for start in range(0, len(texts), BATCH_SIZE):
-        batch = texts[start : start + BATCH_SIZE]
-        outputs.extend(
-            safe_generate_batch(batch, source_lang, target_lang)
-        )
+    provider = "none"
+    model_used = "none"
+
+    if not texts:
+        # Tous les segments sont critiques : aucun appel au modèle.
+        outputs = []
+    elif MOCK_MODE:
+        outputs = mock_translate(texts, request.target)
+        provider = "mock"
+        model_used = "mock"
+    elif use_flagship:
+        try:
+            outputs = generate_flagship_batch(texts, request.target)
+            provider = "flagship"
+            model_used = (
+                "flagship-ai/cameroon-int8:"
+                f"{PAIR_BY_TARGET[request.target]}"
+            )
+        except Exception as exc:
+            if request.target == "ewo":
+                raise HTTPException(
+                    status_code=503,
+                    detail=f"Modèle brouillon ewondo indisponible : {exc}",
+                ) from exc
+            # Fulfulde : NLLB reste un secours si le modèle flagship échoue.
+            for start in range(0, len(texts), BATCH_SIZE):
+                batch = texts[start : start + BATCH_SIZE]
+                outputs.extend(
+                    safe_generate_batch(batch, source_lang, target_lang)
+                )
+            provider = "nllb"
+            model_used = MODEL_NAME
+    else:
+        for start in range(0, len(texts), BATCH_SIZE):
+            batch = texts[start : start + BATCH_SIZE]
+            outputs.extend(
+                safe_generate_batch(batch, source_lang, target_lang)
+            )
+        provider = "nllb"
+        model_used = MODEL_NAME
 
     grouped: dict[str, List[str]] = {}
     for item, output in zip(expanded, outputs):
@@ -779,6 +975,17 @@ def translate(request: TranslateRequest):
 
     drafts = []
     for segment in request.segments:
+        if segment.critical:
+            drafts.append(
+                {
+                    "segment": segment,
+                    "text": segment.text,
+                    "ok": False,
+                    "reason": "critical_pack_only",
+                    "roundtrip": None,
+                }
+            )
+            continue
         parts = grouped.get(segment.id, [])
         joined = " ".join(part.strip() for part in parts if part.strip())
         normalized = normalize_placeholders(joined)
@@ -803,7 +1010,7 @@ def translate(request: TranslateRequest):
 
     # Rétro-traduction : garde-fou contre les hallucinations sur contenu inédit.
     # Désactivable avec NK_ROUNDTRIP=0 si la latence CPU est trop élevée.
-    if ROUNDTRIP_ENABLED and not MOCK_MODE:
+    if ROUNDTRIP_ENABLED and not MOCK_MODE and provider == "nllb":
         candidates = [
             draft
             for draft in drafts
@@ -848,7 +1055,8 @@ def translate(request: TranslateRequest):
 
     return TranslateResponse(
         translations=translations,
-        model=MODEL_NAME,
+        model=model_used,
+        provider=provider,
         target=request.target,
     )
 

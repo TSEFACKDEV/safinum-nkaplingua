@@ -115,8 +115,9 @@ phrase courte déjà chargée.
 
 **Voix off** :
 
-> « NLLB est un modèle de base. Les phrases courtes sont fiables ; les phrases
-> longues doivent encore être validées par un locuteur natif. C’est pourquoi
+> « flagship-ai et NLLB sont des brouillons. Les phrases courtes sont plus
+> fiables ; les phrases longues doivent encore être validées par un locuteur
+> natif. Les phrases critiques sans pack restent en français. C’est pourquoi
 > nous avons un protocole de validation et un contrôle de préservation des
 > montants. »
 
@@ -131,9 +132,9 @@ phrase courte déjà chargée.
 
 ## Checklist d’enregistrement
 
-- [ ] Extension seule testée sans backend (mode cloud)
-- [ ] Backend local lancé pour le mode 100 % local (optionnel)
-- [ ] Modèle NLLB préchauffé si mode local
+- [ ] Extension seule testée avec les packs (le cloud ne couvre pas l’ewondo)
+- [ ] Backend local lancé pour le mode 100 % local
+- [ ] Modèles flagship-ai/NLLB préchauffés si mode local
 - [ ] Extension chargée dans Chrome/Firefox
 - [ ] Page `http://127.0.0.1:8000/demo` ouverte
 - [ ] Zoom navigateur à 100 %

@@ -102,7 +102,7 @@ def main() -> int:
 
     pack_target = client.post(
         "/translate",
-        json={"source": "fr", "target": "ewo", "segments": [{"id": "d", "text": "Bonjour."}]},
+        json={"source": "fr", "target": "dua", "segments": [{"id": "d", "text": "Bonjour."}]},
     )
     check("reject-pack-target", pack_target.status_code == 400, str(pack_target.status_code))
 
