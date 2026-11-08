@@ -160,6 +160,20 @@ async function translateText(text, target, source) {
   };
 }
 
+const CRITICALITY_TERMS =
+  /\b(solde|frais|total|beneficiaire|pin|otp|confirmer|confirmation|annuler|annulation|erreur|securite|reessayer|reference)\b/i;
+
+/**
+ * Niveau A : segment critique (solde, frais, PIN, confirmation, erreur…).
+ * Il ne peut venir que d'un pack validé, jamais d'une MT ni d'un fuzzy.
+ */
+function classifyCriticality(text) {
+  const normalized = String(text || "")
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "");
+  return CRITICALITY_TERMS.test(normalized) ? "A" : "B";
+}
+
 async function translateSegments(segments, target, source) {
   if (!Array.isArray(segments) || segments.length === 0) {
     return { translations: [], provider: null };
@@ -183,7 +197,8 @@ async function translateSegments(segments, target, source) {
       ...segment,
       text: redaction.text,
       tokens: redaction.tokens,
-      originalText: segment.text || ""
+      originalText: segment.text || "",
+      criticality: classifyCriticality(segment.text || "")
     };
   });
   const preparedById = new Map(
@@ -200,6 +215,11 @@ async function translateSegments(segments, target, source) {
   const missing = [];
 
   for (const segment of prepared) {
+    // Le niveau A ne lit jamais le cache : il doit être validé dans le pack.
+    if (segment.criticality === "A") {
+      missing.push(segment);
+      continue;
+    }
     const key = `${detected}:${target}:${segment.originalText}`;
     if (cache.has(key)) {
       results.set(segment.id, { ...cache.get(key), id: segment.id });
@@ -259,6 +279,18 @@ async function translateSegments(segments, target, source) {
         );
         results.set(final.id, final);
       }
+      // Niveau A absent du pack : original conservé, aucun moteur MT.
+      for (const segment of missing) {
+        if (segment.criticality !== "A") continue;
+        if (results.get(segment.id)?.ok) continue;
+        results.set(segment.id, {
+          id: segment.id,
+          text: segment.originalText,
+          ok: false,
+          reason: "untranslated_critical",
+          criticality: "A"
+        });
+      }
       return {
         translations: segments
           .map((segment) => results.get(segment.id))
@@ -272,6 +304,22 @@ async function translateSegments(segments, target, source) {
       (segment) => !hits.some((translation) => translation.id === segment.id)
     );
   }
+
+  // Niveau A absent du pack : on conserve l'original et on ne contacte
+  // jamais le backend local ni le cloud, même si le cloud est autorisé.
+  const criticalMisses = remaining.filter(
+    (segment) => segment.criticality === "A"
+  );
+  for (const segment of criticalMisses) {
+    results.set(segment.id, {
+      id: segment.id,
+      text: segment.originalText,
+      ok: false,
+      reason: "untranslated_critical",
+      criticality: "A"
+    });
+  }
+  remaining = remaining.filter((segment) => segment.criticality !== "A");
 
   if (remaining.length === 0) {
     return {

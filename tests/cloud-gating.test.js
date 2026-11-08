@@ -152,7 +152,7 @@ async function main() {
   const defaultBackground = createBackground({});
   const defaultResponse = await defaultBackground.send({
     type: "NK_TRANSLATE_TEXT",
-    text: "Votre solde est disponible.",
+    text: "Bonjour, merci beaucoup.",
     target: "fub",
     source: "fr"
   });
@@ -169,7 +169,7 @@ async function main() {
   const optInBackground = createBackground({ nkCloudFallback: true });
   const optInResponse = await optInBackground.send({
     type: "NK_TRANSLATE_TEXT",
-    text: "Votre solde est disponible.",
+    text: "Bonjour, merci beaucoup.",
     target: "fub",
     source: "fr"
   });

@@ -1687,3 +1687,62 @@ mot `json`) avec les champs ci-dessous. Exemple de structure, en indentation :
   ]
 }
 ```
+
+## 2026-11-08T06:44:00+01:00 — Marius — M3 — in_progress
+
+```json
+{
+  "timestamp": "2026-11-08T06:44:00+01:00",
+  "person": "Marius",
+  "branch": "marius",
+  "task": "M3",
+  "status": "in_progress",
+  "summary": "Classification A/B par segment : un terme critique (solde, frais, total, bénéficiaire, PIN/OTP, confirmer, annuler, erreur, sécurité, réessayer, référence) force le pack validé uniquement. Si le pack ne contient pas la phrase, l'original est conservé avec raison untranslated_critical et aucun appel local/cloud. Le content script pose l'attribut data-nk-untranslated ; le badge visuel reste à styler avec Freedy.",
+  "files": [
+    "extension/background.js",
+    "extension/content.js",
+    "tests/criticality.test.js",
+    "tests/cloud-gating.test.js",
+    "tests/README.md",
+    ".github/workflows/ci.yml"
+  ],
+  "tests": [
+    {
+      "command": "node tests/criticality.test.js",
+      "result": "pass",
+      "note": "A absent du pack : original + untranslated_critical, 0 requête ; A pack validé : pack ; A cible MT + cloud autorisé : 0 appel MT ; B : MT autorisée"
+    },
+    {
+      "command": "node tests/cloud-gating.test.js",
+      "result": "pass",
+      "note": "phrase de test passée en niveau B pour ne pas confondre M2 et M3"
+    },
+    {
+      "command": "node tests/privacy.test.js && node tests/content.test.js",
+      "result": "pass",
+      "note": "non-régression M1 et DOM"
+    },
+    {
+      "command": "NK_MOCK=1 server/.venv/bin/python -m pytest -q server/test_api.py",
+      "result": "pass",
+      "note": "26 passed"
+    },
+    {
+      "command": "python3 scripts/check-language-packs.py && python3 scripts/check-pack-collisions.py",
+      "result": "pass",
+      "note": "packs et collisions"
+    },
+    {
+      "command": "python3 scripts/check-evolution.py",
+      "result": "pass",
+      "note": "journal valide après ajout de l'entrée"
+    }
+  ],
+  "evidence": "sortie « criticality OK — niveau A pack-only, zéro MT, niveau B autorisé » ; background.js classifyCriticality + untranslated_critical ; content.js data-nk-untranslated",
+  "next": "Appliquer le badge visuel « non traduit » dès que Freedy fournit le style, puis reprendre M7 sur navigateur réel",
+  "blockers": [
+    "Badge visuel par segment non stylé : dépend de Freedy (F1)",
+    "Test navigateur réel bloqué sur ce poste : Chrome branded refuse --load-extension, Chromium de test crashe (crashpad)"
+  ]
+}
+```

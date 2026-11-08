@@ -19,6 +19,7 @@ Node 20+ (CI) ou 24 (poste de dev). Python 3.12 pour le backend.
 | `tests/privacy.test.js` | aucune valeur de formulaire, zone `[data-sensitive]` ou montant brut ne quitte la page ; aucun `context` transmis (M1) | `node tests/privacy.test.js` | **pass** |
 | `tests/cloud-gating.test.js` | pack sans réseau ; MyMemory jamais appelé sans opt-in ; case décochée par défaut (M2) | `node tests/cloud-gating.test.js` | **pass** |
 | `tests/check-pack-collisions.test.py` | détecteur de collisions : collision, normalisation, doublon de source, pack invalide (M4) | `python3 tests/check-pack-collisions.test.py` | **pass** |
+| `tests/criticality.test.js` | niveau A pack-only : aucun appel MT/cloud, original conservé ; niveau B autorisé (M3) | `node tests/criticality.test.js` | **pass** |
 | `scripts/test-extension.js` | registre des langues, détection, packs, jetons, qualité | `node scripts/test-extension.js` | **pass** |
 | `server/test_api.py` | contrats API, CORS, refus, mode mock | `NK_MOCK=1 python3 -m pytest -q server/test_api.py` | **pass** |
 
@@ -43,7 +44,8 @@ pas dans le dépôt.
 
 - `server/test_api.py` en mode `NK_MOCK=1` ;
 - `scripts/test-extension.js`, `tests/content.test.js`,
-  `tests/privacy.test.js` et `tests/cloud-gating.test.js` ;
+  `tests/privacy.test.js`, `tests/cloud-gating.test.js` et
+  `tests/criticality.test.js` ;
 - `scripts/check-evolution.py`, `scripts/check-pack-collisions.py`,
   `tests/check-pack-collisions.test.py`, les contrôles de packs et de données ;
 - `build-firefox.sh`, `web-ext lint` et `package-extension.sh`.

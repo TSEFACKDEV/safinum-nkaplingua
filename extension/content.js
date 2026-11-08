@@ -444,6 +444,11 @@
       element.removeAttribute("data-nk-translated");
     }
 
+    // Marqueurs de niveau A non traduit.
+    for (const element of document.querySelectorAll("[data-nk-untranslated]")) {
+      element.removeAttribute("data-nk-untranslated");
+    }
+
     translatedNodes.clear();
     translatedAttributes.length = 0;
     translatedElements.clear();
@@ -547,6 +552,12 @@
         for (const segment of batch) {
           const result = byId.get(segment.id);
           if (!result || !result.ok) {
+            if (result?.reason === "untranslated_critical") {
+              const element = segment.item.element;
+              if (element) {
+                element.setAttribute("data-nk-untranslated", "A");
+              }
+            }
             flaggedNodes.add(segment.item.node || segment.item.element);
             flaggedCount += 1;
             continue;
