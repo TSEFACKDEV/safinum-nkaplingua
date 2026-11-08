@@ -98,27 +98,26 @@ Le rapport contient le taux d’acceptation, la préservation des montants, le
 score de rétro-traduction moyen et la distribution des raisons de refus. Il ne
 remplace pas une évaluation native : il sert à détecter les régressions.
 
-## Résultat réel du 7 novembre 2026 (modèle 600M quantifié)
+## Résultats réels du 7 novembre 2026 (modèle 600M)
 
-Sur les 20 phrases inédites, avec `NK_ROUNDTRIP=1` et la rétro-traduction
-locale seule : **9/20 acceptées (45 %)**, **100 % des montants préservés**,
-score de rétro-traduction moyen **0,442**. Les 11 refus sont principalement
-des `low_roundtrip` (0,23–0,42) : le filtre préfère conserver l’original.
+Trois mesures distinctes, à ne pas confondre :
 
-La seconde opinion cloud ciblée a ensuite été testée sur les 20 mêmes phrases,
-en simulant un rejet local : **20/20 acceptées** par les contrôles de jetons et
-de qualité, avec montants et termes critiques préservés. Le fallback améliore
-fortement la couverture, mais il envoie chaque phrase pseudonymisée à MyMemory ;
-il doit rester divulgué et optionnel pour les données réelles.
+- **texte brut, sans pseudonymisation** : **9/20 acceptées (45 %)**,
+  100 % des montants préservés, rétro-traduction moyenne 0,442 ;
+- **pipeline réel de l’extension** (pseudonymisation + jetons) :
+  **6/20 inédites (30 %)** et **26/112 segments de la démo (23 %)** ; le
+  chiffre de 45 % ne décrit donc pas le pipeline réel ;
+- **pré-évaluation K5** (protection des nombres et termes, sans
+  rétro-traduction) : **12/20 acceptées** par les contrôles et **8/20
+  refusées** (montant, terme critique ou jeton perdu).
 
-Lecture honnête : le local seul est plus sûr mais couvre 45 % ; le cloud
-ciblé couvre 100 % de cet échantillon mais n’a pas de rétro-traduction locale.
-La pré-évaluation K5 du 7 novembre 2026, avec protection des nombres et des
-termes mais sans rétro-traduction, donne **12/20 sorties acceptées** par les
-contrôles et **8/20 refusées** (montant, terme critique ou jeton perdu). Les
-sorties acceptées restent à juger par un natif dans `docs/UNSEEN_JUDGMENT.csv`.
+La seconde opinion cloud ciblée a accepté 20/20 sur le même échantillon, mais
+elle envoie chaque phrase pseudonymisée à MyMemory : elle reste **hors du
+chemin de démo**, opt-in et non recommandée pour le jury.
 
-La vérité terrain reste la relecture native.
+Lecture honnête : la MT locale seule ne couvre pas le parcours aujourd’hui.
+C’est le **pack validé** qui doit couvrir le niveau A et les 102 phrases de la
+démo. La vérité terrain reste la relecture native.
 
 ## Ce qu’il ne faut pas faire
 

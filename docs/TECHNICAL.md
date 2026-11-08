@@ -104,11 +104,12 @@ financière existante, sans modifier son code source.
   n’est pas touché.
 - **Aucune API côté banque** : l’extension lit uniquement le DOM rendu.
 - **Aucune dépendance à un identifiant de page** : le pipeline est générique.
-- **Fonctionne sans backend** : un service cloud de secours (MyMemory) prend le
-  relais si le backend local n’est pas lancé ; le texte reste pseudonymisé.
-- **Seconde opinion ciblée** : si le backend local rejette une phrase, le
-  background redemande uniquement cette phrase au cloud, puis garde la
-  meilleure sortie conforme. Le local reste prioritaire.
+- **Mode pack sans backend** : les packs validés fonctionnent seuls. Le cloud
+  MyMemory reste **expérimental et opt-in** ; il n’est contacté que si
+  l’utilisateur l’autorise explicitement.
+- **Seconde opinion ciblée** (cloud opt-in uniquement) : si le backend local
+  rejette une phrase, le background peut redemander uniquement cette phrase au
+  cloud, puis garder la meilleure sortie conforme. Le local reste prioritaire.
 - **Trois langues cibles** : fulfulde en MT, ewondo et duala en packs communautaires.
 - **Détection source** : FR/EN, avec indice HTML, mots-outils et confiance.
 - **Permissions minimales** : `activeTab`, `scripting`, `storage`,
@@ -128,7 +129,7 @@ reconnus par le code.
 | Dépendance | Version | Licence | Usage |
 |---|---|---|---|
 | `facebook/nllb-200-distilled-600M` | 600M | CC BY-NC 4.0 | traduction locale |
-| MyMemory Translation API | — | service externe gratuit | traduction cloud de secours |
+| MyMemory Translation API | — | service externe | cloud expérimental, opt-in uniquement |
 | Packs ewondo et duala | 0.1 | à définir avec les contributeurs (CC0 / CC BY) | mémoires de traduction validées |
 | FastAPI | >=0.115 | MIT | API |
 | Uvicorn | >=0.30 | BSD | serveur |
@@ -147,8 +148,8 @@ reconnus par le code.
 - tests et CI ;
 - documentation de sécurité et de licences.
 
-**Composants tiers** : NLLB, FastAPI, PyTorch, Transformers, MyMemory (mode
-cloud de secours uniquement). Les packs communautaires sont la contribution
+**Composants tiers** : NLLB, FastAPI, PyTorch, Transformers, MyMemory (cloud
+expérimental, opt-in uniquement). Les packs communautaires sont la contribution
 propre de l’équipe et des relecteurs natifs.
 
 ## 6. Sécurité et intégrité

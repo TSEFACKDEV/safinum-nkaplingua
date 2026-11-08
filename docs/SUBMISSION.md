@@ -99,7 +99,9 @@ https://tsefackdev.github.io/safinum-nkaplingua/demo/
 
 ## Notes pour le jury
 
-- L’extension fonctionne sans installation Python ; pour une démonstration fiable, lancer le backend local.
+- Le mode pack fonctionne sans installation Python ; le fulfulde nécessite le
+  backend local (modèle téléchargé au premier lancement). Pour une démonstration
+  fiable, lancer le backend local.
 - Elle utilise le backend local s’il est disponible. Le cloud MyMemory est
   expérimental et désactivé par défaut.
 - Les montants, URLs, emails et noms de bénéficiaires sont contrôlés après
@@ -111,11 +113,15 @@ https://tsefackdev.github.io/safinum-nkaplingua/demo/
 
 ## État vérifié localement — 8 novembre 2026
 
-- 3 ZIP construits : **377 Ko** chacun (< 10 Mo), avec exécution du détecteur de
+- 3 ZIP construits : **370 Ko** chacun (< 10 Mo), avec exécution du détecteur de
   collisions avant le build.
 - `web-ext lint` sur `dist/firefox` : **0 erreur, 0 warning, 0 notice**.
-- Tests locaux : **26 tests API** (mode mock), tests jsdom
-  `content`/`privacy`/`cloud-gating`/`criticality`, registre et packs,
-  **6 cas** de collisions.
+- **Chrome for Testing 158** : extension packagée chargée, service worker
+  actif, popup avec les 3 langues, 0 erreur.
+- **Firefox 159** (binaire téléchargé, hors Snap) : paquet installé comme
+  add-on temporaire par `web-ext run`.
+- Tests locaux : **26 tests API unitaires + 17 contrats robustes**, tests jsdom
+  `content`/`privacy`/`cloud-gating`/`criticality`, pipeline pack/edge,
+  registre et packs, **6 cas** de collisions.
 - CI GitHub vérifiée après push : **5 jobs verts** sur `develop` et `marius`
   (backend, journal, données linguistiques, extension, scan de secrets).

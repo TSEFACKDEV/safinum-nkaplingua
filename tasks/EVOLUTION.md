@@ -2073,3 +2073,254 @@ mot `json`) avec les champs ci-dessous. Exemple de structure, en indentation :
   ]
 }
 ```
+
+## 2026-11-08T08:15:00+01:00 — Marius — M10 — done
+
+```json
+{
+  "timestamp": "2026-11-08T08:15:00+01:00",
+  "person": "Marius",
+  "branch": "marius",
+  "task": "M10",
+  "status": "done",
+  "summary": "Packaging complet : 3 ZIP de 370 Ko, contrôle de collisions avant build, web-ext lint 0/0/0. Le paquet Chrome chargé dans Chrome for Testing 158 démarre son service worker et affiche les 3 langues dans le popup. Firefox 159 téléchargé hors Snap installe le paquet comme add-on temporaire via web-ext run. CI GitHub verte sur develop et marius.",
+  "files": [
+    "docs/SUBMISSION.md",
+    "tests/README.md"
+  ],
+  "tests": [
+    {
+      "command": "./scripts/package-extension.sh",
+      "result": "pass",
+      "note": "3 ZIP 370 Ko, collisions OK"
+    },
+    {
+      "command": "chargement de dist/package/chrome dans Chrome for Testing 158",
+      "result": "pass",
+      "note": "service worker chrome-extension://.../background.js actif ; popup 3 langues ; 0 erreur page"
+    },
+    {
+      "command": "web-ext run --source-dir dist/firefox --firefox=.cache/firefox/firefox/firefox --arg=-headless",
+      "result": "pass",
+      "note": "« Installed ... as a temporary add-on » (Firefox 159)"
+    },
+    {
+      "command": "npx web-ext lint --source-dir dist/firefox",
+      "result": "pass",
+      "note": "0 erreur, 0 warning, 0 notice"
+    },
+    {
+      "command": "gh run list / gh run view",
+      "result": "pass",
+      "note": "5/5 jobs verts sur develop et marius"
+    },
+    {
+      "command": "python3 scripts/check-evolution.py",
+      "result": "pass",
+      "note": "journal valide après ajout de l'entrée"
+    }
+  ],
+  "evidence": "sortie Chrome « SW chrome-extension://.../background.js », options popup « Fulfulde MT / Ewondo PACK / Duala PACK » ; sortie Firefox « Installed ... as a temporary add-on » ; docs/SUBMISSION.md § État vérifié",
+  "next": "M7 Firefox site automation, puis traiter M6/M8/M11 (blocages données/modèle)",
+  "blockers": []
+}
+```
+
+## 2026-11-08T08:30:00+01:00 — Marius — M7 — in_progress
+
+```json
+{
+  "timestamp": "2026-11-08T08:30:00+01:00",
+  "person": "Marius",
+  "branch": "marius",
+  "task": "M7",
+  "status": "in_progress",
+  "summary": "Tentative Firefox réelle avec Firefox 159 téléchargé hors Snap et Selenium/geckodriver : l'extension s'installe en add-on temporaire, le content script s'injecte (marqueur DOM présent), mais le background répond « Cloud désactivé et backend local indisponible ». Les host_permissions MV3 ne sont pas accordées à un add-on temporaire, donc le fetch vers 127.0.0.1:8000 est refusé ; les packs étant vides, 0 segment n'est traduit. Le test Chrome complet reste la référence.",
+  "files": [],
+  "tests": [
+    {
+      "command": "Selenium Firefox 159 + install_addon(nkaplingua-test.xpi, temporary=True)",
+      "result": "pass",
+      "note": "add-on nkaplingua@safinum.cm installé ; marqueur data-nk-autotrigger présent"
+    },
+    {
+      "command": "browser.runtime.sendMessage NK_TRANSLATE_SEGMENTS depuis le content script Firefox",
+      "result": "fail",
+      "note": "réponse « Cloud désactivé et backend local indisponible. Lancez le backend ou autorisez le cloud. »"
+    },
+    {
+      "command": "node .cache/m7/m7_test.js (Chrome 158)",
+      "result": "pass",
+      "note": "référence M7 : 5 étapes + EN, 0 erreur, montants/références préservés"
+    },
+    {
+      "command": "node tests/content.test.js && node tests/privacy.test.js && node tests/cloud-gating.test.js && node tests/criticality.test.js",
+      "result": "pass",
+      "note": "aucune régression côté code"
+    },
+    {
+      "command": "NK_MOCK=1 server/.venv/bin/python -m pytest -q server/test_api.py",
+      "result": "pass",
+      "note": "26 passed"
+    },
+    {
+      "command": "python3 scripts/check-evolution.py",
+      "result": "pass",
+      "note": "journal valide après ajout de l'entrée"
+    }
+  ],
+  "evidence": "Firefox 159 : « Installed ... as a temporary add-on » ; data-nk-debug = {\"lang\":\"object\",\"browser\":\"object\",\"hasTranslate\":\"function\"} ; réponse background « backend local indisponible » ; 0 segment traduit",
+  "next": "Accorder explicitement les host_permissions dans un profil Firefox réel (ou construire un pack de test couvrant la page) puis rejouer le parcours",
+  "blockers": [
+    "Firefox MV3 : host_permissions non accordées à l'add-on temporaire, backend local inaccessible",
+    "Firefox n'a pas de pack fub rempli pour compenser sans backend"
+  ]
+}
+```
+
+## 2026-11-08T08:40:00+01:00 — Marius — M6 — blocked
+
+```json
+{
+  "timestamp": "2026-11-08T08:40:00+01:00",
+  "person": "Marius",
+  "branch": "marius",
+  "task": "M6",
+  "status": "blocked",
+  "summary": "Les 20 phrases de data/unseen_finance.txt sont prêtes, mais la comparaison des 4 formats de jetons exige le modèle NLLB. Le modèle n'est pas téléchargé et torch/transformers ne sont pas installés dans l'environnement de test ; aucun résultat de format ne peut être produit sans inventer des mesures.",
+  "files": [],
+  "tests": [
+    {
+      "command": "wc -l data/unseen_finance.txt",
+      "result": "pass",
+      "note": "20 phrases disponibles"
+    },
+    {
+      "command": "server/.venv/bin/python -c 'import torch, transformers'",
+      "result": "not_run",
+      "note": "ModuleNotFoundError: torch absent"
+    },
+    {
+      "command": "téléchargement facebook/nllb-200-distilled-600M",
+      "result": "not_run",
+      "note": "modèle ~2,4 Go absent de models/"
+    }
+  ],
+  "evidence": "models/ absent ; torch absent ; data/unseen_finance.txt = 20 lignes",
+  "next": "Installer torch/transformers, télécharger NLLB, comparer [[NUM_0]], [[0]], [[N0]] et X0 sur les 20 phrases, mesurer token_lost et latence",
+  "blockers": [
+    "Modèle NLLB-200 non téléchargé",
+    "torch/transformers absents du venv de test",
+    "Aucune mesure réelle des 4 formats disponible"
+  ]
+}
+```
+
+## 2026-11-08T08:45:00+01:00 — Marius — M8 — blocked
+
+```json
+{
+  "timestamp": "2026-11-08T08:45:00+01:00",
+  "person": "Marius",
+  "branch": "marius",
+  "task": "M8",
+  "status": "blocked",
+  "summary": "Les 15 phrases audio sans montant et le template d'index existent, mais aucun fichier OGG, aucun index.json rempli et aucun consentement audio ne sont fournis par Klein. Le bouton « Écouter » et le service local ne peuvent pas être testés avec de vrais fichiers ; je n'ai pas fabriqué d'audio.",
+  "files": [],
+  "tests": [
+    {
+      "command": "python3 -c 'csv data/audio/fub/phrases.csv : 15 lignes, has_amount=no'",
+      "result": "pass",
+      "note": "15/15 sans montant"
+    },
+    {
+      "command": "ls data/audio/fub/index.json",
+      "result": "not_run",
+      "note": "index.json absent (seul index.template.json)"
+    },
+    {
+      "command": "lecture de 15 OGG",
+      "result": "not_run",
+      "note": "aucun fichier audio versionné"
+    }
+  ],
+  "evidence": "data/audio/fub : index.template.json + phrases.csv seulement ; 15 lignes has_amount=no ; aucun OGG ; aucun consentement",
+  "next": "Recevoir de Klein les 15 OGG, l'index.json (phrase, fichier, durée, relecteur, licence) et les consentements, puis implémenter le bouton conditionnel",
+  "blockers": [
+    "15 fichiers OGG absents",
+    "index.json absent",
+    "consentements audio non signés",
+    "licences audio non documentées"
+  ]
+}
+```
+
+## 2026-11-08T08:50:00+01:00 — Marius — M11 — blocked
+
+```json
+{
+  "timestamp": "2026-11-08T08:50:00+01:00",
+  "person": "Marius",
+  "branch": "marius",
+  "task": "M11",
+  "status": "blocked",
+  "summary": "docs/ORTHOGRAPHY.md indique explicitement que ɲ → ny est une hypothèse à valider, que la table de validation est vide et qu'il ne faut pas remplacer ɲ dans l'extension tant que les natifs n'ont pas tranché. Aucune table validée fournie par Klein ; implémenter un normaliseur maintenant risquerait de changer le sens des mots.",
+  "files": [],
+  "tests": [
+    {
+      "command": "lecture de docs/ORTHOGRAPHY.md",
+      "result": "pass",
+      "note": "table de validation vide, règle keep_ɲ_or_map_to_ny non tranchée"
+    },
+    {
+      "command": "normalisation ɲ → ny sur 10 exemples",
+      "result": "not_run",
+      "note": "table native absente, pas de règle validée"
+    }
+  ],
+  "evidence": "docs/ORTHOGRAPHY.md §3 : table vide ; §4 : ne pas remplacer ɲ par ny dans l'extension ; aucune table validée dans data/",
+  "next": "Recevoir la table ɲ/ny, tons et exceptions validée par les natifs, puis implémenter le normaliseur déterministe avec 10 tests",
+  "blockers": [
+    "Table orthographique ɲ/ny non validée par les natifs",
+    "Aucune règle validée pour les noms propres et emprunts"
+  ]
+}
+```
+
+## 2026-11-08T09:05:00+01:00 — Marius — M10 — done
+
+```json
+{
+  "timestamp": "2026-11-08T09:05:00+01:00",
+  "person": "Marius",
+  "branch": "marius",
+  "task": "M10",
+  "status": "done",
+  "summary": "Corrections R0 de discours : le README affiche un état réel (packs 0/102 et 0/20, glossaire 0 validé, audio 0, MT duala échouée, test Chrome, Firefox, CI), EVAL distingue 45 % texte brut / 30 % inédites / 23 % démo, et les docs ne présentent plus MyMemory comme un secours automatique. COMPLIANCE, SECURITY, TECHNICAL, DATA_LICENSES, VIDEO_SCRIPT et SUBMISSION alignés.",
+  "files": [
+    "README.md",
+    "docs/EVAL.md",
+    "docs/COMPLIANCE.md",
+    "docs/SECURITY.md",
+    "docs/TECHNICAL.md",
+    "docs/DATA_LICENSES.md",
+    "docs/VIDEO_SCRIPT.md",
+    "docs/SUBMISSION.md"
+  ],
+  "tests": [
+    {
+      "command": "grep -RIn 'cloud de secours|bascule sur un service cloud|84–95|sept langues' README.md docs/*.md",
+      "result": "pass",
+      "note": "aucune formulation automatique restante ; seul le 45 % texte brut est conservé, explicitement distingué"
+    },
+    {
+      "command": "python3 scripts/check-evolution.py",
+      "result": "pass",
+      "note": "journal valide après ajout de l'entrée"
+    }
+  ],
+  "evidence": "README.md § État réel au 8 novembre 2026 ; docs/EVAL.md § Résultats réels ; docs/COMPLIANCE.md total objectif 80+",
+  "next": "Poursuivre M7 (Firefox) et M9 (unseen/demo) dès que les données/modèle seront disponibles",
+  "blockers": []
+}
+```

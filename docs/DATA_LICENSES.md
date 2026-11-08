@@ -30,14 +30,14 @@ s’est révélée très instable sur le fulfulde (répétitions, anglais). NLLB
 version commerciale, il faudra soit obtenir un accord pour NLLB, soit
 fine-tuner M2M100 (MIT) sur le corpus adamawa.
 
-### Service cloud de secours
+### Service cloud expérimental (opt-in)
 
 | Élément | Valeur |
 |---|---|
 | Service | MyMemory Translation API |
 | Type | API externe gratuite, usage soumis aux conditions du service |
 | Source | https://mymemory.translated.net/doc/spec.php |
-| Usage | mode cloud de secours si le backend local n’est pas disponible |
+| Usage | **expérimental, uniquement avec opt-in explicite** ; jamais dans le chemin de démonstration |
 | Données | texte pseudonymisé (montants, URLs, emails et noms de bénéficiaires remplacés) |
 | Remarque | ne pas utiliser avec des données réelles sensibles ; le mode local est prioritaire |
 

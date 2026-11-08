@@ -116,10 +116,11 @@ Mitigations à conserver :
 - cache mémoire limité à 500 entrées ;
 - CORS restreint aux origines de l’extension et au localhost.
 
-## Mode cloud de secours (MyMemory)
+## Mode cloud opt-in (MyMemory)
 
-L’extension doit pouvoir être testée comme un simple fichier, sans installer
-Python. Si le backend local n’est pas disponible, elle bascule sur **MyMemory**.
+Le mode pack fonctionne sans installer Python. Le cloud **n’est jamais utilisé
+par défaut** : il faut l’autoriser explicitement dans le popup. Le backend local
+reste prioritaire ; le cloud n’est qu’un secours expérimental.
 
 - Le texte envoyé est **pseudonymisé** : montants, URLs, emails et noms de
   bénéficiaires remplacés par des jetons.
@@ -130,9 +131,9 @@ Python. Si le backend local n’est pas disponible, elle bascule sur **MyMemory*
 - Si le backend local rejette une phrase (rétro-traduction, qualité), le
   background peut demander une seconde opinion au cloud **pour cette phrase
   seulement**. Le texte reste pseudonymisé.
-- L’utilisateur peut décocher « Autoriser MyMemory » dans le popup pour
-  rester en mode local strict ; dans ce cas, une phrase rejetée reste dans
-  sa langue source.
+- L’utilisateur peut cocher « Autoriser MyMemory » dans le popup pour activer
+  ce secours ; la case est **décochée par défaut**. Sans opt-in, une phrase
+  rejetée reste dans sa langue source et l’extension ne fait aucun appel cloud.
 - Si le service cloud échoue ou dépasse le quota, l’original est conservé.
 - Le service est divulgué dans `docs/DATA_LICENSES.md` et dans le popup.
 

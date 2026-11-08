@@ -13,13 +13,34 @@ NkapLingua est une extension navigateur autonome qui traduit les interfaces
 financières numériques en **trois langues camerounaises** sans modifier le site
 source et sans lire les champs sensibles. Le **fulfulde d’Adamawa** utilise
 NLLB ; l’**ewondo** et le **duala** utilisent des **packs de phrases validées**.
-Elle fonctionne **sans installation Python**, en **100 % local** avec le backend
-NLLB fourni dans le dépôt (le cloud MyMemory est expérimental et désactivé par
-défaut). Ces trois langues sont retenues pour leurs corpus de parole et leurs
-ressources documentaires ; le détail est dans [`docs/LANGUAGES.md`](docs/LANGUAGES.md).
+
+Le mode « pack » ne demande aucune installation Python. Le fulfulde passe par
+le backend NLLB local, qui télécharge le modèle au premier lancement ; le cloud
+MyMemory est expérimental, **désactivé par défaut** et opt-in explicite. Les
+packs ewondo/duala sont encore vides : voir le statut réel ci-dessous. Ces trois
+langues sont retenues pour leurs corpus de parole et leurs ressources
+documentaires ; le détail est dans [`docs/LANGUAGES.md`](docs/LANGUAGES.md).
 
 Projet préparé pour le **SAFINUM Innovate Challenge 2026** (Yaoundé,
 26–28 novembre 2026).
+
+## État réel au 8 novembre 2026
+
+| Élément | État vérifié |
+|---|---|
+| Pack fulfulde | 102 phrases sources, **0 traduite** (`fub.json` : `entries: []`) |
+| Packs ewondo / duala | 20 phrases sources chacun, **0 traduite** |
+| Glossaire finance | 40 termes, **0 validé** |
+| Audio | **0 enregistrement** ; 15 phrases sans montant prêtes |
+| MT duala (pilote) | **échoué** : répétitions, non utilisable pour le niveau A |
+| Test site officiel (Chrome 158) | **5 étapes + EN**, 0 erreur page, montants/noms/références préservés |
+| Firefox 159 | paquet chargé en add-on temporaire ; parcours site non automatisé |
+| CI GitHub Actions | **5 jobs verts** sur `develop` et `marius` |
+| Tests | 26 tests API + 17 contrats HTTP + jsdom + pipeline pack/edge |
+
+Le niveau A (solde, frais, PIN/OTP, confirmation, erreurs) ne vient que d’un
+pack validé ; sans phrase validée, l’original reste affiché avec un badge
+« non traduit ». Aucun appel MT n’est fait sur ce niveau.
 
 ## Aperçu
 
@@ -277,9 +298,9 @@ NK_QUALITY_FRENCH_LEAK=0.35 NK_DEVICE=cpu uvicorn app:app --host 127.0.0.1 --por
 
 Le modèle 600M est le défaut. Pour une meilleure qualité sur une machine
 16 Go, `NK_MODEL=facebook/nllb-200-distilled-1.3B` est possible ; le 3.3B n’est
-pas recommandé sur ce prototype. Le glossaire finance validé
-(`data/glossary.template.csv`) est appliqué avant le modèle : les termes
-métier ne sont pas laissés à l’improvisation de NLLB.
+pas recommandé sur ce prototype. Le glossaire finance
+(`data/glossary.template.csv`) est appliqué avant le modèle dès qu'un terme est
+validé ; il est actuellement **en cours de validation (0 terme validé)**.
 
 ### Mode maquette (sans modèle)
 
