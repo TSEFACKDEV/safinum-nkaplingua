@@ -1,0 +1,37 @@
+{
+  "testedAt": "2026-11-08T16:50:00+01:00",
+  "site": "https://safinum.cm/hackathon-test",
+  "scope": "étape 1 — Solde",
+  "extension": "copie de test avec https://safinum.cm/* ajouté aux host_permissions ; manifeste du dépôt inchangé",
+  "backend": "facebook/nllb-200-distilled-600M, CPU, NK_MOCK=0, NK_ROUNDTRIP=1, NK_QUALITY=1",
+  "toast": "Mode démo SAFINUM (données fictives) — 6 segment(s) traduits en Fulfulde (Adamawa) (source : français, 86 % · backend local · 38 non traduit(s) · 2 critique(s) en MT démo non validée). Les montants et entités ont été préservés.",
+  "counts": {
+    "translatedAnnounced": 6,
+    "untranslatedAnnounced": 38,
+    "criticalDemoMT": 2,
+    "totalAnnounced": 44
+  },
+  "markers": {
+    "langFub": 5,
+    "demoCritical": 2,
+    "untranslatedA": 0
+  },
+  "preserved": {
+    "amount250": true,
+    "amount12500": true,
+    "buttons": [
+      "EN",
+      "Effectuer un transfert",
+      "Consulter les frais"
+    ],
+    "pageErrors": [],
+    "accountOriginalOccurrenceStillPresent": true,
+    "translatedAccountOccurrence": "Numero account: CM 001 23456789 01",
+    "greetingTranslated": "hello, amina"
+  },
+  "restore": {
+    "checkedAt800ms": false,
+    "checkedAt1500msInPreviousRun": true,
+    "note": "Le contrôle à 800 ms renvoie false ; le run précédent avec 1,5 s renvoie true. À re-tester avec attente d'événement, pas un délai fixe."
+  }
+}

@@ -1,5 +1,9 @@
 # Audit des données d’entraînement — 7 novembre 2026
 
+> **Audit d’exécution du 8 novembre 2026** : voir
+> [`AUDIT_2026-11-08.md`](AUDIT_2026-11-08.md). Le présent document reste
+> limité aux données et aux licences.
+
 **Objet** : vérifier si les fichiers fournis dans `~/Downloads` peuvent servir
 à entraîner un modèle de traduction pour NkapLingua, dans le respect des
 licences du concours (MIT, CC0-1.0, CC-BY-4.0, OFL).

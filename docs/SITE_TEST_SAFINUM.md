@@ -6,6 +6,11 @@
 des 5 étapes, audit des nœuds texte/attributs, puis exécution du background
 réel avec le backend `flagship-ai` et MyMemory.
 
+> **Mise à jour du 8 novembre 2026** : ces résultats ne sont pas reproduits
+> avec le backend NLLB seul. Sur l’étape 1, l’audit réel mesure **6 segments
+> traduits sur 44** et 38 laissés en français. Voir
+> [`AUDIT_2026-11-08.md`](AUDIT_2026-11-08.md).
+
 ---
 
 ## 1. Ce qui a été testé

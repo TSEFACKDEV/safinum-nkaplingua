@@ -512,6 +512,7 @@ exigence par exigence dans [`docs/COMPLIANCE.md`](docs/COMPLIANCE.md).
 | [`docs/TRAINING_DATA_AUDIT.md`](docs/TRAINING_DATA_AUDIT.md) | audit des fichiers d’entraînement (Parquet, Bible, CSV) |
 | [`docs/EXTERNAL_RESOURCES.md`](docs/EXTERNAL_RESOURCES.md) | inventaire datasets/modèles, quatrième langue, licences |
 | [`docs/DUALA_MT.md`](docs/DUALA_MT.md) | modèle expérimental anglais → duala (CC-BY-4.0) |
+| [`docs/AUDIT_2026-11-08.md`](docs/AUDIT_2026-11-08.md) | audit d’exécution réel : site SAFINUM, NLLB, écarts et priorités |
 | [`docs/SITE_TEST_SAFINUM.md`](docs/SITE_TEST_SAFINUM.md) | test réel du site SAFINUM, couverture et qualité |
 | [`docs/NATIVE_REVIEW_AUDIT.md`](docs/NATIVE_REVIEW_AUDIT.md) | audit des relectures natives, lignes rejetées et corrections |
 | [`docs/INSTALLED_EXTENSION_TEST.md`](docs/INSTALLED_EXTENSION_TEST.md) | test de l’extension installée sur le site SAFINUM |
@@ -585,7 +586,7 @@ Conventions de commit : `feat:`, `fix:`, `docs:`, `test:`, `chore:`.
 - [x] Traduction des attributs et des options
 - [x] CI GitHub Actions
 - [x] Kit natif T1/T2, glossaire 40 termes et 70 messages du site
-- [x] Pré-évaluation mécanique des 20 phrases inédites (12 acceptées, 8 refusées)
+- [x] Pré-évaluation mécanique historique 12/20 ; **non reproduite avec NLLB réel** (1/20 production, 4/20 démo) — voir [`docs/AUDIT_2026-11-08.md`](docs/AUDIT_2026-11-08.md)
 - [ ] Remplir les packs fulfulde, ewondo et duala avec les locuteurs natifs
 - [ ] Validation native de 100 phrases finance
 - [ ] Brancher les données OLC/ERDELAP (`docs/DATA_INTEGRATION.md`)
