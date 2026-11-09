@@ -357,9 +357,43 @@ $("translateText").addEventListener("click", async () => {
           "Phrase critique (solde, frais, PIN/OTP, etc.) : aucun pack validé. " +
             "Elle reste en français ; le niveau A exige une validation native."
         );
+      } else if (String(response?.translation?.reason || "").startsWith("low_roundtrip")) {
+        setStatus(
+          "Traduction refusée : cohérence de rétro-traduction insuffisante. " +
+            "Le texte original est conservé."
+        );
+      } else if (String(response?.translation?.reason || "").startsWith("token_lost")) {
+        setStatus(
+          "Traduction refusée : un montant, un nom ou une référence a été perdu. " +
+            "Le texte original est conservé."
+        );
+      } else if (
+        response?.translation?.reason === "too_short" ||
+        response?.translation?.reason === "too_long" ||
+        response?.translation?.reason === "repetitive"
+      ) {
+        setStatus(
+          "Traduction refusée : sortie trop courte, trop longue ou répétitive. " +
+            "Le texte original est conservé."
+        );
+      } else if (
+        String(response?.translation?.reason || "").startsWith("dnt_missing")
+      ) {
+        setStatus(
+          "Traduction refusée : un terme critique (FCFA, PIN, OTP…) a été modifié. " +
+            "Le texte original est conservé."
+        );
+      } else if (
+        response?.translation?.reason === "english_leak" ||
+        response?.translation?.reason === "french_leak"
+      ) {
+        setStatus(
+          "Traduction refusée : la sortie n'est pas dans la langue cible. " +
+            "Le texte original est conservé."
+        );
       } else {
         setStatus(
-          "Traduction refusée par le contrôle de sûreté : montants, noms ou entités non préservés."
+          "Traduction refusée par le contrôle de sûreté. Le texte original est conservé."
         );
       }
       return;

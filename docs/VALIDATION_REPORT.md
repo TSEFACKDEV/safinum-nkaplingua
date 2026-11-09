@@ -78,9 +78,9 @@ sont terminés. L'import refuse une validation par une seule personne.
 
 | Langue | Phrases validées | Défauts majeurs | Adéquation /5 | Terminologie | Montants/noms préservés |
 |---|---:|---:|---:|---:|---:|
-| Fulfulde | 0 / 212 validées ; 107 `draft` | à mesurer | à mesurer | à mesurer | contrôles automatiques OK |
-| Ewondo | 0 / 130 validées ; 121 `draft`, 1 `reviewed` | à mesurer | à mesurer | à mesurer | contrôles automatiques OK |
-| Duala | 0 / 130 validées ; 121 `draft` | à mesurer | à mesurer | à mesurer | contrôles automatiques OK |
+| Fulfulde | 0 / 212 validées ; 182 `draft` | à mesurer | à mesurer | à mesurer | contrôles automatiques OK |
+| Ewondo | 0 / 130 validées ; 193 `draft`, 2 `reviewed` | à mesurer | à mesurer | à mesurer | contrôles automatiques OK |
+| Duala | 0 / 130 validées ; 196 `draft` | à mesurer | à mesurer | à mesurer | contrôles automatiques OK |
 
 ## 5. Phrases inédites — jugement natif
 

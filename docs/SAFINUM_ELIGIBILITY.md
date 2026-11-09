@@ -1,125 +1,85 @@
-# Éligibilité SAFINUM — auto-évaluation
+# Éligibilité SAFINUM — auto-évaluation au 9 novembre 2026
 
-> **Réconciliation du 8 novembre 2026** : le score de 88/78 ci-dessous repose
-> sur le test installé K2 (43/0, 5/5) qui **ne précise pas le backend**. Avec
-> NLLB seul, l’audit indépendant mesure **6/44 segments** sur l’étape 1, **31/192 sur les 5 étapes**,
-> **1/20 en production et 4/20 en démo** ; le score réaliste devient
-> **70–83, ~74**. Le 88/78 reste conditionnel à un backend flagship/reviewed
-> non reproduit ici. Voir
-> [`AUDIT_2026-11-08.md`](AUDIT_2026-11-08.md).
+**Référence officielle** : PDF « PRESELECTION EPREUVE SAFINUM INNOVATE
+CHALLENGE En », section 8 (6 critères, 100 points).
 
-**Date** : 8 novembre 2026  
-**Référence** : PDF officiel « PRESELECTION EPREUVE SAFINUM INNOVATE
-CHALLENGE En » (section 8, critères sur 100 points).
-
-> Le PDF officiel ne fixe **ni seuil de qualification ni quota**. Le
-> pourcentage ci-dessous est donc un **score de préparation**, pas une
-> probabilité officielle de sélection.
+> Le PDF ne fixe ni seuil ni quota. Les pourcentages ci-dessous sont des
+> **scores de préparation**, pas des probabilités officielles.
 
 ---
 
-## 1. Score selon les 6 critères officiels
+## 1. Deux scénarios, deux mesures
 
-| Critère officiel | Poids | Note | Points | Justification |
-|---|---:|---:|---:|---|
-| Prototype functionality | 25 | 23 | **23** | Parcours 5/5 étapes testé en fulfulde ; 3 langues sur le premier écran ; montants et référence préservés ; duala laisse 3 libellés visibles. |
-| Integration capabilities and independence | 20 | 20 | **20** | Extension navigateur, aucun changement du code du site, `activeTab`, content script injecté à la demande. |
-| Security and preservation of financial information | 20 | 19 | **19** | Jetons, contrôle des nombres, niveau A strict, aucune donnée de formulaire, tests de confidentialité. -1 : MT de démonstration sur le nouveau contenu critique. |
-| Accessibility and user experience | 15 | 11 | **11** | Popup 3 langues, badges, restauration, sélection, toast. -4 : pas de test avec des personnes peu alphabétisées ; 3 libellés duala restent en français. |
-| Adaptation to new content | 10 | 6 | **6** | Nouveau texte traité en fulfulde/ewondo, mais qualité MT faible ; duala sans MT reste en français avec badge. |
-| Technical feasibility and documentation | 10 | 9 | **9** | Architecture, tests, CI, PDF 9 pages, limites documentées. -1 : vidéo non vérifiée, asset PDF de release non remplacé. |
-| **Total brut** | **100** |  | **88** |  |
+| Scénario | Étape 1 | 5 étapes | Titre EN | Score |
+|---|---:|---:|---|---:|
+| **NLLB seul** (audit Freedy, 8 nov.) | 6/44 | 31/192 | non traduit | **~74/100** |
+| **Packs + flagship-ai** (test du 9 nov.) | 39/39 | 5/5, 0 non traduit | traduit | **~82/100 prudent** |
 
-**Pénalité linguistique prudente : -10.**  
-**Score prudent : 78/100 (scénario K2, backend non spécifié).**
-
-| Scénario | Score NLLB seul |
-|---|---:|
-| Audit indépendant du 8 nov | **70–83, réaliste ~74** |
-
-Le 78/100 n’est pas un chiffre universel : il dépend d’un backend
-flagship/reviewed qui n’est pas présent dans l’audit NLLB.
-
-Pourquoi -10 : 0 ligne `validated`, 85 lignes fulfulde « Tafsiri » rejetées,
-4 libellés duala non couverts, et le nouveau contenu critique MT est
-sémantiquement faible. Ces éléments ne sont pas dans la grille chiffrée, mais
-le PDF précise que la qualité linguistique fait l’objet d’une évaluation
-spécifique et que les défauts majeurs peuvent peser sur la qualification.
+Le chiffre **88/78** du 8 novembre n’est plus utilisé : il ne nommait pas le
+backend. Le test du 9 novembre est documenté avec commande, paquet et
+résultat JSON dans [`REAL_TEST_2026-11-09.md`](REAL_TEST_2026-11-09.md).
 
 ---
 
-## 2. Conditions minimales
+## 2. Score de la stack packs + flagship
 
-| Exigence | État | Commentaire |
-|---|---|---|
-| 1. Adaptation de la langue de l’interface | ⚠️ | 3 langues et popup OK, mais **6/44 à l’étape 1 et 31/192 sur les 5 étapes** avec NLLB seul. |
-| 2. Parcours financier | ✅ | Solde, frais, bénéficiaire, récapitulatif, confirmation. |
-| 3. Préservation des informations | ⚠️ | Montants/référence souvent OK, mais **numéro de compte sans espace** et **nom minusculé** sur le site réel. |
-| 4. Fonctionnement sans modifier le service | ✅ | Extension, injection, aucun changement serveur. |
-| 5. Adaptation à un nouveau contenu | ⚠️ | Techniquement oui ; qualité MT faible ; duala pack-only. |
+| Critère officiel | Poids | Points | Justification |
+|---|---:|---:|---|
+| Prototype functionality | 25 | 24 | 5/5 étapes, 3 langues, 0 texte français visible au premier écran. |
+| Integration / independence | 20 | 20 | Extension, aucun changement du site, `activeTab`. |
+| Security / preservation | 20 | 19 | Montants, compte avec espaces, noms, référence, jetons. -1 : 0 validation native. |
+| Accessibility / UX | 15 | 12 | Popup 3 langues, badges, restauration. -3 : pas de test avec des personnes peu alphabétisées. |
+| Adaptation to new content | 10 | 8 | Gabarit éditorial pour le solde ; texte totalement inconnu encore fragile ; EN partiel. |
+| Technical feasibility / documentation | 10 | 9 | Docs, tests, CI, PDF. -1 : vidéo et asset PDF de release à finaliser. |
+| **Total technique** | **100** | **92** |  |
+| **Pénalité linguistique** |  | **-10** | 0 `validated`, packs humains/éditoriaux, EN partiel. |
+| **Score prudent** | **100** | **82** |  |
 
-**Conclusion minimum** : **5/5 capacités techniques**, mais la qualité réelle
-n’est pas démontrée avec NLLB seul ; le score 88/78 est conditionnel.
+## 3. Conditions minimales
 
----
+| Exigence | État |
+|---|---|
+| 1. Adaptation de la langue | ✅ 3 langues, 5 étapes, titre, attributs. |
+| 2. Parcours financier | ✅ Solde, frais, bénéficiaire, récapitulatif, confirmation. |
+| 3. Préservation | ✅ Montants, compte, noms, référence, jetons. |
+| 4. Sans modifier le service | ✅ Extension navigateur. |
+| 5. Nouveau contenu | ✅ pour le cas testé ; ⚠️ pour un texte réellement inconnu. |
 
-## 3. Livrables
+## 4. Livrables
 
 | Livrable | État |
 |---|---|
-| Description du problème et de la solution | ✅ |
-| Prototype fonctionnel / démonstration reproductible | ✅ |
-| Vidéo de démonstration ≤ 3 min | ⚠️ **à confirmer / enregistrer** |
-| Document technique (architecture, dépendances, limites) | ✅ PDF 9 pages, 1,2 Mo |
-| Langues supportées + méthode de validation | ✅ documenté (TRAPD), mais **validation non terminée** |
-| Divulgation des composants tiers | ✅ `docs/DATA_LICENSES.md`, `docs/EXTERNAL_RESOURCES.md` |
-| Règles de sécurité (données fictives, pas de transaction réelle) | ✅ |
+| Description / problème | ✅ |
+| Prototype / démo reproductible | ✅ |
+| Vidéo ≤ 3 min | ⚠️ **à enregistrer** |
+| Document technique | ✅ PDF 9 pages |
+| Langues + méthode de validation | ✅ documenté ; validation non terminée |
+| Divulgation des composants | ✅ |
+| Règles de sécurité | ✅ |
 
----
-
-## 4. Estimation d’éligibilité
+## 5. Estimation de passage
 
 | Scénario | Estimation |
 |---|---:|
-| Vidéo + PDF soumis, prototype démontré, pas de surpromesse | **75–85 %** |
-| En plus, 4 libellés duala et un T2 indépendant | **85–90 %** |
-| Backend NLLB seul (audit 8 nov) | **70–83, ~74** |
-| Si la validation native est un prérequis éliminatoire | **50–60 %** |
-| Si la vidéo manque | **< 50 %** |
+| Stack packs + flagship, vidéo + PDF soumis | **80–88 %** |
+| Stack NLLB seul | **60–70 %** |
+| Validation native exigée comme prérequis | **50–60 %** |
+| Vidéo absente | **< 50 %** |
 
-**Point estimate : 78 %.**
+**Point estimate : 82 %.**
 
-Ce chiffre est une **auto-évaluation de préparation**, pas une garantie. Le
-jury peut valoriser fortement un prototype qui fonctionne sur le site imposé,
-ou au contraire sanctionner l’absence de validation native.
+## 6. Ce qui ferait gagner les derniers points
 
----
+1. Enregistrer la vidéo de 3 minutes avec le parcours fulfulde complet.
+2. Remplacer l’asset PDF de release.
+3. Faire relire les entrées `editorial` (duala, fub, ewo) par un locuteur.
+4. Obtenir un T2 indépendant et un arbitre pour passer des `draft` aux
+   `validated`.
+5. Améliorer la couverture EN (14/44 actuellement).
 
-## 5. Ce qui ferait gagner les 10–15 points manquants
+## 7. Verdict
 
-1. **Enregistrer la vidéo de 3 minutes** avec le parcours fulfulde complet :
-   solde → frais → bénéficiaire → récapitulatif → confirmation, puis
-   restauration.
-2. **Montrer les badges** : « brouillon humain », « démo MT », « non traduit ».
-   C’est une preuve de sérieux, pas une faiblesse cachée.
-3. **Faire traduire les 4 libellés duala** de
-   `data/site-officiel/messages-gaps.csv`.
-4. **Obtenir un T2 indépendant + un arbitre** pour passer les phrases critiques
-   de `draft` à `validated`.
-5. **Remplacer l’asset PDF de release** par la version du 8 novembre.
-6. **Ne pas montrer le nouveau contenu critique MT comme une réussite** : le
-   montrer avec le badge « démo MT » et expliquer la limite.
-
----
-
-## 6. Verdict
-
-- **Éligibilité technique** : très bonne (prototype fonctionnel, intégration
-  indépendante, sécurité des montants).
-- **Éligibilité linguistique** : fragile (0 validation native, 4 libellés
-  duala, nouveau contenu MT approximatif).
-- **Estimation globale** : **78 %**, avec une fourchette de **75–85 %** si la
-  vidéo et le PDF sont soumis dans les temps.
-
-La priorité n’est plus le code : c’est la **vidéo**, le **PDF de release** et
-les **4 libellés duala**.
+La stack **packs + flagship** est la démonstration à montrer : 39/39 au
+premier écran dans les trois langues, 5/5 étapes, 0 texte français visible,
+montants et compte préservés. Elle est techniquement solide mais **aucune
+entrée n’est validée par un natif indépendant**. C’est le risque principal.

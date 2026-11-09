@@ -54,9 +54,9 @@ doute, traiter le modèle ewondo comme non commercial jusqu’à clarification
 
 | Langue | Code | Source | Licence | Statut |
 |---|---|---|---|---|
-| Fulfulde | `fub` | T1 Dr. Hamadou Bello (CC-BY-4.0), T2 Ousmanou Danpullo (CC0-1.0) ; 85 lignes « Tafsiri » rejetées | CC-BY-4.0 pour les entrées T1 ; CC0-1.0 pour T2 | 107 entrées `draft`, **0 validée** |
-| Ewondo | `ewo` | T1 Dr. Jean-Baptiste Ndono (CC-BY-4.0), T2 Joseph Mballa (CC0-1.0) | CC-BY-4.0 pour les entrées T1 ; CC0-1.0 pour T2 | 122 entrées (121 `draft`, 1 `reviewed`), **0 validée** |
-| Duala | `dua` | T1 Dr. Ebongue Din (CC-BY-4.0), T2 Papa Moukoko (CC0-1.0) | CC-BY-4.0 pour les entrées T1 ; CC0-1.0 pour T2 | 121 entrées `draft`, **0 validée** |
+| Fulfulde | `fub` | T1 Dr. Hamadou Bello (CC-BY-4.0), T2 Ousmanou Danpullo (CC0-1.0) ; 85 lignes « Tafsiri » rejetées | CC-BY-4.0 pour les entrées T1 ; CC0-1.0 pour T2 | 182 entrées `draft` (172 humaines, 10 éditoriales), **0 validée** |
+| Ewondo | `ewo` | T1 Dr. Jean-Baptiste Ndono (CC-BY-4.0), T2 Joseph Mballa (CC0-1.0) | CC-BY-4.0 pour les entrées T1 ; CC0-1.0 pour T2 | 195 entrées (186 humaines, 9 éditoriales ; 193 `draft`, 2 `reviewed`), **0 validée** |
+| Duala | `dua` | T1 Dr. Ebongue Din (CC-BY-4.0), T2 Papa Moukoko (CC0-1.0) | CC-BY-4.0 pour les entrées T1 ; CC0-1.0 pour T2 | 196 entrées `draft` (186 humaines, 10 éditoriales), **0 validée** |
 
 Yemba, medumba, bassa et ghomala' sont retirés du prototype (voir
 `tasks/klein.md`, K10) ; leurs feuilles de traduction ne sont plus maintenues.

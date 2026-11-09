@@ -24,6 +24,7 @@ REVIEW_LEVELS = {
     "second-translator-fallback",
     "reused-message",
     "composed-template",
+    "lexicon-assisted",
     "independent",
     "validated",
 }
@@ -97,10 +98,13 @@ def check_pack(path: Path) -> list[str]:
                 f"{path.name}#{index}: licence {license_id!r} absente ou "
                 "non autorisée"
             )
-        if provenance != "human":
+        allowed_provenance = (
+            {"human"} if status == "validated" else {"human", "editorial"}
+        )
+        if provenance not in allowed_provenance:
             errors.append(
                 f"{path.name}#{index}: provenance {provenance!r} refusée "
-                "(attendu human)"
+                f"(attendu {sorted(allowed_provenance)})"
             )
         if not reviewed_at:
             errors.append(f"{path.name}#{index}: reviewedAt manquant")

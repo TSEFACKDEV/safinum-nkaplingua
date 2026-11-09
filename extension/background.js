@@ -768,6 +768,7 @@ async function translateWithPack(segments, targetSpec, options = {}) {
       reason: validation.reason,
       packStatus: entry.status,
       reviewLevel: entry.reviewLevel || null,
+      provenance: entry.provenance || null,
       humanReviewed: entry.status !== "validated",
       packRaw: !targetHasTokens,
       criticality: segment.criticality

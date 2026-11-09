@@ -33,8 +33,8 @@ Projet préparé pour le **SAFINUM Innovate Challenge 2026** (Yaoundé,
 
 | Élément | État vérifié |
 |---|---|
-| Pack fulfulde | **107 entrées** `draft`, **0 validée** ; 85 lignes « Tafsiri » rejetées |
-| Packs ewondo / duala | **122** et **121 entrées**, **0 validée** (1 `reviewed` en ewondo) |
+| Pack fulfulde | **182 entrées** (FR+EN), **0 validée** ; 85 lignes « Tafsiri » rejetées |
+| Packs ewondo / duala | **195** et **196 entrées**, **0 validée** (2 `reviewed` en ewondo) |
 | Glossaire finance | 40 termes, **0 validé** |
 | Audio | **0 enregistrement** ; 15 phrases sans montant prêtes |
 | MT duala (pilote) | **échoué** : répétitions, non utilisable pour le niveau A |
@@ -199,9 +199,9 @@ Moteur — flagship-ai, NLLB, MyMemory ou pack
 
 | Langue | Code | Moteur | Ressources connues | État |
 |---|---|---|---|---|
-| Fulfulde (Adamawa) | `fub` | `flagship-ai` + NLLB secours + pack | Common Voice ASR ; 1 303 enregistrements TTS | 107 entrées de pack, **0 validée** (brouillons humains) |
-| Ewondo | `ewo` | `flagship-ai` brouillon + pack | Common Voice 27.0 : 14,36 h, 31 voix ; Ewondo-ASR ~3 h 11 | 122 entrées de pack, **0 validée** (121 draft, 1 reviewed) |
-| Duala | `dua` | Pack communautaire | Common Voice 27.0 (heures à vérifier) | 121 entrées de pack, **0 validée** (brouillons humains) |
+| Fulfulde (Adamawa) | `fub` | `flagship-ai` + NLLB secours + pack | Common Voice ASR ; 1 303 enregistrements TTS | 182 entrées de pack, **0 validée** (brouillons humains/éditoriaux) |
+| Ewondo | `ewo` | `flagship-ai` brouillon + pack | Common Voice 27.0 : 14,36 h, 31 voix ; Ewondo-ASR ~3 h 11 | 195 entrées de pack, **0 validée** (193 draft, 2 reviewed) |
+| Duala | `dua` | Pack communautaire | Common Voice 27.0 (heures à vérifier) | 196 entrées de pack, **0 validée** (brouillons humains/éditoriaux) |
 
 Le **kit natif TRAPD** est prêt dans [`data/review/`](data/review/) :
 classeurs T1/T2, fiche d’arbitrage et 20 phrases inédites. Aucune traduction
@@ -517,6 +517,7 @@ exigence par exigence dans [`docs/COMPLIANCE.md`](docs/COMPLIANCE.md).
 | [`docs/NATIVE_REVIEW_AUDIT.md`](docs/NATIVE_REVIEW_AUDIT.md) | audit des relectures natives, lignes rejetées et corrections |
 | [`docs/INSTALLED_EXTENSION_TEST.md`](docs/INSTALLED_EXTENSION_TEST.md) | test de l’extension installée sur le site SAFINUM |
 | [`docs/SAFINUM_ELIGIBILITY.md`](docs/SAFINUM_ELIGIBILITY.md) | auto-évaluation d’éligibilité selon les critères officiels |
+| [`docs/REAL_TEST_2026-11-09.md`](docs/REAL_TEST_2026-11-09.md) | test packs + flagship, commande et preuves |
 | [`docs/DATA_PERMISSIONS.md`](docs/DATA_PERMISSIONS.md) | modèles de demande d’autorisation |
 | [`docs/VIDEO_SCRIPT.md`](docs/VIDEO_SCRIPT.md) | script de la vidéo de 3 minutes |
 | [`docs/SUBMISSION_CHECKLIST.md`](docs/SUBMISSION_CHECKLIST.md) | checklist avant soumission |

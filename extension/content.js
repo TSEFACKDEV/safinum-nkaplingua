@@ -94,6 +94,19 @@
       vertical-align: middle;
       white-space: nowrap;
     }
+    [data-nk-human-reviewed="editorial"]::after {
+      content: "brouillon éditorial";
+      display: inline-block;
+      margin-left: 6px;
+      padding: 0 6px;
+      border: 1px solid #7c3aed;
+      border-radius: 999px;
+      background: #ede9fe;
+      color: #5b21b6;
+      font: 500 10px/1.6 system-ui, -apple-system, "Segoe UI", sans-serif;
+      vertical-align: middle;
+      white-space: nowrap;
+    }
   `;
 
   function ensureBadgeStyle() {
@@ -140,6 +153,9 @@
     "FINAKA"
   ];
 
+  const DATE_ABBR_RE =
+    /^\d{1,2}\s+(janv|févr|mars|avr|mai|juin|juil|août|sept|oct|nov|déc)\.?\s+\d{4}$/i;
+
   const ATTRIBUTE_SELECTOR = [
     "[title]",
     "[aria-label]",
@@ -183,7 +199,15 @@
       "chez|vers|contact)" +
       "\\s*:?\\s+" +
       "([\\p{Lu}][\\p{L}'’-]+(?:\\s+[\\p{Lu}][\\p{L}'’-]+){0,2})",
-    "gu"
+    "giu"
+  );
+
+  const NAME_VOCATIVE_RE = new RegExp(
+    "(?:^|[^\\p{L}])" +
+      "(bonjour|bonsoir|salut|hello|hi|coucou|cher|chère|dear)" +
+      "\\s*[,:-]?\\s+" +
+      "([\\p{Lu}][\\p{L}'’-]+(?:\\s+[\\p{Lu}][\\p{L}'’-]+){0,2})",
+    "giu"
   );
 
   const NAME_SEQUENCE_RE =
@@ -274,6 +298,10 @@
     }
 
     if (element.closest("a") && /^https?:\/\//i.test(text.trim())) return true;
+
+    // Les dates au format « 05 nov. 2026 » restent telles quelles : ce sont
+    // des données, pas un libellé à traduire.
+    if (DATE_ABBR_RE.test(text.trim())) return true;
 
     return false;
   }
@@ -391,6 +419,15 @@
     return words.some((word) => word.length >= 2);
   }
 
+  function capitalizeNamePrefix(candidate) {
+    const kept = [];
+    for (const word of String(candidate || "").split(/\s+/)) {
+      if (!/^\p{Lu}/u.test(word)) break;
+      kept.push(word);
+    }
+    return kept.join(" ");
+  }
+
   function redact(text) {
     const tokens = [];
     let value = String(text);
@@ -424,10 +461,15 @@
 
     // Noms de bénéficiaires et personnes : après un mot déclencheur.
     value = value.replace(NAME_TRIGGER_RE, (match, trigger, candidate) => {
-      if (!looksLikeName(candidate)) return match;
-      const start = match.indexOf(candidate);
+      const originalCandidate = candidate;
+      candidate = capitalizeNamePrefix(candidate);
+      if (!/^\p{Lu}/u.test(candidate) || !looksLikeName(candidate)) {
+        return match;
+      }
+      const start = match.indexOf(originalCandidate);
       if (start < 0) return match;
-      return `${match.slice(0, start)}${addToken("NAME", candidate)}`;
+      const end = start + candidate.length;
+      return `${match.slice(0, start)}${addToken("NAME", candidate)}${match.slice(end)}`;
     });
 
     // Séquences de deux mots capitalisés ou plus (Jean Pierre, Marie-Claire).
@@ -440,7 +482,7 @@
     // Nombres, montants, numéros de compte, téléphones.
     // On protège tous les chiffres : un montant ne doit jamais changer.
     value = value.replace(
-      /\b\d{1,3}(?:[ \u00A0]\d{3})+(?:[.,]\d+)?\b|\b\d+(?:[.,]\d+)?\b/g,
+      /\b\d+(?:[ \u00A0]\d+)+(?:[.,]\d+)?\b|\b\d+(?:[.,]\d+)?\b/g,
       (match) => addToken("NUM", match)
     );
 
@@ -631,10 +673,16 @@
         return;
       }
 
+      // Le titre peut être dans une autre langue que la page (site FR +
+      // bascule EN). On le traduit séparément pour ne pas appliquer la
+      // détection globale de la page à un titre français.
+      const titleItem = items.find((item) => item.kind === "title") || null;
+      const bodyItems = items.filter((item) => item.kind !== "title");
+
       const sourceInfo = detectSourceLanguage(pageText());
       const source = sourceInfo.code === "en" ? "en" : "fr";
 
-      const segments = items.map((item) => {
+      const segments = bodyItems.map((item) => {
         const { text, tokens } = redact(item.value || "");
         return {
           id: item.id,
@@ -650,6 +698,48 @@
       let demoCriticalCount = 0;
       let humanReviewedCount = 0;
 
+      if (titleItem) {
+        const titleRedaction = redact(titleItem.value || "");
+        // Ne pas utiliser le hint `lang` de la page : justement, le titre
+        // peut être dans l'autre langue (site FR basculé en EN).
+        const titleInfo = LANG.detectLanguage
+          ? LANG.detectLanguage(titleItem.value || "", "")
+          : { code: "fr" };
+        const titleSource = titleInfo.code === "en" ? "en" : "fr";
+        try {
+          const titleResponse = await api.runtime.sendMessage({
+            type: "NK_TRANSLATE_TEXT",
+            target: targetCode,
+            source: titleSource,
+            demo: DEMO_PAGE,
+            text: titleRedaction.text
+          });
+          if (titleResponse?.translation?.ok) {
+            const restoredTitle = restoreTokens(
+              titleResponse.translation.text,
+              titleRedaction.tokens
+            );
+            if (restoredTitle) {
+              applyItemTranslation(titleItem, restoredTitle, targetCode);
+              translatedCount += 1;
+              provider = titleResponse.provider || provider;
+              if (titleResponse.translation.demoCritical) {
+                demoCriticalCount += 1;
+              }
+              if (titleResponse.translation.humanReviewed) {
+                humanReviewedCount += 1;
+              }
+            } else {
+              flaggedCount += 1;
+            }
+          } else {
+            flaggedCount += 1;
+          }
+        } catch {
+          flaggedCount += 1;
+        }
+      }
+
       for (const batch of chunks(segments, BATCH_SIZE)) {
         const response = await api.runtime.sendMessage({
           type: "NK_TRANSLATE_SEGMENTS",
@@ -662,12 +752,23 @@
           }))
         });
 
-        if (!response || response.error) {
+        if (!response) {
           showToast(
-            response?.error ||
-              "Service de traduction indisponible. Vérifiez la connexion ou lancez le backend local."
+            "Service de traduction indisponible. Vérifiez la connexion ou lancez le backend local."
           );
           break;
+        }
+        const batchTranslations = Array.isArray(response.translations)
+          ? response.translations
+          : [];
+        if (response.error && batchTranslations.length === 0) {
+          showToast(response.error);
+          break;
+        }
+        if (response.error) {
+          // Le pack a déjà répondu : on applique ses hits avant de signaler
+          // que le moteur MT n'a pas pu compléter.
+          showToast(response.error);
         }
 
         provider = response.provider || provider;
@@ -721,9 +822,16 @@
             // l'écran ; le récapitulatif compte toutes les entrées humaines.
             if (result.criticality === "A" && segment.item.element) {
               ensureBadgeStyle();
+              const packLabel =
+                result.provenance === "editorial" ||
+                result.reviewLevel === "lexicon-assisted"
+                  ? "editorial"
+                  : result.packStatus === "reviewed"
+                    ? "reviewed"
+                    : "draft";
               segment.item.element.setAttribute(
                 "data-nk-human-reviewed",
-                result.packStatus === "reviewed" ? "reviewed" : "draft"
+                packLabel
               );
             }
           }
@@ -750,7 +858,7 @@
       const engine =
         provider === "pack"
           ? humanReviewedCount
-            ? "pack humain (non validé)"
+            ? "pack non validé"
             : "pack communautaire"
           : provider === "flagship"
             ? "flagship-ai (brouillon)"
@@ -787,7 +895,7 @@
               ? ` · ${demoCriticalCount} critique(s) en MT démo non validée`
               : "") +
             (humanReviewedCount
-              ? ` · ${humanReviewedCount} relecture(s) humaine(s) non validée(s)`
+              ? ` · ${humanReviewedCount} entrée(s) de pack non validée(s)`
               : "") +
             "). Les montants et entités ont été préservés."
         );
@@ -1048,7 +1156,7 @@
       const note = document.createElement("p");
       note.className = "note";
       note.textContent =
-        `Pack humain non validé (${translationMeta.packStatus || "draft"}` +
+        `Pack non validé (${translationMeta.packStatus || "draft"}` +
         (translationMeta.reviewLevel
           ? `, ${translationMeta.reviewLevel}`
           : "") +

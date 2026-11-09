@@ -2758,3 +2758,80 @@ mot `json`) avec les champs ci-dessous. Exemple de structure, en indentation :
   "blockers": []
 }
 ```
+
+## 2026-11-09T11:30:00+01:00 — Klein — K2 — in_progress
+
+```json
+{
+  "timestamp": "2026-11-09T11:30:00+01:00",
+  "person": "Klein",
+  "branch": "klein",
+  "task": "K2",
+  "status": "in_progress",
+  "summary": "Rebasé sur origin/develop 2f39537. Appliqué les correctifs J0-J3 : préservation du compte (un seul jeton, espaces restaurés), protection des prénoms après salutation, réparation des jetons NAME_0/[[0]] côté serveur, titre traduit séparément en FR/EN, taxonomie d'erreur popup, application des hits pack même si la MT échoue. Ajout d'une mémoire bilingue FR/EN aux packs, de gabarits éditoriaux pour les 4 libellés duala et des libellés fub/ewo manquants. Test packs + flagship, cloud désactivé : 39/39 segments traduits au premier écran dans les 3 langues, 0 MT critique, 0 non traduit, compte CM 001 2345 6789 01 préservé, parcours fulfulde 5/5, nouveau contenu « Jawdindi ko 25 000 FCFA. », titre EN traduit. Aucune entrée validée.",
+  "files": [
+    "extension/languages.js",
+    "extension/content.js",
+    "extension/background.js",
+    "extension/popup.js",
+    "server/app.py",
+    "data/site-officiel/messages-extra.csv",
+    "data/language-packs/import/fub.csv",
+    "data/language-packs/import/ewo.csv",
+    "data/language-packs/import/dua.csv",
+    "extension/language-packs/fub.json",
+    "extension/language-packs/ewo.json",
+    "extension/language-packs/dua.json",
+    "scripts/build-reviewed-packs.py",
+    "scripts/check-language-data.py",
+    "scripts/check-language-packs.py",
+    "scripts/check-pack-collisions.py",
+    "scripts/import-language-pack.py",
+    "tests/preservation.test.js",
+    "tests/title.test.js",
+    "tests/token-repair.test.py",
+    "tests/site-demo.e2e.js",
+    "docs/REAL_TEST_2026-11-09.md",
+    "docs/INSTALLED_EXTENSION_TEST.md",
+    "docs/SAFINUM_ELIGIBILITY.md",
+    "docs/test-results/final-packs-flagship-2026-11-09.json",
+    "README.md",
+    "tasks/EVOLUTION.md"
+  ],
+  "tests": [
+    {
+      "command": "NK_MOCK=1 server/.venv/bin/python -m pytest -q server/test_api.py",
+      "result": "pass",
+      "note": "30 tests"
+    },
+    {
+      "command": "NK_MOCK=1 server/.venv/bin/python tests/api.robust.py",
+      "result": "pass",
+      "note": "17/17"
+    },
+    {
+      "command": "node tests/preservation.test.js && node tests/title.test.js && node tests/pipeline.e2e.js --mode=all && node tests/site-demo.e2e.js",
+      "result": "pass",
+      "note": "compte, prénom, nom, montant, titre FR sur page EN, pack/revue/edge, badges"
+    },
+    {
+      "command": "server/.venv/bin/python tests/token-repair.test.py",
+      "result": "pass",
+      "note": "NAME_0 et [[0]] réparés sans invention"
+    },
+    {
+      "command": "Chrome headless + extension installée + packs + flagship-ai, cloud désactivé",
+      "result": "pass",
+      "note": "39/39 fub, ewo, dua ; 0 MT critique ; 0 non traduit ; compte avec espaces ; parcours 5/5 ; nouveau contenu éditorial ; titre EN traduit"
+    }
+  ],
+  "evidence": "docs/REAL_TEST_2026-11-09.md ; docs/test-results/final-packs-flagship-2026-11-09.json ; docs/INSTALLED_EXTENSION_TEST.md",
+  "next": "Enregistrer la vidéo de 3 min, remplacer l'asset PDF de release, faire relire les entrées editorial, obtenir un T2 indépendant et un arbitre",
+  "blockers": [
+    "0 entrée validée : les packs restent humains/éditoriaux",
+    "couverture EN partielle (14/44)",
+    "vidéo et asset PDF de release à finaliser",
+    "validation native indépendante absente"
+  ]
+}
+```

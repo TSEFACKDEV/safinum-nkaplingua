@@ -18,7 +18,7 @@ Montrer que NkapLingua :
 - Voix off : français, claire, sans jargon
 - Sous-titres : recommandés
 - Aucune donnée réelle, aucun compte bancaire réel
-- Page utilisée : `http://127.0.0.1:8000/demo` (FINAKA, fictive)
+- Page utilisée : `https://safinum.cm/hackathon-test` (données fictives)
 
 ---
 
@@ -37,7 +37,7 @@ Montrer que NkapLingua :
 
 ### 0:15 — 0:35 · Le problème
 
-**Écran** : page FINAKA en français, montrer le solde, les frais, les conditions.
+**Écran** : page SAFINUM en français, montrer le solde, les frais, le bénéficiaire.
 
 **Voix off** :
 
@@ -55,12 +55,13 @@ Montrer que NkapLingua :
 > formulaire, les mots de passe et les codes OTP. Elle remplace les montants
 > par des jetons avant l’envoi, puis les restaure à l’identique. »
 
-**Écran** : montrer la page traduite en fulfulde.
+**Écran** : montrer la page traduite en fulfulde, puis basculer en ewondo et duala.
 
 ### 1:00 — 1:25 · Préservation des informations
 
-**Action** : pointer le solde `125 000 FCFA`, les frais `1 000 FCFA`, le
-bénéficiaire `Aïcha`, le total `26 000 FCFA`.
+**Action** : pointer le solde `250 000 FCFA`, les frais `25 000 FCFA`, le
+bénéficiaire `Jean-Paul Mbarga`, le total `225 000 FCFA`, le compte
+`CM 001 2345 6789 01`.
 
 **Voix off** :
 
@@ -87,8 +88,8 @@ confirmation, puis le message d’erreur / avertissement de sécurité.
 
 ### 1:50 — 2:15 · Contenu inédit
 
-**Action** : ouvrir le popup, coller un paragraphe court que le jury choisit,
-cliquer sur **Traduire ce texte**.
+**Action** : ajouter `Le solde est de 25 000 FCFA.` dans la page ; montrer
+`Jawdindi ko 25 000 FCFA.` avec le badge « brouillon éditorial ».
 
 **Voix off** :
 
@@ -115,11 +116,10 @@ phrase courte déjà chargée.
 
 **Voix off** :
 
-> « flagship-ai et NLLB sont des brouillons. Les phrases courtes sont plus
-> fiables ; les phrases longues doivent encore être validées par un locuteur
-> natif. Les phrases critiques sans pack restent en français. C’est pourquoi
-> nous avons un protocole de validation et un contrôle de préservation des
-> montants. »
+> « Les packs sont des brouillons humains ou éditoriaux : aucune phrase n’est
+> encore validée par un panel natif indépendant. Le badge le dit clairement.
+> flagship-ai et NLLB restent des secours. Les montants, le compte et les noms
+> sont préservés ; les phrases critiques sans pack restent en français. »
 
 ### 2:55 — 3:00 · Conclusion
 
@@ -133,10 +133,10 @@ phrase courte déjà chargée.
 ## Checklist d’enregistrement
 
 - [ ] Extension seule testée avec les packs (le cloud ne couvre pas l’ewondo)
-- [ ] Backend local lancé pour le mode 100 % local
+- [ ] Backend local lancé : `NK_FLAGSHIP_MT=auto` (commande dans `docs/REAL_TEST_2026-11-09.md`)
 - [ ] Modèles flagship-ai/NLLB préchauffés si mode local
 - [ ] Extension chargée dans Chrome/Firefox
-- [ ] Page `http://127.0.0.1:8000/demo` ouverte
+- [ ] Page `https://safinum.cm/hackathon-test` ouverte
 - [ ] Zoom navigateur à 100 %
 - [ ] Notifications système coupées
 - [ ] Aucune donnée personnelle visible

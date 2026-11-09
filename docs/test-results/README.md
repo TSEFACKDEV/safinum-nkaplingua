@@ -25,7 +25,7 @@ Voir l’analyse complète : [`docs/AUDIT_2026-11-08.md`](../AUDIT_2026-11-08.md
 | `pipeline-unseen.json` | `node tests/pipeline.e2e.js --mode=unseen` | **historique bloqué** : remplacé par le test réel |
 | `pipeline-demo.json` | `node tests/pipeline.e2e.js --mode=demo` | **historique bloqué** : remplacé par le test réel |
 | `native-review-audit.json` / `.csv` | `python3 scripts/audit-native-reviews.py` | **472 lignes auditées**, 85 « Tafsiri » rejetées |
-| `reviewed-packs.json` | `python3 scripts/build-reviewed-packs.py` | **0 validée**, 107/122/121 entrées |
+| `reviewed-packs.json` | `python3 scripts/build-reviewed-packs.py` | **0 validée**, 182/195/196 entrées |
 
 ## Ce que ces résultats prouvent
 
