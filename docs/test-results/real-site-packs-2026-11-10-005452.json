@@ -1,0 +1,126 @@
+{
+  "startedAt": "2026-11-09T23:54:52.911Z",
+  "siteUrl": "https://safinum.cm/hackathon-test",
+  "browser": "chrome-for-testing (playwright)",
+  "steps": {
+    "step1": {
+      "counts": {
+        "fub": 39,
+        "translated": 39,
+        "untranslated": 0,
+        "demoCritical": 0,
+        "toastTranslated": 40
+      },
+      "before": {
+        "title": "Environnement de test — Hackathon SAFINUM Innovate 2026 - Safinum"
+      },
+      "after": {
+        "title": "Nokku ƴeewndo — Hackathon SAFINUM Innovate 2026 - Safinum",
+        "body": "Nokku ƴeewndo — kabaaru fenaande, alaa gollal goonga.\nPorotokol ƴeewndo\nRutto to hackathon\n\nSafinum Pay\n\nBanke e internet\n\nEN\nAN\nAmina Ngo Bell\n1\njawdindi\n2\nNjoɓdi\n3\nKeɓoowo\n4\nKoolol\n5\nteeŋtingol\n\nASAAKU MA\n\nJam tiiɗi, Amina.\n\nYiy jawdindi ma, ngona e kisal ngam nelugol kaalis.\n\nJAWDINDI NDI YAMI\n\n250 000 FCFA\n\nLimre asaaku : CM 001 2345 6789 01\nAsaaku jooni\nNelu kaalis\nYiy njoɓdi\nGOLLE KAALIS ƁENNUƊE\n\nNjoɓdi julaajo\n\n05 nov. 2026\n\n-12 500 FCFA\n\nNjoɓdi lebbi naatii\n\n04 nov. 2026\n\n+180 000 FCFA\n\nKaalis naatii\n\n02 nov. 2026\n\n+50 000 FCFA\n\nNjoɓdi elektrik\n\n31 oct. 2026\n\n-7 500 FCFA\n\nASAAKU MA\nAN\n\nAmina Ngo Bell\n\nAsaaku jooni\n\nJAWDINDI NDI YAMI\n\n250 000 FCFA\n\nCM 001 2345 6789 01\n\nKisal\n\nTeeŋtu innde e limre keɓoowo ko adii yoɓgol fof.\n\nTesku kisal\n\nSafinum Pay — nokku ƴeewndo. Huutoraaka kabaaru hoore ma goonga."
+      },
+      "toast": "Mode démo SAFINUM (données fictives) — 40 segment(s) traduits en Fulfulde (Adamawa) (source : français, 86 % · pack non validé · 30 entrée(s) de pack non validée(s)). Les montants et entités ont été préservés.",
+      "failures": [],
+      "restored": true
+    },
+    "step2": {
+      "counts": {
+        "fub": 38,
+        "translated": 38,
+        "untranslated": 0,
+        "demoCritical": 0,
+        "toastTranslated": 39
+      },
+      "before": {
+        "title": "Environnement de test — Hackathon SAFINUM Innovate 2026 - Safinum"
+      },
+      "after": {
+        "title": "Nokku ƴeewndo — Hackathon SAFINUM Innovate 2026 - Safinum",
+        "body": "Nokku ƴeewndo — kabaaru fenaande, alaa gollal goonga.\nPorotokol ƴeewndo\nRutto to hackathon\n\nSafinum Pay\n\nBanke e internet\n\nEN\nAN\nAmina Ngo Bell\n1\njawdindi\n2\nNjoɓdi\n3\nKeɓoowo\n4\nKoolol\n5\nteeŋtingol\n\nNJOƁDI NAWGOL\n\nSuus sariya nawgol e kaalis. Njoɓdi limtetee ko e laawol gollingol.\nSUUS GOLLAL\nAsaaku Safinum\nMobile Money\nBanke goɗɗo\n\nNawgol jaawngol ko yoɓataa\n\nKAALIS MO NELAƊEN\nFCFA\nNjoɓdi\nKo yoɓataa\n0 FCFA\nKaalis mo yoɓetee fof\n25 000 FCFA\nJawdindi ɓaawo gollal\n225 000 FCFA\nRutto\nWontu yeeso\nASAAKU MA\nAN\n\nAmina Ngo Bell\n\nAsaaku jooni\n\nJAWDINDI NDI YAMI\n\n250 000 FCFA\n\nCM 001 2345 6789 01\n\nKisal\n\nTeeŋtu innde e limre keɓoowo ko adii yoɓgol fof.\n\nTesku kisal\n\nSafinum Pay — nokku ƴeewndo. Huutoraaka kabaaru hoore ma goonga."
+      },
+      "toast": "Mode démo SAFINUM (données fictives) — 39 segment(s) traduits en Fulfulde (Adamawa) (source : français, 86 % · pack non validé · 31 entrée(s) de pack non validée(s)). Les montants et entités ont été préservés.",
+      "failures": [],
+      "restored": true
+    },
+    "step3": {
+      "counts": {
+        "fub": 31,
+        "translated": 31,
+        "untranslated": 0,
+        "demoCritical": 0,
+        "toastTranslated": 32
+      },
+      "before": {
+        "title": "Environnement de test — Hackathon SAFINUM Innovate 2026 - Safinum"
+      },
+      "after": {
+        "title": "Nokku ƴeewndo — Hackathon SAFINUM Innovate 2026 - Safinum",
+        "body": "Nokku ƴeewndo — kabaaru fenaande, alaa gollal goonga.\nPorotokol ƴeewndo\nRutto to hackathon\n\nSafinum Pay\n\nBanke e internet\n\nEN\nAN\nAmina Ngo Bell\n1\njawdindi\n2\nNjoɓdi\n3\nKeɓoowo\n4\nKoolol\n5\nteeŋtingol\n\nKEƁOOWO\n\nLonndu kabaaru keɓoowo. Teeŋtu limre nde ko adii yoɓgol.\n\nOon keɓoowo huutoraaka e ndii asaaku. Teeŋtu limre ko adii yeeso.\n\nINNDE KEƁOOWO\nLIMRE CINNDEL\nDALILLA NAWGOL\nSARIYA (SO INA HAANI)\nMi teeŋtii innde e limre keɓoowo.\nRutto\nWontu yeeso\nASAAKU MA\nAN\n\nAmina Ngo Bell\n\nAsaaku jooni\n\nJAWDINDI NDI YAMI\n\n250 000 FCFA\n\nCM 001 2345 6789 01\n\nKisal\n\nTeeŋtu innde e limre keɓoowo ko adii yoɓgol fof.\n\nTesku kisal\n\nSafinum Pay — nokku ƴeewndo. Huutoraaka kabaaru hoore ma goonga."
+      },
+      "toast": "Mode démo SAFINUM (données fictives) — 32 segment(s) traduits en Fulfulde (Adamawa) (source : français, 89 % · pack non validé · 27 entrée(s) de pack non validée(s)). Les montants et entités ont été préservés.",
+      "failures": [],
+      "restored": true
+    },
+    "step4": {
+      "counts": {
+        "fub": 39,
+        "translated": 39,
+        "untranslated": 0,
+        "demoCritical": 0,
+        "toastTranslated": 40
+      },
+      "before": {
+        "title": "Environnement de test — Hackathon SAFINUM Innovate 2026 - Safinum"
+      },
+      "after": {
+        "title": "Nokku ƴeewndo — Hackathon SAFINUM Innovate 2026 - Safinum",
+        "body": "Nokku ƴeewndo — kabaaru fenaande, alaa gollal goonga.\nPorotokol ƴeewndo\nRutto to hackathon\n\nSafinum Pay\n\nBanke e internet\n\nEN\nAN\nAmina Ngo Bell\n1\njawdindi\n2\nNjoɓdi\n3\nKeɓoowo\n4\nKoolol\n5\nteeŋtingol\n\nKOOLOL\n\nTeeŋtu kabaaru ko adii yoɓgol nawgol.\nKaalis\n25 000 FCFA\nNjoɓdi\n0 FCFA\nKaalis yoɓaaɗo fof\n25 000 FCFA\nKeɓoowo\nJean-Paul Mbarga\nCinndel\n+237 6 99 12 34 56\nTiinde\nSAF-2026-1WP6UX\nGollal\nAsaaku Safinum\nMi teeŋtii kabaaru les ɗoo ko goonga.\nWaylu\nTeeŋtu nawgol\nASAAKU MA\nAN\n\nAmina Ngo Bell\n\nAsaaku jooni\n\nJAWDINDI NDI YAMI\n\n250 000 FCFA\n\nCM 001 2345 6789 01\n\nKisal\n\nTeeŋtu innde e limre keɓoowo ko adii yoɓgol fof.\n\nTesku kisal\n\nSafinum Pay — nokku ƴeewndo. Huutoraaka kabaaru hoore ma goonga."
+      },
+      "toast": "Mode démo SAFINUM (données fictives) — 40 segment(s) traduits en Fulfulde (Adamawa) (source : français, 86 % · pack non validé · 30 entrée(s) de pack non validée(s)). Les montants et entités ont été préservés.",
+      "failures": [],
+      "restored": true
+    },
+    "step5": {
+      "counts": {
+        "fub": 36,
+        "translated": 36,
+        "untranslated": 0,
+        "demoCritical": 0,
+        "toastTranslated": 37
+      },
+      "before": {
+        "title": "Environnement de test — Hackathon SAFINUM Innovate 2026 - Safinum"
+      },
+      "after": {
+        "title": "Nokku ƴeewndo — Hackathon SAFINUM Innovate 2026 - Safinum",
+        "body": "Nokku ƴeewndo — kabaaru fenaande, alaa gollal goonga.\nPorotokol ƴeewndo\nRutto to hackathon\n\nSafinum Pay\n\nBanke e internet\n\nEN\nAN\nAmina Ngo Bell\n1\njawdindi\n2\nNjoɓdi\n3\nKeɓoowo\n4\nKoolol\n5\nteeŋtingol\nNawgol naatii\n\nNawgol ma nelaama e jam.\n\nTiinde\nSAF-2026-1WP6UX\nKaalis\n25 000 FCFA\nNjoɓdi\n0 FCFA\nKaalis yoɓaaɗo fof\n25 000 FCFA\nKeɓoowo\nJean-Paul Mbarga\nTollirgol\nNasara\nNawgol hesrol\nASAAKU MA\nAN\n\nAmina Ngo Bell\n\nAsaaku jooni\n\nJAWDINDI NDI YAMI\n\n250 000 FCFA\n\nCM 001 2345 6789 01\n\nKisal\n\nTeeŋtu innde e limre keɓoowo ko adii yoɓgol fof.\n\nTesku kisal\n\nSafinum Pay — nokku ƴeewndo. Huutoraaka kabaaru hoore ma goonga."
+      },
+      "toast": "Mode démo SAFINUM (données fictives) — 37 segment(s) traduits en Fulfulde (Adamawa) (source : français, 81 % · pack non validé · 27 entrée(s) de pack non validée(s)). Les montants et entités ont été préservés.",
+      "failures": [],
+      "restored": true
+    }
+  },
+  "en": {
+    "counts": {
+      "fub": 36,
+      "translated": 36,
+      "untranslated": 0,
+      "demoCritical": 0,
+      "toastTranslated": 37
+    },
+    "before": {
+      "title": "Environnement de test — Hackathon SAFINUM Innovate 2026 - Safinum"
+    },
+    "after": {
+      "title": "Nokku ƴeewndo — Hackathon SAFINUM Innovate 2026 - Safinum",
+      "body": "Nokku ƴeewndo — kabaaru fenaande, alaa gollal goonga.\nPorotokol ƴeewndo\nBack to hackathon\n\nSafinum Pay\n\nBanke e internet\n\nFR\nAN\nAmina Ngo Bell\n1\nBalance\n2\nFees\n3\nKeɓoowo\n4\nKoolol\n5\nteeŋtingol\n\nASAAKU MA\n\nJam tiiɗi, Amina.\n\nYiy jawdindi ma, ngona e kisal ngam nelugol kaalis.\n\nJAWDINDI NDI YAMI\n\n250,000 FCFA\n\nLimre asaaku : CM 001 2345 6789 01\nAsaaku jooni\nNelu kaalis\nYiy njoɓdi\nGOLLE KAALIS ƁENNUƊE\n\nNjoɓdi julaajo\n\nNov 5, 2026\n\n-12,500 FCFA\n\nNjoɓdi lebbi naatii\n\nNov 4, 2026\n\n+180,000 FCFA\n\nKaalis naatii\n\nNov 2, 2026\n\n+50,000 FCFA\n\nNjoɓdi elektrik\n\nOct 31, 2026\n\n-7,500 FCFA\n\nASAAKU MA\nAN\n\nAmina Ngo Bell\n\nAsaaku jooni\n\nJAWDINDI NDI YAMI\n\n250,000 FCFA\n\nCM 001 2345 6789 01\n\nKisal\n\nTeeŋtu innde e limre keɓoowo ko adii yoɓgol fof.\n\nTesku kisal\n\nSafinum Pay — nokku ƴeewndo. Huutoraaka kabaaru hoore ma goonga."
+    },
+    "toast": "Mode démo SAFINUM (données fictives) — 37 segment(s) traduits en Fulfulde (Adamawa) (source : anglais, 89 % · pack non validé · 7 non traduit(s) · 27 entrée(s) de pack non validée(s)). Les montants et entités ont été préservés.",
+    "failures": [],
+    "restored": true,
+    "label": "en-step1"
+  },
+  "errors": [],
+  "status": "pass",
+  "frToastTotal": 188,
+  "finishedAt": "2026-11-09T23:55:26.991Z"
+}
