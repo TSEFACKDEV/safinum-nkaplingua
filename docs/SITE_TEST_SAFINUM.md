@@ -6,11 +6,11 @@
 des 5 étapes, audit des nœuds texte/attributs, puis exécution du background
 réel avec le backend `flagship-ai` et MyMemory.
 
-> **Mise à jour du 8 novembre 2026** : ces résultats ne sont pas reproduits
-> avec le backend NLLB seul. Sur l’étape 1, l’audit réel mesure **6 segments
-> traduits sur 44** et 38 laissés en français. Voir
-> [`AUDIT_2026-11-08.md`](AUDIT_2026-11-08.md). Sur la bascule EN, le titre
-> reste en français dans le test NLLB du 8 novembre.
+> **Mise à jour du 9 novembre 2026** : la recette indépendante avec les
+> **packs + nouveau serveur** mesure **188/188 segments sur les 5 étapes**,
+> 3 langues au premier écran et le titre traduit. Le repli **NLLB seul** reste
+> **31/192** (6/44 à l’étape 1). Les packs sont des brouillons, **0 validé**.
+> Voir [`AUDIT_2026-11-09.md`](AUDIT_2026-11-09.md).
 
 ---
 

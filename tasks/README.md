@@ -98,18 +98,15 @@ l'humain et parsé par le test.
 
 L’audit réel (`docs/AUDIT_2026-11-08.md`) change les priorités :
 
-1. **Couverture site** : 6/44 sur l’étape 1, **31/192 sur les 5 étapes** ;
-   161 restent en français.
-2. **Qualité NLLB** : 1/20 en production, 4/20 en démo ; le chiffre 12/20 n’est
-   pas reproduit.
-3. **Préservation** : numéro de compte sans espace, nom minusculé, jeton
-   `[[NAME_0]]` perdu.
-4. **Packs** : 0 phrase validée ; ewondo et duala ne peuvent pas sortir du
-   français.
-5. **Message popup** : `low_roundtrip` présenté à tort comme un problème de
-   montants/noms.
-6. **Titre EN** : non traduit ; le test K2 qui annonce un titre fulfulde n’est
-   pas reproduit.
+1. **Validation native** : 0 phrase validée ; les packs sont des brouillons
+   humains/éditoriaux. C’est le blocage principal.
+2. **Inédit** : 1/20 en production, 4/20 en démo ; les packs couvrent le site,
+   pas le nouveau contenu.
+3. **EN partiel** : 38/44, 6 segments en anglais.
+4. **Firefox** non rejoué sur le site dans cette instance.
+5. **Deux stacks** : packs = 188/188 ; NLLB seul = 31/192. Ne pas mélanger.
+6. **Préservation** : compte/noms OK avec les packs, tests verts ; vérifier
+   encore les cas hors pack.
 
 Conséquence : la démonstration doit être **réduite à un paragraphe court** et
 les packs doivent être priorisés. Ne pas cocher la définition de « fini » tant

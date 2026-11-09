@@ -38,7 +38,7 @@ Projet préparé pour le **SAFINUM Innovate Challenge 2026** (Yaoundé,
 | Glossaire finance | 40 termes, **0 validé** |
 | Audio | **0 enregistrement** ; 15 phrases sans montant prêtes |
 | MT duala (pilote) | **échoué** : répétitions, non utilisable pour le niveau A |
-| Test site officiel (couverture) | 5 étapes, 104 segments, 71 uniques, 0 texte visible non collecté — **mais qualité réelle NLLB : 31/192 sur 5 étapes, 6/44 sur l’étape 1** |
+| Test site officiel (couverture) | **188/188 segments sur 5 étapes avec les packs**, 3 langues ; NLLB seul : 31/192 |
 | Firefox 159 | paquet chargé en add-on temporaire ; parcours site non automatisé |
 | CI GitHub Actions | **5 jobs verts** sur `develop` et `marius` |
 | Tests | 30 tests API + 17 contrats HTTP + jsdom + pipeline pack/revue/edge |
@@ -512,7 +512,8 @@ exigence par exigence dans [`docs/COMPLIANCE.md`](docs/COMPLIANCE.md).
 | [`docs/TRAINING_DATA_AUDIT.md`](docs/TRAINING_DATA_AUDIT.md) | audit des fichiers d’entraînement (Parquet, Bible, CSV) |
 | [`docs/EXTERNAL_RESOURCES.md`](docs/EXTERNAL_RESOURCES.md) | inventaire datasets/modèles, quatrième langue, licences |
 | [`docs/DUALA_MT.md`](docs/DUALA_MT.md) | modèle expérimental anglais → duala (CC-BY-4.0) |
-| [`docs/AUDIT_2026-11-08.md`](docs/AUDIT_2026-11-08.md) | audit d’exécution réel : site SAFINUM, NLLB, écarts et priorités |
+| [`docs/AUDIT_2026-11-09.md`](docs/AUDIT_2026-11-09.md) | audit packs + serveur : 188/188, 3 langues, 0 validé |
+| [`docs/AUDIT_2026-11-08.md`](docs/AUDIT_2026-11-08.md) | audit NLLB seul : 31/192, 1/20, repli |
 | [`docs/SITE_TEST_SAFINUM.md`](docs/SITE_TEST_SAFINUM.md) | test réel du site SAFINUM, couverture et qualité |
 | [`docs/NATIVE_REVIEW_AUDIT.md`](docs/NATIVE_REVIEW_AUDIT.md) | audit des relectures natives, lignes rejetées et corrections |
 | [`docs/INSTALLED_EXTENSION_TEST.md`](docs/INSTALLED_EXTENSION_TEST.md) | test de l’extension installée sur le site SAFINUM |

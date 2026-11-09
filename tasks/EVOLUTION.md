@@ -2835,3 +2835,77 @@ mot `json`) avec les champs ci-dessous. Exemple de structure, en indentation :
   ]
 }
 ```
+
+## 2026-11-09T15:45:00+01:00 — Freedy — F3 — in_progress
+
+```json
+{
+  "timestamp": "2026-11-09T15:45:00+01:00",
+  "person": "Freedy",
+  "branch": "freedy",
+  "task": "F3",
+  "status": "in_progress",
+  "summary": "Recette indépendante de la stack packs + serveur : 188/188 segments sur les 5 étapes, 3 langues au premier écran, titres traduits, restauration 5/5, 0 erreur page. Firefox reste à faire.",
+  "files": [
+    "docs/AUDIT_2026-11-09.md",
+    "docs/test-results/real-site-packs-2026-11-09.json",
+    "docs/test-results/real-first3-packs-2026-11-09.json",
+    "docs/test-results/real-first3-dua-2026-11-09.json",
+    "docs/COMPLIANCE.md",
+    "docs/SUBMISSION_CHECKLIST.md"
+  ],
+  "tests": [
+    {
+      "command": "Playwright extension fraîche + site SAFINUM 5 étapes + packs",
+      "result": "pass",
+      "note": "188/188, 0 non traduit, 0 critique MT, 5/5 restauration"
+    },
+    {
+      "command": "Premier écran ewo/dua/fub",
+      "result": "pass",
+      "note": "39/1, 40/0, 40/0 ; comptes, noms, montants et titres"
+    },
+    {
+      "command": "Bascule FR→EN",
+      "result": "pass",
+      "note": "38/44, 6 restants, titre traduit"
+    }
+  ],
+  "evidence": "docs/test-results/real-site-packs-2026-11-09.json ; real-first3-*.json",
+  "next": "Rejouer Firefox, puis faire valider les brouillons par le panel natif",
+  "blockers": []
+}
+```
+
+## 2026-11-09T15:50:00+01:00 — Freedy — F4 — in_progress
+
+```json
+{
+  "timestamp": "2026-11-09T15:50:00+01:00",
+  "person": "Freedy",
+  "branch": "freedy",
+  "task": "F4",
+  "status": "in_progress",
+  "summary": "Suite complète verte sur a7518b7 : title, preservation, token-repair, site-demo, API 17/17, pytest 30, pipeline pack/reviewed/edge. L'inédit reste 1/20 production et 4/20 démo ; 0 phrase validée.",
+  "files": [
+    "docs/AUDIT_2026-11-09.md",
+    "docs/test-results/real-unseen-2026-11-09.json",
+    "docs/test-results/README.md"
+  ],
+  "tests": [
+    {
+      "command": "node tests/preservation.test.js && node tests/title.test.js && python3 tests/token-repair.test.py",
+      "result": "pass",
+      "note": "compte avec espaces, casse, titre FR/EN"
+    },
+    {
+      "command": "20 phrases inédites via background réel",
+      "result": "fail",
+      "note": "production 1/20 ; démo 4/20"
+    }
+  ],
+  "evidence": "docs/test-results/real-unseen-2026-11-09.json",
+  "next": "Faire valider les packs et couvrir l'inédit ; ne pas promettre une validation native",
+  "blockers": []
+}
+```

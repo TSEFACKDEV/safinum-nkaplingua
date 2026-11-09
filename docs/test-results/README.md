@@ -2,7 +2,18 @@
 
 Générés en local par les harnais du dépôt. Aucune donnée réelle.
 
-## Résultats récents — vrai backend NLLB
+## Résultats récents — stack packs + serveur (9 novembre)
+
+| Fichier | Portée | Résultat |
+|---|---|---|
+| `real-site-packs-2026-11-09.json` | Site SAFINUM, 5 étapes, packs + serveur | **188/188 traduits**, 0 non traduit, 0 critique MT, restauration 5/5 |
+| `real-first3-packs-2026-11-09.json` | Premier écran, ewondo/fulfulde | 39/40 et 40/40, titres traduits |
+| `real-first3-dua-2026-11-09.json` | Premier écran, duala | 40/40, titre traduit |
+| `real-unseen-2026-11-09.json` | 20 phrases inédites, packs + serveur | Production 1/20 ; démo 4/20 |
+
+Voir [`docs/AUDIT_2026-11-09.md`](../AUDIT_2026-11-09.md).
+
+## Repli NLLB seul — 8 novembre
 
 | Fichier | Commande / portée | Résultat |
 |---|---|---|
@@ -41,8 +52,8 @@ Voir l’analyse complète : [`docs/AUDIT_2026-11-08.md`](../AUDIT_2026-11-08.md
 
 - la qualité NLLB est faible sur les phrases financières : **1/20 en
   production, 4/20 en démo** ;
-- la couverture réelle du site est de **6/44 sur l’étape 1** et **31/192 sur
-  les 5 étapes**, pas 66/71 ;
+- la couverture packs est **188/188** sur 5 étapes, mais **0 phrase validée** ;
+- le repli NLLB seul reste **31/192** et **6/44** à l’étape 1 ;
 - les packs ewondo et duala sont vides : **aucune phrase validée** ;
 - les étapes 2 à 5 du site n’ont pas été rejouées en NLLB réel ;
 - le message d’erreur du popup ne distingue pas `low_roundtrip` de

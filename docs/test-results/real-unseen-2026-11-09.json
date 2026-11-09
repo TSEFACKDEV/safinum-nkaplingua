@@ -1,0 +1,405 @@
+{
+  "testedAt": "2026-11-09T14:39:52.018Z",
+  "extensionId": "emfnidkedgfpmefkkafjmoccjkfdbkaa",
+  "production": {
+    "total": 20,
+    "ok": 1,
+    "reasons": {
+      "untranslated_critical": 12,
+      "token_lost:[[NUM_0]]": 1,
+      "token_lost:[[NUM_1]]": 1,
+      "low_roundtrip:0.35": 2,
+      "low_roundtrip:0.40": 1,
+      "low_roundtrip:0.39": 1,
+      "low_roundtrip:0.28": 1
+    },
+    "items": [
+      {
+        "id": "u1",
+        "text": "Les frais de transfert sont de 1 000 FCFA. Le montant total débité sera de 26 000 FCFA.",
+        "ok": false,
+        "reason": "untranslated_critical",
+        "criticality": "A"
+      },
+      {
+        "id": "u2",
+        "text": "Le solde minimum requis pour ouvrir un compte est de 5 000 FCFA.",
+        "ok": false,
+        "reason": "untranslated_critical",
+        "criticality": "A"
+      },
+      {
+        "id": "u3",
+        "text": "Le taux d'intérêt mensuel est de 2 %. Des frais de dossier de 2 500 FCFA s'appliquent.",
+        "ok": false,
+        "reason": "untranslated_critical",
+        "criticality": "A"
+      },
+      {
+        "id": "u4",
+        "text": "En cas de retard, une pénalité de 1 % par jour est appliquée sur le montant restant dû.",
+        "ok": false,
+        "reason": "untranslated_critical",
+        "criticality": "A"
+      },
+      {
+        "id": "u5",
+        "text": "Le bénéficiaire reçoit le montant net après déduction des frais de change.",
+        "ok": false,
+        "reason": "untranslated_critical",
+        "criticality": "A"
+      },
+      {
+        "id": "u6",
+        "text": "Ne communiquez jamais votre code PIN à une tierce personne.",
+        "ok": false,
+        "reason": "untranslated_critical",
+        "criticality": "A"
+      },
+      {
+        "id": "u7",
+        "text": "Jaɓɓorgo Kewuuji pinal e jaɓɓorgo Fedde Ɓamtaare Pulaar",
+        "ok": false,
+        "reason": "token_lost:[[NUM_0]]",
+        "roundtrip": null
+      },
+      {
+        "id": "u8",
+        "text": "Le commerçant reçoit une confirmation et le client reçoit un reçu.",
+        "ok": false,
+        "reason": "untranslated_critical",
+        "criticality": "A"
+      },
+      {
+        "id": "u9",
+        "text": "On ɗon maɓɓina 45 000 FCFA. Aɗa woodi 11 balɗe ngam heɓugo gollal maaɗa.",
+        "ok": true,
+        "reason": null,
+        "roundtrip": 0.519
+      },
+      {
+        "id": "u10",
+        "text": "Jaɓɓorgo Fedde Ɓamtaare Pulaar e Fedde Pulaar.",
+        "ok": false,
+        "reason": "token_lost:[[NUM_1]]",
+        "roundtrip": null
+      },
+      {
+        "id": "u11",
+        "text": "Le service client peut proposer un échelonnement du paiement sous conditions.",
+        "ok": false,
+        "reason": "untranslated_critical",
+        "criticality": "A"
+      },
+      {
+        "id": "u12",
+        "text": "Le compte peut être fermé à tout moment sans frais.",
+        "ok": false,
+        "reason": "untranslated_critical",
+        "criticality": "A"
+      },
+      {
+        "id": "u13",
+        "text": "Kewuuji goɗɗi ɗi njogii ina njogii tan ngam janngude defte.",
+        "ok": false,
+        "reason": "low_roundtrip:0.35",
+        "roundtrip": 0.347
+      },
+      {
+        "id": "u14",
+        "text": "Le taux de change est affiché avant la validation de l'opération.",
+        "ok": false,
+        "reason": "untranslated_critical",
+        "criticality": "A"
+      },
+      {
+        "id": "u15",
+        "text": "Goomu jaayndiyankeejo banki'en torataa on ko'e mooɗon.",
+        "ok": false,
+        "reason": "low_roundtrip:0.35",
+        "roundtrip": 0.355
+      },
+      {
+        "id": "u16",
+        "text": "Fedde ndee ina waawi ɓaggeede e nder balɗe [[NUM_0]].",
+        "ok": false,
+        "reason": "low_roundtrip:0.40",
+        "roundtrip": 0.4
+      },
+      {
+        "id": "u17",
+        "text": "Les frais de tenue de compte sont prélevés chaque mois.",
+        "ok": false,
+        "reason": "untranslated_critical",
+        "criticality": "A"
+      },
+      {
+        "id": "u18",
+        "text": "Le dépôt est disponible immédiatement sur votre solde.",
+        "ok": false,
+        "reason": "untranslated_critical",
+        "criticality": "A"
+      },
+      {
+        "id": "u19",
+        "text": "Fuuɓal ngal ko e [[NUM_0]] [[0]] nder balɗe.",
+        "ok": false,
+        "reason": "low_roundtrip:0.39",
+        "roundtrip": 0.386
+      },
+      {
+        "id": "u20",
+        "text": "To on njogii e jaayndiyankeejo on, to on njogini ko'e mooɗon.",
+        "ok": false,
+        "reason": "low_roundtrip:0.28",
+        "roundtrip": 0.283
+      }
+    ]
+  },
+  "demo": {
+    "total": 20,
+    "ok": 4,
+    "reasons": {
+      "low_roundtrip:0.29": 1,
+      "low_roundtrip:0.44": 1,
+      "low_roundtrip:0.35": 3,
+      "too_short": 1,
+      "low_roundtrip:0.43": 1,
+      "token_lost:[[NUM_0]]": 1,
+      "low_roundtrip:0.26": 1,
+      "token_lost:[[NUM_1]]": 1,
+      "low_roundtrip:0.34": 1,
+      "low_roundtrip:0.40": 1,
+      "low_roundtrip:0.18": 1,
+      "low_roundtrip:0.39": 2,
+      "low_roundtrip:0.28": 1
+    },
+    "items": [
+      {
+        "id": "u1",
+        "text": "Jaɓɓorgo Kewuuji pinal ko [[NUM_0]] [[0]]. Fuude ɓeydaande nden ko [[NUM_1]] [[1]].",
+        "ok": false,
+        "reason": "low_roundtrip:0.29",
+        "roundtrip": 0.288
+      },
+      {
+        "id": "u2",
+        "text": "Fedde ɓurɗe jaɓude ngam udduki sukaaɗo ko 5 000 FCFA.",
+        "ok": true,
+        "reason": null,
+        "roundtrip": 0.475,
+        "demoCritical": true
+      },
+      {
+        "id": "u3",
+        "text": "Ɗuum jeewte maande fuu ko [[NUM_0]] %. Ɗuum ko feeñugol fayde [[NUM_1]] [[0]] waɗata.",
+        "ok": false,
+        "reason": "low_roundtrip:0.44",
+        "roundtrip": 0.444
+      },
+      {
+        "id": "u4",
+        "text": "So tawii ɗum laatake, ko sahaa %[[NUM_0]] per go'o e nder juulde nde o taƴii.",
+        "ok": false,
+        "reason": "low_roundtrip:0.35",
+        "roundtrip": 0.354
+      },
+      {
+        "id": "u5",
+        "text": "Jaɓɓorgo Kewuuji pinal",
+        "ok": false,
+        "reason": "too_short",
+        "roundtrip": null
+      },
+      {
+        "id": "u6",
+        "text": "To' on hokkata koode mon [[0]] to goɗɗo go'oto.",
+        "ok": false,
+        "reason": "low_roundtrip:0.43",
+        "roundtrip": 0.433
+      },
+      {
+        "id": "u7",
+        "text": "Jaɓɓorgo Kewuuji pinal e jaɓɓorgo Fedde Ɓamtaare Pulaar",
+        "ok": false,
+        "reason": "token_lost:[[NUM_0]]",
+        "roundtrip": null
+      },
+      {
+        "id": "u8",
+        "text": "Jaayndiyankeejo jaɓɓorgo jaɓɓorgal e jaɓɓorlo jaɓɓorgol.",
+        "ok": false,
+        "reason": "low_roundtrip:0.26",
+        "roundtrip": 0.256
+      },
+      {
+        "id": "u9",
+        "text": "On ɗon maɓɓina 45 000 FCFA. Aɗa woodi 11 balɗe ngam heɓugo gollal maaɗa.",
+        "ok": true,
+        "reason": null,
+        "roundtrip": 0.519
+      },
+      {
+        "id": "u10",
+        "text": "Jaɓɓorgo Fedde Ɓamtaare Pulaar e Fedde Pulaar.",
+        "ok": false,
+        "reason": "token_lost:[[NUM_1]]",
+        "roundtrip": null
+      },
+      {
+        "id": "u11",
+        "text": "Jaɓɓorgo Bayyinaaku Fuuta ina waawi hollude no feewi.",
+        "ok": false,
+        "reason": "low_roundtrip:0.34",
+        "roundtrip": 0.336
+      },
+      {
+        "id": "u12",
+        "text": "Jaɓɓorgo Ganndal ngal ina waawi ɓaggeede e kala sahaa.",
+        "ok": true,
+        "reason": null,
+        "roundtrip": 0.569,
+        "demoCritical": true
+      },
+      {
+        "id": "u13",
+        "text": "Kewuuji goɗɗi ɗi njogii ina njogii tan ngam janngude defte.",
+        "ok": false,
+        "reason": "low_roundtrip:0.35",
+        "roundtrip": 0.347
+      },
+      {
+        "id": "u14",
+        "text": "Fedde ceerno nden hollirtee yeeso jaaynde nden.",
+        "ok": true,
+        "reason": null,
+        "roundtrip": 0.5,
+        "demoCritical": true
+      },
+      {
+        "id": "u15",
+        "text": "Goomu jaayndiyankeejo banki'en torataa on ko'e mooɗon.",
+        "ok": false,
+        "reason": "low_roundtrip:0.35",
+        "roundtrip": 0.355
+      },
+      {
+        "id": "u16",
+        "text": "Fedde ndee ina waawi ɓaggeede e nder balɗe [[NUM_0]].",
+        "ok": false,
+        "reason": "low_roundtrip:0.40",
+        "roundtrip": 0.4
+      },
+      {
+        "id": "u17",
+        "text": "Jaɓɓorgo Kewuuji pinal",
+        "ok": false,
+        "reason": "low_roundtrip:0.18",
+        "roundtrip": 0.182
+      },
+      {
+        "id": "u18",
+        "text": "Jaɓɓorgo Fedde Ɓamtaare Fuuta e Fuuta.",
+        "ok": false,
+        "reason": "low_roundtrip:0.39",
+        "roundtrip": 0.387
+      },
+      {
+        "id": "u19",
+        "text": "Fuuɓal ngal ko e [[NUM_0]] [[0]] nder balɗe.",
+        "ok": false,
+        "reason": "low_roundtrip:0.39",
+        "roundtrip": 0.386
+      },
+      {
+        "id": "u20",
+        "text": "To on njogii e jaayndiyankeejo on, to on njogini ko'e mooɗon.",
+        "ok": false,
+        "reason": "low_roundtrip:0.28",
+        "roundtrip": 0.283
+      }
+    ]
+  },
+  "inputs": [
+    {
+      "id": "u1",
+      "text": "Les frais de transfert sont de 1 000 FCFA. Le montant total débité sera de 26 000 FCFA."
+    },
+    {
+      "id": "u2",
+      "text": "Le solde minimum requis pour ouvrir un compte est de 5 000 FCFA."
+    },
+    {
+      "id": "u3",
+      "text": "Le taux d'intérêt mensuel est de 2 %. Des frais de dossier de 2 500 FCFA s'appliquent."
+    },
+    {
+      "id": "u4",
+      "text": "En cas de retard, une pénalité de 1 % par jour est appliquée sur le montant restant dû."
+    },
+    {
+      "id": "u5",
+      "text": "Le bénéficiaire reçoit le montant net après déduction des frais de change."
+    },
+    {
+      "id": "u6",
+      "text": "Ne communiquez jamais votre code PIN à une tierce personne."
+    },
+    {
+      "id": "u7",
+      "text": "La vérification d'identité est obligatoire pour les transactions supérieures à 500 000 FCFA."
+    },
+    {
+      "id": "u8",
+      "text": "Le commerçant reçoit une confirmation et le client reçoit un reçu."
+    },
+    {
+      "id": "u9",
+      "text": "Vous avez déjà épargné 45 000 FCFA. Il reste 11 semaines pour atteindre votre objectif."
+    },
+    {
+      "id": "u10",
+      "text": "Les paiements marchands sont instantanés et disponibles 24 heures sur 24."
+    },
+    {
+      "id": "u11",
+      "text": "Le service client peut proposer un échelonnement du paiement sous conditions."
+    },
+    {
+      "id": "u12",
+      "text": "Le compte peut être fermé à tout moment sans frais."
+    },
+    {
+      "id": "u13",
+      "text": "Les informations personnelles collectées sont utilisées uniquement pour l'étude du dossier."
+    },
+    {
+      "id": "u14",
+      "text": "Le taux de change est affiché avant la validation de l'opération."
+    },
+    {
+      "id": "u15",
+      "text": "Un agent de la banque ne vous demandera jamais votre code confidentiel."
+    },
+    {
+      "id": "u16",
+      "text": "Le remboursement est dû dans un délai de 30 jours."
+    },
+    {
+      "id": "u17",
+      "text": "Les frais de tenue de compte sont prélevés chaque mois."
+    },
+    {
+      "id": "u18",
+      "text": "Le dépôt est disponible immédiatement sur votre solde."
+    },
+    {
+      "id": "u19",
+      "text": "Le retrait est limité à 100 000 FCFA par jour."
+    },
+    {
+      "id": "u20",
+      "text": "Conservez le reçu en cas de litige avec le commerçant."
+    }
+  ]
+}
