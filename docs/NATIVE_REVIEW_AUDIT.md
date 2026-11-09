@@ -136,6 +136,11 @@ signalée comme point à confirmer par un natif.
 - **Validé** (`validated`) : **aucune entrée**. Il manque un T2 indépendant
   et un arbitre distinct.
 
+> Depuis cet audit, les packs ont été enrichis d’une mémoire bilingue FR/EN et
+> de gabarits `editorial` : 182 entrées fulfulde, 195 ewondo, 196 duala au
+> 9 novembre, toujours **0 validée**. Voir
+> [`REAL_TEST_2026-11-09.md`](REAL_TEST_2026-11-09.md).
+
 Le pack fulfulde récupère **15 lignes** par recoupement avec les messages du
 site (même source française, traduction fulfulde déjà présente) :
 `FUB-006`, `009`, `013`, `014`, `015`, `017`, `018`, `023`, `025`, `026`,
