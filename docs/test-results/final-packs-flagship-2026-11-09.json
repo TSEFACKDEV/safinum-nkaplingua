@@ -1,0 +1,92 @@
+{
+  "testedAt": "2026-11-09",
+  "site": "https://safinum.cm/hackathon-test",
+  "backend": {
+    "command": "NK_MOCK=0 NK_ROUNDTRIP=1 NK_QUALITY=1 NK_FLAGSHIP_MT=auto NK_FLAGSHIP_MODEL_DIR=../dist/models/flagship-int8 .venv/bin/uvicorn app:app --host 127.0.0.1 --port 8000",
+    "model": "facebook/nllb-200-distilled-600M",
+    "flagship": "auto (ewo/fub)",
+    "cloud": false
+  },
+  "extension": {
+    "package": "dist/package/chrome (then test copy with https://safinum.cm/* host permission for automation)",
+    "production_manifest": "activeTab, no safinum host permission"
+  },
+  "firstScreen": {
+    "fub": {
+      "counts": {
+        "translated": 39,
+        "human": 19,
+        "demoMt": 0,
+        "untranslated": 0
+      },
+      "visibleFrenchLabels": [],
+      "untranslatedText": [],
+      "demoMtText": [],
+      "accountLinePresent": true,
+      "title": "Nokku ƴeewndo — Hackathon SAFINUM Innovate 2026 - Safinum"
+    },
+    "ewo": {
+      "counts": {
+        "translated": 39,
+        "human": 19,
+        "demoMt": 0,
+        "untranslated": 0
+      },
+      "visibleFrenchLabels": [],
+      "untranslatedText": [],
+      "demoMtText": [],
+      "accountLinePresent": true,
+      "title": "Vèyá á esáŋá — Hackathon SAFINUM Innovate 2026 - Safinum"
+    },
+    "dua": {
+      "counts": {
+        "translated": 39,
+        "human": 19,
+        "demoMt": 0,
+        "untranslated": 0
+      },
+      "visibleFrenchLabels": [],
+      "untranslatedText": [],
+      "demoMtText": [],
+      "accountLinePresent": true,
+      "title": "Wuma a jeele — Hackathon SAFINUM Innovate 2026 - Safinum"
+    }
+  },
+  "journeyFub": {
+    "steps": 5,
+    "finalCounts": {
+      "translated": 36,
+      "human": 18,
+      "demoMt": 0,
+      "untranslated": 0
+    },
+    "reference": [
+      "SAF-2026-L4MZB0"
+    ],
+    "amounts": [
+      "250 000",
+      "25 000",
+      "0",
+      "225 000",
+      "12 500",
+      "180 000",
+      "50 000",
+      "7 500"
+    ],
+    "accountPreserved": "CM 001 2345 6789 01",
+    "buttonsActive": true
+  },
+  "newContent": {
+    "text": "Jawdindi ko 25 000 FCFA.",
+    "translated": "true",
+    "human": "editorial",
+    "demoMt": null,
+    "untranslated": null
+  },
+  "restore": {
+    "title": "Environnement de test — Hackathon SAFINUM Innovate 2026 - Safinum",
+    "translated": 0,
+    "french": true
+  },
+  "notes": "Packs humains/éditoriaux + flagship-ai; cloud désactivé. Les entrées éditoriales sont marquées comme telles, jamais validées."
+}

@@ -106,6 +106,7 @@ def find_collisions(packs: dict[str, list]) -> list[dict]:
                     "file": filename,
                     "position": position,
                     "source": source,
+                    "context": str(entry.get("context") or ""),
                 }
             )
 
@@ -159,6 +160,29 @@ def main() -> int:
             for occurrence in collision["sources"]
         }
         if sources and sources <= allowed.get(collision["target_key"], set()):
+            accepted.append(collision)
+            continue
+        contexts = {
+            occurrence.get("context", "")
+            for occurrence in collision["sources"]
+        }
+        bilingual_contexts = {
+            "site-officiel",
+            "site-officiel-en",
+            "site-officiel-extra",
+            "site-officiel-extra-en",
+            "glossaire",
+        }
+        has_en = any(context.endswith("-en") for context in contexts)
+        has_fr = any(not context.endswith("-en") for context in contexts)
+        if (
+            contexts
+            and contexts <= bilingual_contexts
+            and has_en
+            and has_fr
+        ):
+            # Même cible pour la version FR et la version EN du site : c'est
+            # une mémoire bilingue volontaire, pas une collision métier.
             accepted.append(collision)
         else:
             remaining.append(collision)

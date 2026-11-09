@@ -13,9 +13,9 @@
 
 | Langue | Code | Moteur | Statut | Ce qui reste à faire |
 |---|---|---|---|---|
-| Fulfulde (Adamawa) | `fub` | `flagship-ai` fr → fub ; NLLB `fuv_Latn` en secours | **0/212 validées** ; 107 entrées de pack, toutes `draft` | refaire les 85 lignes « Tafsiri », puis TRAPD |
-| Ewondo | `ewo` | `flagship-ai` fr → ewo (brouillon) + pack | **0/130 validées** ; 122 entrées, 1 `reviewed`, 121 `draft` | second traducteur indépendant + arbitre |
-| Duala | `dua` | Pack communautaire | **0/130 validées** ; 121 entrées, toutes `draft` | 4 libellés du site + second traducteur indépendant + arbitre |
+| Fulfulde (Adamawa) | `fub` | `flagship-ai` fr → fub ; NLLB `fuv_Latn` en secours | **0/212 validées** ; 182 entrées de pack, toutes `draft` | refaire les 85 lignes « Tafsiri », puis TRAPD |
+| Ewondo | `ewo` | `flagship-ai` fr → ewo (brouillon) + pack | **0/130 validées** ; 195 entrées, 2 `reviewed`, 193 `draft` | second traducteur indépendant + arbitre |
+| Duala | `dua` | Pack communautaire | **0/130 validées** ; 196 entrées, toutes `draft` | relire les entrées éditoriales + second traducteur indépendant + arbitre |
 
 > **Audit du 8 novembre 2026** — les classeurs T1/T2 ont été reçus. Le
 > fulfulde contient 85 lignes « Tafsiri: » qui recopient le français ; T2 est
@@ -262,7 +262,7 @@ acceptées ne sont **pas** validées pour autant : un natif doit remplir
 
 **Conclusion** : le pipeline technique est fonctionnel, mais la qualité
 linguistique du fulfulde n’est **pas encore validée**. Depuis le 8 novembre,
-les packs ne sont plus vides : 107 entrées fulfulde, 122 ewondo et 121 duala,
+les packs ne sont plus vides : 182 entrées fulfulde, 195 ewondo et 196 duala,
 toutes en `draft`/`reviewed`, **0 validée**. Les 85 lignes fulfulde
 « Tafsiri » ont été rejetées. Il faut des locuteurs natifs indépendants avant
 de présenter le prototype comme « validé ». Le test réel confirme aussi que

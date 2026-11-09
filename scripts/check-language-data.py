@@ -434,9 +434,13 @@ def check_extra_messages() -> tuple[list[str], dict]:
                 errors.append(
                     f"messages-extra#{index}/{lang}: date non ISO"
                 )
-            if (row.get("provenance") or "").strip().lower() != "human":
+            if (row.get("provenance") or "").strip().lower() not in {
+                "human",
+                "editorial",
+            }:
                 errors.append(
-                    f"messages-extra#{index}/{lang}: provenance human attendue"
+                    f"messages-extra#{index}/{lang}: provenance human ou "
+                    "editorial attendue"
                 )
     return errors, counts
 

@@ -7,7 +7,7 @@ Ce document confronte le prototype NkapLingua au règlement officiel du
 
 | Exigence officielle | Statut | Preuve / remarque |
 |---|---|---|
-| 1. Adaptation de la langue de l’interface | ⚠️ | Extension MV3 et 3 langues. **Audit réel du 8 nov : 31/192 segments traduits sur les 5 étapes** (6/44 à l’étape 1), 161 restent en français. Packs 107/122/121 entrées, **0 validée**. |
+| 1. Adaptation de la langue de l’interface | ✅ / ⚠️ | Extension MV3 et 3 langues. **Stack packs + flagship (9 nov) : 39/39 au premier écran dans les 3 langues, 0 non traduit, parcours 5/5.** Repli NLLB seul : 31/192 sur 5 étapes. Packs 182/195/196 entrées, **0 validée**. |
 | 2. Parcours financier : solde, frais, transfert | ✅ | Page FINAKA : solde, frais, formulaire de transfert, récapitulatif |
 | 3. Préservation des montants, frais, bénéficiaires, conditions, alertes | ⚠️ | Jetons `[[NUM_n]]`/`[[NAME_n]]` et refus si jeton perdu. **Défauts réels : numéro de compte `CM 001 2345 6789 01` → `CM 001 23456789 01` ; `Amina` → `amina`**. À corriger avant de promettre la préservation. |
 | 4. Fonctionnement sans modifier le code source | ✅ | Injection à l’exécution, aucun changement serveur, toggle original ; le cloud est opt-in et désactivé par défaut |
@@ -72,7 +72,7 @@ Points à vérifier le jour J :
 - [ ] Un message nouveau ajouté par le jury est traduit.
 - [ ] Les attributs `title`, `aria-label`, `placeholder`, `alt` sont traduits.
 - [ ] Un nom de bénéficiaire est préservé et tokenisé.
-- [ ] L’extension fonctionne sans backend en mode pack (packs 107/122/121, 0 validée, à
+- [ ] L’extension fonctionne sans backend en mode pack (packs 182/195/196, 0 validée, à
   valider) ; le cloud expérimental est opt-in, jamais automatique.
 - [ ] Le backend local est lancé si l’on veut le mode 100 % local.
 - [ ] Une langue en mode pack affiche l’original si la phrase n’est pas validée.

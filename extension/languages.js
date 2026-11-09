@@ -215,7 +215,15 @@
       "chez|vers|contact)" +
       "\\s*:?\\s+" +
       "([\\p{Lu}][\\p{L}'’-]+(?:\\s+[\\p{Lu}][\\p{L}'’-]+){0,2})",
-    "gu"
+    "giu"
+  );
+
+  const NAME_VOCATIVE_RE = new RegExp(
+    "(?:^|[^\\p{L}])" +
+      "(bonjour|bonsoir|salut|hello|hi|coucou|cher|chère|dear)" +
+      "\\s*[,:-]?\\s+" +
+      "([\\p{Lu}][\\p{L}'’-]+(?:\\s+[\\p{Lu}][\\p{L}'’-]+){0,2})",
+    "giu"
   );
 
   const NAME_SEQUENCE_RE =
@@ -229,6 +237,15 @@
     if (words.every((word) => NAME_STOPWORDS.has(word))) return false;
     if (words.every((word) => word === word.toUpperCase())) return false;
     return words.some((word) => word.length >= 2);
+  }
+
+  function capitalizeNamePrefix(candidate) {
+    const kept = [];
+    for (const word of String(candidate || "").split(/\s+/)) {
+      if (!/^\p{Lu}/u.test(word)) break;
+      kept.push(word);
+    }
+    return kept.join(" ");
   }
 
   function redactSensitive(text) {
@@ -257,11 +274,32 @@
     );
 
     value = value.replace(NAME_TRIGGER_RE, (match, _trigger, candidate) => {
-      if (!looksLikeName(candidate)) return match;
-      const start = match.indexOf(candidate);
+      const originalCandidate = candidate;
+      candidate = capitalizeNamePrefix(candidate);
+      if (!/^\p{Lu}/u.test(candidate) || !looksLikeName(candidate)) {
+        return match;
+      }
+      const start = match.indexOf(originalCandidate);
       if (start < 0) return match;
-      return `${match.slice(0, start)}${addToken("NAME", candidate)}`;
+      const end = start + candidate.length;
+      return `${match.slice(0, start)}${addToken("NAME", candidate)}${match.slice(end)}`;
     });
+
+    // « Bonjour, Amina » : le prénom seul doit aussi être protégé.
+    value = value.replace(
+      NAME_VOCATIVE_RE,
+      (match, _greeting, candidate) => {
+        const originalCandidate = candidate;
+        candidate = capitalizeNamePrefix(candidate);
+        if (!/^\p{Lu}/u.test(candidate) || !looksLikeName(candidate)) {
+          return match;
+        }
+        const start = match.indexOf(originalCandidate);
+        if (start < 0) return match;
+        const end = start + candidate.length;
+        return `${match.slice(0, start)}${addToken("NAME", candidate)}${match.slice(end)}`;
+      }
+    );
 
     value = value.replace(NAME_SEQUENCE_RE, (match, candidate) => {
       if (!looksLikeName(candidate)) return match;
@@ -270,7 +308,7 @@
     });
 
     value = value.replace(
-      /\b\d{1,3}(?:[ \u00A0]\d{3})+(?:[.,]\d+)?\b|\b\d+(?:[.,]\d+)?\b/g,
+      /\b\d+(?:[ \u00A0]\d+)+(?:[.,]\d+)?\b|\b\d+(?:[.,]\d+)?\b/g,
       (match) => addToken("NUM", match)
     );
 

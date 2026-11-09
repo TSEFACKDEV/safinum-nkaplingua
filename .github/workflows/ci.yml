@@ -36,6 +36,7 @@ jobs:
         run: |
           pytest -q server/test_api.py
           python tests/api.robust.py
+          python tests/token-repair.test.py
 
   extension:
     name: Extension (JS + Firefox lint)
@@ -76,6 +77,8 @@ jobs:
           node tests/criticality.test.js
           node tests/pipeline.e2e.js --mode=all
           node tests/site-demo.e2e.js
+          node tests/preservation.test.js
+          node tests/title.test.js
 
       - name: Validate manifests
         run: |

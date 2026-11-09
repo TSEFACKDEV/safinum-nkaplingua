@@ -247,10 +247,16 @@ def main() -> int:
                         "inconnue (attendu CC0-1.0 ou CC-BY-4.0)"
                     )
                     continue
-                if provenance != "human":
+                allowed_provenance = (
+                    {"human"}
+                    if status == "validated"
+                    else {"human", "editorial"}
+                )
+                if provenance not in allowed_provenance:
                     errors.append(
                         f"ligne {line_number} : provenance {provenance!r} "
-                        f"refusée pour une entrée {status} (attendu human)"
+                        f"refusée pour une entrée {status} "
+                        f"(attendu {sorted(allowed_provenance)})"
                     )
                     continue
                 if reviewed_at is None:

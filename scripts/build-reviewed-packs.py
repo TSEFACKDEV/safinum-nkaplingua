@@ -558,7 +558,7 @@ def build_import_csv(
         if not target:
             continue
         result = selected.get(row["id"])
-        entries[audit.normalize(row["source_fr"])] = {
+        message_entry = {
             "source": row["source_fr"],
             "target": target,
             "status": status_for(result) if result else "draft",
@@ -570,6 +570,19 @@ def build_import_csv(
             "review_level": review_level_for(result) if result else "",
             "original_reviewer": other_reviewer(result, code) if result else "",
         }
+        entries[audit.normalize(row["source_fr"])] = message_entry
+        # Mémoire bilingue : la même cible couvre la version anglaise du site.
+        source_en = (row.get("source_en") or "").strip()
+        if (
+            source_en
+            and not re.search(r"\d", source_en)
+            and audit.normalize(source_en) != audit.normalize(row["source_fr"])
+        ):
+            entries[audit.normalize(source_en)] = {
+                **message_entry,
+                "source": source_en,
+                "context": "site-officiel-en",
+            }
 
     # 4) Gabarits composés (titre, ligne de compte, variantes de ponctuation).
     if MESSAGES_EXTRA.exists():
@@ -578,16 +591,27 @@ def build_import_csv(
             source = (row.get("source_fr") or "").strip()
             if not source or not target:
                 continue
+            provenance = (row.get("provenance") or "human").strip().lower()
+            source_lang = (row.get("source_lang") or "fr").strip().lower()
+            context = (
+                "site-officiel-extra-en"
+                if source_lang == "en"
+                else "site-officiel-extra"
+            )
             entries[audit.normalize(source)] = {
                 "source": source,
                 "target": target,
                 "status": "draft",
                 "reviewer": (row.get(f"reviewer_{code}") or "").strip(),
-                "context": "site-officiel-extra",
+                "context": context,
                 "reviewed_at": (row.get("reviewed_at") or "").strip(),
                 "license": (row.get("license") or "").strip(),
-                "provenance": "human",
-                "review_level": "composed-template",
+                "provenance": provenance,
+                "review_level": (
+                    "lexicon-assisted"
+                    if provenance == "editorial"
+                    else "composed-template"
+                ),
                 "original_reviewer": "",
             }
 

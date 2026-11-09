@@ -66,7 +66,7 @@ les champs de formulaire.
 
 ### 3.1 Fulfulde (`fub`) — pack humain + secours MyMemory
 
-Depuis l'import des relectures, le pack fulfulde contient 107 entrées
+Depuis l'import des relectures, le pack fulfulde contient 182 entrées (FR+EN)
 (`draft`), dont les 70 messages du site. Résultat du parcours complet :
 
 | Mesure | Résultat |
@@ -129,7 +129,7 @@ des brouillons T1.
 
 ### 3.3 Duala (`dua`) — pack humain seulement
 
-Aucun modèle de traduction duala. Le pack contient 121 entrées, dont les
+Aucun modèle de traduction duala. Le pack contient 196 entrées, dont les
 70 messages du site.
 
 | Mesure | Résultat |
@@ -193,8 +193,8 @@ Exemples issus du pack humain :
 
 ## 5. Limites qui restent
 
-1. **Aucune entrée n'est validée** : les 107 entrées fulfulde, 122 ewondo et
-   121 duala sont `draft` ou `reviewed`. Il manque un T2 indépendant et un
+1. **Aucune entrée n'est validée** : les 182 entrées fulfulde, 195 ewondo et
+   196 duala sont `draft` ou `reviewed`. Il manque un T2 indépendant et un
    arbitre.
 2. **Fulfulde** : 85 lignes « Tafsiri » ont été rejetées ; elles doivent être
    refaites par un locuteur. T2 est une copie de T1.

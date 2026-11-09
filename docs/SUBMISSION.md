@@ -93,7 +93,7 @@ https://tsefackdev.github.io/safinum-nkaplingua/demo/
 - [ ] Aucune donnée réelle dans la vidéo ou les captures.
 - [ ] Le panel TRAPD (3 natifs par langue) a relu les phrases critiques.
 - [ ] Les packs fulfulde, ewondo et duala sont remplis de brouillons humains :
-  107, 122 et 121 entrées, **0 validée**.
+  182, 195 et 196 entrées, **0 validée**.
 - [ ] Un nom de bénéficiaire est préservé.
 - [ ] Les attributs `title`, `aria-label`, `placeholder`, `alt` sont traduits.
 

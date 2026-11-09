@@ -81,7 +81,8 @@ async function main() {
 <body>
   <p id="covered">Solde disponible</p>
   <p id="greeting">Bonjour, Amina</p>
-  <p id="missing">Référence</p>
+  <p id="editorial">Référence</p>
+  <p id="missing">Solde mystérieux</p>
 </body>
 </html>`,
     {
@@ -135,6 +136,7 @@ async function main() {
 
   const covered = window.document.getElementById("covered");
   const greeting = window.document.getElementById("greeting");
+  const editorial = window.document.getElementById("editorial");
   const missing = window.document.getElementById("missing");
 
   assert(
@@ -150,12 +152,20 @@ async function main() {
     `salutation non appliquée : ${greeting.textContent}`
   );
   assert(
-    missing.textContent === "Référence",
+    editorial.textContent.includes("Nombara"),
+    `entrée éditoriale non appliquée : ${editorial.textContent}`
+  );
+  assert(
+    editorial.getAttribute("data-nk-human-reviewed") === "editorial",
+    `badge éditorial absent : ${editorial.getAttribute("data-nk-human-reviewed")}`
+  );
+  assert(
+    missing.textContent === "Solde mystérieux",
     `phrase non couverte modifiée : ${missing.textContent}`
   );
   assert(
     missing.getAttribute("data-nk-untranslated") === "A",
-    "badge non traduit absent sur Référence"
+    "badge non traduit absent sur la phrase critique non couverte"
   );
   assert(
     background.calls.every((url) => url.includes("language-packs/")),

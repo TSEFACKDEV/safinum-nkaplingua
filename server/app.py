@@ -470,6 +470,54 @@ def bare_tokens_of(text: str) -> list[str]:
     ]
 
 
+
+
+PLAIN_TOKEN_RE = re.compile(
+    r"(?<!\w)\[?\s*\[?\s*(NUM|URL|EMAIL|NAME|TERM)\s*_\s*(\d+)"
+    r"\s*\]?\s*\]?(?!\w)",
+    re.IGNORECASE,
+)
+
+
+def repair_plain_tokens(source: str, translation: str) -> str:
+    """Répare les jetons que NLLB dégrade en ``NAME_0`` ou ``[[0]]``.
+
+    Le modèle perd parfois les crochets ou remplace ``[[NUM_0]]`` par
+    ``[[0]]``. On ne devine pas un contenu : on réutilise uniquement les
+    jetons présents dans la source.
+    """
+    value = normalize_placeholders(translation)
+    for match in TOKEN_RE.finditer(source):
+        kind = match.group(1).upper()
+        number = match.group(2)
+        canonical = f"[[{kind}_{number}]]"
+        if canonical in value:
+            continue
+        pattern = re.compile(
+            rf"(?<!\w)\[?\s*\[?\s*{kind}\s*_\s*{number}"
+            rf"\s*\]?\s*\]?(?!\w)",
+            re.IGNORECASE,
+        )
+        if pattern.search(value):
+            value = pattern.sub(canonical, value, count=1)
+
+    source_numbers = [
+        f"[[{match.group(1)}]]" for match in BARE_TOKEN_RE.finditer(source)
+    ]
+    source_num_tokens = [
+        f"[[NUM_{match.group(2)}]]"
+        for match in TOKEN_RE.finditer(source)
+        if match.group(1).upper() == "NUM"
+    ]
+    for index, match in enumerate(BARE_TOKEN_RE.finditer(value)):
+        bare = match.group(0)
+        if bare in source_numbers:
+            continue
+        if index < len(source_num_tokens):
+            value = value.replace(bare, source_num_tokens[index], 1)
+    return value
+
+
 def contains_term(text: str, term: str) -> bool:
     """Évite les faux positifs du type "PIN" dans "opinion"."""
     return (
@@ -631,7 +679,7 @@ def validate(source: str, translation: str) -> tuple[bool, Optional[str]]:
 
     # 1) Tous les jetons de données sensibles doivent être présents une fois.
     source_tokens = tokens_of(source)
-    normalized = normalize_placeholders(translation)
+    normalized = repair_plain_tokens(source, translation)
     for token in source_tokens:
         if normalized.count(token) != 1:
             return False, f"token_lost:{token}"
@@ -1009,7 +1057,10 @@ def translate(request: TranslateRequest):
             continue
         parts = grouped.get(segment.id, [])
         joined = " ".join(part.strip() for part in parts if part.strip())
-        normalized = normalize_placeholders(joined)
+        normalized = repair_plain_tokens(
+            protected_by_id.get(segment.id, {}).get("source", segment.text),
+            joined,
+        )
         protected = protected_by_id.get(
             segment.id, {"source": segment.text, "terms": []}
         )
