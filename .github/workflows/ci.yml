@@ -81,6 +81,7 @@ jobs:
           node tests/preservation.test.js
           node tests/title.test.js
           node tests/error-taxonomy.test.js
+          node tests/sentence-fallback.test.js
 
       - name: Validate manifests
         run: |

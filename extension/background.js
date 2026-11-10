@@ -281,6 +281,7 @@ async function translateSegments(segments, target, source, options = {}) {
   let usedCloudLabels = false;
   let usedPack = false;
   let usedMt = false;
+  let packMisses = [];
 
   // 1) Pack communautaire : prioritaire, car il contient des phrases
   //    relues par des locuteurs natifs.
@@ -302,6 +303,7 @@ async function translateSegments(segments, target, source, options = {}) {
     }
 
     const hits = packResults.filter((translation) => translation.ok);
+    packMisses = packResults.filter((translation) => !translation.ok);
     for (const translation of hits) {
       const final = finalizeTranslation(
         translation,
@@ -507,14 +509,25 @@ async function translateSegments(segments, target, source, options = {}) {
   }
 
   if (!translations) {
+    // Aucun moteur MT : on conserve le verdict du pack pour chaque phrase
+    // manquante. Le content script peut ainsi tenter le repli phrase par
+    // phrase au lieu d'abandonner tout le lot.
+    for (const miss of packMisses) {
+      if (results.has(miss.id)) continue;
+      const final = finalizeTranslation(miss, preparedById.get(miss.id));
+      results.set(final.id, final);
+    }
     return {
       translations: segments
         .map((segment) => results.get(segment.id))
         .filter(Boolean),
-      provider: null,
-      error: allowCloud
-        ? "Aucun moteur de traduction disponible."
-        : "Cloud désactivé et backend local indisponible. Lancez le backend ou autorisez le cloud."
+      provider,
+      error:
+        packMisses.length > 0
+          ? null
+          : allowCloud
+            ? "Aucun moteur de traduction disponible."
+            : "Cloud désactivé et backend local indisponible. Lancez le backend ou autorisez le cloud."
     };
   }
 

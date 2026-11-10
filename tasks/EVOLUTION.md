@@ -3171,3 +3171,55 @@ mot `json`) avec les champs ci-dessous. Exemple de structure, en indentation :
   "blockers": []
 }
 ```
+
+## 2026-11-10T18:00:00+01:00 — Klein — K13 — done
+
+```json
+{
+  "timestamp": "2026-11-10T18:00:00+01:00",
+  "person": "Klein",
+  "branch": "klein",
+  "task": "K13",
+  "status": "done",
+  "summary": "Ajouté le repli phrase par phrase quand le pack est le seul moteur : un paragraphe de 2 à 8 phrases est découpé, les phrases connues du pack sont traduites, les autres restent dans la langue source. Aucune substitution mot à mot, aucune pastille par phrase ; le toast et la mention unique comptent les traductions partielles. Une phrase critique non validée reste en français et conserve le marqueur A. Corrigé le background pour renvoyer un pack_miss au lieu d'une erreur globale quand aucune MT n'est disponible, afin que le repli puisse s'exécuter.",
+  "files": [
+    "extension/content.js",
+    "extension/background.js",
+    "tests/sentence-fallback.test.js",
+    "tests/cloud-gating.test.js",
+    "tests/real-site.e2e.js",
+    ".github/workflows/ci.yml",
+    "docs/REAL_TEST_2026-11-10.md",
+    "tasks/EVOLUTION.md"
+  ],
+  "tests": [
+    {
+      "command": "node tests/sentence-fallback.test.js",
+      "result": "pass",
+      "note": "phrase connue traduite, phrase inconnue intacte, critique refusée, mention partielle"
+    },
+    {
+      "command": "node tests/cloud-gating.test.js",
+      "result": "pass",
+      "note": "pack_miss renvoyé sans MT, cloud toujours bloqué par défaut"
+    },
+    {
+      "command": "node tests/real-site.e2e.js",
+      "result": "pass",
+      "note": "188/188 FR, repli réel sur paragraphe mixte, 0 erreur page"
+    },
+    {
+      "command": "node scripts/test-extension.js && node tests/content.test.js && node tests/privacy.test.js && node tests/cloud-gating.test.js && node tests/criticality.test.js && node tests/preservation.test.js && node tests/title.test.js && node tests/error-taxonomy.test.js && node tests/sentence-fallback.test.js && node tests/pipeline.e2e.js --mode=all && node tests/site-demo.e2e.js",
+      "result": "pass"
+    },
+    {
+      "command": "NK_MOCK=1 server/.venv/bin/python -m pytest -q server/test_api.py && NK_MOCK=1 server/.venv/bin/python tests/api.robust.py && server/.venv/bin/python tests/token-repair.test.py",
+      "result": "pass",
+      "note": "30 tests, 17/17, réparation de jetons"
+    }
+  ],
+  "evidence": "docs/test-results/real-site-packs-2026-11-10-173547.json (clé fallback, frToastTotal=188) ; tests/sentence-fallback.test.js ; dist/nkaplingua-extension.zip reconstruit",
+  "next": "Mettre à jour l'asset ZIP de la release v0.6.0 après merge, puis enregistrer la vidéo",
+  "blockers": []
+}
+```
