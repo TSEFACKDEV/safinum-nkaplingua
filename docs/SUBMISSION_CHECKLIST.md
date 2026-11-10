@@ -76,7 +76,7 @@ message pendant la démo.
 **Quelle est la limite principale ?**
 La qualité réelle du backend disponible : NLLB seul donne 6/44 segments sur
 l’étape 1 et 1/20 en production. Les packs contiennent des brouillons humains
-(182/195/196) mais restent à valider par un T2 indépendant et un arbitre ; en
+(185/198/199) mais restent à valider par un T2 indépendant et un arbitre ; en
 mode strict, les phrases critiques restent donc en français.
 
 **Est-ce que ça marche sur l’interface du jury ?**

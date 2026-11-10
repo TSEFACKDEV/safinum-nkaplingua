@@ -12,7 +12,7 @@
   "validation": {
     "validated": 0,
     "reviewed": 0,
-    "draft": 182
+    "draft": 185
   },
   "entries": [
     {
@@ -2197,6 +2197,42 @@
       "license": "CC-BY-4.0",
       "provenance": "editorial",
       "reviewLevel": "lexicon-assisted",
+      "originalReviewer": null
+    },
+    {
+      "source": "Back to hackathon",
+      "target": "Rutto to hackathon",
+      "status": "draft",
+      "reviewer": "Dr. Hamadou Bello",
+      "reviewedAt": "2026-11-08",
+      "context": "site-officiel-extra-en",
+      "license": "CC-BY-4.0",
+      "provenance": "human",
+      "reviewLevel": "composed-template",
+      "originalReviewer": null
+    },
+    {
+      "source": "Balance",
+      "target": "Jawdindi",
+      "status": "draft",
+      "reviewer": "Dr. Hamadou Bello",
+      "reviewedAt": "2026-11-08",
+      "context": "site-officiel-extra-en",
+      "license": "CC-BY-4.0",
+      "provenance": "human",
+      "reviewLevel": "composed-template",
+      "originalReviewer": null
+    },
+    {
+      "source": "Fees",
+      "target": "Njoɓdi",
+      "status": "draft",
+      "reviewer": "Dr. Hamadou Bello",
+      "reviewedAt": "2026-11-08",
+      "context": "site-officiel-extra-en",
+      "license": "CC-BY-4.0",
+      "provenance": "human",
+      "reviewLevel": "composed-template",
       "originalReviewer": null
     }
   ]

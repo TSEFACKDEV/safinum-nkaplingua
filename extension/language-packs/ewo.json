@@ -12,7 +12,7 @@
   "validation": {
     "validated": 0,
     "reviewed": 2,
-    "draft": 193
+    "draft": 196
   },
   "entries": [
     {
@@ -2353,6 +2353,42 @@
       "license": "CC-BY-4.0",
       "provenance": "editorial",
       "reviewLevel": "lexicon-assisted",
+      "originalReviewer": null
+    },
+    {
+      "source": "Back to hackathon",
+      "target": "Kiri mvús na hackathon",
+      "status": "draft",
+      "reviewer": "Dr. Jean-Baptiste Ndono",
+      "reviewedAt": "2026-11-08",
+      "context": "site-officiel-extra-en",
+      "license": "CC-BY-4.0",
+      "provenance": "human",
+      "reviewLevel": "composed-template",
+      "originalReviewer": null
+    },
+    {
+      "source": "Balance",
+      "target": "Abálá",
+      "status": "draft",
+      "reviewer": "Dr. Jean-Baptiste Ndono",
+      "reviewedAt": "2026-11-08",
+      "context": "site-officiel-extra-en",
+      "license": "CC-BY-4.0",
+      "provenance": "human",
+      "reviewLevel": "composed-template",
+      "originalReviewer": null
+    },
+    {
+      "source": "Fees",
+      "target": "Mákyé",
+      "status": "draft",
+      "reviewer": "Dr. Jean-Baptiste Ndono",
+      "reviewedAt": "2026-11-08",
+      "context": "site-officiel-extra-en",
+      "license": "CC-BY-4.0",
+      "provenance": "human",
+      "reviewLevel": "composed-template",
       "originalReviewer": null
     }
   ]

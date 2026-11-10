@@ -91,7 +91,7 @@ Deux harnais sont désormais dans le dépôt, hors CI (navigateur requis) :
 
 Résultats du 10 novembre 2026 : **188/188** sur 5 étapes en Chrome et Firefox,
 0 non traduit, 0 critique MT, restauration 5/5, 0 erreur page. EN pack-only :
-**37/44** (7 restants) ; l'audit avec backend donne 38/44, l'écart étant
-`Back to hackathon`, absent des packs.
+**40/44** (4 dates restantes) ; `Back to hackathon`, `Balance` et `Fees` ont
+été ajoutés en brouillons, l'audit avec backend donnait 38/44.
 
 Détails et preuves : [docs/REAL_TEST_2026-11-10.md](../docs/REAL_TEST_2026-11-10.md).

@@ -145,9 +145,10 @@ async function runReviewed() {
     "niveau A non validé accepté en strict"
   );
   assert(
-    strictById.get("r1")?.ok === false &&
-      strictById.get("r1").reason === "pack_unverified",
-    `entrée draft acceptée en strict : ${JSON.stringify(strictById.get("r1"))}`
+    strictById.get("r1")?.ok === true &&
+      strictById.get("r1").humanReviewed === true &&
+      strictById.get("r1").packStatus === "draft",
+    `niveau B/C draft refusé hors démo : ${JSON.stringify(strictById.get("r1"))}`
   );
   assert(strict.calls.length === 0, "réseau en mode strict pack");
 
@@ -196,8 +197,9 @@ async function runReviewed() {
     segments: [{ id: "r2", text: "Bonjour." }]
   });
   assert(
-    afterDemo.translations?.[0]?.ok === false,
-    "entrée draft resservie depuis le cache en strict"
+    afterDemo.translations?.[0]?.ok === true &&
+      afterDemo.translations?.[0]?.humanReviewed === true,
+    "brouillon B/C non servi hors démo"
   );
 
   return {
