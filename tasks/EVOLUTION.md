@@ -3249,3 +3249,39 @@ mot `json`) avec les champs ci-dessous. Exemple de structure, en indentation :
   "blockers": []
 }
 ```
+
+## 2026-11-10T18:35:00+01:00 — Klein — K15 — done
+
+```json
+{
+  "timestamp": "2026-11-10T18:35:00+01:00",
+  "person": "Klein",
+  "branch": "klein",
+  "task": "K15",
+  "status": "done",
+  "summary": "Ajouté un screencast automatisé sans voix (1280x720, 1 min 47) : page SAFINUM réelle, packs embarqués sans serveur, traduction fulfulde puis ewondo et duala, préservation des montants et noms, retour à l'original, démonstration du repli phrase par phrase, puis cartons de limites. Les légendes sont incrustées pour permettre une voix off ultérieure. Le script est reproductible et ne modifie pas le manifeste de production.",
+  "files": [
+    "scripts/record-demo.js",
+    "docs/VIDEO_SCRIPT.md",
+    "tasks/EVOLUTION.md"
+  ],
+  "tests": [
+    {
+      "command": "node --check scripts/record-demo.js",
+      "result": "pass"
+    },
+    {
+      "command": "NK_TEST_CACHE=... node scripts/record-demo.js && ffprobe dist/nkaplingua-demo.mp4",
+      "result": "pass",
+      "note": "1280x720, 107 s, sans audio, 2,0 Mo"
+    },
+    {
+      "command": "python3 scripts/check-evolution.py",
+      "result": "pass"
+    }
+  ],
+  "evidence": "dist/nkaplingua-demo.mp4 (non versionné, dist/ ignoré) ; scripts/record-demo.js ; docs/VIDEO_SCRIPT.md",
+  "next": "Enregistrer la voix off sur le screencast ou filmer une version commentée",
+  "blockers": []
+}
+```

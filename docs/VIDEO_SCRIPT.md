@@ -154,3 +154,19 @@ avec la mention discrète et « 1 traduction(s) partielle(s) ».
 2. Montrer le repli phrase par phrase sur le paragraphe mixte.
 3. Montrer le contrôle de sécurité et le retour à l’original.
 4. Expliquer clairement que le pack couvre les phrases connues, pas tout l’inédit.
+
+## Screencast automatisé (sans voix)
+
+Pour produire une base muette à recouvrir d’une voix off :
+
+```bash
+NK_TEST_CACHE=/home/klein/.tmp/opencode/demo-cache \
+NODE_PATH=/home/klein/.npm/_npx/e41f203b7505f1fb/node_modules \
+CHROME_PATH=/home/klein/.cache/ms-playwright/chromium-1248/chrome-linux64/chrome \
+node scripts/record-demo.js
+```
+
+Sortie : `dist/nkaplingua-demo.mp4`, 1280×720, environ 1 min 47, sans audio.
+Le script utilise une copie de test de l’extension avec l’hôte SAFINUM pour
+l’automatisation ; le paquet de production reste en `activeTab`. Les légendes
+sont incrustées à l’image, ce qui permet d’ajouter la voix off sans sous-titrer.
