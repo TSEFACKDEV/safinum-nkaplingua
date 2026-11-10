@@ -113,6 +113,19 @@ traductions suspectes. Elle ne remplace ni le T2 indépendant ni l’arbitre.
   non sourcé**, ajouté pour couvrir le site ; à confirmer par un natif.
 - Aucun statut `validated` ajouté.
 
+## 6bis. Apport Pichon 1950
+
+Le PDF `Pichon_1950_Dico_ewondo.pdf` est un scan de 16 pages (grammaire +
+lexique ewondo-français + français-ewondo). 11 entrées utiles ont été
+extraites dans `data/lexicon/ewondo-pichon-1950.csv` : `payer → yan`,
+`monnaie → mvakəma`, `envoyer → lom`, `recevoir → bɛ́lɛ́`, `refuser → tɛ́b`,
+`traduire → timi`, `affaire → dzam`, `caisse → ewôli`, `lumière → mfyé`,
+`nombre → taŋ`, etc.
+
+Ce sont des **attestations de 1950**, pas des validations natives modernes.
+L'orthographe doit être normalisée et les termes finance modernes
+(banque, solde, facture, sécurité, total, transfert) n'y sont pas.
+
 ## 7. Actions
 
 1. Faire relire en priorité `total → fof` et `Reference → Tiinde`.

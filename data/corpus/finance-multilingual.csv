@@ -3,6 +3,7 @@ key_fr,key_en,fub,ewo,dua,fub_status,ewo_status,dua_status,source,provenance,not
 [[NUM_0]] FCFA,,[[NUM_0]] FCFA,,,candidate,missing,missing,pack-fub,human,
 Account number,,Limre asaaku,Nɔ́mbələ á kɔ́ndó,Nombara a kompa,candidate,candidate,candidate,pack-fub;pack-ewo;pack-dua,human,
 Account number : CM [[NUM_0]],,Limre asaaku : CM [[NUM_0]],Nɔ́mbələ á kɔ́ndó : CM [[NUM_0]],Nombara a kompa : CM [[NUM_0]],candidate,candidate,candidate,pack-fub;pack-ewo;pack-dua,editorial,
+affaire,,,dzam,,missing,candidate,missing,pichon-1950,source-attested,"Pichon 1950, p. 110 ; référence, non validé."
 agence,branch,galu,ndáb á nsáŋá,wuma a eɓolo,candidate,candidate,candidate,pack-fub;pack-ewo;pack-dua;lexique-extra,human,À traduire par un natif ; ne pas inventer.
 Alerte de sécurité,Security warning,Tintina kisal,Méyáŋá má ɔ́bám,Bokwe bi bata,candidate,candidate,candidate,site-officiel:SO-045;pack-fub;pack-ewo;pack-dua,human,message site; statut source en_cours
 Alerte de sécurité : ce bénéficiaire n'a jamais été utilisé sur ce compte.,Security warning: this beneficiary has never been used on this account.,Tintina kisal : oon keɓoowo huutoraaka e ndii asaaku.,Méyáŋá má ɔ́bám : mòd á nnyɔ́ŋ nyó a tékə́ yáne bóban á kɔ́ndó nyó.,Bokwe bi bata : nu moto nu mányɔ̀ŋɔ̀ asóɓanó ɓo polo a mí kompa.,candidate,candidate,candidate,site-officiel:SO-068;pack-fub;pack-ewo;pack-dua,human,message site; statut source en_cours
@@ -27,6 +28,7 @@ Beneficiary name,,Innde keɓoowo,Ezóŋ é mòd á nnyɔ́ŋ,Dina la moto nu ma�
 Bonjour,Hello,Jam tiiɗi,Mbolani,Ã mbɔti,candidate,candidate,candidate,site-officiel:SO-001;pack-fub;pack-ewo;pack-dua,human,message site; statut source en_cours
 "Bonjour, Amina.","Hello, Amina.","Jam tiiɗi, Amina.","Mbolani, Amina.","Idiba, Amina.",candidate,candidate,candidate,site-officiel:SO-051;pack-fub;pack-ewo;pack-dua,human,message site; statut source en_cours
 Bénéficiaire,Beneficiary,Keɓoowo,Mòd á nnyɔ́ŋ,Moto nu mányɔ̀ŋɔ̀,candidate,candidate,candidate,site-officiel:SO-019;pack-fub;pack-ewo;pack-dua;lexique-extra,human;pack,message site; statut source en_cours Compositions humaines ; non attestées en ligne.
+caisse,,,ewôli,,missing,candidate,missing,pichon-1950,source-attested,"Pichon 1950, p. 110 ; référence, non validé."
 capacité de remboursement,,doole yoɓgol,ngul á adzúmbí moní,nginya a timbise mɔ̀nì,candidate,candidate,candidate,pack-fub;pack-ewo;pack-dua,human,
 Ce bénéficiaire n'a jamais été utilisé sur ce compte. Vérifiez le numéro avant de continuer.,This beneficiary has never been used on this account. Verify the number before continuing.,Oon keɓoowo huutoraaka e ndii asaaku. Teeŋtu limre ko adii yeeso.,Mòd á nnyɔ́ŋ nyó a tékə́ yáne bóban á kɔ́ndó nyó. Yéŋə́ nɔ́mbələ ósu na ó kə́ ósu.,Nu moto nu mányɔ̀ŋɔ̀ asóɓanó ɓo polo a mí kompa. Jeele nombara oboso na o kɛ́ oboso.,candidate,candidate,candidate,site-officiel:SO-026;pack-fub;pack-ewo;pack-dua,human,message site; statut source en_cours
 Cette transaction est sécurisée par FINAKA.,,,Esama éní é ne ébámbáná ne FINAKA.,Nu eɓolo e yé e batamɛ̂ na FINAKA.,missing,candidate,candidate,pack-ewo;pack-dua,human,
@@ -63,6 +65,7 @@ Electricity bill,,Njoɓdi elektrik,,Facture a mwinda,candidate,missing,candidate
 Enter the recipient details. Always verify the number before confirming.,,Lonndu kabaaru keɓoowo. Teeŋtu limre nde ko adii yoɓgol.,Lóndó bíə́mə́ bí mòd á nnyɔ́ŋ. Yéŋə́ nɔ́mbələ ósu na ó sínyí.,Londe bina bá moto nu mányɔ̀ŋɔ̀. Jeele nombara oboso na o disese.,candidate,candidate,candidate,pack-fub;pack-ewo;pack-dua,human,
 "Environnement de test — données fictives, aucune transaction réelle.","Test environment — fictional data, no real transaction.","Nokku ƴeewndo — kabaaru fenaande, alaa gollal goonga.",Vèyá á esáŋá — bíə́mə́ bí ngə́lə́.,"Wuma a jeele — bina ba wite, soma téŋɛ̂ e titi.",candidate,candidate,candidate,site-officiel:SO-050;pack-fub;pack-ewo;pack-dua,human,message site; statut source en_cours
 Environnement de test — Hackathon SAFINUM Innovate 2026 - Safinum,,Nokku ƴeewndo — Hackathon SAFINUM Innovate 2026 - Safinum,Vèyá á esáŋá — Hackathon SAFINUM Innovate 2026 - Safinum,Wuma a jeele — Hackathon SAFINUM Innovate 2026 - Safinum,candidate,candidate,candidate,pack-fub;pack-ewo;pack-dua,human,
+envoyer,,,lom,,missing,candidate,missing,pichon-1950,source-attested,"Pichon 1950, p. 112 ; référence, non validé."
 Erreur réseau : le service est temporairement indisponible. Réessayez.,Network error: the service is temporarily unavailable. Please try again.,Fenaande rese : gollal ina daɗi. Enndu kadi.,Eboŋle é réseau : nsáŋá á ne tə́té. Bámbáná dábə́.,Boɓan ba réseau : eɓolo e titié ndedi. Byápé.,candidate,candidate,candidate,site-officiel:SO-069;pack-fub;pack-ewo;pack-dua,human,message site; statut source en_cours
 facture,invoice,,,,missing,missing,missing,lexique-extra,,À traduire par un natif ; ne pas inventer.
 Facture électricité,Electricity bill,Njoɓdi elektrik,Mákyé má mwinda,Facture a mwinda,candidate,candidate,candidate,site-officiel:SO-063;pack-fub;pack-ewo;pack-dua,human;editorial,"message site; statut source en_cours Candidat éditorial 2026-11-10 : mákyé (prix/frais) + mwinda (électricité, forme duala). Aucune source ewondo fiable ; à confirmer par un natif. Non validé."
@@ -99,11 +102,13 @@ Le transfert est en attente de confirmation.,,,Nkus á yábə́ nsínyí.,Soma m
 Les frais de transfert sont de [[NUM_1]] FCFA.,,,Mákyé má nkus má ne [[NUM_1]] FCFA.,Móǹgá mwá lómò mɔ̀nì mu yé ne [[NUM_1]] FCFA.,missing,candidate,candidate,pack-ewo;pack-dua,human,
 Les informations personnelles sont utilisées uniquement pour l'étude de votre dossier.,,,Bíə́mə́ bí mòd bí ne mbálan ású nsɔ́ŋó kalada wō etə́.,Bina ɓɔŋ ɓa moto ɓa maɓolane ndé o jeele kalati ɔŋ.,missing,candidate,candidate,pack-ewo;pack-dua,human,
 litige,,haala,nsɔm,nyele,candidate,candidate,candidate,pack-fub;pack-ewo;pack-dua,human,
+lumière,,,mfyé,,missing,candidate,missing,pichon-1950,source-attested,"Pichon 1950, p. 114 ; référence, non validé."
 Make a transfer,,Nelu kaalis,Bɔ́ nkus,Lómò mɔ̀nì,candidate,candidate,candidate,pack-fub;pack-ewo;pack-dua,human,
 Merchant payment,,Njoɓdi julaajo,Mákyé má nkàndá,Wasa mɔ̀nì a nkándà,candidate,candidate,candidate,pack-fub;pack-ewo;pack-dua,human,
 Message important,Important message,Kabaaru mawɗo,Mŋkát á mfi,Mweŋge mwá mfi,candidate,candidate,candidate,site-officiel:SO-042;pack-fub;pack-ewo;pack-dua,human,message site; statut source en_cours
 Mobile Money,Mobile Money,Mobile Money,Mobile Money,Mobile Money,candidate,candidate,candidate,site-officiel:SO-056;pack-fub;pack-ewo;pack-dua,human,message site; statut source en_cours
 Modifier,Edit,Waylu,Tsíŋí,Tukwa,candidate,candidate,candidate,site-officiel:SO-036;pack-fub;pack-ewo;pack-dua,human,message site; statut source en_cours
+monnaie,,,mvakəma,,missing,candidate,missing,pichon-1950,source-attested,"Pichon 1950, p. 115 ; référence, non validé."
 Montant,Amount,Kaalis,Moní,Mɔ̀nì,candidate,candidate,candidate,site-officiel:SO-029;pack-fub;pack-ewo;pack-dua;lexique-extra,human;pack,message site; statut source en_cours Emploi large de l'argent ; à ne pas confondre avec un montant exact.
 Montant à envoyer,Amount to send,Kaalis mo nelaɗen,Moní á ne na á kə́,Mɔ̀nì mú yéná na lómò,candidate,candidate,candidate,site-officiel:SO-012;pack-fub;pack-ewo;pack-dua,human,message site; statut source en_cours
 Motif du transfert,Transfer reason,Dalilla nawgol,Nzólé á nkus,Njóm a lómò mɔ̀nì,candidate,candidate,candidate,site-officiel:SO-023;pack-fub;pack-ewo;pack-dua,human,message site; statut source en_cours
@@ -112,6 +117,7 @@ Ne partagez jamais votre code PIN.,,,Kə́ ve code PIN wō na mòd fə́.,Suka �
 Network error: the service is temporarily unavailable. Please try again.,,Fenaande rese : gollal ina daɗi. Enndu kadi.,Eboŋle é réseau : nsáŋá á ne tə́té. Bámbáná dábə́.,Boɓan ba réseau : eɓolo e titié ndedi. Byápé.,candidate,candidate,candidate,pack-fub;pack-ewo;pack-dua,human,
 New transfer,,Nawgol hesrol,Mfə́fə́ nkus,Péne a lómò mɔ̀nì,candidate,candidate,candidate,pack-fub;pack-ewo;pack-dua,human,
 Nom du bénéficiaire,Beneficiary name,Innde keɓoowo,Ezóŋ é mòd á nnyɔ́ŋ,Dina la moto nu mányɔ̀ŋɔ̀,candidate,candidate,candidate,site-officiel:SO-021;pack-fub;pack-ewo;pack-dua,human,message site; statut source en_cours
+nombre,,,taŋ,,missing,candidate,missing,pichon-1950,source-attested,"Pichon 1950, p. 115 ; référence, non validé."
 Note (optional),,Sariya (so ina haani),Nsɔ́ŋó (á ne eyáŋá),Bedangwedi (yaya),candidate,candidate,candidate,pack-fub;pack-ewo;pack-dua,human,
 Note (optionnel),Note (optional),Sariya (so ina haani),Nsɔ́ŋó (á ne eyáŋá),Bedangwedi (yaya),candidate,candidate,candidate,site-officiel:SO-024;pack-fub;pack-ewo;pack-dua,human,message site; statut source en_cours
 Nouveau transfert,New transfer,Nawgol hesrol,Mfə́fə́ nkus,Péne a lómò mɔ̀nì,candidate,candidate,candidate,site-officiel:SO-041;pack-fub;pack-ewo;pack-dua,human,message site; statut source en_cours
@@ -125,8 +131,10 @@ Operation,,Gollal,Esama,Eɓolo,candidate,candidate,candidate,pack-fub;pack-ewo;p
 Operation type,,Suus gollal,Nsɔm á esama,Epepe a eɓolo,candidate,candidate,candidate,pack-fub;pack-ewo;pack-dua,human,
 Opération,Operation,Gollal,Esama,Eɓolo,candidate,candidate,candidate,site-officiel:SO-033;pack-fub;pack-ewo;pack-dua,human,message site; statut source en_cours
 Other bank,,Banke goɗɗo,Banque fə́,Banque epé,candidate,candidate,candidate,pack-fub;pack-ewo;pack-dua,human,
+paiement,,,mán,,missing,candidate,missing,pichon-1950,source-attested,"Pichon 1950, p. 116 ; référence, non validé."
 Paiement de services,Payment for services,Njoɓdi gollal,Mákyé má nsáŋá,Soma mɔ̀nì a mɓola,candidate,candidate,candidate,site-officiel:SO-060;pack-fub;pack-ewo;pack-dua,human,message site; statut source en_cours
 Paiement marchand,Merchant payment,Njoɓdi julaajo,Mákyé má nkàndá,Wasa mɔ̀nì a nkándà,candidate,candidate,candidate,site-officiel:SO-059;pack-fub;pack-ewo;pack-dua,human,message site; statut source en_cours
+payer,,,yan,,missing,candidate,missing,pichon-1950,source-attested,"Pichon 1950, p. 116 ; référence, non validé."
 Payment for services,,Njoɓdi gollal,Mákyé má nsáŋá,Soma mɔ̀nì a mɓola,candidate,candidate,candidate,pack-fub;pack-ewo;pack-dua,human,
 Phone,,Cinndel,Télafon,Telefon,candidate,candidate,candidate,pack-fub;pack-ewo;pack-dua,human,
 Phone number,,Limre cinndel,Nɔ́mbələ á télafon,Nombara a telefon,candidate,candidate,candidate,pack-fub;pack-ewo;pack-dua,human,
@@ -138,7 +146,9 @@ prêt,loan,,,,missing,missing,missing,lexique-extra,,À traduire par un natif ; 
 pénalité,penalty,,,,missing,missing,missing,lexique-extra,,À traduire par un natif ; ne pas inventer.
 pénalité de retard,,njoɓdi batte,mákyé má eyele,móǹgá mwá boɓi,candidate,candidate,candidate,pack-fub;pack-ewo;pack-dua,human,
 Recent transactions,,Golle kaalis ɓennuɗe,Bésama bí abóban eyele,Bina ba mɔ̀nì ba ɓoɓí ɓosɔ̂,candidate,candidate,candidate,pack-fub;pack-ewo;pack-dua,human,
+recevoir,,,bɛ́lɛ́,,missing,candidate,missing,pichon-1950,source-attested,"Pichon 1950, p. 118 ; référence, non validé."
 Reference,,Limre,Eñíŋlé,Nombara a lómo mɔ̀nì,candidate,candidate,candidate,pack-fub;pack-ewo;pack-dua,editorial,"Correction documentaire 2026-11-10 : total -> kawral ; Reference -> Limre (nombre/référence), Tiinde = boîte/chaîne/chance. À confirmer par un locuteur natif ; non validée."
+refuser,,,tɛ́b,,missing,candidate,missing,pichon-1950,source-attested,"Pichon 1950, p. 118 ; référence, non validé."
 remboursement,refund,yoɓgol kaalis,adzúmbí moní,timbise mɔ̀nì,candidate,candidate,candidate,pack-fub;pack-ewo;pack-dua;lexique-extra,human,À traduire par un natif ; ne pas inventer.
 Renseignez les informations du destinataire. Vérifiez toujours le numéro avant de valider.,Enter the recipient details. Always verify the number before confirming.,Lonndu kabaaru keɓoowo. Teeŋtu limre nde ko adii yoɓgol.,Lóndó bíə́mə́ bí mòd á nnyɔ́ŋ. Yéŋə́ nɔ́mbələ ósu na ó sínyí.,Londe bina bá moto nu mányɔ̀ŋɔ̀. Jeele nombara oboso na o disese.,candidate,candidate,candidate,site-officiel:SO-020;pack-fub;pack-ewo;pack-dua,human,message site; statut source en_cours
 Retour,Back,Rutto,Kiri mvús,Timbia ombusa,candidate,candidate,candidate,site-officiel:SO-018;pack-fub;pack-ewo;pack-dua,human,message site; statut source en_cours
@@ -179,6 +189,7 @@ Total debited,,Kawral kaalis yoɓaaɗo,Mbodó á kúsíya,Mɔ̀nì mwésé mu�
 Total débité,Total debited,Kawral kaalis yoɓaaɗo,Mbodó á kúsíya,Mɔ̀nì mwésé mú kusané,candidate,candidate,candidate,site-officiel:SO-030;pack-fub;pack-ewo;pack-dua,human;editorial,message site; statut source en_cours Correction documentaire 2026-11-10 : total -> kawral ; composition à confirmer par un natif.
 Total to debit,,Kawral kaalis mo yoɓetee,Mbodó á ne na á kúsí,Mɔ̀nì mwésé mú mákusane,candidate,candidate,candidate,pack-fub;pack-ewo;pack-dua,editorial;human,Correction documentaire 2026-11-10 : total -> kawral ; composition à confirmer par un natif.
 Total à débiter,Total to debit,Kawral kaalis mo yoɓetee,Mbodó á ne na á kúsí,Mɔ̀nì mwésé mú mákusane,candidate,candidate,candidate,site-officiel:SO-015;pack-fub;pack-ewo;pack-dua,human;editorial,message site; statut source en_cours Correction documentaire 2026-11-10 : total -> kawral ; composition à confirmer par un natif.
+traduire,,,timi,,missing,candidate,missing,pichon-1950,source-attested,"Pichon 1950, p. 119 ; référence, non validé."
 transaction,,gollal kaalis,nkus-nnyɔ́ŋ,eɓolo a mɔ̀nì,candidate,candidate,candidate,pack-fub;pack-ewo;pack-dua,human,
 Transactions récentes,Recent transactions,Golle kaalis ɓennuɗe,Bésama bí abóban eyele,Bina ba mɔ̀nì ba ɓoɓí ɓosɔ̂,candidate,candidate,candidate,site-officiel:SO-006;pack-fub;pack-ewo;pack-dua,human,message site; statut source en_cours
 Transfer completed,,Nawgol naatii,Nkus á bɔ́ya,Lómò mɔ̀nì e ɓoɓí,candidate,candidate,candidate,pack-fub;pack-ewo;pack-dua,human,
