@@ -175,8 +175,8 @@ async function main() {
   // Une seule mention discrète, pas une pastille par phrase.
   const notice = window.document.getElementById("nk-notice-host");
   assert(
-    notice && notice.shadowRoot.textContent.includes("brouillons non validés"),
-    "mention unique de traduction non validée absente"
+    notice && notice.shadowRoot.textContent.includes("démonstration"),
+    "mention unique de démonstration absente"
   );
   assert(
     !read("extension/content.js").includes('content: "brouillon humain"') &&

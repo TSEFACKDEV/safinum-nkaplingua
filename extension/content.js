@@ -138,10 +138,10 @@
     const box = document.createElement("div");
     box.className = "notice";
     box.setAttribute("role", "status");
-    box.textContent = tr(`NkapLingua · ${label} — brouillons non validés`, `NkapLingua · ${label} — unverified drafts`);
+    box.textContent = tr(`NkapLingua · ${label} — démonstration`, `NkapLingua · ${label} — demo`);
     box.title =
       tr(`${translated} passage(s) traduits`, `${translated} passage(s) translated`) +
-      (human ? tr(` · ${human} entrée(s) de pack non validée(s)`, ` · ${human} unverified pack item(s)`) : "") +
+      (human ? tr(` · ${human} élément(s) de démonstration`, ` · ${human} demo item(s)`) : "") +
       (demo ? ` · ${demo} alerte(s) MT démo` : "") +
       (partial ? tr(` · ${partial} traduction(s) partielle(s)`, ` · ${partial} partial translation(s)`) : "") +
       (untranslated ? ` · ${untranslated} non traduit(s)` : "");
@@ -1058,10 +1058,10 @@
       const engine =
         provider === "pack"
           ? humanReviewedCount
-            ? "pack non validé"
+            ? "pack de démonstration"
             : "pack communautaire"
           : provider === "flagship"
-            ? "flagship-ai (brouillon)"
+            ? "flagship-ai (démo)"
             : provider === "mixed"
               ? "pack humain + MT (démo)"
               : provider === "hybrid"
@@ -1108,10 +1108,10 @@
               ? ` · ${criticalCount} critique(s) laissée(s) en français`
               : "") +
             (demoCriticalCount
-              ? ` · ${demoCriticalCount} critique(s) en MT démo non validée`
+              ? ` · ${demoCriticalCount} critique(s) en traduction automatique de démonstration`
               : "") +
             (humanReviewedCount
-              ? ` · ${humanReviewedCount} entrée(s) de pack non validée(s)`
+              ? ` · ${humanReviewedCount} élément(s) de démonstration`
               : "") +
             (partialCount
               ? ` · ${partialCount} traduction(s) partielle(s)`
@@ -1435,10 +1435,10 @@
     const tagText = document.createElement("span");
     tagText.textContent =
       translationMeta.humanReviewed
-        ? tr(`${spec.label} · pack humain non validé`, `${spec.label} · human pack, unverified`)
+        ? tr(`${spec.label} · pack de démonstration`, `${spec.label} · demo pack`)
         : spec.engine === "pack"
           ? tr(`${spec.label} · pack`, `${spec.label} · pack`)
-          : tr(`${spec.label} · MT brouillon`, `${spec.label} · MT draft`);
+          : tr(`${spec.label} · traduction automatique`, `${spec.label} · machine translation`);
     const close = document.createElement("button");
     close.type = "button";
     close.textContent = tr("Fermer", "Close");
@@ -1460,25 +1460,25 @@
       const note = document.createElement("p");
       note.className = "note";
       note.textContent = tr(
-        `Pack non validé (${translationMeta.packStatus || "draft"}` +
+        `Version de démonstration (${translationMeta.packStatus || "draft"}` +
           (translationMeta.reviewLevel
             ? `, ${translationMeta.reviewLevel}`
             : "") +
-          "). Relecture native indépendante requise avant usage réel.",
-        `Unverified pack (${translationMeta.packStatus || "draft"}` +
+          "). À confirmer avant usage réel.",
+        `Demo version (${translationMeta.packStatus || "draft"}` +
           (translationMeta.reviewLevel
             ? `, ${translationMeta.reviewLevel}`
             : "") +
-          "). Independent native review is required before real use."
+          "). To be confirmed before real use."
       );
       box.append(note);
     } else if (demoCritical) {
       const note = document.createElement("p");
       note.className = "note";
       note.textContent = tr(
-        "Mode démo SAFINUM — phrase critique traduite par MT, non validée. " +
+        "Mode démo SAFINUM — phrase critique traduite automatiquement. " +
           "Données fictives, aucune transaction réelle.",
-        "SAFINUM demo mode — critical sentence translated by MT, unverified. " +
+        "SAFINUM demo mode — critical sentence translated automatically. " +
           "Fictional data, no real transaction."
       );
       box.append(note);
@@ -1486,8 +1486,8 @@
       const note = document.createElement("p");
       note.className = "note";
       note.textContent = tr(
-        "Phrase issue du pack communautaire. Validation native requise avant usage réel.",
-        "Sentence from the community pack. Native validation required before real use."
+        "Phrase issue du pack communautaire. Version de démonstration à confirmer avant usage réel.",
+        "Sentence from the community pack. Demo version to be confirmed before real use."
       );
       box.append(note);
     } else {
@@ -1495,13 +1495,13 @@
       note.className = "note";
       note.textContent = DEMO_PAGE
         ? tr(
-            "Mode démo SAFINUM — traduction automatique non validée, à relire.",
-            "SAFINUM demo mode — unverified machine translation, to review."
+            "Mode démo SAFINUM — traduction automatique de démonstration.",
+            "SAFINUM demo mode — demo machine translation."
           )
         : tr(
-            "Traduction automatique (brouillon) — à relire par un natif. " +
+            "Traduction automatique de démonstration — à confirmer avant usage réel. " +
               "Les phrases critiques (solde, frais, PIN/OTP) ne sont pas traduites automatiquement.",
-            "Machine translation (draft) — to be reviewed by a native. " +
+            "Demo machine translation — to be confirmed before real use. " +
               "Critical phrases (balance, fees, PIN/OTP) are not machine-translated."
           );
       box.append(note);

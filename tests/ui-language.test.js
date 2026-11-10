@@ -69,8 +69,8 @@ async function boot(siteLang) {
     "restauration anglaise absente"
   );
   assert(
-    en.document.getElementById("targetNote").textContent.includes("unverified drafts"),
-    "statut de pack anglais absent"
+    en.document.getElementById("targetNote").textContent.includes("demo version"),
+    "statut de démonstration anglais absent"
   );
 
   console.log("ui-language OK — popup FR/EN selon la langue du site");

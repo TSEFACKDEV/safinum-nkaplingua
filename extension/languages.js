@@ -31,7 +31,7 @@
       nllbCode: "fuv_Latn",
       pack: "language-packs/fub.json",
       status: "mt-draft",
-      statusLabel: "brouillons non validés",
+      statusLabel: "démonstration",
       orthography: "AGLC",
       verified: false
     },
@@ -46,7 +46,7 @@
       engineLabel: "Pack + MT",
       pack: "language-packs/ewo.json",
       status: "mt-draft",
-      statusLabel: "brouillons non validés",
+      statusLabel: "démonstration",
       orthography: "AGLC",
       verified: false
     },
@@ -61,7 +61,7 @@
       engineLabel: "Pack",
       pack: "language-packs/dua.json",
       status: "community-pack",
-      statusLabel: "brouillons non validés",
+      statusLabel: "démonstration",
       orthography: "AGLC",
       verified: false
     },

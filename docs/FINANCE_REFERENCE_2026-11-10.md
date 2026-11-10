@@ -49,8 +49,7 @@ validations natives**.
 ## Décision
 
 - Les 32 entrées sont maintenant **branchées dans les packs** comme entrées
-  `draft`, contexte `lexique-reference`, avec la source et le badge « non
-  validé » ;
+  `draft`, contexte `lexique-reference`, avec la source et la mention « démonstration » ;
 - elles ne sont **jamais `validated`** ;
 - les collisions de cibles sont dans l’allowlist, pas une validation ;
 - les packs passent à 200 / 210 / 203 entrées ;
