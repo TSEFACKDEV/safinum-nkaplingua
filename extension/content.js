@@ -138,9 +138,9 @@
     const box = document.createElement("div");
     box.className = "notice";
     box.setAttribute("role", "status");
-    box.textContent = `NkapLingua · ${label} — traduction automatique, brouillons non validés`;
+    box.textContent = `NkapLingua · ${label} — brouillons non validés`;
     box.title =
-      `${translated} segment(s) traduits` +
+      `${translated} passage(s) traduits` +
       (human ? ` · ${human} entrée(s) de pack non validée(s)` : "") +
       (demo ? ` · ${demo} alerte(s) MT démo` : "") +
       (partial ? ` · ${partial} traduction(s) partielle(s)` : "") +
@@ -260,6 +260,7 @@
   let selectionHost = null;
   let currentTarget = "fub";
   let translatedTitleOriginal = null;
+  let lastResult = null;
   const DEMO_PAGE = LANG.isDemoPage?.() === true;
 
   /* ------------------------------------------------------------------ */
@@ -610,6 +611,16 @@
   }
 
   function restoreAll() {
+    const restoredCount =
+      translatedNodes.size +
+      translatedAttributes.length +
+      (translatedTitleOriginal !== null ? 1 : 0);
+    if (restoredCount === 0) {
+      clearNotice();
+      showToast("Aucune traduction à restaurer.");
+      return { ok: false, error: "Aucune traduction à restaurer." };
+    }
+
     for (const node of translatedNodes) {
       const original = translated.get(node);
       if (typeof original === "string") {
@@ -653,9 +664,11 @@
     translated = new WeakMap();
     attributeOriginals = new WeakMap();
     active = false;
+    lastResult = null;
     stopObserver();
     clearNotice();
     showToast("Original restauré.");
+    return { ok: true, restored: restoredCount };
   }
 
   /* ------------------------------------------------------------------ */
@@ -702,13 +715,16 @@
   }
 
   async function translatePage(target) {
-    if (applying) return;
+    if (applying) {
+      showToast("Une traduction est déjà en cours.");
+      return { ok: false, error: "Une traduction est déjà en cours." };
+    }
 
     const targetCode = target || currentTarget;
     const spec = LANG.getTarget(targetCode);
     if (!spec) {
       showToast("Langue cible inconnue.");
-      return;
+      return { ok: false, error: "Langue cible inconnue." };
     }
 
     applying = true;
@@ -718,17 +734,19 @@
     showToast(
       `Traduction en ${spec.label}… ` +
         (spec.engine === "pack"
-          ? "Seules les phrases validées du pack seront appliquées."
-          : "Le modèle local peut prendre quelques secondes.")
+          ? "Seules les phrases du pack seront appliquées."
+          : "Cela peut prendre quelques secondes.")
     );
 
     let translatedCount = 0;
+    let fatalError = null;
 
     try {
       const items = collectItems();
+      const pageTruncated = items.length >= MAX_TEXT_ITEMS;
       if (items.length === 0) {
         showToast("Aucun nouveau texte à traduire.");
-        return;
+        return { ok: false, error: "Aucun nouveau texte à traduire." };
       }
 
       // Le titre peut être dans une autre langue que la page (site FR +
@@ -881,16 +899,17 @@
         });
 
         if (!response) {
-          showToast(
-            "Service de traduction indisponible. Vérifiez la connexion ou lancez le backend local."
-          );
+          fatalError =
+            "Service de traduction indisponible. Vérifiez la connexion ou lancez le backend local.";
+          showToast(fatalError);
           break;
         }
         const batchTranslations = Array.isArray(response.translations)
           ? response.translations
           : [];
         if (response.error && batchTranslations.length === 0) {
-          showToast(response.error);
+          fatalError = response.error;
+          showToast(fatalError);
           break;
         }
         if (response.error) {
@@ -1044,20 +1063,18 @@
 
       if (spec.engine === "pack" && translatedCount === 0) {
         showToast(
-          `Pack ${spec.label} : aucune phrase validée pour cette page. ` +
-            `Les textes restent en ${sourceLabel(sourceInfo.code)}. ` +
-            `Contribuez via data/language-packs/${spec.code}.csv.`
+          `Pack ${spec.label} : aucune phrase disponible pour cette page. ` +
+            `Les textes restent en ${sourceLabel(sourceInfo.code)}.`
         );
       } else if (translatedCount === 0 && criticalCount > 0) {
         showToast(
-          `Aucune phrase traduite en ${spec.label} : ` +
-            `${criticalCount} phrase(s) critique(s) sans pack validé. ` +
-            "Elles restent en français ; le niveau A exige une validation native."
+          `Aucune phrase traduite en ${spec.label}. ` +
+            "Les phrases qui touchent à l'argent ou à la sécurité restent en français."
         );
       } else {
         showToast(
           (DEMO_PAGE ? "Mode démo SAFINUM (données fictives) — " : "") +
-            `${translatedCount} segment(s) traduits en ${spec.label} ` +
+            `${translatedCount} passage(s) traduits en ${spec.label} ` +
             `(source : ${sourceText} · ${engine}` +
             (flaggedCount ? ` · ${flaggedCount} non traduit(s)` : "") +
             (criticalCount
@@ -1071,6 +1088,9 @@
               : "") +
             (partialCount
               ? ` · ${partialCount} traduction(s) partielle(s)`
+              : "") +
+            (pageTruncated
+              ? " · page longue, 180 passages maximum"
               : "") +
             "). Les montants et entités ont été préservés."
         );
@@ -1095,7 +1115,8 @@
             human: humanReviewedCount,
             demo: demoCriticalCount,
             untranslated: flaggedCount + criticalCount,
-            partial: partialCount
+            partial: partialCount,
+            truncated: pageTruncated
           }
         });
       } catch {
@@ -1106,9 +1127,44 @@
       if (spec.engine === "pack" && translatedCount === 0) {
         active = false;
       }
+
+      if (fatalError) {
+        active = false;
+        return { ok: false, error: fatalError };
+      }
+      if (translatedCount === 0) {
+        active = false;
+        return {
+          ok: false,
+          error:
+            "Aucune phrase n'a pu être traduite. Le texte original est conservé."
+        };
+      }
+
+      lastResult = {
+        translated: translatedCount,
+        untranslated: flaggedCount + criticalCount,
+        partial: partialCount,
+        target: targetCode,
+        label: spec.label,
+        truncated: pageTruncated,
+        active
+      };
+      return {
+        ok: true,
+        translated: translatedCount,
+        untranslated: flaggedCount + criticalCount,
+        partial: partialCount,
+        target: targetCode,
+        label: spec.label,
+        truncated: pageTruncated
+      };
     } catch (error) {
       console.error("[NkapLingua]", error);
-      showToast("Erreur de traduction. Vérifiez la connexion ou le backend local.");
+      const message =
+        "Erreur de traduction. Vérifiez la connexion ou le backend local.";
+      showToast(message);
+      return { ok: false, error: message };
     } finally {
       applying = false;
       if (active) startObserver();
@@ -1146,14 +1202,14 @@
     const text = selection?.toString().trim();
     if (!text) {
       showToast("Sélectionnez d'abord du texte.");
-      return;
+      return { ok: false, error: "Sélectionnez d'abord du texte." };
     }
 
     const targetCode = target || currentTarget;
     const spec = LANG.getTarget(targetCode);
     if (!spec) {
       showToast("Langue cible inconnue.");
-      return;
+      return { ok: false, error: "Langue cible inconnue." };
     }
 
     let anchorRect = null;
@@ -1176,28 +1232,31 @@
       });
 
       if (!response || response.error) {
-        showToast(response?.error || "Traduction impossible pour cette sélection.");
-        return;
+        const message =
+          response?.error || "Traduction impossible pour cette sélection.";
+        showToast(message);
+        return { ok: false, error: message };
       }
 
       if (!response.translation?.ok) {
+        let message;
         if (
           response.translation?.reason === "untranslated_critical" ||
           response.translation?.reason === "critical_pack_only"
         ) {
-          showToast(
-            `Phrase critique : aucun pack ${spec.label} validé. ` +
-              "Elle reste en français ; le niveau A exige une validation native."
-          );
+          message =
+            "Cette phrase touche à l'argent ou à la sécurité. " +
+            "Elle reste en français pour éviter une erreur.";
         } else if (response.translation?.reason === "pack_miss") {
-          showToast(
-            `Phrase non validée dans le pack ${spec.label}. ` +
-              `Ajoutez-la dans data/language-packs/${spec.code}.csv.`
-          );
+          message =
+            "Cette phrase n'est pas encore disponible en " +
+            `${spec.label}. Elle reste en français.`;
         } else {
-          showToast("Traduction non fiable : montants ou entités modifiés.");
+          message =
+            "Traduction non fiable : les montants ou les noms pourraient être modifiés.";
         }
-        return;
+        showToast(message);
+        return { ok: false, error: message };
       }
 
       let restored = null;
@@ -1216,8 +1275,10 @@
         restored = restoreTokens(response.translation.text, tokens);
       }
       if (!restored) {
-        showToast("Traduction non fiable : montants ou entités modifiés.");
-        return;
+        const message =
+          "Traduction non fiable : les montants ou les noms pourraient être modifiés.";
+        showToast(message);
+        return { ok: false, error: message };
       }
 
       showSelectionTooltip(
@@ -1229,9 +1290,12 @@
         response.translation?.demoCritical === true,
         response.translation || {}
       );
+      return { ok: true, translated: 1 };
     } catch (error) {
       console.error("[NkapLingua]", error);
-      showToast("Erreur de traduction de la sélection.");
+      const message = "Erreur de traduction de la sélection.";
+      showToast(message);
+      return { ok: false, error: message };
     }
   }
 
@@ -1442,31 +1506,65 @@
   /* Messages                                                           */
   /* ------------------------------------------------------------------ */
 
+  function getPageState() {
+    const spec = LANG.getTarget(currentTarget);
+    const translated = lastResult?.translated || translatedNodes.size;
+    return {
+      ok: true,
+      active: active || translated > 0,
+      busy: applying,
+      translated,
+      untranslated: lastResult?.untranslated || 0,
+      partial: lastResult?.partial || 0,
+      truncated: lastResult?.truncated === true,
+      target: currentTarget,
+      label: spec?.label || "",
+      pageLang: document.documentElement?.lang || ""
+    };
+  }
+
   api.runtime.onMessage.addListener((message, _sender, sendResponse) => {
     if (message?.type === "NK_TRANSLATE_PAGE") {
-      translatePage(message.target);
-      sendResponse({ ok: true });
+      translatePage(message.target)
+        .then((result) => sendResponse(result || { ok: false, error: "Action sans résultat." }))
+        .catch((error) =>
+          sendResponse({ ok: false, error: String(error?.message || error) })
+        );
       return true;
     }
 
     if (message?.type === "NK_RESTORE") {
-      restoreAll();
-      sendResponse({ ok: true });
+      sendResponse(restoreAll() || { ok: false, error: "Restauration impossible." });
       return true;
     }
 
     if (message?.type === "NK_TRANSLATE_SELECTION") {
-      translateSelection(message.target);
-      sendResponse({ ok: true });
+      translateSelection(message.target)
+        .then((result) => sendResponse(result || { ok: false, error: "Action sans résultat." }))
+        .catch((error) =>
+          sendResponse({ ok: false, error: String(error?.message || error) })
+        );
+      return true;
+    }
+
+    if (message?.type === "NK_GET_STATE") {
+      sendResponse(getPageState());
       return true;
     }
 
     if (message?.type === "NK_SET_TARGET") {
-      if (LANG.getTarget(message.target)) {
-        currentTarget = message.target;
-        sendResponse({ ok: true, target: currentTarget });
-      } else {
+      if (!LANG.getTarget(message.target)) {
         sendResponse({ ok: false, error: "unknown_target" });
+        return true;
+      }
+      const previous = currentTarget;
+      currentTarget = message.target;
+      const retranslating =
+        previous !== currentTarget && !applying && (lastResult?.translated || 0) > 0;
+      sendResponse({ ok: true, target: currentTarget, retranslating });
+      if (retranslating) {
+        restoreAll();
+        translatePage(currentTarget).catch(() => {});
       }
       return true;
     }

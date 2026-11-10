@@ -25,6 +25,7 @@ await page.addInitScript(() => {
   const storage = { nkTarget: "fub", nkCloudFallback: true };
   window.chrome = {
     runtime: {
+      onMessage: { addListener() {} },
       sendMessage: async (message) => {
         if (message?.type === "NK_TRANSLATE_TEXT") {
           return {

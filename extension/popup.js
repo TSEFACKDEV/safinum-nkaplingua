@@ -1,19 +1,91 @@
 const api = globalThis.browser ?? globalThis.chrome;
 const LANG = globalThis.NK_LANGUAGES;
+const UI = globalThis.NK_UI;
 
 const $ = (id) => document.getElementById(id);
+const t = (key, vars) => (UI ? UI.t(key, vars) : key);
 
 let target = "fub";
+let actionBusy = false;
 
 function setStatus(message) {
   const status = $("status");
   if (!status) return;
   status.textContent = message;
-  status.dataset.tone = /erreur|refus|impossible|indisponible|non fiable|aucun onglet|collez/i.test(
+  status.dataset.tone = /erreur|refus|impossible|indisponible|non fiable|aucun|collez|sélectionnez|pas pu|error|failed|unavailable|not possible|could not|select some text|no new text|no phrase|no translation|not translated/i.test(
     message
   )
     ? "danger"
     : "ok";
+}
+
+function setTestError(message = "") {
+  const error = $("testError");
+  if (!error) return;
+  error.textContent = message;
+  error.hidden = !message;
+  $("unseen")?.setAttribute("aria-invalid", message ? "true" : "false");
+}
+
+function failTest(message) {
+  setTestError(message);
+  setStatus(t("testFailed"));
+}
+
+function updatePrivacyIndicator(enabled) {
+  const indicator = $("privacyMode");
+  if (!indicator) return;
+  indicator.textContent = t(enabled ? "cloudActive" : "local");
+  indicator.dataset.cloud = enabled ? "true" : "false";
+}
+
+function setActionsBusy(busy) {
+  actionBusy = busy;
+  for (const id of ["translatePage", "restore", "translateSelection"]) {
+    const button = $(id);
+    if (button) button.disabled = busy;
+  }
+  document.querySelector(".app")?.setAttribute("aria-busy", busy ? "true" : "false");
+}
+
+function pageResultMessage(result) {
+  const parts = [
+    t("result", { n: result.translated }),
+    result.untranslated ? t("remaining", { n: result.untranslated }) : null,
+    result.partial ? t("partials", { n: result.partial }) : null
+  ].filter(Boolean);
+  return (
+    `${parts.join(" · ")}.` +
+    (result.truncated ? ` ${t("truncated")}.` : "")
+  );
+}
+
+async function refreshPageState() {
+  try {
+    const tab = await getActiveTab();
+    if (!tab?.id) return;
+    const state = await api.tabs.sendMessage(tab.id, { type: "NK_GET_STATE" });
+    if (state?.busy) {
+      setStatus(t("working"));
+      return;
+    }
+    if (state?.translated) {
+      const label = state.label
+        ? displayName({ label: state.label })
+        : t("unknownLanguage");
+      setStatus(
+        t("pageTranslated", { lang: label, n: state.translated }) +
+          (state.untranslated
+            ? ` · ${t("remaining", { n: state.untranslated })}`
+            : "") +
+          (state.truncated ? ` · ${t("truncated")}` : "")
+      );
+      return;
+    }
+    setStatus(t("ready"));
+  } catch {
+    setStatus(t("ready"));
+  }
 }
 
 function spec() {
@@ -23,16 +95,19 @@ function spec() {
 api.runtime.onMessage.addListener((message) => {
   if (message?.type !== "NK_TRANSLATION_SUMMARY") return;
   const summary = message.summary || {};
-  if (!summary.translated) return;
+  if (!summary.translated) {
+    setStatus(t("noTranslation"));
+    return;
+  }
+  const lang = summary.label
+    ? displayName({ label: summary.label })
+    : t("unknownLanguage");
   const parts = [
-    `${summary.translated} segment(s) traduits en ${displayName({
-      label: summary.label
-    })}`,
-    summary.human
-      ? `${summary.human} entrée(s) de pack non validée(s)`
-      : null,
-    summary.demo ? `${summary.demo} alerte(s) MT démo` : null,
-    summary.untranslated ? `${summary.untranslated} non traduit(s)` : null
+    t("result", { n: summary.translated }) + ` (${lang})`,
+    summary.human ? t("elementsUnverified", { n: summary.human }) : null,
+    summary.demo ? t("demoAlerts", { n: summary.demo }) : null,
+    summary.untranslated ? t("remaining", { n: summary.untranslated }) : null,
+    summary.truncated ? t("truncated") : null
   ].filter(Boolean);
   setStatus(parts.join(" · ") + ".");
 });
@@ -44,15 +119,14 @@ function displayName(item) {
 }
 
 function providerLabel(provider) {
-  if (provider === "pack") return "pack communautaire";
-  if (provider === "flagship") return "flagship-ai (brouillon)";
-  if (provider === "mixed") return "pack humain + MT (démo)";
-  if (provider === "hybrid") return "MyMemory + flagship-ai (démo)";
-  if (provider === "nllb") return "backend local NLLB";
-  if (provider === "local") return "backend local";
-  if (provider === "cloud") return "MyMemory (cloud)";
-  if (provider === "mock") return "mode maquette";
-  return "moteur inconnu";
+  if (provider === "pack") return t("providerPack");
+  if (provider === "flagship") return t("providerFlagship");
+  if (provider === "mixed") return t("providerMixed");
+  if (provider === "hybrid") return t("providerHybrid");
+  if (provider === "nllb" || provider === "local") return t("providerLocal");
+  if (provider === "cloud") return t("providerCloud");
+  if (provider === "mock") return t("providerMock");
+  return t("providerUnknown");
 }
 
 function optionCheckSvg() {
@@ -74,13 +148,11 @@ function updateLanguageUI() {
   $("languageLabel").textContent = current.label;
   $("languageButton").setAttribute(
     "aria-label",
-    `Langue cible : ${current.label}`
+    `${t("targetLabel")} : ${current.label}`
   );
-  $("heroTitle").textContent = "Traduire cette page";
-  $("engineTag").textContent = current.engine === "pack" ? "PACK:" : "MT:";
-  $("targetStatus").textContent = String(current.statusLabel || "")
-    .replace(/^MT(?:\s+brouillon)?\s*—\s*/i, "")
-    .replace(/^Pack communautaire\s*—\s*/i, "");
+  $("engineTag").textContent =
+    `${current.engineLabel || (current.engine === "pack" ? t("pack") : t("mt"))}:`;
+  $("targetStatus").textContent = t("drafts");
   $("targetNote").title = current.region || "";
   $("targetNote").dataset.engine = current.engine;
 
@@ -111,7 +183,8 @@ function populateLanguages() {
 
     const engine = document.createElement("span");
     engine.className = "option-engine";
-    engine.textContent = item.engine === "pack" ? "PACK" : "MT";
+    engine.textContent =
+      item.engineLabel || (item.engine === "pack" ? "PACK" : "MT");
 
     button.append(label, engine, optionCheckSvg());
     button.addEventListener("click", () => selectLanguage(item.code));
@@ -169,16 +242,20 @@ async function selectLanguage(code) {
   try {
     const tab = await getActiveTab();
     if (tab?.id) {
-      await api.tabs.sendMessage(tab.id, {
+      const response = await api.tabs.sendMessage(tab.id, {
         type: "NK_SET_TARGET",
         target
       });
+      if (response?.retranslating) {
+        setStatus(t("languageRetranslating", { lang: next.label }));
+        return;
+      }
     }
   } catch {
     // Le content script n'est peut-être pas encore injecté.
   }
 
-  setStatus(`Langue cible : ${next.label}.`);
+  setStatus(t("languageChanged", { lang: next.label }));
 }
 
 async function ensureContentScript(tabId) {
@@ -201,6 +278,23 @@ async function sendToPage(message) {
   return api.tabs.sendMessage(tab.id, message);
 }
 
+async function detectSiteLanguage() {
+  try {
+    const tab = await getActiveTab();
+    if (!tab?.id || !api.scripting?.executeScript) return null;
+    const results = await api.scripting.executeScript({
+      target: { tabId: tab.id },
+      func: () => document.documentElement.lang || ""
+    });
+    const declared = String(results?.[0]?.result || "").toLowerCase();
+    if (declared.startsWith("en")) return "en";
+    if (declared.startsWith("fr")) return "fr";
+  } catch {
+    // Page protégée ou permission absente : on garde le français.
+  }
+  return null;
+}
+
 async function loadTarget() {
   try {
     const stored = await api.storage.local.get("nkTarget");
@@ -211,6 +305,9 @@ async function loadTarget() {
     // On garde la valeur par défaut.
   }
 
+  const siteLanguage = await detectSiteLanguage();
+  if (siteLanguage) UI?.apply(siteLanguage);
+
   populateLanguages();
   updateLanguageUI();
 
@@ -220,8 +317,9 @@ async function loadTarget() {
   } catch {
     $("cloudFallback").checked = false;
   }
+  updatePrivacyIndicator($("cloudFallback").checked);
 
-  setStatus("Prêt · détection FR/EN");
+  await refreshPageState();
 }
 
 $("languageButton").addEventListener("click", (event) => {
@@ -281,46 +379,79 @@ document.addEventListener("click", (event) => {
 
 $("cloudFallback").addEventListener("change", async () => {
   const enabled = $("cloudFallback").checked;
+  updatePrivacyIndicator(enabled);
   try {
     await api.storage.local.set({ nkCloudFallback: enabled });
   } catch {
     // Le réglage reste valable pour la session.
   }
-  setStatus(
-    enabled
-      ? "Cloud autorisé pour les phrases rejetées."
-      : "Mode local uniquement."
-  );
+  setStatus(t(enabled ? "cloudOn" : "cloudOff"));
 });
 
-$("translatePage").addEventListener("click", async () => {
-  try {
-    setStatus(`Traduction en ${displayName(spec())}…`);
-    await sendToPage({ type: "NK_TRANSLATE_PAGE", target });
-    setStatus("Traduction lancée sur la page.");
-  } catch (error) {
-    setStatus(error.message);
-  }
-});
+function localizeActionError(message) {
+  if (!UI || UI.lang !== "en") return message;
+  const known = {
+    "Sélectionnez d'abord du texte.": "noSelection",
+    "Aucun nouveau texte à traduire.": "noNewText",
+    "Aucune traduction à restaurer.": "nothingToRestore",
+    "Une traduction est déjà en cours.": "alreadyTranslating",
+    "Aucune phrase n'a pu être traduite. Le texte original est conservé.":
+      "noTranslation"
+  };
+  return known[message] ? t(known[message]) : t("actionError");
+}
 
-$("restore").addEventListener("click", async () => {
+async function runPageAction(button, pending, message, successText, useResult = false) {
+  if (actionBusy) return;
+  setActionsBusy(true);
+  setStatus(pending);
   try {
-    await sendToPage({ type: "NK_RESTORE" });
-    setStatus("Original restauré.");
+    const response = await sendToPage(message);
+    if (!response?.ok) {
+      setStatus(localizeActionError(response?.error || t("actionError")));
+      return;
+    }
+    if (useResult && typeof response.translated === "number") {
+      setStatus(pageResultMessage(response));
+    } else {
+      setStatus(response.message || successText);
+    }
   } catch (error) {
-    setStatus(error.message);
+    setStatus(localizeActionError(error.message));
+  } finally {
+    setActionsBusy(false);
   }
-});
+}
 
-$("translateSelection").addEventListener("click", async () => {
-  try {
-    setStatus("Traduction de la sélection…");
-    await sendToPage({ type: "NK_TRANSLATE_SELECTION", target });
-    setStatus("Sélection traduite.");
-  } catch (error) {
-    setStatus(error.message);
-  }
-});
+$("translatePage").addEventListener("click", () =>
+  runPageAction(
+    $("translatePage"),
+    t("translating", { lang: displayName(spec()) }),
+    { type: "NK_TRANSLATE_PAGE", target },
+    t("translationDone"),
+    true
+  )
+);
+
+$("restore").addEventListener("click", () =>
+  runPageAction(
+    $("restore"),
+    t("restoring"),
+    { type: "NK_RESTORE" },
+    t("restored")
+  )
+);
+
+$("translateSelection").addEventListener("click", () =>
+  runPageAction(
+    $("translateSelection"),
+    t("selecting"),
+    { type: "NK_TRANSLATE_SELECTION", target },
+    t("selectionDone")
+  )
+);
+
+$("unseen").addEventListener("input", () => setTestError(""));
 
 $("translateText").addEventListener("click", async () => {
   const text = $("unseen").value.trim();
@@ -328,13 +459,19 @@ $("translateText").addEventListener("click", async () => {
   const meta = $("resultMeta");
 
   if (!text) {
-    setStatus("Collez d'abord un texte à traduire.");
+    failTest(t("testEmpty"));
+    $("unseen").focus();
     return;
   }
 
+  setTestError("");
   result.textContent = "";
   meta.textContent = "";
-  setStatus("Traduction du texte inédit…");
+  setStatus(t("working"));
+
+  const runButton = $("translateText");
+  runButton.disabled = true;
+  runButton.setAttribute("aria-busy", "true");
 
   try {
     const response = await api.runtime.sendMessage({
@@ -344,92 +481,69 @@ $("translateText").addEventListener("click", async () => {
     });
 
     if (response?.error) {
-      setStatus(`Erreur : ${response.error}`);
+      failTest(localizeActionError(response.error));
       return;
     }
 
     const detected = response?.detected;
     const detectedLabel =
       detected?.code === "en"
-        ? `anglais (${Math.round((detected.confidence || 0) * 100)} %)`
+        ? `${t("english")} (${Math.round((detected.confidence || 0) * 100)} %)`
         : detected?.code === "fr"
-          ? `français (${Math.round((detected.confidence || 0) * 100)} %)`
-          : "langue indéterminée";
+          ? `${t("french")} (${Math.round((detected.confidence || 0) * 100)} %)`
+          : t("unknownLanguage");
 
     if (!response?.translation?.ok) {
-      if (response?.translation?.reason === "pack_miss") {
-        setStatus(
-          `Phrase absente du pack ${spec().label}. ` +
-            `Ajoutez-la dans data/language-packs/${spec().code}.csv.`
-        );
-      } else if (response?.translation?.reason === "pack_unverified") {
-        setStatus(
-          "Cette phrase existe dans le pack mais n'est pas encore validée par un locuteur natif."
-        );
+      const reason = String(response?.translation?.reason || "");
+      let message = "La traduction a été refusée par sécurité. Le texte original est conservé.";
+      if (reason === "pack_miss") {
+        message = t("packMiss", { lang: spec().label });
+      } else if (reason === "pack_unverified") {
+        message = t("packUnverified");
       } else if (
-        response?.translation?.reason === "untranslated_critical" ||
-        response?.translation?.reason === "critical_pack_only"
+        reason === "untranslated_critical" ||
+        reason === "critical_pack_only"
       ) {
-        setStatus(
-          "Phrase critique (solde, frais, PIN/OTP, etc.) : aucun pack validé. " +
-            "Elle reste en français ; le niveau A exige une validation native."
-        );
-      } else if (String(response?.translation?.reason || "").startsWith("low_roundtrip")) {
-        setStatus(
-          "Traduction refusée : cohérence de rétro-traduction insuffisante. " +
-            "Le texte original est conservé."
-        );
-      } else if (String(response?.translation?.reason || "").startsWith("token_lost")) {
-        setStatus(
-          "Traduction refusée : un montant, un nom ou une référence a été perdu. " +
-            "Le texte original est conservé."
-        );
+        message = t("critical");
+      } else if (reason.startsWith("low_roundtrip")) {
+        message = t("lowRoundtrip");
+      } else if (reason.startsWith("token_lost")) {
+        message = t("tokenLost");
       } else if (
-        response?.translation?.reason === "too_short" ||
-        response?.translation?.reason === "too_long" ||
-        response?.translation?.reason === "repetitive"
+        reason === "too_short" ||
+        reason === "too_long" ||
+        reason === "repetitive"
       ) {
-        setStatus(
-          "Traduction refusée : sortie trop courte, trop longue ou répétitive. " +
-            "Le texte original est conservé."
-        );
-      } else if (
-        String(response?.translation?.reason || "").startsWith("dnt_missing")
-      ) {
-        setStatus(
-          "Traduction refusée : un terme critique (FCFA, PIN, OTP…) a été modifié. " +
-            "Le texte original est conservé."
-        );
-      } else if (
-        response?.translation?.reason === "english_leak" ||
-        response?.translation?.reason === "french_leak"
-      ) {
-        setStatus(
-          "Traduction refusée : la sortie n'est pas dans la langue cible. " +
-            "Le texte original est conservé."
-        );
+        message = t("tooShort");
+      } else if (reason.startsWith("dnt_missing")) {
+        message = t("dntMissing");
+      } else if (reason === "english_leak" || reason === "french_leak") {
+        message = t("wrongLanguage");
       } else {
-        setStatus(
-          "Traduction refusée par le contrôle de sûreté. Le texte original est conservé."
-        );
+        message = t("refused");
       }
+      failTest(message);
       return;
     }
 
     result.textContent = response.translation.text;
     result.lang = target;
     meta.textContent =
-      `Source détectée : ${detectedLabel} · ` +
-      `Moteur : ${providerLabel(response.provider)} · ` +
-      `Cible : ${spec().label}`;
+      `${t("sourceDetected")} : ${detectedLabel} · ` +
+      `${t("engine")} : ${providerLabel(response.provider)} · ` +
+      `${t("targetLabel")} : ${spec().label}`;
 
     if (typeof response.translation.roundtrip === "number") {
       meta.textContent +=
-        ` · cohérence ${Math.round(response.translation.roundtrip * 100)} %`;
+        ` · ${Math.round(response.translation.roundtrip * 100)} %`;
     }
-    setStatus("Texte inédit traduit avec contrôle des montants et des noms.");
+    setTestError("");
+    setStatus(t("testSuccess"));
   } catch (error) {
-    setStatus(`Erreur : ${error.message}`);
+    failTest(localizeActionError(error.message));
+  } finally {
+    runButton.disabled = false;
+    runButton.removeAttribute("aria-busy");
   }
 });
 

@@ -4,10 +4,11 @@
 
 - **Nom du projet** : NkapLingua
 - **Hackathon** : SAFINUM Innovate Challenge 2026
-- **Langues cibles** : fulfulde adamawa (`fub`) et ewondo (`ewo`) en MT
-  brouillon ; duala (`dua`) en pack de phrases validées. Trois langues retenues
-  pour leurs corpus de parole et leurs ressources documentaires ; yemba,
-  medumba, bassa et ghomala' retirés du prototype.
+- **Langues cibles** : fulfulde adamawa (`fub`) et ewondo (`ewo`) en pack + MT
+  brouillon ; duala (`dua`) en pack de brouillons non validés. **0 phrase
+  validée** à ce jour. Trois langues retenues pour leurs corpus de parole et
+  leurs ressources documentaires ; yemba, medumba, bassa et ghomala' retirés du
+  prototype.
 - **Plateforme** : extension navigateur Chrome/Edge/Firefox (Manifest V3)
 - **Moteur** : `flagship-ai` (Marian/CTranslate2, brouillon fr → fulfulde et
   fr → ewondo), NLLB-200 en secours pour le fulfulde ; pack pour le duala

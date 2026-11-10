@@ -114,7 +114,7 @@ def wait_toast(driver, timeout: float = 25) -> str:
     deadline = time.time() + timeout
     while time.time() < deadline:
         data = snapshot(driver)
-        if "segment(s) traduits" in data["toast"]:
+        if "passage(s) traduits" in data["toast"]:
             time.sleep(0.8)
             return snapshot(driver)["toast"]
         time.sleep(0.3)

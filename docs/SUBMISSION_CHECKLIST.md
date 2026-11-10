@@ -51,9 +51,10 @@
 ## 4. Questions probables du jury
 
 **Quelles langues ?**
-Fulfulde (Adamawa) et ewondo en **MT brouillon** (`flagship-ai`), duala en pack
-de phrases validées. Ces trois langues sont retenues pour leurs corpus de
-parole et leurs ressources documentaires.
+Fulfulde (Adamawa) et ewondo en **pack + MT brouillon** (`flagship-ai`), duala
+en **pack de brouillons non validés**. **0 phrase validée** à ce jour ; ces
+trois langues sont retenues pour leurs corpus de parole et leurs ressources
+documentaires.
 
 **Pourquoi NLLB ?**
 NLLB n’est plus le moteur principal : `flagship-ai` fournit le brouillon

@@ -19,6 +19,10 @@ const languagesSource = fs.readFileSync(
   path.join(root, "extension/languages.js"),
   "utf8"
 );
+const uiCopySource = fs.readFileSync(
+  path.join(root, "extension/ui-copy.js"),
+  "utf8"
+);
 
 function assert(condition, message) {
   if (!condition) throw new Error(message);
@@ -44,6 +48,7 @@ function loadPopup() {
     tabs: { query: async () => [{}], sendMessage: async () => ({}) },
     scripting: { executeScript: async () => {} }
   };
+  window.eval(uiCopySource);
   window.eval(languagesSource);
   window.eval(popupSource);
   return {
@@ -62,7 +67,10 @@ async function statusFor(reason) {
     "Le service client est disponible.";
   popup.window.document.getElementById("translateText").click();
   await new Promise((resolve) => setTimeout(resolve, 120));
-  return popup.window.document.getElementById("status").textContent;
+  return (
+    popup.window.document.getElementById("testError").textContent ||
+    popup.window.document.getElementById("status").textContent
+  );
 }
 
 (async () => {
@@ -71,7 +79,7 @@ async function statusFor(reason) {
   const short = await statusFor("too_short");
   const dnt = await statusFor("dnt_missing:FCFA");
 
-  assert(low.includes("rétro-traduction"), `low_roundtrip: ${low}`);
+  assert(low.includes("cohérence"), `low_roundtrip: ${low}`);
   assert(
     token.includes("montant, un nom ou une référence"),
     `token_lost: ${token}`

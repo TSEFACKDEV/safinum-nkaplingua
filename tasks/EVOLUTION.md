@@ -3427,3 +3427,54 @@ mot `json`) avec les champs ci-dessous. Exemple de structure, en indentation :
   "blockers": []
 }
 ```
+
+## 2026-11-10T22:15:00+01:00 — Freedy — F4 — in_progress
+
+```json
+{
+  "timestamp": "2026-11-10T22:15:00+01:00",
+  "person": "Freedy",
+  "branch": "freedy",
+  "task": "F4",
+  "status": "in_progress",
+  "summary": "Corrections UX : statuts honnêtes (Duala plus de 'phrases validées'), moteurs Pack+MT, actions qui attendent le vrai résultat, état de page et retraduction au changement de langue, busy, cloud visible, cibles 44 px, erreurs inline, popup FR/EN selon la langue du site.",
+  "files": [
+    "extension/popup.js",
+    "extension/popup.html",
+    "extension/popup.css",
+    "extension/content.js",
+    "extension/languages.js",
+    "extension/ui-copy.js",
+    "tests/state.test.js",
+    "tests/ui-language.test.js",
+    "docs/AUDIT_2026-11-10.md",
+    "docs/SUBMISSION_CHECKLIST.md",
+    "docs/PRESELECTION.md",
+    "docs/PITCH.md"
+  ],
+  "tests": [
+    {
+      "command": "node tests/state.test.js",
+      "result": "pass",
+      "note": "état, retraduction et refus des no-op"
+    },
+    {
+      "command": "node tests/ui-language.test.js",
+      "result": "pass",
+      "note": "popup FR/EN selon la langue du site"
+    },
+    {
+      "command": "NK_TEST_CACHE=/tmp/nk-real-site-cache6 node tests/real-site.e2e.js",
+      "result": "pass",
+      "note": "222 passages, 5 étapes + EN, 0 erreur"
+    },
+    {
+      "command": "node tests/error-taxonomy.test.js && node tests/content.test.js && node tests/site-demo.e2e.js",
+      "result": "pass"
+    }
+  ],
+  "evidence": "docs/test-results/real-site-packs-2026-11-10.json ; docs/assets/popup-redesign.png",
+  "next": "Localiser aussi les toasts de page ; Firefox réel ; validation native",
+  "blockers": []
+}
+```

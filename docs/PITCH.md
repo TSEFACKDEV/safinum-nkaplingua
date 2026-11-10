@@ -18,8 +18,9 @@ retard », ni « solde disponible ».
 Une extension navigateur qui ajoute une **couche de traduction réversible** à
 n’importe quelle page financière. L’utilisateur clique, choisit sa langue, et
 la page devient lisible — sans que le site ait besoin d’intégrer quoi que ce
-soit. Le fulfulde d’Adamawa est traduit automatiquement ; l’ewondo et le duala
-utilisent des phrases validées par des locuteurs natifs (TRAPD).
+soit. Le fulfulde d’Adamawa et l’ewondo combinent pack et MT brouillon ; le
+duala utilise un pack de brouillons. La validation native TRAPD reste à
+finaliser : **0 phrase validée** à ce jour.
 
 ### 3. La démo (60 s)
 

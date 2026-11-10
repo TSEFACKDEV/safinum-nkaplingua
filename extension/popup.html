@@ -22,17 +22,17 @@
 
       <main class="main">
         <div class="intro">
-          <h1 id="heroTitle">Traduire cette page</h1>
-          <p class="sub">Sans modifier le site. Montants et noms protégés.</p>
+          <h1 id="heroTitle" data-i18n="heroTitle">Traduire cette page</h1>
+          <p class="sub" data-i18n="heroSub">Sans modifier le site. Montants et noms protégés.</p>
         </div>
 
         <div class="lang-rail">
           <div class="lang-cell source-cell">
-            <span class="lang-label">Source</span>
+            <span class="lang-label" data-i18n="source">Source</span>
             <span class="lang-value">FR/EN</span>
           </div>
           <div class="lang-cell target-cell">
-            <span class="lang-label" id="targetLabel">Cible</span>
+            <span class="lang-label" id="targetLabel" data-i18n="target">Cible</span>
             <button
               id="languageButton"
               class="lang-button"
@@ -48,7 +48,7 @@
               </svg>
             </button>
           </div>
-          <div id="languageList" class="lang-list" role="listbox" aria-label="Langues disponibles" hidden></div>
+          <div id="languageList" class="lang-list" role="listbox" aria-label="Langues disponibles" data-i18n-aria-label="languagesAvailable" hidden></div>
         </div>
 
         <p id="targetNote" class="target-note" data-engine="mt">
@@ -57,17 +57,17 @@
         </p>
 
         <button id="translatePage" class="primary" type="button">
-          <span>Traduire la page</span>
+          <span data-i18n="translatePage">Traduire la page</span>
           <svg viewBox="0 0 24 24" aria-hidden="true">
             <path d="M5 12h14M13 6l6 6-6 6" />
           </svg>
         </button>
 
         <div class="actions">
-          <button id="restore" class="action" type="button">
+          <button id="restore" class="action" type="button" data-i18n="restore">
             Restaurer
           </button>
-          <button id="translateSelection" class="action" type="button">
+          <button id="translateSelection" class="action" type="button" data-i18n="translateSelection">
             Traduire la sélection
           </button>
         </div>
@@ -78,21 +78,23 @@
 
         <details class="test">
           <summary>
-            <span class="summary-title">Tester un texte</span>
-            <span class="summary-hint">inédit</span>
+            <span class="summary-title" data-i18n="testTitle">Tester un texte</span>
+            <span class="summary-hint" data-i18n="testHint">inédit</span>
             <svg class="summary-icon" viewBox="0 0 20 20" aria-hidden="true">
               <path d="M5 7.5l5 5 5-5" />
             </svg>
           </summary>
           <div class="test-body">
-            <label class="sr-only" for="unseen">Texte financier à traduire</label>
+            <label class="sr-only" for="unseen" data-i18n="testLabel">Texte financier à traduire</label>
             <textarea
               id="unseen"
               class="textarea"
               rows="3"
               placeholder="Collez un message financier jamais vu…"
+              data-i18n-placeholder="testPlaceholder"
             ></textarea>
-            <button id="translateText" class="run" type="button">
+            <p id="testError" class="field-error" role="alert" hidden></p>
+            <button id="translateText" class="run" type="button" data-i18n="translateText">
               Traduire ce texte
             </button>
             <div id="result" class="result" aria-live="polite"></div>
@@ -102,18 +104,18 @@
       </main>
 
       <footer class="footer">
-        <span class="local">Local · pseudonymisé</span>
+        <span id="privacyMode" class="local">Local · pseudonymisé</span>
         <details class="privacy">
-          <summary>Confidentialité</summary>
+          <summary data-i18n="privacy">Confidentialité</summary>
           <div class="privacy-body">
-            <p>
+            <p data-i18n="privacyP1">
               Le backend local est prioritaire. MyMemory n’est utilisé que si
               vous l’autorisez explicitement ci-dessous : dans ce cas, montants,
               URLs, emails et noms de bénéficiaires sont remplacés par des
               jetons. Aucun mot de passe, code PIN, OTP ou valeur de formulaire
               n’est lu. Pour un usage réel, lancer le backend NLLB local.
             </p>
-            <p>
+            <p data-i18n="privacyP2">
               Les packs communautaires contiennent des brouillons humains
               (fulfulde, ewondo, duala) mais aucune phrase validée pour
               l'instant. En mode strict, seules les phrases `validated` sont
@@ -123,13 +125,14 @@
             </p>
             <label class="cloud-toggle">
               <input id="cloudFallback" type="checkbox" />
-              <span>Autoriser MyMemory (expérimental, opt-in)</span>
+              <span data-i18n="cloudToggle">Autoriser MyMemory (expérimental, opt-in)</span>
             </label>
           </div>
         </details>
       </footer>
     </div>
 
+    <script src="ui-copy.js"></script>
     <script src="languages.js"></script>
     <script src="popup.js"></script>
   </body>

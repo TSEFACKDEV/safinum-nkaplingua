@@ -30,6 +30,9 @@ Node 20+ (CI) ou 24 (poste de dev). Python 3.12 pour le backend.
 | `scripts/test-extension.js` | registre des langues, détection, packs, jetons, qualité | `node scripts/test-extension.js` | **pass** |
 | `server/test_api.py` | contrats API, CORS, refus, mode mock | `NK_MOCK=1 python3 -m pytest -q server/test_api.py` | **pass** |
 | `tests/corpus.test.py` | corpus candidat : 213 lignes, clés uniques, 0 validé | `python3 tests/corpus.test.py` | **pass** |
+| `tests/state.test.js` | état de page, retraduction au changement de langue, refus des no-op | `node tests/state.test.js` | **pass** |
+| `tests/ui-language.test.js` | popup FR/EN selon `<html lang>` du site | `node tests/ui-language.test.js` | **pass** |
+| `tests/popup-actions.test.js` | busy, succès réel et refus des no-op dans le popup | `node tests/popup-actions.test.js` | **pass** |
 
 Vérifications complémentaires :
 

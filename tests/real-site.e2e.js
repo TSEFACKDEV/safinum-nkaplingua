@@ -112,7 +112,7 @@ async function waitForToast(page, timeoutMs = 20000) {
   const started = Date.now();
   while (Date.now() - started < timeoutMs) {
     const toast = await toastText(page);
-    if (toast.includes("segment(s) traduits")) return toast;
+    if (toast.includes("passage(s) traduits")) return toast;
     await page.waitForTimeout(250);
   }
   return toastText(page);
@@ -252,7 +252,7 @@ async function main() {
         translated: await page.locator("[data-nk-translated]").count(),
         untranslated: await page.locator("[data-nk-untranslated]").count(),
         demoCritical: await page.locator("[data-nk-demo-critical]").count(),
-        toastTranslated: Number((toast.match(/(\d+) segment\(s\) traduits/) || [])[1] || 0)
+        toastTranslated: Number((toast.match(/(\d+) passage\(s\) traduits/) || [])[1] || 0)
       };
 
       const failures = [];
