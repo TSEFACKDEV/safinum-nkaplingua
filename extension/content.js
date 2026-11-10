@@ -88,7 +88,14 @@
     noticeHost = null;
   }
 
-  function updateNotice({ label, translated, human, demo, untranslated }) {
+  function updateNotice({
+    label,
+    translated,
+    human,
+    demo,
+    untranslated,
+    partial
+  }) {
     clearNotice();
     if (!translated) return;
 
@@ -136,6 +143,7 @@
       `${translated} segment(s) traduits` +
       (human ? ` · ${human} entrée(s) de pack non validée(s)` : "") +
       (demo ? ` · ${demo} alerte(s) MT démo` : "") +
+      (partial ? ` · ${partial} traduction(s) partielle(s)` : "") +
       (untranslated ? ` · ${untranslated} non traduit(s)` : "");
     shadow.append(style, box);
     document.documentElement.appendChild(host);
@@ -662,6 +670,29 @@
     return output;
   }
 
+  // Découpage de secours : si un paragraphe entier n'est pas dans le pack,
+  // on retente phrase par phrase. Les phrases connues sont traduites, les
+  // autres restent dans la langue source — jamais de mot à mot.
+  const SENTENCE_SPLIT_RE =
+    /(?<=[.!?…])\s+(?=[\p{Lu}\p{N}"«(“'])/u;
+
+  function splitSentences(value) {
+    return String(value || "")
+      .trim()
+      .split(SENTENCE_SPLIT_RE)
+      .flatMap((part) => part.split(/\n+/))
+      .map((part) => part.trim())
+      .filter(Boolean);
+  }
+
+  function withSourcePunctuation(source, target) {
+    const ending = (String(source).match(/[.!?…]+$/) || [""])[0];
+    if (ending && !/[.!?…]$/.test(String(target).trim())) {
+      return `${String(target).trim()}${ending}`;
+    }
+    return String(target).trim();
+  }
+
   function pageText() {
     return (
       document.body?.innerText ||
@@ -724,6 +755,76 @@
       let criticalCount = 0;
       let demoCriticalCount = 0;
       let humanReviewedCount = 0;
+      let partialCount = 0;
+      const sentenceCandidates = [];
+
+      async function translateBySentences(segment) {
+        const sentences = splitSentences(segment.item.value || "");
+        if (sentences.length < 2 || sentences.length > 8) return null;
+
+        const parts = sentences.map((sentence, index) => {
+          const redaction = redact(sentence);
+          return {
+            index,
+            sentence,
+            text: redaction.text,
+            tokens: redaction.tokens
+          };
+        });
+
+        const response = await api.runtime.sendMessage({
+          type: "NK_TRANSLATE_SEGMENTS",
+          target: targetCode,
+          source,
+          demo: DEMO_PAGE,
+          segments: parts.map(({ index, text }) => ({
+            id: `${segment.id}#s${index}`,
+            text
+          }))
+        });
+        if (!response || !Array.isArray(response.translations)) return null;
+
+        const byId = new Map(
+          response.translations.map((result) => [result.id, result])
+        );
+        const pieces = [];
+        let matched = 0;
+        let critical = 0;
+        let human = false;
+        let demo = false;
+
+        for (const part of parts) {
+          const result = byId.get(`${segment.id}#s${part.index}`);
+          if (result?.ok) {
+            const restored = restoreTokens(result.text, part.tokens);
+            if (restored) {
+              pieces.push(
+                withSourcePunctuation(part.sentence, restored)
+              );
+              matched += 1;
+              human = human || Boolean(result.humanReviewed);
+              demo = demo || Boolean(result.demoCritical);
+              continue;
+            }
+          } else if (
+            result?.reason === "untranslated_critical" ||
+            result?.reason === "critical_pack_only"
+          ) {
+            critical += 1;
+          }
+          pieces.push(part.sentence);
+        }
+
+        if (matched === 0) return null;
+        return {
+          text: pieces.join(" "),
+          matched,
+          total: parts.length,
+          critical,
+          human,
+          demo
+        };
+      }
 
       if (titleItem) {
         const titleRedaction = redact(titleItem.value || "");
@@ -811,6 +912,7 @@
               result?.reason === "critical_pack_only"
             ) {
               criticalCount += 1;
+              sentenceCandidates.push({ segment, critical: true });
               const element = segment.item.element;
               if (element) {
                 ensureBadgeStyle();
@@ -820,6 +922,9 @@
               result?.reason === "pack_miss" ||
               result?.reason === "empty_translation"
             ) {
+              if (result?.reason === "pack_miss") {
+                sentenceCandidates.push({ segment, critical: false });
+              }
               const visible = String(segment.item.value || "")
                 .replace(/\[\[[^\]]+\]\]/g, "")
                 .replace(/[^A-Za-zÀ-ÖØ-öø-ÿɓɗŋƴɔɛə]/g, "");
@@ -877,6 +982,46 @@
         }
       }
 
+      // Repli phrase par phrase, uniquement quand le pack est le seul
+      // moteur disponible. On ne mélange pas MT et pack dans un même
+      // paragraphe.
+      if (
+        sentenceCandidates.length > 0 &&
+        (provider === "pack" || provider === null)
+      ) {
+        for (const { segment, critical } of sentenceCandidates) {
+          let partial = null;
+          try {
+            partial = await translateBySentences(segment);
+          } catch {
+            partial = null;
+          }
+          if (!partial) continue;
+
+          applyItemTranslation(segment.item, partial.text, targetCode);
+          translatedCount += 1;
+          partialCount += 1;
+          flaggedCount = Math.max(0, flaggedCount - 1);
+          flaggedNodes.delete(segment.item.node || segment.item.element);
+          // Le segment entier avait été compté critique : on le remplace par
+          // le nombre exact de phrases critiques restées en français.
+          if (critical) criticalCount = Math.max(0, criticalCount - 1);
+          if (partial.human) humanReviewedCount += 1;
+          segment.item.element?.removeAttribute("data-nk-untranslated");
+          if (partial.critical) {
+            criticalCount += partial.critical;
+            segment.item.element?.setAttribute("data-nk-untranslated", "A");
+          }
+          if (partial.demo) {
+            demoCriticalCount += 1;
+            segment.item.element?.setAttribute(
+              "data-nk-demo-critical",
+              "A"
+            );
+          }
+        }
+      }
+
       const sourceText =
         `${sourceLabel(sourceInfo.code)}` +
         (sourceInfo.confidence
@@ -924,6 +1069,9 @@
             (humanReviewedCount
               ? ` · ${humanReviewedCount} entrée(s) de pack non validée(s)`
               : "") +
+            (partialCount
+              ? ` · ${partialCount} traduction(s) partielle(s)`
+              : "") +
             "). Les montants et entités ont été préservés."
         );
       }
@@ -933,7 +1081,8 @@
         translated: translatedCount,
         human: humanReviewedCount,
         demo: demoCriticalCount,
-        untranslated: flaggedCount + criticalCount
+        untranslated: flaggedCount + criticalCount,
+        partial: partialCount
       });
 
       // Détail pour le popup, s'il est encore ouvert.
@@ -945,7 +1094,8 @@
             translated: translatedCount,
             human: humanReviewedCount,
             demo: demoCriticalCount,
-            untranslated: flaggedCount + criticalCount
+            untranslated: flaggedCount + criticalCount,
+            partial: partialCount
           }
         });
       } catch {

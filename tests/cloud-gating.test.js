@@ -151,6 +151,33 @@ async function main() {
     `requête(s) réseau sur un hit de pack : ${packBackground.calls.join(", ")}`
   );
 
+  // 2a. Pack sans MT : une phrase absente revient avec pack_miss, pas une
+  // erreur globale (le content script peut alors tenter le repli phrase).
+  const missBackground = createBackground({});
+  missBackground.overrides.fub = {
+    entries: [
+      {
+        source: "Votre solde est disponible.",
+        target: "Jawdindi ndi yami.",
+        status: "validated"
+      }
+    ]
+  };
+  const missResponse = await missBackground.send({
+    type: "NK_TRANSLATE_SEGMENTS",
+    target: "fub",
+    source: "fr",
+    segments: [{ id: "s0", text: "Le vendeur arrive demain." }]
+  });
+  assert(
+    missResponse.translations?.[0]?.reason === "pack_miss",
+    `pack_miss attendu : ${JSON.stringify(missResponse)}`
+  );
+  assert(
+    missResponse.error === null,
+    `erreur globale au lieu d'un pack_miss : ${JSON.stringify(missResponse)}`
+  );
+
   // 2. Sans choix explicite : aucun appel cloud.
   const defaultBackground = createBackground({});
   const defaultResponse = await defaultBackground.send({
