@@ -2390,6 +2390,19 @@
       "provenance": "human",
       "reviewLevel": "composed-template",
       "originalReviewer": null
+    },
+    {
+      "source": "Facture électricité",
+      "target": "Mákyé má mwinda",
+      "status": "draft",
+      "reviewer": "NkapLingua editorial",
+      "reviewedAt": "2026-11-10",
+      "context": "site-officiel",
+      "license": "CC-BY-4.0",
+      "provenance": "editorial",
+      "reviewLevel": "lexicon-assisted",
+      "originalReviewer": "",
+      "note": "Candidat éditorial 2026-11-10 : mákyé (prix/frais) + mwinda (électricité, forme duala). Aucune source ewondo fiable ; à confirmer par un natif. Non validé."
     }
   ]
 }

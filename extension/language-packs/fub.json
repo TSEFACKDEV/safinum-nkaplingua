@@ -269,15 +269,16 @@
     },
     {
       "source": "total",
-      "target": "fof",
+      "target": "kawral",
       "status": "draft",
-      "reviewer": "Dr. Hamadou Bello",
+      "reviewer": "NkapLingua editorial",
       "reviewedAt": "2026-11-08",
       "context": "glossaire",
       "license": "CC-BY-4.0",
-      "provenance": "human",
-      "reviewLevel": "single-translator",
-      "originalReviewer": "Ousmanou Danpullo"
+      "provenance": "editorial",
+      "reviewLevel": "lexicon-assisted",
+      "originalReviewer": "Ousmanou Danpullo",
+      "note": "Correction documentaire 2026-11-10 : total -> kawral ; Reference -> Limre (nombre/référence), Tiinde = boîte/chaîne/chance. À confirmer par un locuteur natif ; non validée."
     },
     {
       "source": "échéance",
@@ -353,15 +354,16 @@
     },
     {
       "source": "Référence",
-      "target": "Tiinde",
+      "target": "Limre",
       "status": "draft",
-      "reviewer": "Dr. Hamadou Bello",
+      "reviewer": "NkapLingua editorial",
       "reviewedAt": "2026-11-08",
       "context": "site-officiel",
       "license": "CC-BY-4.0",
-      "provenance": "human",
-      "reviewLevel": "single-translator",
-      "originalReviewer": "Ousmanou Danpullo"
+      "provenance": "editorial",
+      "reviewLevel": "lexicon-assisted",
+      "originalReviewer": "Ousmanou Danpullo",
+      "note": "Correction documentaire 2026-11-10 : total -> kawral ; Reference -> Limre (nombre/référence), Tiinde = boîte/chaîne/chance. À confirmer par un locuteur natif ; non validée."
     },
     {
       "source": "reçu",
@@ -533,15 +535,16 @@
     },
     {
       "source": "Total débité",
-      "target": "Kaalis yoɓaaɗo fof",
+      "target": "Kawral kaalis yoɓaaɗo",
       "status": "draft",
-      "reviewer": "Dr. Hamadou Bello",
+      "reviewer": "NkapLingua editorial",
       "reviewedAt": "2026-11-08",
       "context": "site-officiel",
       "license": "CC-BY-4.0",
-      "provenance": "human",
-      "reviewLevel": "single-translator",
-      "originalReviewer": "Ousmanou Danpullo"
+      "provenance": "editorial",
+      "reviewLevel": "lexicon-assisted",
+      "originalReviewer": "Ousmanou Danpullo",
+      "note": "Correction documentaire 2026-11-10 : total -> kawral ; composition à confirmer par un natif."
     },
     {
       "source": "Solde après opération",
@@ -905,27 +908,29 @@
     },
     {
       "source": "Total à débiter",
-      "target": "Kaalis mo yoɓetee fof",
+      "target": "Kawral kaalis mo yoɓetee",
       "status": "draft",
-      "reviewer": "Dr. Hamadou Bello",
+      "reviewer": "NkapLingua editorial",
       "reviewedAt": "2026-11-08",
       "context": "site-officiel",
       "license": "CC-BY-4.0",
-      "provenance": "human",
-      "reviewLevel": "single-translator",
-      "originalReviewer": "Ousmanou Danpullo"
+      "provenance": "editorial",
+      "reviewLevel": "lexicon-assisted",
+      "originalReviewer": "Ousmanou Danpullo",
+      "note": "Correction documentaire 2026-11-10 : total -> kawral ; composition à confirmer par un natif."
     },
     {
       "source": "Total to debit",
-      "target": "Kaalis mo yoɓetee fof",
+      "target": "Kawral kaalis mo yoɓetee",
       "status": "draft",
-      "reviewer": "Dr. Hamadou Bello",
+      "reviewer": "NkapLingua editorial",
       "reviewedAt": "2026-11-08",
       "context": "site-officiel-en",
       "license": "CC-BY-4.0",
-      "provenance": "human",
-      "reviewLevel": "single-translator",
-      "originalReviewer": "Ousmanou Danpullo"
+      "provenance": "editorial",
+      "reviewLevel": "lexicon-assisted",
+      "originalReviewer": "Ousmanou Danpullo",
+      "note": "Correction documentaire 2026-11-10 : total -> kawral ; composition à confirmer par un natif."
     },
     {
       "source": "Balance after transfer",
@@ -1205,15 +1210,16 @@
     },
     {
       "source": "Total debited",
-      "target": "Kaalis yoɓaaɗo fof",
+      "target": "Kawral kaalis yoɓaaɗo",
       "status": "draft",
-      "reviewer": "Dr. Hamadou Bello",
+      "reviewer": "NkapLingua editorial",
       "reviewedAt": "2026-11-08",
       "context": "site-officiel-en",
       "license": "CC-BY-4.0",
-      "provenance": "human",
-      "reviewLevel": "single-translator",
-      "originalReviewer": "Ousmanou Danpullo"
+      "provenance": "editorial",
+      "reviewLevel": "lexicon-assisted",
+      "originalReviewer": "Ousmanou Danpullo",
+      "note": "Correction documentaire 2026-11-10 : total -> kawral ; composition à confirmer par un natif."
     },
     {
       "source": "Téléphone",
@@ -1241,7 +1247,7 @@
     },
     {
       "source": "Reference",
-      "target": "Tiinde",
+      "target": "Limre",
       "status": "draft",
       "reviewer": "NkapLingua editorial",
       "reviewedAt": "2026-11-09",
@@ -1249,7 +1255,8 @@
       "license": "CC-BY-4.0",
       "provenance": "editorial",
       "reviewLevel": "lexicon-assisted",
-      "originalReviewer": null
+      "originalReviewer": null,
+      "note": "Correction documentaire 2026-11-10 : total -> kawral ; Reference -> Limre (nombre/référence), Tiinde = boîte/chaîne/chance. À confirmer par un locuteur natif ; non validée."
     },
     {
       "source": "Opération",

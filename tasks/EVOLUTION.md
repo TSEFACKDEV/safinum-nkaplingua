@@ -3381,3 +3381,49 @@ mot `json`) avec les champs ci-dessous. Exemple de structure, en indentation :
   "blockers": []
 }
 ```
+
+## 2026-11-10T21:45:00+01:00 — Freedy — F4 — in_progress
+
+```json
+{
+  "timestamp": "2026-11-10T21:45:00+01:00",
+  "person": "Freedy",
+  "branch": "freedy",
+  "task": "F4",
+  "status": "in_progress",
+  "summary": "Corrections documentaires appliquées : total→kawral, Reference→Limre, Facture électricité ewondo en candidat éditorial Mákyé má mwinda. Corpus candidat de 213 lignes créé ; 0 validé.",
+  "files": [
+    "data/language-packs/import/fub.csv",
+    "data/language-packs/import/ewo.csv",
+    "extension/language-packs/fub.json",
+    "extension/language-packs/ewo.json",
+    "data/site-officiel/messages.fr-en.csv",
+    "data/lexicon/finance-extra.csv",
+    "data/corpus/finance-multilingual.csv",
+    "data/corpus/README.md",
+    "tests/corpus.test.py",
+    "docs/AUDIT_2026-11-10.md",
+    "docs/ONLINE_VERIFICATION_2026-11-10.md"
+  ],
+  "tests": [
+    {
+      "command": "python3 tests/corpus.test.py",
+      "result": "pass",
+      "note": "213 lignes, 0 validé, clés uniques"
+    },
+    {
+      "command": "NK_TEST_CACHE=/tmp/nk-real-site-cache4 node tests/real-site.e2e.js",
+      "result": "pass",
+      "note": "222 segments, Limre/Kawral visibles, 0 erreur"
+    },
+    {
+      "command": "test ewondo ciblé",
+      "result": "pass",
+      "note": "40/40, Mákyé má mwinda, 0 non traduit"
+    }
+  ],
+  "evidence": "docs/test-results/real-site-ewo-facture-2026-11-10.json ; data/corpus/finance-multilingual.csv",
+  "next": "Faire confirmer total/Reference/Facture par un natif ; la vidéo finale reste à faire",
+  "blockers": []
+}
+```

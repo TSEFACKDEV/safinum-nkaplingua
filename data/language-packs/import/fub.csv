@@ -20,14 +20,14 @@ service client,gollordu wallitaande,draft,Dr. Hamadou Bello,glossaire,2026-11-08
 transaction,gollal kaalis,draft,Dr. Hamadou Bello,glossaire,2026-11-08,CC-BY-4.0,human,single-translator,Ousmanou Danpullo
 remboursement,yoɓgol kaalis,draft,Dr. Hamadou Bello,glossaire,2026-11-08,CC-BY-4.0,human,single-translator,Ousmanou Danpullo
 Frais,Njoɓdi,draft,Dr. Hamadou Bello,site-officiel,2026-11-08,CC-BY-4.0,human,single-translator,Ousmanou Danpullo
-total,fof,draft,Dr. Hamadou Bello,glossaire,2026-11-08,CC-BY-4.0,human,single-translator,Ousmanou Danpullo
+total,kawral,draft,NkapLingua editorial,glossaire,2026-11-08,CC-BY-4.0,editorial,lexicon-assisted,Ousmanou Danpullo
 échéance,nyalnde yoɓgol,draft,Dr. Hamadou Bello,glossaire,2026-11-08,CC-BY-4.0,human,single-translator,Ousmanou Danpullo
 plafond,keeri kaalis,draft,Dr. Hamadou Bello,glossaire,2026-11-08,CC-BY-4.0,human,single-translator,Ousmanou Danpullo
 découvert,kaalis ɓurɗo yowede,draft,Dr. Hamadou Bello,glossaire,2026-11-08,CC-BY-4.0,human,single-translator,Ousmanou Danpullo
 agence,galu,draft,Dr. Hamadou Bello,glossaire,2026-11-08,CC-BY-4.0,human,single-translator,Ousmanou Danpullo
 guichet,damugal,draft,Dr. Hamadou Bello,glossaire,2026-11-08,CC-BY-4.0,human,single-translator,Ousmanou Danpullo
 code,code,draft,Dr. Hamadou Bello,glossaire,2026-11-08,CC-BY-4.0,human,single-translator,Ousmanou Danpullo
-Référence,Tiinde,draft,Dr. Hamadou Bello,site-officiel,2026-11-08,CC-BY-4.0,human,single-translator,Ousmanou Danpullo
+Référence,Limre,draft,NkapLingua editorial,site-officiel,2026-11-08,CC-BY-4.0,editorial,lexicon-assisted,Ousmanou Danpullo
 reçu,seedantaagal,draft,Dr. Hamadou Bello,glossaire,2026-11-08,CC-BY-4.0,human,single-translator,Ousmanou Danpullo
 litige,haala,draft,Dr. Hamadou Bello,glossaire,2026-11-08,CC-BY-4.0,human,single-translator,Ousmanou Danpullo
 échec,bonere,draft,Dr. Hamadou Bello,glossaire,2026-11-08,CC-BY-4.0,human,single-translator,Ousmanou Danpullo
@@ -42,7 +42,7 @@ destinataire,keɓoowo,draft,Dr. Hamadou Bello,glossaire,2026-11-08,CC-BY-4.0,hum
 Alerte de sécurité,Tintina kisal,draft,Dr. Hamadou Bello,site-officiel,2026-11-08,CC-BY-4.0,human,single-translator,Ousmanou Danpullo
 Récapitulatif,Koolol,draft,Dr. Hamadou Bello,site-officiel,2026-11-08,CC-BY-4.0,human,single-translator,Ousmanou Danpullo
 [[NUM_0]] FCFA,[[NUM_0]] FCFA,draft,Dr. Hamadou Bello,Récapitulatif,2026-11-08,CC-BY-4.0,human,single-translator,Ousmanou Danpullo
-Total débité,Kaalis yoɓaaɗo fof,draft,Dr. Hamadou Bello,site-officiel,2026-11-08,CC-BY-4.0,human,single-translator,Ousmanou Danpullo
+Total débité,Kawral kaalis yoɓaaɗo,draft,NkapLingua editorial,site-officiel,2026-11-08,CC-BY-4.0,editorial,lexicon-assisted,Ousmanou Danpullo
 Solde après opération,Jawdindi ɓaawo gollal,draft,Dr. Hamadou Bello,site-officiel,2026-11-08,CC-BY-4.0,human,single-translator,Ousmanou Danpullo
 Confirmer le transfert,Teeŋtu nawgol,draft,Dr. Hamadou Bello,site-officiel,2026-11-08,CC-BY-4.0,human,single-translator,Ousmanou Danpullo
 Modifier,Waylu,draft,Dr. Hamadou Bello,site-officiel,2026-11-08,CC-BY-4.0,human,single-translator,Ousmanou Danpullo
@@ -73,8 +73,8 @@ Amount to send,Kaalis mo nelaɗen,draft,Dr. Hamadou Bello,site-officiel-en,2026-
 Fee,Njoɓdi,draft,Dr. Hamadou Bello,site-officiel-en,2026-11-08,CC-BY-4.0,human,single-translator,Ousmanou Danpullo
 Gratuit,Ko yoɓataa,draft,Dr. Hamadou Bello,site-officiel,2026-11-08,CC-BY-4.0,human,single-translator,Ousmanou Danpullo
 Free,Ko yoɓataa,draft,Dr. Hamadou Bello,site-officiel-en,2026-11-08,CC-BY-4.0,human,single-translator,Ousmanou Danpullo
-Total à débiter,Kaalis mo yoɓetee fof,draft,Dr. Hamadou Bello,site-officiel,2026-11-08,CC-BY-4.0,human,single-translator,Ousmanou Danpullo
-Total to debit,Kaalis mo yoɓetee fof,draft,Dr. Hamadou Bello,site-officiel-en,2026-11-08,CC-BY-4.0,human,single-translator,Ousmanou Danpullo
+Total à débiter,Kawral kaalis mo yoɓetee,draft,NkapLingua editorial,site-officiel,2026-11-08,CC-BY-4.0,editorial,lexicon-assisted,Ousmanou Danpullo
+Total to debit,Kawral kaalis mo yoɓetee,draft,NkapLingua editorial,site-officiel-en,2026-11-08,CC-BY-4.0,editorial,lexicon-assisted,Ousmanou Danpullo
 Balance after transfer,Jawdindi ɓaawo gollal,draft,Dr. Hamadou Bello,site-officiel-en,2026-11-08,CC-BY-4.0,human,single-translator,Ousmanou Danpullo
 Continuer,Wontu yeeso,draft,Dr. Hamadou Bello,site-officiel,2026-11-08,CC-BY-4.0,human,single-translator,Ousmanou Danpullo
 Continue,Wontu yeeso,draft,Dr. Hamadou Bello,site-officiel-en,2026-11-08,CC-BY-4.0,human,single-translator,Ousmanou Danpullo
@@ -98,10 +98,10 @@ Summary,Koolol,draft,Dr. Hamadou Bello,site-officiel-en,2026-11-08,CC-BY-4.0,hum
 Vérifiez les informations avant de confirmer le transfert.,Teeŋtu kabaaru ko adii yoɓgol nawgol.,draft,Dr. Hamadou Bello,site-officiel,2026-11-08,CC-BY-4.0,human,single-translator,Ousmanou Danpullo
 Check the details before confirming the transfer.,Teeŋtu kabaaru ko adii yoɓgol nawgol.,draft,Dr. Hamadou Bello,site-officiel-en,2026-11-08,CC-BY-4.0,human,single-translator,Ousmanou Danpullo
 Amount,Kaalis,draft,Dr. Hamadou Bello,site-officiel-en,2026-11-08,CC-BY-4.0,human,single-translator,Ousmanou Danpullo
-Total debited,Kaalis yoɓaaɗo fof,draft,Dr. Hamadou Bello,site-officiel-en,2026-11-08,CC-BY-4.0,human,single-translator,Ousmanou Danpullo
+Total debited,Kawral kaalis yoɓaaɗo,draft,NkapLingua editorial,site-officiel-en,2026-11-08,CC-BY-4.0,editorial,lexicon-assisted,Ousmanou Danpullo
 Téléphone,Cinndel,draft,Dr. Hamadou Bello,site-officiel,2026-11-08,CC-BY-4.0,human,single-translator,Ousmanou Danpullo
 Phone,Cinndel,draft,Dr. Hamadou Bello,site-officiel-en,2026-11-08,CC-BY-4.0,human,single-translator,Ousmanou Danpullo
-Reference,Tiinde,draft,NkapLingua editorial,site-officiel-extra-en,2026-11-09,CC-BY-4.0,editorial,lexicon-assisted,
+Reference,Limre,draft,NkapLingua editorial,site-officiel-extra-en,2026-11-09,CC-BY-4.0,editorial,lexicon-assisted,
 Opération,Gollal,draft,Dr. Hamadou Bello,site-officiel,2026-11-08,CC-BY-4.0,human,single-translator,Ousmanou Danpullo
 Operation,Gollal,draft,Dr. Hamadou Bello,site-officiel-en,2026-11-08,CC-BY-4.0,human,single-translator,Ousmanou Danpullo
 Je confirme que les informations ci-dessus sont correctes.,Mi teeŋtii kabaaru les ɗoo ko goonga.,draft,Dr. Hamadou Bello,site-officiel,2026-11-08,CC-BY-4.0,human,single-translator,Ousmanou Danpullo

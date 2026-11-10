@@ -105,7 +105,15 @@ Le lexique duala de 2014 confirme :
 confirme quelques racines (`môni`, `bank`, `njoɓdi`) et signale deux
 traductions suspectes. Elle ne remplace ni le T2 indépendant ni l’arbitre.
 
-## 6. Actions
+## 6. Corrections appliquées
+
+- `total → kawral` (source `import/fub.csv` + pack).
+- `Reference → Limre` (source + pack).
+- `Facture électricité → Mákyé má mwinda` en ewondo : **candidat éditorial
+  non sourcé**, ajouté pour couvrir le site ; à confirmer par un natif.
+- Aucun statut `validated` ajouté.
+
+## 7. Actions
 
 1. Faire relire en priorité `total → fof` et `Reference → Tiinde`.
 2. Vérifier `Compte → Asaaku` face au terme `limngal` du Webonary ; trancher

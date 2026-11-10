@@ -1,0 +1,11 @@
+{
+  "toast": "Mode démo SAFINUM (données fictives) — 40 segment(s) traduits en Ewondo (source : français, 86 % · pack non validé · 30 entrée(s) de pack non validée(s)). Les montants et entités ont été préservés.",
+  "markers": {
+    "ewo": 39,
+    "untranslated": 0,
+    "demo": 0
+  },
+  "facture": true,
+  "factureLine": "Mákyé má mwinda",
+  "errors": []
+}
