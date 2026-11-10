@@ -34,6 +34,7 @@ function loadPopup() {
   let reason = "low_roundtrip:0.2";
   window.chrome = {
     runtime: {
+      onMessage: { addListener() {} },
       sendMessage: async () => ({
         detected: { code: "fr", confidence: 0.9 },
         translation: { id: "text", text: "x", ok: false, reason }

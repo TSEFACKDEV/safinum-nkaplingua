@@ -20,6 +20,23 @@ function spec() {
   return LANG.getTarget(target) || LANG.getTarget("fub");
 }
 
+api.runtime.onMessage.addListener((message) => {
+  if (message?.type !== "NK_TRANSLATION_SUMMARY") return;
+  const summary = message.summary || {};
+  if (!summary.translated) return;
+  const parts = [
+    `${summary.translated} segment(s) traduits en ${displayName({
+      label: summary.label
+    })}`,
+    summary.human
+      ? `${summary.human} entrée(s) de pack non validée(s)`
+      : null,
+    summary.demo ? `${summary.demo} alerte(s) MT démo` : null,
+    summary.untranslated ? `${summary.untranslated} non traduit(s)` : null
+  ].filter(Boolean);
+  setStatus(parts.join(" · ") + ".");
+});
+
 function displayName(item) {
   return String(item?.label || "")
     .replace(/\s*\([^)]*\)\s*$/, "")

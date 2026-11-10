@@ -110,7 +110,10 @@ function loadPopup(storage) {
       sendMessage: async () => ({})
     },
     scripting: { executeScript: async () => {} },
-    runtime: { sendMessage: async () => ({}) }
+    runtime: {
+      sendMessage: async () => ({}),
+      onMessage: { addListener() {} }
+    }
   };
   window.eval(languagesSource);
   window.eval(popupSource);

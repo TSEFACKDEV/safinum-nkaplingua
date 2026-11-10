@@ -59,7 +59,7 @@ traduit, les montants restent intacts.
 `Le solde est de 25 000 FCFA.` → `Jawdindi ko 25 000 FCFA.`
 
 - montant préservé ;
-- badge **« brouillon éditorial »** ;
+- mention unique « brouillons non validés » en bas de page ;
 - entrée de pack, pas de MT sur ce cas.
 
 ## 5. Bascule EN
@@ -82,6 +82,7 @@ traduit, les montants restent intacts.
 
 - 0 entrée `validated`.
 - Les packs contiennent des brouillons humains et éditoriaux ; les entrées
-  éditoriales sont marquées comme telles.
+  éditoriales sont marquées comme telles. La page affiche une seule mention
+  discrète, pas une pastille par phrase.
 - Le test automatisé utilise une permission d’hôte de test.
 - La couverture EN est partielle.
