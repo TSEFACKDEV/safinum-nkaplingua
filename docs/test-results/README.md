@@ -6,15 +6,14 @@ Générés en local par les harnais du dépôt. Aucune donnée réelle.
 
 | Fichier | Portée | Résultat |
 |---|---|---|
-| `real-site-packs-2026-11-10-005452.json` | Chrome 158, site SAFINUM, 5 étapes + EN, packs | **188/188** sur 5 étapes, 0 non traduit, 0 critique MT, restauration 5/5, 0 erreur |
-| `real-firefox-2026-11-10-005419.json` | Firefox 159, site SAFINUM, 5 étapes + EN, packs | **188/188** sur 5 étapes, 0 non traduit, 0 critique MT, restauration 5/5, 0 erreur |
+| `real-site-packs-2026-11-10-011346.json` | Chrome 158, site SAFINUM, 5 étapes + EN, packs | **188/188** sur 5 étapes, 0 non traduit, 0 critique MT, restauration 5/5, 0 erreur |
+| `real-firefox-2026-11-10-011500.json` | Firefox 159, site SAFINUM, 5 étapes + EN, packs | **188/188** sur 5 étapes, 0 non traduit, 0 critique MT, restauration 5/5, 0 erreur |
 | `api-load-2026-11-10.json` | 24 requêtes concurrentes FR/EN + 503 ewondo | **24/24**, 0 mélange, p95 29,86 ms ; 503 isolé 6/6, `/health` 200 |
 | `pipeline-pack.json` | `node tests/pipeline.e2e.js --mode=pack` | pass, 0 réseau |
 | `pipeline-reviewed.json` | `node tests/pipeline.e2e.js --mode=reviewed` | pass : draft/reviewed en démo, refus en strict |
 | `pipeline-edge.json` | `node tests/pipeline.e2e.js --mode=edge` | pass, 4 cas |
 
-EN pack-only : **37/44**, 7 restants. L’audit du 9 nov (avec backend) donne
-38/44 ; l’écart est `Back to hackathon`, absent des packs.
+EN pack-only : **40/44** (4 dates restantes). Les entrées anglaises `Back to hackathon`, `Balance` et `Fees` ont été ajoutées en brouillons ; l’audit du 9 nov (backend) donnait 38/44.
 
 Voir [`docs/REAL_TEST_2026-11-10.md`](../REAL_TEST_2026-11-10.md).
 
@@ -49,7 +48,7 @@ Voir [`docs/AUDIT_2026-11-08.md`](../AUDIT_2026-11-08.md).
 | `pipeline-unseen.json` | `node tests/pipeline.e2e.js --mode=unseen` | bloqué : NLLB absent |
 | `pipeline-demo.json` | `node tests/pipeline.e2e.js --mode=demo` | bloqué : validation native absente |
 | `native-review-audit.json` / `.csv` | `python3 scripts/audit-native-reviews.py` | **472 lignes auditées**, 85 « Tafsiri » rejetées |
-| `reviewed-packs.json` | `python3 scripts/build-reviewed-packs.py` | **0 validée**, 182/195/196 entrées |
+| `reviewed-packs.json` | `python3 scripts/build-reviewed-packs.py` | **0 validée**, 185/198/199 entrées |
 
 ## Ce que ces résultats prouvent
 
@@ -63,7 +62,7 @@ Voir [`docs/AUDIT_2026-11-08.md`](../AUDIT_2026-11-08.md).
 ## Ce que ces résultats ne prouvent pas
 
 - **0 phrase validée** : les packs sont des brouillons humains/éditoriaux ;
-- EN partiel : 37/44 pack-only, 38/44 avec backend ;
+- EN 40/44 pack-only (4 dates restantes), 38/44 avec backend dans l’audit ;
 - inédit réel : **1/20 production, 4/20 démo** ;
 - NLLB seul : **31/192** sur 5 étapes, 6/44 à l’étape 1 ;
 - qualité linguistique native : aucune validation TRAPD indépendante ;

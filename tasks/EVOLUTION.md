@@ -3027,3 +3027,105 @@ mot `json`) avec les champs ci-dessous. Exemple de structure, en indentation :
   "blockers": []
 }
 ```
+
+## 2026-11-10T01:20:00+01:00 — Marius — M3 — done
+
+```json
+{
+  "timestamp": "2026-11-10T01:20:00+01:00",
+  "person": "Marius",
+  "branch": "marius",
+  "task": "M3",
+  "status": "done",
+  "summary": "Politique packs élargie : hors démo, les entrées draft/reviewed sont utilisables pour le niveau B/C, avec compteur « pack non validé » dans le toast ; le niveau A reste strictement validated. Ajout de trois variantes anglaises éditoriales (Back to hackathon, Balance, Fees) et reconstruction des packs. La couverture EN pack-only passe de 37/44 à 40/44 ; les 4 restants sont des dates.",
+  "files": [
+    "extension/background.js",
+    "scripts/test-extension.js",
+    "tests/pipeline.e2e.js",
+    "data/site-officiel/messages-extra.csv",
+    "data/language-packs/import/fub.csv",
+    "data/language-packs/import/ewo.csv",
+    "data/language-packs/import/dua.csv",
+    "extension/language-packs/fub.json",
+    "extension/language-packs/ewo.json",
+    "extension/language-packs/dua.json"
+  ],
+  "tests": [
+    {
+      "command": "node scripts/test-extension.js",
+      "result": "pass",
+      "note": "B/C draft accepté hors démo, A draft refusé (untranslated_critical)"
+    },
+    {
+      "command": "node tests/pipeline.e2e.js --mode=all",
+      "result": "pass",
+      "note": "pack, reviewed (B/C brouillon hors démo), edge"
+    },
+    {
+      "command": "python3 scripts/check-language-packs.py && python3 scripts/check-language-data.py && python3 scripts/check-pack-collisions.py",
+      "result": "pass",
+      "note": "packs 185/198/199, 0 validée, collisions arbitrées"
+    },
+    {
+      "command": "node tests/site-demo.e2e.js && node tests/criticality.test.js",
+      "result": "pass",
+      "note": "niveau A strict et badges"
+    },
+    {
+      "command": "python3 scripts/check-evolution.py",
+      "result": "pass",
+      "note": "journal valide après ajout de l'entrée"
+    }
+  ],
+  "evidence": "EN pack-only 40/44 ; 185/198/199 entrées, 0 validée ; test-extension vérifie A refusé / B-C accepté hors démo",
+  "next": "Faire relire les brouillons par le panel natif ; ne pas présenter les 40/44 comme validés",
+  "blockers": []
+}
+```
+
+## 2026-11-10T01:25:00+01:00 — Marius — M9 — done
+
+```json
+{
+  "timestamp": "2026-11-10T01:25:00+01:00",
+  "person": "Marius",
+  "branch": "marius",
+  "task": "M9",
+  "status": "done",
+  "summary": "Harnais réels rejoués après l'élargissement des packs : Chrome 158 et Firefox 159 donnent toujours 188/188 sur les 5 étapes, 0 non traduit, 0 critique MT, restauration 5/5, 0 erreur. EN passe à 40/44 dans les deux navigateurs ; les 4 restants sont des dates. Preuves JSON remplacées par les runs du 10 novembre 01:13/01:15.",
+  "files": [
+    "tests/real-site.e2e.js",
+    "tests/real-firefox.e2e.py",
+    "docs/REAL_TEST_2026-11-10.md",
+    "docs/test-results/real-site-packs-2026-11-10-011346.json",
+    "docs/test-results/real-firefox-2026-11-10-011500.json",
+    "docs/test-results/README.md",
+    "tests/README.md"
+  ],
+  "tests": [
+    {
+      "command": "PLAYWRIGHT_BROWSERS_PATH=.cache/ms-playwright node tests/real-site.e2e.js",
+      "result": "pass",
+      "note": "Chrome 158, 188/188, EN 40/44, 0 erreur"
+    },
+    {
+      "command": "server/.venv/bin/python tests/real-firefox.e2e.py",
+      "result": "pass",
+      "note": "Firefox 159, 188/188, EN 40/44, 0 erreur"
+    },
+    {
+      "command": "NK_MOCK=1 server/.venv/bin/python -m pytest -q server/test_api.py",
+      "result": "pass",
+      "note": "30 tests"
+    },
+    {
+      "command": "python3 scripts/check-evolution.py",
+      "result": "pass",
+      "note": "journal valide après ajout de l'entrée"
+    }
+  ],
+  "evidence": "docs/test-results/real-site-packs-2026-11-10-011346.json ; docs/test-results/real-firefox-2026-11-10-011500.json ; 188/188 et EN 40/44",
+  "next": "Conserver 0 validée comme limite ; viser la validation native et l'inédit",
+  "blockers": []
+}
+```

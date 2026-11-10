@@ -12,7 +12,7 @@
   "validation": {
     "validated": 0,
     "reviewed": 0,
-    "draft": 196
+    "draft": 199
   },
   "entries": [
     {
@@ -2365,6 +2365,42 @@
       "license": "CC-BY-4.0",
       "provenance": "editorial",
       "reviewLevel": "lexicon-assisted",
+      "originalReviewer": null
+    },
+    {
+      "source": "Back to hackathon",
+      "target": "Timbia ombusa na hackathon",
+      "status": "draft",
+      "reviewer": "Dr. Ebongue Din",
+      "reviewedAt": "2026-11-08",
+      "context": "site-officiel-extra-en",
+      "license": "CC-BY-4.0",
+      "provenance": "human",
+      "reviewLevel": "composed-template",
+      "originalReviewer": null
+    },
+    {
+      "source": "Balance",
+      "target": "Mɔ̀nì mwé ɓáyí",
+      "status": "draft",
+      "reviewer": "Dr. Ebongue Din",
+      "reviewedAt": "2026-11-08",
+      "context": "site-officiel-extra-en",
+      "license": "CC-BY-4.0",
+      "provenance": "human",
+      "reviewLevel": "composed-template",
+      "originalReviewer": null
+    },
+    {
+      "source": "Fees",
+      "target": "Mɔ́ǹgá",
+      "status": "draft",
+      "reviewer": "Dr. Ebongue Din",
+      "reviewedAt": "2026-11-08",
+      "context": "site-officiel-extra-en",
+      "license": "CC-BY-4.0",
+      "provenance": "human",
+      "reviewLevel": "composed-template",
       "originalReviewer": null
     }
   ]
