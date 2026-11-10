@@ -48,10 +48,12 @@ validations natives**.
 
 ## Décision
 
-- Les 32 entrées restent dans le **corpus de référence** ;
-- elles ne sont **pas injectées dans les packs** : orthographe 1950/1972,
-  sens moderne incertain, licence ;
-- le pack garde ses 185 / 199 / 199 brouillons ;
+- Les 32 entrées sont maintenant **branchées dans les packs** comme entrées
+  `draft`, contexte `lexique-reference`, avec la source et le badge « non
+  validé » ;
+- elles ne sont **jamais `validated`** ;
+- les collisions de cibles sont dans l’allowlist, pas une validation ;
+- les packs passent à 200 / 210 / 203 entrées ;
 - **0 phrase validée**.
 
 ## Prochaine étape

@@ -2402,6 +2402,58 @@
       "provenance": "human",
       "reviewLevel": "composed-template",
       "originalReviewer": null
+    },
+    {
+      "source": "argent",
+      "target": "moní",
+      "status": "draft",
+      "reviewer": "Helmlinger 1972",
+      "reviewedAt": "2026-11-10",
+      "context": "lexique-reference",
+      "license": "CC-BY-4.0",
+      "provenance": "editorial",
+      "reviewLevel": "lexicon-assisted",
+      "originalReviewer": "",
+      "note": "Entrée « moní » : argent. Non validé. Source lexicographique, non validée."
+    },
+    {
+      "source": "banque",
+      "target": "bank",
+      "status": "draft",
+      "reviewer": "Helmlinger 1972",
+      "reviewedAt": "2026-11-10",
+      "context": "lexique-reference",
+      "license": "CC-BY-4.0",
+      "provenance": "editorial",
+      "reviewLevel": "lexicon-assisted",
+      "originalReviewer": "",
+      "note": "Entrée « bank » (de l'anglais) : la banque. Non validé. Source lexicographique, non validée."
+    },
+    {
+      "source": "envoyer",
+      "target": "lóma",
+      "status": "draft",
+      "reviewer": "Helmlinger 1972",
+      "reviewedAt": "2026-11-10",
+      "context": "lexique-reference",
+      "license": "CC-BY-4.0",
+      "provenance": "editorial",
+      "reviewLevel": "lexicon-assisted",
+      "originalReviewer": "",
+      "note": "Racine « lóma » : envoi, envoyer. Non validé. Source lexicographique, non validée."
+    },
+    {
+      "source": "recevoir",
+      "target": "kusa",
+      "status": "draft",
+      "reviewer": "Helmlinger 1972",
+      "reviewedAt": "2026-11-10",
+      "context": "lexique-reference",
+      "license": "CC-BY-4.0",
+      "provenance": "editorial",
+      "reviewLevel": "lexicon-assisted",
+      "originalReviewer": "",
+      "note": "« bekusedi » (de kusa) : réception, reçu ; recevoir. Non validé. Source lexicographique, non validée."
     }
   ]
 }
