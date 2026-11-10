@@ -2909,3 +2909,121 @@ mot `json`) avec les champs ci-dessous. Exemple de structure, en indentation :
   "blockers": []
 }
 ```
+
+## 2026-11-10T01:00:00+01:00 — Marius — M7 — done
+
+```json
+{
+  "timestamp": "2026-11-10T01:00:00+01:00",
+  "person": "Marius",
+  "branch": "marius",
+  "task": "M7",
+  "status": "done",
+  "summary": "Recette réelle Firefox 159 ajoutée et verte : XPI de test pack-only, 5 étapes + EN, 188/188 segments sur les 5 étapes, 0 non traduit, 0 critique MT, restauration 5/5, 0 erreur page, titre traduit. Chrome 158 rejoué avec le harnais versionné : mêmes 188/188. EN pack-only = 37/44 ; l'audit avec backend donne 38/44, l'écart est Back to hackathon, absent des packs.",
+  "files": [
+    "tests/real-firefox.e2e.py",
+    "tests/real-site.e2e.js",
+    "docs/REAL_TEST_2026-11-10.md",
+    "docs/test-results/real-firefox-2026-11-10-005419.json",
+    "docs/test-results/real-site-packs-2026-11-10-005452.json",
+    "tests/README.md"
+  ],
+  "tests": [
+    {
+      "command": "server/.venv/bin/python tests/real-firefox.e2e.py",
+      "result": "pass",
+      "note": "Firefox 159, 5 étapes + EN, frToastTotal 188, 0 non traduit, 0 critique MT, restauration 5/5, 0 erreur"
+    },
+    {
+      "command": "PLAYWRIGHT_BROWSERS_PATH=.cache/ms-playwright node tests/real-site.e2e.js",
+      "result": "pass",
+      "note": "Chrome 158, 5 étapes + EN, 188/188, 0 non traduit, 0 critique MT, restauration 5/5"
+    },
+    {
+      "command": "node tests/error-taxonomy.test.js",
+      "result": "pass",
+      "note": "messages distincts low_roundtrip/token_lost/too_short/dnt_missing"
+    },
+    {
+      "command": "node tests/content.test.js && node tests/preservation.test.js && node tests/title.test.js",
+      "result": "pass",
+      "note": "non-régression DOM, préservation, titre"
+    },
+    {
+      "command": "NK_MOCK=1 server/.venv/bin/python -m pytest -q server/test_api.py",
+      "result": "pass",
+      "note": "30 tests"
+    },
+    {
+      "command": "python3 scripts/check-evolution.py",
+      "result": "pass",
+      "note": "journal valide après ajout de l'entrée"
+    }
+  ],
+  "evidence": "docs/REAL_TEST_2026-11-10.md ; preuves JSON Chrome et Firefox ; toasts 40+39+32+40+37=188 ; Firefox pack-only EN 37/44 expliqué par Back to hackathon absent du pack",
+  "next": "Faire valider les brouillons par le panel TRAPD ; compléter l'entrée EN manquante si le backend n'est pas disponible",
+  "blockers": []
+}
+```
+
+## 2026-11-10T01:10:00+01:00 — Marius — M9 — done
+
+```json
+{
+  "timestamp": "2026-11-10T01:10:00+01:00",
+  "person": "Marius",
+  "branch": "marius",
+  "task": "M9",
+  "status": "done",
+  "summary": "Harnais de recette réel versionnés (Chrome Playwright et Firefox Selenium), charge API avec 24 requêtes concurrentes FR/EN (24/24, 0 mélange, p95 29,86 ms) et 503 ewondo isolé (1 puis 6/6, /health 200). Ajout du test de taxonomie popup (4 messages distincts) et du mode reviewed du pipeline. docs/REAL_TEST_2026-11-10.md et docs/test-results mis à jour.",
+  "files": [
+    "tests/real-site.e2e.js",
+    "tests/real-firefox.e2e.py",
+    "tests/api-load.test.py",
+    "tests/error-taxonomy.test.js",
+    "docs/REAL_TEST_2026-11-10.md",
+    "docs/test-results/api-load-2026-11-10.json",
+    "docs/test-results/real-site-packs-2026-11-10-005452.json",
+    "docs/test-results/real-firefox-2026-11-10-005419.json",
+    "docs/test-results/README.md",
+    "tests/README.md",
+    ".github/workflows/ci.yml",
+    "server/requirements-ci.txt"
+  ],
+  "tests": [
+    {
+      "command": "server/.venv/bin/python tests/api-load.test.py",
+      "result": "pass",
+      "note": "24/24 200, 0 mélange, p50 23,33 / p95 29,86 ms ; 503 ewondo 6/6, health 200"
+    },
+    {
+      "command": "node tests/error-taxonomy.test.js",
+      "result": "pass",
+      "note": "low_roundtrip, token_lost, too_short, dnt_missing distincts"
+    },
+    {
+      "command": "node tests/pipeline.e2e.js --mode=all",
+      "result": "pass",
+      "note": "pack 7,57 ms, reviewed, edge ; 0 réseau"
+    },
+    {
+      "command": "NK_MOCK=1 server/.venv/bin/python tests/api.robust.py",
+      "result": "pass",
+      "note": "17/17"
+    },
+    {
+      "command": "NK_MOCK=1 server/.venv/bin/python -m pytest -q server/test_api.py",
+      "result": "pass",
+      "note": "30 tests"
+    },
+    {
+      "command": "python3 scripts/check-evolution.py",
+      "result": "pass",
+      "note": "journal valide après ajout de l'entrée"
+    }
+  ],
+  "evidence": "docs/test-results/api-load-2026-11-10.json ; harnais real-site/real-firefox ; docs/REAL_TEST_2026-11-10.md",
+  "next": "Exécuter unseen/demo avec NLLB et packs validés ; conserver les harnais réels dans la CI manuelle",
+  "blockers": []
+}
+```
