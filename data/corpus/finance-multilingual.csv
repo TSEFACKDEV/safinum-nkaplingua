@@ -25,8 +25,11 @@ banque,bank,Banke,Banke,Bank,candidate,candidate,candidate,lexique-extra,fub/ewo
 Banque en ligne,,Banke e internet,Banke á internet,Banke a internet,candidate,candidate,candidate,pack-fub;pack-ewo;pack-dua,editorial,
 Beneficiary,,Keɓoowo,Mòd á nnyɔ́ŋ,Moto nu mányɔ̀ŋɔ̀,candidate,candidate,candidate,pack-fub;pack-ewo;pack-dua,human,
 Beneficiary name,,Innde keɓoowo,Ezóŋ é mòd á nnyɔ́ŋ,Dina la moto nu mányɔ̀ŋɔ̀,candidate,candidate,candidate,pack-fub;pack-ewo;pack-dua,human,
+billet de banque,,kayitol kaalis,,,candidate,missing,missing,Dictionnaire Fulfulde (PDF),source-attested,Référence lexicographique ; non validé.
 Bonjour,Hello,Jam tiiɗi,Mbolani,Ã mbɔti,candidate,candidate,candidate,site-officiel:SO-001;pack-fub;pack-ewo;pack-dua,human,message site; statut source en_cours
 "Bonjour, Amina.","Hello, Amina.","Jam tiiɗi, Amina.","Mbolani, Amina.","Idiba, Amina.",candidate,candidate,candidate,site-officiel:SO-051;pack-fub;pack-ewo;pack-dua,human,message site; statut source en_cours
+budget,,ceede,,,candidate,missing,missing,Dictionnaire Fulfulde (PDF),source-attested,Référence lexicographique ; non validé.
+bénéfice,,nyoodo,,,candidate,missing,missing,Dictionnaire Fulfulde (PDF),source-attested,Référence lexicographique ; non validé.
 Bénéficiaire,Beneficiary,Keɓoowo,Mòd á nnyɔ́ŋ,Moto nu mányɔ̀ŋɔ̀,candidate,candidate,candidate,site-officiel:SO-019;pack-fub;pack-ewo;pack-dua;lexique-extra,human;pack,message site; statut source en_cours Compositions humaines ; non attestées en ligne.
 caisse,,,ewôli,,missing,candidate,missing,pichon-1950,source-attested,"Pichon 1950, p. 110 ; référence, non validé."
 capacité de remboursement,,doole yoɓgol,ngul á adzúmbí moní,nginya a timbise mɔ̀nì,candidate,candidate,candidate,pack-fub;pack-ewo;pack-dua,human,
@@ -52,11 +55,14 @@ Consultez votre solde et lancez un transfert en toute sécurité.,Check your bal
 Contactez le service client pour plus d'informations.,,,Kɔ́bɔ́ ne nsáŋá á nnam ású bíə́mə́ fə́.,Bena mɓola a ɓato ású bina mepé.,missing,candidate,candidate,pack-ewo;pack-dua,human,
 Continue,,Wontu yeeso,Kə́ ósu,Kɛ́ oboso,candidate,candidate,candidate,pack-fub;pack-ewo;pack-dua,human,
 Continuer,Continue,Wontu yeeso,Kə́ ósu,Kɛ́ oboso,candidate,candidate,candidate,site-officiel:SO-017;pack-fub;pack-ewo;pack-dua,human,message site; statut source en_cours
+coût,,njaru,,,candidate,missing,missing,Dictionnaire Fulfulde (PDF),source-attested,Référence lexicographique ; non validé.
+crédit,,baɗal,,,candidate,missing,missing,Dictionnaire Fulfulde (PDF),source-attested,Référence lexicographique ; non validé.
 Current account,,Asaaku jooni,Kɔ́ndó courant,Kompa a ɓoso,candidate,candidate,candidate,pack-fub;pack-ewo;pack-dua,editorial,
 Des frais supplémentaires peuvent s'appliquer.,,,Mákyé fə́ má ne kɔ́ndáná.,Móǹgá mepé me ne na me ɓata.,missing,candidate,candidate,pack-ewo;pack-dua,human,
 destinataire,,keɓoowo,mòd á nnyɔ́ŋ,moto nu mányɔ̀ŋɔ̀,candidate,candidate,candidate,pack-fub;pack-ewo;pack-dua,human,
 Dismiss,,Uddu,Fúdbá,Diɓa,candidate,candidate,candidate,pack-fub;pack-ewo;pack-dua,human,
 découvert,,kaalis ɓurɗo yowede,,,candidate,missing,missing,pack-fub,human,
+dépense,,canke,,,candidate,missing,missing,Dictionnaire Fulfulde (PDF),source-attested,Référence lexicographique ; non validé.
 dépôt,deposit,naatgol kaalis,óláŋá,tutula mɔ̀nì,candidate,candidate,candidate,pack-fub;pack-ewo;pack-dua;lexique-extra,human;fub: Webonary ; ewo/dua: pack,Limgal est ambigu (dépôt/recensement).
 Edit,,Waylu,Tsíŋí,Tukwa,candidate,candidate,candidate,pack-fub;pack-ewo;pack-dua,human,
 Effectuer un transfert,Make a transfer,Nelu kaalis,Bɔ́ nkus,Lómò mɔ̀nì,candidate,candidate,candidate,site-officiel:SO-004;pack-fub;pack-ewo;pack-dua,human,message site; statut source en_cours
@@ -65,9 +71,9 @@ Electricity bill,,Njoɓdi elektrik,,Facture a mwinda,candidate,missing,candidate
 Enter the recipient details. Always verify the number before confirming.,,Lonndu kabaaru keɓoowo. Teeŋtu limre nde ko adii yoɓgol.,Lóndó bíə́mə́ bí mòd á nnyɔ́ŋ. Yéŋə́ nɔ́mbələ ósu na ó sínyí.,Londe bina bá moto nu mányɔ̀ŋɔ̀. Jeele nombara oboso na o disese.,candidate,candidate,candidate,pack-fub;pack-ewo;pack-dua,human,
 "Environnement de test — données fictives, aucune transaction réelle.","Test environment — fictional data, no real transaction.","Nokku ƴeewndo — kabaaru fenaande, alaa gollal goonga.",Vèyá á esáŋá — bíə́mə́ bí ngə́lə́.,"Wuma a jeele — bina ba wite, soma téŋɛ̂ e titi.",candidate,candidate,candidate,site-officiel:SO-050;pack-fub;pack-ewo;pack-dua,human,message site; statut source en_cours
 Environnement de test — Hackathon SAFINUM Innovate 2026 - Safinum,,Nokku ƴeewndo — Hackathon SAFINUM Innovate 2026 - Safinum,Vèyá á esáŋá — Hackathon SAFINUM Innovate 2026 - Safinum,Wuma a jeele — Hackathon SAFINUM Innovate 2026 - Safinum,candidate,candidate,candidate,pack-fub;pack-ewo;pack-dua,human,
-envoyer,,,lom,,missing,candidate,missing,pichon-1950,source-attested,"Pichon 1950, p. 112 ; référence, non validé."
+envoyer,,,lom,lóma,missing,candidate,candidate,pichon-1950;Helmlinger 1972,source-attested;source-attested,"Pichon 1950, p. 112 ; référence, non validé."
 Erreur réseau : le service est temporairement indisponible. Réessayez.,Network error: the service is temporarily unavailable. Please try again.,Fenaande rese : gollal ina daɗi. Enndu kadi.,Eboŋle é réseau : nsáŋá á ne tə́té. Bámbáná dábə́.,Boɓan ba réseau : eɓolo e titié ndedi. Byápé.,candidate,candidate,candidate,site-officiel:SO-069;pack-fub;pack-ewo;pack-dua,human,message site; statut source en_cours
-facture,invoice,,,,missing,missing,missing,lexique-extra,,À traduire par un natif ; ne pas inventer.
+facture,invoice,faktiir,,,candidate,missing,missing,lexique-extra;Dictionnaire Fulfulde (PDF),source-attested,À traduire par un natif ; ne pas inventer.
 Facture électricité,Electricity bill,Njoɓdi elektrik,Mákyé má mwinda,Facture a mwinda,candidate,candidate,candidate,site-officiel:SO-063;pack-fub;pack-ewo;pack-dua,human;editorial,"message site; statut source en_cours Candidat éditorial 2026-11-10 : mákyé (prix/frais) + mwinda (électricité, forme duala). Aucune source ewondo fiable ; à confirmer par un natif. Non validé."
 Fee,,Njoɓdi,Mákyé,Móǹgá,candidate,candidate,candidate,pack-fub;pack-ewo;pack-dua,human,
 Fees,,Njoɓdi,Mákyé,Mɔ́ǹgá,candidate,candidate,candidate,pack-fub;pack-ewo;pack-dua,human,
@@ -87,6 +93,7 @@ Hello,,Jam tiiɗi,Mbolani,Ã mbɔti,candidate,candidate,candidate,pack-fub;pack
 I confirm the information above is correct.,,Mi teeŋtii kabaaru les ɗoo ko goonga.,Me tɔ́ŋlé na bíə́mə́ bí ne yɔ́bɔ yé ne ébən.,Na madise na bina ɓé na omóŋ ɓé téŋɛ̂.,candidate,candidate,candidate,pack-fub;pack-ewo;pack-dua,human,
 I have verified the beneficiary name and phone number.,,Mi teeŋtii innde e limre keɓoowo.,Me yéŋéya ezóŋ á nɔ́mbələ á mòd á nnyɔ́ŋ.,Na jeeleyɛ̂ dina na nombara a moto nu mányɔ̀ŋɔ̀.,candidate,candidate,candidate,pack-fub;pack-ewo;pack-dua,human,
 Important message,,Kabaaru mawɗo,Mŋkát á mfi,Mweŋge mwá mfi,candidate,candidate,candidate,pack-fub;pack-ewo;pack-dua,human,
+impôt,,lampo,,,candidate,missing,missing,Dictionnaire Fulfulde (PDF),source-attested,Référence lexicographique ; non validé.
 "Instant, free transfer",,Nawgol jaawngol ko yoɓataa,Nkus á oyá-oyá á tékə́ mákyé,Lómò mɔ̀nì a ɓuɓéɓuɓé na esikaye móǹgá,candidate,candidate,candidate,pack-fub;pack-ewo;pack-dua,human,
 Insufficient balance for this transfer.,,Jawdindi ina famɗi ngam waɗde ndii gollal.,Abálá á tékə́ yáne kɔ́ŋ na á bɔ nkus nyó.,Mɔ̀nì mwé ɓáyí mu titi ɓwá lómò mɔ̀nì.,candidate,candidate,candidate,pack-fub;pack-ewo;pack-dua,human,
 J'ai vérifié le nom et le numéro du bénéficiaire.,I have verified the beneficiary name and phone number.,Mi teeŋtii innde e limre keɓoowo.,Me yéŋéya ezóŋ á nɔ́mbələ á mòd á nnyɔ́ŋ.,Na jeeleyɛ̂ dina na nombara a moto nu mányɔ̀ŋɔ̀.,candidate,candidate,candidate,site-officiel:SO-025;pack-fub;pack-ewo;pack-dua,human,message site; statut source en_cours
@@ -108,7 +115,7 @@ Merchant payment,,Njoɓdi julaajo,Mákyé má nkàndá,Wasa mɔ̀nì a nkánda�
 Message important,Important message,Kabaaru mawɗo,Mŋkát á mfi,Mweŋge mwá mfi,candidate,candidate,candidate,site-officiel:SO-042;pack-fub;pack-ewo;pack-dua,human,message site; statut source en_cours
 Mobile Money,Mobile Money,Mobile Money,Mobile Money,Mobile Money,candidate,candidate,candidate,site-officiel:SO-056;pack-fub;pack-ewo;pack-dua,human,message site; statut source en_cours
 Modifier,Edit,Waylu,Tsíŋí,Tukwa,candidate,candidate,candidate,site-officiel:SO-036;pack-fub;pack-ewo;pack-dua,human,message site; statut source en_cours
-monnaie,,,mvakəma,,missing,candidate,missing,pichon-1950,source-attested,"Pichon 1950, p. 115 ; référence, non validé."
+monnaie,,becca,mvakəma,,candidate,candidate,missing,pichon-1950;Dictionnaire Fulfulde (PDF),source-attested;source-attested,"Pichon 1950, p. 115 ; référence, non validé."
 Montant,Amount,Kaalis,Moní,Mɔ̀nì,candidate,candidate,candidate,site-officiel:SO-029;pack-fub;pack-ewo;pack-dua;lexique-extra,human;pack,message site; statut source en_cours Emploi large de l'argent ; à ne pas confondre avec un montant exact.
 Montant à envoyer,Amount to send,Kaalis mo nelaɗen,Moní á ne na á kə́,Mɔ̀nì mú yéná na lómò,candidate,candidate,candidate,site-officiel:SO-012;pack-fub;pack-ewo;pack-dua,human,message site; statut source en_cours
 Motif du transfert,Transfer reason,Dalilla nawgol,Nzólé á nkus,Njóm a lómò mɔ̀nì,candidate,candidate,candidate,site-officiel:SO-023;pack-fub;pack-ewo;pack-dua,human,message site; statut source en_cours
@@ -141,12 +148,15 @@ Phone number,,Limre cinndel,Nɔ́mbələ á télafon,Nombara a telefon,candidate
 pièce d'identité,,kadi enndam,lélá éyoŋ,kalati a edube,candidate,candidate,candidate,pack-fub;pack-ewo;pack-dua,human,
 plafond,limit,keeri kaalis,asúgú,sókó a mɔ̀nì,candidate,candidate,candidate,pack-fub;pack-ewo;pack-dua;lexique-extra,human,À traduire par un natif ; ne pas inventer.
 Please provide the beneficiary name and phone number.,,Mawnu innde e limre keɓoowo.,Və́ ezóŋ á nɔ́mbələ á mòd á nnyɔ́ŋ.,Londe dina na nombara a moto nu mányɔ̀ŋɔ̀.,candidate,candidate,candidate,pack-fub;pack-ewo;pack-dua,human,
+prix,,coggu,,,candidate,missing,missing,Dictionnaire Fulfulde (PDF),source-attested,Référence lexicographique ; non validé.
+prix total,,njaru kawral,,,candidate,missing,missing,Dictionnaire Fulfulde (PDF),source-attested,Référence lexicographique ; non validé.
 Protocole de test,,Porotokol ƴeewndo,Protokole á esáŋá,Protokole a jeele,candidate,candidate,candidate,pack-fub;pack-ewo;pack-dua,editorial,
 prêt,loan,,,,missing,missing,missing,lexique-extra,,À traduire par un natif ; ne pas inventer.
 pénalité,penalty,,,,missing,missing,missing,lexique-extra,,À traduire par un natif ; ne pas inventer.
 pénalité de retard,,njoɓdi batte,mákyé má eyele,móǹgá mwá boɓi,candidate,candidate,candidate,pack-fub;pack-ewo;pack-dua,human,
 Recent transactions,,Golle kaalis ɓennuɗe,Bésama bí abóban eyele,Bina ba mɔ̀nì ba ɓoɓí ɓosɔ̂,candidate,candidate,candidate,pack-fub;pack-ewo;pack-dua,human,
-recevoir,,,bɛ́lɛ́,,missing,candidate,missing,pichon-1950,source-attested,"Pichon 1950, p. 118 ; référence, non validé."
+recette,,keɓaa,,,candidate,missing,missing,Dictionnaire Fulfulde (PDF),source-attested,Référence lexicographique ; non validé.
+recevoir,,,bɛ́lɛ́,kusa,missing,candidate,candidate,pichon-1950;Helmlinger 1972,source-attested;source-attested,"Pichon 1950, p. 118 ; référence, non validé."
 Reference,,Limre,Eñíŋlé,Nombara a lómo mɔ̀nì,candidate,candidate,candidate,pack-fub;pack-ewo;pack-dua,editorial,"Correction documentaire 2026-11-10 : total -> kawral ; Reference -> Limre (nombre/référence), Tiinde = boîte/chaîne/chance. À confirmer par un locuteur natif ; non validée."
 refuser,,,tɛ́b,,missing,candidate,missing,pichon-1950,source-attested,"Pichon 1950, p. 118 ; référence, non validé."
 remboursement,refund,yoɓgol kaalis,adzúmbí moní,timbise mɔ̀nì,candidate,candidate,candidate,pack-fub;pack-ewo;pack-dua;lexique-extra,human,À traduire par un natif ; ne pas inventer.
@@ -160,6 +170,7 @@ Référence,Reference,Limre,Eñíŋlé,Nombara a lómo mɔ̀nì,candidate,candid
 Safinum account,,Asaaku Safinum,Kɔ́ndó á Safinum,Kompa a Safinum,candidate,candidate,candidate,pack-fub;pack-ewo;pack-dua,human,
 Safinum Pay — demonstration environment. Do not enter real personal data.,,Safinum Pay — nokku ƴeewndo. Huutoraaka kabaaru hoore ma goonga.,Safinum Pay — vèyá á esáŋá. Kə́ lóndó bíə́mə́ bí eñíŋ wō.,Safinum Pay — eɓolo a jeele. Suka londe bina ɓɔŋ bá moto.,candidate,candidate,candidate,pack-fub;pack-ewo;pack-dua,human,
 Safinum Pay — environnement de démonstration. Ne saisissez aucune donnée personnelle réelle.,Safinum Pay — demonstration environment. Do not enter real personal data.,Safinum Pay — nokku ƴeewndo. Huutoraaka kabaaru hoore ma goonga.,Safinum Pay — vèyá á esáŋá. Kə́ lóndó bíə́mə́ bí eñíŋ wō.,Safinum Pay — eɓolo a jeele. Suka londe bina ɓɔŋ bá moto.,candidate,candidate,candidate,site-officiel:SO-049;pack-fub;pack-ewo;pack-dua,human,message site; statut source en_cours
+salaire,,tawegol,,,candidate,missing,missing,Dictionnaire Fulfulde (PDF),source-attested,Référence lexicographique ; non validé.
 Salaire reçu,Salary received,Njoɓdi lebbi naatii,Fáwá á nnyɔ́ŋya,Fáwá e nyóŋɛ̂,candidate,candidate,candidate,site-officiel:SO-061;pack-fub;pack-ewo;pack-dua,human,message site; statut source en_cours
 Salary received,,Njoɓdi lebbi naatii,Fáwá á nnyɔ́ŋya,Fáwá e nyóŋɛ̂,candidate,candidate,candidate,pack-fub;pack-ewo;pack-dua,human,
 Secure connection,,Tesku kisal,Nláŋáná á ɔ́bám,Mulongu mu batamɛ̂,candidate,candidate,candidate,pack-fub;pack-ewo;pack-dua,human,
@@ -180,6 +191,7 @@ Summary,,Koolol,Afúlásí,Tombise,candidate,candidate,candidate,pack-fub;pack-e
 Sécurité,Security,Kisal,Ɔ́bám,Bata,candidate,candidate,candidate,site-officiel:SO-046;pack-fub;pack-ewo;pack-dua;lexique-extra,human;pack,message site; statut source en_cours Aucune attestation dictionnaire trouvée.
 taux d'intérêt,,tolno nafa,ntéláná á mfá'á,edinge a longele,candidate,candidate,candidate,pack-fub;pack-ewo;pack-dua,human,
 taux de change,,tolno mbiliro,nsɛ́ŋlé moní,edinge a tukwisa mɔ̀nì,candidate,candidate,candidate,pack-fub;pack-ewo;pack-dua,human,
+taxe,,lampo,,,candidate,missing,missing,Dictionnaire Fulfulde (PDF),source-attested,Référence lexicographique ; non validé.
 "Test environment — fictional data, no real transaction.",,"Nokku ƴeewndo — kabaaru fenaande, alaa gollal goonga.",Vèyá á esáŋá — bíə́mə́ bí ngə́lə́.,"Wuma a jeele — bina ba wite, soma téŋɛ̂ e titi.",candidate,candidate,candidate,pack-fub;pack-ewo;pack-dua,human,
 Test protocol,,Porotokol ƴeewndo,Protokole á esáŋá,Protokole a jeele,candidate,candidate,candidate,pack-fub;pack-ewo;pack-dua,editorial,
 The amount must be greater than zero.,,Kaalis ina foti ɓurde zero.,Moní á yian yə́bə́ étə́ŋ éyɔŋ zéró.,Mɔ̀nì mu yiane ɓa móŋlé ombon a zéró.,candidate,candidate,candidate,pack-fub;pack-ewo;pack-dua,human,
