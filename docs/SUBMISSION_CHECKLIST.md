@@ -1,16 +1,17 @@
 # Checklist de soumission — SAFINUM Innovate 2026
 
-> **État réel — audit du 9 novembre 2026** : **188/188 segments sur les 5
-> étapes** avec les packs, 3 langues au premier écran, 1/20 inédites en
-> production, 4/20 en démo, **0 phrase validée**. Le repli NLLB seul est
-> 31/192. Ne pas confondre couverture pack et validation native. Ne pas promettre une page entièrement traduite.
+> **État réel — audit du 10 novembre 2026** : pack-only **188/188 sur les 5
+> étapes**, EN **40/44**, 3 ZIP + lint OK, 1/20 inédites en production,
+> 4/20 en démo, **0 phrase validée**, Firefox non rejoué. La vidéo finale
+> (voix off/montage/release) n’est pas prête. Ne pas confondre couverture pack
+> et validation native.
 > Voir [`AUDIT_2026-11-09.md`](AUDIT_2026-11-09.md).
 
 ## 1. Livrables
 
 - [ ] Description de la solution : `README.md` + `docs/PRESELECTION.md`
 - [ ] Prototype fonctionnel : `extension/` + `server/` + `demo/`
-- [x] Vidéo ≤ 3 minutes : `NkapLingua-Demo.mp4` (2 min 19)
+- [ ] Vidéo finale ≤ 3 minutes : screencast silencieux produit, voix off/montage/release à finaliser
 - [ ] Document technique : `docs/TECHNICAL.md`
 - [ ] Langues + validation : `docs/LANGUAGE_VALIDATION.md`, `docs/LANGUAGES.md`
 - [ ] Intégration des données linguistiques : `docs/DATA_INTEGRATION.md`

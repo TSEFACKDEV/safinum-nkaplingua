@@ -3285,3 +3285,70 @@ mot `json`) avec les champs ci-dessous. Exemple de structure, en indentation :
   "blockers": []
 }
 ```
+
+## 2026-11-10T20:55:00+01:00 — Freedy — F3 — in_progress
+
+```json
+{
+  "timestamp": "2026-11-10T20:55:00+01:00",
+  "person": "Freedy",
+  "branch": "freedy",
+  "task": "F3",
+  "status": "in_progress",
+  "summary": "Recette finale pack-only sur d4cb347 : 188/188 sur les 5 étapes, EN 40/44, repli phrase OK, restauration 5/5, 0 erreur. Firefox non rejoué.",
+  "files": [
+    "docs/AUDIT_2026-11-10.md",
+    "docs/test-results/real-site-packs-2026-11-10.json",
+    "docs/COMPLIANCE.md",
+    "docs/SUBMISSION_CHECKLIST.md"
+  ],
+  "tests": [
+    {
+      "command": "NK_TEST_CACHE=/tmp/nk-real-site-cache2 node tests/real-site.e2e.js",
+      "result": "pass",
+      "note": "188/188 FR, EN 40/44, fallback OK, restauration 5/5"
+    },
+    {
+      "command": "tests/real-firefox.e2e.py",
+      "result": "blocked",
+      "note": "Firefox/geckodriver absents de la machine"
+    }
+  ],
+  "evidence": "docs/test-results/real-site-packs-2026-11-10.json",
+  "next": "Firefox réel ; vidéo finale (voix off/montage) et release",
+  "blockers": []
+}
+```
+
+## 2026-11-10T20:58:00+01:00 — Freedy — F4 — in_progress
+
+```json
+{
+  "timestamp": "2026-11-10T20:58:00+01:00",
+  "person": "Freedy",
+  "branch": "freedy",
+  "task": "F4",
+  "status": "in_progress",
+  "summary": "Suite complète verte sur d4cb347 : API 17/17, pytest 30, charge 24/24 avec 503 isolé, taxonomie, repli phrase, packaging 3 ZIP 394 Ko et web-ext lint 0/0/0. 0 phrase validée, inédit 1/20.",
+  "files": [
+    "docs/AUDIT_2026-11-10.md",
+    "docs/test-results/api-load-2026-11-10.json",
+    "docs/test-results/README.md"
+  ],
+  "tests": [
+    {
+      "command": "tests/api-load.test.py",
+      "result": "pass",
+      "note": "24/24 200, p95 39,42 ms mock, 503 isolé, health 200"
+    },
+    {
+      "command": "scripts/package-extension.sh && npx web-ext lint",
+      "result": "pass",
+      "note": "3 ZIP 394 Ko, 0 erreur/warning"
+    }
+  ],
+  "evidence": "docs/test-results/api-load-2026-11-10.json ; dist/*.zip",
+  "next": "Validation native et vidéo finale",
+  "blockers": []
+}
+```

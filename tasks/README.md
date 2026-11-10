@@ -102,11 +102,11 @@ L’audit réel (`docs/AUDIT_2026-11-08.md`) change les priorités :
    humains/éditoriaux. C’est le blocage principal.
 2. **Inédit** : 1/20 en production, 4/20 en démo ; les packs couvrent le site,
    pas le nouveau contenu.
-3. **EN partiel** : 38/44, 6 segments en anglais.
-4. **Firefox** non rejoué sur le site dans cette instance.
-5. **Deux stacks** : packs = 188/188 ; NLLB seul = 31/192. Ne pas mélanger.
-6. **Préservation** : compte/noms OK avec les packs, tests verts ; vérifier
-   encore les cas hors pack.
+3. **EN partiel** : 40/44 pack-only, 4 dates restent en anglais.
+4. **Firefox** non rejoué sur cette base.
+5. **Deux stacks** : pack-only = 188/188 ; NLLB seul = 31/192. Ne pas mélanger.
+6. **Vidéo/release** : screencast silencieux seulement ; voix off, montage et
+   asset de release à finaliser avant envoi.
 
 Conséquence : la démonstration doit être **réduite à un paragraphe court** et
 les packs doivent être priorisés. Ne pas cocher la définition de « fini » tant

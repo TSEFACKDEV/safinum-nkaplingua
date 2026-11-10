@@ -11,7 +11,7 @@ Ce document confronte le prototype NkapLingua au règlement officiel du
 | 2. Parcours financier : solde, frais, transfert | ✅ | Page FINAKA : solde, frais, formulaire de transfert, récapitulatif |
 | 3. Préservation des montants, frais, bénéficiaires, conditions, alertes | ✅ | Audit 9 nov : compte `CM 001 2345 6789 01` avec espaces, noms, téléphone, références et montants conservés sur les 5 étapes ; tests `preservation` et `token-repair` verts. |
 | 4. Fonctionnement sans modifier le code source | ✅ | Injection à l’exécution, aucun changement serveur, toggle original ; le cloud est opt-in et désactivé par défaut |
-| 5. Adaptation à un nouveau contenu | ⚠️ | Popup « texte inédit », sélection et attributs. **Inédit réel : 1/20 en production, 4/20 en démo** ; les packs couvrent le site mais pas le nouveau contenu. |
+| 5. Adaptation à un nouveau contenu | ⚠️ | Popup « texte inédit », sélection et attributs. **Inédit réel : 1/20 en production, 4/20 en démo** ; pack-only EN **40/44**, 4 dates restent en anglais. |
 
 ## 2. Grille d’évaluation (100 points)
 
@@ -21,9 +21,9 @@ Ce document confronte le prototype NkapLingua au règlement officiel du
 | Intégration et indépendance | 20 | 18–20 | Aucune modification du site ; `activeTab` + `scripting` |
 | Sécurité et préservation des informations | 20 | **18–19** | Compte, noms, téléphone, montants et références préservés sur le site ; tests de non-régression verts. |
 | Accessibilité et expérience utilisateur | 15 | 12–14 | Choix de 3 langues, détection affichée, toggle original, `lang`, popup natif ; pas encore de lecture audio |
-| Adaptation à un nouveau contenu | 10 | **7–8** | Packs efficaces sur le site ; inédit 1/20 production, 4/20 démo ; EN 38/44. |
+| Adaptation à un nouveau contenu | 10 | **7–8** | Packs efficaces sur le site ; inédit 1/20 production, 4/20 démo ; EN pack-only 40/44. |
 | Faisabilité technique et documentation | 10 | **8–9** | Documentation riche, mais plusieurs chiffres antérieurs (12/20, 66/71) ne sont pas reproduits ; l’audit du 8 nov corrige. |
-| **Total indicatif** | **100** | **92 brut ; 82 prudent** | Pénalité linguistique liée aux 0 phrase validée ; pas une note du jury. |
+| **Total indicatif** | **100** | **92 brut ; 82 prudent** | Pénalité linguistique liée aux 0 phrase validée ; Firefox non rejoué ; pas une note du jury. |
 
 > Ces notes sont une auto-évaluation, pas une note du jury.
 
