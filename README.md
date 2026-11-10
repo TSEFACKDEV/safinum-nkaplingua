@@ -29,25 +29,27 @@ ci-dessous et [`docs/NATIVE_REVIEW_AUDIT.md`](docs/NATIVE_REVIEW_AUDIT.md).
 Projet préparé pour le **SAFINUM Innovate Challenge 2026** (Yaoundé,
 26–28 novembre 2026).
 
-## État réel au 8 novembre 2026
+## État réel au 10 novembre 2026
 
 | Élément | État vérifié |
 |---|---|
-| Pack fulfulde | **182 entrées** (FR+EN), **0 validée** ; 85 lignes « Tafsiri » rejetées |
-| Packs ewondo / duala | **195** et **196 entrées**, **0 validée** (2 `reviewed` en ewondo) |
+| Pack fulfulde | **185 entrées** (FR+EN), **0 validée** ; brouillons humains/éditoriaux |
+| Packs ewondo / duala | **198** et **199 entrées**, **0 validée** (2 `reviewed` en ewondo) |
 | Glossaire finance | 40 termes, **0 validé** |
 | Audio | **0 enregistrement** ; 15 phrases sans montant prêtes |
 | MT duala (pilote) | **échoué** : répétitions, non utilisable pour le niveau A |
-| Test site officiel (couverture) | **188/188 segments sur 5 étapes avec les packs**, 3 langues ; NLLB seul : 31/192 |
-| Firefox 159 | paquet chargé en add-on temporaire ; parcours site non automatisé |
-| CI GitHub Actions | **5 jobs verts** sur `develop` et `marius` |
-| Tests | 30 tests API + 17 contrats HTTP + jsdom + pipeline pack/revue/edge |
+| Test site officiel | **188/188** sur 5 étapes en Chrome et Firefox, 0 non traduit, 0 critique MT, restauration 5/5, 0 erreur ; NLLB seul : 31/192 |
+| EN pack-only | **40/44** (4 dates restantes) ; 38/44 avec backend dans l’audit du 9 nov |
+| Firefox 159 | recette réelle 5 étapes + EN via XPI de test |
+| CI GitHub Actions | **5 jobs verts** sur `develop` |
+| Tests | 30 API + 17 contrats + charge/503 + jsdom + taxonomie + harnais Chrome/Firefox |
 
 Le niveau A (solde, frais, PIN/OTP, confirmation, erreurs) ne vient que d’un
 pack validé en mode strict ; sans phrase validée, l’original reste affiché
 avec un badge « non traduit ». En mode démo SAFINUM, une entrée humaine
 `draft`/`reviewed` peut couvrir le niveau A avec le badge « brouillon
-humain » ; une phrase sans pack passe en MT avec le badge « démo MT ».
+humain ». Depuis le 10 novembre, hors démo, les brouillons `draft`/`reviewed`
+ne couvrent que le niveau B/C, jamais A, avec un toast « pack non validé ».
 
 Suivi détaillé du lot moteur : [docs/MARIUS_STATUS.md](docs/MARIUS_STATUS.md).
 
