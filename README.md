@@ -516,6 +516,7 @@ exigence par exigence dans [`docs/COMPLIANCE.md`](docs/COMPLIANCE.md).
 | [`docs/DUALA_MT.md`](docs/DUALA_MT.md) | modèle expérimental anglais → duala (CC-BY-4.0) |
 | [`docs/AUDIT_2026-11-10.md`](docs/AUDIT_2026-11-10.md) | audit final pack-only : 188/188, EN 40/44, 0 validé |
 | [`docs/ONLINE_VERIFICATION_2026-11-10.md`](docs/ONLINE_VERIFICATION_2026-11-10.md) | vérification en ligne et corrections : total, Reference, facture ewondo |
+| [`docs/AUDIT_SAFINUM_GUIDE_2026-11-10.md`](docs/AUDIT_SAFINUM_GUIDE_2026-11-10.md) | audit spécial barème SAFINUM : 79/100, plan d'investissement |
 | [`data/corpus/finance-multilingual.csv`](data/corpus/finance-multilingual.csv) | corpus candidat FR/EN/fub/ewo/dua, 213 lignes |
 | [`docs/AUDIT_2026-11-09.md`](docs/AUDIT_2026-11-09.md) | audit packs + serveur : 188/188, 3 langues, 0 validé |
 | [`docs/AUDIT_2026-11-08.md`](docs/AUDIT_2026-11-08.md) | audit NLLB seul : 31/192, 1/20, repli |

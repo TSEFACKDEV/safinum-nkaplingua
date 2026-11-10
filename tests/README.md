@@ -27,6 +27,7 @@ Node 20+ (CI) ou 24 (poste de dev). Python 3.12 pour le backend.
 | `tests/error-taxonomy.test.js` | messages popup distincts : low_roundtrip, token_lost, too_short, dnt_missing | `node tests/error-taxonomy.test.js` | **pass** |
 | `tests/real-site.e2e.js` | recette Chrome réelle 5 étapes + EN, packs, préservation (manuel) | `PLAYWRIGHT_BROWSERS_PATH=.cache/ms-playwright node tests/real-site.e2e.js` | **pass** |
 | `tests/real-firefox.e2e.py` | recette Firefox réelle 5 étapes + EN, packs, préservation (manuel) | `server/.venv/bin/python tests/real-firefox.e2e.py` | **pass** |
+| `tests/guide.e2e.js` | conditions du guide SAFINUM : page non modifiée, dynamique, montants, changement de langue | `NK_TEST_CACHE=/tmp/nk-guide node tests/guide.e2e.js` | **pass** |
 | `scripts/test-extension.js` | registre des langues, détection, packs, jetons, qualité | `node scripts/test-extension.js` | **pass** |
 | `server/test_api.py` | contrats API, CORS, refus, mode mock | `NK_MOCK=1 python3 -m pytest -q server/test_api.py` | **pass** |
 | `tests/corpus.test.py` | corpus candidat : 213 lignes, clés uniques, 0 validé | `python3 tests/corpus.test.py` | **pass** |

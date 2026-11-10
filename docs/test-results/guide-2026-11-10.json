@@ -1,0 +1,38 @@
+{
+  "startedAt": "2026-11-10T21:26:29.158Z",
+  "siteUrl": "https://safinum.cm/hackathon-test",
+  "checks": {
+    "noHookNeeded": true,
+    "unmodifiedPage": true,
+    "amountsPreserved": true,
+    "referencePreserved": true,
+    "accountPreserved": true,
+    "inputsUntouched": true,
+    "dynamicKnownTranslated": true,
+    "dynamicUnknownStaysFrench": true,
+    "languageSwitchRetranslates": true
+  },
+  "errors": [],
+  "status": "pass",
+  "translation": {
+    "translated": 40,
+    "state": {
+      "ok": true,
+      "active": true,
+      "busy": false,
+      "translated": 41,
+      "untranslated": 1,
+      "partial": 0,
+      "truncated": false,
+      "target": "ewo",
+      "label": "Ewondo",
+      "pageLang": "fr"
+    }
+  },
+  "dynamic": {
+    "text": "Asaaku ma\n\nLe vendeur arrive demain.",
+    "translated": 1,
+    "untranslated": 1
+  },
+  "failed": []
+}

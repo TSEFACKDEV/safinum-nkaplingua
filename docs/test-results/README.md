@@ -24,6 +24,7 @@ Voir [`docs/REAL_TEST_2026-11-10.md`](../REAL_TEST_2026-11-10.md).
 | `real-site-packs-2026-11-09.json` | Site SAFINUM, 5 étapes, packs + serveur | **188/188 traduits**, 0 non traduit, 0 critique MT, restauration 5/5 |
 | `real-site-packs-2026-11-10.json` | Pack-only, backend arrêté, 5 étapes + EN + repli | **188/188 FR, EN 40/44**, repli OK, 0 erreur |
 | `real-site-ewo-facture-2026-11-10.json` | Ewondo ciblé après correction | **40/40**, `Mákyé má mwinda`, 0 erreur |
+| `guide-2026-11-10.json` | Conditions du guide SAFINUM | **pass** : dynamique, montants, références, langue |
 | `api-load-2026-11-10.json` | 24 requêtes concurrentes + 503 isolé | **24/24 200**, 503 isolé, `/health` 200 |
 | `real-first3-packs-2026-11-09.json` | Premier écran, ewondo/fulfulde | 39/40 et 40/40, titres traduits |
 | `real-first3-dua-2026-11-09.json` | Premier écran, duala | 40/40, titre traduit |
