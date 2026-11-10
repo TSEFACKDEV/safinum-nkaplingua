@@ -172,8 +172,20 @@ async function main() {
     `réseau inattendu : ${background.calls.join(", ")}`
   );
 
+  // Une seule mention discrète, pas une pastille par phrase.
+  const notice = window.document.getElementById("nk-notice-host");
+  assert(
+    notice && notice.shadowRoot.textContent.includes("brouillons non validés"),
+    "mention unique de traduction non validée absente"
+  );
+  assert(
+    !read("extension/content.js").includes('content: "brouillon humain"') &&
+      !read("extension/content.js").includes('content: "brouillon éditorial"'),
+    "pastilles par phrase encore présentes dans le CSS"
+  );
+
   console.log(
-    "site-demo OK — pack humain, badge draft, badge non traduit, zéro réseau externe"
+    "site-demo OK — pack humain, mention unique, badge non traduit, zéro réseau externe"
   );
 }
 

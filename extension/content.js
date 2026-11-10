@@ -68,45 +68,6 @@
       vertical-align: middle;
       white-space: nowrap;
     }
-    [data-nk-human-reviewed="reviewed"]::after {
-      content: "humain non validé";
-      display: inline-block;
-      margin-left: 6px;
-      padding: 0 6px;
-      border: 1px solid #0f766e;
-      border-radius: 999px;
-      background: #ccfbf1;
-      color: #115e59;
-      font: 500 10px/1.6 system-ui, -apple-system, "Segoe UI", sans-serif;
-      vertical-align: middle;
-      white-space: nowrap;
-    }
-    [data-nk-human-reviewed="draft"]::after {
-      content: "brouillon humain";
-      display: inline-block;
-      margin-left: 6px;
-      padding: 0 6px;
-      border: 1px solid #b45309;
-      border-radius: 999px;
-      background: #fef3c7;
-      color: #92400e;
-      font: 500 10px/1.6 system-ui, -apple-system, "Segoe UI", sans-serif;
-      vertical-align: middle;
-      white-space: nowrap;
-    }
-    [data-nk-human-reviewed="editorial"]::after {
-      content: "brouillon éditorial";
-      display: inline-block;
-      margin-left: 6px;
-      padding: 0 6px;
-      border: 1px solid #7c3aed;
-      border-radius: 999px;
-      background: #ede9fe;
-      color: #5b21b6;
-      font: 500 10px/1.6 system-ui, -apple-system, "Segoe UI", sans-serif;
-      vertical-align: middle;
-      white-space: nowrap;
-    }
   `;
 
   function ensureBadgeStyle() {
@@ -115,6 +76,70 @@
     style.id = "nk-badge-style";
     style.textContent = BADGE_STYLE;
     (document.head || document.documentElement).appendChild(style);
+  }
+
+  // Mention unique et discrète : une seule pastille en bas de page au lieu
+  // d'une étiquette sur chaque phrase. Le détail (nombre d'entrées non
+  // validées, alertes) reste disponible au survol et dans le popup.
+  let noticeHost = null;
+
+  function clearNotice() {
+    noticeHost?.remove();
+    noticeHost = null;
+  }
+
+  function updateNotice({ label, translated, human, demo, untranslated }) {
+    clearNotice();
+    if (!translated) return;
+
+    const host = document.createElement("div");
+    host.id = "nk-notice-host";
+    host.style.all = "initial";
+    host.style.position = "fixed";
+    host.style.left = "16px";
+    host.style.bottom = "16px";
+    host.style.zIndex = "2147483646";
+    host.style.pointerEvents = "none";
+
+    const shadow = host.attachShadow({ mode: "open" });
+    const style = document.createElement("style");
+    style.textContent = `
+      .notice {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        padding: 5px 10px;
+        border: 1px solid rgba(232, 213, 173, 0.28);
+        border-radius: 999px;
+        background: rgba(18, 59, 46, 0.9);
+        color: #f8f4ec;
+        box-shadow: 0 6px 18px rgba(13, 42, 32, 0.18);
+        font: 500 11px/1.4 "Noto Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+        white-space: nowrap;
+        opacity: 0.92;
+      }
+      .notice::before {
+        content: "";
+        width: 6px;
+        height: 6px;
+        border-radius: 50%;
+        background: #c9a45c;
+        flex: none;
+      }
+    `;
+
+    const box = document.createElement("div");
+    box.className = "notice";
+    box.setAttribute("role", "status");
+    box.textContent = `NkapLingua · ${label} — traduction automatique, brouillons non validés`;
+    box.title =
+      `${translated} segment(s) traduits` +
+      (human ? ` · ${human} entrée(s) de pack non validée(s)` : "") +
+      (demo ? ` · ${demo} alerte(s) MT démo` : "") +
+      (untranslated ? ` · ${untranslated} non traduit(s)` : "");
+    shadow.append(style, box);
+    document.documentElement.appendChild(host);
+    noticeHost = host;
   }
 
   const SKIP_TAGS = new Set([
@@ -621,6 +646,7 @@
     attributeOriginals = new WeakMap();
     active = false;
     stopObserver();
+    clearNotice();
     showToast("Original restauré.");
   }
 
@@ -657,6 +683,7 @@
     applying = true;
     active = true;
     stopObserver();
+    clearNotice();
     showToast(
       `Traduction en ${spec.label}… ` +
         (spec.engine === "pack"
@@ -899,6 +926,30 @@
               : "") +
             "). Les montants et entités ont été préservés."
         );
+      }
+
+      updateNotice({
+        label: spec.label,
+        translated: translatedCount,
+        human: humanReviewedCount,
+        demo: demoCriticalCount,
+        untranslated: flaggedCount + criticalCount
+      });
+
+      // Détail pour le popup, s'il est encore ouvert.
+      try {
+        api.runtime.sendMessage({
+          type: "NK_TRANSLATION_SUMMARY",
+          summary: {
+            label: spec.label,
+            translated: translatedCount,
+            human: humanReviewedCount,
+            demo: demoCriticalCount,
+            untranslated: flaggedCount + criticalCount
+          }
+        });
+      } catch {
+        // Best-effort : le popup est souvent déjà fermé.
       }
 
       currentTarget = targetCode;

@@ -89,7 +89,7 @@ confirmation, puis le message d’erreur / avertissement de sécurité.
 ### 1:50 — 2:15 · Contenu inédit
 
 **Action** : ajouter `Le solde est de 25 000 FCFA.` dans la page ; montrer
-`Jawdindi ko 25 000 FCFA.` avec le badge « brouillon éditorial ».
+`Jawdindi ko 25 000 FCFA.` avec la mention « brouillons non validés ».
 
 **Voix off** :
 

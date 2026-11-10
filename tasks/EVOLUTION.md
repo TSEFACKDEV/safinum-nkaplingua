@@ -2835,3 +2835,45 @@ mot `json`) avec les champs ci-dessous. Exemple de structure, en indentation :
   ]
 }
 ```
+
+## 2026-11-10T17:00:00+01:00 — Klein — K12 — done
+
+```json
+{
+  "timestamp": "2026-11-10T17:00:00+01:00",
+  "person": "Klein",
+  "branch": "klein",
+  "task": "K12",
+  "status": "done",
+  "summary": "Retiré les pastilles « brouillon humain » et « brouillon éditorial » affichées sur chaque phrase traduite. La page affiche désormais une seule mention discrète en bas à gauche (« traduction automatique, brouillons non validés »), avec le détail au survol et dans le popup via NK_TRANSLATION_SUMMARY. Les pastilles « non traduit » et « démo MT » restent uniquement pour les alertes réelles. Les attributs data-nk-* restent posés pour les tests et la traçabilité.",
+  "files": [
+    "extension/content.js",
+    "extension/popup.js",
+    "tests/site-demo.e2e.js",
+    "tests/cloud-gating.test.js",
+    "docs/REAL_TEST_2026-11-09.md",
+    "docs/INSTALLED_EXTENSION_TEST.md",
+    "docs/VIDEO_SCRIPT.md",
+    "tasks/EVOLUTION.md"
+  ],
+  "tests": [
+    {
+      "command": "node tests/site-demo.e2e.js",
+      "result": "pass",
+      "note": "mention unique présente, plus aucune pastille brouillon dans le CSS"
+    },
+    {
+      "command": "node scripts/test-extension.js && node tests/content.test.js && node tests/privacy.test.js && node tests/cloud-gating.test.js && node tests/criticality.test.js && node tests/pipeline.e2e.js --mode=all && node tests/preservation.test.js && node tests/title.test.js",
+      "result": "pass"
+    },
+    {
+      "command": "NK_MOCK=1 server/.venv/bin/python -m pytest -q server/test_api.py && NK_MOCK=1 server/.venv/bin/python tests/api.robust.py",
+      "result": "pass",
+      "note": "30 tests + 17/17"
+    }
+  ],
+  "evidence": "extension/content.js (updateNotice, BADGE_STYLE) ; tests/site-demo.e2e.js ; dist/nkaplingua-extension.zip reconstruit",
+  "next": "Vérifier visuellement dans Chrome installé, puis enregistrer la vidéo",
+  "blockers": []
+}
+```
