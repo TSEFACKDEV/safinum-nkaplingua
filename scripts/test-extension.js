@@ -101,6 +101,11 @@ context.__NK_PACK_OVERRIDES__ = {
         source: "Phrase non validée.",
         target: "Phrase ewo.",
         status: "draft"
+      },
+      {
+        source: "Le solde est en brouillon.",
+        target: "Jawdindi brouillon.",
+        status: "draft"
       }
     ]
   }
@@ -208,10 +213,22 @@ vm.runInContext(
     "dua",
     "fr"
   );
-  assert(draft.translations[0].ok === false, "phrase draft acceptée");
+  assert(draft.translations[0].ok === true, "phrase draft B/C refusée en strict");
   assert(
-    draft.translations[0].reason === "pack_unverified",
-    "raison pack_unverified attendue"
+    draft.translations[0].humanReviewed === true &&
+      draft.translations[0].packStatus === "draft",
+    "métadonnées draft absentes en strict"
+  );
+
+  const draftCritical = await context.translateSegments(
+    [{ id: "dc", text: "Le solde est en brouillon." }],
+    "dua",
+    "fr"
+  );
+  assert(draftCritical.translations[0].ok === false, "niveau A draft accepté en strict");
+  assert(
+    draftCritical.translations[0].reason === "untranslated_critical",
+    `raison A draft ${draftCritical.translations[0].reason}`
   );
 
   const leak = context.validateTranslation(

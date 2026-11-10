@@ -1,9 +1,10 @@
 # Checklist de soumission — SAFINUM Innovate 2026
 
-> **État réel — audit du 8 novembre 2026** : **31/192 segments traduits sur
-> les 5 étapes** (6/44 à l’étape 1), 1/20 phrases inédites en production,
-> 4/20 en démo, 0 phrase de pack validée. Ne pas promettre une page entièrement traduite.
-> Voir [`AUDIT_2026-11-08.md`](AUDIT_2026-11-08.md).
+> **État réel — audit du 9 novembre 2026** : **188/188 segments sur les 5
+> étapes** avec les packs, 3 langues au premier écran, 1/20 inédites en
+> production, 4/20 en démo, **0 phrase validée**. Le repli NLLB seul est
+> 31/192. Ne pas confondre couverture pack et validation native. Ne pas promettre une page entièrement traduite.
+> Voir [`AUDIT_2026-11-09.md`](AUDIT_2026-11-09.md).
 
 ## 1. Livrables
 
@@ -34,10 +35,10 @@
 - [ ] **Bloqué** : modèles `flagship-ai/cameroon-int8` absents dans l’audit ; NLLB seul est plus faible
 - [ ] Modèle NLLB téléchargé en secours (ou mode `NK_MOCK=1` pour l’UI)
 - [ ] `GET /health` confirme `flagship.models.ewo` et `flagship.models.fub` (faux dans l’environnement audité)
-- [ ] **Ne pas démontrer la page entière** : 6/44 segments seulement ; préparer un paragraphe court
+- [x] **Démontrer la page avec les packs** : 188/188, mais annoncer « brouillons non validés » ; le repli NLLB seul est 31/192
 - [ ] Extension épinglée dans la barre d’outils
 - [ ] Page de l’interface fournie par le jury ouverte
-- [ ] Test de traduction sur un court paragraphe (pas la page entière)
+- [ ] Test de traduction sur un court paragraphe, puis sur la page avec packs
 - [ ] Test du toggle « Restaurer l’original » (vérifier à 1,5 s)
 - [ ] Test d’un message d’erreur (distinguer qualité et jeton)
 - [ ] Test d’un contenu inédit court, en connaissant le 1/20
@@ -75,7 +76,7 @@ message pendant la démo.
 **Quelle est la limite principale ?**
 La qualité réelle du backend disponible : NLLB seul donne 6/44 segments sur
 l’étape 1 et 1/20 en production. Les packs contiennent des brouillons humains
-(182/195/196) mais restent à valider par un T2 indépendant et un arbitre ; en
+(185/198/199) mais restent à valider par un T2 indépendant et un arbitre ; en
 mode strict, les phrases critiques restent donc en français.
 
 **Est-ce que ça marche sur l’interface du jury ?**

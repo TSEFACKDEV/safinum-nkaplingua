@@ -29,25 +29,27 @@ ci-dessous et [`docs/NATIVE_REVIEW_AUDIT.md`](docs/NATIVE_REVIEW_AUDIT.md).
 Projet préparé pour le **SAFINUM Innovate Challenge 2026** (Yaoundé,
 26–28 novembre 2026).
 
-## État réel au 8 novembre 2026
+## État réel au 10 novembre 2026
 
 | Élément | État vérifié |
 |---|---|
-| Pack fulfulde | **182 entrées** (FR+EN), **0 validée** ; 85 lignes « Tafsiri » rejetées |
-| Packs ewondo / duala | **195** et **196 entrées**, **0 validée** (2 `reviewed` en ewondo) |
+| Pack fulfulde | **185 entrées** (FR+EN), **0 validée** ; brouillons humains/éditoriaux |
+| Packs ewondo / duala | **198** et **199 entrées**, **0 validée** (2 `reviewed` en ewondo) |
 | Glossaire finance | 40 termes, **0 validé** |
 | Audio | **0 enregistrement** ; 15 phrases sans montant prêtes |
 | MT duala (pilote) | **échoué** : répétitions, non utilisable pour le niveau A |
-| Test site officiel (couverture) | 5 étapes, 104 segments, 71 uniques, 0 texte visible non collecté — **mais qualité réelle NLLB : 31/192 sur 5 étapes, 6/44 sur l’étape 1** |
-| Firefox 159 | paquet chargé en add-on temporaire ; parcours site non automatisé |
-| CI GitHub Actions | **5 jobs verts** sur `develop` et `marius` |
-| Tests | 30 tests API + 17 contrats HTTP + jsdom + pipeline pack/revue/edge |
+| Test site officiel | **188/188** sur 5 étapes en Chrome et Firefox, 0 non traduit, 0 critique MT, restauration 5/5, 0 erreur ; NLLB seul : 31/192 |
+| EN pack-only | **40/44** (4 dates restantes) ; 38/44 avec backend dans l’audit du 9 nov |
+| Firefox 159 | recette réelle 5 étapes + EN via XPI de test |
+| CI GitHub Actions | **5 jobs verts** sur `develop` |
+| Tests | 30 API + 17 contrats + charge/503 + jsdom + taxonomie + harnais Chrome/Firefox |
 
 Le niveau A (solde, frais, PIN/OTP, confirmation, erreurs) ne vient que d’un
 pack validé en mode strict ; sans phrase validée, l’original reste affiché
 avec un badge « non traduit ». En mode démo SAFINUM, une entrée humaine
 `draft`/`reviewed` peut couvrir le niveau A avec le badge « brouillon
-humain » ; une phrase sans pack passe en MT avec le badge « démo MT ».
+humain ». Depuis le 10 novembre, hors démo, les brouillons `draft`/`reviewed`
+ne couvrent que le niveau B/C, jamais A, avec un toast « pack non validé ».
 
 Suivi détaillé du lot moteur : [docs/MARIUS_STATUS.md](docs/MARIUS_STATUS.md).
 
@@ -512,7 +514,8 @@ exigence par exigence dans [`docs/COMPLIANCE.md`](docs/COMPLIANCE.md).
 | [`docs/TRAINING_DATA_AUDIT.md`](docs/TRAINING_DATA_AUDIT.md) | audit des fichiers d’entraînement (Parquet, Bible, CSV) |
 | [`docs/EXTERNAL_RESOURCES.md`](docs/EXTERNAL_RESOURCES.md) | inventaire datasets/modèles, quatrième langue, licences |
 | [`docs/DUALA_MT.md`](docs/DUALA_MT.md) | modèle expérimental anglais → duala (CC-BY-4.0) |
-| [`docs/AUDIT_2026-11-08.md`](docs/AUDIT_2026-11-08.md) | audit d’exécution réel : site SAFINUM, NLLB, écarts et priorités |
+| [`docs/AUDIT_2026-11-09.md`](docs/AUDIT_2026-11-09.md) | audit packs + serveur : 188/188, 3 langues, 0 validé |
+| [`docs/AUDIT_2026-11-08.md`](docs/AUDIT_2026-11-08.md) | audit NLLB seul : 31/192, 1/20, repli |
 | [`docs/SITE_TEST_SAFINUM.md`](docs/SITE_TEST_SAFINUM.md) | test réel du site SAFINUM, couverture et qualité |
 | [`docs/NATIVE_REVIEW_AUDIT.md`](docs/NATIVE_REVIEW_AUDIT.md) | audit des relectures natives, lignes rejetées et corrections |
 | [`docs/INSTALLED_EXTENSION_TEST.md`](docs/INSTALLED_EXTENSION_TEST.md) | test de l’extension installée sur le site SAFINUM |

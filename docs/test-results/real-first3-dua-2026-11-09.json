@@ -1,0 +1,65 @@
+{
+  "toast": "Mode démo SAFINUM (données fictives) — 40 segment(s) traduits en Duala (source : français, 86 % · pack non validé · 30 entrée(s) de pack non validée(s)). Les montants et entités ont été préservés.",
+  "before": {
+    "body": "Environnement de test — données fictives, aucune transaction réelle.\nProtocole de test\nRetour au hackathon\n\nSafinum Pay\n\nBanque en ligne\n\nEN\nAN\nAmina Ngo Bell\n1\nSolde\n2\nFrais\n3\nBénéficiaire\n4\nRécapitulatif\n5\nConfirmation\n\nVOTRE COMPTE\n\nBonjour, Amina\n\nConsultez votre solde et lancez un transfert en toute sécurité.\n\nSOLDE DISPONIBLE\n\n250 000 FCFA\n\nNuméro de compte : CM 001 2345 6789 01\nCompte courant\nEffectuer un transfert\nConsulter les frais\nTRANSACTIONS RÉCENTES\n\nPaiement marchand\n\n05 nov. 2026\n\n-12 500 FCFA\n\nSalaire reçu\n\n04 nov. 2026\n\n+180 000 FCFA\n\nTransfert reçu\n\n02 nov. 2026\n\n+50 000 FCFA\n\nFacture électricité\n\n31 oct. 2026\n\n-7 500 FCFA\n\nVOTRE COMPTE\nAN\n\nAmina Ngo Bell\n\nCompte courant\n\nSOLDE DISPONIBLE\n\n250 000 FCFA\n\nCM 001 2345 6789 01\n\nSécurité\n\nVérifiez toujours le nom et le numéro du bénéficiaire avant de confirmer un transfert.\n\nConnexion sécurisée\n\nSafinum Pay — environnement de démonstration. Ne saisissez aucune donnée personnelle réelle.",
+    "title": "Environnement de test — Hackathon SAFINUM Innovate 2026 - Safinum",
+    "fields": [],
+    "buttons": [
+      {
+        "text": "EN",
+        "disabled": false
+      },
+      {
+        "text": "Effectuer un transfert",
+        "disabled": false
+      },
+      {
+        "text": "Consulter les frais",
+        "disabled": false
+      }
+    ]
+  },
+  "after": {
+    "body": "Wuma a jeele — bina ba wite, soma téŋɛ̂ e titi.\nProtokole a jeele\nTimbia ombusa na hackathon\n\nSafinum Pay\n\nBanke a internet\n\nEN\nAN\nAmina Ngo Bell\n1\nmɔ̀nì mwé ɓáyí\n2\nMóǹgá\n3\nMoto nu mányɔ̀ŋɔ̀\n4\nTombise\n5\nadise\n\nKOMPA ƆŊ\n\nIdiba, Amina.\n\nJeŋe mɔ̀nì mwé ɓáyí, o lome pé mɔ̀nì na bata.\n\nMƆ̀NÌ MWÉ ƁÁYÍ\n\n250 000 FCFA\n\nNombara a kompa : CM 001 2345 6789 01\nKompa a ɓoso\nLómò mɔ̀nì\nJeŋe móǹgá\nBINA BA MƆ̀NÌ BA ƁOƁÍ ƁOSƆ̂\n\nWasa mɔ̀nì a nkándà\n\n05 nov. 2026\n\n-12 500 FCFA\n\nFáwá e nyóŋɛ̂\n\n04 nov. 2026\n\n+180 000 FCFA\n\nLómò mɔ̀nì mu nyóŋɛ̂\n\n02 nov. 2026\n\n+50 000 FCFA\n\nFacture a mwinda\n\n31 oct. 2026\n\n-7 500 FCFA\n\nKOMPA ƆŊ\nAN\n\nAmina Ngo Bell\n\nKompa a ɓoso\n\nMƆ̀NÌ MWÉ ƁÁYÍ\n\n250 000 FCFA\n\nCM 001 2345 6789 01\n\nBata\n\nJeele pɔ́n dina na nombara a moto nu mányɔ̀ŋɔ̀ oboso na o adise.\n\nMulongu mu batamɛ̂\n\nSafinum Pay — eɓolo a jeele. Suka londe bina ɓɔŋ bá moto.",
+    "title": "Wuma a jeele — Hackathon SAFINUM Innovate 2026 - Safinum",
+    "markers": {
+      "dua": 39,
+      "untranslated": 0,
+      "demo": 0
+    },
+    "fields": [],
+    "buttons": [
+      {
+        "text": "EN",
+        "disabled": false
+      },
+      {
+        "text": "Lómò mɔ̀nì",
+        "disabled": false
+      },
+      {
+        "text": "Jeŋe móǹgá",
+        "disabled": false
+      }
+    ]
+  },
+  "restored": {
+    "body": "Environnement de test — données fictives, aucune transaction réelle.\nProtocole de test\nRetour au hackathon\n\nSafinum Pay\n\nBanque en ligne\n\nEN\nAN\nAmina Ngo Bell\n1\nSolde\n2\nFrais\n3\nBénéficiaire\n4\nRécapitulatif\n5\nConfirmation\n\nVOTRE COMPTE\n\nBonjour, Amina\n\nConsultez votre solde et lancez un transfert en toute sécurité.\n\nSOLDE DISPONIBLE\n\n250 000 FCFA\n\nNuméro de compte : CM 001 2345 6789 01\nCompte courant\nEffectuer un transfert\nConsulter les frais\nTRANSACTIONS RÉCENTES\n\nPaiement marchand\n\n05 nov. 2026\n\n-12 500 FCFA\n\nSalaire reçu\n\n04 nov. 2026\n\n+180 000 FCFA\n\nTransfert reçu\n\n02 nov. 2026\n\n+50 000 FCFA\n\nFacture électricité\n\n31 oct. 2026\n\n-7 500 FCFA\n\nVOTRE COMPTE\nAN\n\nAmina Ngo Bell\n\nCompte courant\n\nSOLDE DISPONIBLE\n\n250 000 FCFA\n\nCM 001 2345 6789 01\n\nSécurité\n\nVérifiez toujours le nom et le numéro du bénéficiaire avant de confirmer un transfert.\n\nConnexion sécurisée\n\nSafinum Pay — environnement de démonstration. Ne saisissez aucune donnée personnelle réelle.",
+    "title": "Environnement de test — Hackathon SAFINUM Innovate 2026 - Safinum",
+    "markers": {
+      "dua": 0,
+      "untranslated": 0,
+      "demo": 0
+    }
+  },
+  "preserved": {
+    "account": true,
+    "name": true,
+    "amount": true,
+    "buttons": true,
+    "fields": true,
+    "restoredText": true,
+    "restoredMarkers": true
+  },
+  "errors": []
+}

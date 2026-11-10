@@ -1,0 +1,277 @@
+{
+  "startedAt": "2026-11-09T14:32:37.867Z",
+  "langs": {
+    "ewo": {
+      "toast": "Mode démo SAFINUM (données fictives) — 39 segment(s) traduits en Ewondo (source : français, 86 % · pack non validé · 1 non traduit(s) · 29 entrée(s) de pack non validée(s)). Les montants et entités ont été préservés.",
+      "before": {
+        "title": "Environnement de test — Hackathon SAFINUM Innovate 2026 - Safinum",
+        "body": "Environnement de test — données fictives, aucune transaction réelle.\nProtocole de test\nRetour au hackathon\n\nSafinum Pay\n\nBanque en ligne\n\nEN\nAN\nAmina Ngo Bell\n1\nSolde\n2\nFrais\n3\nBénéficiaire\n4\nRécapitulatif\n5\nConfirmation\n\nVOTRE COMPTE\n\nBonjour, Amina\n\nConsultez votre solde et lancez un transfert en toute sécurité.\n\nSOLDE DISPONIBLE\n\n250 000 FCFA\n\nNuméro de compte : CM 001 2345 6789 01\nCompte courant\nEffectuer un transfert\nConsulter les frais\nTRANSACTIONS RÉCENTES\n\nPaiement marchand\n\n05 nov. 2026\n\n-12 500 FCFA\n\nSalaire reçu\n\n04 nov. 2026\n\n+180 000 FCFA\n\nTransfert reçu\n\n02 nov. 2026\n\n+50 000 FCFA\n\nFacture électricité\n\n31 oct. 2026\n\n-7 500 FCFA\n\nVOTRE COMPTE\nAN\n\nAmina Ngo Bell\n\nCompte courant\n\nSOLDE DISPONIBLE\n\n250 000 FCFA\n\nCM 001 2345 6789 01\n\nSécurité\n\nVérifiez toujours le nom et le numéro du bénéficiaire avant de confirmer un transfert.\n\nConnexion sécurisée\n\nSafinum Pay — environnement de démonstration. Ne saisissez aucune donnée personnelle réelle.",
+        "markers": {
+          "fub": 0,
+          "ewo": 0,
+          "dua": 0,
+          "demo": 0,
+          "untranslated": 0
+        },
+        "buttons": [
+          {
+            "text": "EN",
+            "disabled": false
+          },
+          {
+            "text": "Effectuer un transfert",
+            "disabled": false
+          },
+          {
+            "text": "Consulter les frais",
+            "disabled": false
+          }
+        ],
+        "fields": []
+      },
+      "after": {
+        "title": "Vèyá á esáŋá — Hackathon SAFINUM Innovate 2026 - Safinum",
+        "body": "Vèyá á esáŋá — bíə́mə́ bí ngə́lə́.\nProtokole á esáŋá\nKiri mvús na hackathon\n\nSafinum Pay\n\nBanke á internet\n\nEN\nAN\nAmina Ngo Bell\n1\nabálá\n2\nMákyé\n3\nMòd á nnyɔ́ŋ\n4\nAfúlásí\n5\nadzíŋí\n\nKƆ́NDÓ WŌ\n\nMbolani, Amina.\n\nDə́ŋə́ abálá wō, ó kɔ́bɔ́ fə́ nkus á nə́m ewɔ́lɔ́.\n\nABÁLÁ É NE NGƏ́LƏ́\n\n250 000 FCFA\n\nNɔ́mbələ á kɔ́ndó : CM 001 2345 6789 01\nKɔ́ndó courant\nBɔ́ nkus\nDə́ŋə́ mákyé\nBÉSAMA BÍ ABÓBAN EYELE\n\nMákyé má nkàndá\n\n05 nov. 2026\n\n-12 500 FCFA\n\nFáwá á nnyɔ́ŋya\n\n04 nov. 2026\n\n+180 000 FCFA\n\nNkus á nnyɔ́ŋya\n\n02 nov. 2026\n\n+50 000 FCFA\n\nFacture électricité\n\n31 oct. 2026\n\n-7 500 FCFA\n\nKƆ́NDÓ WŌ\nAN\n\nAmina Ngo Bell\n\nKɔ́ndó courant\n\nABÁLÁ É NE NGƏ́LƏ́\n\n250 000 FCFA\n\nCM 001 2345 6789 01\n\nƆ́bám\n\nYéŋə́ ezóŋ á nɔ́mbələ á mòd á nnyɔ́ŋ ósu na ó sínyí nkus.\n\nNláŋáná á ɔ́bám\n\nSafinum Pay — vèyá á esáŋá. Kə́ lóndó bíə́mə́ bí eñíŋ wō.",
+        "markers": {
+          "fub": 0,
+          "ewo": 38,
+          "dua": 0,
+          "demo": 0,
+          "untranslated": 0
+        },
+        "buttons": [
+          {
+            "text": "EN",
+            "disabled": false
+          },
+          {
+            "text": "Bɔ́ nkus",
+            "disabled": false
+          },
+          {
+            "text": "Də́ŋə́ mákyé",
+            "disabled": false
+          }
+        ],
+        "fields": []
+      },
+      "restored": {
+        "title": "Environnement de test — Hackathon SAFINUM Innovate 2026 - Safinum",
+        "body": "Environnement de test — données fictives, aucune transaction réelle.\nProtocole de test\nRetour au hackathon\n\nSafinum Pay\n\nBanque en ligne\n\nEN\nAN\nAmina Ngo Bell\n1\nSolde\n2\nFrais\n3\nBénéficiaire\n4\nRécapitulatif\n5\nConfirmation\n\nVOTRE COMPTE\n\nBonjour, Amina\n\nConsultez votre solde et lancez un transfert en toute sécurité.\n\nSOLDE DISPONIBLE\n\n250 000 FCFA\n\nNuméro de compte : CM 001 2345 6789 01\nCompte courant\nEffectuer un transfert\nConsulter les frais\nTRANSACTIONS RÉCENTES\n\nPaiement marchand\n\n05 nov. 2026\n\n-12 500 FCFA\n\nSalaire reçu\n\n04 nov. 2026\n\n+180 000 FCFA\n\nTransfert reçu\n\n02 nov. 2026\n\n+50 000 FCFA\n\nFacture électricité\n\n31 oct. 2026\n\n-7 500 FCFA\n\nVOTRE COMPTE\nAN\n\nAmina Ngo Bell\n\nCompte courant\n\nSOLDE DISPONIBLE\n\n250 000 FCFA\n\nCM 001 2345 6789 01\n\nSécurité\n\nVérifiez toujours le nom et le numéro du bénéficiaire avant de confirmer un transfert.\n\nConnexion sécurisée\n\nSafinum Pay — environnement de démonstration. Ne saisissez aucune donnée personnelle réelle.",
+        "markers": {
+          "fub": 0,
+          "ewo": 0,
+          "dua": 0,
+          "demo": 0,
+          "untranslated": 0
+        },
+        "buttons": [
+          {
+            "text": "EN",
+            "disabled": false
+          },
+          {
+            "text": "Effectuer un transfert",
+            "disabled": false
+          },
+          {
+            "text": "Consulter les frais",
+            "disabled": false
+          }
+        ],
+        "fields": []
+      },
+      "preserved": {
+        "account": true,
+        "name": true,
+        "amount": true,
+        "restored": true,
+        "restoredMarkers": true,
+        "buttonsDisabled": true,
+        "fields": true
+      }
+    },
+    "dua": {
+      "toast": "Traduction en Duala… Seules les phrases validées du pack seront appliquées.",
+      "before": {
+        "title": "Environnement de test — Hackathon SAFINUM Innovate 2026 - Safinum",
+        "body": "Environnement de test — données fictives, aucune transaction réelle.\nProtocole de test\nRetour au hackathon\n\nSafinum Pay\n\nBanque en ligne\n\nEN\nAN\nAmina Ngo Bell\n1\nSolde\n2\nFrais\n3\nBénéficiaire\n4\nRécapitulatif\n5\nConfirmation\n\nVOTRE COMPTE\n\nBonjour, Amina\n\nConsultez votre solde et lancez un transfert en toute sécurité.\n\nSOLDE DISPONIBLE\n\n250 000 FCFA\n\nNuméro de compte : CM 001 2345 6789 01\nCompte courant\nEffectuer un transfert\nConsulter les frais\nTRANSACTIONS RÉCENTES\n\nPaiement marchand\n\n05 nov. 2026\n\n-12 500 FCFA\n\nSalaire reçu\n\n04 nov. 2026\n\n+180 000 FCFA\n\nTransfert reçu\n\n02 nov. 2026\n\n+50 000 FCFA\n\nFacture électricité\n\n31 oct. 2026\n\n-7 500 FCFA\n\nVOTRE COMPTE\nAN\n\nAmina Ngo Bell\n\nCompte courant\n\nSOLDE DISPONIBLE\n\n250 000 FCFA\n\nCM 001 2345 6789 01\n\nSécurité\n\nVérifiez toujours le nom et le numéro du bénéficiaire avant de confirmer un transfert.\n\nConnexion sécurisée\n\nSafinum Pay — environnement de démonstration. Ne saisissez aucune donnée personnelle réelle.",
+        "markers": {
+          "fub": 0,
+          "ewo": 0,
+          "dua": 0,
+          "demo": 0,
+          "untranslated": 0
+        },
+        "buttons": [
+          {
+            "text": "EN",
+            "disabled": false
+          },
+          {
+            "text": "Effectuer un transfert",
+            "disabled": false
+          },
+          {
+            "text": "Consulter les frais",
+            "disabled": false
+          }
+        ],
+        "fields": []
+      },
+      "after": {
+        "title": "Wuma a jeele — Hackathon SAFINUM Innovate 2026 - Safinum",
+        "body": "Wuma a jeele — bina ba wite, soma téŋɛ̂ e titi.\nProtokole a jeele\nTimbia ombusa na hackathon\n\nSafinum Pay\n\nBanke a internet\n\nEN\nAN\nAmina Ngo Bell\n1\nmɔ̀nì mwé ɓáyí\n2\nMóǹgá\n3\nMoto nu mányɔ̀ŋɔ̀\n4\nTombise\n5\nadise\n\nKOMPA ƆŊ\n\nIdiba, Amina.\n\nJeŋe mɔ̀nì mwé ɓáyí, o lome pé mɔ̀nì na bata.\n\nMƆ̀NÌ MWÉ ƁÁYÍ\n\n250 000 FCFA\n\nNuméro de compte : CM 001 2345 6789 01\nCompte courant\nEffectuer un transfert\nConsulter les frais\nTRANSACTIONS RÉCENTES\n\nPaiement marchand\n\n05 nov. 2026\n\n-12 500 FCFA\n\nSalaire reçu\n\n04 nov. 2026\n\n+180 000 FCFA\n\nTransfert reçu\n\n02 nov. 2026\n\n+50 000 FCFA\n\nFacture électricité\n\n31 oct. 2026\n\n-7 500 FCFA\n\nVOTRE COMPTE\nAN\n\nAmina Ngo Bell\n\nCompte courant\n\nSOLDE DISPONIBLE\n\n250 000 FCFA\n\nCM 001 2345 6789 01\n\nSécurité\n\nVérifiez toujours le nom et le numéro du bénéficiaire avant de confirmer un transfert.\n\nConnexion sécurisée\n\nSafinum Pay — environnement de démonstration. Ne saisissez aucune donnée personnelle réelle.",
+        "markers": {
+          "fub": 0,
+          "ewo": 0,
+          "dua": 16,
+          "demo": 0,
+          "untranslated": 0
+        },
+        "buttons": [
+          {
+            "text": "EN",
+            "disabled": false
+          },
+          {
+            "text": "Effectuer un transfert",
+            "disabled": false
+          },
+          {
+            "text": "Consulter les frais",
+            "disabled": false
+          }
+        ],
+        "fields": []
+      },
+      "restored": {
+        "title": "Environnement de test — Hackathon SAFINUM Innovate 2026 - Safinum",
+        "body": "Environnement de test — données fictives, aucune transaction réelle.\nProtocole de test\nRetour au hackathon\n\nSafinum Pay\n\nBanque en ligne\n\nEN\nAN\nAmina Ngo Bell\n1\nSolde\n2\nFrais\n3\nBénéficiaire\n4\nRécapitulatif\n5\nConfirmation\n\nVOTRE COMPTE\n\nBonjour, Amina\n\nConsultez votre solde et lancez un transfert en toute sécurité.\n\nSOLDE DISPONIBLE\n\n250 000 FCFA\n\nNuméro de compte : CM 001 2345 6789 01\nCompte courant\nEffectuer un transfert\nConsulter les frais\nTRANSACTIONS RÉCENTES\n\nPaiement marchand\n\n05 nov. 2026\n\n-12 500 FCFA\n\nSalaire reçu\n\n04 nov. 2026\n\n+180 000 FCFA\n\nTransfert reçu\n\n02 nov. 2026\n\n+50 000 FCFA\n\nFacture électricité\n\n31 oct. 2026\n\n-7 500 FCFA\n\nVOTRE COMPTE\nAN\n\nAmina Ngo Bell\n\nCompte courant\n\nSOLDE DISPONIBLE\n\n250 000 FCFA\n\nCM 001 2345 6789 01\n\nSécurité\n\nVérifiez toujours le nom et le numéro du bénéficiaire avant de confirmer un transfert.\n\nConnexion sécurisée\n\nSafinum Pay — environnement de démonstration. Ne saisissez aucune donnée personnelle réelle.",
+        "markers": {
+          "fub": 0,
+          "ewo": 0,
+          "dua": 0,
+          "demo": 0,
+          "untranslated": 0
+        },
+        "buttons": [
+          {
+            "text": "EN",
+            "disabled": false
+          },
+          {
+            "text": "Effectuer un transfert",
+            "disabled": false
+          },
+          {
+            "text": "Consulter les frais",
+            "disabled": false
+          }
+        ],
+        "fields": []
+      },
+      "preserved": {
+        "account": true,
+        "name": true,
+        "amount": true,
+        "restored": true,
+        "restoredMarkers": true,
+        "buttonsDisabled": true,
+        "fields": true
+      }
+    },
+    "fub": {
+      "toast": "Mode démo SAFINUM (données fictives) — 40 segment(s) traduits en Fulfulde (Adamawa) (source : français, 86 % · pack non validé · 30 entrée(s) de pack non validée(s)). Les montants et entités ont été préservés.",
+      "before": {
+        "title": "Environnement de test — Hackathon SAFINUM Innovate 2026 - Safinum",
+        "body": "Environnement de test — données fictives, aucune transaction réelle.\nProtocole de test\nRetour au hackathon\n\nSafinum Pay\n\nBanque en ligne\n\nEN\nAN\nAmina Ngo Bell\n1\nSolde\n2\nFrais\n3\nBénéficiaire\n4\nRécapitulatif\n5\nConfirmation\n\nVOTRE COMPTE\n\nBonjour, Amina\n\nConsultez votre solde et lancez un transfert en toute sécurité.\n\nSOLDE DISPONIBLE\n\n250 000 FCFA\n\nNuméro de compte : CM 001 2345 6789 01\nCompte courant\nEffectuer un transfert\nConsulter les frais\nTRANSACTIONS RÉCENTES\n\nPaiement marchand\n\n05 nov. 2026\n\n-12 500 FCFA\n\nSalaire reçu\n\n04 nov. 2026\n\n+180 000 FCFA\n\nTransfert reçu\n\n02 nov. 2026\n\n+50 000 FCFA\n\nFacture électricité\n\n31 oct. 2026\n\n-7 500 FCFA\n\nVOTRE COMPTE\nAN\n\nAmina Ngo Bell\n\nCompte courant\n\nSOLDE DISPONIBLE\n\n250 000 FCFA\n\nCM 001 2345 6789 01\n\nSécurité\n\nVérifiez toujours le nom et le numéro du bénéficiaire avant de confirmer un transfert.\n\nConnexion sécurisée\n\nSafinum Pay — environnement de démonstration. Ne saisissez aucune donnée personnelle réelle.",
+        "markers": {
+          "fub": 0,
+          "ewo": 0,
+          "dua": 0,
+          "demo": 0,
+          "untranslated": 0
+        },
+        "buttons": [
+          {
+            "text": "EN",
+            "disabled": false
+          },
+          {
+            "text": "Effectuer un transfert",
+            "disabled": false
+          },
+          {
+            "text": "Consulter les frais",
+            "disabled": false
+          }
+        ],
+        "fields": []
+      },
+      "after": {
+        "title": "Nokku ƴeewndo — Hackathon SAFINUM Innovate 2026 - Safinum",
+        "body": "Nokku ƴeewndo — kabaaru fenaande, alaa gollal goonga.\nPorotokol ƴeewndo\nRutto to hackathon\n\nSafinum Pay\n\nBanke e internet\n\nEN\nAN\nAmina Ngo Bell\n1\njawdindi\n2\nNjoɓdi\n3\nKeɓoowo\n4\nKoolol\n5\nteeŋtingol\n\nASAAKU MA\n\nJam tiiɗi, Amina.\n\nYiy jawdindi ma, ngona e kisal ngam nelugol kaalis.\n\nJAWDINDI NDI YAMI\n\n250 000 FCFA\n\nLimre asaaku : CM 001 2345 6789 01\nAsaaku jooni\nNelu kaalis\nYiy njoɓdi\nGOLLE KAALIS ƁENNUƊE\n\nNjoɓdi julaajo\n\n05 nov. 2026\n\n-12 500 FCFA\n\nNjoɓdi lebbi naatii\n\n04 nov. 2026\n\n+180 000 FCFA\n\nKaalis naatii\n\n02 nov. 2026\n\n+50 000 FCFA\n\nNjoɓdi elektrik\n\n31 oct. 2026\n\n-7 500 FCFA\n\nASAAKU MA\nAN\n\nAmina Ngo Bell\n\nAsaaku jooni\n\nJAWDINDI NDI YAMI\n\n250 000 FCFA\n\nCM 001 2345 6789 01\n\nKisal\n\nTeeŋtu innde e limre keɓoowo ko adii yoɓgol fof.\n\nTesku kisal\n\nSafinum Pay — nokku ƴeewndo. Huutoraaka kabaaru hoore ma goonga.",
+        "markers": {
+          "fub": 39,
+          "ewo": 0,
+          "dua": 0,
+          "demo": 0,
+          "untranslated": 0
+        },
+        "buttons": [
+          {
+            "text": "EN",
+            "disabled": false
+          },
+          {
+            "text": "Nelu kaalis",
+            "disabled": false
+          },
+          {
+            "text": "Yiy njoɓdi",
+            "disabled": false
+          }
+        ],
+        "fields": []
+      },
+      "restored": {
+        "title": "Environnement de test — Hackathon SAFINUM Innovate 2026 - Safinum",
+        "body": "Environnement de test — données fictives, aucune transaction réelle.\nProtocole de test\nRetour au hackathon\n\nSafinum Pay\n\nBanque en ligne\n\nEN\nAN\nAmina Ngo Bell\n1\nSolde\n2\nFrais\n3\nBénéficiaire\n4\nRécapitulatif\n5\nConfirmation\n\nVOTRE COMPTE\n\nBonjour, Amina\n\nConsultez votre solde et lancez un transfert en toute sécurité.\n\nSOLDE DISPONIBLE\n\n250 000 FCFA\n\nNuméro de compte : CM 001 2345 6789 01\nCompte courant\nEffectuer un transfert\nConsulter les frais\nTRANSACTIONS RÉCENTES\n\nPaiement marchand\n\n05 nov. 2026\n\n-12 500 FCFA\n\nSalaire reçu\n\n04 nov. 2026\n\n+180 000 FCFA\n\nTransfert reçu\n\n02 nov. 2026\n\n+50 000 FCFA\n\nFacture électricité\n\n31 oct. 2026\n\n-7 500 FCFA\n\nVOTRE COMPTE\nAN\n\nAmina Ngo Bell\n\nCompte courant\n\nSOLDE DISPONIBLE\n\n250 000 FCFA\n\nCM 001 2345 6789 01\n\nSécurité\n\nVérifiez toujours le nom et le numéro du bénéficiaire avant de confirmer un transfert.\n\nConnexion sécurisée\n\nSafinum Pay — environnement de démonstration. Ne saisissez aucune donnée personnelle réelle.",
+        "markers": {
+          "fub": 0,
+          "ewo": 0,
+          "dua": 0,
+          "demo": 0,
+          "untranslated": 0
+        },
+        "buttons": [
+          {
+            "text": "EN",
+            "disabled": false
+          },
+          {
+            "text": "Effectuer un transfert",
+            "disabled": false
+          },
+          {
+            "text": "Consulter les frais",
+            "disabled": false
+          }
+        ],
+        "fields": []
+      },
+      "preserved": {
+        "account": true,
+        "name": true,
+        "amount": true,
+        "restored": true,
+        "restoredMarkers": true,
+        "buttonsDisabled": true,
+        "fields": true
+      }
+    }
+  },
+  "errors": [],
+  "status": "done"
+}

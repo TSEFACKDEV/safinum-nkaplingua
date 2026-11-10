@@ -1,7 +1,8 @@
 # Audit des données d’entraînement — 7 novembre 2026
 
 > **Audit d’exécution du 8 novembre 2026** : voir
-> [`AUDIT_2026-11-08.md`](AUDIT_2026-11-08.md). Le présent document reste
+> [`AUDIT_2026-11-08.md`](AUDIT_2026-11-08.md) et
+> [`AUDIT_2026-11-09.md`](AUDIT_2026-11-09.md). Le présent document reste
 > limité aux données et aux licences.
 
 **Objet** : vérifier si les fichiers fournis dans `~/Downloads` peuvent servir

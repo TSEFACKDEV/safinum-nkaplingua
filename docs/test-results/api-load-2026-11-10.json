@@ -1,0 +1,29 @@
+{
+  "load": {
+    "requests": 24,
+    "concurrency": 12,
+    "statuses": {
+      "200": 24
+    },
+    "mixed": 0,
+    "totalMs": 55.32,
+    "p50Ms": 23.33,
+    "p95Ms": 29.86,
+    "maxMs": 30.89,
+    "errors": []
+  },
+  "isolated503": {
+    "firstStatus": 503,
+    "detail": "Le modèle brouillon ewondo n'est pas installé. Téléchargez flagship-ai/cameroon-int8 ou utilisez le pack communautaire.",
+    "healthAfter": 200,
+    "parallel503": [
+      503,
+      503,
+      503,
+      503,
+      503,
+      503
+    ]
+  },
+  "status": "pass"
+}

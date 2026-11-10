@@ -705,9 +705,13 @@ function indexPack(pack) {
 async function translateWithPack(segments, targetSpec, options = {}) {
   const pack = await loadPack(targetSpec);
   const index = indexPack(pack);
-  const allowUnvalidated = options.demo === true;
 
   return segments.map((segment) => {
+    // Politique produit : hors démo, les brouillons humains sont utilisables
+    // pour le niveau B/C, jamais pour le niveau A. Le toast indique le nombre
+    // d'entrées de pack non validées utilisées.
+    const allowUnvalidated =
+      options.demo === true || segment.criticality !== "A";
     // On cherche d'abord le texte brut : les messages humains du site
     // contiennent des montants réels (1 500 FCFA), pas des jetons.
     // Le texte pseudonymisé reste le repli pour les packs à jetons.

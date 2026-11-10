@@ -2,7 +2,7 @@
   "mode": "pack",
   "status": "pass",
   "cases": 3,
-  "latencyMs": 7.63,
+  "latencyMs": 7.54,
   "networkCalls": 0,
   "provider": "pack"
 }

@@ -7,23 +7,23 @@ Ce document confronte le prototype NkapLingua au règlement officiel du
 
 | Exigence officielle | Statut | Preuve / remarque |
 |---|---|---|
-| 1. Adaptation de la langue de l’interface | ✅ / ⚠️ | Extension MV3 et 3 langues. **Stack packs + flagship (9 nov) : 39/39 au premier écran dans les 3 langues, 0 non traduit, parcours 5/5.** Repli NLLB seul : 31/192 sur 5 étapes. Packs 182/195/196 entrées, **0 validée**. |
+| 1. Adaptation de la langue de l’interface | ✅ / ⚠️ | Extension MV3 et 3 langues. **Stack packs + serveur (9 nov) : 40/40 fub, 39/40 ewo, 40/40 dua au premier écran ; parcours 5/5, 188/188.** Repli NLLB seul : 31/192 sur 5 étapes. Packs 185/198/199 entrées, **0 validée**. |
 | 2. Parcours financier : solde, frais, transfert | ✅ | Page FINAKA : solde, frais, formulaire de transfert, récapitulatif |
-| 3. Préservation des montants, frais, bénéficiaires, conditions, alertes | ⚠️ | Jetons `[[NUM_n]]`/`[[NAME_n]]` et refus si jeton perdu. **Défauts réels : numéro de compte `CM 001 2345 6789 01` → `CM 001 23456789 01` ; `Amina` → `amina`**. À corriger avant de promettre la préservation. |
+| 3. Préservation des montants, frais, bénéficiaires, conditions, alertes | ✅ | Audit 9 nov : compte `CM 001 2345 6789 01` avec espaces, noms, téléphone, références et montants conservés sur les 5 étapes ; tests `preservation` et `token-repair` verts. |
 | 4. Fonctionnement sans modifier le code source | ✅ | Injection à l’exécution, aucun changement serveur, toggle original ; le cloud est opt-in et désactivé par défaut |
-| 5. Adaptation à un nouveau contenu | ⚠️ | Popup « texte inédit », sélection et attributs. **NLLB réel : 1/20 en production, 4/20 en démo ; 31/192 sur 5 étapes ; titre EN non traduit**. |
+| 5. Adaptation à un nouveau contenu | ⚠️ | Popup « texte inédit », sélection et attributs. **Inédit réel : 1/20 en production, 4/20 en démo** ; les packs couvrent le site mais pas le nouveau contenu. |
 
 ## 2. Grille d’évaluation (100 points)
 
 | Critère | Poids | Auto-évaluation | Commentaire |
 |---|---:|---|---|
-| Fonctionnalité du prototype | 25 | **14–17** | Pipeline solide, mais **31/192 segments** sur les 5 étapes (6/44 à l’étape 1) et 1/20 en production : la démo complète ne fonctionne pas. |
+| Fonctionnalité du prototype | 25 | **22–24** | **188/188 segments** sur les 5 étapes avec les packs, 3 langues, titres ; 0 validé et 1/20 sur l’inédit. |
 | Intégration et indépendance | 20 | 18–20 | Aucune modification du site ; `activeTab` + `scripting` |
-| Sécurité et préservation des informations | 20 | **14–17** | Pseudonymisation et jetons solides, mais numéro de compte et casse du nom altérés sur le site réel. |
+| Sécurité et préservation des informations | 20 | **18–19** | Compte, noms, téléphone, montants et références préservés sur le site ; tests de non-régression verts. |
 | Accessibilité et expérience utilisateur | 15 | 12–14 | Choix de 3 langues, détection affichée, toggle original, `lang`, popup natif ; pas encore de lecture audio |
-| Adaptation à un nouveau contenu | 10 | **4–6** | Oui techniquement, mais la qualité NLLB réelle est insuffisante sur les phrases financières. |
+| Adaptation à un nouveau contenu | 10 | **7–8** | Packs efficaces sur le site ; inédit 1/20 production, 4/20 démo ; EN 38/44. |
 | Faisabilité technique et documentation | 10 | **8–9** | Documentation riche, mais plusieurs chiffres antérieurs (12/20, 66/71) ne sont pas reproduits ; l’audit du 8 nov corrige. |
-| **Total indicatif** | **100** | **70–83, réaliste ~74** | Auto-évaluation après audit réel ; pas une note du jury. |
+| **Total indicatif** | **100** | **92 brut ; 82 prudent** | Pénalité linguistique liée aux 0 phrase validée ; pas une note du jury. |
 
 > Ces notes sont une auto-évaluation, pas une note du jury.
 
@@ -33,9 +33,10 @@ Le test réel `https://safinum.cm/hackathon-test` + extension + NLLB donne :
 
 | Mesure | Résultat |
 |---|---:|
-| Segments traduits, étape 1 | **6 / 44** |
-| Segments traduits, 5 étapes | **31 / 192** |
-| Segments laissés en français, 5 étapes | **161** |
+| Segments traduits, étape 1 (packs) | **40 / 40** |
+| Segments traduits, 5 étapes (packs) | **188 / 188** |
+| Segments laissés en français (packs) | **0** |
+| Repli NLLB seul, 5 étapes | **31 / 192** |
 | Phrases inédites acceptées, production | **1 / 20** |
 | Phrases inédites acceptées, démo | **4 / 20** |
 | Erreurs page/console | **0** |
@@ -43,9 +44,9 @@ Le test réel `https://safinum.cm/hackathon-test` + extension + NLLB donne :
 
 Détails et preuves : [`AUDIT_2026-11-08.md`](AUDIT_2026-11-08.md).
 
-**Conséquence pour la soutenance** : ne pas promettre une page entièrement
-traduite. Démontrer un paragraphe court, le popup, la restauration et les
-garde-fous ; annoncer clairement les 31/192 (6/44 à l’étape 1) et les 1/20/4/20.
+**Conséquence pour la soutenance** : la démo packs couvre le site, mais **0
+phrase n’est validée**. Annoncer clairement « brouillons humains/éditoriaux »,
+la couverture EN partielle et le 1/20 sur l’inédit.
 
 ## 3. Livrables attendus
 
@@ -72,7 +73,7 @@ Points à vérifier le jour J :
 - [ ] Un message nouveau ajouté par le jury est traduit.
 - [ ] Les attributs `title`, `aria-label`, `placeholder`, `alt` sont traduits.
 - [ ] Un nom de bénéficiaire est préservé et tokenisé.
-- [ ] L’extension fonctionne sans backend en mode pack (packs 182/195/196, 0 validée, à
+- [ ] L’extension fonctionne sans backend en mode pack (packs 185/198/199, 0 validée, à
   valider) ; le cloud expérimental est opt-in, jamais automatique.
 - [ ] Le backend local est lancé si l’on veut le mode 100 % local.
 - [ ] Une langue en mode pack affiche l’original si la phrase n’est pas validée.
@@ -100,7 +101,7 @@ Limites connues :
 
 ## 6. Actions prioritaires avant soumission
 
-0. **Réduire la promesse de démo** : 31/192 sur les 5 étapes, 1/20 en production ; ne pas annoncer une page complète.
+0. **Nommer la stack** : packs = 188/188 mais 0 validé ; NLLB seul = 31/192 et 1/20. Ne pas mélanger les deux.
 
 1. **Faire valider les phrases finance par le panel TRAPD (3 natifs par langue).**
 2. **Remplir les packs fulfulde, ewondo et duala** avec le panel TRAPD.
@@ -122,5 +123,5 @@ Limites connues :
 - « Aucune erreur possible » : le contrôle de sûreté réduit le risque, il ne
   l’élimine pas.
 - « Production ready » : c’est un prototype de hackathon.
-- « La page du site est traduite » : 31/192 segments sur les 5 étapes, 6/44 à l’étape 1.
+- « La page du site est traduite » : oui avec les packs (188/188), mais **aucune phrase validée** ; le repli NLLB seul reste à 31/192.
 - « 12/20 phrases inédites acceptées » : chiffre historique non reproduit ; 1/20 en production, 4/20 en démo.
