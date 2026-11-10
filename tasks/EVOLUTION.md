@@ -3352,3 +3352,32 @@ mot `json`) avec les champs ci-dessous. Exemple de structure, en indentation :
   "blockers": []
 }
 ```
+
+## 2026-11-10T21:30:00+01:00 — Freedy — F4 — in_progress
+
+```json
+{
+  "timestamp": "2026-11-10T21:30:00+01:00",
+  "person": "Freedy",
+  "branch": "freedy",
+  "task": "F4",
+  "status": "in_progress",
+  "summary": "Vérification en ligne de 16 libellés critiques/editorial : 0 correspondance exacte, 4 racines partielles, 2 divergences nettes (total→fof, Reference→Tiinde), 10 non attestés.",
+  "files": [
+    "docs/ONLINE_VERIFICATION_2026-11-10.md",
+    "docs/AUDIT_2026-11-10.md",
+    "README.md",
+    "tasks/README.md"
+  ],
+  "tests": [
+    {
+      "command": "Recherche Webonary / Glosbe / lexique duala / PDF ewondo",
+      "result": "fail",
+      "note": "aucune validation en ligne ; divergences total et Reference"
+    }
+  ],
+  "evidence": "docs/ONLINE_VERIFICATION_2026-11-10.md",
+  "next": "Faire relire total/fof, Reference/Tiinde et Compte/Asaaku par un natif",
+  "blockers": []
+}
+```
