@@ -3223,3 +3223,29 @@ mot `json`) avec les champs ci-dessous. Exemple de structure, en indentation :
   "blockers": []
 }
 ```
+
+## 2026-11-10T18:20:00+01:00 — Klein — K14 — done
+
+```json
+{
+  "timestamp": "2026-11-10T18:20:00+01:00",
+  "person": "Klein",
+  "branch": "klein",
+  "task": "K14",
+  "status": "done",
+  "summary": "Aligné le script vidéo sur l'état réel du produit : démonstration du repli phrase par phrase sur un paragraphe mixte, preuve sans serveur local, mention unique discrète au lieu d'une pastille par phrase, et plan B fondé sur la sonde Chrome. Aucun changement de code ou de paquet.",
+  "files": [
+    "docs/VIDEO_SCRIPT.md",
+    "tasks/EVOLUTION.md"
+  ],
+  "tests": [
+    {
+      "command": "python3 scripts/check-evolution.py",
+      "result": "pass"
+    }
+  ],
+  "evidence": "docs/VIDEO_SCRIPT.md ; entrée K13 et docs/test-results/real-site-packs-2026-11-10-173547.json",
+  "next": "Enregistrer la vidéo avec le script aligné, puis soumettre ZIP + PDF + vidéo",
+  "blockers": []
+}
+```
