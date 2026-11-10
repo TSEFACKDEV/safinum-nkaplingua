@@ -1,0 +1,200 @@
+source,target,status,string_match,dictionary_line
+Solde disponible,Mɔ̀nì mwé ɓáyí,draft,False,
+Frais de transfert,Móǹgá mwá lómò mɔ̀nì,draft,False,
+Montant à envoyer,Mɔ̀nì mú yéná na lómò,draft,False,
+Bénéficiaire,Moto nu mányɔ̀ŋɔ̀,draft,True,1006
+code PIN,code PIN,draft,False,
+code de confirmation,code confirmation,draft,False,
+taux d'intérêt,edinge a longele,draft,True,1334
+frais de dossier,móǹgá mwá kalati,draft,False,
+pénalité de retard,móǹgá mwá boɓi,draft,False,
+capacité de remboursement,nginya a timbise mɔ̀nì,draft,False,
+épargne automatique,bálà mɔ̀nì a ɓuɓéɓuɓé,draft,False,
+objectif d'épargne,sɔŋɔ a bálà mɔ̀nì,draft,False,
+dépôt,tutula mɔ̀nì,draft,False,
+retrait,kusa mɔ̀nì,draft,True,1345
+Paiement marchand,Wasa mɔ̀nì a nkándà,draft,True,3004
+vérification d'identité,jeele la dina na edube,draft,False,
+pièce d'identité,kalati a edube,draft,True,710
+service client,mɓola a ɓato,draft,False,
+transaction,eɓolo a mɔ̀nì,draft,False,
+remboursement,timbise mɔ̀nì,draft,True,3465
+Frais,Móǹgá,draft,False,
+total,mɔ̀nì mwésé,draft,False,
+échéance,búnyá ɓwá timbise,draft,False,
+plafond,sókó a mɔ̀nì,draft,False,
+agence,wuma a eɓolo,draft,False,
+code,code,draft,False,
+reçu,kalati a suma,draft,True,710
+litige,nyele,draft,False,
+échec,boɓi,draft,False,
+annulation,ɓumse,draft,False,
+confirmation,adise,draft,False,
+Sécurité,Bata,draft,True,202
+frais de change,móǹgá mwá tukwisa mɔ̀nì,draft,False,
+taux de change,edinge a tukwisa mɔ̀nì,draft,True,1334
+Montant,Mɔ̀nì,draft,False,
+solde,mɔ̀nì mwé ɓáyí,draft,False,
+destinataire,moto nu mányɔ̀ŋɔ̀,draft,True,1006
+Le solde est de [[NUM_0]] FCFA.,Mɔ̀nì mwé ɓáyí mu yé ne [[NUM_0]] FCFA.,draft,False,
+Les frais de transfert sont de [[NUM_1]] FCFA.,Móǹgá mwá lómò mɔ̀nì mu yé ne [[NUM_1]] FCFA.,draft,False,
+Le montant total débité sera de [[NUM_2]] FCFA.,Mɔ̀nì mwésé mú mákusane mú maɓa ne [[NUM_2]] FCFA.,draft,False,
+Ne partagez jamais votre code PIN.,Suka ɓoléyé code PIN ɔŋ na moto a pé.,draft,True,4193
+Vérifiez le nom du bénéficiaire avant de confirmer.,Jeele dina la moto nu mányɔ̀ŋɔ̀ oboso na o adise.,draft,False,
+Le bénéficiaire reçoit le montant net après déduction des frais.,Moto nu mányɔ̀ŋɔ̀ a mányɔ̀ŋɔ̀ mɔ̀nì ma pɔ́kɔ̂ ombusa kula móǹgá.,draft,True,1006
+Le taux d'intérêt mensuel est de 2 %.,Edinge a longele a mɔ́dí e yé 2 %.,draft,True,1334
+"En cas de retard, une pénalité de 1 % par jour est appliquée.","Yɛ̂ pé boɓi ɓwâ pele, móǹgá mwá 1 % mwá búnyá mu máɓolee.",draft,False,
+Votre compte a été crédité de [[NUM_0]] FCFA.,Kompa ɔŋ e nyóŋɛ̂ [[NUM_0]] FCFA.,draft,False,
+Votre compte a été débité de [[NUM_0]] FCFA.,Kompa ɔŋ e kusâ [[NUM_0]] FCFA.,draft,False,
+Le transfert a été effectué avec succès.,Soma mɔ̀nì e ɓoɓí na ɓwám.,draft,True,3667
+Le transfert est en attente de confirmation.,Soma mɔ̀nì e yé a jaŋgi a adise.,draft,True,3667
+Code PIN incorrect. Veuillez réessayer.,Code PIN e titi téŋɛ̂. Byápé.,draft,False,
+Ne communiquez jamais votre code OTP à un tiers.,Suka ɓoléyé code OTP ɔŋ na moto a pé.,draft,True,4193
+Cette transaction est sécurisée par FINAKA.,Nu eɓolo e yé e batamɛ̂ na FINAKA.,draft,True,124
+Le solde disponible est insuffisant.,Mɔ̀nì mwé ɓáyí mu sumbidi.,draft,False,
+Les informations personnelles sont utilisées uniquement pour l'étude de votre dossier.,Bina ɓɔŋ ɓa moto ɓa maɓolane ndé o jeele kalati ɔŋ.,draft,True,362
+Vous pouvez annuler la transaction avant confirmation.,O ne na o ɓumse soma oboso na adise.,draft,True,1
+Des frais supplémentaires peuvent s'appliquer.,Móǹgá mepé me ne na me ɓata.,draft,False,
+Contactez le service client pour plus d'informations.,Bena mɓola a ɓato ású bina mepé.,draft,True,2813
+Bonjour,Ã mbɔti,draft,True,6
+Hello,Ã mbɔti,draft,True,6
+Votre compte,Kompa ɔŋ,draft,False,
+Your account,Kompa ɔŋ,draft,False,
+Consultez votre solde et lancez un transfert en toute sécurité.,"Jeŋe mɔ̀nì mwé ɓáyí, o lome pé mɔ̀nì na bata.",draft,False,
+Check your balance and start a secure transfer.,"Jeŋe mɔ̀nì mwé ɓáyí, o lome pé mɔ̀nì na bata.",draft,False,
+Effectuer un transfert,Lómò mɔ̀nì,draft,False,
+Make a transfer,Lómò mɔ̀nì,draft,False,
+Consulter les frais,Jeŋe móǹgá,draft,False,
+View fees,Jeŋe móǹgá,draft,False,
+Transactions récentes,Bina ba mɔ̀nì ba ɓoɓí ɓosɔ̂,draft,True,362
+Recent transactions,Bina ba mɔ̀nì ba ɓoɓí ɓosɔ̂,draft,True,362
+Available balance,Mɔ̀nì mwé ɓáyí,draft,False,
+Numéro de compte,Nombara a kompa,draft,False,
+Account number,Nombara a kompa,draft,False,
+Transfer fees,Móǹgá mwá lómò mɔ̀nì,draft,False,
+Choisissez le type de transfert et le montant. Les frais sont calculés automatiquement.,Pɔ́ yá lómò na ɓwéyá ɓwá mɔ̀nì. Móǹgá mu maɓolane ɓuɓéɓuɓé.,draft,False,
+Choose the transfer type and amount. Fees are calculated automatically.,Pɔ́ yá lómò na ɓwéyá ɓwá mɔ̀nì. Móǹgá mu maɓolane ɓuɓéɓuɓé.,draft,False,
+Type d'opération,Epepe a eɓolo,draft,True,9877
+Operation type,Epepe a eɓolo,draft,True,9877
+Amount to send,Mɔ̀nì mú yéná na lómò,draft,False,
+Fee,Móǹgá,draft,False,
+Gratuit,Esikaye móǹgá,draft,False,
+Free,Esikaye móǹgá,draft,False,
+Total à débiter,Mɔ̀nì mwésé mú mákusane,draft,False,
+Total to debit,Mɔ̀nì mwésé mú mákusane,draft,False,
+Solde après opération,Mɔ̀nì mwé ɓáyí ombusa soma,draft,False,
+Balance after transfer,Mɔ̀nì mwé ɓáyí ombusa soma,draft,False,
+Continuer,Kɛ́ oboso,draft,False,
+Continue,Kɛ́ oboso,draft,False,
+Retour,Timbia ombusa,draft,False,
+Back,Timbia ombusa,draft,False,
+Beneficiary,Moto nu mányɔ̀ŋɔ̀,draft,True,1006
+Renseignez les informations du destinataire. Vérifiez toujours le numéro avant de valider.,Londe bina bá moto nu mányɔ̀ŋɔ̀. Jeele nombara oboso na o disese.,draft,False,
+Enter the recipient details. Always verify the number before confirming.,Londe bina bá moto nu mányɔ̀ŋɔ̀. Jeele nombara oboso na o disese.,draft,False,
+Nom du bénéficiaire,Dina la moto nu mányɔ̀ŋɔ̀,draft,True,480
+Beneficiary name,Dina la moto nu mányɔ̀ŋɔ̀,draft,True,480
+Numéro de téléphone,Nombara a telefon,draft,False,
+Phone number,Nombara a telefon,draft,False,
+Motif du transfert,Njóm a lómò mɔ̀nì,draft,False,
+Transfer reason,Njóm a lómò mɔ̀nì,draft,False,
+Note (optionnel),Bedangwedi (yaya),draft,True,2417
+Note (optional),Bedangwedi (yaya),draft,True,2417
+J'ai vérifié le nom et le numéro du bénéficiaire.,Na jeeleyɛ̂ dina na nombara a moto nu mányɔ̀ŋɔ̀.,draft,True,6
+I have verified the beneficiary name and phone number.,Na jeeleyɛ̂ dina na nombara a moto nu mányɔ̀ŋɔ̀.,draft,True,6
+Ce bénéficiaire n'a jamais été utilisé sur ce compte. Vérifiez le numéro avant de continuer.,Nu moto nu mányɔ̀ŋɔ̀ asóɓanó ɓo polo a mí kompa. Jeele nombara oboso na o kɛ́ oboso.,draft,True,124
+This beneficiary has never been used on this account. Verify the number before continuing.,Nu moto nu mányɔ̀ŋɔ̀ asóɓanó ɓo polo a mí kompa. Jeele nombara oboso na o kɛ́ oboso.,draft,True,124
+Récapitulatif,Tombise,draft,True,12856
+Summary,Tombise,draft,True,12856
+Vérifiez les informations avant de confirmer le transfert.,Jeele bina oboso na o adise lómò mɔ̀nì.,draft,False,
+Check the details before confirming the transfer.,Jeele bina oboso na o adise lómò mɔ̀nì.,draft,False,
+Amount,Mɔ̀nì,draft,False,
+Total débité,Mɔ̀nì mwésé mú kusané,draft,False,
+Total debited,Mɔ̀nì mwésé mú kusané,draft,False,
+Téléphone,Telefon,draft,False,
+Phone,Telefon,draft,False,
+Opération,Eɓolo,draft,False,
+Operation,Eɓolo,draft,False,
+Je confirme que les informations ci-dessus sont correctes.,Na madise na bina ɓé na omóŋ ɓé téŋɛ̂.,draft,True,6
+I confirm the information above is correct.,Na madise na bina ɓé na omóŋ ɓé téŋɛ̂.,draft,True,6
+Confirmer le transfert,Adise lómò mɔ̀nì,draft,False,
+Confirm transfer,Adise lómò mɔ̀nì,draft,False,
+Modifier,Tukwa,draft,True,963
+Edit,Tukwa,draft,True,963
+Transfert effectué,Lómò mɔ̀nì e ɓoɓí,draft,False,
+Transfer completed,Lómò mɔ̀nì e ɓoɓí,draft,False,
+Votre transfert a été envoyé avec succès.,Lómò mɔ̀nì ɔŋ e loméyɛ̂ na ɓwám.,draft,False,
+Your transfer has been sent successfully.,Lómò mɔ̀nì ɔŋ e loméyɛ̂ na ɓwám.,draft,False,
+Statut,Ejaŋgi,draft,False,
+Status,Ejaŋgi,draft,False,
+Succès,Ɓwám,draft,False,
+Success,Ɓwám,draft,False,
+Nouveau transfert,Péne a lómò mɔ̀nì,draft,False,
+New transfer,Péne a lómò mɔ̀nì,draft,False,
+Message important,Mweŋge mwá mfi,draft,False,
+Important message,Mweŋge mwá mfi,draft,False,
+Fermer,Diɓa,draft,False,
+Dismiss,Diɓa,draft,False,
+Une erreur est survenue,Wuma eɓanɛ̂,draft,False,
+An error occurred,Wuma eɓanɛ̂,draft,False,
+Alerte de sécurité,Bokwe bi bata,draft,True,3650
+Security warning,Bokwe bi bata,draft,True,3650
+Security,Bata,draft,True,202
+Vérifiez toujours le nom et le numéro du bénéficiaire avant de confirmer un transfert.,Jeele pɔ́n dina na nombara a moto nu mányɔ̀ŋɔ̀ oboso na o adise.,draft,False,
+Always verify the beneficiary name and number before confirming a transfer.,Jeele pɔ́n dina na nombara a moto nu mányɔ̀ŋɔ̀ oboso na o adise.,draft,False,
+Connexion sécurisée,Mulongu mu batamɛ̂,draft,False,
+Secure connection,Mulongu mu batamɛ̂,draft,False,
+Safinum Pay — environnement de démonstration. Ne saisissez aucune donnée personnelle réelle.,Safinum Pay — eɓolo a jeele. Suka londe bina ɓɔŋ bá moto.,draft,False,
+Safinum Pay — demonstration environment. Do not enter real personal data.,Safinum Pay — eɓolo a jeele. Suka londe bina ɓɔŋ bá moto.,draft,False,
+"Environnement de test — données fictives, aucune transaction réelle.","Wuma a jeele — bina ba wite, soma téŋɛ̂ e titi.",draft,False,
+"Test environment — fictional data, no real transaction.","Wuma a jeele — bina ba wite, soma téŋɛ̂ e titi.",draft,False,
+"Bonjour, Amina.","Idiba, Amina.",draft,True,1557
+"Hello, Amina.","Idiba, Amina.",draft,True,1557
+Amina Ngo Bell,Amina Ngo Bell,draft,False,
+Transfert instantané et gratuit,Lómò mɔ̀nì a ɓuɓéɓuɓé na esikaye móǹgá,draft,False,
+"Instant, free transfer",Lómò mɔ̀nì a ɓuɓéɓuɓé na esikaye móǹgá,draft,False,
+"Frais de 1,5 % (min. 100 FCFA, max. 2 500 FCFA)","Móǹgá mwá 1,5 % (min. 100 FCFA, max. 2 500 FCFA)",draft,False,
+"Frais de 2 % (min. 200 FCFA, max. 5 000 FCFA)","Móǹgá mwá 2 % (min. 200 FCFA, max. 5 000 FCFA)",draft,False,
+Mobile Money,Mobile Money,draft,True,7630
+Compte Safinum,Kompa a Safinum,draft,False,
+Safinum account,Kompa a Safinum,draft,False,
+Autre banque,Banque epé,draft,True,1927
+Other bank,Banque epé,draft,True,1927
+Merchant payment,Wasa mɔ̀nì a nkándà,draft,True,3004
+Paiement de services,Soma mɔ̀nì a mɓola,draft,True,3667
+Payment for services,Soma mɔ̀nì a mɓola,draft,True,3667
+Salaire reçu,Fáwá e nyóŋɛ̂,draft,False,
+Salary received,Fáwá e nyóŋɛ̂,draft,False,
+Transfert reçu,Lómò mɔ̀nì mu nyóŋɛ̂,draft,False,
+Transfer received,Lómò mɔ̀nì mu nyóŋɛ̂,draft,False,
+Facture électricité,Facture a mwinda,draft,False,
+Electricity bill,Facture a mwinda,draft,False,
+Le montant doit être supérieur à zéro.,Mɔ̀nì mu yiane ɓa móŋlé ombon a zéró.,draft,False,
+The amount must be greater than zero.,Mɔ̀nì mu yiane ɓa móŋlé ombon a zéró.,draft,False,
+Solde insuffisant pour effectuer ce transfert.,Mɔ̀nì mwé ɓáyí mu titi ɓwá lómò mɔ̀nì.,draft,False,
+Insufficient balance for this transfer.,Mɔ̀nì mwé ɓáyí mu titi ɓwá lómò mɔ̀nì.,draft,False,
+Veuillez renseigner le nom et le numéro du bénéficiaire.,Londe dina na nombara a moto nu mányɔ̀ŋɔ̀.,draft,False,
+Please provide the beneficiary name and phone number.,Londe dina na nombara a moto nu mányɔ̀ŋɔ̀.,draft,False,
+Alerte de sécurité : vérifiez le numéro du bénéficiaire avant de continuer.,Bokwe bi bata : jeele nombara a moto nu mányɔ̀ŋɔ̀ oboso na o kɛ́ oboso.,draft,True,3650
+Security warning: verify the beneficiary phone number before continuing.,Bokwe bi bata : jeele nombara a moto nu mányɔ̀ŋɔ̀ oboso na o kɛ́ oboso.,draft,True,3650
+Alerte de sécurité : ce bénéficiaire n'a jamais été utilisé sur ce compte.,Bokwe bi bata : nu moto nu mányɔ̀ŋɔ̀ asóɓanó ɓo polo a mí kompa.,draft,True,3650
+Security warning: this beneficiary has never been used on this account.,Bokwe bi bata : nu moto nu mányɔ̀ŋɔ̀ asóɓanó ɓo polo a mí kompa.,draft,True,3650
+Erreur réseau : le service est temporairement indisponible. Réessayez.,Boɓan ba réseau : eɓolo e titié ndedi. Byápé.,draft,False,
+Network error: the service is temporarily unavailable. Please try again.,Boɓan ba réseau : eɓolo e titié ndedi. Byápé.,draft,False,
+Vous devez confirmer les informations avant de valider le transfert.,O yiane adise bina oboso na o kusa soma.,draft,True,1
+You must confirm the details before validating the transfer.,O yiane adise bina oboso na o kusa soma.,draft,True,1
+Environnement de test — Hackathon SAFINUM Innovate 2026 - Safinum,Wuma a jeele — Hackathon SAFINUM Innovate 2026 - Safinum,draft,False,
+Numéro de compte : CM [[NUM_0]],Nombara a kompa : CM [[NUM_0]],draft,False,
+Retour au hackathon,Timbia ombusa na hackathon,draft,False,
+Protocole de test,Protokole a jeele,draft,False,
+Banque en ligne,Banke a internet,draft,False,
+Compte courant,Kompa a ɓoso,draft,False,
+Référence,Nombara a lómo mɔ̀nì,draft,False,
+"Hello, Amina","Idiba, Amina.",draft,True,1557
+Account number : CM [[NUM_0]],Nombara a kompa : CM [[NUM_0]],draft,False,
+Test protocol,Protokole a jeele,draft,False,
+Online banking,Banke a internet,draft,False,
+Current account,Kompa a ɓoso,draft,False,
+Reference,Nombara a lómo mɔ̀nì,draft,False,
+Back to hackathon,Timbia ombusa na hackathon,draft,False,
+Balance,Mɔ̀nì mwé ɓáyí,draft,False,
+Fees,Mɔ́ǹgá,draft,False,

@@ -518,6 +518,9 @@ exigence par exigence dans [`docs/COMPLIANCE.md`](docs/COMPLIANCE.md).
 | [`docs/ONLINE_VERIFICATION_2026-11-10.md`](docs/ONLINE_VERIFICATION_2026-11-10.md) | vérification en ligne et corrections : total, Reference, facture ewondo |
 | [`docs/AUDIT_SAFINUM_GUIDE_2026-11-10.md`](docs/AUDIT_SAFINUM_GUIDE_2026-11-10.md) | audit spécial barème SAFINUM : 79/100, plan d'investissement |
 | [`docs/FINANCE_REFERENCE_2026-11-10.md`](docs/FINANCE_REFERENCE_2026-11-10.md) | noyau finance trilingue : 32 références, 0 validé |
+| [`docs/AUDIT_582_STRUCTURE_2026-11-10.md`](docs/AUDIT_582_STRUCTURE_2026-11-10.md) | audit structurel 583 entrées : 0 validé |
+| [`docs/SYNTAX_TRILINGUAL_2026-11-10.md`](docs/SYNTAX_TRILINGUAL_2026-11-10.md) | fiches de syntaxe fulfulde/ewondo/duala |
+| [`data/review/native-kit.csv`](data/review/native-kit.csv) | kit natif : 150 phrases + 32 termes |
 | [`data/corpus/finance-multilingual.csv`](data/corpus/finance-multilingual.csv) | corpus candidat FR/EN/fub/ewo/dua, 236 lignes |
 | [`docs/AUDIT_2026-11-09.md`](docs/AUDIT_2026-11-09.md) | audit packs + serveur : 188/188, 3 langues, 0 validé |
 | [`docs/AUDIT_2026-11-08.md`](docs/AUDIT_2026-11-08.md) | audit NLLB seul : 31/192, 1/20, repli |

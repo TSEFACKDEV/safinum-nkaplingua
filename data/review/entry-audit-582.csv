@@ -1,0 +1,584 @@
+lang,source,target,status,provenance,review_level,source_words,target_words,flags
+fub,Solde disponible,Jawdindi ndi yami,draft,human,single-translator,2,3,libelle
+fub,Frais de transfert,Njoɓdi nawgol,draft,human,single-translator,3,2,libelle
+fub,Montant à envoyer,Kaalis mo nelaɗen,draft,human,single-translator,3,3,libelle
+fub,Bénéficiaire,Keɓoowo,draft,human,single-translator,1,1,libelle
+fub,code PIN,code PIN,draft,human,single-translator,2,2,identique;libelle
+fub,Code de confirmation,code teeŋtingol,draft,human,reused-message,3,2,libelle
+fub,taux d'intérêt,tolno nafa,draft,human,single-translator,2,2,libelle
+fub,Frais de dossier,njoɓdi binndol,draft,human,reused-message,3,2,libelle
+fub,pénalité de retard,njoɓdi batte,draft,human,single-translator,3,2,libelle
+fub,capacité de remboursement,doole yoɓgol,draft,human,single-translator,3,2,libelle
+fub,Épargne automatique,ko mooftata e laawol,draft,human,reused-message,2,4,libelle
+fub,objectif d'épargne,faandaare mooftugol,draft,human,single-translator,2,2,libelle
+fub,dépôt,naatgol kaalis,draft,human,single-translator,1,2,libelle
+fub,retrait,yaltugol kaalis,draft,human,single-translator,1,2,libelle
+fub,Paiement marchand,Njoɓdi julaajo,draft,human,single-translator,2,2,libelle
+fub,vérification d'identité,teeŋtingol enndam,draft,human,single-translator,2,2,libelle
+fub,pièce d'identité,kadi enndam,draft,human,single-translator,2,2,libelle
+fub,service client,gollordu wallitaande,draft,human,single-translator,2,2,libelle
+fub,transaction,gollal kaalis,draft,human,single-translator,1,2,libelle
+fub,remboursement,yoɓgol kaalis,draft,human,single-translator,1,2,libelle
+fub,Frais,Njoɓdi,draft,human,single-translator,1,1,libelle
+fub,total,kawral,draft,editorial,lexicon-assisted,1,1,libelle
+fub,échéance,nyalnde yoɓgol,draft,human,single-translator,1,2,libelle
+fub,plafond,keeri kaalis,draft,human,single-translator,1,2,libelle
+fub,découvert,kaalis ɓurɗo yowede,draft,human,single-translator,1,3,libelle
+fub,agence,galu,draft,human,single-translator,1,1,libelle
+fub,guichet,damugal,draft,human,single-translator,1,1,libelle
+fub,code,code,draft,human,single-translator,1,1,identique;libelle
+fub,Référence,Limre,draft,editorial,lexicon-assisted,1,1,libelle
+fub,reçu,seedantaagal,draft,human,single-translator,1,1,libelle
+fub,litige,haala,draft,human,single-translator,1,1,libelle
+fub,échec,bonere,draft,human,single-translator,1,1,libelle
+fub,annulation,dartingol,draft,human,single-translator,1,1,libelle
+fub,confirmation,teeŋtingol,draft,human,single-translator,1,1,libelle
+fub,Sécurité,Kisal,draft,human,single-translator,1,1,libelle
+fub,frais de change,njoɓdi mbiliro,draft,human,single-translator,3,2,libelle
+fub,taux de change,tolno mbiliro,draft,human,single-translator,3,2,libelle
+fub,Montant,Kaalis,draft,human,single-translator,1,1,libelle
+fub,solde,jawdindi,draft,human,single-translator,1,1,libelle
+fub,destinataire,keɓoowo,draft,human,single-translator,1,1,libelle
+fub,Alerte de sécurité,Tintina kisal,draft,human,single-translator,3,2,libelle
+fub,Récapitulatif,Koolol,draft,human,single-translator,1,1,libelle
+fub,[[NUM_0]] FCFA,[[NUM_0]] FCFA,draft,human,single-translator,2,2,identique;libelle
+fub,Total débité,Kawral kaalis yoɓaaɗo,draft,editorial,lexicon-assisted,2,3,libelle
+fub,Solde après opération,Jawdindi ɓaawo gollal,draft,human,single-translator,3,3,libelle
+fub,Confirmer le transfert,Teeŋtu nawgol,draft,human,single-translator,3,2,libelle
+fub,Modifier,Waylu,draft,human,single-translator,1,1,libelle
+fub,Motif du transfert,Dalilla nawgol,draft,human,single-translator,3,2,libelle
+fub,Votre compte,Asaaku ma,draft,human,single-translator,2,2,possessif;libelle
+fub,−[[NUM_0]] FCFA,−[[NUM_0]] FCFA,draft,human,single-translator,2,2,identique;libelle
+fub,+[[NUM_0]] FCFA,+[[NUM_0]] FCFA,draft,human,single-translator,2,2,identique;libelle
+fub,Bonjour,Jam tiiɗi,draft,human,single-translator,1,2,libelle
+fub,Hello,Jam tiiɗi,draft,human,single-translator,1,2,libelle
+fub,Your account,Asaaku ma,draft,human,single-translator,2,2,libelle
+fub,Consultez votre solde et lancez un transfert en toute sécurité.,"Yiy jawdindi ma, ngona e kisal ngam nelugol kaalis.",draft,human,single-translator,10,9,possessif;phrase
+fub,Check your balance and start a secure transfer.,"Yiy jawdindi ma, ngona e kisal ngam nelugol kaalis.",draft,human,single-translator,8,9,phrase
+fub,Effectuer un transfert,Nelu kaalis,draft,human,single-translator,3,2,libelle
+fub,Make a transfer,Nelu kaalis,draft,human,single-translator,3,2,libelle
+fub,Consulter les frais,Yiy njoɓdi,draft,human,single-translator,3,2,libelle
+fub,View fees,Yiy njoɓdi,draft,human,single-translator,2,2,libelle
+fub,Transactions récentes,Golle kaalis ɓennuɗe,draft,human,single-translator,2,3,libelle
+fub,Recent transactions,Golle kaalis ɓennuɗe,draft,human,single-translator,2,3,libelle
+fub,Available balance,Jawdindi ndi yami,draft,human,single-translator,2,3,libelle
+fub,Numéro de compte,Limre asaaku,draft,human,single-translator,3,2,libelle
+fub,Account number,Limre asaaku,draft,human,single-translator,2,2,libelle
+fub,Transfer fees,Njoɓdi nawgol,draft,human,single-translator,2,2,libelle
+fub,Choisissez le type de transfert et le montant. Les frais sont calculés automatiquement.,Suus sariya nawgol e kaalis. Njoɓdi limtetee ko e laawol gollingol.,draft,human,single-translator,13,11,phrase
+fub,Choose the transfer type and amount. Fees are calculated automatically.,Suus sariya nawgol e kaalis. Njoɓdi limtetee ko e laawol gollingol.,draft,human,single-translator,10,11,phrase
+fub,Type d'opération,Suus gollal,draft,human,single-translator,2,2,libelle
+fub,Operation type,Suus gollal,draft,human,single-translator,2,2,libelle
+fub,Amount to send,Kaalis mo nelaɗen,draft,human,single-translator,3,3,libelle
+fub,Fee,Njoɓdi,draft,human,single-translator,1,1,libelle
+fub,Gratuit,Ko yoɓataa,draft,human,single-translator,1,2,libelle
+fub,Free,Ko yoɓataa,draft,human,single-translator,1,2,libelle
+fub,Total à débiter,Kawral kaalis mo yoɓetee,draft,editorial,lexicon-assisted,3,4,libelle
+fub,Total to debit,Kawral kaalis mo yoɓetee,draft,editorial,lexicon-assisted,3,4,libelle
+fub,Balance after transfer,Jawdindi ɓaawo gollal,draft,human,single-translator,3,3,libelle
+fub,Continuer,Wontu yeeso,draft,human,single-translator,1,2,libelle
+fub,Continue,Wontu yeeso,draft,human,single-translator,1,2,libelle
+fub,Retour,Rutto,draft,human,single-translator,1,1,libelle
+fub,Back,Rutto,draft,human,single-translator,1,1,libelle
+fub,Beneficiary,Keɓoowo,draft,human,single-translator,1,1,libelle
+fub,Renseignez les informations du destinataire. Vérifiez toujours le numéro avant de valider.,Lonndu kabaaru keɓoowo. Teeŋtu limre nde ko adii yoɓgol.,draft,human,single-translator,12,9,phrase
+fub,Enter the recipient details. Always verify the number before confirming.,Lonndu kabaaru keɓoowo. Teeŋtu limre nde ko adii yoɓgol.,draft,human,single-translator,10,9,phrase
+fub,Nom du bénéficiaire,Innde keɓoowo,draft,human,single-translator,3,2,libelle
+fub,Beneficiary name,Innde keɓoowo,draft,human,single-translator,2,2,libelle
+fub,Numéro de téléphone,Limre cinndel,draft,human,single-translator,3,2,libelle
+fub,Phone number,Limre cinndel,draft,human,single-translator,2,2,libelle
+fub,Transfer reason,Dalilla nawgol,draft,human,single-translator,2,2,libelle
+fub,Note (optionnel),Sariya (so ina haani),draft,human,single-translator,2,4,libelle
+fub,Note (optional),Sariya (so ina haani),draft,human,single-translator,2,4,libelle
+fub,J'ai vérifié le nom et le numéro du bénéficiaire.,Mi teeŋtii innde e limre keɓoowo.,draft,human,single-translator,9,6,phrase
+fub,I have verified the beneficiary name and phone number.,Mi teeŋtii innde e limre keɓoowo.,draft,human,single-translator,9,6,phrase
+fub,Ce bénéficiaire n'a jamais été utilisé sur ce compte. Vérifiez le numéro avant de continuer.,Oon keɓoowo huutoraaka e ndii asaaku. Teeŋtu limre ko adii yeeso.,draft,human,single-translator,15,11,negation;phrase
+fub,This beneficiary has never been used on this account. Verify the number before continuing.,Oon keɓoowo huutoraaka e ndii asaaku. Teeŋtu limre ko adii yeeso.,draft,human,single-translator,14,11,phrase
+fub,Summary,Koolol,draft,human,single-translator,1,1,libelle
+fub,Vérifiez les informations avant de confirmer le transfert.,Teeŋtu kabaaru ko adii yoɓgol nawgol.,draft,human,single-translator,8,6,phrase
+fub,Check the details before confirming the transfer.,Teeŋtu kabaaru ko adii yoɓgol nawgol.,draft,human,single-translator,7,6,phrase
+fub,Amount,Kaalis,draft,human,single-translator,1,1,libelle
+fub,Total debited,Kawral kaalis yoɓaaɗo,draft,editorial,lexicon-assisted,2,3,libelle
+fub,Téléphone,Cinndel,draft,human,single-translator,1,1,libelle
+fub,Phone,Cinndel,draft,human,single-translator,1,1,libelle
+fub,Reference,Limre,draft,editorial,lexicon-assisted,1,1,libelle
+fub,Opération,Gollal,draft,human,single-translator,1,1,libelle
+fub,Operation,Gollal,draft,human,single-translator,1,1,libelle
+fub,Je confirme que les informations ci-dessus sont correctes.,Mi teeŋtii kabaaru les ɗoo ko goonga.,draft,human,single-translator,8,7,phrase
+fub,I confirm the information above is correct.,Mi teeŋtii kabaaru les ɗoo ko goonga.,draft,human,single-translator,7,7,phrase
+fub,Confirm transfer,Teeŋtu nawgol,draft,human,single-translator,2,2,libelle
+fub,Edit,Waylu,draft,human,single-translator,1,1,libelle
+fub,Transfert effectué,Nawgol naatii,draft,human,single-translator,2,2,libelle
+fub,Transfer completed,Nawgol naatii,draft,human,single-translator,2,2,libelle
+fub,Votre transfert a été envoyé avec succès.,Nawgol ma nelaama e jam.,draft,human,single-translator,7,5,possessif;phrase
+fub,Your transfer has been sent successfully.,Nawgol ma nelaama e jam.,draft,human,single-translator,6,5,phrase
+fub,Statut,Tollirgol,draft,human,single-translator,1,1,libelle
+fub,Status,Tollirgol,draft,human,single-translator,1,1,libelle
+fub,Succès,Nasara,draft,human,single-translator,1,1,libelle
+fub,Success,Nasara,draft,human,single-translator,1,1,libelle
+fub,Nouveau transfert,Nawgol hesrol,draft,human,single-translator,2,2,libelle
+fub,New transfer,Nawgol hesrol,draft,human,single-translator,2,2,libelle
+fub,Message important,Kabaaru mawɗo,draft,human,single-translator,2,2,libelle
+fub,Important message,Kabaaru mawɗo,draft,human,single-translator,2,2,libelle
+fub,Fermer,Uddu,draft,human,single-translator,1,1,libelle
+fub,Dismiss,Uddu,draft,human,single-translator,1,1,libelle
+fub,Une erreur est survenue,Fenaande waɗii,draft,human,single-translator,4,2,
+fub,An error occurred,Fenaande waɗii,draft,human,single-translator,3,2,libelle
+fub,Security warning,Tintina kisal,draft,human,single-translator,2,2,libelle
+fub,Security,Kisal,draft,human,single-translator,1,1,libelle
+fub,Vérifiez toujours le nom et le numéro du bénéficiaire avant de confirmer un transfert.,Teeŋtu innde e limre keɓoowo ko adii yoɓgol fof.,draft,human,single-translator,14,9,phrase
+fub,Always verify the beneficiary name and number before confirming a transfer.,Teeŋtu innde e limre keɓoowo ko adii yoɓgol fof.,draft,human,single-translator,11,9,phrase
+fub,Connexion sécurisée,Tesku kisal,draft,human,single-translator,2,2,libelle
+fub,Secure connection,Tesku kisal,draft,human,single-translator,2,2,libelle
+fub,Safinum Pay — environnement de démonstration. Ne saisissez aucune donnée personnelle réelle.,Safinum Pay — nokku ƴeewndo. Huutoraaka kabaaru hoore ma goonga.,draft,human,single-translator,12,10,negation;phrase
+fub,Safinum Pay — demonstration environment. Do not enter real personal data.,Safinum Pay — nokku ƴeewndo. Huutoraaka kabaaru hoore ma goonga.,draft,human,single-translator,11,10,phrase
+fub,"Environnement de test — données fictives, aucune transaction réelle.","Nokku ƴeewndo — kabaaru fenaande, alaa gollal goonga.",draft,human,single-translator,9,8,phrase
+fub,"Test environment — fictional data, no real transaction.","Nokku ƴeewndo — kabaaru fenaande, alaa gollal goonga.",draft,human,single-translator,8,8,phrase
+fub,"Bonjour, Amina.","Jam tiiɗi, Amina.",draft,human,single-translator,2,3,phrase
+fub,"Hello, Amina.","Jam tiiɗi, Amina.",draft,human,single-translator,2,3,phrase
+fub,Amina Ngo Bell,Amina Ngo Bell,draft,human,single-translator,3,3,identique;libelle
+fub,Transfert instantané et gratuit,Nawgol jaawngol ko yoɓataa,draft,human,single-translator,4,4,
+fub,"Instant, free transfer",Nawgol jaawngol ko yoɓataa,draft,human,single-translator,3,4,libelle
+fub,"Frais de 1,5 % (min. 100 FCFA, max. 2 500 FCFA)","Njoɓdi ko 1,5 % (min. 100 FCFA, max. 2 500 FCFA)",draft,human,single-translator,11,11,phrase
+fub,"Frais de 2 % (min. 200 FCFA, max. 5 000 FCFA)","Njoɓdi ko 2 % (min. 200 FCFA, max. 5 000 FCFA)",draft,human,single-translator,11,11,phrase
+fub,Mobile Money,Mobile Money,draft,human,single-translator,2,2,identique;libelle
+fub,Compte Safinum,Asaaku Safinum,draft,human,single-translator,2,2,libelle
+fub,Safinum account,Asaaku Safinum,draft,human,single-translator,2,2,libelle
+fub,Autre banque,Banke goɗɗo,draft,human,single-translator,2,2,libelle
+fub,Other bank,Banke goɗɗo,draft,human,single-translator,2,2,libelle
+fub,Merchant payment,Njoɓdi julaajo,draft,human,single-translator,2,2,libelle
+fub,Paiement de services,Njoɓdi gollal,draft,human,single-translator,3,2,libelle
+fub,Payment for services,Njoɓdi gollal,draft,human,single-translator,3,2,libelle
+fub,Salaire reçu,Njoɓdi lebbi naatii,draft,human,single-translator,2,3,libelle
+fub,Salary received,Njoɓdi lebbi naatii,draft,human,single-translator,2,3,libelle
+fub,Transfert reçu,Kaalis naatii,draft,human,single-translator,2,2,libelle
+fub,Transfer received,Kaalis naatii,draft,human,single-translator,2,2,libelle
+fub,Facture électricité,Njoɓdi elektrik,draft,human,single-translator,2,2,libelle
+fub,Electricity bill,Njoɓdi elektrik,draft,human,single-translator,2,2,libelle
+fub,Le montant doit être supérieur à zéro.,Kaalis ina foti ɓurde zero.,draft,human,single-translator,7,5,phrase
+fub,The amount must be greater than zero.,Kaalis ina foti ɓurde zero.,draft,human,single-translator,7,5,phrase
+fub,Solde insuffisant pour effectuer ce transfert.,Jawdindi ina famɗi ngam waɗde ndii gollal.,draft,human,single-translator,6,7,phrase
+fub,Insufficient balance for this transfer.,Jawdindi ina famɗi ngam waɗde ndii gollal.,draft,human,single-translator,5,7,phrase
+fub,Veuillez renseigner le nom et le numéro du bénéficiaire.,Mawnu innde e limre keɓoowo.,draft,human,single-translator,9,5,phrase
+fub,Please provide the beneficiary name and phone number.,Mawnu innde e limre keɓoowo.,draft,human,single-translator,8,5,phrase
+fub,Alerte de sécurité : vérifiez le numéro du bénéficiaire avant de continuer.,Tintina kisal : teeŋtu limre keɓoowo ko adii yeeso.,draft,human,single-translator,12,9,phrase
+fub,Security warning: verify the beneficiary phone number before continuing.,Tintina kisal : teeŋtu limre keɓoowo ko adii yeeso.,draft,human,single-translator,9,9,phrase
+fub,Alerte de sécurité : ce bénéficiaire n'a jamais été utilisé sur ce compte.,Tintina kisal : oon keɓoowo huutoraaka e ndii asaaku.,draft,human,single-translator,13,9,negation;phrase
+fub,Security warning: this beneficiary has never been used on this account.,Tintina kisal : oon keɓoowo huutoraaka e ndii asaaku.,draft,human,single-translator,11,9,phrase
+fub,Erreur réseau : le service est temporairement indisponible. Réessayez.,Fenaande rese : gollal ina daɗi. Enndu kadi.,draft,human,single-translator,9,8,phrase
+fub,Network error: the service is temporarily unavailable. Please try again.,Fenaande rese : gollal ina daɗi. Enndu kadi.,draft,human,single-translator,10,8,phrase
+fub,Vous devez confirmer les informations avant de valider le transfert.,A foti teeŋtude kabaaru ko adii yoɓgol.,draft,human,single-translator,10,7,phrase
+fub,You must confirm the details before validating the transfer.,A foti teeŋtude kabaaru ko adii yoɓgol.,draft,human,single-translator,9,7,phrase
+fub,Environnement de test — Hackathon SAFINUM Innovate 2026 - Safinum,Nokku ƴeewndo — Hackathon SAFINUM Innovate 2026 - Safinum,draft,human,composed-template,10,9,
+fub,Numéro de compte : CM [[NUM_0]],Limre asaaku : CM [[NUM_0]],draft,human,composed-template,6,5,
+fub,Retour au hackathon,Rutto to hackathon,draft,human,composed-template,3,3,libelle
+fub,Protocole de test,Porotokol ƴeewndo,draft,editorial,lexicon-assisted,3,2,libelle
+fub,Banque en ligne,Banke e internet,draft,editorial,lexicon-assisted,3,3,libelle
+fub,Compte courant,Asaaku jooni,draft,editorial,lexicon-assisted,2,2,libelle
+fub,Le solde est de [[NUM_0]] FCFA.,Jawdindi ko [[NUM_0]] FCFA.,draft,editorial,lexicon-assisted,6,4,phrase
+fub,"Hello, Amina","Jam tiiɗi, Amina.",draft,editorial,lexicon-assisted,2,3,libelle
+fub,Account number : CM [[NUM_0]],Limre asaaku : CM [[NUM_0]],draft,editorial,lexicon-assisted,5,5,
+fub,Test protocol,Porotokol ƴeewndo,draft,editorial,lexicon-assisted,2,2,libelle
+fub,Online banking,Banke e internet,draft,editorial,lexicon-assisted,2,3,libelle
+fub,Current account,Asaaku jooni,draft,editorial,lexicon-assisted,2,2,libelle
+fub,Back to hackathon,Rutto to hackathon,draft,human,composed-template,3,3,libelle
+fub,Balance,Jawdindi,draft,human,composed-template,1,1,libelle
+fub,Fees,Njoɓdi,draft,human,composed-template,1,1,libelle
+ewo,Solde disponible,Abálá é ne ngə́lə́,draft,human,single-translator,2,4,libelle
+ewo,Frais de transfert,Mákyé má nkus,draft,human,single-translator,3,3,libelle
+ewo,Montant à envoyer,Moní á ne na á kə́,draft,human,single-translator,3,6,libelle
+ewo,Bénéficiaire,Mòd á nnyɔ́ŋ,draft,human,single-translator,1,3,libelle
+ewo,code PIN,code PIN,draft,human,single-translator,2,2,identique;libelle
+ewo,code de confirmation,code de confirmation,draft,human,single-translator,3,3,identique;libelle
+ewo,taux d'intérêt,ntéláná á mfá'á,draft,human,single-translator,2,3,libelle
+ewo,frais de dossier,mákyé má kalada,draft,human,single-translator,3,3,libelle
+ewo,pénalité de retard,mákyé má eyele,draft,human,single-translator,3,3,libelle
+ewo,capacité de remboursement,ngul á adzúmbí moní,draft,human,single-translator,3,4,libelle
+ewo,épargne automatique,kɔ́ndó á adzóŋó,draft,human,single-translator,2,3,libelle
+ewo,objectif d'épargne,nsɔ́ŋó á adzóŋó,draft,human,single-translator,2,3,libelle
+ewo,dépôt,óláŋá,draft,human,single-translator,1,1,libelle
+ewo,retrait,kúdí moní,draft,human,single-translator,1,2,libelle
+ewo,Paiement marchand,Mákyé má nkàndá,draft,human,single-translator,2,3,libelle
+ewo,vérification d'identité,yéŋélí eyóŋ,draft,human,single-translator,2,2,libelle
+ewo,pièce d'identité,lélá éyoŋ,draft,human,single-translator,2,2,libelle
+ewo,service client,nsáŋá á nnam,draft,human,single-translator,2,3,libelle
+ewo,transaction,nkus-nnyɔ́ŋ,draft,human,single-translator,1,1,libelle
+ewo,remboursement,adzúmbí moní,draft,human,single-translator,1,2,libelle
+ewo,Frais,Mákyé,draft,human,single-translator,1,1,libelle
+ewo,total,mbodó,draft,human,single-translator,1,1,libelle
+ewo,échéance,eyele,draft,human,single-translator,1,1,libelle
+ewo,plafond,asúgú,draft,human,single-translator,1,1,libelle
+ewo,agence,ndáb á nsáŋá,draft,human,single-translator,1,3,libelle
+ewo,guichet,ekɔb,draft,human,single-translator,1,1,libelle
+ewo,code,code,draft,human,single-translator,1,1,identique;libelle
+ewo,Référence,Eñíŋlé,draft,human,single-translator,1,1,libelle
+ewo,reçu,kalada á nkus,draft,human,single-translator,1,3,libelle
+ewo,litige,nsɔm,draft,human,single-translator,1,1,libelle
+ewo,échec,éboŋ,draft,human,single-translator,1,1,libelle
+ewo,annulation,asúsí,draft,human,single-translator,1,1,libelle
+ewo,confirmation,adzíŋí,draft,human,single-translator,1,1,libelle
+ewo,Sécurité,Ɔ́bám,draft,human,single-translator,1,1,libelle
+ewo,frais de change,mákyé má nsɛ́ŋlé moní,draft,human,single-translator,3,4,libelle
+ewo,taux de change,nsɛ́ŋlé moní,draft,human,single-translator,3,2,libelle
+ewo,Montant,Moní,draft,human,single-translator,1,1,libelle
+ewo,solde,abálá,draft,human,single-translator,1,1,libelle
+ewo,destinataire,mòd á nnyɔ́ŋ,draft,human,single-translator,1,3,libelle
+ewo,Le solde est de [[NUM_0]] FCFA.,Abálá á ne [[NUM_0]] FCFA.,draft,human,single-translator,6,5,phrase
+ewo,Les frais de transfert sont de [[NUM_1]] FCFA.,Mákyé má nkus má ne [[NUM_1]] FCFA.,draft,human,single-translator,8,7,phrase
+ewo,Le montant total débité sera de [[NUM_2]] FCFA.,Mbodó á ne na á kúsí á ne [[NUM_2]] FCFA.,draft,human,single-translator,8,10,phrase
+ewo,Ne partagez jamais votre code PIN.,Kə́ ve code PIN wō na mòd fə́.,draft,human,single-translator,6,8,negation;possessif;phrase
+ewo,Vérifiez le nom du bénéficiaire avant de confirmer.,Yéŋə́ ezóŋ á mòd á nnyɔ́ŋ ósu na ó sínyí.,draft,human,single-translator,8,10,phrase
+ewo,Le bénéficiaire reçoit le montant net après déduction des frais.,Mòd á nnyɔ́ŋ á nnyɔ́ŋ moní éyɔ́ŋ mákyé má manía kúdé.,draft,human,single-translator,10,11,phrase
+ewo,Le taux d'intérêt mensuel est de 2 %.,Ntéláná á mfá'á á ngɔ́n á ne 2 %.,draft,human,single-translator,8,9,phrase
+ewo,"En cas de retard, une pénalité de 1 % par jour est appliquée.","Éyɔ́ŋ á bɔ́ya eyele, mákyé má afa á 1 % émos ésə́ má ne nkus.",draft,human,single-translator,13,15,phrase
+ewo,Votre compte a été crédité de [[NUM_0]] FCFA.,Kɔ́ndó wō á nnyɔ́ŋya [[NUM_0]] FCFA.,draft,human,single-translator,8,6,possessif;phrase
+ewo,Votre compte a été débité de [[NUM_0]] FCFA.,Kɔ́ndó wō á kúsíya [[NUM_0]] FCFA.,draft,human,single-translator,8,6,possessif;phrase
+ewo,Le transfert a été effectué avec succès.,Nkus á bɔ́ya ne adzáŋ.,draft,human,single-translator,7,5,phrase
+ewo,Le transfert est en attente de confirmation.,Nkus á yábə́ nsínyí.,draft,human,single-translator,7,4,phrase
+ewo,Code PIN incorrect. Veuillez réessayer.,Code PIN á ne áboŋ. Bámbáná dábə́.,draft,human,single-translator,5,7,phrase
+ewo,Ne communiquez jamais votre code OTP à un tiers.,Kə́ ve code OTP wō na mòd fə́.,draft,human,single-translator,9,8,negation;possessif;phrase
+ewo,Cette transaction est sécurisée par FINAKA.,Esama éní é ne ébámbáná ne FINAKA.,draft,human,single-translator,6,7,phrase
+ewo,Le solde disponible est insuffisant.,Abálá é ne ngə́lə́ á tékə́ yáne.,draft,human,single-translator,5,7,phrase
+ewo,Les informations personnelles sont utilisées uniquement pour l'étude de votre dossier.,Bíə́mə́ bí mòd bí ne mbálan ású nsɔ́ŋó kalada wō etə́.,draft,human,single-translator,11,11,possessif;phrase
+ewo,Vous pouvez annuler la transaction avant confirmation.,Wa yálá súsí esama ósu na ó sínyí.,draft,human,single-translator,7,8,phrase
+ewo,Des frais supplémentaires peuvent s'appliquer.,Mákyé fə́ má ne kɔ́ndáná.,draft,human,single-translator,5,5,phrase
+ewo,Contactez le service client pour plus d'informations.,Kɔ́bɔ́ ne nsáŋá á nnam ású bíə́mə́ fə́.,draft,human,single-translator,7,8,phrase
+ewo,Bonjour,Mbolani,draft,human,single-translator,1,1,libelle
+ewo,Hello,Mbolani,draft,human,single-translator,1,1,libelle
+ewo,Votre compte,Kɔ́ndó wō,draft,human,single-translator,2,2,possessif;libelle
+ewo,Your account,Kɔ́ndó wō,draft,human,single-translator,2,2,libelle
+ewo,Consultez votre solde et lancez un transfert en toute sécurité.,"Də́ŋə́ abálá wō, ó kɔ́bɔ́ fə́ nkus á nə́m ewɔ́lɔ́.",draft,human,single-translator,10,10,possessif;phrase
+ewo,Check your balance and start a secure transfer.,"Də́ŋə́ abálá wō, ó kɔ́bɔ́ fə́ nkus á nə́m ewɔ́lɔ́.",draft,human,single-translator,8,10,phrase
+ewo,Effectuer un transfert,Bɔ́ nkus,draft,human,single-translator,3,2,libelle
+ewo,Make a transfer,Bɔ́ nkus,draft,human,single-translator,3,2,libelle
+ewo,Consulter les frais,Də́ŋə́ mákyé,draft,human,single-translator,3,2,libelle
+ewo,View fees,Də́ŋə́ mákyé,draft,human,single-translator,2,2,libelle
+ewo,Transactions récentes,Bésama bí abóban eyele,draft,human,single-translator,2,4,libelle
+ewo,Recent transactions,Bésama bí abóban eyele,draft,human,single-translator,2,4,libelle
+ewo,Available balance,Abálá é ne ngə́lə́,draft,human,single-translator,2,4,libelle
+ewo,Numéro de compte,Nɔ́mbələ á kɔ́ndó,draft,human,single-translator,3,3,libelle
+ewo,Account number,Nɔ́mbələ á kɔ́ndó,draft,human,single-translator,2,3,libelle
+ewo,Transfer fees,Mákyé má nkus,draft,human,single-translator,2,3,libelle
+ewo,Choisissez le type de transfert et le montant. Les frais sont calculés automatiquement.,Tə́ŋí nsɔm á nkus ábɔ́ŋ moní. Mákyé má fásbáná emos ésə́.,reviewed,human,second-translator-fallback,13,11,phrase
+ewo,Choose the transfer type and amount. Fees are calculated automatically.,Tə́ŋí nsɔm á nkus ábɔ́ŋ moní. Mákyé má fásbáná emos ésə́.,reviewed,human,second-translator-fallback,10,11,phrase
+ewo,Type d'opération,Nsɔm á esama,draft,human,single-translator,2,3,libelle
+ewo,Operation type,Nsɔm á esama,draft,human,single-translator,2,3,libelle
+ewo,Amount to send,Moní á ne na á kə́,draft,human,single-translator,3,6,libelle
+ewo,Fee,Mákyé,draft,human,single-translator,1,1,libelle
+ewo,Gratuit,Á tékə́ mákyé,draft,human,single-translator,1,3,libelle
+ewo,Free,Á tékə́ mákyé,draft,human,single-translator,1,3,libelle
+ewo,Total à débiter,Mbodó á ne na á kúsí,draft,human,single-translator,3,6,libelle
+ewo,Total to debit,Mbodó á ne na á kúsí,draft,human,single-translator,3,6,libelle
+ewo,Solde après opération,Abálá á mvús nkus,draft,human,single-translator,3,4,libelle
+ewo,Balance after transfer,Abálá á mvús nkus,draft,human,single-translator,3,4,libelle
+ewo,Continuer,Kə́ ósu,draft,human,single-translator,1,2,libelle
+ewo,Continue,Kə́ ósu,draft,human,single-translator,1,2,libelle
+ewo,Retour,Kiri mvús,draft,human,single-translator,1,2,libelle
+ewo,Back,Kiri mvús,draft,human,single-translator,1,2,libelle
+ewo,Beneficiary,Mòd á nnyɔ́ŋ,draft,human,single-translator,1,3,libelle
+ewo,Renseignez les informations du destinataire. Vérifiez toujours le numéro avant de valider.,Lóndó bíə́mə́ bí mòd á nnyɔ́ŋ. Yéŋə́ nɔ́mbələ ósu na ó sínyí.,draft,human,single-translator,12,12,phrase
+ewo,Enter the recipient details. Always verify the number before confirming.,Lóndó bíə́mə́ bí mòd á nnyɔ́ŋ. Yéŋə́ nɔ́mbələ ósu na ó sínyí.,draft,human,single-translator,10,12,phrase
+ewo,Nom du bénéficiaire,Ezóŋ é mòd á nnyɔ́ŋ,draft,human,single-translator,3,5,libelle
+ewo,Beneficiary name,Ezóŋ é mòd á nnyɔ́ŋ,draft,human,single-translator,2,5,libelle
+ewo,Numéro de téléphone,Nɔ́mbələ á télafon,draft,human,single-translator,3,3,libelle
+ewo,Phone number,Nɔ́mbələ á télafon,draft,human,single-translator,2,3,libelle
+ewo,Motif du transfert,Nzólé á nkus,draft,human,single-translator,3,3,libelle
+ewo,Transfer reason,Nzólé á nkus,draft,human,single-translator,2,3,libelle
+ewo,Note (optionnel),Nsɔ́ŋó (á ne eyáŋá),draft,human,single-translator,2,4,libelle
+ewo,Note (optional),Nsɔ́ŋó (á ne eyáŋá),draft,human,single-translator,2,4,libelle
+ewo,J'ai vérifié le nom et le numéro du bénéficiaire.,Me yéŋéya ezóŋ á nɔ́mbələ á mòd á nnyɔ́ŋ.,draft,human,single-translator,9,9,phrase
+ewo,I have verified the beneficiary name and phone number.,Me yéŋéya ezóŋ á nɔ́mbələ á mòd á nnyɔ́ŋ.,draft,human,single-translator,9,9,phrase
+ewo,Ce bénéficiaire n'a jamais été utilisé sur ce compte. Vérifiez le numéro avant de continuer.,Mòd á nnyɔ́ŋ nyó a tékə́ yáne bóban á kɔ́ndó nyó. Yéŋə́ nɔ́mbələ ósu na ó kə́ ósu.,draft,human,single-translator,15,18,negation;phrase
+ewo,This beneficiary has never been used on this account. Verify the number before continuing.,Mòd á nnyɔ́ŋ nyó a tékə́ yáne bóban á kɔ́ndó nyó. Yéŋə́ nɔ́mbələ ósu na ó kə́ ósu.,draft,human,single-translator,14,18,cible_tres_longue;phrase
+ewo,Récapitulatif,Afúlásí,draft,human,single-translator,1,1,libelle
+ewo,Summary,Afúlásí,draft,human,single-translator,1,1,libelle
+ewo,Vérifiez les informations avant de confirmer le transfert.,Yéŋə́ bíə́mə́ ósu na ó sínyí nkus.,draft,human,single-translator,8,7,phrase
+ewo,Check the details before confirming the transfer.,Yéŋə́ bíə́mə́ ósu na ó sínyí nkus.,draft,human,single-translator,7,7,phrase
+ewo,Amount,Moní,draft,human,single-translator,1,1,libelle
+ewo,Total débité,Mbodó á kúsíya,draft,human,single-translator,2,3,libelle
+ewo,Total debited,Mbodó á kúsíya,draft,human,single-translator,2,3,libelle
+ewo,Téléphone,Télafon,draft,human,single-translator,1,1,libelle
+ewo,Phone,Télafon,draft,human,single-translator,1,1,libelle
+ewo,Reference,Eñíŋlé,draft,editorial,lexicon-assisted,1,1,libelle
+ewo,Opération,Esama,draft,human,single-translator,1,1,libelle
+ewo,Operation,Esama,draft,human,single-translator,1,1,libelle
+ewo,Je confirme que les informations ci-dessus sont correctes.,Me tɔ́ŋlé na bíə́mə́ bí ne yɔ́bɔ yé ne ébən.,draft,human,single-translator,8,10,phrase
+ewo,I confirm the information above is correct.,Me tɔ́ŋlé na bíə́mə́ bí ne yɔ́bɔ yé ne ébən.,draft,human,single-translator,7,10,phrase
+ewo,Confirmer le transfert,Sínyí nkus,draft,human,single-translator,3,2,libelle
+ewo,Confirm transfer,Sínyí nkus,draft,human,single-translator,2,2,libelle
+ewo,Modifier,Tsíŋí,draft,human,single-translator,1,1,libelle
+ewo,Edit,Tsíŋí,draft,human,single-translator,1,1,libelle
+ewo,Transfert effectué,Nkus á bɔ́ya,draft,human,single-translator,2,3,libelle
+ewo,Transfer completed,Nkus á bɔ́ya,draft,human,single-translator,2,3,libelle
+ewo,Votre transfert a été envoyé avec succès.,Nkus wō á lómya ne adzáŋ.,draft,human,single-translator,7,6,possessif;phrase
+ewo,Your transfer has been sent successfully.,Nkus wō á lómya ne adzáŋ.,draft,human,single-translator,6,6,phrase
+ewo,Statut,Ntéláná,draft,human,single-translator,1,1,libelle
+ewo,Status,Ntéláná,draft,human,single-translator,1,1,libelle
+ewo,Succès,Adzáŋ,draft,human,single-translator,1,1,libelle
+ewo,Success,Adzáŋ,draft,human,single-translator,1,1,libelle
+ewo,Nouveau transfert,Mfə́fə́ nkus,draft,human,single-translator,2,2,libelle
+ewo,New transfer,Mfə́fə́ nkus,draft,human,single-translator,2,2,libelle
+ewo,Message important,Mŋkát á mfi,draft,human,single-translator,2,3,libelle
+ewo,Important message,Mŋkát á mfi,draft,human,single-translator,2,3,libelle
+ewo,Fermer,Fúdbá,draft,human,single-translator,1,1,libelle
+ewo,Dismiss,Fúdbá,draft,human,single-translator,1,1,libelle
+ewo,Une erreur est survenue,Eboŋle é bɔ́ya,draft,human,single-translator,4,3,
+ewo,An error occurred,Eboŋle é bɔ́ya,draft,human,single-translator,3,3,libelle
+ewo,Alerte de sécurité,Méyáŋá má ɔ́bám,draft,human,single-translator,3,3,libelle
+ewo,Security warning,Méyáŋá má ɔ́bám,draft,human,single-translator,2,3,libelle
+ewo,Security,Ɔ́bám,draft,human,single-translator,1,1,libelle
+ewo,Vérifiez toujours le nom et le numéro du bénéficiaire avant de confirmer un transfert.,Yéŋə́ ezóŋ á nɔ́mbələ á mòd á nnyɔ́ŋ ósu na ó sínyí nkus.,draft,human,single-translator,14,13,phrase
+ewo,Always verify the beneficiary name and number before confirming a transfer.,Yéŋə́ ezóŋ á nɔ́mbələ á mòd á nnyɔ́ŋ ósu na ó sínyí nkus.,draft,human,single-translator,11,13,phrase
+ewo,Connexion sécurisée,Nláŋáná á ɔ́bám,draft,human,single-translator,2,3,libelle
+ewo,Secure connection,Nláŋáná á ɔ́bám,draft,human,single-translator,2,3,libelle
+ewo,Safinum Pay — environnement de démonstration. Ne saisissez aucune donnée personnelle réelle.,Safinum Pay — vèyá á esáŋá. Kə́ lóndó bíə́mə́ bí eñíŋ wō.,draft,human,single-translator,12,12,negation;phrase
+ewo,Safinum Pay — demonstration environment. Do not enter real personal data.,Safinum Pay — vèyá á esáŋá. Kə́ lóndó bíə́mə́ bí eñíŋ wō.,draft,human,single-translator,11,12,phrase
+ewo,"Environnement de test — données fictives, aucune transaction réelle.",Vèyá á esáŋá — bíə́mə́ bí ngə́lə́.,draft,human,single-translator,9,7,phrase
+ewo,"Test environment — fictional data, no real transaction.",Vèyá á esáŋá — bíə́mə́ bí ngə́lə́.,draft,human,single-translator,8,7,phrase
+ewo,"Bonjour, Amina.","Mbolani, Amina.",draft,human,single-translator,2,2,phrase
+ewo,"Hello, Amina.","Mbolani, Amina.",draft,human,single-translator,2,2,phrase
+ewo,Amina Ngo Bell,Amina Ngo Bell,draft,human,single-translator,3,3,identique;libelle
+ewo,Transfert instantané et gratuit,Nkus á oyá-oyá á tékə́ mákyé,draft,human,single-translator,4,6,
+ewo,"Instant, free transfer",Nkus á oyá-oyá á tékə́ mákyé,draft,human,single-translator,3,6,libelle
+ewo,"Frais de 1,5 % (min. 100 FCFA, max. 2 500 FCFA)","Mákyé á 1,5 % (min. 100 FCFA, max. 2 500 FCFA)",draft,human,single-translator,11,11,phrase
+ewo,"Frais de 2 % (min. 200 FCFA, max. 5 000 FCFA)","Mákyé á 2 % (min. 200 FCFA, max. 5 000 FCFA)",draft,human,single-translator,11,11,phrase
+ewo,Mobile Money,Mobile Money,draft,human,single-translator,2,2,identique;libelle
+ewo,Compte Safinum,Kɔ́ndó á Safinum,draft,human,single-translator,2,3,libelle
+ewo,Safinum account,Kɔ́ndó á Safinum,draft,human,single-translator,2,3,libelle
+ewo,Autre banque,Banque fə́,draft,human,single-translator,2,2,libelle
+ewo,Other bank,Banque fə́,draft,human,single-translator,2,2,libelle
+ewo,Merchant payment,Mákyé má nkàndá,draft,human,single-translator,2,3,libelle
+ewo,Paiement de services,Mákyé má nsáŋá,draft,human,single-translator,3,3,libelle
+ewo,Payment for services,Mákyé má nsáŋá,draft,human,single-translator,3,3,libelle
+ewo,Salaire reçu,Fáwá á nnyɔ́ŋya,draft,human,single-translator,2,3,libelle
+ewo,Salary received,Fáwá á nnyɔ́ŋya,draft,human,single-translator,2,3,libelle
+ewo,Transfert reçu,Nkus á nnyɔ́ŋya,draft,human,single-translator,2,3,libelle
+ewo,Transfer received,Nkus á nnyɔ́ŋya,draft,human,single-translator,2,3,libelle
+ewo,Le montant doit être supérieur à zéro.,Moní á yian yə́bə́ étə́ŋ éyɔŋ zéró.,draft,human,single-translator,7,7,phrase
+ewo,The amount must be greater than zero.,Moní á yian yə́bə́ étə́ŋ éyɔŋ zéró.,draft,human,single-translator,7,7,phrase
+ewo,Solde insuffisant pour effectuer ce transfert.,Abálá á tékə́ yáne kɔ́ŋ na á bɔ nkus nyó.,draft,human,single-translator,6,10,cible_tres_longue;phrase
+ewo,Insufficient balance for this transfer.,Abálá á tékə́ yáne kɔ́ŋ na á bɔ nkus nyó.,draft,human,single-translator,5,10,cible_tres_longue;phrase
+ewo,Veuillez renseigner le nom et le numéro du bénéficiaire.,Və́ ezóŋ á nɔ́mbələ á mòd á nnyɔ́ŋ.,draft,human,single-translator,9,8,phrase
+ewo,Please provide the beneficiary name and phone number.,Və́ ezóŋ á nɔ́mbələ á mòd á nnyɔ́ŋ.,draft,human,single-translator,8,8,phrase
+ewo,Alerte de sécurité : vérifiez le numéro du bénéficiaire avant de continuer.,Méyáŋá má ɔ́bám : yéŋə́ nɔ́mbələ á mòd á nnyɔ́ŋ ósu na ó kə́ ósu.,draft,human,single-translator,12,15,phrase
+ewo,Security warning: verify the beneficiary phone number before continuing.,Méyáŋá má ɔ́bám : yéŋə́ nɔ́mbələ á mòd á nnyɔ́ŋ ósu na ó kə́ ósu.,draft,human,single-translator,9,15,cible_tres_longue;phrase
+ewo,Alerte de sécurité : ce bénéficiaire n'a jamais été utilisé sur ce compte.,Méyáŋá má ɔ́bám : mòd á nnyɔ́ŋ nyó a tékə́ yáne bóban á kɔ́ndó nyó.,draft,human,single-translator,13,15,negation;phrase
+ewo,Security warning: this beneficiary has never been used on this account.,Méyáŋá má ɔ́bám : mòd á nnyɔ́ŋ nyó a tékə́ yáne bóban á kɔ́ndó nyó.,draft,human,single-translator,11,15,cible_tres_longue;phrase
+ewo,Erreur réseau : le service est temporairement indisponible. Réessayez.,Eboŋle é réseau : nsáŋá á ne tə́té. Bámbáná dábə́.,draft,human,single-translator,9,10,phrase
+ewo,Network error: the service is temporarily unavailable. Please try again.,Eboŋle é réseau : nsáŋá á ne tə́té. Bámbáná dábə́.,draft,human,single-translator,10,10,phrase
+ewo,Vous devez confirmer les informations avant de valider le transfert.,Wa yian sínyí bíə́mə́ ósu na ó kát nkus.,draft,human,single-translator,10,9,phrase
+ewo,You must confirm the details before validating the transfer.,Wa yian sínyí bíə́mə́ ósu na ó kát nkus.,draft,human,single-translator,9,9,phrase
+ewo,Environnement de test — Hackathon SAFINUM Innovate 2026 - Safinum,Vèyá á esáŋá — Hackathon SAFINUM Innovate 2026 - Safinum,draft,human,composed-template,10,10,
+ewo,Numéro de compte : CM [[NUM_0]],Nɔ́mbələ á kɔ́ndó : CM [[NUM_0]],draft,human,composed-template,6,6,
+ewo,Retour au hackathon,Kiri mvús na hackathon,draft,human,composed-template,3,4,libelle
+ewo,Protocole de test,Protokole á esáŋá,draft,editorial,lexicon-assisted,3,3,libelle
+ewo,Banque en ligne,Banke á internet,draft,editorial,lexicon-assisted,3,3,libelle
+ewo,Compte courant,Kɔ́ndó courant,draft,editorial,lexicon-assisted,2,2,libelle
+ewo,"Hello, Amina","Mbolani, Amina.",draft,editorial,lexicon-assisted,2,2,libelle
+ewo,Account number : CM [[NUM_0]],Nɔ́mbələ á kɔ́ndó : CM [[NUM_0]],draft,editorial,lexicon-assisted,5,6,
+ewo,Test protocol,Protokole á esáŋá,draft,editorial,lexicon-assisted,2,3,libelle
+ewo,Online banking,Banke á internet,draft,editorial,lexicon-assisted,2,3,libelle
+ewo,Current account,Kɔ́ndó courant,draft,editorial,lexicon-assisted,2,2,libelle
+ewo,Back to hackathon,Kiri mvús na hackathon,draft,human,composed-template,3,4,libelle
+ewo,Balance,Abálá,draft,human,composed-template,1,1,libelle
+ewo,Fees,Mákyé,draft,human,composed-template,1,1,libelle
+ewo,Facture électricité,Mákyé má mwinda,draft,editorial,lexicon-assisted,2,3,libelle
+dua,Solde disponible,Mɔ̀nì mwé ɓáyí,draft,human,single-translator,2,3,libelle
+dua,Frais de transfert,Móǹgá mwá lómò mɔ̀nì,draft,human,single-translator,3,4,libelle
+dua,Montant à envoyer,Mɔ̀nì mú yéná na lómò,draft,human,single-translator,3,5,libelle
+dua,Bénéficiaire,Moto nu mányɔ̀ŋɔ̀,draft,human,single-translator,1,3,libelle
+dua,code PIN,code PIN,draft,human,single-translator,2,2,identique;libelle
+dua,code de confirmation,code confirmation,draft,human,single-translator,3,2,libelle
+dua,taux d'intérêt,edinge a longele,draft,human,single-translator,2,3,libelle
+dua,frais de dossier,móǹgá mwá kalati,draft,human,single-translator,3,3,libelle
+dua,pénalité de retard,móǹgá mwá boɓi,draft,human,single-translator,3,3,libelle
+dua,capacité de remboursement,nginya a timbise mɔ̀nì,draft,human,single-translator,3,4,libelle
+dua,épargne automatique,bálà mɔ̀nì a ɓuɓéɓuɓé,draft,human,single-translator,2,4,libelle
+dua,objectif d'épargne,sɔŋɔ a bálà mɔ̀nì,draft,human,single-translator,2,4,libelle
+dua,dépôt,tutula mɔ̀nì,draft,human,single-translator,1,2,libelle
+dua,retrait,kusa mɔ̀nì,draft,human,single-translator,1,2,libelle
+dua,Paiement marchand,Wasa mɔ̀nì a nkándà,draft,human,single-translator,2,4,libelle
+dua,vérification d'identité,jeele la dina na edube,draft,human,single-translator,2,5,libelle
+dua,pièce d'identité,kalati a edube,draft,human,single-translator,2,3,libelle
+dua,service client,mɓola a ɓato,draft,human,single-translator,2,3,libelle
+dua,transaction,eɓolo a mɔ̀nì,draft,human,single-translator,1,3,libelle
+dua,remboursement,timbise mɔ̀nì,draft,human,single-translator,1,2,libelle
+dua,Frais,Móǹgá,draft,human,single-translator,1,1,libelle
+dua,total,mɔ̀nì mwésé,draft,human,single-translator,1,2,libelle
+dua,échéance,búnyá ɓwá timbise,draft,human,single-translator,1,3,libelle
+dua,plafond,sókó a mɔ̀nì,draft,human,single-translator,1,3,libelle
+dua,agence,wuma a eɓolo,draft,human,single-translator,1,3,libelle
+dua,code,code,draft,human,single-translator,1,1,identique;libelle
+dua,reçu,kalati a suma,draft,human,single-translator,1,3,libelle
+dua,litige,nyele,draft,human,single-translator,1,1,libelle
+dua,échec,boɓi,draft,human,single-translator,1,1,libelle
+dua,annulation,ɓumse,draft,human,single-translator,1,1,libelle
+dua,confirmation,adise,draft,human,single-translator,1,1,libelle
+dua,Sécurité,Bata,draft,human,single-translator,1,1,libelle
+dua,frais de change,móǹgá mwá tukwisa mɔ̀nì,draft,human,single-translator,3,4,libelle
+dua,taux de change,edinge a tukwisa mɔ̀nì,draft,human,single-translator,3,4,libelle
+dua,Montant,Mɔ̀nì,draft,human,single-translator,1,1,libelle
+dua,solde,mɔ̀nì mwé ɓáyí,draft,human,single-translator,1,3,libelle
+dua,destinataire,moto nu mányɔ̀ŋɔ̀,draft,human,single-translator,1,3,libelle
+dua,Le solde est de [[NUM_0]] FCFA.,Mɔ̀nì mwé ɓáyí mu yé ne [[NUM_0]] FCFA.,draft,human,single-translator,6,8,phrase
+dua,Les frais de transfert sont de [[NUM_1]] FCFA.,Móǹgá mwá lómò mɔ̀nì mu yé ne [[NUM_1]] FCFA.,draft,human,single-translator,8,9,phrase
+dua,Le montant total débité sera de [[NUM_2]] FCFA.,Mɔ̀nì mwésé mú mákusane mú maɓa ne [[NUM_2]] FCFA.,draft,human,single-translator,8,9,phrase
+dua,Ne partagez jamais votre code PIN.,Suka ɓoléyé code PIN ɔŋ na moto a pé.,draft,human,single-translator,6,9,negation;possessif;phrase
+dua,Vérifiez le nom du bénéficiaire avant de confirmer.,Jeele dina la moto nu mányɔ̀ŋɔ̀ oboso na o adise.,draft,human,single-translator,8,10,phrase
+dua,Le bénéficiaire reçoit le montant net après déduction des frais.,Moto nu mányɔ̀ŋɔ̀ a mányɔ̀ŋɔ̀ mɔ̀nì ma pɔ́kɔ̂ ombusa kula móǹgá.,draft,human,single-translator,10,11,phrase
+dua,Le taux d'intérêt mensuel est de 2 %.,Edinge a longele a mɔ́dí e yé 2 %.,draft,human,single-translator,8,9,phrase
+dua,"En cas de retard, une pénalité de 1 % par jour est appliquée.","Yɛ̂ pé boɓi ɓwâ pele, móǹgá mwá 1 % mwá búnyá mu máɓolee.",draft,human,single-translator,13,13,phrase
+dua,Votre compte a été crédité de [[NUM_0]] FCFA.,Kompa ɔŋ e nyóŋɛ̂ [[NUM_0]] FCFA.,draft,human,single-translator,8,6,possessif;phrase
+dua,Votre compte a été débité de [[NUM_0]] FCFA.,Kompa ɔŋ e kusâ [[NUM_0]] FCFA.,draft,human,single-translator,8,6,possessif;phrase
+dua,Le transfert a été effectué avec succès.,Soma mɔ̀nì e ɓoɓí na ɓwám.,draft,human,single-translator,7,6,phrase
+dua,Le transfert est en attente de confirmation.,Soma mɔ̀nì e yé a jaŋgi a adise.,draft,human,single-translator,7,8,phrase
+dua,Code PIN incorrect. Veuillez réessayer.,Code PIN e titi téŋɛ̂. Byápé.,draft,human,single-translator,5,6,phrase
+dua,Ne communiquez jamais votre code OTP à un tiers.,Suka ɓoléyé code OTP ɔŋ na moto a pé.,draft,human,single-translator,9,9,negation;possessif;phrase
+dua,Cette transaction est sécurisée par FINAKA.,Nu eɓolo e yé e batamɛ̂ na FINAKA.,draft,human,single-translator,6,8,phrase
+dua,Le solde disponible est insuffisant.,Mɔ̀nì mwé ɓáyí mu sumbidi.,draft,human,single-translator,5,5,phrase
+dua,Les informations personnelles sont utilisées uniquement pour l'étude de votre dossier.,Bina ɓɔŋ ɓa moto ɓa maɓolane ndé o jeele kalati ɔŋ.,draft,human,single-translator,11,11,possessif;phrase
+dua,Vous pouvez annuler la transaction avant confirmation.,O ne na o ɓumse soma oboso na adise.,draft,human,single-translator,7,9,phrase
+dua,Des frais supplémentaires peuvent s'appliquer.,Móǹgá mepé me ne na me ɓata.,draft,human,single-translator,5,7,phrase
+dua,Contactez le service client pour plus d'informations.,Bena mɓola a ɓato ású bina mepé.,draft,human,single-translator,7,7,phrase
+dua,Bonjour,Ã mbɔti,draft,human,single-translator,1,2,libelle
+dua,Hello,Ã mbɔti,draft,human,single-translator,1,2,libelle
+dua,Votre compte,Kompa ɔŋ,draft,human,single-translator,2,2,possessif;libelle
+dua,Your account,Kompa ɔŋ,draft,human,single-translator,2,2,libelle
+dua,Consultez votre solde et lancez un transfert en toute sécurité.,"Jeŋe mɔ̀nì mwé ɓáyí, o lome pé mɔ̀nì na bata.",draft,human,single-translator,10,10,possessif;phrase
+dua,Check your balance and start a secure transfer.,"Jeŋe mɔ̀nì mwé ɓáyí, o lome pé mɔ̀nì na bata.",draft,human,single-translator,8,10,phrase
+dua,Effectuer un transfert,Lómò mɔ̀nì,draft,human,single-translator,3,2,libelle
+dua,Make a transfer,Lómò mɔ̀nì,draft,human,single-translator,3,2,libelle
+dua,Consulter les frais,Jeŋe móǹgá,draft,human,single-translator,3,2,libelle
+dua,View fees,Jeŋe móǹgá,draft,human,single-translator,2,2,libelle
+dua,Transactions récentes,Bina ba mɔ̀nì ba ɓoɓí ɓosɔ̂,draft,human,single-translator,2,6,cible_tres_longue;libelle
+dua,Recent transactions,Bina ba mɔ̀nì ba ɓoɓí ɓosɔ̂,draft,human,single-translator,2,6,cible_tres_longue;libelle
+dua,Available balance,Mɔ̀nì mwé ɓáyí,draft,human,single-translator,2,3,libelle
+dua,Numéro de compte,Nombara a kompa,draft,human,single-translator,3,3,libelle
+dua,Account number,Nombara a kompa,draft,human,single-translator,2,3,libelle
+dua,Transfer fees,Móǹgá mwá lómò mɔ̀nì,draft,human,single-translator,2,4,libelle
+dua,Choisissez le type de transfert et le montant. Les frais sont calculés automatiquement.,Pɔ́ yá lómò na ɓwéyá ɓwá mɔ̀nì. Móǹgá mu maɓolane ɓuɓéɓuɓé.,draft,human,single-translator,13,11,phrase
+dua,Choose the transfer type and amount. Fees are calculated automatically.,Pɔ́ yá lómò na ɓwéyá ɓwá mɔ̀nì. Móǹgá mu maɓolane ɓuɓéɓuɓé.,draft,human,single-translator,10,11,phrase
+dua,Type d'opération,Epepe a eɓolo,draft,human,single-translator,2,3,libelle
+dua,Operation type,Epepe a eɓolo,draft,human,single-translator,2,3,libelle
+dua,Amount to send,Mɔ̀nì mú yéná na lómò,draft,human,single-translator,3,5,libelle
+dua,Fee,Móǹgá,draft,human,single-translator,1,1,libelle
+dua,Gratuit,Esikaye móǹgá,draft,human,single-translator,1,2,libelle
+dua,Free,Esikaye móǹgá,draft,human,single-translator,1,2,libelle
+dua,Total à débiter,Mɔ̀nì mwésé mú mákusane,draft,human,single-translator,3,4,libelle
+dua,Total to debit,Mɔ̀nì mwésé mú mákusane,draft,human,single-translator,3,4,libelle
+dua,Solde après opération,Mɔ̀nì mwé ɓáyí ombusa soma,draft,human,single-translator,3,5,libelle
+dua,Balance after transfer,Mɔ̀nì mwé ɓáyí ombusa soma,draft,human,single-translator,3,5,libelle
+dua,Continuer,Kɛ́ oboso,draft,human,single-translator,1,2,libelle
+dua,Continue,Kɛ́ oboso,draft,human,single-translator,1,2,libelle
+dua,Retour,Timbia ombusa,draft,human,single-translator,1,2,libelle
+dua,Back,Timbia ombusa,draft,human,single-translator,1,2,libelle
+dua,Beneficiary,Moto nu mányɔ̀ŋɔ̀,draft,human,single-translator,1,3,libelle
+dua,Renseignez les informations du destinataire. Vérifiez toujours le numéro avant de valider.,Londe bina bá moto nu mányɔ̀ŋɔ̀. Jeele nombara oboso na o disese.,draft,human,single-translator,12,12,phrase
+dua,Enter the recipient details. Always verify the number before confirming.,Londe bina bá moto nu mányɔ̀ŋɔ̀. Jeele nombara oboso na o disese.,draft,human,single-translator,10,12,phrase
+dua,Nom du bénéficiaire,Dina la moto nu mányɔ̀ŋɔ̀,draft,human,single-translator,3,5,libelle
+dua,Beneficiary name,Dina la moto nu mányɔ̀ŋɔ̀,draft,human,single-translator,2,5,libelle
+dua,Numéro de téléphone,Nombara a telefon,draft,human,single-translator,3,3,libelle
+dua,Phone number,Nombara a telefon,draft,human,single-translator,2,3,libelle
+dua,Motif du transfert,Njóm a lómò mɔ̀nì,draft,human,single-translator,3,4,libelle
+dua,Transfer reason,Njóm a lómò mɔ̀nì,draft,human,single-translator,2,4,libelle
+dua,Note (optionnel),Bedangwedi (yaya),draft,human,single-translator,2,2,libelle
+dua,Note (optional),Bedangwedi (yaya),draft,human,single-translator,2,2,libelle
+dua,J'ai vérifié le nom et le numéro du bénéficiaire.,Na jeeleyɛ̂ dina na nombara a moto nu mányɔ̀ŋɔ̀.,draft,human,single-translator,9,9,phrase
+dua,I have verified the beneficiary name and phone number.,Na jeeleyɛ̂ dina na nombara a moto nu mányɔ̀ŋɔ̀.,draft,human,single-translator,9,9,phrase
+dua,Ce bénéficiaire n'a jamais été utilisé sur ce compte. Vérifiez le numéro avant de continuer.,Nu moto nu mányɔ̀ŋɔ̀ asóɓanó ɓo polo a mí kompa. Jeele nombara oboso na o kɛ́ oboso.,draft,human,single-translator,15,17,negation;phrase
+dua,This beneficiary has never been used on this account. Verify the number before continuing.,Nu moto nu mányɔ̀ŋɔ̀ asóɓanó ɓo polo a mí kompa. Jeele nombara oboso na o kɛ́ oboso.,draft,human,single-translator,14,17,phrase
+dua,Récapitulatif,Tombise,draft,human,single-translator,1,1,libelle
+dua,Summary,Tombise,draft,human,single-translator,1,1,libelle
+dua,Vérifiez les informations avant de confirmer le transfert.,Jeele bina oboso na o adise lómò mɔ̀nì.,draft,human,single-translator,8,8,phrase
+dua,Check the details before confirming the transfer.,Jeele bina oboso na o adise lómò mɔ̀nì.,draft,human,single-translator,7,8,phrase
+dua,Amount,Mɔ̀nì,draft,human,single-translator,1,1,libelle
+dua,Total débité,Mɔ̀nì mwésé mú kusané,draft,human,single-translator,2,4,libelle
+dua,Total debited,Mɔ̀nì mwésé mú kusané,draft,human,single-translator,2,4,libelle
+dua,Téléphone,Telefon,draft,human,single-translator,1,1,libelle
+dua,Phone,Telefon,draft,human,single-translator,1,1,libelle
+dua,Opération,Eɓolo,draft,human,single-translator,1,1,libelle
+dua,Operation,Eɓolo,draft,human,single-translator,1,1,libelle
+dua,Je confirme que les informations ci-dessus sont correctes.,Na madise na bina ɓé na omóŋ ɓé téŋɛ̂.,draft,human,single-translator,8,9,phrase
+dua,I confirm the information above is correct.,Na madise na bina ɓé na omóŋ ɓé téŋɛ̂.,draft,human,single-translator,7,9,phrase
+dua,Confirmer le transfert,Adise lómò mɔ̀nì,draft,human,single-translator,3,3,libelle
+dua,Confirm transfer,Adise lómò mɔ̀nì,draft,human,single-translator,2,3,libelle
+dua,Modifier,Tukwa,draft,human,single-translator,1,1,libelle
+dua,Edit,Tukwa,draft,human,single-translator,1,1,libelle
+dua,Transfert effectué,Lómò mɔ̀nì e ɓoɓí,draft,human,single-translator,2,4,libelle
+dua,Transfer completed,Lómò mɔ̀nì e ɓoɓí,draft,human,single-translator,2,4,libelle
+dua,Votre transfert a été envoyé avec succès.,Lómò mɔ̀nì ɔŋ e loméyɛ̂ na ɓwám.,draft,human,single-translator,7,7,possessif;phrase
+dua,Your transfer has been sent successfully.,Lómò mɔ̀nì ɔŋ e loméyɛ̂ na ɓwám.,draft,human,single-translator,6,7,phrase
+dua,Statut,Ejaŋgi,draft,human,single-translator,1,1,libelle
+dua,Status,Ejaŋgi,draft,human,single-translator,1,1,libelle
+dua,Succès,Ɓwám,draft,human,single-translator,1,1,libelle
+dua,Success,Ɓwám,draft,human,single-translator,1,1,libelle
+dua,Nouveau transfert,Péne a lómò mɔ̀nì,draft,human,single-translator,2,4,libelle
+dua,New transfer,Péne a lómò mɔ̀nì,draft,human,single-translator,2,4,libelle
+dua,Message important,Mweŋge mwá mfi,draft,human,single-translator,2,3,libelle
+dua,Important message,Mweŋge mwá mfi,draft,human,single-translator,2,3,libelle
+dua,Fermer,Diɓa,draft,human,single-translator,1,1,libelle
+dua,Dismiss,Diɓa,draft,human,single-translator,1,1,libelle
+dua,Une erreur est survenue,Wuma eɓanɛ̂,draft,human,single-translator,4,2,
+dua,An error occurred,Wuma eɓanɛ̂,draft,human,single-translator,3,2,libelle
+dua,Alerte de sécurité,Bokwe bi bata,draft,human,single-translator,3,3,libelle
+dua,Security warning,Bokwe bi bata,draft,human,single-translator,2,3,libelle
+dua,Security,Bata,draft,human,single-translator,1,1,libelle
+dua,Vérifiez toujours le nom et le numéro du bénéficiaire avant de confirmer un transfert.,Jeele pɔ́n dina na nombara a moto nu mányɔ̀ŋɔ̀ oboso na o adise.,draft,human,single-translator,14,13,phrase
+dua,Always verify the beneficiary name and number before confirming a transfer.,Jeele pɔ́n dina na nombara a moto nu mányɔ̀ŋɔ̀ oboso na o adise.,draft,human,single-translator,11,13,phrase
+dua,Connexion sécurisée,Mulongu mu batamɛ̂,draft,human,single-translator,2,3,libelle
+dua,Secure connection,Mulongu mu batamɛ̂,draft,human,single-translator,2,3,libelle
+dua,Safinum Pay — environnement de démonstration. Ne saisissez aucune donnée personnelle réelle.,Safinum Pay — eɓolo a jeele. Suka londe bina ɓɔŋ bá moto.,draft,human,single-translator,12,12,negation;phrase
+dua,Safinum Pay — demonstration environment. Do not enter real personal data.,Safinum Pay — eɓolo a jeele. Suka londe bina ɓɔŋ bá moto.,draft,human,single-translator,11,12,phrase
+dua,"Environnement de test — données fictives, aucune transaction réelle.","Wuma a jeele — bina ba wite, soma téŋɛ̂ e titi.",draft,human,single-translator,9,11,phrase
+dua,"Test environment — fictional data, no real transaction.","Wuma a jeele — bina ba wite, soma téŋɛ̂ e titi.",draft,human,single-translator,8,11,phrase
+dua,"Bonjour, Amina.","Idiba, Amina.",draft,human,single-translator,2,2,phrase
+dua,"Hello, Amina.","Idiba, Amina.",draft,human,single-translator,2,2,phrase
+dua,Amina Ngo Bell,Amina Ngo Bell,draft,human,single-translator,3,3,identique;libelle
+dua,Transfert instantané et gratuit,Lómò mɔ̀nì a ɓuɓéɓuɓé na esikaye móǹgá,draft,human,single-translator,4,7,
+dua,"Instant, free transfer",Lómò mɔ̀nì a ɓuɓéɓuɓé na esikaye móǹgá,draft,human,single-translator,3,7,cible_tres_longue;libelle
+dua,"Frais de 1,5 % (min. 100 FCFA, max. 2 500 FCFA)","Móǹgá mwá 1,5 % (min. 100 FCFA, max. 2 500 FCFA)",draft,human,single-translator,11,11,phrase
+dua,"Frais de 2 % (min. 200 FCFA, max. 5 000 FCFA)","Móǹgá mwá 2 % (min. 200 FCFA, max. 5 000 FCFA)",draft,human,single-translator,11,11,phrase
+dua,Mobile Money,Mobile Money,draft,human,single-translator,2,2,identique;libelle
+dua,Compte Safinum,Kompa a Safinum,draft,human,single-translator,2,3,libelle
+dua,Safinum account,Kompa a Safinum,draft,human,single-translator,2,3,libelle
+dua,Autre banque,Banque epé,draft,human,single-translator,2,2,libelle
+dua,Other bank,Banque epé,draft,human,single-translator,2,2,libelle
+dua,Merchant payment,Wasa mɔ̀nì a nkándà,draft,human,single-translator,2,4,libelle
+dua,Paiement de services,Soma mɔ̀nì a mɓola,draft,human,single-translator,3,4,libelle
+dua,Payment for services,Soma mɔ̀nì a mɓola,draft,human,single-translator,3,4,libelle
+dua,Salaire reçu,Fáwá e nyóŋɛ̂,draft,human,single-translator,2,3,libelle
+dua,Salary received,Fáwá e nyóŋɛ̂,draft,human,single-translator,2,3,libelle
+dua,Transfert reçu,Lómò mɔ̀nì mu nyóŋɛ̂,draft,human,single-translator,2,4,libelle
+dua,Transfer received,Lómò mɔ̀nì mu nyóŋɛ̂,draft,human,single-translator,2,4,libelle
+dua,Facture électricité,Facture a mwinda,draft,human,single-translator,2,3,libelle
+dua,Electricity bill,Facture a mwinda,draft,human,single-translator,2,3,libelle
+dua,Le montant doit être supérieur à zéro.,Mɔ̀nì mu yiane ɓa móŋlé ombon a zéró.,draft,human,single-translator,7,8,phrase
+dua,The amount must be greater than zero.,Mɔ̀nì mu yiane ɓa móŋlé ombon a zéró.,draft,human,single-translator,7,8,phrase
+dua,Solde insuffisant pour effectuer ce transfert.,Mɔ̀nì mwé ɓáyí mu titi ɓwá lómò mɔ̀nì.,draft,human,single-translator,6,8,phrase
+dua,Insufficient balance for this transfer.,Mɔ̀nì mwé ɓáyí mu titi ɓwá lómò mɔ̀nì.,draft,human,single-translator,5,8,phrase
+dua,Veuillez renseigner le nom et le numéro du bénéficiaire.,Londe dina na nombara a moto nu mányɔ̀ŋɔ̀.,draft,human,single-translator,9,8,phrase
+dua,Please provide the beneficiary name and phone number.,Londe dina na nombara a moto nu mányɔ̀ŋɔ̀.,draft,human,single-translator,8,8,phrase
+dua,Alerte de sécurité : vérifiez le numéro du bénéficiaire avant de continuer.,Bokwe bi bata : jeele nombara a moto nu mányɔ̀ŋɔ̀ oboso na o kɛ́ oboso.,draft,human,single-translator,12,15,phrase
+dua,Security warning: verify the beneficiary phone number before continuing.,Bokwe bi bata : jeele nombara a moto nu mányɔ̀ŋɔ̀ oboso na o kɛ́ oboso.,draft,human,single-translator,9,15,cible_tres_longue;phrase
+dua,Alerte de sécurité : ce bénéficiaire n'a jamais été utilisé sur ce compte.,Bokwe bi bata : nu moto nu mányɔ̀ŋɔ̀ asóɓanó ɓo polo a mí kompa.,draft,human,single-translator,13,14,negation;phrase
+dua,Security warning: this beneficiary has never been used on this account.,Bokwe bi bata : nu moto nu mányɔ̀ŋɔ̀ asóɓanó ɓo polo a mí kompa.,draft,human,single-translator,11,14,phrase
+dua,Erreur réseau : le service est temporairement indisponible. Réessayez.,Boɓan ba réseau : eɓolo e titié ndedi. Byápé.,draft,human,single-translator,9,9,phrase
+dua,Network error: the service is temporarily unavailable. Please try again.,Boɓan ba réseau : eɓolo e titié ndedi. Byápé.,draft,human,single-translator,10,9,phrase
+dua,Vous devez confirmer les informations avant de valider le transfert.,O yiane adise bina oboso na o kusa soma.,draft,human,single-translator,10,9,phrase
+dua,You must confirm the details before validating the transfer.,O yiane adise bina oboso na o kusa soma.,draft,human,single-translator,9,9,phrase
+dua,Environnement de test — Hackathon SAFINUM Innovate 2026 - Safinum,Wuma a jeele — Hackathon SAFINUM Innovate 2026 - Safinum,draft,human,composed-template,10,10,
+dua,Numéro de compte : CM [[NUM_0]],Nombara a kompa : CM [[NUM_0]],draft,human,composed-template,6,6,
+dua,Retour au hackathon,Timbia ombusa na hackathon,draft,human,composed-template,3,4,libelle
+dua,Protocole de test,Protokole a jeele,draft,editorial,lexicon-assisted,3,3,libelle
+dua,Banque en ligne,Banke a internet,draft,editorial,lexicon-assisted,3,3,libelle
+dua,Compte courant,Kompa a ɓoso,draft,editorial,lexicon-assisted,2,3,libelle
+dua,Référence,Nombara a lómo mɔ̀nì,draft,editorial,lexicon-assisted,1,4,libelle
+dua,"Hello, Amina","Idiba, Amina.",draft,editorial,lexicon-assisted,2,2,libelle
+dua,Account number : CM [[NUM_0]],Nombara a kompa : CM [[NUM_0]],draft,editorial,lexicon-assisted,5,6,
+dua,Test protocol,Protokole a jeele,draft,editorial,lexicon-assisted,2,3,libelle
+dua,Online banking,Banke a internet,draft,editorial,lexicon-assisted,2,3,libelle
+dua,Current account,Kompa a ɓoso,draft,editorial,lexicon-assisted,2,3,libelle
+dua,Reference,Nombara a lómo mɔ̀nì,draft,editorial,lexicon-assisted,1,4,libelle
+dua,Back to hackathon,Timbia ombusa na hackathon,draft,human,composed-template,3,4,libelle
+dua,Balance,Mɔ̀nì mwé ɓáyí,draft,human,composed-template,1,3,libelle
+dua,Fees,Mɔ́ǹgá,draft,human,composed-template,1,1,libelle

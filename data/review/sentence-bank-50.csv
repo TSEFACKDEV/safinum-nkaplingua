@@ -1,0 +1,151 @@
+lang,fr,en,target,status,source,provenance,pattern,analysis
+fub,Bonjour,Hello,Jam tiiɗi,draft,site:SO-001,human,libellé/action,Libellé court : vérifier qu’il reste une action/label naturel.
+fub,Votre compte,Your account,Asaaku ma,draft,site:SO-002,human,possession,Possessif : vérifier l’ordre et l’accord avec le nom.
+fub,Consultez votre solde et lancez un transfert en toute sécurité.,Check your balance and start a secure transfer.,"Yiy jawdindi ma, ngona e kisal ngam nelugol kaalis.",draft,site:SO-003,human,alerte/négation,"Alerte ou négation : garder le ton, la portée et la négation."
+fub,Effectuer un transfert,Make a transfer,Nelu kaalis,draft,site:SO-004,human,libellé/action,Libellé court : vérifier qu’il reste une action/label naturel.
+fub,Consulter les frais,View fees,Yiy njoɓdi,draft,site:SO-005,human,libellé/action,Libellé court : vérifier qu’il reste une action/label naturel.
+fub,Transactions récentes,Recent transactions,Golle kaalis ɓennuɗe,draft,site:SO-006,human,libellé/action,Libellé court : vérifier qu’il reste une action/label naturel.
+fub,Solde disponible,Available balance,Jawdindi ndi yami,draft,site:SO-007,human,libellé/action,Libellé court : vérifier qu’il reste une action/label naturel.
+fub,Numéro de compte,Account number,Limre asaaku,draft,site:SO-008,human,possession,Possessif : vérifier l’ordre et l’accord avec le nom.
+fub,Frais de transfert,Transfer fees,Njoɓdi nawgol,draft,site:SO-009,human,libellé/action,Libellé court : vérifier qu’il reste une action/label naturel.
+fub,Choisissez le type de transfert et le montant. Les frais sont calculés automatiquement.,Choose the transfer type and amount. Fees are calculated automatically.,Suus sariya nawgol e kaalis. Njoɓdi limtetee ko e laawol gollingol.,draft,site:SO-010,human,phrase,"Phrase simple : vérifier l’ordre, les accords et le temps."
+fub,Type d'opération,Operation type,Suus gollal,draft,site:SO-011,human,libellé/action,Libellé court : vérifier qu’il reste une action/label naturel.
+fub,Montant à envoyer,Amount to send,Kaalis mo nelaɗen,draft,site:SO-012,human,libellé/action,Libellé court : vérifier qu’il reste une action/label naturel.
+fub,Frais,Fee,Njoɓdi,draft,site:SO-013,human,libellé/action,Libellé court : vérifier qu’il reste une action/label naturel.
+fub,Gratuit,Free,Ko yoɓataa,draft,site:SO-014,human,libellé/action,Libellé court : vérifier qu’il reste une action/label naturel.
+fub,Total à débiter,Total to debit,Kawral kaalis mo yoɓetee,draft,site:SO-015,human,libellé/action,Libellé court : vérifier qu’il reste une action/label naturel.
+fub,Solde après opération,Balance after transfer,Jawdindi ɓaawo gollal,draft,site:SO-016,human,libellé/action,Libellé court : vérifier qu’il reste une action/label naturel.
+fub,Continuer,Continue,Wontu yeeso,draft,site:SO-017,human,libellé/action,Libellé court : vérifier qu’il reste une action/label naturel.
+fub,Retour,Back,Rutto,draft,site:SO-018,human,libellé/action,Libellé court : vérifier qu’il reste une action/label naturel.
+fub,Bénéficiaire,Beneficiary,Keɓoowo,draft,site:SO-019,human,libellé/action,Libellé court : vérifier qu’il reste une action/label naturel.
+fub,Renseignez les informations du destinataire. Vérifiez toujours le numéro avant de valider.,Enter the recipient details. Always verify the number before confirming.,Lonndu kabaaru keɓoowo. Teeŋtu limre nde ko adii yoɓgol.,draft,site:SO-020,human,alerte/négation,"Alerte ou négation : garder le ton, la portée et la négation."
+fub,Nom du bénéficiaire,Beneficiary name,Innde keɓoowo,draft,site:SO-021,human,libellé/action,Libellé court : vérifier qu’il reste une action/label naturel.
+fub,Numéro de téléphone,Phone number,Limre cinndel,draft,site:SO-022,human,libellé/action,Libellé court : vérifier qu’il reste une action/label naturel.
+fub,Motif du transfert,Transfer reason,Dalilla nawgol,draft,site:SO-023,human,libellé/action,Libellé court : vérifier qu’il reste une action/label naturel.
+fub,Note (optionnel),Note (optional),Sariya (so ina haani),draft,site:SO-024,human,libellé/action,Libellé court : vérifier qu’il reste une action/label naturel.
+fub,J'ai vérifié le nom et le numéro du bénéficiaire.,I have verified the beneficiary name and phone number.,Mi teeŋtii innde e limre keɓoowo.,draft,site:SO-025,human,phrase,"Phrase simple : vérifier l’ordre, les accords et le temps."
+fub,Ce bénéficiaire n'a jamais été utilisé sur ce compte. Vérifiez le numéro avant de continuer.,This beneficiary has never been used on this account. Verify the number before continuing.,Oon keɓoowo huutoraaka e ndii asaaku. Teeŋtu limre ko adii yeeso.,draft,site:SO-026,human,alerte/négation,"Alerte ou négation : garder le ton, la portée et la négation."
+fub,Récapitulatif,Summary,Koolol,draft,site:SO-027,human,libellé/action,Libellé court : vérifier qu’il reste une action/label naturel.
+fub,Vérifiez les informations avant de confirmer le transfert.,Check the details before confirming the transfer.,Teeŋtu kabaaru ko adii yoɓgol nawgol.,draft,site:SO-028,human,alerte/négation,"Alerte ou négation : garder le ton, la portée et la négation."
+fub,Montant,Amount,Kaalis,draft,site:SO-029,human,libellé/action,Libellé court : vérifier qu’il reste une action/label naturel.
+fub,Total débité,Total debited,Kawral kaalis yoɓaaɗo,draft,site:SO-030,human,libellé/action,Libellé court : vérifier qu’il reste une action/label naturel.
+fub,Téléphone,Phone,Cinndel,draft,site:SO-031,human,libellé/action,Libellé court : vérifier qu’il reste une action/label naturel.
+fub,Référence,Reference,Limre,draft,site:SO-032,human,libellé/action,Libellé court : vérifier qu’il reste une action/label naturel.
+fub,Opération,Operation,Gollal,draft,site:SO-033,human,libellé/action,Libellé court : vérifier qu’il reste une action/label naturel.
+fub,Je confirme que les informations ci-dessus sont correctes.,I confirm the information above is correct.,Mi teeŋtii kabaaru les ɗoo ko goonga.,draft,site:SO-034,human,phrase,"Phrase simple : vérifier l’ordre, les accords et le temps."
+fub,Confirmer le transfert,Confirm transfer,Teeŋtu nawgol,draft,site:SO-035,human,libellé/action,Libellé court : vérifier qu’il reste une action/label naturel.
+fub,Modifier,Edit,Waylu,draft,site:SO-036,human,libellé/action,Libellé court : vérifier qu’il reste une action/label naturel.
+fub,Transfert effectué,Transfer completed,Nawgol naatii,draft,site:SO-037,human,libellé/action,Libellé court : vérifier qu’il reste une action/label naturel.
+fub,Votre transfert a été envoyé avec succès.,Your transfer has been sent successfully.,Nawgol ma nelaama e jam.,draft,site:SO-038,human,possession,Possessif : vérifier l’ordre et l’accord avec le nom.
+fub,Statut,Status,Tollirgol,draft,site:SO-039,human,libellé/action,Libellé court : vérifier qu’il reste une action/label naturel.
+fub,Succès,Success,Nasara,draft,site:SO-040,human,libellé/action,Libellé court : vérifier qu’il reste une action/label naturel.
+fub,Nouveau transfert,New transfer,Nawgol hesrol,draft,site:SO-041,human,libellé/action,Libellé court : vérifier qu’il reste une action/label naturel.
+fub,Message important,Important message,Kabaaru mawɗo,draft,site:SO-042,human,libellé/action,Libellé court : vérifier qu’il reste une action/label naturel.
+fub,Fermer,Dismiss,Uddu,draft,site:SO-043,human,libellé/action,Libellé court : vérifier qu’il reste une action/label naturel.
+fub,Une erreur est survenue,An error occurred,Fenaande waɗii,draft,site:SO-044,human,alerte/négation,"Alerte ou négation : garder le ton, la portée et la négation."
+fub,Alerte de sécurité,Security warning,Tintina kisal,draft,site:SO-045,human,alerte/négation,"Alerte ou négation : garder le ton, la portée et la négation."
+fub,Sécurité,Security,Kisal,draft,site:SO-046,human,alerte/négation,"Alerte ou négation : garder le ton, la portée et la négation."
+fub,Vérifiez toujours le nom et le numéro du bénéficiaire avant de confirmer un transfert.,Always verify the beneficiary name and number before confirming a transfer.,Teeŋtu innde e limre keɓoowo ko adii yoɓgol fof.,draft,site:SO-047,human,alerte/négation,"Alerte ou négation : garder le ton, la portée et la négation."
+fub,Connexion sécurisée,Secure connection,Tesku kisal,draft,site:SO-048,human,libellé/action,Libellé court : vérifier qu’il reste une action/label naturel.
+fub,Safinum Pay — environnement de démonstration. Ne saisissez aucune donnée personnelle réelle.,Safinum Pay — demonstration environment. Do not enter real personal data.,Safinum Pay — nokku ƴeewndo. Huutoraaka kabaaru hoore ma goonga.,draft,site:SO-049,human,alerte/négation,"Alerte ou négation : garder le ton, la portée et la négation."
+fub,"Environnement de test — données fictives, aucune transaction réelle.","Test environment — fictional data, no real transaction.","Nokku ƴeewndo — kabaaru fenaande, alaa gollal goonga.",draft,site:SO-050,human,alerte/négation,"Alerte ou négation : garder le ton, la portée et la négation."
+ewo,Bonjour,Hello,Mbolani,draft,site:SO-001,human,libellé/action,Libellé court : vérifier qu’il reste une action/label naturel.
+ewo,Votre compte,Your account,Kɔ́ndó wō,draft,site:SO-002,human,possession,Possessif : vérifier l’ordre et l’accord avec le nom.
+ewo,Consultez votre solde et lancez un transfert en toute sécurité.,Check your balance and start a secure transfer.,"Də́ŋə́ abálá wō, ó kɔ́bɔ́ fə́ nkus á nə́m ewɔ́lɔ́.",draft,site:SO-003,human,alerte/négation,"Alerte ou négation : garder le ton, la portée et la négation."
+ewo,Effectuer un transfert,Make a transfer,Bɔ́ nkus,draft,site:SO-004,human,libellé/action,Libellé court : vérifier qu’il reste une action/label naturel.
+ewo,Consulter les frais,View fees,Də́ŋə́ mákyé,draft,site:SO-005,human,libellé/action,Libellé court : vérifier qu’il reste une action/label naturel.
+ewo,Transactions récentes,Recent transactions,Bésama bí abóban eyele,draft,site:SO-006,human,libellé/action,Libellé court : vérifier qu’il reste une action/label naturel.
+ewo,Solde disponible,Available balance,Abálá é ne ngə́lə́,draft,site:SO-007,human,libellé/action,Libellé court : vérifier qu’il reste une action/label naturel.
+ewo,Numéro de compte,Account number,Nɔ́mbələ á kɔ́ndó,draft,site:SO-008,human,possession,Possessif : vérifier l’ordre et l’accord avec le nom.
+ewo,Frais de transfert,Transfer fees,Mákyé má nkus,draft,site:SO-009,human,libellé/action,Libellé court : vérifier qu’il reste une action/label naturel.
+ewo,Choisissez le type de transfert et le montant. Les frais sont calculés automatiquement.,Choose the transfer type and amount. Fees are calculated automatically.,Tə́ŋí nsɔm á nkus ábɔ́ŋ moní. Mákyé má fásbáná emos ésə́.,draft,site:SO-010,human,phrase,"Phrase simple : vérifier l’ordre, les accords et le temps."
+ewo,Type d'opération,Operation type,Nsɔm á esama,draft,site:SO-011,human,libellé/action,Libellé court : vérifier qu’il reste une action/label naturel.
+ewo,Montant à envoyer,Amount to send,Moní á ne na á kə́,draft,site:SO-012,human,libellé/action,Libellé court : vérifier qu’il reste une action/label naturel.
+ewo,Frais,Fee,Mákyé,draft,site:SO-013,human,libellé/action,Libellé court : vérifier qu’il reste une action/label naturel.
+ewo,Gratuit,Free,Á tékə́ mákyé,draft,site:SO-014,human,libellé/action,Libellé court : vérifier qu’il reste une action/label naturel.
+ewo,Total à débiter,Total to debit,Mbodó á ne na á kúsí,draft,site:SO-015,human,libellé/action,Libellé court : vérifier qu’il reste une action/label naturel.
+ewo,Solde après opération,Balance after transfer,Abálá á mvús nkus,draft,site:SO-016,human,libellé/action,Libellé court : vérifier qu’il reste une action/label naturel.
+ewo,Continuer,Continue,Kə́ ósu,draft,site:SO-017,human,libellé/action,Libellé court : vérifier qu’il reste une action/label naturel.
+ewo,Retour,Back,Kiri mvús,draft,site:SO-018,human,libellé/action,Libellé court : vérifier qu’il reste une action/label naturel.
+ewo,Bénéficiaire,Beneficiary,Mòd á nnyɔ́ŋ,draft,site:SO-019,human,libellé/action,Libellé court : vérifier qu’il reste une action/label naturel.
+ewo,Renseignez les informations du destinataire. Vérifiez toujours le numéro avant de valider.,Enter the recipient details. Always verify the number before confirming.,Lóndó bíə́mə́ bí mòd á nnyɔ́ŋ. Yéŋə́ nɔ́mbələ ósu na ó sínyí.,draft,site:SO-020,human,alerte/négation,"Alerte ou négation : garder le ton, la portée et la négation."
+ewo,Nom du bénéficiaire,Beneficiary name,Ezóŋ é mòd á nnyɔ́ŋ,draft,site:SO-021,human,libellé/action,Libellé court : vérifier qu’il reste une action/label naturel.
+ewo,Numéro de téléphone,Phone number,Nɔ́mbələ á télafon,draft,site:SO-022,human,libellé/action,Libellé court : vérifier qu’il reste une action/label naturel.
+ewo,Motif du transfert,Transfer reason,Nzólé á nkus,draft,site:SO-023,human,libellé/action,Libellé court : vérifier qu’il reste une action/label naturel.
+ewo,Note (optionnel),Note (optional),Nsɔ́ŋó (á ne eyáŋá),draft,site:SO-024,human,libellé/action,Libellé court : vérifier qu’il reste une action/label naturel.
+ewo,J'ai vérifié le nom et le numéro du bénéficiaire.,I have verified the beneficiary name and phone number.,Me yéŋéya ezóŋ á nɔ́mbələ á mòd á nnyɔ́ŋ.,draft,site:SO-025,human,phrase,"Phrase simple : vérifier l’ordre, les accords et le temps."
+ewo,Ce bénéficiaire n'a jamais été utilisé sur ce compte. Vérifiez le numéro avant de continuer.,This beneficiary has never been used on this account. Verify the number before continuing.,Mòd á nnyɔ́ŋ nyó a tékə́ yáne bóban á kɔ́ndó nyó. Yéŋə́ nɔ́mbələ ósu na ó kə́ ósu.,draft,site:SO-026,human,alerte/négation,"Alerte ou négation : garder le ton, la portée et la négation."
+ewo,Récapitulatif,Summary,Afúlásí,draft,site:SO-027,human,libellé/action,Libellé court : vérifier qu’il reste une action/label naturel.
+ewo,Vérifiez les informations avant de confirmer le transfert.,Check the details before confirming the transfer.,Yéŋə́ bíə́mə́ ósu na ó sínyí nkus.,draft,site:SO-028,human,alerte/négation,"Alerte ou négation : garder le ton, la portée et la négation."
+ewo,Montant,Amount,Moní,draft,site:SO-029,human,libellé/action,Libellé court : vérifier qu’il reste une action/label naturel.
+ewo,Total débité,Total debited,Mbodó á kúsíya,draft,site:SO-030,human,libellé/action,Libellé court : vérifier qu’il reste une action/label naturel.
+ewo,Téléphone,Phone,Télafon,draft,site:SO-031,human,libellé/action,Libellé court : vérifier qu’il reste une action/label naturel.
+ewo,Référence,Reference,Eñíŋlé,draft,site:SO-032,human,libellé/action,Libellé court : vérifier qu’il reste une action/label naturel.
+ewo,Opération,Operation,Esama,draft,site:SO-033,human,libellé/action,Libellé court : vérifier qu’il reste une action/label naturel.
+ewo,Je confirme que les informations ci-dessus sont correctes.,I confirm the information above is correct.,Me tɔ́ŋlé na bíə́mə́ bí ne yɔ́bɔ yé ne ébən.,draft,site:SO-034,human,phrase,"Phrase simple : vérifier l’ordre, les accords et le temps."
+ewo,Confirmer le transfert,Confirm transfer,Sínyí nkus,draft,site:SO-035,human,libellé/action,Libellé court : vérifier qu’il reste une action/label naturel.
+ewo,Modifier,Edit,Tsíŋí,draft,site:SO-036,human,libellé/action,Libellé court : vérifier qu’il reste une action/label naturel.
+ewo,Transfert effectué,Transfer completed,Nkus á bɔ́ya,draft,site:SO-037,human,libellé/action,Libellé court : vérifier qu’il reste une action/label naturel.
+ewo,Votre transfert a été envoyé avec succès.,Your transfer has been sent successfully.,Nkus wō á lómya ne adzáŋ.,draft,site:SO-038,human,possession,Possessif : vérifier l’ordre et l’accord avec le nom.
+ewo,Statut,Status,Ntéláná,draft,site:SO-039,human,libellé/action,Libellé court : vérifier qu’il reste une action/label naturel.
+ewo,Succès,Success,Adzáŋ,draft,site:SO-040,human,libellé/action,Libellé court : vérifier qu’il reste une action/label naturel.
+ewo,Nouveau transfert,New transfer,Mfə́fə́ nkus,draft,site:SO-041,human,libellé/action,Libellé court : vérifier qu’il reste une action/label naturel.
+ewo,Message important,Important message,Mŋkát á mfi,draft,site:SO-042,human,libellé/action,Libellé court : vérifier qu’il reste une action/label naturel.
+ewo,Fermer,Dismiss,Fúdbá,draft,site:SO-043,human,libellé/action,Libellé court : vérifier qu’il reste une action/label naturel.
+ewo,Une erreur est survenue,An error occurred,Eboŋle é bɔ́ya,draft,site:SO-044,human,alerte/négation,"Alerte ou négation : garder le ton, la portée et la négation."
+ewo,Alerte de sécurité,Security warning,Méyáŋá má ɔ́bám,draft,site:SO-045,human,alerte/négation,"Alerte ou négation : garder le ton, la portée et la négation."
+ewo,Sécurité,Security,Ɔ́bám,draft,site:SO-046,human,alerte/négation,"Alerte ou négation : garder le ton, la portée et la négation."
+ewo,Vérifiez toujours le nom et le numéro du bénéficiaire avant de confirmer un transfert.,Always verify the beneficiary name and number before confirming a transfer.,Yéŋə́ ezóŋ á nɔ́mbələ á mòd á nnyɔ́ŋ ósu na ó sínyí nkus.,draft,site:SO-047,human,alerte/négation,"Alerte ou négation : garder le ton, la portée et la négation."
+ewo,Connexion sécurisée,Secure connection,Nláŋáná á ɔ́bám,draft,site:SO-048,human,libellé/action,Libellé court : vérifier qu’il reste une action/label naturel.
+ewo,Safinum Pay — environnement de démonstration. Ne saisissez aucune donnée personnelle réelle.,Safinum Pay — demonstration environment. Do not enter real personal data.,Safinum Pay — vèyá á esáŋá. Kə́ lóndó bíə́mə́ bí eñíŋ wō.,draft,site:SO-049,human,alerte/négation,"Alerte ou négation : garder le ton, la portée et la négation."
+ewo,"Environnement de test — données fictives, aucune transaction réelle.","Test environment — fictional data, no real transaction.",Vèyá á esáŋá — bíə́mə́ bí ngə́lə́.,draft,site:SO-050,human,alerte/négation,"Alerte ou négation : garder le ton, la portée et la négation."
+dua,Bonjour,Hello,Ã mbɔti,draft,site:SO-001,human,libellé/action,Libellé court : vérifier qu’il reste une action/label naturel.
+dua,Votre compte,Your account,Kompa ɔŋ,draft,site:SO-002,human,possession,Possessif : vérifier l’ordre et l’accord avec le nom.
+dua,Consultez votre solde et lancez un transfert en toute sécurité.,Check your balance and start a secure transfer.,"Jeŋe mɔ̀nì mwé ɓáyí, o lome pé mɔ̀nì na bata.",draft,site:SO-003,human,alerte/négation,"Alerte ou négation : garder le ton, la portée et la négation."
+dua,Effectuer un transfert,Make a transfer,Lómò mɔ̀nì,draft,site:SO-004,human,libellé/action,Libellé court : vérifier qu’il reste une action/label naturel.
+dua,Consulter les frais,View fees,Jeŋe móǹgá,draft,site:SO-005,human,libellé/action,Libellé court : vérifier qu’il reste une action/label naturel.
+dua,Transactions récentes,Recent transactions,Bina ba mɔ̀nì ba ɓoɓí ɓosɔ̂,draft,site:SO-006,human,libellé/action,Libellé court : vérifier qu’il reste une action/label naturel.
+dua,Solde disponible,Available balance,Mɔ̀nì mwé ɓáyí,draft,site:SO-007,human,libellé/action,Libellé court : vérifier qu’il reste une action/label naturel.
+dua,Numéro de compte,Account number,Nombara a kompa,draft,site:SO-008,human,possession,Possessif : vérifier l’ordre et l’accord avec le nom.
+dua,Frais de transfert,Transfer fees,Móǹgá mwá lómò mɔ̀nì,draft,site:SO-009,human,libellé/action,Libellé court : vérifier qu’il reste une action/label naturel.
+dua,Choisissez le type de transfert et le montant. Les frais sont calculés automatiquement.,Choose the transfer type and amount. Fees are calculated automatically.,Pɔ́ yá lómò na ɓwéyá ɓwá mɔ̀nì. Móǹgá mu maɓolane ɓuɓéɓuɓé.,draft,site:SO-010,human,phrase,"Phrase simple : vérifier l’ordre, les accords et le temps."
+dua,Type d'opération,Operation type,Epepe a eɓolo,draft,site:SO-011,human,libellé/action,Libellé court : vérifier qu’il reste une action/label naturel.
+dua,Montant à envoyer,Amount to send,Mɔ̀nì mú yéná na lómò,draft,site:SO-012,human,libellé/action,Libellé court : vérifier qu’il reste une action/label naturel.
+dua,Frais,Fee,Móǹgá,draft,site:SO-013,human,libellé/action,Libellé court : vérifier qu’il reste une action/label naturel.
+dua,Gratuit,Free,Esikaye móǹgá,draft,site:SO-014,human,libellé/action,Libellé court : vérifier qu’il reste une action/label naturel.
+dua,Total à débiter,Total to debit,Mɔ̀nì mwésé mú mákusane,draft,site:SO-015,human,libellé/action,Libellé court : vérifier qu’il reste une action/label naturel.
+dua,Solde après opération,Balance after transfer,Mɔ̀nì mwé ɓáyí ombusa soma,draft,site:SO-016,human,libellé/action,Libellé court : vérifier qu’il reste une action/label naturel.
+dua,Continuer,Continue,Kɛ́ oboso,draft,site:SO-017,human,libellé/action,Libellé court : vérifier qu’il reste une action/label naturel.
+dua,Retour,Back,Timbia ombusa,draft,site:SO-018,human,libellé/action,Libellé court : vérifier qu’il reste une action/label naturel.
+dua,Bénéficiaire,Beneficiary,Moto nu mányɔ̀ŋɔ̀,draft,site:SO-019,human,libellé/action,Libellé court : vérifier qu’il reste une action/label naturel.
+dua,Renseignez les informations du destinataire. Vérifiez toujours le numéro avant de valider.,Enter the recipient details. Always verify the number before confirming.,Londe bina bá moto nu mányɔ̀ŋɔ̀. Jeele nombara oboso na o disese.,draft,site:SO-020,human,alerte/négation,"Alerte ou négation : garder le ton, la portée et la négation."
+dua,Nom du bénéficiaire,Beneficiary name,Dina la moto nu mányɔ̀ŋɔ̀,draft,site:SO-021,human,libellé/action,Libellé court : vérifier qu’il reste une action/label naturel.
+dua,Numéro de téléphone,Phone number,Nombara a telefon,draft,site:SO-022,human,libellé/action,Libellé court : vérifier qu’il reste une action/label naturel.
+dua,Motif du transfert,Transfer reason,Njóm a lómò mɔ̀nì,draft,site:SO-023,human,libellé/action,Libellé court : vérifier qu’il reste une action/label naturel.
+dua,Note (optionnel),Note (optional),Bedangwedi (yaya),draft,site:SO-024,human,libellé/action,Libellé court : vérifier qu’il reste une action/label naturel.
+dua,J'ai vérifié le nom et le numéro du bénéficiaire.,I have verified the beneficiary name and phone number.,Na jeeleyɛ̂ dina na nombara a moto nu mányɔ̀ŋɔ̀.,draft,site:SO-025,human,phrase,"Phrase simple : vérifier l’ordre, les accords et le temps."
+dua,Ce bénéficiaire n'a jamais été utilisé sur ce compte. Vérifiez le numéro avant de continuer.,This beneficiary has never been used on this account. Verify the number before continuing.,Nu moto nu mányɔ̀ŋɔ̀ asóɓanó ɓo polo a mí kompa. Jeele nombara oboso na o kɛ́ oboso.,draft,site:SO-026,human,alerte/négation,"Alerte ou négation : garder le ton, la portée et la négation."
+dua,Récapitulatif,Summary,Tombise,draft,site:SO-027,human,libellé/action,Libellé court : vérifier qu’il reste une action/label naturel.
+dua,Vérifiez les informations avant de confirmer le transfert.,Check the details before confirming the transfer.,Jeele bina oboso na o adise lómò mɔ̀nì.,draft,site:SO-028,human,alerte/négation,"Alerte ou négation : garder le ton, la portée et la négation."
+dua,Montant,Amount,Mɔ̀nì,draft,site:SO-029,human,libellé/action,Libellé court : vérifier qu’il reste une action/label naturel.
+dua,Total débité,Total debited,Mɔ̀nì mwésé mú kusané,draft,site:SO-030,human,libellé/action,Libellé court : vérifier qu’il reste une action/label naturel.
+dua,Téléphone,Phone,Telefon,draft,site:SO-031,human,libellé/action,Libellé court : vérifier qu’il reste une action/label naturel.
+dua,Opération,Operation,Eɓolo,draft,site:SO-033,human,libellé/action,Libellé court : vérifier qu’il reste une action/label naturel.
+dua,Je confirme que les informations ci-dessus sont correctes.,I confirm the information above is correct.,Na madise na bina ɓé na omóŋ ɓé téŋɛ̂.,draft,site:SO-034,human,phrase,"Phrase simple : vérifier l’ordre, les accords et le temps."
+dua,Confirmer le transfert,Confirm transfer,Adise lómò mɔ̀nì,draft,site:SO-035,human,libellé/action,Libellé court : vérifier qu’il reste une action/label naturel.
+dua,Modifier,Edit,Tukwa,draft,site:SO-036,human,libellé/action,Libellé court : vérifier qu’il reste une action/label naturel.
+dua,Transfert effectué,Transfer completed,Lómò mɔ̀nì e ɓoɓí,draft,site:SO-037,human,libellé/action,Libellé court : vérifier qu’il reste une action/label naturel.
+dua,Votre transfert a été envoyé avec succès.,Your transfer has been sent successfully.,Lómò mɔ̀nì ɔŋ e loméyɛ̂ na ɓwám.,draft,site:SO-038,human,possession,Possessif : vérifier l’ordre et l’accord avec le nom.
+dua,Statut,Status,Ejaŋgi,draft,site:SO-039,human,libellé/action,Libellé court : vérifier qu’il reste une action/label naturel.
+dua,Succès,Success,Ɓwám,draft,site:SO-040,human,libellé/action,Libellé court : vérifier qu’il reste une action/label naturel.
+dua,Nouveau transfert,New transfer,Péne a lómò mɔ̀nì,draft,site:SO-041,human,libellé/action,Libellé court : vérifier qu’il reste une action/label naturel.
+dua,Message important,Important message,Mweŋge mwá mfi,draft,site:SO-042,human,libellé/action,Libellé court : vérifier qu’il reste une action/label naturel.
+dua,Fermer,Dismiss,Diɓa,draft,site:SO-043,human,libellé/action,Libellé court : vérifier qu’il reste une action/label naturel.
+dua,Une erreur est survenue,An error occurred,Wuma eɓanɛ̂,draft,site:SO-044,human,alerte/négation,"Alerte ou négation : garder le ton, la portée et la négation."
+dua,Alerte de sécurité,Security warning,Bokwe bi bata,draft,site:SO-045,human,alerte/négation,"Alerte ou négation : garder le ton, la portée et la négation."
+dua,Sécurité,Security,Bata,draft,site:SO-046,human,alerte/négation,"Alerte ou négation : garder le ton, la portée et la négation."
+dua,Vérifiez toujours le nom et le numéro du bénéficiaire avant de confirmer un transfert.,Always verify the beneficiary name and number before confirming a transfer.,Jeele pɔ́n dina na nombara a moto nu mányɔ̀ŋɔ̀ oboso na o adise.,draft,site:SO-047,human,alerte/négation,"Alerte ou négation : garder le ton, la portée et la négation."
+dua,Connexion sécurisée,Secure connection,Mulongu mu batamɛ̂,draft,site:SO-048,human,libellé/action,Libellé court : vérifier qu’il reste une action/label naturel.
+dua,Safinum Pay — environnement de démonstration. Ne saisissez aucune donnée personnelle réelle.,Safinum Pay — demonstration environment. Do not enter real personal data.,Safinum Pay — eɓolo a jeele. Suka londe bina ɓɔŋ bá moto.,draft,site:SO-049,human,alerte/négation,"Alerte ou négation : garder le ton, la portée et la négation."
+dua,"Environnement de test — données fictives, aucune transaction réelle.","Test environment — fictional data, no real transaction.","Wuma a jeele — bina ba wite, soma téŋɛ̂ e titi.",draft,site:SO-050,human,alerte/négation,"Alerte ou négation : garder le ton, la portée et la négation."
+dua,"Bonjour, Amina.","Hello, Amina.","Idiba, Amina.",draft,site:SO-051,human,phrase,"Phrase simple : vérifier l’ordre, les accords et le temps."
