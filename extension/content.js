@@ -138,12 +138,12 @@
     const box = document.createElement("div");
     box.className = "notice";
     box.setAttribute("role", "status");
-    box.textContent = `NkapLingua · ${label} — brouillons non validés`;
+    box.textContent = tr(`NkapLingua · ${label} — brouillons non validés`, `NkapLingua · ${label} — unverified drafts`);
     box.title =
-      `${translated} passage(s) traduits` +
-      (human ? ` · ${human} entrée(s) de pack non validée(s)` : "") +
+      tr(`${translated} passage(s) traduits`, `${translated} passage(s) translated`) +
+      (human ? tr(` · ${human} entrée(s) de pack non validée(s)`, ` · ${human} unverified pack item(s)`) : "") +
       (demo ? ` · ${demo} alerte(s) MT démo` : "") +
-      (partial ? ` · ${partial} traduction(s) partielle(s)` : "") +
+      (partial ? tr(` · ${partial} traduction(s) partielle(s)`, ` · ${partial} partial translation(s)`) : "") +
       (untranslated ? ` · ${untranslated} non traduit(s)` : "");
     shadow.append(style, box);
     document.documentElement.appendChild(host);
@@ -262,6 +262,9 @@
   let translatedTitleOriginal = null;
   let lastResult = null;
   const DEMO_PAGE = LANG.isDemoPage?.() === true;
+  const pageIsEnglish = () =>
+    String(document.documentElement?.lang || "").toLowerCase().startsWith("en");
+  const tr = (fr, en) => (pageIsEnglish() ? en : fr);
 
   /* ------------------------------------------------------------------ */
   /* Détection de langue                                                */
@@ -275,9 +278,9 @@
   }
 
   function sourceLabel(code) {
-    if (code === "en") return "anglais";
-    if (code === "fr") return "français";
-    return "langue inconnue";
+    if (code === "en") return tr("anglais", "English");
+    if (code === "fr") return tr("français", "French");
+    return tr("langue inconnue", "unknown language");
   }
 
   /* ------------------------------------------------------------------ */
@@ -617,7 +620,7 @@
       (translatedTitleOriginal !== null ? 1 : 0);
     if (restoredCount === 0) {
       clearNotice();
-      showToast("Aucune traduction à restaurer.");
+      showToast(tr("Aucune traduction à restaurer.", "No translation to restore."));
       return { ok: false, error: "Aucune traduction à restaurer." };
     }
 
@@ -667,7 +670,7 @@
     lastResult = null;
     stopObserver();
     clearNotice();
-    showToast("Original restauré.");
+    showToast(tr("Original restauré.", "Original restored."));
     return { ok: true, restored: restoredCount };
   }
 
@@ -716,14 +719,14 @@
 
   async function translatePage(target) {
     if (applying) {
-      showToast("Une traduction est déjà en cours.");
+      showToast(tr("Une traduction est déjà en cours.", "A translation is already in progress."));
       return { ok: false, error: "Une traduction est déjà en cours." };
     }
 
     const targetCode = target || currentTarget;
     const spec = LANG.getTarget(targetCode);
     if (!spec) {
-      showToast("Langue cible inconnue.");
+      showToast(tr("Langue cible inconnue.", "Unknown target language."));
       return { ok: false, error: "Langue cible inconnue." };
     }
 
@@ -732,10 +735,16 @@
     stopObserver();
     clearNotice();
     showToast(
-      `Traduction en ${spec.label}… ` +
-        (spec.engine === "pack"
-          ? "Seules les phrases du pack seront appliquées."
-          : "Cela peut prendre quelques secondes.")
+      tr(
+        `Traduction en ${spec.label}… ` +
+          (spec.engine === "pack"
+            ? "Seules les phrases du pack seront appliquées."
+            : "Cela peut prendre quelques secondes."),
+        `Translating to ${spec.label}… ` +
+          (spec.engine === "pack"
+            ? "Only pack phrases will be applied."
+            : "This may take a few seconds.")
+      )
     );
 
     let translatedCount = 0;
@@ -745,7 +754,7 @@
       const items = collectItems();
       const pageTruncated = items.length >= MAX_TEXT_ITEMS;
       if (items.length === 0) {
-        showToast("Aucun nouveau texte à traduire.");
+        showToast(tr("Aucun nouveau texte à traduire.", "No new text to translate."));
         return { ok: false, error: "Aucun nouveau texte à traduire." };
       }
 
@@ -900,7 +909,7 @@
 
         if (!response) {
           fatalError =
-            "Service de traduction indisponible. Vérifiez la connexion ou lancez le backend local.";
+            tr("Service de traduction indisponible. Vérifiez la connexion ou lancez le backend local.", "Translation service unavailable. Check the connection or start the local backend.");
           showToast(fatalError);
           break;
         }
@@ -1063,14 +1072,32 @@
 
       if (spec.engine === "pack" && translatedCount === 0) {
         showToast(
-          `Pack ${spec.label} : aucune phrase disponible pour cette page. ` +
-            `Les textes restent en ${sourceLabel(sourceInfo.code)}.`
+          tr(
+            `Pack ${spec.label} : aucune phrase disponible pour cette page. ` +
+              `Les textes restent en ${sourceLabel(sourceInfo.code)}.`,
+            `Pack ${spec.label}: no phrase available for this page. ` +
+              `Text stays in ${sourceLabel(sourceInfo.code)}.`
+          )
         );
       } else if (translatedCount === 0 && criticalCount > 0) {
         showToast(
-          `Aucune phrase traduite en ${spec.label}. ` +
-            "Les phrases qui touchent à l'argent ou à la sécurité restent en français."
+          tr(
+            `Aucune phrase traduite en ${spec.label}. ` +
+              "Les phrases qui touchent à l'argent ou à la sécurité restent en français.",
+            `No phrase translated to ${spec.label}. ` +
+              "Sentences involving money or security stay in French."
+          )
         );
+      } else if (pageIsEnglish()) {
+        const bits = [
+          `${translatedCount} passage(s) translated to ${spec.label}`,
+          flaggedCount + criticalCount
+            ? `${flaggedCount + criticalCount} left in French`
+            : null,
+          partialCount ? `${partialCount} partial translation(s)` : null,
+          pageTruncated ? "long page, 180 passages maximum" : null
+        ].filter(Boolean);
+        showToast(`${bits.join(" · ")}. Amounts and names preserved.`);
       } else {
         showToast(
           (DEMO_PAGE ? "Mode démo SAFINUM (données fictives) — " : "") +
@@ -1201,14 +1228,14 @@
     const selection = window.getSelection();
     const text = selection?.toString().trim();
     if (!text) {
-      showToast("Sélectionnez d'abord du texte.");
+      showToast(tr("Sélectionnez d'abord du texte.", "Select some text first."));
       return { ok: false, error: "Sélectionnez d'abord du texte." };
     }
 
     const targetCode = target || currentTarget;
     const spec = LANG.getTarget(targetCode);
     if (!spec) {
-      showToast("Langue cible inconnue.");
+      showToast(tr("Langue cible inconnue.", "Unknown target language."));
       return { ok: false, error: "Langue cible inconnue." };
     }
 
@@ -1233,7 +1260,8 @@
 
       if (!response || response.error) {
         const message =
-          response?.error || "Traduction impossible pour cette sélection.";
+          response?.error ||
+          tr("Traduction impossible pour cette sélection.", "Translation failed for this selection.");
         showToast(message);
         return { ok: false, error: message };
       }
@@ -1244,16 +1272,24 @@
           response.translation?.reason === "untranslated_critical" ||
           response.translation?.reason === "critical_pack_only"
         ) {
-          message =
+          message = tr(
             "Cette phrase touche à l'argent ou à la sécurité. " +
-            "Elle reste en français pour éviter une erreur.";
+              "Elle reste en français pour éviter une erreur.",
+            "This sentence involves money or security. " +
+              "It stays in French to avoid an error."
+          );
         } else if (response.translation?.reason === "pack_miss") {
-          message =
-            "Cette phrase n'est pas encore disponible en " +
-            `${spec.label}. Elle reste en français.`;
+          message = tr(
+            `Cette phrase n'est pas encore disponible en ${spec.label}. ` +
+              "Elle reste en français.",
+            `This sentence is not available in ${spec.label} yet. ` +
+              "It stays in French."
+          );
         } else {
-          message =
-            "Traduction non fiable : les montants ou les noms pourraient être modifiés.";
+          message = tr(
+            "Traduction non fiable : les montants ou les noms pourraient être modifiés.",
+            "Unreliable translation: amounts or names may have changed."
+          );
         }
         showToast(message);
         return { ok: false, error: message };
@@ -1293,7 +1329,10 @@
       return { ok: true, translated: 1 };
     } catch (error) {
       console.error("[NkapLingua]", error);
-      const message = "Erreur de traduction de la sélection.";
+      const message = tr(
+        "Erreur de traduction de la sélection.",
+        "Selection translation error."
+      );
       showToast(message);
       return { ok: false, error: message };
     }
@@ -1389,20 +1428,20 @@
     const box = document.createElement("div");
     box.className = "box";
     box.setAttribute("role", "dialog");
-    box.setAttribute("aria-label", "Traduction NkapLingua");
+    box.setAttribute("aria-label", tr("Traduction NkapLingua", "NkapLingua translation"));
 
     const tag = document.createElement("div");
     tag.className = "tag";
     const tagText = document.createElement("span");
     tagText.textContent =
       translationMeta.humanReviewed
-        ? `${spec.label} · pack humain non validé`
+        ? tr(`${spec.label} · pack humain non validé`, `${spec.label} · human pack, unverified`)
         : spec.engine === "pack"
-          ? `${spec.label} · pack`
-          : `${spec.label} · MT brouillon`;
+          ? tr(`${spec.label} · pack`, `${spec.label} · pack`)
+          : tr(`${spec.label} · MT brouillon`, `${spec.label} · MT draft`);
     const close = document.createElement("button");
     close.type = "button";
-    close.textContent = "Fermer";
+    close.textContent = tr("Fermer", "Close");
     close.addEventListener("click", () => host.remove());
     tag.append(tagText, close);
 
@@ -1420,33 +1459,51 @@
     if (translationMeta.humanReviewed) {
       const note = document.createElement("p");
       note.className = "note";
-      note.textContent =
+      note.textContent = tr(
         `Pack non validé (${translationMeta.packStatus || "draft"}` +
-        (translationMeta.reviewLevel
-          ? `, ${translationMeta.reviewLevel}`
-          : "") +
-        "). Relecture native indépendante requise avant usage réel.";
+          (translationMeta.reviewLevel
+            ? `, ${translationMeta.reviewLevel}`
+            : "") +
+          "). Relecture native indépendante requise avant usage réel.",
+        `Unverified pack (${translationMeta.packStatus || "draft"}` +
+          (translationMeta.reviewLevel
+            ? `, ${translationMeta.reviewLevel}`
+            : "") +
+          "). Independent native review is required before real use."
+      );
       box.append(note);
     } else if (demoCritical) {
       const note = document.createElement("p");
       note.className = "note";
-      note.textContent =
+      note.textContent = tr(
         "Mode démo SAFINUM — phrase critique traduite par MT, non validée. " +
-        "Données fictives, aucune transaction réelle.";
+          "Données fictives, aucune transaction réelle.",
+        "SAFINUM demo mode — critical sentence translated by MT, unverified. " +
+          "Fictional data, no real transaction."
+      );
       box.append(note);
     } else if (spec.engine === "pack" || provider === "pack") {
       const note = document.createElement("p");
       note.className = "note";
-      note.textContent =
-        "Phrase issue du pack communautaire. Validation native requise avant usage réel.";
+      note.textContent = tr(
+        "Phrase issue du pack communautaire. Validation native requise avant usage réel.",
+        "Sentence from the community pack. Native validation required before real use."
+      );
       box.append(note);
     } else {
       const note = document.createElement("p");
       note.className = "note";
       note.textContent = DEMO_PAGE
-        ? "Mode démo SAFINUM — traduction automatique non validée, à relire."
-        : "Traduction automatique (brouillon) — à relire par un natif. " +
-          "Les phrases critiques (solde, frais, PIN/OTP) ne sont pas traduites automatiquement.";
+        ? tr(
+            "Mode démo SAFINUM — traduction automatique non validée, à relire.",
+            "SAFINUM demo mode — unverified machine translation, to review."
+          )
+        : tr(
+            "Traduction automatique (brouillon) — à relire par un natif. " +
+              "Les phrases critiques (solde, frais, PIN/OTP) ne sont pas traduites automatiquement.",
+            "Machine translation (draft) — to be reviewed by a native. " +
+              "Critical phrases (balance, fees, PIN/OTP) are not machine-translated."
+          );
       box.append(note);
     }
 
