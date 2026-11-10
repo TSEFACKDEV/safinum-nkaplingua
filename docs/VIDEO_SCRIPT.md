@@ -86,18 +86,21 @@ confirmation, puis le message d’erreur / avertissement de sécurité.
 > « Le parcours est complet : vérifier le solde, lire les frais, préparer un
 > transfert, relire le récapitulatif et comprendre une alerte de sécurité. »
 
-### 1:50 — 2:15 · Contenu inédit
+### 1:50 — 2:15 · Contenu inédit, phrase par phrase
 
-**Action** : ajouter `Le solde est de 25 000 FCFA.` dans la page ; montrer
-`Jawdindi ko 25 000 FCFA.` avec la mention « brouillons non validés ».
+**Action** : ajouter dans la page le paragraphe
+`Le solde est de 25 000 FCFA. Le vendeur arrive demain.` ; montrer
+`Jawdindi ko 25 000 FCFA.` suivi de la phrase inconnue restée en français,
+avec la mention discrète et « 1 traduction(s) partielle(s) ».
 
 **Voix off** :
 
-> « Le jury peut introduire un message qui n’était pas dans la page. Le moteur
-> le traduit à la volée. »
+> « Le jury peut introduire un message qui n’était pas dans la page. NkapLingua
+> traduit les phrases connues du pack et laisse les autres en français. Il ne
+> fait jamais de traduction mot à mot et n’invente pas de phrase. »
 
-**Plan B** : si le modèle est lent, utiliser la traduction de sélection sur une
-phrase courte déjà chargée.
+**Plan B** : si l’insertion live échoue, montrer la capture de la sonde
+`fallback` dans `docs/test-results/real-site-packs-2026-11-10-173547.json`.
 
 ### 2:15 — 2:35 · Sécurité
 
@@ -105,10 +108,10 @@ phrase courte déjà chargée.
 
 **Voix off** :
 
-> « L’extension utilise le backend local s’il est disponible. Le service cloud
-> expérimental n’est contacté que si l’utilisateur l’autorise explicitement,
-> avec un texte pseudonymisé. Dans les deux cas : pas de cookies, pas de mot de
-> passe, pas de code PIN. »
+> « Ici, aucun serveur n’est lancé : tout vient des packs embarqués dans
+> l’extension. Le service cloud expérimental n’est contacté que si
+> l’utilisateur l’autorise explicitement, avec un texte pseudonymisé. Dans tous
+> les cas : pas de cookies, pas de mot de passe, pas de code PIN. »
 
 **Écran** : montrer `docs/DATA_LICENSES.md` ou le tableau des composants.
 
@@ -117,9 +120,10 @@ phrase courte déjà chargée.
 **Voix off** :
 
 > « Les packs sont des brouillons humains ou éditoriaux : aucune phrase n’est
-> encore validée par un panel natif indépendant. Le badge le dit clairement.
-> flagship-ai et NLLB restent des secours. Les montants, le compte et les noms
-> sont préservés ; les phrases critiques sans pack restent en français. »
+> encore validée par un panel natif indépendant. Une mention discrète le dit
+> clairement, sans pastille sur chaque phrase. flagship-ai et NLLB restent des
+> secours. Les montants, le compte et les noms sont préservés ; les phrases
+> critiques sans pack restent en français. »
 
 ### 2:55 — 3:00 · Conclusion
 
@@ -133,8 +137,8 @@ phrase courte déjà chargée.
 ## Checklist d’enregistrement
 
 - [ ] Extension seule testée avec les packs (le cloud ne couvre pas l’ewondo)
-- [ ] Backend local lancé : `NK_FLAGSHIP_MT=auto` (commande dans `docs/REAL_TEST_2026-11-09.md`)
-- [ ] Modèles flagship-ai/NLLB préchauffés si mode local
+- [ ] Serveur local arrêté pour prouver l’autonomie du paquet
+- [ ] Aucun opt-in cloud activé pendant la démonstration
 - [ ] Extension chargée dans Chrome/Firefox
 - [ ] Page `https://safinum.cm/hackathon-test` ouverte
 - [ ] Zoom navigateur à 100 %
@@ -146,7 +150,7 @@ phrase courte déjà chargée.
 
 ## Plan B si la traduction live est trop lente
 
-1. Montrer la page déjà traduite (cache préchauffé).
-2. Montrer le texte inédit sur une phrase courte.
-3. Montrer le contrôle de sécurité et le toggle original.
-4. Expliquer clairement la limite de latence CPU.
+1. Montrer la page déjà traduite depuis un rechargement propre.
+2. Montrer le repli phrase par phrase sur le paragraphe mixte.
+3. Montrer le contrôle de sécurité et le retour à l’original.
+4. Expliquer clairement que le pack couvre les phrases connues, pas tout l’inédit.
