@@ -3,7 +3,7 @@
 `finance-multilingual.csv` rassemble les messages du site et les entrées des
 trois packs, dédupliqués par clé FR/EN.
 
-- **236 lignes** environ, selon les mises à jour des packs ;
+- **642 lignes** environ, selon les mises à jour des packs ;
 - colonnes `key_fr`, `key_en`, `fub`, `ewo`, `dua` ;
 - statuts `candidate` ou `missing` uniquement ;
 - **aucune ligne `validated`** : c'est un corpus candidat, pas une vérité

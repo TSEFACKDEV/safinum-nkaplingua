@@ -22,3 +22,23 @@ Fichiers générés le 10 novembre 2026. **Aucune ligne n'est `validated`.**
 4. Une entrée ne passe à `validated` que si les deux relecteurs et l'arbitre
    sont d'accord.
 5. Ne jamais remplir `decision=validated` sans preuve et consentement.
+
+
+## Fichiers ajoutés le 11 novembre 2026
+
+- `fub-panel-P1P2P3.csv` : 185 entrées du pack fulfulde avec signaux de forme
+  (35 types), priorité panel P1/P2/P3, colonnes de relecture vides.
+  Ce n'est **pas une validation** : c'est la liste de ce qu'il faut faire relire.
+- `fub-translation-queue.csv` : 416 sources françaises à traduire (actions,
+  comptes, sécurité, erreurs, crédit, banque, phrases), **cibles vides**.
+  Claude a volontairement refusé de traduire en aveugle ; tout est `proposed`.
+- 406 nouvelles clés ajoutées au corpus `finance-multilingual.csv`
+  (642 lignes au total), avec `status: missing`.
+
+### Signaux prioritaires
+
+- `NJOODI_MULTI_SENS` (18) : `njoɓdi` couvre frais, paiement, facture, salaire.
+- `MOT_A_MOT_PROBABLE` (14) : plafond, découvert, agence, guichet, litige.
+- `NAWGOL_VS_NELU` : `nawgol` pour envoyer et recevoir.
+- `YOOBGOL_PAYER_VALIDER` : `yoɓgol` pour payer et valider.
+- `EMPRUNT_A_DECLARER` (11) : emprunts non déclarés.

@@ -1,10 +1,23 @@
 key_fr,key_en,fub,ewo,dua,fub_status,ewo_status,dua_status,source,provenance,note
 +[[NUM_0]] FCFA,,+[[NUM_0]] FCFA,,,candidate,missing,missing,pack-fub,human,
 [[NUM_0]] FCFA,,[[NUM_0]] FCFA,,,candidate,missing,missing,pack-fub,human,
+Accepter,Accept,,,,missing,missing,missing,fub-translation-queue,to-translate,Source à traduire ; cible vide. Type: action
 Account number,,Limre asaaku,Nɔ́mbələ á kɔ́ndó,Nombara a kompa,candidate,candidate,candidate,pack-fub;pack-ewo;pack-dua,human,
 Account number : CM [[NUM_0]],,Limre asaaku : CM [[NUM_0]],Nɔ́mbələ á kɔ́ndó : CM [[NUM_0]],Nombara a kompa : CM [[NUM_0]],candidate,candidate,candidate,pack-fub;pack-ewo;pack-dua,editorial,
+Activer,Activate,,,,missing,missing,missing,fub-translation-queue,to-translate,Source à traduire ; cible vide. Type: action
+Activité suspecte,Suspicious activity,,,,missing,missing,missing,fub-translation-queue,to-translate,Source à traduire ; cible vide. Type: securite
+Actualiser,Refresh,,,,missing,missing,missing,fub-translation-queue,to-translate,Source à traduire ; cible vide. Type: action
 affaire,,,dzam,,missing,candidate,missing,pichon-1950,source-attested,"Pichon 1950, p. 110 ; référence, non validé."
 agence,branch,galu,ndáb á nsáŋá,wuma a eɓolo,candidate,candidate,candidate,pack-fub;pack-ewo;pack-dua;lexique-extra,human,À traduire par un natif ; ne pas inventer.
+agence la plus proche,nearest branch,,,,missing,missing,missing,fub-translation-queue,to-translate,Source à traduire ; cible vide. Type: banque
+Agent,Agent,,,,missing,missing,missing,fub-translation-queue,to-translate,Source à traduire ; cible vide. Type: compte
+Aide et support,Help and support,,,,missing,missing,missing,fub-translation-queue,to-translate,Source à traduire ; cible vide. Type: phrase
+Ajouter aux favoris,Add to favourites,,,,missing,missing,missing,fub-translation-queue,to-translate,Source à traduire ; cible vide. Type: compte
+Ajouter un bénéficiaire,Add a beneficiary,,,,missing,missing,missing,fub-translation-queue,to-translate,Source à traduire ; cible vide. Type: action
+Ajoutez un nouveau bénéficiaire,Add a new beneficiary,,,,missing,missing,missing,fub-translation-queue,to-translate,Source à traduire ; cible vide. Type: phrase
+Ajoutez une note (facultatif),Add a note (optional),,,,missing,missing,missing,fub-translation-queue,to-translate,Source à traduire ; cible vide. Type: phrase
+Alerte : tentative de connexion inhabituelle.,Alert: unusual login attempt.,,,,missing,missing,missing,fub-translation-queue,to-translate,Source à traduire ; cible vide. Type: erreur
+Alerte : un nouvel appareil a été détecté.,Alert: a new device was detected.,,,,missing,missing,missing,fub-translation-queue,to-translate,Source à traduire ; cible vide. Type: erreur
 Alerte de sécurité,Security warning,Tintina kisal,Méyáŋá má ɔ́bám,Bokwe bi bata,candidate,candidate,candidate,site-officiel:SO-045;pack-fub;pack-ewo;pack-dua,human,message site; statut source en_cours
 Alerte de sécurité : ce bénéficiaire n'a jamais été utilisé sur ce compte.,Security warning: this beneficiary has never been used on this account.,Tintina kisal : oon keɓoowo huutoraaka e ndii asaaku.,Méyáŋá má ɔ́bám : mòd á nnyɔ́ŋ nyó a tékə́ yáne bóban á kɔ́ndó nyó.,Bokwe bi bata : nu moto nu mányɔ̀ŋɔ̀ asóɓanó ɓo polo a mí kompa.,candidate,candidate,candidate,site-officiel:SO-068;pack-fub;pack-ewo;pack-dua,human,message site; statut source en_cours
 Alerte de sécurité : vérifiez le numéro du bénéficiaire avant de continuer.,Security warning: verify the beneficiary phone number before continuing.,Tintina kisal : teeŋtu limre keɓoowo ko adii yeeso.,Méyáŋá má ɔ́bám : yéŋə́ nɔ́mbələ á mòd á nnyɔ́ŋ ósu na ó kə́ ósu.,Bokwe bi bata : jeele nombara a moto nu mányɔ̀ŋɔ̀ oboso na o kɛ́ oboso.,candidate,candidate,candidate,site-officiel:SO-067;pack-fub;pack-ewo;pack-dua,human,message site; statut source en_cours
@@ -13,8 +26,27 @@ Amina Ngo Bell,Amina Ngo Bell,Amina Ngo Bell,Amina Ngo Bell,Amina Ngo Bell,candi
 Amount,,Kaalis,Moní,Mɔ̀nì,candidate,candidate,candidate,pack-fub;pack-ewo;pack-dua,human,
 Amount to send,,Kaalis mo nelaɗen,Moní á ne na á kə́,Mɔ̀nì mú yéná na lómò,candidate,candidate,candidate,pack-fub;pack-ewo;pack-dua,human,
 An error occurred,,Fenaande waɗii,Eboŋle é bɔ́ya,Wuma eɓanɛ̂,candidate,candidate,candidate,pack-fub;pack-ewo;pack-dua,human,
+ancien code PIN,Old PIN,,,,missing,missing,missing,fub-translation-queue,to-translate,Source à traduire ; cible vide. Type: securite
 annulation,,dartingol,asúsí,ɓumse,candidate,candidate,candidate,pack-fub;pack-ewo;pack-dua,human,
+Annuler,Cancel,,,,missing,missing,missing,fub-translation-queue,to-translate,Source à traduire ; cible vide. Type: action
+Annulé,Cancelled,,,,missing,missing,missing,fub-translation-queue,to-translate,Source à traduire ; cible vide. Type: compte
+Appareil autorisé,Authorized device,,,,missing,missing,missing,fub-translation-queue,to-translate,Source à traduire ; cible vide. Type: securite
+Appareil de confiance,Trusted device,,,,missing,missing,missing,fub-translation-queue,to-translate,Source à traduire ; cible vide. Type: securite
+Appareil inconnu,Unknown device,,,,missing,missing,missing,fub-translation-queue,to-translate,Source à traduire ; cible vide. Type: securite
+Appelez le service client,Call customer service,,,,missing,missing,missing,fub-translation-queue,to-translate,Source à traduire ; cible vide. Type: phrase
+application mobile,mobile app,,,,missing,missing,missing,fub-translation-queue,to-translate,Source à traduire ; cible vide. Type: banque
 argent,money,Kaalis,Moní,Mɔ̀nì,candidate,candidate,candidate,lexique-extra,fub/ewo: pack ; dua: lexique,Mɔ̀nì/môni = argent ; Kaalis = argent.
+argent (monnaie),money,,,,missing,missing,missing,fub-translation-queue,to-translate,Source à traduire ; cible vide. Type: compte
+"argent (monnaie), synonyme",money,,,,missing,missing,missing,fub-translation-queue,to-translate,Source à traduire ; cible vide. Type: compte
+"argent (monnaie), variante",money,,,,missing,missing,missing,fub-translation-queue,to-translate,Source à traduire ; cible vide. Type: compte
+Arnaque,Scam,,,,missing,missing,missing,fub-translation-queue,to-translate,Source à traduire ; cible vide. Type: securite
+assurance,insurance,,,,missing,missing,missing,fub-translation-queue,to-translate,Source à traduire ; cible vide. Type: credit
+Aucun bénéficiaire enregistré,No saved beneficiaries,,,,missing,missing,missing,fub-translation-queue,to-translate,Source à traduire ; cible vide. Type: phrase
+Aucun résultat trouvé.,No results found.,,,,missing,missing,missing,fub-translation-queue,to-translate,Source à traduire ; cible vide. Type: erreur
+Aucune transaction à afficher.,No transactions to display.,,,,missing,missing,missing,fub-translation-queue,to-translate,Source à traduire ; cible vide. Type: erreur
+Authentification,Authentication,,,,missing,missing,missing,fub-translation-queue,to-translate,Source à traduire ; cible vide. Type: securite
+Authentification à deux facteurs,Two-factor authentication,,,,missing,missing,missing,fub-translation-queue,to-translate,Source à traduire ; cible vide. Type: securite
+Autoriser,Allow,,,,missing,missing,missing,fub-translation-queue,to-translate,Source à traduire ; cible vide. Type: action
 Autre banque,Other bank,Banke goɗɗo,Banque fə́,Banque epé,candidate,candidate,candidate,site-officiel:SO-058;pack-fub;pack-ewo;pack-dua,human,message site; statut source en_cours
 Available balance,,Jawdindi ndi yami,Abálá é ne ngə́lə́,Mɔ̀nì mwé ɓáyí,candidate,candidate,candidate,pack-fub;pack-ewo;pack-dua,human,
 Back,,Rutto,Kiri mvús,Timbia ombusa,candidate,candidate,candidate,pack-fub;pack-ewo;pack-dua,human,
@@ -25,182 +57,485 @@ banque,bank,Banke,Banke,Bank,candidate,candidate,candidate,lexique-extra,fub/ewo
 Banque en ligne,,Banke e internet,Banke á internet,Banke a internet,candidate,candidate,candidate,pack-fub;pack-ewo;pack-dua,editorial,
 Beneficiary,,Keɓoowo,Mòd á nnyɔ́ŋ,Moto nu mányɔ̀ŋɔ̀,candidate,candidate,candidate,pack-fub;pack-ewo;pack-dua,human,
 Beneficiary name,,Innde keɓoowo,Ezóŋ é mòd á nnyɔ́ŋ,Dina la moto nu mányɔ̀ŋɔ̀,candidate,candidate,candidate,pack-fub;pack-ewo;pack-dua,human,
+Besoin d'aide ?,Need help?,,,,missing,missing,missing,fub-translation-queue,to-translate,Source à traduire ; cible vide. Type: phrase
+Bienvenue,Welcome,,,,missing,missing,missing,fub-translation-queue,to-translate,Source à traduire ; cible vide. Type: phrase
+Bienvenue sur votre espace,Welcome to your space,,,,missing,missing,missing,fub-translation-queue,to-translate,Source à traduire ; cible vide. Type: phrase
 billet de banque,,kayitol kaalis,,,candidate,missing,missing,Dictionnaire Fulfulde (PDF),source-attested,Référence lexicographique ; non validé.
+Bloquer,Block,,,,missing,missing,missing,fub-translation-queue,to-translate,Source à traduire ; cible vide. Type: action
+Bloquer ma carte,Block my card,,,,missing,missing,missing,fub-translation-queue,to-translate,Source à traduire ; cible vide. Type: securite
 Bonjour,Hello,Jam tiiɗi,Mbolani,Ã mbɔti,candidate,candidate,candidate,site-officiel:SO-001;pack-fub;pack-ewo;pack-dua,human,message site; statut source en_cours
 "Bonjour, Amina.","Hello, Amina.","Jam tiiɗi, Amina.","Mbolani, Amina.","Idiba, Amina.",candidate,candidate,candidate,site-officiel:SO-051;pack-fub;pack-ewo;pack-dua,human,message site; statut source en_cours
+Bonne journée,Have a nice day,,,,missing,missing,missing,fub-translation-queue,to-translate,Source à traduire ; cible vide. Type: phrase
+Bonsoir,Good evening,,,,missing,missing,missing,fub-translation-queue,to-translate,Source à traduire ; cible vide. Type: phrase
 budget,,ceede,,,candidate,missing,missing,Dictionnaire Fulfulde (PDF),source-attested,Référence lexicographique ; non validé.
 bénéfice,,nyoodo,,,candidate,missing,missing,Dictionnaire Fulfulde (PDF),source-attested,Référence lexicographique ; non validé.
 Bénéficiaire,Beneficiary,Keɓoowo,Mòd á nnyɔ́ŋ,Moto nu mányɔ̀ŋɔ̀,candidate,candidate,candidate,site-officiel:SO-019;pack-fub;pack-ewo;pack-dua;lexique-extra,human;pack,message site; statut source en_cours Compositions humaines ; non attestées en ligne.
 caisse,,,ewôli,,missing,candidate,missing,pichon-1950,source-attested,"Pichon 1950, p. 110 ; référence, non validé."
+capacité d'emprunt,borrowing capacity,,,,missing,missing,missing,fub-translation-queue,to-translate,Source à traduire ; cible vide. Type: credit
 capacité de remboursement,,doole yoɓgol,ngul á adzúmbí moní,nginya a timbise mɔ̀nì,candidate,candidate,candidate,pack-fub;pack-ewo;pack-dua,human,
+capital,principal,,,,missing,missing,missing,fub-translation-queue,to-translate,Source à traduire ; cible vide. Type: credit
+capital restant dû,outstanding principal,,,,missing,missing,missing,fub-translation-queue,to-translate,Source à traduire ; cible vide. Type: credit
+carte bancaire,bank card,,,,missing,missing,missing,fub-translation-queue,to-translate,Source à traduire ; cible vide. Type: banque
+carte de débit,debit card,,,,missing,missing,missing,fub-translation-queue,to-translate,Source à traduire ; cible vide. Type: banque
+carte prépayée,prepaid card,,,,missing,missing,missing,fub-translation-queue,to-translate,Source à traduire ; cible vide. Type: banque
+caution,surety,,,,missing,missing,missing,fub-translation-queue,to-translate,Source à traduire ; cible vide. Type: credit
+Ce bénéficiaire est introuvable.,This beneficiary cannot be found.,,,,missing,missing,missing,fub-translation-queue,to-translate,Source à traduire ; cible vide. Type: erreur
+Ce bénéficiaire n'a jamais été utilisé sur ce compte,This beneficiary has never been used on this account,,,,missing,missing,missing,fub-translation-queue,to-translate,Source à traduire ; cible vide. Type: phrase
 Ce bénéficiaire n'a jamais été utilisé sur ce compte. Vérifiez le numéro avant de continuer.,This beneficiary has never been used on this account. Verify the number before continuing.,Oon keɓoowo huutoraaka e ndii asaaku. Teeŋtu limre ko adii yeeso.,Mòd á nnyɔ́ŋ nyó a tékə́ yáne bóban á kɔ́ndó nyó. Yéŋə́ nɔ́mbələ ósu na ó kə́ ósu.,Nu moto nu mányɔ̀ŋɔ̀ asóɓanó ɓo polo a mí kompa. Jeele nombara oboso na o kɛ́ oboso.,candidate,candidate,candidate,site-officiel:SO-026;pack-fub;pack-ewo;pack-dua,human,message site; statut source en_cours
+Ce champ est obligatoire.,This field is required.,,,,missing,missing,missing,fub-translation-queue,to-translate,Source à traduire ; cible vide. Type: erreur
+Ce code a expiré. Demandez un nouveau code.,This code has expired. Request a new code.,,,,missing,missing,missing,fub-translation-queue,to-translate,Source à traduire ; cible vide. Type: erreur
+Ce compte est bloqué.,This account is blocked.,,,,missing,missing,missing,fub-translation-queue,to-translate,Source à traduire ; cible vide. Type: erreur
+Ce compte n'existe pas.,This account does not exist.,,,,missing,missing,missing,fub-translation-queue,to-translate,Source à traduire ; cible vide. Type: erreur
+Ce format n'est pas accepté.,This format is not accepted.,,,,missing,missing,missing,fub-translation-queue,to-translate,Source à traduire ; cible vide. Type: erreur
+Cette action est définitive,This action is final,,,,missing,missing,missing,fub-translation-queue,to-translate,Source à traduire ; cible vide. Type: phrase
+Cette carte est bloquée.,This card is blocked.,,,,missing,missing,missing,fub-translation-queue,to-translate,Source à traduire ; cible vide. Type: erreur
+Cette opération est gratuite,This operation is free,,,,missing,missing,missing,fub-translation-queue,to-translate,Source à traduire ; cible vide. Type: phrase
+Cette opération est impossible pour le moment.,This operation is not possible right now.,,,,missing,missing,missing,fub-translation-queue,to-translate,Source à traduire ; cible vide. Type: erreur
+Cette opération est payante,This operation has a fee,,,,missing,missing,missing,fub-translation-queue,to-translate,Source à traduire ; cible vide. Type: phrase
+Cette opération ne peut pas être annulée,This operation cannot be cancelled,,,,missing,missing,missing,fub-translation-queue,to-translate,Source à traduire ; cible vide. Type: phrase
 Cette transaction est sécurisée par FINAKA.,,,Esama éní é ne ébámbáná ne FINAKA.,Nu eɓolo e yé e batamɛ̂ na FINAKA.,missing,candidate,candidate,pack-ewo;pack-dua,human,
+Changer de numéro,Change number,,,,missing,missing,missing,fub-translation-queue,to-translate,Source à traduire ; cible vide. Type: securite
+Changer le code PIN,Change PIN,,,,missing,missing,missing,fub-translation-queue,to-translate,Source à traduire ; cible vide. Type: action
+Chargement en cours…,Loading…,,,,missing,missing,missing,fub-translation-queue,to-translate,Source à traduire ; cible vide. Type: phrase
 Check the details before confirming the transfer.,,Teeŋtu kabaaru ko adii yoɓgol nawgol.,Yéŋə́ bíə́mə́ ósu na ó sínyí nkus.,Jeele bina oboso na o adise lómò mɔ̀nì.,candidate,candidate,candidate,pack-fub;pack-ewo;pack-dua,human,
 Check your balance and start a secure transfer.,,"Yiy jawdindi ma, ngona e kisal ngam nelugol kaalis.","Də́ŋə́ abálá wō, ó kɔ́bɔ́ fə́ nkus á nə́m ewɔ́lɔ́.","Jeŋe mɔ̀nì mwé ɓáyí, o lome pé mɔ̀nì na bata.",candidate,candidate,candidate,pack-fub;pack-ewo;pack-dua,human,
+Cherchez un bénéficiaire,Search for a beneficiary,,,,missing,missing,missing,fub-translation-queue,to-translate,Source à traduire ; cible vide. Type: phrase
+Choisir,Choose,,,,missing,missing,missing,fub-translation-queue,to-translate,Source à traduire ; cible vide. Type: action
+Choisir la langue,Choose language,,,,missing,missing,missing,fub-translation-queue,to-translate,Source à traduire ; cible vide. Type: phrase
+Choisissez l'opérateur,Choose the operator,,,,missing,missing,missing,fub-translation-queue,to-translate,Source à traduire ; cible vide. Type: phrase
+Choisissez la date,Choose the date,,,,missing,missing,missing,fub-translation-queue,to-translate,Source à traduire ; cible vide. Type: phrase
+Choisissez le compte à débiter,Choose the account to debit,,,,missing,missing,missing,fub-translation-queue,to-translate,Source à traduire ; cible vide. Type: phrase
+Choisissez le mode de paiement,Choose the payment method,,,,missing,missing,missing,fub-translation-queue,to-translate,Source à traduire ; cible vide. Type: phrase
+Choisissez le type de transfert,Choose the transfer type,,,,missing,missing,missing,fub-translation-queue,to-translate,Source à traduire ; cible vide. Type: phrase
 Choisissez le type de transfert et le montant. Les frais sont calculés automatiquement.,Choose the transfer type and amount. Fees are calculated automatically.,Suus sariya nawgol e kaalis. Njoɓdi limtetee ko e laawol gollingol.,Tə́ŋí nsɔm á nkus ábɔ́ŋ moní. Mákyé má fásbáná emos ésə́.,Pɔ́ yá lómò na ɓwéyá ɓwá mɔ̀nì. Móǹgá mu maɓolane ɓuɓéɓuɓé.,candidate,candidate,candidate,site-officiel:SO-010;pack-fub;pack-ewo;pack-dua,human,message site; statut source en_cours
+Choisissez une durée,Choose a term,,,,missing,missing,missing,fub-translation-queue,to-translate,Source à traduire ; cible vide. Type: phrase
 Choose the transfer type and amount. Fees are calculated automatically.,,Suus sariya nawgol e kaalis. Njoɓdi limtetee ko e laawol gollingol.,Tə́ŋí nsɔm á nkus ábɔ́ŋ moní. Mákyé má fásbáná emos ésə́.,Pɔ́ yá lómò na ɓwéyá ɓwá mɔ̀nì. Móǹgá mu maɓolane ɓuɓéɓuɓé.,candidate,candidate,candidate,pack-fub;pack-ewo;pack-dua,human,
+chèque,cheque,,,,missing,missing,missing,fub-translation-queue,to-translate,Source à traduire ; cible vide. Type: banque
+chéquier,chequebook,,,,missing,missing,missing,fub-translation-queue,to-translate,Source à traduire ; cible vide. Type: banque
 code,code,code,code,code,candidate,candidate,candidate,pack-fub;pack-ewo;pack-dua;lexique-extra,human;pack,Terme conservé tel quel ; code PIN reste code PIN.
+code agence,branch code,,,,missing,missing,missing,fub-translation-queue,to-translate,Source à traduire ; cible vide. Type: banque
+code banque,bank code,,,,missing,missing,missing,fub-translation-queue,to-translate,Source à traduire ; cible vide. Type: banque
 Code de confirmation,,code teeŋtingol,code de confirmation,code confirmation,candidate,candidate,candidate,pack-fub;pack-ewo;pack-dua,human,
+Code de l'agent,Agent code,,,,missing,missing,missing,fub-translation-queue,to-translate,Source à traduire ; cible vide. Type: compte
+code de sécurité de la carte,card security code,,,,missing,missing,missing,fub-translation-queue,to-translate,Source à traduire ; cible vide. Type: banque
+Code envoyé par SMS,Code sent by SMS,,,,missing,missing,missing,fub-translation-queue,to-translate,Source à traduire ; cible vide. Type: securite
+Code expiré,Code expired,,,,missing,missing,missing,fub-translation-queue,to-translate,Source à traduire ; cible vide. Type: securite
+Code incorrect,Incorrect code,,,,missing,missing,missing,fub-translation-queue,to-translate,Source à traduire ; cible vide. Type: securite
+code OTP,OTP code,,,,missing,missing,missing,fub-translation-queue,to-translate,Source à traduire ; cible vide. Type: securite
 code PIN,,code PIN,code PIN,code PIN,candidate,candidate,candidate,pack-fub;pack-ewo;pack-dua,human,
 Code PIN incorrect. Veuillez réessayer.,,,Code PIN á ne áboŋ. Bámbáná dábə́.,Code PIN e titi téŋɛ̂. Byápé.,missing,candidate,candidate,pack-ewo;pack-dua,human,
+Code PIN oublié,Forgot PIN,,,,missing,missing,missing,fub-translation-queue,to-translate,Source à traduire ; cible vide. Type: securite
+code secret,Secret code,,,,missing,missing,missing,fub-translation-queue,to-translate,Source à traduire ; cible vide. Type: securite
+Code valide,Code valid,,,,missing,missing,missing,fub-translation-queue,to-translate,Source à traduire ; cible vide. Type: securite
+Commencer,Start,,,,missing,missing,missing,fub-translation-queue,to-translate,Source à traduire ; cible vide. Type: action
+Comment ça marche ?,How does it work?,,,,missing,missing,missing,fub-translation-queue,to-translate,Source à traduire ; cible vide. Type: phrase
 compte,account,Limngal,Kɔ́ndó,Kompa,candidate,candidate,candidate,lexique-extra,fub: Webonary ; ewo/dua: pack,Limngal est attesté pour compte ; Kompa/Kɔ́ndó sont des formes de pack.
+Compte bloqué,Account blocked,,,,missing,missing,missing,fub-translation-queue,to-translate,Source à traduire ; cible vide. Type: securite
 Compte courant,,Asaaku jooni,Kɔ́ndó courant,Kompa a ɓoso,candidate,candidate,candidate,pack-fub;pack-ewo;pack-dua,editorial,
+compte joint,joint account,,,,missing,missing,missing,fub-translation-queue,to-translate,Source à traduire ; cible vide. Type: banque
+compte professionnel,business account,,,,missing,missing,missing,fub-translation-queue,to-translate,Source à traduire ; cible vide. Type: banque
 Compte Safinum,Safinum account,Asaaku Safinum,Kɔ́ndó á Safinum,Kompa a Safinum,candidate,candidate,candidate,site-officiel:SO-057;pack-fub;pack-ewo;pack-dua,human,message site; statut source en_cours
+Compte suspendu,Account suspended,,,,missing,missing,missing,fub-translation-queue,to-translate,Source à traduire ; cible vide. Type: securite
+Compte verrouillé,Account locked,,,,missing,missing,missing,fub-translation-queue,to-translate,Source à traduire ; cible vide. Type: securite
+compte épargne,savings account,,,,missing,missing,missing,fub-translation-queue,to-translate,Source à traduire ; cible vide. Type: credit
+Conditions d'utilisation,Terms of use,,,,missing,missing,missing,fub-translation-queue,to-translate,Source à traduire ; cible vide. Type: securite
 Confirm transfer,,Teeŋtu nawgol,Sínyí nkus,Adise lómò mɔ̀nì,candidate,candidate,candidate,pack-fub;pack-ewo;pack-dua,human,
 confirmation,,teeŋtingol,adzíŋí,adise,candidate,candidate,candidate,pack-fub;pack-ewo;pack-dua,human,
+Confirmer,Confirm,,,,missing,missing,missing,fub-translation-queue,to-translate,Source à traduire ; cible vide. Type: action
+Confirmer le code PIN,Confirm PIN,,,,missing,missing,missing,fub-translation-queue,to-translate,Source à traduire ; cible vide. Type: securite
 Confirmer le transfert,Confirm transfer,Teeŋtu nawgol,Sínyí nkus,Adise lómò mɔ̀nì,candidate,candidate,candidate,site-officiel:SO-035;pack-fub;pack-ewo;pack-dua,human,message site; statut source en_cours
+Confirmez le transfert,Confirm the transfer,,,,missing,missing,missing,fub-translation-queue,to-translate,Source à traduire ; cible vide. Type: phrase
+Connexion chiffrée,Encrypted connection,,,,missing,missing,missing,fub-translation-queue,to-translate,Source à traduire ; cible vide. Type: securite
 Connexion sécurisée,Secure connection,Tesku kisal,Nláŋáná á ɔ́bám,Mulongu mu batamɛ̂,candidate,candidate,candidate,site-officiel:SO-048;pack-fub;pack-ewo;pack-dua,human,message site; statut source en_cours
+conseiller,advisor,,,,missing,missing,missing,fub-translation-queue,to-translate,Source à traduire ; cible vide. Type: banque
+Consentement,Consent,,,,missing,missing,missing,fub-translation-queue,to-translate,Source à traduire ; cible vide. Type: securite
+Consulter,View,,,,missing,missing,missing,fub-translation-queue,to-translate,Source à traduire ; cible vide. Type: action
 Consulter les frais,View fees,Yiy njoɓdi,Də́ŋə́ mákyé,Jeŋe móǹgá,candidate,candidate,candidate,site-officiel:SO-005;pack-fub;pack-ewo;pack-dua,human,message site; statut source en_cours
+Consultez votre solde,Check your balance,,,,missing,missing,missing,fub-translation-queue,to-translate,Source à traduire ; cible vide. Type: phrase
 Consultez votre solde et lancez un transfert en toute sécurité.,Check your balance and start a secure transfer.,"Yiy jawdindi ma, ngona e kisal ngam nelugol kaalis.","Də́ŋə́ abálá wō, ó kɔ́bɔ́ fə́ nkus á nə́m ewɔ́lɔ́.","Jeŋe mɔ̀nì mwé ɓáyí, o lome pé mɔ̀nì na bata.",candidate,candidate,candidate,site-officiel:SO-003;pack-fub;pack-ewo;pack-dua,human,message site; statut source en_cours
+Contacter le service client,Contact customer service,,,,missing,missing,missing,fub-translation-queue,to-translate,Source à traduire ; cible vide. Type: action
+Contactez le service client,Contact customer service,,,,missing,missing,missing,fub-translation-queue,to-translate,Source à traduire ; cible vide. Type: phrase
 Contactez le service client pour plus d'informations.,,,Kɔ́bɔ́ ne nsáŋá á nnam ású bíə́mə́ fə́.,Bena mɓola a ɓato ású bina mepé.,missing,candidate,candidate,pack-ewo;pack-dua,human,
 Continue,,Wontu yeeso,Kə́ ósu,Kɛ́ oboso,candidate,candidate,candidate,pack-fub;pack-ewo;pack-dua,human,
 Continuer,Continue,Wontu yeeso,Kə́ ósu,Kɛ́ oboso,candidate,candidate,candidate,site-officiel:SO-017;pack-fub;pack-ewo;pack-dua,human,message site; statut source en_cours
+coopérative d'épargne,savings cooperative,,,,missing,missing,missing,fub-translation-queue,to-translate,Source à traduire ; cible vide. Type: banque
+coordonnées bancaires,bank details,,,,missing,missing,missing,fub-translation-queue,to-translate,Source à traduire ; cible vide. Type: banque
+Copier,Copy,,,,missing,missing,missing,fub-translation-queue,to-translate,Source à traduire ; cible vide. Type: action
 coût,,njaru,,,candidate,missing,missing,Dictionnaire Fulfulde (PDF),source-attested,Référence lexicographique ; non validé.
 crédit,,baɗal,,,candidate,missing,missing,Dictionnaire Fulfulde (PDF),source-attested,Référence lexicographique ; non validé.
+crédit accordé,credit approved,,,,missing,missing,missing,fub-translation-queue,to-translate,Source à traduire ; cible vide. Type: credit
+crédit refusé,credit declined,,,,missing,missing,missing,fub-translation-queue,to-translate,Source à traduire ; cible vide. Type: credit
+Créditer,Credit,,,,missing,missing,missing,fub-translation-queue,to-translate,Source à traduire ; cible vide. Type: action
 Current account,,Asaaku jooni,Kɔ́ndó courant,Kompa a ɓoso,candidate,candidate,candidate,pack-fub;pack-ewo;pack-dua,editorial,
+Date,Date,,,,missing,missing,missing,fub-translation-queue,to-translate,Source à traduire ; cible vide. Type: compte
+date d'expiration,expiry date,,,,missing,missing,missing,fub-translation-queue,to-translate,Source à traduire ; cible vide. Type: banque
+date d'ouverture du compte,account opening date,,,,missing,missing,missing,fub-translation-queue,to-translate,Source à traduire ; cible vide. Type: banque
+date d'échéance,due date,,,,missing,missing,missing,fub-translation-queue,to-translate,Source à traduire ; cible vide. Type: credit
+Date de l'opération,Operation date,,,,missing,missing,missing,fub-translation-queue,to-translate,Source à traduire ; cible vide. Type: compte
+demande de crédit,credit application,,,,missing,missing,missing,fub-translation-queue,to-translate,Source à traduire ; cible vide. Type: credit
+Demander un code,Request a code,,,,missing,missing,missing,fub-translation-queue,to-translate,Source à traduire ; cible vide. Type: action
+Dernière transaction,Last transaction,,,,missing,missing,missing,fub-translation-queue,to-translate,Source à traduire ; cible vide. Type: compte
+Des frais s'appliquent,Fees apply,,,,missing,missing,missing,fub-translation-queue,to-translate,Source à traduire ; cible vide. Type: phrase
 Des frais supplémentaires peuvent s'appliquer.,,,Mákyé fə́ má ne kɔ́ndáná.,Móǹgá mepé me ne na me ɓata.,missing,candidate,candidate,pack-ewo;pack-dua,human,
 destinataire,,keɓoowo,mòd á nnyɔ́ŋ,moto nu mányɔ̀ŋɔ̀,candidate,candidate,candidate,pack-fub;pack-ewo;pack-dua,human,
+Devise,Currency,,,,missing,missing,missing,fub-translation-queue,to-translate,Source à traduire ; cible vide. Type: compte
+directeur d'agence,branch manager,,,,missing,missing,missing,fub-translation-queue,to-translate,Source à traduire ; cible vide. Type: banque
 Dismiss,,Uddu,Fúdbá,Diɓa,candidate,candidate,candidate,pack-fub;pack-ewo;pack-dua,human,
+distributeur automatique,ATM,,,,missing,missing,missing,fub-translation-queue,to-translate,Source à traduire ; cible vide. Type: banque
+Données personnelles,Personal data,,,,missing,missing,missing,fub-translation-queue,to-translate,Source à traduire ; cible vide. Type: securite
+Double validation,Two-step approval,,,,missing,missing,missing,fub-translation-queue,to-translate,Source à traduire ; cible vide. Type: securite
+durée du prêt,loan term,,,,missing,missing,missing,fub-translation-queue,to-translate,Source à traduire ; cible vide. Type: credit
+Débit,Debit,,,,missing,missing,missing,fub-translation-queue,to-translate,Source à traduire ; cible vide. Type: compte
+Débiter,Debit,,,,missing,missing,missing,fub-translation-queue,to-translate,Source à traduire ; cible vide. Type: action
+Débloquer,Unblock,,,,missing,missing,missing,fub-translation-queue,to-translate,Source à traduire ; cible vide. Type: action
 découvert,,kaalis ɓurɗo yowede,,,candidate,missing,missing,pack-fub,human,
 dépense,,canke,,,candidate,missing,missing,Dictionnaire Fulfulde (PDF),source-attested,Référence lexicographique ; non validé.
+Dépenses,Expenses,,,,missing,missing,missing,fub-translation-queue,to-translate,Source à traduire ; cible vide. Type: compte
+Déposer,Deposit,,,,missing,missing,missing,fub-translation-queue,to-translate,Source à traduire ; cible vide. Type: action
 dépôt,deposit,naatgol kaalis,óláŋá,tutula mɔ̀nì,candidate,candidate,candidate,pack-fub;pack-ewo;pack-dua;lexique-extra,human;fub: Webonary ; ewo/dua: pack,Limgal est ambigu (dépôt/recensement).
+Dépôt d'espèces,Cash deposit,,,,missing,missing,missing,fub-translation-queue,to-translate,Source à traduire ; cible vide. Type: compte
+dépôt à terme,term deposit,,,,missing,missing,missing,fub-translation-queue,to-translate,Source à traduire ; cible vide. Type: credit
+Désactiver,Deactivate,,,,missing,missing,missing,fub-translation-queue,to-translate,Source à traduire ; cible vide. Type: action
+Détails de la transaction,Transaction details,,,,missing,missing,missing,fub-translation-queue,to-translate,Source à traduire ; cible vide. Type: compte
 Edit,,Waylu,Tsíŋí,Tukwa,candidate,candidate,candidate,pack-fub;pack-ewo;pack-dua,human,
 Effectuer un transfert,Make a transfer,Nelu kaalis,Bɔ́ nkus,Lómò mɔ̀nì,candidate,candidate,candidate,site-officiel:SO-004;pack-fub;pack-ewo;pack-dua,human,message site; statut source en_cours
 Electricity bill,,Njoɓdi elektrik,,Facture a mwinda,candidate,missing,candidate,pack-fub;pack-dua,human,
+Empreinte digitale,Fingerprint,,,,missing,missing,missing,fub-translation-queue,to-translate,Source à traduire ; cible vide. Type: securite
+Emprunter,Borrow,,,,missing,missing,missing,fub-translation-queue,to-translate,Source à traduire ; cible vide. Type: action
+emprunteur,borrower,,,,missing,missing,missing,fub-translation-queue,to-translate,Source à traduire ; cible vide. Type: credit
+En attente,Pending,,,,missing,missing,missing,fub-translation-queue,to-translate,Source à traduire ; cible vide. Type: compte
 "En cas de retard, une pénalité de 1 % par jour est appliquée.",,,"Éyɔ́ŋ á bɔ́ya eyele, mákyé má afa á 1 % émos ésə́ má ne nkus.","Yɛ̂ pé boɓi ɓwâ pele, móǹgá mwá 1 % mwá búnyá mu máɓolee.",missing,candidate,candidate,pack-ewo;pack-dua,human,
+Enregistrement en cours…,Saving…,,,,missing,missing,missing,fub-translation-queue,to-translate,Source à traduire ; cible vide. Type: phrase
+Enregistrer,Save,,,,missing,missing,missing,fub-translation-queue,to-translate,Source à traduire ; cible vide. Type: action
 Enter the recipient details. Always verify the number before confirming.,,Lonndu kabaaru keɓoowo. Teeŋtu limre nde ko adii yoɓgol.,Lóndó bíə́mə́ bí mòd á nnyɔ́ŋ. Yéŋə́ nɔ́mbələ ósu na ó sínyí.,Londe bina bá moto nu mányɔ̀ŋɔ̀. Jeele nombara oboso na o disese.,candidate,candidate,candidate,pack-fub;pack-ewo;pack-dua,human,
+Entrez le code reçu par SMS,Enter the code received by SMS,,,,missing,missing,missing,fub-translation-queue,to-translate,Source à traduire ; cible vide. Type: phrase
+Entrez le montant,Enter the amount,,,,missing,missing,missing,fub-translation-queue,to-translate,Source à traduire ; cible vide. Type: phrase
+Entrez le montant à déposer,Enter the amount to deposit,,,,missing,missing,missing,fub-translation-queue,to-translate,Source à traduire ; cible vide. Type: phrase
+Entrez le montant à envoyer,Enter the amount to send,,,,missing,missing,missing,fub-translation-queue,to-translate,Source à traduire ; cible vide. Type: phrase
+Entrez le montant à retirer,Enter the amount to withdraw,,,,missing,missing,missing,fub-translation-queue,to-translate,Source à traduire ; cible vide. Type: phrase
+Entrez le numéro du bénéficiaire,Enter the beneficiary's number,,,,missing,missing,missing,fub-translation-queue,to-translate,Source à traduire ; cible vide. Type: phrase
+Entrez votre code PIN,Enter your PIN,,,,missing,missing,missing,fub-translation-queue,to-translate,Source à traduire ; cible vide. Type: phrase
+Entrée d'argent,Money in,,,,missing,missing,missing,fub-translation-queue,to-translate,Source à traduire ; cible vide. Type: compte
 "Environnement de test — données fictives, aucune transaction réelle.","Test environment — fictional data, no real transaction.","Nokku ƴeewndo — kabaaru fenaande, alaa gollal goonga.",Vèyá á esáŋá — bíə́mə́ bí ngə́lə́.,"Wuma a jeele — bina ba wite, soma téŋɛ̂ e titi.",candidate,candidate,candidate,site-officiel:SO-050;pack-fub;pack-ewo;pack-dua,human,message site; statut source en_cours
 Environnement de test — Hackathon SAFINUM Innovate 2026 - Safinum,,Nokku ƴeewndo — Hackathon SAFINUM Innovate 2026 - Safinum,Vèyá á esáŋá — Hackathon SAFINUM Innovate 2026 - Safinum,Wuma a jeele — Hackathon SAFINUM Innovate 2026 - Safinum,candidate,candidate,candidate,pack-fub;pack-ewo;pack-dua,human,
 envoyer,,,lom,lóma,missing,candidate,candidate,pichon-1950;Helmlinger 1972,source-attested;source-attested,"Pichon 1950, p. 112 ; référence, non validé."
 Erreur réseau : le service est temporairement indisponible. Réessayez.,Network error: the service is temporarily unavailable. Please try again.,Fenaande rese : gollal ina daɗi. Enndu kadi.,Eboŋle é réseau : nsáŋá á ne tə́té. Bámbáná dábə́.,Boɓan ba réseau : eɓolo e titié ndedi. Byápé.,candidate,candidate,candidate,site-officiel:SO-069;pack-fub;pack-ewo;pack-dua,human,message site; statut source en_cours
+Exporter,Export,,,,missing,missing,missing,fub-translation-queue,to-translate,Source à traduire ; cible vide. Type: action
+Expéditeur,Sender,,,,missing,missing,missing,fub-translation-queue,to-translate,Source à traduire ; cible vide. Type: compte
 facture,invoice,faktiir,,,candidate,missing,missing,lexique-extra;Dictionnaire Fulfulde (PDF),source-attested,À traduire par un natif ; ne pas inventer.
+Facture d'eau,Water bill,,,,missing,missing,missing,fub-translation-queue,to-translate,Source à traduire ; cible vide. Type: compte
+Facture d'électricité,Electricity bill,,,,missing,missing,missing,fub-translation-queue,to-translate,Source à traduire ; cible vide. Type: compte
 Facture électricité,Electricity bill,Njoɓdi elektrik,Mákyé má mwinda,Facture a mwinda,candidate,candidate,candidate,site-officiel:SO-063;pack-fub;pack-ewo;pack-dua,human;editorial,"message site; statut source en_cours Candidat éditorial 2026-11-10 : mákyé (prix/frais) + mwinda (électricité, forme duala). Aucune source ewondo fiable ; à confirmer par un natif. Non validé."
 Fee,,Njoɓdi,Mákyé,Móǹgá,candidate,candidate,candidate,pack-fub;pack-ewo;pack-dua,human,
 Fees,,Njoɓdi,Mákyé,Mɔ́ǹgá,candidate,candidate,candidate,pack-fub;pack-ewo;pack-dua,human,
 Fermer,Dismiss,Uddu,Fúdbá,Diɓa,candidate,candidate,candidate,site-officiel:SO-043;pack-fub;pack-ewo;pack-dua,human,message site; statut source en_cours
+Fermer le compte,Close the account,,,,missing,missing,missing,fub-translation-queue,to-translate,Source à traduire ; cible vide. Type: action
+Filtrer,Filter,,,,missing,missing,missing,fub-translation-queue,to-translate,Source à traduire ; cible vide. Type: action
+Forfait internet,Data bundle,,,,missing,missing,missing,fub-translation-queue,to-translate,Source à traduire ; cible vide. Type: compte
 Frais,Fee,Njoɓdi,Mákyé,Móǹgá,candidate,candidate,candidate,site-officiel:SO-013;pack-fub;pack-ewo;pack-dua;lexique-extra,human;pack fub/ewo/dua,message site; statut source en_cours Njoɓdi est une racine de paiement ; expression générique non attestée.
+Frais : [[NUM_0]] FCFA,Fee: [[NUM_0]] FCFA,,,,missing,missing,missing,fub-translation-queue,to-translate,Source à traduire ; cible vide. Type: phrase
+Frais d'envoi,Sending fees,,,,missing,missing,missing,fub-translation-queue,to-translate,Source à traduire ; cible vide. Type: compte
 "Frais de 1,5 % (min. 100 FCFA, max. 2 500 FCFA)","1.5% fee (min. 100 FCFA, max. 2,500 FCFA)","Njoɓdi ko 1,5 % (min. 100 FCFA, max. 2 500 FCFA)","Mákyé á 1,5 % (min. 100 FCFA, max. 2 500 FCFA)","Móǹgá mwá 1,5 % (min. 100 FCFA, max. 2 500 FCFA)",candidate,candidate,candidate,site-officiel:SO-054;pack-fub;pack-ewo;pack-dua,human,message site; statut source en_cours
 "Frais de 2 % (min. 200 FCFA, max. 5 000 FCFA)","2% fee (min. 200 FCFA, max. 5,000 FCFA)","Njoɓdi ko 2 % (min. 200 FCFA, max. 5 000 FCFA)","Mákyé á 2 % (min. 200 FCFA, max. 5 000 FCFA)","Móǹgá mwá 2 % (min. 200 FCFA, max. 5 000 FCFA)",candidate,candidate,candidate,site-officiel:SO-055;pack-fub;pack-ewo;pack-dua,human,message site; statut source en_cours
 frais de change,,njoɓdi mbiliro,mákyé má nsɛ́ŋlé moní,móǹgá mwá tukwisa mɔ̀nì,candidate,candidate,candidate,pack-fub;pack-ewo;pack-dua,human,
 Frais de dossier,,njoɓdi binndol,mákyé má kalada,móǹgá mwá kalati,candidate,candidate,candidate,pack-fub;pack-ewo;pack-dua,human,
+Frais de dépôt,Deposit fees,,,,missing,missing,missing,fub-translation-queue,to-translate,Source à traduire ; cible vide. Type: compte
+frais de retard,late fees,,,,missing,missing,missing,fub-translation-queue,to-translate,Source à traduire ; cible vide. Type: credit
+Frais de retrait,Withdrawal fees,,,,missing,missing,missing,fub-translation-queue,to-translate,Source à traduire ; cible vide. Type: compte
+Frais de service,Service fees,,,,missing,missing,missing,fub-translation-queue,to-translate,Source à traduire ; cible vide. Type: compte
+frais de tenue de compte,account maintenance fee,,,,missing,missing,missing,fub-translation-queue,to-translate,Source à traduire ; cible vide. Type: banque
 Frais de transfert,Transfer fees,Njoɓdi nawgol,Mákyé má nkus,Móǹgá mwá lómò mɔ̀nì,candidate,candidate,candidate,site-officiel:SO-009;pack-fub;pack-ewo;pack-dua,human,message site; statut source en_cours
+Frais mensuels,Monthly fees,,,,missing,missing,missing,fub-translation-queue,to-translate,Source à traduire ; cible vide. Type: compte
+Fraude,Fraud,,,,missing,missing,missing,fub-translation-queue,to-translate,Source à traduire ; cible vide. Type: securite
 Free,,Ko yoɓataa,Á tékə́ mákyé,Esikaye móǹgá,candidate,candidate,candidate,pack-fub;pack-ewo;pack-dua,human,
+garant,guarantor,,,,missing,missing,missing,fub-translation-queue,to-translate,Source à traduire ; cible vide. Type: credit
+garantie,guarantee,,,,missing,missing,missing,fub-translation-queue,to-translate,Source à traduire ; cible vide. Type: credit
 Gratuit,Free,Ko yoɓataa,Á tékə́ mákyé,Esikaye móǹgá,candidate,candidate,candidate,site-officiel:SO-014;pack-fub;pack-ewo;pack-dua,human,message site; statut source en_cours
 guichet,teller,damugal,ekɔb,,candidate,candidate,missing,pack-fub;pack-ewo;lexique-extra,human,À traduire par un natif ; ne pas inventer.
+Hameçonnage,Phishing,,,,missing,missing,missing,fub-translation-queue,to-translate,Source à traduire ; cible vide. Type: securite
 Hello,,Jam tiiɗi,Mbolani,Ã mbɔti,candidate,candidate,candidate,pack-fub;pack-ewo;pack-dua,human,
 "Hello, Amina",,"Jam tiiɗi, Amina.","Mbolani, Amina.","Idiba, Amina.",candidate,candidate,candidate,pack-fub;pack-ewo;pack-dua,editorial,
 "Hello, Amina.",,"Jam tiiɗi, Amina.","Mbolani, Amina.","Idiba, Amina.",candidate,candidate,candidate,pack-fub;pack-ewo;pack-dua,human,
+Heure,Time,,,,missing,missing,missing,fub-translation-queue,to-translate,Source à traduire ; cible vide. Type: compte
+Historique,History,,,,missing,missing,missing,fub-translation-queue,to-translate,Source à traduire ; cible vide. Type: compte
+Historique des transactions,Transaction history,,,,missing,missing,missing,fub-translation-queue,to-translate,Source à traduire ; cible vide. Type: compte
+horaires d'ouverture,opening hours,,,,missing,missing,missing,fub-translation-queue,to-translate,Source à traduire ; cible vide. Type: banque
 I confirm the information above is correct.,,Mi teeŋtii kabaaru les ɗoo ko goonga.,Me tɔ́ŋlé na bíə́mə́ bí ne yɔ́bɔ yé ne ébən.,Na madise na bina ɓé na omóŋ ɓé téŋɛ̂.,candidate,candidate,candidate,pack-fub;pack-ewo;pack-dua,human,
 I have verified the beneficiary name and phone number.,,Mi teeŋtii innde e limre keɓoowo.,Me yéŋéya ezóŋ á nɔ́mbələ á mòd á nnyɔ́ŋ.,Na jeeleyɛ̂ dina na nombara a moto nu mányɔ̀ŋɔ̀.,candidate,candidate,candidate,pack-fub;pack-ewo;pack-dua,human,
+IBAN,IBAN,,,,missing,missing,missing,fub-translation-queue,to-translate,Source à traduire ; cible vide. Type: banque
+Identifiant,Username,,,,missing,missing,missing,fub-translation-queue,to-translate,Source à traduire ; cible vide. Type: securite
+Il vous reste [[NUM_0]] FCFA à rembourser,You have [[NUM_0]] FCFA left to repay,,,,missing,missing,missing,fub-translation-queue,to-translate,Source à traduire ; cible vide. Type: phrase
+Il vous reste [[NUM_0]] tentatives.,You have [[NUM_0]] attempts left.,,,,missing,missing,missing,fub-translation-queue,to-translate,Source à traduire ; cible vide. Type: erreur
 Important message,,Kabaaru mawɗo,Mŋkát á mfi,Mweŋge mwá mfi,candidate,candidate,candidate,pack-fub;pack-ewo;pack-dua,human,
+Imprimer,Print,,,,missing,missing,missing,fub-translation-queue,to-translate,Source à traduire ; cible vide. Type: action
 impôt,,lampo,,,candidate,missing,missing,Dictionnaire Fulfulde (PDF),source-attested,Référence lexicographique ; non validé.
 "Instant, free transfer",,Nawgol jaawngol ko yoɓataa,Nkus á oyá-oyá á tékə́ mákyé,Lómò mɔ̀nì a ɓuɓéɓuɓé na esikaye móǹgá,candidate,candidate,candidate,pack-fub;pack-ewo;pack-dua,human,
 Insufficient balance for this transfer.,,Jawdindi ina famɗi ngam waɗde ndii gollal.,Abálá á tékə́ yáne kɔ́ŋ na á bɔ nkus nyó.,Mɔ̀nì mwé ɓáyí mu titi ɓwá lómò mɔ̀nì.,candidate,candidate,candidate,pack-fub;pack-ewo;pack-dua,human,
+intérêt,interest,,,,missing,missing,missing,fub-translation-queue,to-translate,Source à traduire ; cible vide. Type: credit
+intérêts gagnés,interest earned,,,,missing,missing,missing,fub-translation-queue,to-translate,Source à traduire ; cible vide. Type: credit
+J'accepte les conditions d'utilisation,I accept the terms of use,,,,missing,missing,missing,fub-translation-queue,to-translate,Source à traduire ; cible vide. Type: phrase
 J'ai vérifié le nom et le numéro du bénéficiaire.,I have verified the beneficiary name and phone number.,Mi teeŋtii innde e limre keɓoowo.,Me yéŋéya ezóŋ á nɔ́mbələ á mòd á nnyɔ́ŋ.,Na jeeleyɛ̂ dina na nombara a moto nu mányɔ̀ŋɔ̀.,candidate,candidate,candidate,site-officiel:SO-025;pack-fub;pack-ewo;pack-dua,human,message site; statut source en_cours
 Je confirme que les informations ci-dessus sont correctes.,I confirm the information above is correct.,Mi teeŋtii kabaaru les ɗoo ko goonga.,Me tɔ́ŋlé na bíə́mə́ bí ne yɔ́bɔ yé ne ébən.,Na madise na bina ɓé na omóŋ ɓé téŋɛ̂.,candidate,candidate,candidate,site-officiel:SO-034;pack-fub;pack-ewo;pack-dua,human,message site; statut source en_cours
+jours de retard,days late,,,,missing,missing,missing,fub-translation-queue,to-translate,Source à traduire ; cible vide. Type: credit
+Justificatif de domicile,Proof of address,,,,missing,missing,missing,fub-translation-queue,to-translate,Source à traduire ; cible vide. Type: securite
+KYC,KYC,,,,missing,missing,missing,fub-translation-queue,to-translate,Source à traduire ; cible vide. Type: securite
+La banque ne vous demandera jamais votre code PIN.,The bank will never ask for your PIN.,,,,missing,missing,missing,fub-translation-queue,to-translate,Source à traduire ; cible vide. Type: erreur
+La photo est floue. Reprenez-la.,The photo is blurry. Retake it.,,,,missing,missing,missing,fub-translation-queue,to-translate,Source à traduire ; cible vide. Type: erreur
+La session a expiré. Reconnectez-vous.,Your session has expired. Log in again.,,,,missing,missing,missing,fub-translation-queue,to-translate,Source à traduire ; cible vide. Type: erreur
+Langue,Language,,,,missing,missing,missing,fub-translation-queue,to-translate,Source à traduire ; cible vide. Type: phrase
+Le bénéficiaire recevra [[NUM_0]] FCFA,The beneficiary will receive [[NUM_0]] FCFA,,,,missing,missing,missing,fub-translation-queue,to-translate,Source à traduire ; cible vide. Type: phrase
 Le bénéficiaire reçoit le montant net après déduction des frais.,,,Mòd á nnyɔ́ŋ á nnyɔ́ŋ moní éyɔ́ŋ mákyé má manía kúdé.,Moto nu mányɔ̀ŋɔ̀ a mányɔ̀ŋɔ̀ mɔ̀nì ma pɔ́kɔ̂ ombusa kula móǹgá.,missing,candidate,candidate,pack-ewo;pack-dua,human,
+Le code a déjà été utilisé.,The code has already been used.,,,,missing,missing,missing,fub-translation-queue,to-translate,Source à traduire ; cible vide. Type: erreur
+Le code PIN doit contenir 4 chiffres.,The PIN must contain 4 digits.,,,,missing,missing,missing,fub-translation-queue,to-translate,Source à traduire ; cible vide. Type: erreur
+Le code PIN est incorrect.,The PIN is incorrect.,,,,missing,missing,missing,fub-translation-queue,to-translate,Source à traduire ; cible vide. Type: erreur
+Le code saisi est incorrect.,The code entered is incorrect.,,,,missing,missing,missing,fub-translation-queue,to-translate,Source à traduire ; cible vide. Type: erreur
+Le délai est dépassé.,The time limit has passed.,,,,missing,missing,missing,fub-translation-queue,to-translate,Source à traduire ; cible vide. Type: erreur
+Le dépôt a échoué.,The deposit failed.,,,,missing,missing,missing,fub-translation-queue,to-translate,Source à traduire ; cible vide. Type: erreur
+Le fichier est trop volumineux.,The file is too large.,,,,missing,missing,missing,fub-translation-queue,to-translate,Source à traduire ; cible vide. Type: erreur
 Le montant doit être supérieur à zéro.,The amount must be greater than zero.,Kaalis ina foti ɓurde zero.,Moní á yian yə́bə́ étə́ŋ éyɔŋ zéró.,Mɔ̀nì mu yiane ɓa móŋlé ombon a zéró.,candidate,candidate,candidate,site-officiel:SO-064;pack-fub;pack-ewo;pack-dua,human,message site; statut source en_cours
+Le montant doit être un nombre.,The amount must be a number.,,,,missing,missing,missing,fub-translation-queue,to-translate,Source à traduire ; cible vide. Type: erreur
+Le montant est invalide.,The amount is invalid.,,,,missing,missing,missing,fub-translation-queue,to-translate,Source à traduire ; cible vide. Type: erreur
+Le montant maximum est de [[NUM_0]] FCFA.,The maximum amount is [[NUM_0]] FCFA.,,,,missing,missing,missing,fub-translation-queue,to-translate,Source à traduire ; cible vide. Type: erreur
+Le montant minimum est de [[NUM_0]] FCFA.,The minimum amount is [[NUM_0]] FCFA.,,,,missing,missing,missing,fub-translation-queue,to-translate,Source à traduire ; cible vide. Type: erreur
 Le montant total débité sera de [[NUM_2]] FCFA.,,,Mbodó á ne na á kúsí á ne [[NUM_2]] FCFA.,Mɔ̀nì mwésé mú mákusane mú maɓa ne [[NUM_2]] FCFA.,missing,candidate,candidate,pack-ewo;pack-dua,human,
+Le mot de passe est incorrect.,The password is incorrect.,,,,missing,missing,missing,fub-translation-queue,to-translate,Source à traduire ; cible vide. Type: erreur
+Le numéro de téléphone est invalide.,The phone number is invalid.,,,,missing,missing,missing,fub-translation-queue,to-translate,Source à traduire ; cible vide. Type: erreur
+Le numéro du bénéficiaire est incorrect.,The beneficiary number is incorrect.,,,,missing,missing,missing,fub-translation-queue,to-translate,Source à traduire ; cible vide. Type: erreur
+Le paiement a échoué.,The payment failed.,,,,missing,missing,missing,fub-translation-queue,to-translate,Source à traduire ; cible vide. Type: erreur
+Le plafond de votre compte est atteint.,Your account limit has been reached.,,,,missing,missing,missing,fub-translation-queue,to-translate,Source à traduire ; cible vide. Type: erreur
+Le retrait a échoué.,The withdrawal failed.,,,,missing,missing,missing,fub-translation-queue,to-translate,Source à traduire ; cible vide. Type: erreur
+Le service est momentanément indisponible. Réessayez plus tard.,The service is temporarily unavailable. Try again later.,,,,missing,missing,missing,fub-translation-queue,to-translate,Source à traduire ; cible vide. Type: erreur
 Le solde disponible est insuffisant.,,,Abálá é ne ngə́lə́ á tékə́ yáne.,Mɔ̀nì mwé ɓáyí mu sumbidi.,missing,candidate,candidate,pack-ewo;pack-dua,human,
 Le solde est de [[NUM_0]] FCFA.,,Jawdindi ko [[NUM_0]] FCFA.,Abálá á ne [[NUM_0]] FCFA.,Mɔ̀nì mwé ɓáyí mu yé ne [[NUM_0]] FCFA.,candidate,candidate,candidate,pack-fub;pack-ewo;pack-dua,editorial;human,
 Le taux d'intérêt mensuel est de 2 %.,,,Ntéláná á mfá'á á ngɔ́n á ne 2 %.,Edinge a longele a mɔ́dí e yé 2 %.,missing,candidate,candidate,pack-ewo;pack-dua,human,
+Le transfert a échoué. Réessayez.,The transfer failed. Try again.,,,,missing,missing,missing,fub-translation-queue,to-translate,Source à traduire ; cible vide. Type: erreur
 Le transfert a été effectué avec succès.,,,Nkus á bɔ́ya ne adzáŋ.,Soma mɔ̀nì e ɓoɓí na ɓwám.,missing,candidate,candidate,pack-ewo;pack-dua,human,
 Le transfert est en attente de confirmation.,,,Nkus á yábə́ nsínyí.,Soma mɔ̀nì e yé a jaŋgi a adise.,missing,candidate,candidate,pack-ewo;pack-dua,human,
+Les deux codes ne sont pas identiques.,The two codes do not match.,,,,missing,missing,missing,fub-translation-queue,to-translate,Source à traduire ; cible vide. Type: erreur
 Les frais de transfert sont de [[NUM_1]] FCFA.,,,Mákyé má nkus má ne [[NUM_1]] FCFA.,Móǹgá mwá lómò mɔ̀nì mu yé ne [[NUM_1]] FCFA.,missing,candidate,candidate,pack-ewo;pack-dua,human,
+Les frais dépendent du montant,Fees depend on the amount,,,,missing,missing,missing,fub-translation-queue,to-translate,Source à traduire ; cible vide. Type: phrase
+Les frais sont calculés automatiquement,Fees are calculated automatically,,,,missing,missing,missing,fub-translation-queue,to-translate,Source à traduire ; cible vide. Type: phrase
+Les informations ne correspondent pas.,The information does not match.,,,,missing,missing,missing,fub-translation-queue,to-translate,Source à traduire ; cible vide. Type: erreur
 Les informations personnelles sont utilisées uniquement pour l'étude de votre dossier.,,,Bíə́mə́ bí mòd bí ne mbálan ású nsɔ́ŋó kalada wō etə́.,Bina ɓɔŋ ɓa moto ɓa maɓolane ndé o jeele kalati ɔŋ.,missing,candidate,candidate,pack-ewo;pack-dua,human,
 litige,,haala,nsɔm,nyele,candidate,candidate,candidate,pack-fub;pack-ewo;pack-dua,human,
 lumière,,,mfyé,,missing,candidate,missing,pichon-1950,source-attested,"Pichon 1950, p. 114 ; référence, non validé."
+Maintenance en cours. Revenez plus tard.,Maintenance in progress. Come back later.,,,,missing,missing,missing,fub-translation-queue,to-translate,Source à traduire ; cible vide. Type: erreur
 Make a transfer,,Nelu kaalis,Bɔ́ nkus,Lómò mɔ̀nì,candidate,candidate,candidate,pack-fub;pack-ewo;pack-dua,human,
+mensualité,monthly payment,,,,missing,missing,missing,fub-translation-queue,to-translate,Source à traduire ; cible vide. Type: credit
 Merchant payment,,Njoɓdi julaajo,Mákyé má nkàndá,Wasa mɔ̀nì a nkándà,candidate,candidate,candidate,pack-fub;pack-ewo;pack-dua,human,
+Merci,Thank you,,,,missing,missing,missing,fub-translation-queue,to-translate,Source à traduire ; cible vide. Type: phrase
+Merci pour votre confiance,Thank you for your trust,,,,missing,missing,missing,fub-translation-queue,to-translate,Source à traduire ; cible vide. Type: phrase
+Mes bénéficiaires,My beneficiaries,,,,missing,missing,missing,fub-translation-queue,to-translate,Source à traduire ; cible vide. Type: compte
+Message au bénéficiaire,Message to beneficiary,,,,missing,missing,missing,fub-translation-queue,to-translate,Source à traduire ; cible vide. Type: compte
 Message important,Important message,Kabaaru mawɗo,Mŋkát á mfi,Mweŋge mwá mfi,candidate,candidate,candidate,site-officiel:SO-042;pack-fub;pack-ewo;pack-dua,human,message site; statut source en_cours
+microcrédit,microcredit,,,,missing,missing,missing,fub-translation-queue,to-translate,Source à traduire ; cible vide. Type: credit
+microfinance,microfinance,,,,missing,missing,missing,fub-translation-queue,to-translate,Source à traduire ; cible vide. Type: banque
 Mobile Money,Mobile Money,Mobile Money,Mobile Money,Mobile Money,candidate,candidate,candidate,site-officiel:SO-056;pack-fub;pack-ewo;pack-dua,human,message site; statut source en_cours
+Modifications enregistrées,Changes saved,,,,missing,missing,missing,fub-translation-queue,to-translate,Source à traduire ; cible vide. Type: phrase
 Modifier,Edit,Waylu,Tsíŋí,Tukwa,candidate,candidate,candidate,site-officiel:SO-036;pack-fub;pack-ewo;pack-dua,human,message site; statut source en_cours
+Mon profil,My profile,,,,missing,missing,missing,fub-translation-queue,to-translate,Source à traduire ; cible vide. Type: phrase
 monnaie,,becca,mvakəma,,candidate,candidate,missing,pichon-1950;Dictionnaire Fulfulde (PDF),source-attested;source-attested,"Pichon 1950, p. 115 ; référence, non validé."
 Montant,Amount,Kaalis,Moní,Mɔ̀nì,candidate,candidate,candidate,site-officiel:SO-029;pack-fub;pack-ewo;pack-dua;lexique-extra,human;pack,message site; statut source en_cours Emploi large de l'argent ; à ne pas confondre avec un montant exact.
+Montant crédité,Amount credited,,,,missing,missing,missing,fub-translation-queue,to-translate,Source à traduire ; cible vide. Type: compte
+montant du prêt,loan amount,,,,missing,missing,missing,fub-translation-queue,to-translate,Source à traduire ; cible vide. Type: credit
+Montant débité,Amount debited,,,,missing,missing,missing,fub-translation-queue,to-translate,Source à traduire ; cible vide. Type: compte
+Montant envoyé,Amount sent,,,,missing,missing,missing,fub-translation-queue,to-translate,Source à traduire ; cible vide. Type: compte
+Montant maximum,Maximum amount,,,,missing,missing,missing,fub-translation-queue,to-translate,Source à traduire ; cible vide. Type: compte
+Montant minimum,Minimum amount,,,,missing,missing,missing,fub-translation-queue,to-translate,Source à traduire ; cible vide. Type: compte
+Montant reçu,Amount received,,,,missing,missing,missing,fub-translation-queue,to-translate,Source à traduire ; cible vide. Type: compte
 Montant à envoyer,Amount to send,Kaalis mo nelaɗen,Moní á ne na á kə́,Mɔ̀nì mú yéná na lómò,candidate,candidate,candidate,site-officiel:SO-012;pack-fub;pack-ewo;pack-dua,human,message site; statut source en_cours
+montant à rembourser,amount to repay,,,,missing,missing,missing,fub-translation-queue,to-translate,Source à traduire ; cible vide. Type: credit
+mot de passe,Password,,,,missing,missing,missing,fub-translation-queue,to-translate,Source à traduire ; cible vide. Type: securite
+Mot de passe oublié,Forgot password,,,,missing,missing,missing,fub-translation-queue,to-translate,Source à traduire ; cible vide. Type: securite
 Motif du transfert,Transfer reason,Dalilla nawgol,Nzólé á nkus,Njóm a lómò mɔ̀nì,candidate,candidate,candidate,site-officiel:SO-023;pack-fub;pack-ewo;pack-dua,human,message site; statut source en_cours
 Ne communiquez jamais votre code OTP à un tiers.,,,Kə́ ve code OTP wō na mòd fə́.,Suka ɓoléyé code OTP ɔŋ na moto a pé.,missing,candidate,candidate,pack-ewo;pack-dua,human,
+Ne communiquez jamais votre code à un inconnu.,Never give your code to a stranger.,,,,missing,missing,missing,fub-translation-queue,to-translate,Source à traduire ; cible vide. Type: erreur
 Ne partagez jamais votre code PIN.,,,Kə́ ve code PIN wō na mòd fə́.,Suka ɓoléyé code PIN ɔŋ na moto a pé.,missing,candidate,candidate,pack-ewo;pack-dua,human,
 Network error: the service is temporarily unavailable. Please try again.,,Fenaande rese : gollal ina daɗi. Enndu kadi.,Eboŋle é réseau : nsáŋá á ne tə́té. Bámbáná dábə́.,Boɓan ba réseau : eɓolo e titié ndedi. Byápé.,candidate,candidate,candidate,pack-fub;pack-ewo;pack-dua,human,
 New transfer,,Nawgol hesrol,Mfə́fə́ nkus,Péne a lómò mɔ̀nì,candidate,candidate,candidate,pack-fub;pack-ewo;pack-dua,human,
 Nom du bénéficiaire,Beneficiary name,Innde keɓoowo,Ezóŋ é mòd á nnyɔ́ŋ,Dina la moto nu mányɔ̀ŋɔ̀,candidate,candidate,candidate,site-officiel:SO-021;pack-fub;pack-ewo;pack-dua,human,message site; statut source en_cours
 nombre,,,taŋ,,missing,candidate,missing,pichon-1950,source-attested,"Pichon 1950, p. 115 ; référence, non validé."
+Nombre maximum de tentatives,Maximum attempts,,,,missing,missing,missing,fub-translation-queue,to-translate,Source à traduire ; cible vide. Type: securite
 Note (optional),,Sariya (so ina haani),Nsɔ́ŋó (á ne eyáŋá),Bedangwedi (yaya),candidate,candidate,candidate,pack-fub;pack-ewo;pack-dua,human,
 Note (optionnel),Note (optional),Sariya (so ina haani),Nsɔ́ŋó (á ne eyáŋá),Bedangwedi (yaya),candidate,candidate,candidate,site-officiel:SO-024;pack-fub;pack-ewo;pack-dua,human,message site; statut source en_cours
+Notifications,Notifications,,,,missing,missing,missing,fub-translation-queue,to-translate,Source à traduire ; cible vide. Type: phrase
+Nous sommes là pour vous aider,We are here to help,,,,missing,missing,missing,fub-translation-queue,to-translate,Source à traduire ; cible vide. Type: phrase
+nouveau mot de passe,New password,,,,missing,missing,missing,fub-translation-queue,to-translate,Source à traduire ; cible vide. Type: securite
 Nouveau transfert,New transfer,Nawgol hesrol,Mfə́fə́ nkus,Péne a lómò mɔ̀nì,candidate,candidate,candidate,site-officiel:SO-041;pack-fub;pack-ewo;pack-dua,human,message site; statut source en_cours
+Nouvel appareil,New device,,,,missing,missing,missing,fub-translation-queue,to-translate,Source à traduire ; cible vide. Type: securite
 numéro,number,Lammba,Nɔ́mbələ,Nombara,candidate,candidate,candidate,lexique-extra,fub: Webonary ; ewo/dua: pack,Lammba = numéro ; Nɔ́mbələ/Nombara sont des emprunts.
+numéro de carte,card number,,,,missing,missing,missing,fub-translation-queue,to-translate,Source à traduire ; cible vide. Type: banque
 Numéro de compte,Account number,Limre asaaku,Nɔ́mbələ á kɔ́ndó,Nombara a kompa,candidate,candidate,candidate,site-officiel:SO-008;pack-fub;pack-ewo;pack-dua,human,message site; statut source en_cours
 Numéro de compte : CM [[NUM_0]],,Limre asaaku : CM [[NUM_0]],Nɔ́mbələ á kɔ́ndó : CM [[NUM_0]],Nombara a kompa : CM [[NUM_0]],candidate,candidate,candidate,pack-fub;pack-ewo;pack-dua,human,
+Numéro de transaction,Transaction number,,,,missing,missing,missing,fub-translation-queue,to-translate,Source à traduire ; cible vide. Type: compte
 Numéro de téléphone,Phone number,Limre cinndel,Nɔ́mbələ á télafon,Nombara a telefon,candidate,candidate,candidate,site-officiel:SO-022;pack-fub;pack-ewo;pack-dua,human,message site; statut source en_cours
+Numéro mobile,Mobile number,,,,missing,missing,missing,fub-translation-queue,to-translate,Source à traduire ; cible vide. Type: compte
+objectif atteint,goal reached,,,,missing,missing,missing,fub-translation-queue,to-translate,Source à traduire ; cible vide. Type: credit
 objectif d'épargne,,faandaare mooftugol,nsɔ́ŋó á adzóŋó,sɔŋɔ a bálà mɔ̀nì,candidate,candidate,candidate,pack-fub;pack-ewo;pack-dua,human,
 Online banking,,Banke e internet,Banke á internet,Banke a internet,candidate,candidate,candidate,pack-fub;pack-ewo;pack-dua,editorial,
 Operation,,Gollal,Esama,Eɓolo,candidate,candidate,candidate,pack-fub;pack-ewo;pack-dua,human,
 Operation type,,Suus gollal,Nsɔm á esama,Epepe a eɓolo,candidate,candidate,candidate,pack-fub;pack-ewo;pack-dua,human,
+opposition sur la carte,card block request,,,,missing,missing,missing,fub-translation-queue,to-translate,Source à traduire ; cible vide. Type: banque
+Opérateur,Operator,,,,missing,missing,missing,fub-translation-queue,to-translate,Source à traduire ; cible vide. Type: compte
 Opération,Operation,Gollal,Esama,Eɓolo,candidate,candidate,candidate,site-officiel:SO-033;pack-fub;pack-ewo;pack-dua,human,message site; statut source en_cours
+Opération annulée,Operation cancelled,,,,missing,missing,missing,fub-translation-queue,to-translate,Source à traduire ; cible vide. Type: phrase
+Opération en cours de traitement.,Operation is being processed.,,,,missing,missing,missing,fub-translation-queue,to-translate,Source à traduire ; cible vide. Type: erreur
+Opération non autorisée.,Operation not authorized.,,,,missing,missing,missing,fub-translation-queue,to-translate,Source à traduire ; cible vide. Type: erreur
+Opération refusée.,Operation declined.,,,,missing,missing,missing,fub-translation-queue,to-translate,Source à traduire ; cible vide. Type: erreur
+Opération réussie,Operation successful,,,,missing,missing,missing,fub-translation-queue,to-translate,Source à traduire ; cible vide. Type: phrase
+Opération terminée,Operation completed,,,,missing,missing,missing,fub-translation-queue,to-translate,Source à traduire ; cible vide. Type: phrase
 Other bank,,Banke goɗɗo,Banque fə́,Banque epé,candidate,candidate,candidate,pack-fub;pack-ewo;pack-dua,human,
+Ouvrir,Open,,,,missing,missing,missing,fub-translation-queue,to-translate,Source à traduire ; cible vide. Type: action
+Ouvrir un compte,Open an account,,,,missing,missing,missing,fub-translation-queue,to-translate,Source à traduire ; cible vide. Type: action
 paiement,,,mán,,missing,candidate,missing,pichon-1950,source-attested,"Pichon 1950, p. 116 ; référence, non validé."
+Paiement de facture,Bill payment,,,,missing,missing,missing,fub-translation-queue,to-translate,Source à traduire ; cible vide. Type: compte
 Paiement de services,Payment for services,Njoɓdi gollal,Mákyé má nsáŋá,Soma mɔ̀nì a mɓola,candidate,candidate,candidate,site-officiel:SO-060;pack-fub;pack-ewo;pack-dua,human,message site; statut source en_cours
 Paiement marchand,Merchant payment,Njoɓdi julaajo,Mákyé má nkàndá,Wasa mɔ̀nì a nkándà,candidate,candidate,candidate,site-officiel:SO-059;pack-fub;pack-ewo;pack-dua,human,message site; statut source en_cours
+paiement partiel,partial payment,,,,missing,missing,missing,fub-translation-queue,to-translate,Source à traduire ; cible vide. Type: credit
+paiement total,full payment,,,,missing,missing,missing,fub-translation-queue,to-translate,Source à traduire ; cible vide. Type: credit
+Paramètres,Settings,,,,missing,missing,missing,fub-translation-queue,to-translate,Source à traduire ; cible vide. Type: phrase
+Partager,Share,,,,missing,missing,missing,fub-translation-queue,to-translate,Source à traduire ; cible vide. Type: action
+Partager le reçu,Share the receipt,,,,missing,missing,missing,fub-translation-queue,to-translate,Source à traduire ; cible vide. Type: phrase
+Pas de connexion internet.,No internet connection.,,,,missing,missing,missing,fub-translation-queue,to-translate,Source à traduire ; cible vide. Type: erreur
+Passer,Skip,,,,missing,missing,missing,fub-translation-queue,to-translate,Source à traduire ; cible vide. Type: action
 payer,,,yan,,missing,candidate,missing,pichon-1950,source-attested,"Pichon 1950, p. 116 ; référence, non validé."
 Payment for services,,Njoɓdi gollal,Mákyé má nsáŋá,Soma mɔ̀nì a mɓola,candidate,candidate,candidate,pack-fub;pack-ewo;pack-dua,human,
 Phone,,Cinndel,Télafon,Telefon,candidate,candidate,candidate,pack-fub;pack-ewo;pack-dua,human,
 Phone number,,Limre cinndel,Nɔ́mbələ á télafon,Nombara a telefon,candidate,candidate,candidate,pack-fub;pack-ewo;pack-dua,human,
+Photo d'identité,ID photo,,,,missing,missing,missing,fub-translation-queue,to-translate,Source à traduire ; cible vide. Type: securite
 pièce d'identité,,kadi enndam,lélá éyoŋ,kalati a edube,candidate,candidate,candidate,pack-fub;pack-ewo;pack-dua,human,
+Pièce d'identité valide,Valid ID,,,,missing,missing,missing,fub-translation-queue,to-translate,Source à traduire ; cible vide. Type: securite
 plafond,limit,keeri kaalis,asúgú,sókó a mɔ̀nì,candidate,candidate,candidate,pack-fub;pack-ewo;pack-dua;lexique-extra,human,À traduire par un natif ; ne pas inventer.
+plafond journalier,daily limit,,,,missing,missing,missing,fub-translation-queue,to-translate,Source à traduire ; cible vide. Type: credit
+plafond mensuel,monthly limit,,,,missing,missing,missing,fub-translation-queue,to-translate,Source à traduire ; cible vide. Type: credit
+Planifier,Schedule,,,,missing,missing,missing,fub-translation-queue,to-translate,Source à traduire ; cible vide. Type: action
 Please provide the beneficiary name and phone number.,,Mawnu innde e limre keɓoowo.,Və́ ezóŋ á nɔ́mbələ á mòd á nnyɔ́ŋ.,Londe dina na nombara a moto nu mányɔ̀ŋɔ̀.,candidate,candidate,candidate,pack-fub;pack-ewo;pack-dua,human,
+Point de retrait,Withdrawal point,,,,missing,missing,missing,fub-translation-queue,to-translate,Source à traduire ; cible vide. Type: compte
+Politique de confidentialité,Privacy policy,,,,missing,missing,missing,fub-translation-queue,to-translate,Source à traduire ; cible vide. Type: securite
+Portefeuille électronique,E-wallet,,,,missing,missing,missing,fub-translation-queue,to-translate,Source à traduire ; cible vide. Type: compte
+"Pour votre sécurité, ne partagez jamais votre code","For your safety, never share your code",,,,missing,missing,missing,fub-translation-queue,to-translate,Source à traduire ; cible vide. Type: phrase
+Prenez un selfie,Take a selfie,,,,missing,missing,missing,fub-translation-queue,to-translate,Source à traduire ; cible vide. Type: phrase
+Prenez une photo de votre pièce d'identité,Take a photo of your ID,,,,missing,missing,missing,fub-translation-queue,to-translate,Source à traduire ; cible vide. Type: phrase
 prix,,coggu,,,candidate,missing,missing,Dictionnaire Fulfulde (PDF),source-attested,Référence lexicographique ; non validé.
 prix total,,njaru kawral,,,candidate,missing,missing,Dictionnaire Fulfulde (PDF),source-attested,Référence lexicographique ; non validé.
+prochaine échéance,next due date,,,,missing,missing,missing,fub-translation-queue,to-translate,Source à traduire ; cible vide. Type: credit
+Protection des données,Data protection,,,,missing,missing,missing,fub-translation-queue,to-translate,Source à traduire ; cible vide. Type: securite
 Protocole de test,,Porotokol ƴeewndo,Protokole á esáŋá,Protokole a jeele,candidate,candidate,candidate,pack-fub;pack-ewo;pack-dua,editorial,
+Précédent,Previous,,,,missing,missing,missing,fub-translation-queue,to-translate,Source à traduire ; cible vide. Type: action
 prêt,loan,,,,missing,missing,missing,lexique-extra,,À traduire par un natif ; ne pas inventer.
+prêteur,lender,,,,missing,missing,missing,fub-translation-queue,to-translate,Source à traduire ; cible vide. Type: credit
 pénalité,penalty,,,,missing,missing,missing,lexique-extra,,À traduire par un natif ; ne pas inventer.
 pénalité de retard,,njoɓdi batte,mákyé má eyele,móǹgá mwá boɓi,candidate,candidate,candidate,pack-fub;pack-ewo;pack-dua,human,
+Questions fréquentes,Frequently asked questions,,,,missing,missing,missing,fub-translation-queue,to-translate,Source à traduire ; cible vide. Type: phrase
 Recent transactions,,Golle kaalis ɓennuɗe,Bésama bí abóban eyele,Bina ba mɔ̀nì ba ɓoɓí ɓosɔ̂,candidate,candidate,candidate,pack-fub;pack-ewo;pack-dua,human,
 recette,,keɓaa,,,candidate,missing,missing,Dictionnaire Fulfulde (PDF),source-attested,Référence lexicographique ; non validé.
 recevoir,,,bɛ́lɛ́,kusa,missing,candidate,candidate,pichon-1950;Helmlinger 1972,source-attested;source-attested,"Pichon 1950, p. 118 ; référence, non validé."
+Recharge téléphonique,Airtime top-up,,,,missing,missing,missing,fub-translation-queue,to-translate,Source à traduire ; cible vide. Type: compte
+Recharger,Top up,,,,missing,missing,missing,fub-translation-queue,to-translate,Source à traduire ; cible vide. Type: action
+Rechercher,Search,,,,missing,missing,missing,fub-translation-queue,to-translate,Source à traduire ; cible vide. Type: action
+Reconnaissance faciale,Face recognition,,,,missing,missing,missing,fub-translation-queue,to-translate,Source à traduire ; cible vide. Type: securite
 Reference,,Limre,Eñíŋlé,Nombara a lómo mɔ̀nì,candidate,candidate,candidate,pack-fub;pack-ewo;pack-dua,editorial,"Correction documentaire 2026-11-10 : total -> kawral ; Reference -> Limre (nombre/référence), Tiinde = boîte/chaîne/chance. À confirmer par un locuteur natif ; non validée."
 refuser,,,tɛ́b,,missing,candidate,missing,pichon-1950,source-attested,"Pichon 1950, p. 118 ; référence, non validé."
+Rejeter,Reject,,,,missing,missing,missing,fub-translation-queue,to-translate,Source à traduire ; cible vide. Type: action
+Relevé de compte,Account statement,,,,missing,missing,missing,fub-translation-queue,to-translate,Source à traduire ; cible vide. Type: compte
+Relevé mensuel,Monthly statement,,,,missing,missing,missing,fub-translation-queue,to-translate,Source à traduire ; cible vide. Type: compte
 remboursement,refund,yoɓgol kaalis,adzúmbí moní,timbise mɔ̀nì,candidate,candidate,candidate,pack-fub;pack-ewo;pack-dua;lexique-extra,human,À traduire par un natif ; ne pas inventer.
+remboursement anticipé,early repayment,,,,missing,missing,missing,fub-translation-queue,to-translate,Source à traduire ; cible vide. Type: credit
+Rembourser,Repay,,,,missing,missing,missing,fub-translation-queue,to-translate,Source à traduire ; cible vide. Type: action
+Remboursé,Refunded,,,,missing,missing,missing,fub-translation-queue,to-translate,Source à traduire ; cible vide. Type: compte
 Renseignez les informations du destinataire. Vérifiez toujours le numéro avant de valider.,Enter the recipient details. Always verify the number before confirming.,Lonndu kabaaru keɓoowo. Teeŋtu limre nde ko adii yoɓgol.,Lóndó bíə́mə́ bí mòd á nnyɔ́ŋ. Yéŋə́ nɔ́mbələ ósu na ó sínyí.,Londe bina bá moto nu mányɔ̀ŋɔ̀. Jeele nombara oboso na o disese.,candidate,candidate,candidate,site-officiel:SO-020;pack-fub;pack-ewo;pack-dua,human,message site; statut source en_cours
+Renvoyer le code,Resend the code,,,,missing,missing,missing,fub-translation-queue,to-translate,Source à traduire ; cible vide. Type: action
+Renvoyer le code dans [[NUM_0]] secondes,Resend code in [[NUM_0]] seconds,,,,missing,missing,missing,fub-translation-queue,to-translate,Source à traduire ; cible vide. Type: phrase
+reporter une échéance,postpone a payment,,,,missing,missing,missing,fub-translation-queue,to-translate,Source à traduire ; cible vide. Type: credit
+Reprendre,Resume,,,,missing,missing,missing,fub-translation-queue,to-translate,Source à traduire ; cible vide. Type: action
+Restaurer,Restore,,,,missing,missing,missing,fub-translation-queue,to-translate,Source à traduire ; cible vide. Type: action
+retard de paiement,late payment,,,,missing,missing,missing,fub-translation-queue,to-translate,Source à traduire ; cible vide. Type: credit
+Retirer,Withdraw,,,,missing,missing,missing,fub-translation-queue,to-translate,Source à traduire ; cible vide. Type: action
+retirer de mon épargne,withdraw from savings,,,,missing,missing,missing,fub-translation-queue,to-translate,Source à traduire ; cible vide. Type: credit
 Retour,Back,Rutto,Kiri mvús,Timbia ombusa,candidate,candidate,candidate,site-officiel:SO-018;pack-fub;pack-ewo;pack-dua,human,message site; statut source en_cours
 Retour au hackathon,,Rutto to hackathon,Kiri mvús na hackathon,Timbia ombusa na hackathon,candidate,candidate,candidate,pack-fub;pack-ewo;pack-dua,human,
+Retour au tableau de bord,Back to dashboard,,,,missing,missing,missing,fub-translation-queue,to-translate,Source à traduire ; cible vide. Type: phrase
+Retour à l'accueil,Back to home,,,,missing,missing,missing,fub-translation-queue,to-translate,Source à traduire ; cible vide. Type: phrase
 retrait,withdrawal,yaltugol kaalis,kúdí moní,kusa mɔ̀nì,candidate,candidate,candidate,pack-fub;pack-ewo;pack-dua;lexique-extra,human;fub: Webonary ; ewo/dua: pack,Jaɓtugol attesté ; les autres sont descriptifs.
+Retrait d'espèces,Cash withdrawal,,,,missing,missing,missing,fub-translation-queue,to-translate,Source à traduire ; cible vide. Type: compte
+Revenus,Income,,,,missing,missing,missing,fub-translation-queue,to-translate,Source à traduire ; cible vide. Type: compte
 reçu,receipt,seedantaagal,kalada á nkus,kalati a suma,candidate,candidate,candidate,pack-fub;pack-ewo;pack-dua;lexique-extra,human,À traduire par un natif ; ne pas inventer.
+reçu d'agence,branch receipt,,,,missing,missing,missing,fub-translation-queue,to-translate,Source à traduire ; cible vide. Type: banque
+RIB,bank details (RIB),,,,missing,missing,missing,fub-translation-queue,to-translate,Source à traduire ; cible vide. Type: banque
 Récapitulatif,Summary,Koolol,Afúlásí,Tombise,candidate,candidate,candidate,site-officiel:SO-027;pack-fub;pack-ewo;pack-dua,human,message site; statut source en_cours
+Réessayer,Retry,,,,missing,missing,missing,fub-translation-queue,to-translate,Source à traduire ; cible vide. Type: action
 Référence,Reference,Limre,Eñíŋlé,Nombara a lómo mɔ̀nì,candidate,candidate,candidate,site-officiel:SO-032;pack-fub;pack-ewo;pack-dua;lexique-extra,human;editorial;fub: Webonary/numéro ; ewo/dua: pack,"message site; statut source en_cours Correction documentaire 2026-11-10 : total -> kawral ; Reference -> Limre (nombre/référence), Tiinde = boîte/chaîne/chance. À confirmer par un locuteur natif ; non validée. Correction fub : Tiinde (boîte/chaîne) remplacé par Limre."
+Réinitialiser,Reset,,,,missing,missing,missing,fub-translation-queue,to-translate,Source à traduire ; cible vide. Type: action
+Réussi,Successful,,,,missing,missing,missing,fub-translation-queue,to-translate,Source à traduire ; cible vide. Type: compte
+Réussir,Succeed,,,,missing,missing,missing,fub-translation-queue,to-translate,Source à traduire ; cible vide. Type: action
+rééchelonnement,rescheduling,,,,missing,missing,missing,fub-translation-queue,to-translate,Source à traduire ; cible vide. Type: credit
+S'inscrire,Sign up,,,,missing,missing,missing,fub-translation-queue,to-translate,Source à traduire ; cible vide. Type: action
 Safinum account,,Asaaku Safinum,Kɔ́ndó á Safinum,Kompa a Safinum,candidate,candidate,candidate,pack-fub;pack-ewo;pack-dua,human,
 Safinum Pay — demonstration environment. Do not enter real personal data.,,Safinum Pay — nokku ƴeewndo. Huutoraaka kabaaru hoore ma goonga.,Safinum Pay — vèyá á esáŋá. Kə́ lóndó bíə́mə́ bí eñíŋ wō.,Safinum Pay — eɓolo a jeele. Suka londe bina ɓɔŋ bá moto.,candidate,candidate,candidate,pack-fub;pack-ewo;pack-dua,human,
 Safinum Pay — environnement de démonstration. Ne saisissez aucune donnée personnelle réelle.,Safinum Pay — demonstration environment. Do not enter real personal data.,Safinum Pay — nokku ƴeewndo. Huutoraaka kabaaru hoore ma goonga.,Safinum Pay — vèyá á esáŋá. Kə́ lóndó bíə́mə́ bí eñíŋ wō.,Safinum Pay — eɓolo a jeele. Suka londe bina ɓɔŋ bá moto.,candidate,candidate,candidate,site-officiel:SO-049;pack-fub;pack-ewo;pack-dua,human,message site; statut source en_cours
+Saisir,Enter,,,,missing,missing,missing,fub-translation-queue,to-translate,Source à traduire ; cible vide. Type: action
+Saisissez le motif du transfert,Enter the transfer reason,,,,missing,missing,missing,fub-translation-queue,to-translate,Source à traduire ; cible vide. Type: phrase
+Saisissez le numéro du compte,Enter the account number,,,,missing,missing,missing,fub-translation-queue,to-translate,Source à traduire ; cible vide. Type: phrase
 salaire,,tawegol,,,candidate,missing,missing,Dictionnaire Fulfulde (PDF),source-attested,Référence lexicographique ; non validé.
 Salaire reçu,Salary received,Njoɓdi lebbi naatii,Fáwá á nnyɔ́ŋya,Fáwá e nyóŋɛ̂,candidate,candidate,candidate,site-officiel:SO-061;pack-fub;pack-ewo;pack-dua,human,message site; statut source en_cours
 Salary received,,Njoɓdi lebbi naatii,Fáwá á nnyɔ́ŋya,Fáwá e nyóŋɛ̂,candidate,candidate,candidate,pack-fub;pack-ewo;pack-dua,human,
+Se connecter,Log in,,,,missing,missing,missing,fub-translation-queue,to-translate,Source à traduire ; cible vide. Type: action
+Se déconnecter,Log out,,,,missing,missing,missing,fub-translation-queue,to-translate,Source à traduire ; cible vide. Type: action
+Se souvenir de moi,Remember me,,,,missing,missing,missing,fub-translation-queue,to-translate,Source à traduire ; cible vide. Type: securite
 Secure connection,,Tesku kisal,Nláŋáná á ɔ́bám,Mulongu mu batamɛ̂,candidate,candidate,candidate,pack-fub;pack-ewo;pack-dua,human,
 Security,,Kisal,Ɔ́bám,Bata,candidate,candidate,candidate,pack-fub;pack-ewo;pack-dua,human,
 Security warning,,Tintina kisal,Méyáŋá má ɔ́bám,Bokwe bi bata,candidate,candidate,candidate,pack-fub;pack-ewo;pack-dua,human,
 Security warning: this beneficiary has never been used on this account.,,Tintina kisal : oon keɓoowo huutoraaka e ndii asaaku.,Méyáŋá má ɔ́bám : mòd á nnyɔ́ŋ nyó a tékə́ yáne bóban á kɔ́ndó nyó.,Bokwe bi bata : nu moto nu mányɔ̀ŋɔ̀ asóɓanó ɓo polo a mí kompa.,candidate,candidate,candidate,pack-fub;pack-ewo;pack-dua,human,
 Security warning: verify the beneficiary phone number before continuing.,,Tintina kisal : teeŋtu limre keɓoowo ko adii yeeso.,Méyáŋá má ɔ́bám : yéŋə́ nɔ́mbələ á mòd á nnyɔ́ŋ ósu na ó kə́ ósu.,Bokwe bi bata : jeele nombara a moto nu mányɔ̀ŋɔ̀ oboso na o kɛ́ oboso.,candidate,candidate,candidate,pack-fub;pack-ewo;pack-dua,human,
 service client,,gollordu wallitaande,nsáŋá á nnam,mɓola a ɓato,candidate,candidate,candidate,pack-fub;pack-ewo;pack-dua,human,
+Session expirée,Session expired,,,,missing,missing,missing,fub-translation-queue,to-translate,Source à traduire ; cible vide. Type: securite
+"Si ce n'était pas vous, bloquez votre compte.","If this wasn't you, block your account.",,,,missing,missing,missing,fub-translation-queue,to-translate,Source à traduire ; cible vide. Type: erreur
+Signaler un problème,Report a problem,,,,missing,missing,missing,fub-translation-queue,to-translate,Source à traduire ; cible vide. Type: action
+Signaler une fraude,Report fraud,,,,missing,missing,missing,fub-translation-queue,to-translate,Source à traduire ; cible vide. Type: securite
 solde,balance,jawdindi,abálá,mɔ̀nì mwé ɓáyí,candidate,candidate,candidate,pack-fub;pack-ewo;pack-dua;lexique-extra,human;pack fub/ewo/dua,Terme métier ; Mɔ̀nì signifie d'abord argent. À valider.
+Solde actuel,Current balance,,,,missing,missing,missing,fub-translation-queue,to-translate,Source à traduire ; cible vide. Type: compte
 Solde après opération,Balance after transfer,Jawdindi ɓaawo gollal,Abálá á mvús nkus,Mɔ̀nì mwé ɓáyí ombusa soma,candidate,candidate,candidate,site-officiel:SO-016;pack-fub;pack-ewo;pack-dua,human,message site; statut source en_cours
+Solde bloqué,Blocked balance,,,,missing,missing,missing,fub-translation-queue,to-translate,Source à traduire ; cible vide. Type: compte
 Solde disponible,Available balance,Jawdindi ndi yami,Abálá é ne ngə́lə́,Mɔ̀nì mwé ɓáyí,candidate,candidate,candidate,site-officiel:SO-007;pack-fub;pack-ewo;pack-dua,human,message site; statut source en_cours
+Solde du compte,Account balance,,,,missing,missing,missing,fub-translation-queue,to-translate,Source à traduire ; cible vide. Type: compte
+Solde du portefeuille,Wallet balance,,,,missing,missing,missing,fub-translation-queue,to-translate,Source à traduire ; cible vide. Type: compte
+Solde insuffisant pour cette opération.,Insufficient balance for this operation.,,,,missing,missing,missing,fub-translation-queue,to-translate,Source à traduire ; cible vide. Type: erreur
 Solde insuffisant pour effectuer ce transfert.,Insufficient balance for this transfer.,Jawdindi ina famɗi ngam waɗde ndii gollal.,Abálá á tékə́ yáne kɔ́ŋ na á bɔ nkus nyó.,Mɔ̀nì mwé ɓáyí mu titi ɓwá lómò mɔ̀nì.,candidate,candidate,candidate,site-officiel:SO-065;pack-fub;pack-ewo;pack-dua,human,message site; statut source en_cours
+solde restant,remaining balance,,,,missing,missing,missing,fub-translation-queue,to-translate,Source à traduire ; cible vide. Type: credit
+Sortie d'argent,Money out,,,,missing,missing,missing,fub-translation-queue,to-translate,Source à traduire ; cible vide. Type: compte
 Status,,Tollirgol,Ntéláná,Ejaŋgi,candidate,candidate,candidate,pack-fub;pack-ewo;pack-dua,human,
 Statut,Status,Tollirgol,Ntéláná,Ejaŋgi,candidate,candidate,candidate,site-officiel:SO-039;pack-fub;pack-ewo;pack-dua,human,message site; statut source en_cours
 Success,,Nasara,Adzáŋ,Ɓwám,candidate,candidate,candidate,pack-fub;pack-ewo;pack-dua,human,
 Succès,Success,Nasara,Adzáŋ,Ɓwám,candidate,candidate,candidate,site-officiel:SO-040;pack-fub;pack-ewo;pack-dua,human,message site; statut source en_cours
+Suivant,Next,,,,missing,missing,missing,fub-translation-queue,to-translate,Source à traduire ; cible vide. Type: action
 Summary,,Koolol,Afúlásí,Tombise,candidate,candidate,candidate,pack-fub;pack-ewo;pack-dua,human,
+Supprimer,Delete,,,,missing,missing,missing,fub-translation-queue,to-translate,Source à traduire ; cible vide. Type: action
+Supprimer un bénéficiaire,Remove a beneficiary,,,,missing,missing,missing,fub-translation-queue,to-translate,Source à traduire ; cible vide. Type: action
+Suspendre,Suspend,,,,missing,missing,missing,fub-translation-queue,to-translate,Source à traduire ; cible vide. Type: action
+SWIFT,SWIFT,,,,missing,missing,missing,fub-translation-queue,to-translate,Source à traduire ; cible vide. Type: banque
 Sécurité,Security,Kisal,Ɔ́bám,Bata,candidate,candidate,candidate,site-officiel:SO-046;pack-fub;pack-ewo;pack-dua;lexique-extra,human;pack,message site; statut source en_cours Aucune attestation dictionnaire trouvée.
+Sélectionnez un bénéficiaire,Select a beneficiary,,,,missing,missing,missing,fub-translation-queue,to-translate,Source à traduire ; cible vide. Type: phrase
+taux annuel,annual rate,,,,missing,missing,missing,fub-translation-queue,to-translate,Source à traduire ; cible vide. Type: credit
 taux d'intérêt,,tolno nafa,ntéláná á mfá'á,edinge a longele,candidate,candidate,candidate,pack-fub;pack-ewo;pack-dua,human,
 taux de change,,tolno mbiliro,nsɛ́ŋlé moní,edinge a tukwisa mɔ̀nì,candidate,candidate,candidate,pack-fub;pack-ewo;pack-dua,human,
+taux fixe,fixed rate,,,,missing,missing,missing,fub-translation-queue,to-translate,Source à traduire ; cible vide. Type: credit
+taux variable,variable rate,,,,missing,missing,missing,fub-translation-queue,to-translate,Source à traduire ; cible vide. Type: credit
 taxe,,lampo,,,candidate,missing,missing,Dictionnaire Fulfulde (PDF),source-attested,Référence lexicographique ; non validé.
+Taxes,Taxes,,,,missing,missing,missing,fub-translation-queue,to-translate,Source à traduire ; cible vide. Type: compte
+Tentative suspecte,Suspicious attempt,,,,missing,missing,missing,fub-translation-queue,to-translate,Source à traduire ; cible vide. Type: securite
+Terminer,Finish,,,,missing,missing,missing,fub-translation-queue,to-translate,Source à traduire ; cible vide. Type: action
 "Test environment — fictional data, no real transaction.",,"Nokku ƴeewndo — kabaaru fenaande, alaa gollal goonga.",Vèyá á esáŋá — bíə́mə́ bí ngə́lə́.,"Wuma a jeele — bina ba wite, soma téŋɛ̂ e titi.",candidate,candidate,candidate,pack-fub;pack-ewo;pack-dua,human,
 Test protocol,,Porotokol ƴeewndo,Protokole á esáŋá,Protokole a jeele,candidate,candidate,candidate,pack-fub;pack-ewo;pack-dua,editorial,
 The amount must be greater than zero.,,Kaalis ina foti ɓurde zero.,Moní á yian yə́bə́ étə́ŋ éyɔŋ zéró.,Mɔ̀nì mu yiane ɓa móŋlé ombon a zéró.,candidate,candidate,candidate,pack-fub;pack-ewo;pack-dua,human,
 This beneficiary has never been used on this account. Verify the number before continuing.,,Oon keɓoowo huutoraaka e ndii asaaku. Teeŋtu limre ko adii yeeso.,Mòd á nnyɔ́ŋ nyó a tékə́ yáne bóban á kɔ́ndó nyó. Yéŋə́ nɔ́mbələ ósu na ó kə́ ósu.,Nu moto nu mányɔ̀ŋɔ̀ asóɓanó ɓo polo a mí kompa. Jeele nombara oboso na o kɛ́ oboso.,candidate,candidate,candidate,pack-fub;pack-ewo;pack-dua,human,
+Titulaire du compte,Account holder,,,,missing,missing,missing,fub-translation-queue,to-translate,Source à traduire ; cible vide. Type: compte
+tontine,tontine,,,,missing,missing,missing,fub-translation-queue,to-translate,Source à traduire ; cible vide. Type: credit
 total,total,kawral,mbodó,mɔ̀nì mwésé,candidate,candidate,candidate,pack-fub;pack-ewo;pack-dua;lexique-extra,editorial;human;fub: Webonary ; ewo/dua: pack,"Correction documentaire 2026-11-10 : total -> kawral ; Reference -> Limre (nombre/référence), Tiinde = boîte/chaîne/chance. À confirmer par un locuteur natif ; non validée. Correction fub : fof remplacé par kawral."
 Total debited,,Kawral kaalis yoɓaaɗo,Mbodó á kúsíya,Mɔ̀nì mwésé mú kusané,candidate,candidate,candidate,pack-fub;pack-ewo;pack-dua,editorial;human,Correction documentaire 2026-11-10 : total -> kawral ; composition à confirmer par un natif.
 Total débité,Total debited,Kawral kaalis yoɓaaɗo,Mbodó á kúsíya,Mɔ̀nì mwésé mú kusané,candidate,candidate,candidate,site-officiel:SO-030;pack-fub;pack-ewo;pack-dua,human;editorial,message site; statut source en_cours Correction documentaire 2026-11-10 : total -> kawral ; composition à confirmer par un natif.
 Total to debit,,Kawral kaalis mo yoɓetee,Mbodó á ne na á kúsí,Mɔ̀nì mwésé mú mákusane,candidate,candidate,candidate,pack-fub;pack-ewo;pack-dua,editorial;human,Correction documentaire 2026-11-10 : total -> kawral ; composition à confirmer par un natif.
 Total à débiter,Total to debit,Kawral kaalis mo yoɓetee,Mbodó á ne na á kúsí,Mɔ̀nì mwésé mú mákusane,candidate,candidate,candidate,site-officiel:SO-015;pack-fub;pack-ewo;pack-dua,human;editorial,message site; statut source en_cours Correction documentaire 2026-11-10 : total -> kawral ; composition à confirmer par un natif.
+Total à payer : [[NUM_0]] FCFA,Total to pay: [[NUM_0]] FCFA,,,,missing,missing,missing,fub-translation-queue,to-translate,Source à traduire ; cible vide. Type: phrase
 traduire,,,timi,,missing,candidate,missing,pichon-1950,source-attested,"Pichon 1950, p. 119 ; référence, non validé."
 transaction,,gollal kaalis,nkus-nnyɔ́ŋ,eɓolo a mɔ̀nì,candidate,candidate,candidate,pack-fub;pack-ewo;pack-dua,human,
 Transactions récentes,Recent transactions,Golle kaalis ɓennuɗe,Bésama bí abóban eyele,Bina ba mɔ̀nì ba ɓoɓí ɓosɔ̂,candidate,candidate,candidate,site-officiel:SO-006;pack-fub;pack-ewo;pack-dua,human,message site; statut source en_cours
@@ -210,28 +545,99 @@ Transfer reason,,Dalilla nawgol,Nzólé á nkus,Njóm a lómò mɔ̀nì,candi
 Transfer received,,Kaalis naatii,Nkus á nnyɔ́ŋya,Lómò mɔ̀nì mu nyóŋɛ̂,candidate,candidate,candidate,pack-fub;pack-ewo;pack-dua,human,
 transfert,transfer,Nawgol,Nkus,Lómo,candidate,candidate,candidate,lexique-extra,pack fub/ewo/dua,Formes issues des messages du site ; pas d'entrée dictionnaire.
 Transfert effectué,Transfer completed,Nawgol naatii,Nkus á bɔ́ya,Lómò mɔ̀nì e ɓoɓí,candidate,candidate,candidate,site-officiel:SO-037;pack-fub;pack-ewo;pack-dua,human,message site; statut source en_cours
+Transfert instantané,Instant transfer,,,,missing,missing,missing,fub-translation-queue,to-translate,Source à traduire ; cible vide. Type: compte
 Transfert instantané et gratuit,"Instant, free transfer",Nawgol jaawngol ko yoɓataa,Nkus á oyá-oyá á tékə́ mákyé,Lómò mɔ̀nì a ɓuɓéɓuɓé na esikaye móǹgá,candidate,candidate,candidate,site-officiel:SO-053;pack-fub;pack-ewo;pack-dua,human,message site; statut source en_cours
+Transfert international,International transfer,,,,missing,missing,missing,fub-translation-queue,to-translate,Source à traduire ; cible vide. Type: compte
+Transfert programmé,Scheduled transfer,,,,missing,missing,missing,fub-translation-queue,to-translate,Source à traduire ; cible vide. Type: compte
 Transfert reçu,Transfer received,Kaalis naatii,Nkus á nnyɔ́ŋya,Lómò mɔ̀nì mu nyóŋɛ̂,candidate,candidate,candidate,site-officiel:SO-062;pack-fub;pack-ewo;pack-dua,human,message site; statut source en_cours
+Transfert récurrent,Recurring transfer,,,,missing,missing,missing,fub-translation-queue,to-translate,Source à traduire ; cible vide. Type: compte
+Transférer,Transfer,,,,missing,missing,missing,fub-translation-queue,to-translate,Source à traduire ; cible vide. Type: action
+Trier,Sort,,,,missing,missing,missing,fub-translation-queue,to-translate,Source à traduire ; cible vide. Type: action
+Trop de tentatives. Votre compte est bloqué.,Too many attempts. Your account is blocked.,,,,missing,missing,missing,fub-translation-queue,to-translate,Source à traduire ; cible vide. Type: erreur
 Type d'opération,Operation type,Suus gollal,Nsɔm á esama,Epepe a eɓolo,candidate,candidate,candidate,site-officiel:SO-011;pack-fub;pack-ewo;pack-dua,human,message site; statut source en_cours
+Télécharger le relevé,Download the statement,,,,missing,missing,missing,fub-translation-queue,to-translate,Source à traduire ; cible vide. Type: phrase
+Télécharger le reçu,Download receipt,,,,missing,missing,missing,fub-translation-queue,to-translate,Source à traduire ; cible vide. Type: action
 Téléphone,Phone,Cinndel,Télafon,Telefon,candidate,candidate,candidate,site-officiel:SO-031;pack-fub;pack-ewo;pack-dua,human,message site; statut source en_cours
+Téléphone perdu,Lost phone,,,,missing,missing,missing,fub-translation-queue,to-translate,Source à traduire ; cible vide. Type: securite
+Un code vous a été envoyé,A code has been sent to you,,,,missing,missing,missing,fub-translation-queue,to-translate,Source à traduire ; cible vide. Type: phrase
+Un reçu vous a été envoyé,A receipt has been sent to you,,,,missing,missing,missing,fub-translation-queue,to-translate,Source à traduire ; cible vide. Type: phrase
 Une erreur est survenue,An error occurred,Fenaande waɗii,Eboŋle é bɔ́ya,Wuma eɓanɛ̂,candidate,candidate,candidate,site-officiel:SO-044;pack-fub;pack-ewo;pack-dua,human,message site; statut source en_cours
+Une erreur est survenue. Réessayez plus tard.,An error occurred. Try again later.,,,,missing,missing,missing,fub-translation-queue,to-translate,Source à traduire ; cible vide. Type: erreur
+Usurpation d'identité,Identity theft,,,,missing,missing,missing,fub-translation-queue,to-translate,Source à traduire ; cible vide. Type: securite
+Valider,Validate,,,,missing,missing,missing,fub-translation-queue,to-translate,Source à traduire ; cible vide. Type: action
+Verrouillage automatique,Auto-lock,,,,missing,missing,missing,fub-translation-queue,to-translate,Source à traduire ; cible vide. Type: securite
+verser sur mon épargne,add to my savings,,,,missing,missing,missing,fub-translation-queue,to-translate,Source à traduire ; cible vide. Type: credit
+Veuillez patienter,Please wait,,,,missing,missing,missing,fub-translation-queue,to-translate,Source à traduire ; cible vide. Type: phrase
 Veuillez renseigner le nom et le numéro du bénéficiaire.,Please provide the beneficiary name and phone number.,Mawnu innde e limre keɓoowo.,Və́ ezóŋ á nɔ́mbələ á mòd á nnyɔ́ŋ.,Londe dina na nombara a moto nu mányɔ̀ŋɔ̀.,candidate,candidate,candidate,site-officiel:SO-066;pack-fub;pack-ewo;pack-dua,human,message site; statut source en_cours
+Veuillez réessayer dans quelques minutes.,Please try again in a few minutes.,,,,missing,missing,missing,fub-translation-queue,to-translate,Source à traduire ; cible vide. Type: erreur
 View fees,,Yiy njoɓdi,Də́ŋə́ mákyé,Jeŋe móǹgá,candidate,candidate,candidate,pack-fub;pack-ewo;pack-dua,human,
+virement,wire transfer,,,,missing,missing,missing,fub-translation-queue,to-translate,Source à traduire ; cible vide. Type: banque
+Virement envoyé,Transfer sent,,,,missing,missing,missing,fub-translation-queue,to-translate,Source à traduire ; cible vide. Type: compte
+Virement reçu,Transfer received,,,,missing,missing,missing,fub-translation-queue,to-translate,Source à traduire ; cible vide. Type: compte
+Voir les détails,View details,,,,missing,missing,missing,fub-translation-queue,to-translate,Source à traduire ; cible vide. Type: phrase
+Voir tout,See all,,,,missing,missing,missing,fub-translation-queue,to-translate,Source à traduire ; cible vide. Type: phrase
+Vos données sont protégées,Your data is protected,,,,missing,missing,missing,fub-translation-queue,to-translate,Source à traduire ; cible vide. Type: phrase
+Votre carte a expiré.,Your card has expired.,,,,missing,missing,missing,fub-translation-queue,to-translate,Source à traduire ; cible vide. Type: erreur
 Votre compte,Your account,Asaaku ma,Kɔ́ndó wō,Kompa ɔŋ,candidate,candidate,candidate,site-officiel:SO-002;pack-fub;pack-ewo;pack-dua,human,message site; statut source en_cours
+Votre compte a été activé,Your account has been activated,,,,missing,missing,missing,fub-translation-queue,to-translate,Source à traduire ; cible vide. Type: phrase
 Votre compte a été crédité de [[NUM_0]] FCFA.,,,Kɔ́ndó wō á nnyɔ́ŋya [[NUM_0]] FCFA.,Kompa ɔŋ e nyóŋɛ̂ [[NUM_0]] FCFA.,missing,candidate,candidate,pack-ewo;pack-dua,human,
+Votre compte a été créé,Your account has been created,,,,missing,missing,missing,fub-translation-queue,to-translate,Source à traduire ; cible vide. Type: phrase
 Votre compte a été débité de [[NUM_0]] FCFA.,,,Kɔ́ndó wō á kúsíya [[NUM_0]] FCFA.,Kompa ɔŋ e kusâ [[NUM_0]] FCFA.,missing,candidate,candidate,pack-ewo;pack-dua,human,
+Votre compte a été désactivé,Your account has been deactivated,,,,missing,missing,missing,fub-translation-queue,to-translate,Source à traduire ; cible vide. Type: phrase
+Votre compte est bloqué,Your account is blocked,,,,missing,missing,missing,fub-translation-queue,to-translate,Source à traduire ; cible vide. Type: phrase
+Votre crédit a été accordé,Your credit has been approved,,,,missing,missing,missing,fub-translation-queue,to-translate,Source à traduire ; cible vide. Type: phrase
+Votre crédit a été refusé,Your credit has been declined,,,,missing,missing,missing,fub-translation-queue,to-translate,Source à traduire ; cible vide. Type: phrase
+Votre demande a été envoyée,Your request has been sent,,,,missing,missing,missing,fub-translation-queue,to-translate,Source à traduire ; cible vide. Type: phrase
+Votre demande est en cours d'examen,Your request is being reviewed,,,,missing,missing,missing,fub-translation-queue,to-translate,Source à traduire ; cible vide. Type: phrase
+Votre demande n'a pas pu être traitée.,Your request could not be processed.,,,,missing,missing,missing,fub-translation-queue,to-translate,Source à traduire ; cible vide. Type: erreur
+Votre dépôt a été effectué,Your deposit was made,,,,missing,missing,missing,fub-translation-queue,to-translate,Source à traduire ; cible vide. Type: phrase
+Votre nouveau solde est de [[NUM_0]] FCFA,Your new balance is [[NUM_0]] FCFA,,,,missing,missing,missing,fub-translation-queue,to-translate,Source à traduire ; cible vide. Type: phrase
+Votre paiement a été effectué,Your payment was made,,,,missing,missing,missing,fub-translation-queue,to-translate,Source à traduire ; cible vide. Type: phrase
+Votre paiement est en attente,Your payment is pending,,,,missing,missing,missing,fub-translation-queue,to-translate,Source à traduire ; cible vide. Type: phrase
+Votre prochaine échéance est le [[NUM_0]],Your next due date is [[NUM_0]],,,,missing,missing,missing,fub-translation-queue,to-translate,Source à traduire ; cible vide. Type: phrase
+Votre remboursement a été reçu,Your repayment has been received,,,,missing,missing,missing,fub-translation-queue,to-translate,Source à traduire ; cible vide. Type: phrase
+Votre retrait a été effectué,Your withdrawal was made,,,,missing,missing,missing,fub-translation-queue,to-translate,Source à traduire ; cible vide. Type: phrase
+Votre solde disponible est de [[NUM_0]] FCFA,Your available balance is [[NUM_0]] FCFA,,,,missing,missing,missing,fub-translation-queue,to-translate,Source à traduire ; cible vide. Type: phrase
+Votre solde est trop faible.,Your balance is too low.,,,,missing,missing,missing,fub-translation-queue,to-translate,Source à traduire ; cible vide. Type: erreur
+Votre transfert a été envoyé,Your transfer has been sent,,,,missing,missing,missing,fub-translation-queue,to-translate,Source à traduire ; cible vide. Type: phrase
 Votre transfert a été envoyé avec succès.,Your transfer has been sent successfully.,Nawgol ma nelaama e jam.,Nkus wō á lómya ne adzáŋ.,Lómò mɔ̀nì ɔŋ e loméyɛ̂ na ɓwám.,candidate,candidate,candidate,site-officiel:SO-038;pack-fub;pack-ewo;pack-dua,human,message site; statut source en_cours
+Votre transfert est en cours,Your transfer is in progress,,,,missing,missing,missing,fub-translation-queue,to-translate,Source à traduire ; cible vide. Type: phrase
+Voulez-vous confirmer cette opération ?,Do you want to confirm this operation?,,,,missing,missing,missing,fub-translation-queue,to-translate,Source à traduire ; cible vide. Type: phrase
+Voulez-vous vraiment annuler ?,Do you really want to cancel?,,,,missing,missing,missing,fub-translation-queue,to-translate,Source à traduire ; cible vide. Type: phrase
+Voulez-vous vraiment quitter ?,Do you really want to leave?,,,,missing,missing,missing,fub-translation-queue,to-translate,Source à traduire ; cible vide. Type: phrase
+Vous allez envoyer [[NUM_0]] FCFA,You are about to send [[NUM_0]] FCFA,,,,missing,missing,missing,fub-translation-queue,to-translate,Source à traduire ; cible vide. Type: phrase
+Vous avez déjà effectué cette opération.,You have already made this operation.,,,,missing,missing,missing,fub-translation-queue,to-translate,Source à traduire ; cible vide. Type: erreur
+Vous avez dépassé le plafond journalier.,You have exceeded the daily limit.,,,,missing,missing,missing,fub-translation-queue,to-translate,Source à traduire ; cible vide. Type: erreur
+Vous avez dépassé le plafond mensuel.,You have exceeded the monthly limit.,,,,missing,missing,missing,fub-translation-queue,to-translate,Source à traduire ; cible vide. Type: erreur
+Vous avez envoyé [[NUM_0]] FCFA à [[NUM_1]],You sent [[NUM_0]] FCFA to [[NUM_1]],,,,missing,missing,missing,fub-translation-queue,to-translate,Source à traduire ; cible vide. Type: phrase
+Vous avez reçu [[NUM_0]] FCFA de la part de [[NUM_1]],You received [[NUM_0]] FCFA from [[NUM_1]],,,,missing,missing,missing,fub-translation-queue,to-translate,Source à traduire ; cible vide. Type: phrase
 Vous devez confirmer les informations avant de valider le transfert.,You must confirm the details before validating the transfer.,A foti teeŋtude kabaaru ko adii yoɓgol.,Wa yian sínyí bíə́mə́ ósu na ó kát nkus.,O yiane adise bina oboso na o kusa soma.,candidate,candidate,candidate,site-officiel:SO-070;pack-fub;pack-ewo;pack-dua,human,message site; statut source en_cours
+Vous n'avez pas les droits nécessaires.,You do not have the required permissions.,,,,missing,missing,missing,fub-translation-queue,to-translate,Source à traduire ; cible vide. Type: erreur
+Vous n'avez pas reçu le code ?,Didn't receive the code?,,,,missing,missing,missing,fub-translation-queue,to-translate,Source à traduire ; cible vide. Type: phrase
+Vous ne pouvez pas vous envoyer de l'argent à vous-même.,You cannot send money to yourself.,,,,missing,missing,missing,fub-translation-queue,to-translate,Source à traduire ; cible vide. Type: erreur
 Vous pouvez annuler la transaction avant confirmation.,,,Wa yálá súsí esama ósu na ó sínyí.,O ne na o ɓumse soma oboso na adise.,missing,candidate,candidate,pack-ewo;pack-dua,human,
 vérification d'identité,,teeŋtingol enndam,yéŋélí eyóŋ,jeele la dina na edube,candidate,candidate,candidate,pack-fub;pack-ewo;pack-dua,human,
+Vérification en deux étapes,Two-step verification,,,,missing,missing,missing,fub-translation-queue,to-translate,Source à traduire ; cible vide. Type: securite
+Vérifier,Verify,,,,missing,missing,missing,fub-translation-queue,to-translate,Source à traduire ; cible vide. Type: action
+Vérifiez le montant et les frais,Check the amount and fees,,,,missing,missing,missing,fub-translation-queue,to-translate,Source à traduire ; cible vide. Type: phrase
+Vérifiez le nom avant de confirmer.,Verify the name before confirming.,,,,missing,missing,missing,fub-translation-queue,to-translate,Source à traduire ; cible vide. Type: erreur
 Vérifiez le nom du bénéficiaire avant de confirmer.,,,Yéŋə́ ezóŋ á mòd á nnyɔ́ŋ ósu na ó sínyí.,Jeele dina la moto nu mányɔ̀ŋɔ̀ oboso na o adise.,missing,candidate,candidate,pack-ewo;pack-dua,human,
+Vérifiez le nom et le numéro du bénéficiaire,Check the beneficiary's name and number,,,,missing,missing,missing,fub-translation-queue,to-translate,Source à traduire ; cible vide. Type: phrase
+Vérifiez le numéro avant de continuer,Check the number before continuing,,,,missing,missing,missing,fub-translation-queue,to-translate,Source à traduire ; cible vide. Type: phrase
 Vérifiez les informations avant de confirmer le transfert.,Check the details before confirming the transfer.,Teeŋtu kabaaru ko adii yoɓgol nawgol.,Yéŋə́ bíə́mə́ ósu na ó sínyí nkus.,Jeele bina oboso na o adise lómò mɔ̀nì.,candidate,candidate,candidate,site-officiel:SO-028;pack-fub;pack-ewo;pack-dua,human,message site; statut source en_cours
 Vérifiez toujours le nom et le numéro du bénéficiaire avant de confirmer un transfert.,Always verify the beneficiary name and number before confirming a transfer.,Teeŋtu innde e limre keɓoowo ko adii yoɓgol fof.,Yéŋə́ ezóŋ á nɔ́mbələ á mòd á nnyɔ́ŋ ósu na ó sínyí nkus.,Jeele pɔ́n dina na nombara a moto nu mányɔ̀ŋɔ̀ oboso na o adise.,candidate,candidate,candidate,site-officiel:SO-047;pack-fub;pack-ewo;pack-dua,human,message site; statut source en_cours
+Vérifiez votre connexion internet.,Check your internet connection.,,,,missing,missing,missing,fub-translation-queue,to-translate,Source à traduire ; cible vide. Type: erreur
 You must confirm the details before validating the transfer.,,A foti teeŋtude kabaaru ko adii yoɓgol.,Wa yian sínyí bíə́mə́ ósu na ó kát nkus.,O yiane adise bina oboso na o kusa soma.,candidate,candidate,candidate,pack-fub;pack-ewo;pack-dua,human,
 Your account,,Asaaku ma,Kɔ́ndó wō,Kompa ɔŋ,candidate,candidate,candidate,pack-fub;pack-ewo;pack-dua,human,
 Your transfer has been sent successfully.,,Nawgol ma nelaama e jam.,Nkus wō á lómya ne adzáŋ.,Lómò mɔ̀nì ɔŋ e loméyɛ̂ na ɓwám.,candidate,candidate,candidate,pack-fub;pack-ewo;pack-dua,human,
+À bientôt,See you soon,,,,missing,missing,missing,fub-translation-queue,to-translate,Source à traduire ; cible vide. Type: phrase
 échec,,bonere,éboŋ,boɓi,candidate,candidate,candidate,pack-fub;pack-ewo;pack-dua,human,
+Échec de la vérification d'identité.,Identity verification failed.,,,,missing,missing,missing,fub-translation-queue,to-translate,Source à traduire ; cible vide. Type: erreur
+Échouer,Fail,,,,missing,missing,missing,fub-translation-queue,to-translate,Source à traduire ; cible vide. Type: action
+Échoué,Failed,,,,missing,missing,missing,fub-translation-queue,to-translate,Source à traduire ; cible vide. Type: compte
 échéance,due date,nyalnde yoɓgol,eyele,búnyá ɓwá timbise,candidate,candidate,candidate,pack-fub;pack-ewo;pack-dua;lexique-extra,human,À traduire par un natif ; ne pas inventer.
+échéancier,repayment schedule,,,,missing,missing,missing,fub-translation-queue,to-translate,Source à traduire ; cible vide. Type: credit
 épargne,savings,,,,missing,missing,missing,lexique-extra,,À traduire par un natif ; ne pas inventer.
 Épargne automatique,,ko mooftata e laawol,kɔ́ndó á adzóŋó,bálà mɔ̀nì a ɓuɓéɓuɓé,candidate,candidate,candidate,pack-fub;pack-ewo;pack-dua,human,
+Épargner,Save money,,,,missing,missing,missing,fub-translation-queue,to-translate,Source à traduire ; cible vide. Type: action
 −[[NUM_0]] FCFA,,−[[NUM_0]] FCFA,,,candidate,missing,missing,pack-fub,human,
