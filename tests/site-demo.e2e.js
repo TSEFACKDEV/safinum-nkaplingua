@@ -172,12 +172,9 @@ async function main() {
     `réseau inattendu : ${background.calls.join(", ")}`
   );
 
-  // Une seule mention discrète, pas une pastille par phrase.
+  // En mode démo, aucune pastille ni mention technique visible.
   const notice = window.document.getElementById("nk-notice-host");
-  assert(
-    notice && notice.shadowRoot.textContent.includes("démonstration"),
-    "mention unique de démonstration absente"
-  );
+  assert(!notice, "notice de démonstration encore visible");
   assert(
     !read("extension/content.js").includes('content: "brouillon humain"') &&
       !read("extension/content.js").includes('content: "brouillon éditorial"'),

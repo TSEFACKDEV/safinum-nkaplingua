@@ -1,0 +1,417 @@
+﻿source,source_en,type,target,target_variante,confiance,gloss,construction,note
+Envoyer,Send,action,Nelu,,probable,envoie,impératif,"Forme tirée de 'Nelu kaalis' (ligne 58 du pack), non validée. Infinitif non connu avec certitude."
+Recevoir,Receive,action,Keɓu,,incertain,reçois / obtiens,impératif par analogie,Racine keɓ- vue dans 'keɓoowo' ; recevoir vs obtenir à vérifier.
+Confirmer,Confirm,action,Teeŋtu,,probable,confirme,impératif,"Même forme que Vérifier dans le pack (lignes 47, 109) : ambiguïté signalée."
+Annuler,Cancel,action,INCONNU,,inconnu,,,INCONNU : aucune base fiable. Point de départ possible : ligne 34 (annulation).
+Valider,Validate,action,INCONNU,,inconnu,,,INCONNU : aucune base fiable. Aucun terme que je puisse proposer sans l'inventer.
+Refuser,Decline,action,INCONNU,,inconnu,,,INCONNU : aucune base fiable. Aucun terme que je puisse proposer sans l'inventer.
+Accepter,Accept,action,INCONNU,,inconnu,,,INCONNU : aucune base fiable. Aucun terme que je puisse proposer sans l'inventer.
+Payer,Pay,action,Yoɓu,,incertain,paie,impératif par analogie avec yoɓgol,Racine yoɓ- du pack ; forme impérative construite.
+Retirer,Withdraw,action,INCONNU,,inconnu,,,INCONNU : aucune base fiable. Point de départ possible : ligne 15 (retrait).
+Déposer,Deposit,action,INCONNU,,inconnu,,,INCONNU : aucune base fiable. Point de départ possible : ligne 14 (dépôt).
+Transférer,Transfer,action,INCONNU,,inconnu,,,INCONNU : aucune base fiable. Point de départ possible : ligne 58 (Effectuer un transfert).
+Vérifier,Verify,action,Teeŋtu,,incertain,vérifie,impératif,Identique à Confirmer : le panel doit dire s'il faut les distinguer.
+Fermer le compte,Close the account,action,INCONNU,,inconnu,,,INCONNU : aucune base fiable. Aucun terme que je puisse proposer sans l'inventer.
+Ouvrir,Open,action,INCONNU,,inconnu,,,INCONNU : aucune base fiable. Point de départ possible : ligne 123 (Fermer).
+Ouvrir un compte,Open an account,action,INCONNU,,inconnu,,,INCONNU : aucune base fiable. Aucun terme que je puisse proposer sans l'inventer.
+Réessayer,Retry,action,Enndu kadi,,incertain,(essaie) encore,impératif + adverbe,Ligne 168 du pack ; sens exact de 'enndu' à confirmer.
+Choisir,Choose,action,INCONNU,,inconnu,,,INCONNU : aucune base fiable. Aucun terme que je puisse proposer sans l'inventer.
+Saisir,Enter,action,Lonndu,,incertain,renseigne,impératif,Ligne 84 du pack (Lonndu kabaaru) ; 'saisir' vs 'renseigner' à vérifier.
+Supprimer,Delete,action,INCONNU,,inconnu,,,INCONNU : aucune base fiable. Aucun terme que je puisse proposer sans l'inventer.
+Enregistrer,Save,action,INCONNU,,inconnu,,,INCONNU : aucune base fiable. Aucun terme que je puisse proposer sans l'inventer.
+Partager,Share,action,INCONNU,,inconnu,,,INCONNU : aucune base fiable. Aucun terme que je puisse proposer sans l'inventer.
+Imprimer,Print,action,INCONNU,,inconnu,,,INCONNU : aucune base fiable. Aucun terme que je puisse proposer sans l'inventer.
+Recharger,Top up,action,INCONNU,,inconnu,,,INCONNU : aucune base fiable. Aucun terme que je puisse proposer sans l'inventer.
+Bloquer,Block,action,INCONNU,,inconnu,,,INCONNU : aucune base fiable. Aucun terme que je puisse proposer sans l'inventer.
+Débloquer,Unblock,action,INCONNU,,inconnu,,,INCONNU : aucune base fiable. Aucun terme que je puisse proposer sans l'inventer.
+Activer,Activate,action,INCONNU,,inconnu,,,INCONNU : aucune base fiable. Aucun terme que je puisse proposer sans l'inventer.
+Désactiver,Deactivate,action,INCONNU,,inconnu,,,INCONNU : aucune base fiable. Aucun terme que je puisse proposer sans l'inventer.
+Restaurer,Restore,action,INCONNU,,inconnu,,,INCONNU : aucune base fiable. Aucun terme que je puisse proposer sans l'inventer.
+Rechercher,Search,action,INCONNU,,inconnu,,,INCONNU : aucune base fiable. Aucun terme que je puisse proposer sans l'inventer.
+Filtrer,Filter,action,INCONNU,,inconnu,,,INCONNU : aucune base fiable. Aucun terme que je puisse proposer sans l'inventer.
+Trier,Sort,action,INCONNU,,inconnu,,,INCONNU : aucune base fiable. Aucun terme que je puisse proposer sans l'inventer.
+Télécharger le reçu,Download receipt,action,INCONNU,,inconnu,,,INCONNU : aucune base fiable. Point de départ possible : ligne 31 (reçu).
+Actualiser,Refresh,action,INCONNU,,inconnu,,,INCONNU : aucune base fiable. Aucun terme que je puisse proposer sans l'inventer.
+Copier,Copy,action,INCONNU,,inconnu,,,INCONNU : aucune base fiable. Aucun terme que je puisse proposer sans l'inventer.
+Suivant,Next,action,INCONNU,,inconnu,,,INCONNU : aucune base fiable. Aucun terme que je puisse proposer sans l'inventer.
+Précédent,Previous,action,INCONNU,,inconnu,,,INCONNU : aucune base fiable. Aucun terme que je puisse proposer sans l'inventer.
+Terminer,Finish,action,INCONNU,,inconnu,,,INCONNU : aucune base fiable. Aucun terme que je puisse proposer sans l'inventer.
+Commencer,Start,action,INCONNU,,inconnu,,,INCONNU : aucune base fiable. Aucun terme que je puisse proposer sans l'inventer.
+Se connecter,Log in,action,INCONNU,,inconnu,,,INCONNU : aucune base fiable. Aucun terme que je puisse proposer sans l'inventer.
+Se déconnecter,Log out,action,INCONNU,,inconnu,,,INCONNU : aucune base fiable. Aucun terme que je puisse proposer sans l'inventer.
+S'inscrire,Sign up,action,INCONNU,,inconnu,,,INCONNU : aucune base fiable. Aucun terme que je puisse proposer sans l'inventer.
+Ajouter un bénéficiaire,Add a beneficiary,action,INCONNU,,inconnu,,,INCONNU : aucune base fiable. Point de départ possible : ligne 5 (Bénéficiaire).
+Supprimer un bénéficiaire,Remove a beneficiary,action,INCONNU,,inconnu,,,INCONNU : aucune base fiable. Aucun terme que je puisse proposer sans l'inventer.
+Demander un code,Request a code,action,INCONNU,,inconnu,,,INCONNU : aucune base fiable. Aucun terme que je puisse proposer sans l'inventer.
+Renvoyer le code,Resend the code,action,INCONNU,,inconnu,,,INCONNU : aucune base fiable. Aucun terme que je puisse proposer sans l'inventer.
+Réinitialiser,Reset,action,INCONNU,,inconnu,,,INCONNU : aucune base fiable. Aucun terme que je puisse proposer sans l'inventer.
+Changer le code PIN,Change PIN,action,INCONNU,,inconnu,,,INCONNU : aucune base fiable. Point de départ possible : ligne 6 (code PIN).
+Créditer,Credit,action,INCONNU,,inconnu,,,INCONNU : aucune base fiable. Aucun terme que je puisse proposer sans l'inventer.
+Débiter,Debit,action,INCONNU,,inconnu,,,INCONNU : aucune base fiable. Aucun terme que je puisse proposer sans l'inventer.
+Rembourser,Repay,action,INCONNU,,inconnu,,,INCONNU : aucune base fiable. Point de départ possible : ligne 21 (remboursement).
+Emprunter,Borrow,action,INCONNU,,inconnu,,,INCONNU : aucune base fiable. Aucun terme que je puisse proposer sans l'inventer.
+Épargner,Save money,action,INCONNU,,inconnu,,,INCONNU : aucune base fiable. Point de départ possible : ligne 12 (Épargne automatique).
+Consulter,View,action,INCONNU,,inconnu,,,INCONNU : aucune base fiable. Aucun terme que je puisse proposer sans l'inventer.
+Exporter,Export,action,INCONNU,,inconnu,,,INCONNU : aucune base fiable. Aucun terme que je puisse proposer sans l'inventer.
+Contacter le service client,Contact customer service,action,INCONNU,,inconnu,,,INCONNU : aucune base fiable. Point de départ possible : ligne 19 (service client).
+Signaler un problème,Report a problem,action,INCONNU,,inconnu,,,INCONNU : aucune base fiable. Aucun terme que je puisse proposer sans l'inventer.
+Autoriser,Allow,action,INCONNU,,inconnu,,,INCONNU : aucune base fiable. Aucun terme que je puisse proposer sans l'inventer.
+Rejeter,Reject,action,INCONNU,,inconnu,,,INCONNU : aucune base fiable. Aucun terme que je puisse proposer sans l'inventer.
+Reprendre,Resume,action,INCONNU,,inconnu,,,INCONNU : aucune base fiable. Aucun terme que je puisse proposer sans l'inventer.
+Suspendre,Suspend,action,INCONNU,,inconnu,,,INCONNU : aucune base fiable. Aucun terme que je puisse proposer sans l'inventer.
+Planifier,Schedule,action,INCONNU,,inconnu,,,INCONNU : aucune base fiable. Aucun terme que je puisse proposer sans l'inventer.
+Passer,Skip,action,INCONNU,,inconnu,,,INCONNU : aucune base fiable. Aucun terme que je puisse proposer sans l'inventer.
+Réussir,Succeed,action,INCONNU,,inconnu,,,INCONNU : aucune base fiable. Aucun terme que je puisse proposer sans l'inventer.
+Échouer,Fail,action,INCONNU,,inconnu,,,INCONNU : aucune base fiable. Aucun terme que je puisse proposer sans l'inventer.
+Solde bloqué,Blocked balance,compte,INCONNU,,inconnu,,,INCONNU : aucune base fiable. Point de départ possible : ligne 40 (solde).
+Solde actuel,Current balance,compte,INCONNU,,inconnu,,,INCONNU : aucune base fiable. Point de départ possible : ligne 40 (solde).
+Solde du compte,Account balance,compte,INCONNU,,inconnu,,,INCONNU : aucune base fiable. Point de départ possible : ligne 40 (solde).
+Titulaire du compte,Account holder,compte,INCONNU,,inconnu,,,INCONNU : aucune base fiable. Aucun terme que je puisse proposer sans l'inventer.
+Expéditeur,Sender,compte,INCONNU,,inconnu,,,INCONNU : aucune base fiable. Point de départ possible : ligne 41 (destinataire).
+Montant reçu,Amount received,compte,INCONNU,,inconnu,,,INCONNU : aucune base fiable. Point de départ possible : ligne 39 (Montant).
+Montant envoyé,Amount sent,compte,INCONNU,,inconnu,,,INCONNU : aucune base fiable. Point de départ possible : ligne 39 (Montant).
+Montant débité,Amount debited,compte,INCONNU,,inconnu,,,INCONNU : aucune base fiable. Point de départ possible : ligne 45 (Total débité).
+Montant crédité,Amount credited,compte,INCONNU,,inconnu,,,INCONNU : aucune base fiable. Aucun terme que je puisse proposer sans l'inventer.
+Montant minimum,Minimum amount,compte,INCONNU,,inconnu,,,INCONNU : aucune base fiable. Point de départ possible : ligne 39 (Montant).
+Montant maximum,Maximum amount,compte,INCONNU,,inconnu,,,INCONNU : aucune base fiable. Aucun terme que je puisse proposer sans l'inventer.
+Frais d'envoi,Sending fees,compte,INCONNU,,inconnu,,,INCONNU : aucune base fiable. Point de départ possible : ligne 3 (Frais de transfert).
+Frais de retrait,Withdrawal fees,compte,INCONNU,,inconnu,,,INCONNU : aucune base fiable. Point de départ possible : ligne 22 (Frais).
+Frais de dépôt,Deposit fees,compte,INCONNU,,inconnu,,,INCONNU : aucune base fiable. Point de départ possible : ligne 22 (Frais).
+Frais de service,Service fees,compte,INCONNU,,inconnu,,,INCONNU : aucune base fiable. Point de départ possible : ligne 22 (Frais).
+Frais mensuels,Monthly fees,compte,INCONNU,,inconnu,,,INCONNU : aucune base fiable. Point de départ possible : ligne 22 (Frais).
+Taxes,Taxes,compte,INCONNU,,inconnu,,,INCONNU : aucune base fiable. Aucun terme que je puisse proposer sans l'inventer.
+Numéro de transaction,Transaction number,compte,INCONNU,,inconnu,,,INCONNU : aucune base fiable. Point de départ possible : ligne 30 (Référence).
+Historique,History,compte,INCONNU,,inconnu,,,INCONNU : aucune base fiable. Aucun terme que je puisse proposer sans l'inventer.
+Historique des transactions,Transaction history,compte,INCONNU,,inconnu,,,INCONNU : aucune base fiable. Point de départ possible : ligne 62 (Transactions récentes).
+Relevé de compte,Account statement,compte,INCONNU,,inconnu,,,INCONNU : aucune base fiable. Aucun terme que je puisse proposer sans l'inventer.
+Relevé mensuel,Monthly statement,compte,INCONNU,,inconnu,,,INCONNU : aucune base fiable. Aucun terme que je puisse proposer sans l'inventer.
+Date,Date,compte,Nyalnde,,incertain,jour,nom,Racine vue dans 'nyalnde yoɓgol' (ligne 24).
+Heure,Time,compte,INCONNU,,inconnu,,,INCONNU : aucune base fiable. Aucun terme que je puisse proposer sans l'inventer.
+Date de l'opération,Operation date,compte,INCONNU,,inconnu,,,INCONNU : aucune base fiable. Point de départ possible : ligne 105 (Opération).
+En attente,Pending,compte,INCONNU,,inconnu,,,INCONNU : aucune base fiable. Aucun terme que je puisse proposer sans l'inventer.
+Réussi,Successful,compte,Nasara,,incertain,succès,nom/adjectif,Ligne 117 du pack ('Succès').
+Échoué,Failed,compte,INCONNU,,inconnu,,,INCONNU : aucune base fiable. Point de départ possible : ligne 33 (échec).
+Annulé,Cancelled,compte,INCONNU,,inconnu,,,INCONNU : aucune base fiable. Point de départ possible : ligne 34 (annulation).
+Remboursé,Refunded,compte,INCONNU,,inconnu,,,INCONNU : aucune base fiable. Point de départ possible : ligne 21 (remboursement).
+Débit,Debit,compte,INCONNU,,inconnu,,,INCONNU : aucune base fiable. Aucun terme que je puisse proposer sans l'inventer.
+Crédit,Credit,compte,INCONNU,,inconnu,,,INCONNU : aucune base fiable. Aucun terme que je puisse proposer sans l'inventer.
+Entrée d'argent,Money in,compte,INCONNU,,inconnu,,,INCONNU : aucune base fiable. Aucun terme que je puisse proposer sans l'inventer.
+Sortie d'argent,Money out,compte,INCONNU,,inconnu,,,INCONNU : aucune base fiable. Aucun terme que je puisse proposer sans l'inventer.
+Dépenses,Expenses,compte,INCONNU,,inconnu,,,INCONNU : aucune base fiable. Aucun terme que je puisse proposer sans l'inventer.
+Revenus,Income,compte,INCONNU,,inconnu,,,INCONNU : aucune base fiable. Aucun terme que je puisse proposer sans l'inventer.
+Virement reçu,Transfer received,compte,INCONNU,,inconnu,,,INCONNU : aucune base fiable. Point de départ possible : ligne 154 (Transfert reçu).
+Virement envoyé,Transfer sent,compte,INCONNU,,inconnu,,,INCONNU : aucune base fiable. Aucun terme que je puisse proposer sans l'inventer.
+Paiement,Payment,compte,INCONNU,,inconnu,,,INCONNU : aucune base fiable. Aucun terme que je puisse proposer sans l'inventer.
+Paiement de facture,Bill payment,compte,INCONNU,,inconnu,,,INCONNU : aucune base fiable. Point de départ possible : ligne 156 (Facture électricité).
+Facture d'eau,Water bill,compte,INCONNU,,inconnu,,,INCONNU : aucune base fiable. Point de départ possible : ligne 156 (Facture électricité).
+Facture d'électricité,Electricity bill,compte,INCONNU,,inconnu,,,INCONNU : aucune base fiable. Point de départ possible : ligne 156 (Facture électricité).
+Recharge téléphonique,Airtime top-up,compte,INCONNU,,inconnu,,,INCONNU : aucune base fiable. Aucun terme que je puisse proposer sans l'inventer.
+Forfait internet,Data bundle,compte,INCONNU,,inconnu,,,INCONNU : aucune base fiable. Aucun terme que je puisse proposer sans l'inventer.
+Retrait d'espèces,Cash withdrawal,compte,INCONNU,,inconnu,,,INCONNU : aucune base fiable. Point de départ possible : ligne 15 (retrait).
+Dépôt d'espèces,Cash deposit,compte,INCONNU,,inconnu,,,INCONNU : aucune base fiable. Point de départ possible : ligne 14 (dépôt).
+Agent,Agent,compte,INCONNU,,inconnu,,,INCONNU : aucune base fiable. Aucun terme que je puisse proposer sans l'inventer.
+Point de retrait,Withdrawal point,compte,INCONNU,,inconnu,,,INCONNU : aucune base fiable. Aucun terme que je puisse proposer sans l'inventer.
+Code de l'agent,Agent code,compte,INCONNU,,inconnu,,,INCONNU : aucune base fiable. Aucun terme que je puisse proposer sans l'inventer.
+Devise,Currency,compte,INCONNU,,inconnu,,,INCONNU : aucune base fiable. Aucun terme que je puisse proposer sans l'inventer.
+Portefeuille électronique,E-wallet,compte,INCONNU,,inconnu,,,INCONNU : aucune base fiable. Aucun terme que je puisse proposer sans l'inventer.
+Solde du portefeuille,Wallet balance,compte,INCONNU,,inconnu,,,INCONNU : aucune base fiable. Point de départ possible : ligne 40 (solde).
+Opérateur,Operator,compte,INCONNU,,inconnu,,,INCONNU : aucune base fiable. Aucun terme que je puisse proposer sans l'inventer.
+Numéro mobile,Mobile number,compte,INCONNU,,inconnu,,,INCONNU : aucune base fiable. Point de départ possible : ligne 88 (Numéro de téléphone).
+Dernière transaction,Last transaction,compte,INCONNU,,inconnu,,,INCONNU : aucune base fiable. Point de départ possible : ligne 20 (transaction).
+Détails de la transaction,Transaction details,compte,INCONNU,,inconnu,,,INCONNU : aucune base fiable. Point de départ possible : ligne 20 (transaction).
+Message au bénéficiaire,Message to beneficiary,compte,INCONNU,,inconnu,,,INCONNU : aucune base fiable. Point de départ possible : ligne 5 (Bénéficiaire).
+Transfert programmé,Scheduled transfer,compte,INCONNU,,inconnu,,,INCONNU : aucune base fiable. Point de départ possible : ligne 119 (Nouveau transfert).
+Transfert récurrent,Recurring transfer,compte,INCONNU,,inconnu,,,INCONNU : aucune base fiable. Point de départ possible : ligne 119 (Nouveau transfert).
+Transfert international,International transfer,compte,INCONNU,,inconnu,,,INCONNU : aucune base fiable. Point de départ possible : ligne 119 (Nouveau transfert).
+Transfert instantané,Instant transfer,compte,INCONNU,,inconnu,,,INCONNU : aucune base fiable. Point de départ possible : ligne 140 (Transfert instantané et gratuit).
+Ajouter aux favoris,Add to favourites,compte,INCONNU,,inconnu,,,INCONNU : aucune base fiable. Aucun terme que je puisse proposer sans l'inventer.
+Mes bénéficiaires,My beneficiaries,compte,INCONNU,,inconnu,,,INCONNU : aucune base fiable. Point de départ possible : ligne 5 (Bénéficiaire).
+code OTP,OTP code,securite,code OTP,,probable,code OTP,emprunt conservé,Sigle conservé comme 'code PIN' dans le pack.
+code secret,Secret code,securite,INCONNU,,inconnu,,,INCONNU : aucune base fiable. Point de départ possible : ligne 6 (code PIN).
+mot de passe,Password,securite,INCONNU,,inconnu,,,INCONNU : aucune base fiable. Aucun terme que je puisse proposer sans l'inventer.
+nouveau mot de passe,New password,securite,INCONNU,,inconnu,,,INCONNU : aucune base fiable. Aucun terme que je puisse proposer sans l'inventer.
+ancien code PIN,Old PIN,securite,INCONNU,,inconnu,,,INCONNU : aucune base fiable. Point de départ possible : ligne 6 (code PIN).
+Confirmer le code PIN,Confirm PIN,securite,INCONNU,,inconnu,,,INCONNU : aucune base fiable. Point de départ possible : ligne 6 (code PIN).
+Double validation,Two-step approval,securite,INCONNU,,inconnu,,,INCONNU : aucune base fiable. Point de départ possible : ligne 35 (confirmation).
+Authentification,Authentication,securite,INCONNU,,inconnu,,,INCONNU : aucune base fiable. Aucun terme que je puisse proposer sans l'inventer.
+Authentification à deux facteurs,Two-factor authentication,securite,INCONNU,,inconnu,,,INCONNU : aucune base fiable. Aucun terme que je puisse proposer sans l'inventer.
+Empreinte digitale,Fingerprint,securite,INCONNU,,inconnu,,,INCONNU : aucune base fiable. Aucun terme que je puisse proposer sans l'inventer.
+Reconnaissance faciale,Face recognition,securite,INCONNU,,inconnu,,,INCONNU : aucune base fiable. Aucun terme que je puisse proposer sans l'inventer.
+Identifiant,Username,securite,INCONNU,,inconnu,,,INCONNU : aucune base fiable. Aucun terme que je puisse proposer sans l'inventer.
+Fraude,Fraud,securite,INCONNU,,inconnu,,,INCONNU : aucune base fiable. Aucun terme que je puisse proposer sans l'inventer.
+Tentative suspecte,Suspicious attempt,securite,INCONNU,,inconnu,,,INCONNU : aucune base fiable. Aucun terme que je puisse proposer sans l'inventer.
+Activité suspecte,Suspicious activity,securite,INCONNU,,inconnu,,,INCONNU : aucune base fiable. Aucun terme que je puisse proposer sans l'inventer.
+Compte bloqué,Account blocked,securite,INCONNU,,inconnu,,,INCONNU : aucune base fiable. Aucun terme que je puisse proposer sans l'inventer.
+Compte suspendu,Account suspended,securite,INCONNU,,inconnu,,,INCONNU : aucune base fiable. Aucun terme que je puisse proposer sans l'inventer.
+Compte verrouillé,Account locked,securite,INCONNU,,inconnu,,,INCONNU : aucune base fiable. Aucun terme que je puisse proposer sans l'inventer.
+Vérification en deux étapes,Two-step verification,securite,INCONNU,,inconnu,,,INCONNU : aucune base fiable. Point de départ possible : ligne 17 (vérification d'identité).
+KYC,KYC,securite,KYC,,probable,KYC,emprunt conservé,Sigle ; une explication locale serait utile à côté.
+Pièce d'identité valide,Valid ID,securite,INCONNU,,inconnu,,,INCONNU : aucune base fiable. Point de départ possible : ligne 18 (pièce d'identité).
+Justificatif de domicile,Proof of address,securite,INCONNU,,inconnu,,,INCONNU : aucune base fiable. Aucun terme que je puisse proposer sans l'inventer.
+Photo d'identité,ID photo,securite,INCONNU,,inconnu,,,INCONNU : aucune base fiable. Point de départ possible : ligne 18 (pièce d'identité).
+Session expirée,Session expired,securite,INCONNU,,inconnu,,,INCONNU : aucune base fiable. Aucun terme que je puisse proposer sans l'inventer.
+Appareil inconnu,Unknown device,securite,INCONNU,,inconnu,,,INCONNU : aucune base fiable. Aucun terme que je puisse proposer sans l'inventer.
+Nouvel appareil,New device,securite,INCONNU,,inconnu,,,INCONNU : aucune base fiable. Aucun terme que je puisse proposer sans l'inventer.
+Appareil de confiance,Trusted device,securite,INCONNU,,inconnu,,,INCONNU : aucune base fiable. Aucun terme que je puisse proposer sans l'inventer.
+Verrouillage automatique,Auto-lock,securite,INCONNU,,inconnu,,,INCONNU : aucune base fiable. Aucun terme que je puisse proposer sans l'inventer.
+Nombre maximum de tentatives,Maximum attempts,securite,INCONNU,,inconnu,,,INCONNU : aucune base fiable. Aucun terme que je puisse proposer sans l'inventer.
+Code expiré,Code expired,securite,INCONNU,,inconnu,,,INCONNU : aucune base fiable. Point de départ possible : ligne 29 (code).
+Code valide,Code valid,securite,INCONNU,,inconnu,,,INCONNU : aucune base fiable. Aucun terme que je puisse proposer sans l'inventer.
+Code incorrect,Incorrect code,securite,INCONNU,,inconnu,,,INCONNU : aucune base fiable. Point de départ possible : ligne 29 (code).
+Code envoyé par SMS,Code sent by SMS,securite,INCONNU,,inconnu,,,INCONNU : aucune base fiable. Point de départ possible : ligne 29 (code).
+Hameçonnage,Phishing,securite,INCONNU,,inconnu,,,INCONNU : aucune base fiable. Aucun terme que je puisse proposer sans l'inventer.
+Arnaque,Scam,securite,INCONNU,,inconnu,,,INCONNU : aucune base fiable. Aucun terme que je puisse proposer sans l'inventer.
+Usurpation d'identité,Identity theft,securite,INCONNU,,inconnu,,,INCONNU : aucune base fiable. Aucun terme que je puisse proposer sans l'inventer.
+Signaler une fraude,Report fraud,securite,INCONNU,,inconnu,,,INCONNU : aucune base fiable. Aucun terme que je puisse proposer sans l'inventer.
+Bloquer ma carte,Block my card,securite,INCONNU,,inconnu,,,INCONNU : aucune base fiable. Aucun terme que je puisse proposer sans l'inventer.
+Téléphone perdu,Lost phone,securite,INCONNU,,inconnu,,,INCONNU : aucune base fiable. Aucun terme que je puisse proposer sans l'inventer.
+Changer de numéro,Change number,securite,INCONNU,,inconnu,,,INCONNU : aucune base fiable. Aucun terme que je puisse proposer sans l'inventer.
+Politique de confidentialité,Privacy policy,securite,INCONNU,,inconnu,,,INCONNU : aucune base fiable. Aucun terme que je puisse proposer sans l'inventer.
+Conditions d'utilisation,Terms of use,securite,INCONNU,,inconnu,,,INCONNU : aucune base fiable. Aucun terme que je puisse proposer sans l'inventer.
+Consentement,Consent,securite,INCONNU,,inconnu,,,INCONNU : aucune base fiable. Aucun terme que je puisse proposer sans l'inventer.
+Données personnelles,Personal data,securite,INCONNU,,inconnu,,,INCONNU : aucune base fiable. Aucun terme que je puisse proposer sans l'inventer.
+Protection des données,Data protection,securite,INCONNU,,inconnu,,,INCONNU : aucune base fiable. Aucun terme que je puisse proposer sans l'inventer.
+Connexion chiffrée,Encrypted connection,securite,INCONNU,,inconnu,,,INCONNU : aucune base fiable. Point de départ possible : ligne 131 (Connexion sécurisée).
+Se souvenir de moi,Remember me,securite,INCONNU,,inconnu,,,INCONNU : aucune base fiable. Aucun terme que je puisse proposer sans l'inventer.
+Mot de passe oublié,Forgot password,securite,INCONNU,,inconnu,,,INCONNU : aucune base fiable. Aucun terme que je puisse proposer sans l'inventer.
+Code PIN oublié,Forgot PIN,securite,INCONNU,,inconnu,,,INCONNU : aucune base fiable. Point de départ possible : ligne 6 (code PIN).
+Appareil autorisé,Authorized device,securite,INCONNU,,inconnu,,,INCONNU : aucune base fiable. Aucun terme que je puisse proposer sans l'inventer.
+Le montant est invalide.,The amount is invalid.,erreur,INCONNU,,inconnu,,,INCONNU : aucune base fiable. Point de départ possible : ligne 39 (Montant).
+Le numéro du bénéficiaire est incorrect.,The beneficiary number is incorrect.,erreur,INCONNU,,inconnu,,,INCONNU : aucune base fiable. Point de départ possible : ligne 5 (Bénéficiaire).
+Solde insuffisant pour cette opération.,Insufficient balance for this operation.,erreur,Jawdindi ina famɗi ngam waɗde ndii gollal.,,incertain,le solde est insuffisant pour faire cette opération,phrase déclarative,Ligne 160 du pack ; sens exact de 'famɗi' à vérifier.
+Ce code a expiré. Demandez un nouveau code.,This code has expired. Request a new code.,erreur,INCONNU,,inconnu,,,INCONNU : aucune base fiable. Aucun terme que je puisse proposer sans l'inventer.
+Le service est momentanément indisponible. Réessayez plus tard.,The service is temporarily unavailable. Try again later.,erreur,INCONNU,,inconnu,,,INCONNU : aucune base fiable. Point de départ possible : ligne 168 (Erreur réseau : le service est temporairement indisponible. Réessayez.).
+Vous avez dépassé le plafond journalier.,You have exceeded the daily limit.,erreur,INCONNU,,inconnu,,,INCONNU : aucune base fiable. Point de départ possible : ligne 25 (plafond).
+Vous avez dépassé le plafond mensuel.,You have exceeded the monthly limit.,erreur,INCONNU,,inconnu,,,INCONNU : aucune base fiable. Aucun terme que je puisse proposer sans l'inventer.
+Ne partagez jamais votre code PIN.,Never share your PIN.,erreur,INCONNU,,inconnu,,,INCONNU : aucune base fiable. Point de départ possible : ligne 6 (code PIN).
+Vérifiez le nom avant de confirmer.,Verify the name before confirming.,erreur,INCONNU,,inconnu,,,INCONNU : aucune base fiable. Aucun terme que je puisse proposer sans l'inventer.
+Le code PIN est incorrect.,The PIN is incorrect.,erreur,INCONNU,,inconnu,,,INCONNU : aucune base fiable. Point de départ possible : ligne 6 (code PIN).
+Le code PIN doit contenir 4 chiffres.,The PIN must contain 4 digits.,erreur,INCONNU,,inconnu,,,INCONNU : aucune base fiable. Aucun terme que je puisse proposer sans l'inventer.
+Il vous reste [[NUM_0]] tentatives.,You have [[NUM_0]] attempts left.,erreur,INCONNU,,inconnu,,,INCONNU : aucune base fiable. Aucun terme que je puisse proposer sans l'inventer.
+Trop de tentatives. Votre compte est bloqué.,Too many attempts. Your account is blocked.,erreur,INCONNU,,inconnu,,,INCONNU : aucune base fiable. Aucun terme que je puisse proposer sans l'inventer.
+Le mot de passe est incorrect.,The password is incorrect.,erreur,INCONNU,,inconnu,,,INCONNU : aucune base fiable. Aucun terme que je puisse proposer sans l'inventer.
+Le numéro de téléphone est invalide.,The phone number is invalid.,erreur,INCONNU,,inconnu,,,INCONNU : aucune base fiable. Point de départ possible : ligne 88 (Numéro de téléphone).
+Ce champ est obligatoire.,This field is required.,erreur,INCONNU,,inconnu,,,INCONNU : aucune base fiable. Aucun terme que je puisse proposer sans l'inventer.
+Le montant minimum est de [[NUM_0]] FCFA.,The minimum amount is [[NUM_0]] FCFA.,erreur,INCONNU,,inconnu,,,INCONNU : aucune base fiable. Aucun terme que je puisse proposer sans l'inventer.
+Le montant maximum est de [[NUM_0]] FCFA.,The maximum amount is [[NUM_0]] FCFA.,erreur,INCONNU,,inconnu,,,INCONNU : aucune base fiable. Aucun terme que je puisse proposer sans l'inventer.
+Le montant doit être un nombre.,The amount must be a number.,erreur,INCONNU,,inconnu,,,INCONNU : aucune base fiable. Aucun terme que je puisse proposer sans l'inventer.
+Le transfert a échoué. Réessayez.,The transfer failed. Try again.,erreur,INCONNU,,inconnu,,,INCONNU : aucune base fiable. Aucun terme que je puisse proposer sans l'inventer.
+Le paiement a échoué.,The payment failed.,erreur,INCONNU,,inconnu,,,INCONNU : aucune base fiable. Aucun terme que je puisse proposer sans l'inventer.
+Le retrait a échoué.,The withdrawal failed.,erreur,INCONNU,,inconnu,,,INCONNU : aucune base fiable. Aucun terme que je puisse proposer sans l'inventer.
+Le dépôt a échoué.,The deposit failed.,erreur,INCONNU,,inconnu,,,INCONNU : aucune base fiable. Aucun terme que je puisse proposer sans l'inventer.
+Une erreur est survenue. Réessayez plus tard.,An error occurred. Try again later.,erreur,INCONNU,,inconnu,,,INCONNU : aucune base fiable. Point de départ possible : ligne 125 (Une erreur est survenue).
+Vérifiez votre connexion internet.,Check your internet connection.,erreur,INCONNU,,inconnu,,,INCONNU : aucune base fiable. Aucun terme que je puisse proposer sans l'inventer.
+Pas de connexion internet.,No internet connection.,erreur,INCONNU,,inconnu,,,INCONNU : aucune base fiable. Aucun terme que je puisse proposer sans l'inventer.
+La session a expiré. Reconnectez-vous.,Your session has expired. Log in again.,erreur,INCONNU,,inconnu,,,INCONNU : aucune base fiable. Aucun terme que je puisse proposer sans l'inventer.
+Ce bénéficiaire est introuvable.,This beneficiary cannot be found.,erreur,INCONNU,,inconnu,,,INCONNU : aucune base fiable. Point de départ possible : ligne 5 (Bénéficiaire).
+Ce compte est bloqué.,This account is blocked.,erreur,INCONNU,,inconnu,,,INCONNU : aucune base fiable. Aucun terme que je puisse proposer sans l'inventer.
+Ce compte n'existe pas.,This account does not exist.,erreur,INCONNU,,inconnu,,,INCONNU : aucune base fiable. Aucun terme que je puisse proposer sans l'inventer.
+Vous ne pouvez pas vous envoyer de l'argent à vous-même.,You cannot send money to yourself.,erreur,INCONNU,,inconnu,,,INCONNU : aucune base fiable. Aucun terme que je puisse proposer sans l'inventer.
+Opération refusée.,Operation declined.,erreur,INCONNU,,inconnu,,,INCONNU : aucune base fiable. Aucun terme que je puisse proposer sans l'inventer.
+Opération en cours de traitement.,Operation is being processed.,erreur,INCONNU,,inconnu,,,INCONNU : aucune base fiable. Aucun terme que je puisse proposer sans l'inventer.
+Opération non autorisée.,Operation not authorized.,erreur,INCONNU,,inconnu,,,INCONNU : aucune base fiable. Aucun terme que je puisse proposer sans l'inventer.
+Votre carte a expiré.,Your card has expired.,erreur,INCONNU,,inconnu,,,INCONNU : aucune base fiable. Aucun terme que je puisse proposer sans l'inventer.
+Cette carte est bloquée.,This card is blocked.,erreur,INCONNU,,inconnu,,,INCONNU : aucune base fiable. Aucun terme que je puisse proposer sans l'inventer.
+Le code saisi est incorrect.,The code entered is incorrect.,erreur,INCONNU,,inconnu,,,INCONNU : aucune base fiable. Aucun terme que je puisse proposer sans l'inventer.
+Le code a déjà été utilisé.,The code has already been used.,erreur,INCONNU,,inconnu,,,INCONNU : aucune base fiable. Aucun terme que je puisse proposer sans l'inventer.
+Aucun résultat trouvé.,No results found.,erreur,INCONNU,,inconnu,,,INCONNU : aucune base fiable. Aucun terme que je puisse proposer sans l'inventer.
+Aucune transaction à afficher.,No transactions to display.,erreur,INCONNU,,inconnu,,,INCONNU : aucune base fiable. Point de départ possible : ligne 62 (Transactions récentes).
+Le fichier est trop volumineux.,The file is too large.,erreur,INCONNU,,inconnu,,,INCONNU : aucune base fiable. Aucun terme que je puisse proposer sans l'inventer.
+Ce format n'est pas accepté.,This format is not accepted.,erreur,INCONNU,,inconnu,,,INCONNU : aucune base fiable. Aucun terme que je puisse proposer sans l'inventer.
+La photo est floue. Reprenez-la.,The photo is blurry. Retake it.,erreur,INCONNU,,inconnu,,,INCONNU : aucune base fiable. Aucun terme que je puisse proposer sans l'inventer.
+Les informations ne correspondent pas.,The information does not match.,erreur,INCONNU,,inconnu,,,INCONNU : aucune base fiable. Aucun terme que je puisse proposer sans l'inventer.
+Les deux codes ne sont pas identiques.,The two codes do not match.,erreur,INCONNU,,inconnu,,,INCONNU : aucune base fiable. Aucun terme que je puisse proposer sans l'inventer.
+Cette opération est impossible pour le moment.,This operation is not possible right now.,erreur,INCONNU,,inconnu,,,INCONNU : aucune base fiable. Aucun terme que je puisse proposer sans l'inventer.
+Maintenance en cours. Revenez plus tard.,Maintenance in progress. Come back later.,erreur,INCONNU,,inconnu,,,INCONNU : aucune base fiable. Aucun terme que je puisse proposer sans l'inventer.
+Votre solde est trop faible.,Your balance is too low.,erreur,INCONNU,,inconnu,,,INCONNU : aucune base fiable. Point de départ possible : ligne 40 (solde).
+Vous avez déjà effectué cette opération.,You have already made this operation.,erreur,INCONNU,,inconnu,,,INCONNU : aucune base fiable. Aucun terme que je puisse proposer sans l'inventer.
+Veuillez réessayer dans quelques minutes.,Please try again in a few minutes.,erreur,INCONNU,,inconnu,,,INCONNU : aucune base fiable. Aucun terme que je puisse proposer sans l'inventer.
+Le délai est dépassé.,The time limit has passed.,erreur,INCONNU,,inconnu,,,INCONNU : aucune base fiable. Aucun terme que je puisse proposer sans l'inventer.
+Alerte : tentative de connexion inhabituelle.,Alert: unusual login attempt.,erreur,INCONNU,,inconnu,,,INCONNU : aucune base fiable. Point de départ possible : ligne 42 (Alerte de sécurité).
+Alerte : un nouvel appareil a été détecté.,Alert: a new device was detected.,erreur,INCONNU,,inconnu,,,INCONNU : aucune base fiable. Point de départ possible : ligne 42 (Alerte de sécurité).
+"Si ce n'était pas vous, bloquez votre compte.","If this wasn't you, block your account.",erreur,INCONNU,,inconnu,,,INCONNU : aucune base fiable. Aucun terme que je puisse proposer sans l'inventer.
+Ne communiquez jamais votre code à un inconnu.,Never give your code to a stranger.,erreur,INCONNU,,inconnu,,,INCONNU : aucune base fiable. Aucun terme que je puisse proposer sans l'inventer.
+La banque ne vous demandera jamais votre code PIN.,The bank will never ask for your PIN.,erreur,INCONNU,,inconnu,,,INCONNU : aucune base fiable. Point de départ possible : ligne 6 (code PIN).
+Vous n'avez pas les droits nécessaires.,You do not have the required permissions.,erreur,INCONNU,,inconnu,,,INCONNU : aucune base fiable. Aucun terme que je puisse proposer sans l'inventer.
+Échec de la vérification d'identité.,Identity verification failed.,erreur,INCONNU,,inconnu,,,INCONNU : aucune base fiable. Point de départ possible : ligne 17 (vérification d'identité).
+Votre demande n'a pas pu être traitée.,Your request could not be processed.,erreur,INCONNU,,inconnu,,,INCONNU : aucune base fiable. Aucun terme que je puisse proposer sans l'inventer.
+Le plafond de votre compte est atteint.,Your account limit has been reached.,erreur,INCONNU,,inconnu,,,INCONNU : aucune base fiable. Point de départ possible : ligne 25 (plafond).
+prêt,loan,credit,INCONNU,,inconnu,,,INCONNU : aucune base fiable. Aucun terme que je puisse proposer sans l'inventer.
+microcrédit,microcredit,credit,INCONNU,,inconnu,,,INCONNU : aucune base fiable. Aucun terme que je puisse proposer sans l'inventer.
+intérêt,interest,credit,INCONNU,,inconnu,,,INCONNU : aucune base fiable. Point de départ possible : ligne 8 (taux d'intérêt).
+intérêts gagnés,interest earned,credit,INCONNU,,inconnu,,,INCONNU : aucune base fiable. Aucun terme que je puisse proposer sans l'inventer.
+taux annuel,annual rate,credit,INCONNU,,inconnu,,,INCONNU : aucune base fiable. Point de départ possible : ligne 8 (taux d'intérêt).
+mensualité,monthly payment,credit,INCONNU,,inconnu,,,INCONNU : aucune base fiable. Point de départ possible : ligne 24 (échéance).
+plafond journalier,daily limit,credit,INCONNU,,inconnu,,,INCONNU : aucune base fiable. Point de départ possible : ligne 25 (plafond).
+plafond mensuel,monthly limit,credit,INCONNU,,inconnu,,,INCONNU : aucune base fiable. Point de départ possible : ligne 25 (plafond).
+remboursement anticipé,early repayment,credit,INCONNU,,inconnu,,,INCONNU : aucune base fiable. Point de départ possible : ligne 21 (remboursement).
+garantie,guarantee,credit,INCONNU,,inconnu,,,INCONNU : aucune base fiable. Aucun terme que je puisse proposer sans l'inventer.
+caution,surety,credit,INCONNU,,inconnu,,,INCONNU : aucune base fiable. Aucun terme que je puisse proposer sans l'inventer.
+garant,guarantor,credit,INCONNU,,inconnu,,,INCONNU : aucune base fiable. Aucun terme que je puisse proposer sans l'inventer.
+durée du prêt,loan term,credit,INCONNU,,inconnu,,,INCONNU : aucune base fiable. Aucun terme que je puisse proposer sans l'inventer.
+montant du prêt,loan amount,credit,INCONNU,,inconnu,,,INCONNU : aucune base fiable. Aucun terme que je puisse proposer sans l'inventer.
+capital,principal,credit,INCONNU,,inconnu,,,INCONNU : aucune base fiable. Aucun terme que je puisse proposer sans l'inventer.
+capital restant dû,outstanding principal,credit,INCONNU,,inconnu,,,INCONNU : aucune base fiable. Aucun terme que je puisse proposer sans l'inventer.
+échéancier,repayment schedule,credit,INCONNU,,inconnu,,,INCONNU : aucune base fiable. Point de départ possible : ligne 24 (échéance).
+demande de crédit,credit application,credit,INCONNU,,inconnu,,,INCONNU : aucune base fiable. Aucun terme que je puisse proposer sans l'inventer.
+crédit accordé,credit approved,credit,INCONNU,,inconnu,,,INCONNU : aucune base fiable. Aucun terme que je puisse proposer sans l'inventer.
+crédit refusé,credit declined,credit,INCONNU,,inconnu,,,INCONNU : aucune base fiable. Aucun terme que je puisse proposer sans l'inventer.
+épargne,savings,credit,INCONNU,,inconnu,,,INCONNU : aucune base fiable. Point de départ possible : ligne 13 (objectif d'épargne).
+compte épargne,savings account,credit,INCONNU,,inconnu,,,INCONNU : aucune base fiable. Aucun terme que je puisse proposer sans l'inventer.
+tontine,tontine,credit,INCONNU,,inconnu,,,INCONNU : aucune base fiable. Aucun terme que je puisse proposer sans l'inventer.
+dépôt à terme,term deposit,credit,INCONNU,,inconnu,,,INCONNU : aucune base fiable. Point de départ possible : ligne 14 (dépôt).
+assurance,insurance,credit,INCONNU,,inconnu,,,INCONNU : aucune base fiable. Aucun terme que je puisse proposer sans l'inventer.
+emprunteur,borrower,credit,INCONNU,,inconnu,,,INCONNU : aucune base fiable. Aucun terme que je puisse proposer sans l'inventer.
+prêteur,lender,credit,INCONNU,,inconnu,,,INCONNU : aucune base fiable. Aucun terme que je puisse proposer sans l'inventer.
+retard de paiement,late payment,credit,INCONNU,,inconnu,,,INCONNU : aucune base fiable. Point de départ possible : ligne 10 (pénalité de retard).
+jours de retard,days late,credit,INCONNU,,inconnu,,,INCONNU : aucune base fiable. Point de départ possible : ligne 10 (pénalité de retard).
+solde restant,remaining balance,credit,INCONNU,,inconnu,,,INCONNU : aucune base fiable. Point de départ possible : ligne 40 (solde).
+paiement partiel,partial payment,credit,INCONNU,,inconnu,,,INCONNU : aucune base fiable. Aucun terme que je puisse proposer sans l'inventer.
+paiement total,full payment,credit,INCONNU,,inconnu,,,INCONNU : aucune base fiable. Aucun terme que je puisse proposer sans l'inventer.
+reporter une échéance,postpone a payment,credit,INCONNU,,inconnu,,,INCONNU : aucune base fiable. Point de départ possible : ligne 24 (échéance).
+rééchelonnement,rescheduling,credit,INCONNU,,inconnu,,,INCONNU : aucune base fiable. Point de départ possible : ligne 24 (échéance).
+capacité d'emprunt,borrowing capacity,credit,INCONNU,,inconnu,,,INCONNU : aucune base fiable. Point de départ possible : ligne 11 (capacité de remboursement).
+prochaine échéance,next due date,credit,INCONNU,,inconnu,,,INCONNU : aucune base fiable. Point de départ possible : ligne 24 (échéance).
+date d'échéance,due date,credit,INCONNU,,inconnu,,,INCONNU : aucune base fiable. Point de départ possible : ligne 24 (échéance).
+montant à rembourser,amount to repay,credit,INCONNU,,inconnu,,,INCONNU : aucune base fiable. Point de départ possible : ligne 21 (remboursement).
+frais de retard,late fees,credit,INCONNU,,inconnu,,,INCONNU : aucune base fiable. Point de départ possible : ligne 10 (pénalité de retard).
+taux fixe,fixed rate,credit,INCONNU,,inconnu,,,INCONNU : aucune base fiable. Point de départ possible : ligne 8 (taux d'intérêt).
+taux variable,variable rate,credit,INCONNU,,inconnu,,,INCONNU : aucune base fiable. Aucun terme que je puisse proposer sans l'inventer.
+objectif atteint,goal reached,credit,INCONNU,,inconnu,,,INCONNU : aucune base fiable. Point de départ possible : ligne 13 (objectif d'épargne).
+verser sur mon épargne,add to my savings,credit,INCONNU,,inconnu,,,INCONNU : aucune base fiable. Aucun terme que je puisse proposer sans l'inventer.
+retirer de mon épargne,withdraw from savings,credit,INCONNU,,inconnu,,,INCONNU : aucune base fiable. Aucun terme que je puisse proposer sans l'inventer.
+banque,bank,banque,banke,banki,probable,banque,emprunt,Emprunt ; 'Banke goɗɗo' à la ligne 147 du pack.
+distributeur automatique,ATM,banque,INCONNU,,inconnu,,,INCONNU : aucune base fiable. Point de départ possible : ligne 28 (guichet).
+carte bancaire,bank card,banque,INCONNU,,inconnu,,,INCONNU : aucune base fiable. Aucun terme que je puisse proposer sans l'inventer.
+carte de débit,debit card,banque,INCONNU,,inconnu,,,INCONNU : aucune base fiable. Aucun terme que je puisse proposer sans l'inventer.
+carte prépayée,prepaid card,banque,INCONNU,,inconnu,,,INCONNU : aucune base fiable. Aucun terme que je puisse proposer sans l'inventer.
+IBAN,IBAN,banque,IBAN,,probable,IBAN,emprunt conservé,Sigle bancaire international.
+SWIFT,SWIFT,banque,SWIFT,,probable,SWIFT,emprunt conservé,Sigle bancaire international.
+code banque,bank code,banque,INCONNU,,inconnu,,,INCONNU : aucune base fiable. Aucun terme que je puisse proposer sans l'inventer.
+code agence,branch code,banque,INCONNU,,inconnu,,,INCONNU : aucune base fiable. Point de départ possible : ligne 27 (agence).
+RIB,bank details (RIB),banque,INCONNU,,inconnu,,,INCONNU : aucune base fiable. Aucun terme que je puisse proposer sans l'inventer.
+compte joint,joint account,banque,INCONNU,,inconnu,,,INCONNU : aucune base fiable. Point de départ possible : ligne 177 (Compte courant).
+compte professionnel,business account,banque,INCONNU,,inconnu,,,INCONNU : aucune base fiable. Point de départ possible : ligne 177 (Compte courant).
+virement,wire transfer,banque,INCONNU,,inconnu,,,INCONNU : aucune base fiable. Point de départ possible : ligne 58 (Effectuer un transfert).
+chèque,cheque,banque,INCONNU,,inconnu,,,INCONNU : aucune base fiable. Aucun terme que je puisse proposer sans l'inventer.
+chéquier,chequebook,banque,INCONNU,,inconnu,,,INCONNU : aucune base fiable. Aucun terme que je puisse proposer sans l'inventer.
+reçu d'agence,branch receipt,banque,INCONNU,,inconnu,,,INCONNU : aucune base fiable. Point de départ possible : ligne 31 (reçu).
+horaires d'ouverture,opening hours,banque,INCONNU,,inconnu,,,INCONNU : aucune base fiable. Point de départ possible : ligne 27 (agence).
+conseiller,advisor,banque,INCONNU,,inconnu,,,INCONNU : aucune base fiable. Point de départ possible : ligne 19 (service client).
+directeur d'agence,branch manager,banque,INCONNU,,inconnu,,,INCONNU : aucune base fiable. Point de départ possible : ligne 27 (agence).
+coordonnées bancaires,bank details,banque,INCONNU,,inconnu,,,INCONNU : aucune base fiable. Aucun terme que je puisse proposer sans l'inventer.
+application mobile,mobile app,banque,INCONNU,,inconnu,,,INCONNU : aucune base fiable. Aucun terme que je puisse proposer sans l'inventer.
+microfinance,microfinance,banque,INCONNU,,inconnu,,,INCONNU : aucune base fiable. Aucun terme que je puisse proposer sans l'inventer.
+coopérative d'épargne,savings cooperative,banque,INCONNU,,inconnu,,,INCONNU : aucune base fiable. Aucun terme que je puisse proposer sans l'inventer.
+date d'ouverture du compte,account opening date,banque,INCONNU,,inconnu,,,INCONNU : aucune base fiable. Point de départ possible : ligne 177 (Compte courant).
+frais de tenue de compte,account maintenance fee,banque,INCONNU,,inconnu,,,INCONNU : aucune base fiable. Point de départ possible : ligne 22 (Frais).
+agence la plus proche,nearest branch,banque,INCONNU,,inconnu,,,INCONNU : aucune base fiable. Point de départ possible : ligne 27 (agence).
+numéro de carte,card number,banque,INCONNU,,inconnu,,,INCONNU : aucune base fiable. Aucun terme que je puisse proposer sans l'inventer.
+date d'expiration,expiry date,banque,INCONNU,,inconnu,,,INCONNU : aucune base fiable. Aucun terme que je puisse proposer sans l'inventer.
+code de sécurité de la carte,card security code,banque,INCONNU,,inconnu,,,INCONNU : aucune base fiable. Aucun terme que je puisse proposer sans l'inventer.
+opposition sur la carte,card block request,banque,INCONNU,,inconnu,,,INCONNU : aucune base fiable. Aucun terme que je puisse proposer sans l'inventer.
+Consultez votre solde,Check your balance,phrase,Yiy jawdindi ma,,probable,regarde ton solde,impératif + possessif postposé (ma),Dérivé de la ligne 56 du pack ; tutoiement/politesse à décider.
+Entrez le numéro du bénéficiaire,Enter the beneficiary's number,phrase,Lonndu limre keɓoowo,,incertain,renseigne le numéro du bénéficiaire,impératif + nom + nom,Composition de lignes 84 et 164 du pack.
+Choisissez le type de transfert,Choose the transfer type,phrase,INCONNU,,inconnu,,,INCONNU : aucune base fiable. Point de départ possible : ligne 68 (Choisissez le type de transfert et le montant. Les frais sont calculés automatiquement.).
+Les frais sont calculés automatiquement,Fees are calculated automatically,phrase,Njoɓdi limtetee ko e laawol gollingol,,probable,les frais sont comptés par un chemin qui agit,phrase passive,"Ligne 68 du pack, 2e phrase ; 'njoɓdi' ambigu."
+Vérifiez le montant et les frais,Check the amount and fees,phrase,Teeŋtu kaalis e njoɓdi,,incertain,vérifie le montant et les frais,impératif + coordination e,Composition ; 'njoɓdi' ambigu.
+Vérifiez le nom et le numéro du bénéficiaire,Check the beneficiary's name and number,phrase,Teeŋtu innde e limre keɓoowo,,probable,vérifie le nom et le numéro du bénéficiaire,impératif + coordination e,Ligne 129 du pack.
+Confirmez le transfert,Confirm the transfer,phrase,Teeŋtu nawgol,,probable,confirme le transfert,impératif + objet,Ligne 47 du pack.
+Votre transfert a été envoyé,Your transfer has been sent,phrase,Nawgol ma nelaama,,probable,ton transfert a été envoyé,possessif postposé + passif accompli,Ligne 113 du pack sans 'e jam'.
+Votre transfert est en cours,Your transfer is in progress,phrase,INCONNU,,inconnu,,,INCONNU : aucune base fiable. Aucun terme que je puisse proposer sans l'inventer.
+Un reçu vous a été envoyé,A receipt has been sent to you,phrase,INCONNU,,inconnu,,,INCONNU : aucune base fiable. Point de départ possible : ligne 31 (reçu).
+Ce bénéficiaire n'a jamais été utilisé sur ce compte,This beneficiary has never been used on this account,phrase,INCONNU,,inconnu,,,INCONNU : aucune base fiable. Point de départ possible : ligne 95 (Ce bénéficiaire n'a jamais été utilisé sur ce compte. Vérifiez le numéro avant de continuer.).
+Bienvenue,Welcome,phrase,Jaɓaama,Jabbama,incertain,bienvenue,formule d'accueil,Hésitation sur la forme exacte ; à faire confirmer.
+Bienvenue sur votre espace,Welcome to your space,phrase,INCONNU,,inconnu,,,INCONNU : aucune base fiable. Aucun terme que je puisse proposer sans l'inventer.
+Bonsoir,Good evening,phrase,INCONNU,,inconnu,,,INCONNU : aucune base fiable. Point de départ possible : ligne 53 (Bonjour).
+Merci,Thank you,phrase,Jaaraama,,probable,merci,formule de remerciement,Formule répandue en fulfulde ; forme Adamawa à confirmer.
+Merci pour votre confiance,Thank you for your trust,phrase,INCONNU,,inconnu,,,INCONNU : aucune base fiable. Aucun terme que je puisse proposer sans l'inventer.
+À bientôt,See you soon,phrase,INCONNU,,inconnu,,,INCONNU : aucune base fiable. Aucun terme que je puisse proposer sans l'inventer.
+Bonne journée,Have a nice day,phrase,INCONNU,,inconnu,,,INCONNU : aucune base fiable. Point de départ possible : ligne 53 (Bonjour).
+Entrez votre code PIN,Enter your PIN,phrase,Lonndu code PIN ma,,incertain,renseigne ton code PIN,impératif + possessif postposé,Composition du pack.
+Entrez le code reçu par SMS,Enter the code received by SMS,phrase,INCONNU,,inconnu,,,INCONNU : aucune base fiable. Aucun terme que je puisse proposer sans l'inventer.
+Un code vous a été envoyé,A code has been sent to you,phrase,INCONNU,,inconnu,,,INCONNU : aucune base fiable. Point de départ possible : ligne 29 (code).
+Vous n'avez pas reçu le code ?,Didn't receive the code?,phrase,INCONNU,,inconnu,,,INCONNU : aucune base fiable. Aucun terme que je puisse proposer sans l'inventer.
+Renvoyer le code dans [[NUM_0]] secondes,Resend code in [[NUM_0]] seconds,phrase,INCONNU,,inconnu,,,INCONNU : aucune base fiable. Aucun terme que je puisse proposer sans l'inventer.
+Entrez le montant,Enter the amount,phrase,INCONNU,,inconnu,,,INCONNU : aucune base fiable. Point de départ possible : ligne 39 (Montant).
+Entrez le montant à envoyer,Enter the amount to send,phrase,INCONNU,,inconnu,,,INCONNU : aucune base fiable. Point de départ possible : ligne 4 (Montant à envoyer).
+Entrez le montant à retirer,Enter the amount to withdraw,phrase,INCONNU,,inconnu,,,INCONNU : aucune base fiable. Point de départ possible : ligne 15 (retrait).
+Entrez le montant à déposer,Enter the amount to deposit,phrase,INCONNU,,inconnu,,,INCONNU : aucune base fiable. Point de départ possible : ligne 14 (dépôt).
+Choisissez le compte à débiter,Choose the account to debit,phrase,INCONNU,,inconnu,,,INCONNU : aucune base fiable. Aucun terme que je puisse proposer sans l'inventer.
+Choisissez le mode de paiement,Choose the payment method,phrase,INCONNU,,inconnu,,,INCONNU : aucune base fiable. Aucun terme que je puisse proposer sans l'inventer.
+Choisissez l'opérateur,Choose the operator,phrase,INCONNU,,inconnu,,,INCONNU : aucune base fiable. Aucun terme que je puisse proposer sans l'inventer.
+Choisissez la date,Choose the date,phrase,INCONNU,,inconnu,,,INCONNU : aucune base fiable. Aucun terme que je puisse proposer sans l'inventer.
+Choisissez une durée,Choose a term,phrase,INCONNU,,inconnu,,,INCONNU : aucune base fiable. Aucun terme que je puisse proposer sans l'inventer.
+Sélectionnez un bénéficiaire,Select a beneficiary,phrase,INCONNU,,inconnu,,,INCONNU : aucune base fiable. Point de départ possible : ligne 5 (Bénéficiaire).
+Ajoutez un nouveau bénéficiaire,Add a new beneficiary,phrase,INCONNU,,inconnu,,,INCONNU : aucune base fiable. Aucun terme que je puisse proposer sans l'inventer.
+Saisissez le numéro du compte,Enter the account number,phrase,INCONNU,,inconnu,,,INCONNU : aucune base fiable. Point de départ possible : ligne 65 (Numéro de compte).
+Saisissez le motif du transfert,Enter the transfer reason,phrase,INCONNU,,inconnu,,,INCONNU : aucune base fiable. Point de départ possible : ligne 49 (Motif du transfert).
+Ajoutez une note (facultatif),Add a note (optional),phrase,INCONNU,,inconnu,,,INCONNU : aucune base fiable. Point de départ possible : ligne 91 (Note (optionnel)).
+Le bénéficiaire recevra [[NUM_0]] FCFA,The beneficiary will receive [[NUM_0]] FCFA,phrase,INCONNU,,inconnu,,,INCONNU : aucune base fiable. Aucun terme que je puisse proposer sans l'inventer.
+Vous allez envoyer [[NUM_0]] FCFA,You are about to send [[NUM_0]] FCFA,phrase,INCONNU,,inconnu,,,INCONNU : aucune base fiable. Point de départ possible : ligne 4 (Montant à envoyer).
+Frais : [[NUM_0]] FCFA,Fee: [[NUM_0]] FCFA,phrase,Njoɓdi ko [[NUM_0]] FCFA,,incertain,"frais, c'est [[NUM_0]] FCFA",ko = copule,Modèle de la ligne 142 ; 'njoɓdi' ambigu.
+Total à payer : [[NUM_0]] FCFA,Total to pay: [[NUM_0]] FCFA,phrase,INCONNU,,inconnu,,,INCONNU : aucune base fiable. Point de départ possible : ligne 76 (Total à débiter).
+Votre nouveau solde est de [[NUM_0]] FCFA,Your new balance is [[NUM_0]] FCFA,phrase,INCONNU,,inconnu,,,INCONNU : aucune base fiable. Point de départ possible : ligne 178 (Le solde est de [[NUM_0]] FCFA.).
+Votre solde disponible est de [[NUM_0]] FCFA,Your available balance is [[NUM_0]] FCFA,phrase,Jawdindi ndi yami ko [[NUM_0]] FCFA,,incertain,"solde disponible, c'est [[NUM_0]] FCFA",ko = copule,Composition des lignes 2 et 178 du pack ; 'yami' non analysé.
+Vous avez reçu [[NUM_0]] FCFA de la part de [[NUM_1]],You received [[NUM_0]] FCFA from [[NUM_1]],phrase,INCONNU,,inconnu,,,INCONNU : aucune base fiable. Point de départ possible : ligne 154 (Transfert reçu).
+Vous avez envoyé [[NUM_0]] FCFA à [[NUM_1]],You sent [[NUM_0]] FCFA to [[NUM_1]],phrase,INCONNU,,inconnu,,,INCONNU : aucune base fiable. Aucun terme que je puisse proposer sans l'inventer.
+Votre dépôt a été effectué,Your deposit was made,phrase,INCONNU,,inconnu,,,INCONNU : aucune base fiable. Point de départ possible : ligne 14 (dépôt).
+Votre retrait a été effectué,Your withdrawal was made,phrase,INCONNU,,inconnu,,,INCONNU : aucune base fiable. Point de départ possible : ligne 15 (retrait).
+Votre paiement a été effectué,Your payment was made,phrase,INCONNU,,inconnu,,,INCONNU : aucune base fiable. Aucun terme que je puisse proposer sans l'inventer.
+Votre paiement est en attente,Your payment is pending,phrase,INCONNU,,inconnu,,,INCONNU : aucune base fiable. Aucun terme que je puisse proposer sans l'inventer.
+Votre demande a été envoyée,Your request has been sent,phrase,INCONNU,,inconnu,,,INCONNU : aucune base fiable. Aucun terme que je puisse proposer sans l'inventer.
+Votre demande est en cours d'examen,Your request is being reviewed,phrase,INCONNU,,inconnu,,,INCONNU : aucune base fiable. Aucun terme que je puisse proposer sans l'inventer.
+Votre crédit a été accordé,Your credit has been approved,phrase,INCONNU,,inconnu,,,INCONNU : aucune base fiable. Aucun terme que je puisse proposer sans l'inventer.
+Votre crédit a été refusé,Your credit has been declined,phrase,INCONNU,,inconnu,,,INCONNU : aucune base fiable. Aucun terme que je puisse proposer sans l'inventer.
+Votre prochaine échéance est le [[NUM_0]],Your next due date is [[NUM_0]],phrase,INCONNU,,inconnu,,,INCONNU : aucune base fiable. Aucun terme que je puisse proposer sans l'inventer.
+Votre remboursement a été reçu,Your repayment has been received,phrase,INCONNU,,inconnu,,,INCONNU : aucune base fiable. Point de départ possible : ligne 21 (remboursement).
+Il vous reste [[NUM_0]] FCFA à rembourser,You have [[NUM_0]] FCFA left to repay,phrase,INCONNU,,inconnu,,,INCONNU : aucune base fiable. Aucun terme que je puisse proposer sans l'inventer.
+Votre compte a été créé,Your account has been created,phrase,INCONNU,,inconnu,,,INCONNU : aucune base fiable. Aucun terme que je puisse proposer sans l'inventer.
+Votre compte a été activé,Your account has been activated,phrase,INCONNU,,inconnu,,,INCONNU : aucune base fiable. Aucun terme que je puisse proposer sans l'inventer.
+Votre compte a été désactivé,Your account has been deactivated,phrase,INCONNU,,inconnu,,,INCONNU : aucune base fiable. Aucun terme que je puisse proposer sans l'inventer.
+Votre compte est bloqué,Your account is blocked,phrase,INCONNU,,inconnu,,,INCONNU : aucune base fiable. Aucun terme que je puisse proposer sans l'inventer.
+Contactez le service client,Contact customer service,phrase,INCONNU,,inconnu,,,INCONNU : aucune base fiable. Point de départ possible : ligne 19 (service client).
+Appelez le service client,Call customer service,phrase,INCONNU,,inconnu,,,INCONNU : aucune base fiable. Point de départ possible : ligne 19 (service client).
+Nous sommes là pour vous aider,We are here to help,phrase,INCONNU,,inconnu,,,INCONNU : aucune base fiable. Aucun terme que je puisse proposer sans l'inventer.
+Besoin d'aide ?,Need help?,phrase,INCONNU,,inconnu,,,INCONNU : aucune base fiable. Aucun terme que je puisse proposer sans l'inventer.
+Questions fréquentes,Frequently asked questions,phrase,INCONNU,,inconnu,,,INCONNU : aucune base fiable. Aucun terme que je puisse proposer sans l'inventer.
+Comment ça marche ?,How does it work?,phrase,INCONNU,,inconnu,,,INCONNU : aucune base fiable. Aucun terme que je puisse proposer sans l'inventer.
+Prenez une photo de votre pièce d'identité,Take a photo of your ID,phrase,INCONNU,,inconnu,,,INCONNU : aucune base fiable. Point de départ possible : ligne 18 (pièce d'identité).
+Prenez un selfie,Take a selfie,phrase,INCONNU,,inconnu,,,INCONNU : aucune base fiable. Aucun terme que je puisse proposer sans l'inventer.
+Vos données sont protégées,Your data is protected,phrase,INCONNU,,inconnu,,,INCONNU : aucune base fiable. Aucun terme que je puisse proposer sans l'inventer.
+J'accepte les conditions d'utilisation,I accept the terms of use,phrase,INCONNU,,inconnu,,,INCONNU : aucune base fiable. Aucun terme que je puisse proposer sans l'inventer.
+Voulez-vous vraiment annuler ?,Do you really want to cancel?,phrase,INCONNU,,inconnu,,,INCONNU : aucune base fiable. Aucun terme que je puisse proposer sans l'inventer.
+Voulez-vous vraiment quitter ?,Do you really want to leave?,phrase,INCONNU,,inconnu,,,INCONNU : aucune base fiable. Aucun terme que je puisse proposer sans l'inventer.
+Voulez-vous confirmer cette opération ?,Do you want to confirm this operation?,phrase,INCONNU,,inconnu,,,INCONNU : aucune base fiable. Aucun terme que je puisse proposer sans l'inventer.
+Cette action est définitive,This action is final,phrase,INCONNU,,inconnu,,,INCONNU : aucune base fiable. Aucun terme que je puisse proposer sans l'inventer.
+Cette opération ne peut pas être annulée,This operation cannot be cancelled,phrase,INCONNU,,inconnu,,,INCONNU : aucune base fiable. Aucun terme que je puisse proposer sans l'inventer.
+Opération réussie,Operation successful,phrase,INCONNU,,inconnu,,,INCONNU : aucune base fiable. Point de départ possible : ligne 117 (Succès).
+Opération terminée,Operation completed,phrase,INCONNU,,inconnu,,,INCONNU : aucune base fiable. Point de départ possible : ligne 111 (Transfert effectué).
+Opération annulée,Operation cancelled,phrase,INCONNU,,inconnu,,,INCONNU : aucune base fiable. Aucun terme que je puisse proposer sans l'inventer.
+Chargement en cours…,Loading…,phrase,INCONNU,,inconnu,,,INCONNU : aucune base fiable. Aucun terme que je puisse proposer sans l'inventer.
+Veuillez patienter,Please wait,phrase,INCONNU,,inconnu,,,INCONNU : aucune base fiable. Aucun terme que je puisse proposer sans l'inventer.
+Enregistrement en cours…,Saving…,phrase,INCONNU,,inconnu,,,INCONNU : aucune base fiable. Aucun terme que je puisse proposer sans l'inventer.
+Modifications enregistrées,Changes saved,phrase,INCONNU,,inconnu,,,INCONNU : aucune base fiable. Aucun terme que je puisse proposer sans l'inventer.
+Voir tout,See all,phrase,INCONNU,,inconnu,,,INCONNU : aucune base fiable. Aucun terme que je puisse proposer sans l'inventer.
+Voir les détails,View details,phrase,INCONNU,,inconnu,,,INCONNU : aucune base fiable. Aucun terme que je puisse proposer sans l'inventer.
+Télécharger le relevé,Download the statement,phrase,INCONNU,,inconnu,,,INCONNU : aucune base fiable. Aucun terme que je puisse proposer sans l'inventer.
+Partager le reçu,Share the receipt,phrase,INCONNU,,inconnu,,,INCONNU : aucune base fiable. Point de départ possible : ligne 31 (reçu).
+Cherchez un bénéficiaire,Search for a beneficiary,phrase,INCONNU,,inconnu,,,INCONNU : aucune base fiable. Point de départ possible : ligne 5 (Bénéficiaire).
+Aucun bénéficiaire enregistré,No saved beneficiaries,phrase,INCONNU,,inconnu,,,INCONNU : aucune base fiable. Aucun terme que je puisse proposer sans l'inventer.
+Cette opération est gratuite,This operation is free,phrase,INCONNU,,inconnu,,,INCONNU : aucune base fiable. Point de départ possible : ligne 74 (Gratuit).
+Cette opération est payante,This operation has a fee,phrase,INCONNU,,inconnu,,,INCONNU : aucune base fiable. Aucun terme que je puisse proposer sans l'inventer.
+Des frais s'appliquent,Fees apply,phrase,INCONNU,,inconnu,,,INCONNU : aucune base fiable. Point de départ possible : ligne 22 (Frais).
+Les frais dépendent du montant,Fees depend on the amount,phrase,INCONNU,,inconnu,,,INCONNU : aucune base fiable. Point de départ possible : ligne 22 (Frais).
+"Pour votre sécurité, ne partagez jamais votre code","For your safety, never share your code",phrase,INCONNU,,inconnu,,,INCONNU : aucune base fiable. Aucun terme que je puisse proposer sans l'inventer.
+Vérifiez le numéro avant de continuer,Check the number before continuing,phrase,INCONNU,,inconnu,,,INCONNU : aucune base fiable. Point de départ possible : ligne 164 (Alerte de sécurité : vérifiez le numéro du bénéficiaire avant de continuer.).
+Retour à l'accueil,Back to home,phrase,INCONNU,,inconnu,,,INCONNU : aucune base fiable. Point de départ possible : ligne 81 (Retour).
+Retour au tableau de bord,Back to dashboard,phrase,INCONNU,,inconnu,,,INCONNU : aucune base fiable. Point de départ possible : ligne 81 (Retour).
+Paramètres,Settings,phrase,INCONNU,,inconnu,,,INCONNU : aucune base fiable. Aucun terme que je puisse proposer sans l'inventer.
+Langue,Language,phrase,ɗemngal,,probable,langue,nom,Mot général pour 'langue' ; forme Adamawa à confirmer.
+Choisir la langue,Choose language,phrase,INCONNU,,inconnu,,,INCONNU : aucune base fiable. Aucun terme que je puisse proposer sans l'inventer.
+Mon profil,My profile,phrase,INCONNU,,inconnu,,,INCONNU : aucune base fiable. Aucun terme que je puisse proposer sans l'inventer.
+Notifications,Notifications,phrase,INCONNU,,inconnu,,,INCONNU : aucune base fiable. Aucun terme que je puisse proposer sans l'inventer.
+Aide et support,Help and support,phrase,INCONNU,,inconnu,,,INCONNU : aucune base fiable. Point de départ possible : ligne 19 (service client).
+argent (monnaie),money,compte,ceede,,probable,argent,nom,Candidat fourni dans le prompt et proposé plus tôt avec confiance moyenne ; à valider
+"argent (monnaie), variante",money,compte,kaalisi,,incertain,argent,nom,Candidat fourni par le demandeur ; je ne peux pas le confirmer
+"argent (monnaie), synonyme",money,compte,mbuuɗu,,incertain,argent,nom,Candidat fourni par le demandeur ; je ne peux pas le confirmer

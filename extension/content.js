@@ -71,6 +71,7 @@
   `;
 
   function ensureBadgeStyle() {
+    if (DEMO_PAGE) return;
     if (document.getElementById("nk-badge-style")) return;
     const style = document.createElement("style");
     style.id = "nk-badge-style";
@@ -97,7 +98,7 @@
     partial
   }) {
     clearNotice();
-    if (!translated) return;
+    if (DEMO_PAGE || !translated) return;
 
     const host = document.createElement("div");
     host.id = "nk-notice-host";
@@ -734,18 +735,22 @@
     active = true;
     stopObserver();
     clearNotice();
-    showToast(
-      tr(
-        `Traduction en ${spec.label}… ` +
-          (spec.engine === "pack"
-            ? "Seules les phrases du pack seront appliquées."
-            : "Cela peut prendre quelques secondes."),
-        `Translating to ${spec.label}… ` +
-          (spec.engine === "pack"
-            ? "Only pack phrases will be applied."
-            : "This may take a few seconds.")
-      )
-    );
+    if (DEMO_PAGE) {
+      showToast(tr(`Traduction en ${spec.label}…`, `Translating to ${spec.label}…`));
+    } else {
+      showToast(
+        tr(
+          `Traduction en ${spec.label}… ` +
+            (spec.engine === "pack"
+              ? "Seules les phrases du pack seront appliquées."
+              : "Cela peut prendre quelques secondes."),
+          `Translating to ${spec.label}… ` +
+            (spec.engine === "pack"
+              ? "Only pack phrases will be applied."
+              : "This may take a few seconds.")
+        )
+      );
+    }
 
     let translatedCount = 0;
     let fatalError = null;
@@ -1070,7 +1075,14 @@
                 ? "backend local"
                 : "cloud";
 
-      if (spec.engine === "pack" && translatedCount === 0) {
+      if (DEMO_PAGE && translatedCount > 0) {
+        showToast(
+          tr(
+            "Traduction terminée. Les montants et les noms sont préservés.",
+            "Translation complete. Amounts and names are preserved."
+          )
+        );
+      } else if (spec.engine === "pack" && translatedCount === 0) {
         showToast(
           tr(
             `Pack ${spec.label} : aucune phrase disponible pour cette page. ` +
@@ -1143,7 +1155,8 @@
             demo: demoCriticalCount,
             untranslated: flaggedCount + criticalCount,
             partial: partialCount,
-            truncated: pageTruncated
+            truncated: pageTruncated,
+            simple: DEMO_PAGE
           }
         });
       } catch {
@@ -1184,7 +1197,8 @@
         partial: partialCount,
         target: targetCode,
         label: spec.label,
-        truncated: pageTruncated
+        truncated: pageTruncated,
+        simple: DEMO_PAGE
       };
     } catch (error) {
       console.error("[NkapLingua]", error);

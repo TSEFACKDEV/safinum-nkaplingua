@@ -14,3 +14,17 @@ lampo,impôt,Référence lexicographique : taxe et impôt partagent le même ter
 moní,argent,Référence interlangue : la même forme apparaît dans plusieurs langues ; aucune validation automatique.
 moní,Montant,Référence interlangue : la même forme apparaît dans plusieurs langues ; aucune validation automatique.
 moní,Amount,Référence interlangue : la même forme apparaît dans plusieurs langues ; aucune validation automatique.
+"ceede","argent","Référence lexicographique : même racine ; à arbitrer."
+"ceede","budget","Référence lexicographique : même racine ; à arbitrer."
+"ceede","argent (monnaie)","Référence lexicographique : même racine ; à arbitrer."
+"Jawdindi ina famɗi ngam waɗde ndii gollal.","Solde insuffisant pour cette opération.","Variante de la même erreur ; à arbitrer."
+"Jawdindi ina famɗi ngam waɗde ndii gollal.","Solde insuffisant pour effectuer ce transfert.","Variante de la même erreur ; à arbitrer."
+"Jawdindi ina famɗi ngam waɗde ndii gollal.","Insufficient balance for this transfer.","Variante de la même erreur ; à arbitrer."
+"Nasara","Succès","Même famille succès/réussi ; à arbitrer."
+"Nasara","Success","Même famille succès/réussi ; à arbitrer."
+"Nasara","Réussi","Même famille succès/réussi ; à arbitrer."
+"Teeŋtu","Confirmer","Collision confirmer/vérifier signalée P1 ; à arbitrer."
+"Teeŋtu","Vérifier","Collision confirmer/vérifier signalée P1 ; à arbitrer."
+"Teeŋtu nawgol","Confirmer le transfert","Variante impérative ; à arbitrer."
+"Teeŋtu nawgol","Confirm transfer","Variante impérative ; à arbitrer."
+"Teeŋtu nawgol","Confirmez le transfert","Variante impérative ; à arbitrer."

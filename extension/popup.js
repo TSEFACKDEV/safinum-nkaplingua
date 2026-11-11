@@ -99,6 +99,10 @@ api.runtime.onMessage.addListener((message) => {
     setStatus(t("noTranslation"));
     return;
   }
+  if (summary.simple) {
+    setStatus(t("translationDone"));
+    return;
+  }
   const lang = summary.label
     ? displayName({ label: summary.label })
     : t("unknownLanguage");
@@ -411,7 +415,9 @@ async function runPageAction(button, pending, message, successText, useResult = 
       setStatus(localizeActionError(response?.error || t("actionError")));
       return;
     }
-    if (useResult && typeof response.translated === "number") {
+    if (response.simple) {
+      setStatus(t("translationDone"));
+    } else if (useResult && typeof response.translated === "number") {
       setStatus(pageResultMessage(response));
     } else {
       setStatus(response.message || successText);

@@ -42,3 +42,12 @@ Fichiers générés le 10 novembre 2026. **Aucune ligne n'est `validated`.**
 - `NAWGOL_VS_NELU` : `nawgol` pour envoyer et recevoir.
 - `YOOBGOL_PAYER_VALIDER` : `yoɓgol` pour payer et valider.
 - `EMPRUNT_A_DECLARER` (11) : emprunts non déclarés.
+
+
+## Propositions IA du 11 novembre
+
+- `fub-relecture-pack-ia.csv` : relecture des 185 entrées (4 sûr, 3 probable,
+  178 incertain) ; aucune correction sûre.
+- `fub-traductions-proposees-ia.csv` : 416 sources, 31 propositions utilisables,
+  385 INCONNU.
+- 31 entrées importées au pack en `draft` (contexte `proposition-relecture`).

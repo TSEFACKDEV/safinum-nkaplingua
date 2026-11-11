@@ -337,7 +337,7 @@ async function main() {
           .map((el) => el.shadowRoot?.querySelector(".toast")?.textContent || "")
           .join(" ")
       );
-      if (toast.includes(text)) return toast;
+      if (toast.includes(text) || toast.includes("Traduction terminée")) return toast;
       await sleep(250);
     }
     return "";
@@ -381,7 +381,7 @@ async function main() {
       "Traduction en fulfulde — uniquement les packs embarqués."
     );
     await send(tab, { type: "NK_TRANSLATE_PAGE", target: "fub" });
-    await waitForToast("passage(s) traduits");
+    await waitForToast("Traduction terminée");
     await sleep(1200);
     await caption(
       tab,
@@ -400,7 +400,7 @@ async function main() {
     await sleep(900);
     await send(tab, { type: "NK_SET_TARGET", target: "ewo" });
     await send(tab, { type: "NK_TRANSLATE_PAGE", target: "ewo" });
-    await waitForToast("passage(s) traduits");
+    await waitForToast("Traduction terminée");
     await sleep(4200);
 
     await caption(tab, "Bascule en duala.");
@@ -408,7 +408,7 @@ async function main() {
     await sleep(900);
     await send(tab, { type: "NK_SET_TARGET", target: "dua" });
     await send(tab, { type: "NK_TRANSLATE_PAGE", target: "dua" });
-    await waitForToast("passage(s) traduits");
+    await waitForToast("Traduction terminée");
     await sleep(4200);
 
     await caption(

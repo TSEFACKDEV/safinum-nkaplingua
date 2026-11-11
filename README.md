@@ -522,6 +522,7 @@ exigence par exigence dans [`docs/COMPLIANCE.md`](docs/COMPLIANCE.md).
 | [`docs/SYNTAX_TRILINGUAL_2026-11-10.md`](docs/SYNTAX_TRILINGUAL_2026-11-10.md) | fiches de syntaxe fulfulde/ewondo/duala |
 | [`data/review/native-kit.csv`](data/review/native-kit.csv) | kit natif : 150 phrases + 32 termes |
 | [`docs/FUB_IMPORT_2026-11-11.md`](docs/FUB_IMPORT_2026-11-11.md) | import fulfulde : 416 sources à traduire, 185 entrées priorisées |
+| [`docs/FUB_PROPOSITIONS_IA_2026-11-11.md`](docs/FUB_PROPOSITIONS_IA_2026-11-11.md) | propositions fulfulde : 31 retenues, 385 inconnues |
 | [`data/corpus/finance-multilingual.csv`](data/corpus/finance-multilingual.csv) | corpus candidat FR/EN/fub/ewo/dua, 642 lignes |
 | [`docs/AUDIT_2026-11-09.md`](docs/AUDIT_2026-11-09.md) | audit packs + serveur : 188/188, 3 langues, 0 validé |
 | [`docs/AUDIT_2026-11-08.md`](docs/AUDIT_2026-11-08.md) | audit NLLB seul : 31/192, 1/20, repli |
