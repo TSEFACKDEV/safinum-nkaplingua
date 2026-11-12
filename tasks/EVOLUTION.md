@@ -3478,3 +3478,70 @@ mot `json`) avec les champs ci-dessous. Exemple de structure, en indentation :
   "blockers": []
 }
 ```
+
+## 2026-11-12T15:50:00+01:00 — Marius — M9 — done
+
+```json
+{
+  "timestamp": "2026-11-12T15:50:00+01:00",
+  "person": "Marius",
+  "branch": "marius",
+  "task": "M9",
+  "status": "done",
+  "summary": "Ajout du reçu de traduction : le content script publie data-nk-summary (compteurs, moteur, source/cible) et le popup affiche une carte avec traduits, partiels, restés en français, non validés et note honnête. Les harnais Chrome/Firefox lisent ce reçu : 188/188 sur 5 étapes, EN 40/44, 0 non traduit, 0 critique MT, restauration 5/5. Release reconstruite : 3 ZIP 403/404 Ko, lint 0/0/0, paquets chargés.",
+  "files": [
+    "extension/content.js",
+    "extension/popup.html",
+    "extension/popup.css",
+    "extension/popup.js",
+    "extension/ui-copy.js",
+    "tests/receipt.test.js",
+    "tests/site-demo.e2e.js",
+    "tests/real-site.e2e.js",
+    "tests/real-firefox.e2e.py",
+    "docs/REAL_TEST_2026-11-12.md",
+    "docs/test-results/real-site-packs-2026-11-12-153512.json",
+    "docs/test-results/real-firefox-2026-11-12-154230.json"
+  ],
+  "tests": [
+    {
+      "command": "node tests/receipt.test.js",
+      "result": "pass",
+      "note": "compteurs, moteur, note brouillon, masquage à la restauration"
+    },
+    {
+      "command": "PLAYWRIGHT_BROWSERS_PATH=.cache/ms-playwright node tests/real-site.e2e.js",
+      "result": "pass",
+      "note": "Chrome 158, reçu 188/188, EN 40/44, 0 erreur"
+    },
+    {
+      "command": "server/.venv/bin/python tests/real-firefox.e2e.py",
+      "result": "pass",
+      "note": "Firefox 159, reçu 188/188, EN 40/44, 0 erreur"
+    },
+    {
+      "command": "node tests/site-demo.e2e.js && node tests/state.test.js && node tests/ui-language.test.js",
+      "result": "pass",
+      "note": "reçu, états, popup FR/EN"
+    },
+    {
+      "command": "./scripts/package-extension.sh && ./scripts/build-firefox.sh && npx web-ext lint --source-dir dist/firefox",
+      "result": "pass",
+      "note": "3 ZIP 403/404 Ko, lint 0/0/0"
+    },
+    {
+      "command": "NK_MOCK=1 server/.venv/bin/python -m pytest -q server/test_api.py",
+      "result": "pass",
+      "note": "30 passed"
+    },
+    {
+      "command": "python3 scripts/check-evolution.py",
+      "result": "pass",
+      "note": "journal valide après ajout de l'entrée"
+    }
+  ],
+  "evidence": "docs/REAL_TEST_2026-11-12.md ; data-nk-summary ; preuves Chrome/Firefox 188/188 + EN 40/44 ; ZIP 403/404 Ko",
+  "next": "Validation native et inédit ; Firefox paquet public à rejouer",
+  "blockers": []
+}
+```

@@ -14,7 +14,7 @@
 | **M6** — formats de jetons | ⛔ blocked | 20 phrases prêtes ; torch/NLLB absents | Télécharger NLLB, comparer 4 formats |
 | **M7** — site officiel Vue | ✅ done | Chrome 158 et Firefox 159 : 5 étapes + EN, **188/188**, 0 non traduit, 0 critique MT, restauration 5/5, 0 erreur | EN pack-only 40/44 (4 dates ; 38/44 audit backend) |
 | **M8** — audio backend | ⛔ blocked | 15 phrases sans montant ; 0 OGG, index absent | Recevoir audio + consentements de Klein |
-| **M9** — harnais e2e | ✅ done | `api.robust.py` 17/17 ; charge 24/24, p95 29,86 ms ; 503 isolé ; taxonomie ; harnais Chrome/Firefox versionnés | Modes unseen/demo (NLLB, validation native) |
+| **M9** — harnais e2e | ✅ done | `api.robust.py` 17/17 ; charge 24/24, p95 29,86 ms ; 503 isolé ; taxonomie ; **reçu de traduction** ; harnais Chrome/Firefox versionnés | Modes unseen/demo (NLLB, validation native) |
 | **M10** — packaging/CI | ✅ done | 3 ZIP 370 Ko ; Chrome + Firefox chargés ; lint 0/0/0 ; CI verte | — |
 | **M11** — normaliseur ɲ/ny | ⛔ blocked | Table native vide dans `docs/ORTHOGRAPHY.md` | Recevoir la table validée |
 | **M12** — Shadow DOM/iframes | ✅ done | [docs/SHADOW_DOM_IFRAMES.md](SHADOW_DOM_IFRAMES.md) | Support futur non promis |
@@ -42,7 +42,7 @@ python3 scripts/check-evolution.py
 
 ## Blocages externes
 
-- packs fub/ewo/dua remplis en brouillons (185/198/199), **0 phrase validée** ;
+- packs fub/ewo/dua remplis en brouillons (231/210/203), **0 phrase validée** ;
 - glossaire 0 validé, table orthographique non validée ;
 - 15 fichiers audio absents ;
 - modèle NLLB non téléchargé ;

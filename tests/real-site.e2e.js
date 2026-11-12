@@ -60,10 +60,19 @@ function norm(text) {
   return String(text || "").replace(/\s+/g, " ").trim();
 }
 
+async function readSummary(page) {
+  return page.evaluate(() => {
+    const raw = document.documentElement.getAttribute("data-nk-summary");
+    if (!raw) return null;
+    try { return JSON.parse(raw); } catch { return null; }
+  });
+}
+
 async function snapshot(page) {
   const body = await page.locator("body").innerText();
   return {
     body,
+    summary: await readSummary(page),
     normalized: norm(body),
     title: await page.title(),
     inputs: await page
@@ -93,19 +102,20 @@ async function toastText(page) {
 
 async function waitForTranslation(page, timeoutMs = 20000) {
   const started = Date.now();
-  let previous = -1;
-  let stable = 0;
   while (Date.now() - started < timeoutMs) {
-    const count = await page.locator("[data-nk-translated]").count();
-    stable = count === previous ? stable + 1 : 0;
-    previous = count;
-    if (count > 0 && stable >= 2) {
-      await page.waitForTimeout(400);
-      return count;
+    const summary = await readSummary(page);
+    if (summary && summary.translated > 0) {
+      await page.waitForTimeout(500);
+      return summary;
     }
-    await page.waitForTimeout(400);
+    const count = await page.locator("[data-nk-translated]").count();
+    if (count > 0) {
+      await page.waitForTimeout(400);
+      return { translated: count };
+    }
+    await page.waitForTimeout(300);
   }
-  return page.locator("[data-nk-translated]").count();
+  return { translated: await page.locator("[data-nk-translated]").count() };
 }
 
 async function waitForToast(page, timeoutMs = 20000) {
@@ -244,18 +254,21 @@ async function main() {
     ) {
       const before = await snapshot(page);
       await send({ type: "NK_TRANSLATE_PAGE", target: "fub" });
-      await waitForTranslation(page);
+      const summary = await waitForTranslation(page);
       const toast = await waitForToast(page);
       const after = await snapshot(page);
       const domTranslated = await page.locator("[data-nk-translated]").count();
+      const domUntranslated = await page.locator("[data-nk-untranslated]").count();
+      const domDemoCritical = await page.locator("[data-nk-demo-critical]").count();
       const counts = {
         fub: await page.locator('[lang="fub"]').count(),
-        translated: domTranslated,
-        untranslated: await page.locator("[data-nk-untranslated]").count(),
-        demoCritical: await page.locator("[data-nk-demo-critical]").count(),
-        toastTranslated:
-          Number((toast.match(/(\d+) passage\(s\) traduits/) || [])[1] || 0) ||
-          domTranslated
+        translated: summary?.translated ?? domTranslated,
+        domTranslated,
+        untranslated: summary?.untranslated ?? domUntranslated,
+        demoCritical: summary?.demo ?? domDemoCritical,
+        partial: summary?.partial ?? 0,
+        human: summary?.human ?? 0,
+        provider: summary?.provider || null
       };
 
       const failures = [];
@@ -291,6 +304,7 @@ async function main() {
       if (restored.title !== before.title) failures.push("titre non restauré");
       const markers = await page.locator("[data-nk-translated]").count();
       if (markers !== 0) failures.push(`${markers} marqueur(s) après restauration`);
+      if (restored.summary) failures.push("reçu non nettoyé après restauration");
 
       run.steps[label] = { counts, before: { title: before.title }, after: { title: after.title, body: after.body }, toast, failures, restored: failures.length === 0 };
       if (failures.length) throw new Error(`${label}: ${failures.join(", ")}`);
@@ -409,12 +423,12 @@ async function main() {
       throw new Error("repli phrase : un non traduit subsiste");
     }
 
-    const frToastTotal = ["step1", "step2", "step3", "step4", "step5"].reduce(
-      (sum, key) => sum + run.steps[key].counts.toastTranslated,
+    const frSummaryTotal = ["step1", "step2", "step3", "step4", "step5"].reduce(
+      (sum, key) => sum + run.steps[key].counts.translated,
       0
     );
-    run.frToastTotal = frToastTotal;
-    if (frToastTotal !== 188) throw new Error(`total FR ${frToastTotal}, attendu 188`);
+    run.frToastTotal = frSummaryTotal;
+    if (frSummaryTotal !== 188) throw new Error(`total FR ${frSummaryTotal}, attendu 188`);
     if (run.errors.length) throw new Error(`erreurs page : ${run.errors.slice(0, 3).join(" | ")}`);
     run.status = "pass";
     run.finishedAt = new Date().toISOString();

@@ -87,6 +87,11 @@
   function clearNotice() {
     noticeHost?.remove();
     noticeHost = null;
+    try {
+      document.documentElement.removeAttribute("data-nk-summary");
+    } catch {
+      // Document sans racine : rien à nettoyer.
+    }
   }
 
   function updateNotice({
@@ -1144,20 +1149,32 @@
         partial: partialCount
       });
 
+      // Reçu de traduction : données machine-lisibles (harnais, popup) et
+      // carte lisible. Aucun texte de page n'est exposé, uniquement des
+      // compteurs et le moteur.
+      const summary = {
+        label: spec.label,
+        translated: translatedCount,
+        human: humanReviewedCount,
+        demo: demoCriticalCount,
+        untranslated: flaggedCount + criticalCount,
+        partial: partialCount,
+        truncated: pageTruncated,
+        simple: DEMO_PAGE,
+        provider: provider || null,
+        source,
+        target: targetCode
+      };
+      document.documentElement.setAttribute(
+        "data-nk-summary",
+        JSON.stringify(summary)
+      );
+
       // Détail pour le popup, s'il est encore ouvert.
       try {
         api.runtime.sendMessage({
           type: "NK_TRANSLATION_SUMMARY",
-          summary: {
-            label: spec.label,
-            translated: translatedCount,
-            human: humanReviewedCount,
-            demo: demoCriticalCount,
-            untranslated: flaggedCount + criticalCount,
-            partial: partialCount,
-            truncated: pageTruncated,
-            simple: DEMO_PAGE
-          }
+          summary
         });
       } catch {
         // Best-effort : le popup est souvent déjà fermé.

@@ -2,6 +2,15 @@
 
 Générés en local par les harnais du dépôt. Aucune donnée réelle.
 
+## 12 novembre 2026 — reçu de traduction
+
+| Fichier | Portée | Résultat |
+|---|---|---|
+| `real-site-packs-2026-11-12-153512.json` | Chrome 158, 5 étapes + EN, reçu | **188/188**, EN 40/44, 0 non traduit, 0 erreur |
+| `real-firefox-2026-11-12-154230.json` | Firefox 159, 5 étapes + EN, reçu | **188/188**, EN 40/44, 0 non traduit, 0 erreur |
+
+Voir [`docs/REAL_TEST_2026-11-12.md`](../REAL_TEST_2026-11-12.md).
+
 ## 10 novembre 2026 — recette pack-only, charge API, taxonomie
 
 | Fichier | Portée | Résultat |
@@ -52,7 +61,7 @@ Voir [`docs/AUDIT_2026-11-08.md`](../AUDIT_2026-11-08.md).
 | `pipeline-unseen.json` | `node tests/pipeline.e2e.js --mode=unseen` | bloqué : NLLB absent |
 | `pipeline-demo.json` | `node tests/pipeline.e2e.js --mode=demo` | bloqué : validation native absente |
 | `native-review-audit.json` / `.csv` | `python3 scripts/audit-native-reviews.py` | **472 lignes auditées**, 85 « Tafsiri » rejetées |
-| `reviewed-packs.json` | `python3 scripts/build-reviewed-packs.py` | **0 validée**, 185/198/199 entrées |
+| `reviewed-packs.json` | `python3 scripts/build-reviewed-packs.py` | **0 validée**, 231/210/203 entrées |
 
 ## Ce que ces résultats prouvent
 

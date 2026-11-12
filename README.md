@@ -33,8 +33,8 @@ Projet préparé pour le **SAFINUM Innovate Challenge 2026** (Yaoundé,
 
 | Élément | État vérifié |
 |---|---|
-| Pack fulfulde | **185 entrées** (FR+EN), **0 validée** ; brouillons humains/éditoriaux |
-| Packs ewondo / duala | **198** et **199 entrées**, **0 validée** (2 `reviewed` en ewondo) |
+| Pack fulfulde | **231 entrées** (FR+EN), **0 validée** ; brouillons humains/éditoriaux |
+| Packs ewondo / duala | **210** et **203 entrées**, **0 validée** (2 `reviewed` en ewondo) |
 | Glossaire finance | 40 termes, **0 validé** |
 | Audio | **0 enregistrement** ; 15 phrases sans montant prêtes |
 | MT duala (pilote) | **échoué** : répétitions, non utilisable pour le niveau A |
@@ -156,7 +156,7 @@ Content script
       ▼
 Background (service worker Chrome / event page Firefox)
   ├─ cache local
-  ├─ packs communautaires validés (fulfulde, ewondo, duala)
+  ├─ packs communautaires validés/brouillons (fulfulde, ewondo, duala)
   ├─ phrases niveau A sans pack : bloquées, jamais de MT
   ├─ backend local flagship-ai / NLLB (127.0.0.1:8000)
   └─ cloud MyMemory expérimental (opt-in, seulement si paire cloud)
@@ -179,6 +179,8 @@ Moteur — flagship-ai, NLLB, MyMemory ou pack
   confirmation, etc. ne sont jamais envoyés à la MT sans pack validé.
 - **Détection FR/EN** avant traduction, avec score de confiance affiché.
 - **Traduction réversible** : bouton « Restaurer l’original ».
+- **Reçu de traduction** : compteurs traduits/partiels/laissés en français,
+  moteur utilisé, entrées non validées, et nettoyage à la restauration.
 - **Contenu inédit** : test dans le popup ou traduction de la sélection.
 - **Attributs traduits** : `title`, `aria-label`, `placeholder`, `alt`, boutons
   `input` et options de `select`.
@@ -201,9 +203,9 @@ Moteur — flagship-ai, NLLB, MyMemory ou pack
 
 | Langue | Code | Moteur | Ressources connues | État |
 |---|---|---|---|---|
-| Fulfulde (Adamawa) | `fub` | `flagship-ai` + NLLB secours + pack | Common Voice ASR ; 1 303 enregistrements TTS | 182 entrées de pack, **0 validée** (brouillons humains/éditoriaux) |
-| Ewondo | `ewo` | `flagship-ai` brouillon + pack | Common Voice 27.0 : 14,36 h, 31 voix ; Ewondo-ASR ~3 h 11 | 195 entrées de pack, **0 validée** (193 draft, 2 reviewed) |
-| Duala | `dua` | Pack communautaire | Common Voice 27.0 (heures à vérifier) | 196 entrées de pack, **0 validée** (brouillons humains/éditoriaux) |
+| Fulfulde (Adamawa) | `fub` | `flagship-ai` + NLLB secours + pack | Common Voice ASR ; 1 303 enregistrements TTS | 231 entrées de pack, **0 validée** (brouillons humains/éditoriaux) |
+| Ewondo | `ewo` | `flagship-ai` brouillon + pack | Common Voice 27.0 : 14,36 h, 31 voix ; Ewondo-ASR ~3 h 11 | 210 entrées de pack, **0 validée** (208 draft, 2 reviewed) |
+| Duala | `dua` | Pack communautaire | Common Voice 27.0 (heures à vérifier) | 203 entrées de pack, **0 validée** (brouillons humains/éditoriaux) |
 
 Le **kit natif TRAPD** est prêt dans [`data/review/`](data/review/) :
 classeurs T1/T2, fiche d’arbitrage et 20 phrases inédites. Aucune traduction
