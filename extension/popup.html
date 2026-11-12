@@ -75,6 +75,31 @@
         <p id="status" class="status" role="status" aria-live="polite" data-tone="ok">
           Prêt · détection FR/EN
         </p>
+        <section id="receipt" class="receipt" hidden aria-label="Reçu de traduction">
+          <div class="receipt-head">
+            <span data-i18n="receiptTitle">Reçu de traduction</span>
+            <span id="receiptEngine" class="receipt-engine"></span>
+          </div>
+          <dl class="receipt-grid">
+            <div>
+              <dt data-i18n="receiptTranslated">Traduits</dt>
+              <dd id="receiptTranslated">—</dd>
+            </div>
+            <div>
+              <dt data-i18n="receiptPartial">Partiels</dt>
+              <dd id="receiptPartial">—</dd>
+            </div>
+            <div>
+              <dt data-i18n="receiptUntranslated">En français</dt>
+              <dd id="receiptUntranslated">—</dd>
+            </div>
+            <div>
+              <dt data-i18n="receiptUnverified">Non validés</dt>
+              <dd id="receiptUnverified">—</dd>
+            </div>
+          </dl>
+          <p id="receiptNote" class="receipt-note"></p>
+        </section>
 
         <details class="test">
           <summary>

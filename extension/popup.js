@@ -92,9 +92,39 @@ function spec() {
   return LANG.getTarget(target) || LANG.getTarget("fub");
 }
 
+function hideReceipt() {
+  const receipt = $("receipt");
+  if (receipt) receipt.hidden = true;
+}
+
+function renderReceipt(summary) {
+  const receipt = $("receipt");
+  if (!receipt) return;
+  if (!summary || !summary.translated) {
+    hideReceipt();
+    return;
+  }
+  $("receiptTranslated").textContent = summary.translated;
+  $("receiptPartial").textContent = summary.partial || 0;
+  $("receiptUntranslated").textContent = summary.untranslated || 0;
+  $("receiptUnverified").textContent = summary.human || 0;
+  $("receiptEngine").textContent = summary.provider
+    ? providerLabel(summary.provider)
+    : "";
+  const notes = [];
+  if (summary.demo) {
+    notes.push(t("receiptDemo", { n: summary.demo }));
+  }
+  if (summary.truncated) notes.push(t("truncated"));
+  notes.push(summary.human ? t("receiptDraft") : t("receiptValidated"));
+  $("receiptNote").textContent = notes.join(" · ");
+  receipt.hidden = false;
+}
+
 api.runtime.onMessage.addListener((message) => {
   if (message?.type !== "NK_TRANSLATION_SUMMARY") return;
   const summary = message.summary || {};
+  renderReceipt(summary);
   if (!summary.translated) {
     setStatus(t("noTranslation"));
     return;
@@ -439,14 +469,15 @@ $("translatePage").addEventListener("click", () =>
   )
 );
 
-$("restore").addEventListener("click", () =>
-  runPageAction(
+$("restore").addEventListener("click", () => {
+  hideReceipt();
+  return runPageAction(
     $("restore"),
     t("restoring"),
     { type: "NK_RESTORE" },
     t("restored")
-  )
-);
+  );
+});
 
 $("translateSelection").addEventListener("click", () =>
   runPageAction(

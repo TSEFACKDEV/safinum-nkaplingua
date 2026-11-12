@@ -172,6 +172,16 @@ async function main() {
     `réseau inattendu : ${background.calls.join(", ")}`
   );
 
+  const summaryRaw = window.document.documentElement.getAttribute(
+    "data-nk-summary"
+  );
+  assert(summaryRaw, "reçu de traduction absent");
+  const summary = JSON.parse(summaryRaw);
+  assert(summary.translated >= 3, `reçu traduits : ${summary.translated}`);
+  assert(summary.untranslated >= 1, `reçu non traduits : ${summary.untranslated}`);
+  assert(summary.partial >= 0, "reçu partiels invalide");
+  assert(summary.provider === "pack", `reçu moteur : ${summary.provider}`);
+
   // En mode démo, aucune pastille ni mention technique visible.
   const notice = window.document.getElementById("nk-notice-host");
   assert(!notice, "notice de démonstration encore visible");
@@ -181,8 +191,17 @@ async function main() {
     "pastilles par phrase encore présentes dans le CSS"
   );
 
+  await new Promise((resolve) => {
+    listener({ type: "NK_RESTORE" }, {}, resolve);
+  });
+  await new Promise((resolve) => setTimeout(resolve, 120));
+  assert(
+    !window.document.documentElement.hasAttribute("data-nk-summary"),
+    "reçu non nettoyé après restauration"
+  );
+
   console.log(
-    "site-demo OK — pack humain, mention unique, badge non traduit, zéro réseau externe"
+    "site-demo OK — pack humain, reçu, badge non traduit, zéro réseau externe"
   );
 }
 

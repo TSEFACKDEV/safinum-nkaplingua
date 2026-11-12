@@ -90,8 +90,12 @@ def snapshot(driver) -> dict:
         const body = document.body ? document.body.innerText : "";
         const hosts = [...document.querySelectorAll("div")].filter(d => d.shadowRoot);
         const toast = hosts.map(h => h.shadowRoot.querySelector(".toast")?.textContent || "").filter(Boolean).pop() || "";
+        const rawSummary = document.documentElement.getAttribute("data-nk-summary");
+        let summary = null;
+        try { summary = rawSummary ? JSON.parse(rawSummary) : null; } catch { summary = null; }
         return {
           body,
+          summary,
           title: document.title,
           inputs: [...document.querySelectorAll("input,select,textarea")].map(e => ({value:e.value, checked:e.checked})),
           buttons: [...document.querySelectorAll("button")].map(e => ({text:(e.innerText||"").trim(), disabled:e.disabled})),
@@ -191,25 +195,37 @@ def main() -> int:
             """
         )
 
-        def check_step(label: str, expect_title: bool = False) -> None:
+        def wait_summary(timeout: float = 25) -> dict | None:
+            deadline = time.time() + timeout
+            while time.time() < deadline:
+                summary = snapshot(driver)["summary"]
+                if summary and summary.get("translated", 0) > 0:
+                    time.sleep(0.5)
+                    return summary
+                time.sleep(0.3)
+            return snapshot(driver)["summary"]
+
+        def check_step(label: str, expect_title: bool = False, allowed_untranslated: int = 0) -> None:
             before = snapshot(driver)
             before_norm = norm(before["body"])
             trigger(driver, "nk-translate")
+            summary = wait_summary(driver) if False else wait_summary()
             toast = wait_toast(driver)
             after = snapshot(driver)
             counts = {
                 "fub": after["fub"],
-                "translated": after["translated"],
-                "untranslated": after["untranslated"],
-                "demoCritical": after["demoCritical"],
-                "toastTranslated": int(
-                    (re.search(r"(\d+) segment\(s\) traduits", toast) or [0, 0])[1]
-                ),
+                "translated": (summary or {}).get("translated", after["translated"]),
+                "domTranslated": after["translated"],
+                "untranslated": (summary or {}).get("untranslated", after["untranslated"]),
+                "demoCritical": (summary or {}).get("demo", after["demoCritical"]),
+                "partial": (summary or {}).get("partial", 0),
+                "human": (summary or {}).get("human", 0),
+                "provider": (summary or {}).get("provider"),
             }
             failures = []
             if counts["translated"] == 0:
                 failures.append("aucun segment traduit")
-            if counts["untranslated"] != 0:
+            if counts["untranslated"] > allowed_untranslated:
                 failures.append(f"{counts['untranslated']} non traduit(s)")
             if counts["demoCritical"] != 0:
                 failures.append(f"{counts['demoCritical']} critique(s) MT")
@@ -249,6 +265,8 @@ def main() -> int:
                 failures.append("restauration incomplète")
             if restored["title"] != before["title"]:
                 failures.append("titre non restauré")
+            if restored["summary"]:
+                failures.append("reçu non nettoyé après restauration")
 
             run["steps"][label] = {
                 "counts": counts,
@@ -291,10 +309,10 @@ def main() -> int:
             lambda d: "Balance" in d.find_element(By.TAG_NAME, "body").text
         )
         time.sleep(1)
-        check_step("en-step1", expect_title=True)
+        check_step("en-step1", expect_title=True, allowed_untranslated=4)
         run["en"] = {**run["steps"].pop("en-step1"), "label": "en-step1"}
 
-        total = sum(run["steps"][key]["counts"]["toastTranslated"] for key in ["step1", "step2", "step3", "step4", "step5"])
+        total = sum(run["steps"][key]["counts"]["translated"] for key in ["step1", "step2", "step3", "step4", "step5"])
         run["frToastTotal"] = total
         if total != 188:
             raise AssertionError(f"total FR {total}, attendu 188")

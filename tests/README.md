@@ -25,6 +25,7 @@ Node 20+ (CI) ou 24 (poste de dev). Python 3.12 pour le backend.
 | `tests/api.robust.py` | 17 contrats HTTP, CORS, refus, JSON sans HTML (M9) | `NK_MOCK=1 python3 tests/api.robust.py` | **pass** |
 | `tests/api-load.test.py` | charge 24 requêtes concurrentes FR/EN, 503 ewondo isolé (M9) | `server/.venv/bin/python tests/api-load.test.py` | **pass** |
 | `tests/error-taxonomy.test.js` | messages popup distincts : low_roundtrip, token_lost, too_short, dnt_missing | `node tests/error-taxonomy.test.js` | **pass** |
+| `tests/receipt.test.js` | reçu de traduction : compteurs, moteur, note brouillon, masquage à la restauration | `node tests/receipt.test.js` | **pass** |
 | `tests/real-site.e2e.js` | recette Chrome réelle 5 étapes + EN, packs, préservation (manuel) | `PLAYWRIGHT_BROWSERS_PATH=.cache/ms-playwright node tests/real-site.e2e.js` | **pass** |
 | `tests/real-firefox.e2e.py` | recette Firefox réelle 5 étapes + EN, packs, préservation (manuel) | `server/.venv/bin/python tests/real-firefox.e2e.py` | **pass** |
 | `tests/guide.e2e.js` | conditions du guide SAFINUM : page non modifiée, dynamique, montants, changement de langue | `NK_TEST_CACHE=/tmp/nk-guide node tests/guide.e2e.js` | **pass** |
@@ -58,8 +59,8 @@ Les résultats générés sont dans
 - `server/test_api.py`, `tests/api.robust.py` et `tests/api-load.test.py` en mode `NK_MOCK=1` ;
 - `scripts/test-extension.js`, `tests/content.test.js`,
   `tests/privacy.test.js`, `tests/cloud-gating.test.js`,
-  `tests/criticality.test.js`, `tests/error-taxonomy.test.js` et
-  `tests/pipeline.e2e.js --mode=all` ;
+  `tests/criticality.test.js`, `tests/error-taxonomy.test.js`,
+  `tests/receipt.test.js` et `tests/pipeline.e2e.js --mode=all` ;
 - `scripts/check-evolution.py`, `scripts/check-pack-collisions.py`,
   `tests/check-pack-collisions.test.py`, `tests/import-glossary.test.py`,
   les contrôles de packs et de données ;
