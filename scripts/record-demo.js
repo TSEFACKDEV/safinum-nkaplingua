@@ -471,7 +471,7 @@ async function main() {
       "Une couche de confiance pour l’inclusion financière",
       [
         "Sans modifier le site. Sans exposer les données sensibles.",
-        "github.com/TSEFACKDEV/safinum-nkaplingua"
+        "Équipe ARTEMIS 237 · github.com/TSEFACKDEV/safinum-nkaplingua"
       ],
       7000);
   } finally {

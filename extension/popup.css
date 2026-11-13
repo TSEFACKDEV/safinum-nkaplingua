@@ -139,6 +139,17 @@ summary:focus-visible {
   letter-spacing: -0.015em;
 }
 
+.team-tag {
+  padding: 1px 5px;
+  border: 1px solid var(--line-strong);
+  border-radius: 4px;
+  color: var(--muted);
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  white-space: nowrap;
+}
+
 .route {
   display: inline-flex;
   align-items: center;
@@ -224,8 +235,8 @@ h1 {
   position: relative;
   flex: 1;
   min-width: 0;
-  padding: 7px 10px;
-  border-radius: 0 var(--radius-lg) var(--radius-lg) 0;
+  padding: 8px 12px;
+  border-radius: var(--radius-lg);
 }
 
 .lang-label {
@@ -542,8 +553,16 @@ h1 {
   font-variant-numeric: tabular-nums;
   line-height: 1.2;
 }
+.receipt-summary {
+  margin: 4px 0 0;
+  color: var(--ink);
+  font-size: 13px;
+  font-weight: 600;
+  line-height: 1.35;
+}
+
 .receipt-note {
-  margin: 8px 0 0;
+  margin: 6px 0 0;
   color: var(--muted);
   font-size: 11px;
   line-height: 1.4;
@@ -637,6 +656,13 @@ button:disabled {
   padding: 0 0 4px;
 }
 
+.test-help {
+  margin: 0 0 6px;
+  color: var(--muted);
+  font-size: 11px;
+  line-height: 1.4;
+}
+
 .textarea {
   width: 100%;
   min-height: 76px;
@@ -715,6 +741,7 @@ button:disabled {
   display: inline;
   white-space: nowrap;
 }
+
 
 .privacy {
   margin-left: auto;

@@ -9,6 +9,8 @@
 > **Traduction financière non intrusive en fulfulde, ewondo et duala,
 > directement dans le navigateur.**
 
+**Équipe ARTEMIS 237** — Klein · Freedy · Marius.
+
 NkapLingua est une extension navigateur autonome qui traduit les interfaces
 financières numériques en **trois langues camerounaises** sans modifier le site
 source et sans lire les champs sensibles. Le **fulfulde d’Adamawa** et
@@ -178,11 +180,16 @@ Moteur — flagship-ai, NLLB, MyMemory ou pack
   pour le fulfulde ; duala en pack.
 - **Barrière niveau A** : solde, frais, montant, PIN/OTP, transaction,
   confirmation, etc. ne sont jamais envoyés à la MT sans pack validé.
-- **Détection FR/EN** avant traduction, avec score de confiance affiché.
-- **Traduction réversible** : bouton « Restaurer l’original ».
-- **Reçu de traduction** : compteurs traduits/partiels/laissés en français,
-  moteur utilisé, entrées non validées, et nettoyage à la restauration.
-- **Contenu inédit** : test dans le popup ou traduction de la sélection.
+- **Interface simplifiée** : une langue cible, un bouton principal, et les
+  actions secondaires (restaurer, sélection) clairement séparées.
+- **Détection FR/EN** automatique avant traduction.
+- **Traduction réversible** : bouton « Restaurer », activé seulement quand une
+  traduction existe.
+- **Résultat compact** : nombre de passages traduits et nombre laissés en
+  français ; le détail technique reste masqué.
+- **Contenu inédit** : test dans le popup ou traduction de la sélection. Le
+  texte est découpé en phrases : les phrases connues sont traduites, les
+  autres restent en français avec une explication, sans mot à mot.
 - **Attributs traduits** : `title`, `aria-label`, `placeholder`, `alt`, boutons
   `input` et options de `select`.
 - **Pseudonymisation** des montants, numéros, URLs, emails et noms de

@@ -3,6 +3,7 @@
 ## 1. Identification
 
 - **Nom du projet** : NkapLingua
+- **Équipe** : ARTEMIS 237 (Klein, Freedy, Marius)
 - **Hackathon** : SAFINUM Innovate Challenge 2026
 - **Langues cibles** : fulfulde adamawa (`fub`) et ewondo (`ewo`) en pack + MT
   brouillon ; duala (`dua`) en pack de brouillons non validés. **0 phrase

@@ -1,7 +1,7 @@
 # Consentement de contribution linguistique
 
 **Projet** : NkapLingua — SAFINUM Innovate Challenge 2026  
-**Responsable** : équipe NkapLingua, Yaoundé  
+**Responsable** : équipe ARTEMIS 237, Yaoundé  
 **Langue concernée** : ☐ fulfulde (fub) ☐ ewondo (ewo) ☐ duala (dua)  
 **Rôle** : ☐ traducteur 1 ☐ traducteur 2 ☐ arbitre ☐ prétest ☐ voix
 

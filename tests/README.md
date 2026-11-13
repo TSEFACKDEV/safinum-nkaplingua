@@ -36,6 +36,8 @@ Node 20+ (CI) ou 24 (poste de dev). Python 3.12 pour le backend.
 | `tests/state.test.js` | état de page, retraduction au changement de langue, refus des no-op | `node tests/state.test.js` | **pass** |
 | `tests/ui-language.test.js` | popup FR/EN selon `<html lang>` du site | `node tests/ui-language.test.js` | **pass** |
 | `tests/popup-actions.test.js` | busy, succès réel et refus des no-op dans le popup | `node tests/popup-actions.test.js` | **pass** |
+| `tests/unseen-text.test.js` | texte inédit multi-phrases : phrases connues traduites, inconnues laissées en français, critique préservée | `node tests/unseen-text.test.js` | **pass** |
+| `tests/popup-unseen.test.js` | popup : repli partiel expliqué sans erreur rouge, phrase absente signalée calmement | `node tests/popup-unseen.test.js` | **pass** |
 
 Vérifications complémentaires :
 

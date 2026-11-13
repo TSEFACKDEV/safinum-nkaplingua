@@ -12,6 +12,7 @@
         <div class="brand">
           <img class="brand-mark" src="icon.svg" alt="" width="26" height="26" />
           <span class="wordmark">NkapLingua</span>
+          <span class="team-tag">ARTEMIS 237</span>
         </div>
         <div class="route" aria-label="Langue source et langue cible">
           <span id="sourceCode">FR/EN</span>
@@ -27,12 +28,8 @@
         </div>
 
         <div class="lang-rail">
-          <div class="lang-cell source-cell">
-            <span class="lang-label" data-i18n="source">Source</span>
-            <span class="lang-value">FR/EN</span>
-          </div>
           <div class="lang-cell target-cell">
-            <span class="lang-label" id="targetLabel" data-i18n="target">Cible</span>
+            <span class="lang-label" id="targetLabel" data-i18n="target">Traduire en</span>
             <button
               id="languageButton"
               class="lang-button"
@@ -52,8 +49,8 @@
         </div>
 
         <p id="targetNote" class="target-note" data-engine="mt">
-          <span id="engineTag" class="engine-tag">MT:</span>
-          <span id="targetStatus">validation native en cours</span>
+          <span id="engineTag" class="engine-tag" hidden>MT:</span>
+          <span id="targetStatus">démonstration · aucune phrase validée</span>
         </p>
 
         <button id="translatePage" class="primary" type="button">
@@ -64,7 +61,7 @@
         </button>
 
         <div class="actions">
-          <button id="restore" class="action" type="button" data-i18n="restore">
+          <button id="restore" class="action" type="button" data-i18n="restore" disabled>
             Restaurer
           </button>
           <button id="translateSelection" class="action" type="button" data-i18n="translateSelection">
@@ -73,14 +70,16 @@
         </div>
 
         <p id="status" class="status" role="status" aria-live="polite" data-tone="ok">
-          Prêt · détection FR/EN
+          Prêt à traduire cette page.
         </p>
-        <section id="receipt" class="receipt" hidden aria-label="Reçu de traduction">
+
+        <section id="receipt" class="receipt" hidden aria-label="Résultat de traduction">
           <div class="receipt-head">
-            <span data-i18n="receiptTitle">Reçu de traduction</span>
-            <span id="receiptEngine" class="receipt-engine"></span>
+            <span data-i18n="receiptTitle">Résultat</span>
+            <span id="receiptEngine" class="receipt-engine" hidden></span>
           </div>
-          <dl class="receipt-grid">
+          <p id="receiptSummary" class="receipt-summary"></p>
+          <dl class="receipt-grid" hidden>
             <div>
               <dt data-i18n="receiptTranslated">Traduits</dt>
               <dd id="receiptTranslated">—</dd>
@@ -110,6 +109,9 @@
             </svg>
           </summary>
           <div class="test-body">
+            <p class="test-help" data-i18n="testHelp">
+              Les phrases déjà dans le pack sont traduites. Les autres restent en français.
+            </p>
             <label class="sr-only" for="unseen" data-i18n="testLabel">Texte financier à traduire</label>
             <textarea
               id="unseen"
@@ -129,22 +131,14 @@
       </main>
 
       <footer class="footer">
-        <span id="privacyMode" class="local">Local · pseudonymisé</span>
+        <span id="privacyMode" class="local">100 % local</span>
         <details class="privacy">
           <summary data-i18n="privacy">Confidentialité</summary>
           <div class="privacy-body">
             <p data-i18n="privacyP1">
-              Le backend local est prioritaire. MyMemory n’est utilisé que si
-              vous l’autorisez explicitement ci-dessous : dans ce cas, montants,
-              URLs, emails et noms de bénéficiaires sont remplacés par des
-              jetons. Aucun mot de passe, code PIN, OTP ou valeur de formulaire
-              n’est lu. Pour un usage réel, lancer le backend NLLB local.
-            </p>
-            <p data-i18n="privacyP2">
-              Les packs communautaires contiennent des traductions en cours
-              de révision (fulfulde, ewondo, duala). En mode démo SAFINUM,
-              elles sont appliquées avec une mention « démonstration ».
-              Le duala ne contacte aucun service cloud.
+              Tout reste sur cet appareil avec les packs. Aucun mot de passe,
+              code PIN, OTP ou valeur de formulaire n’est lu. MyMemory n’est
+              utilisé que si vous l’autorisez explicitement ci-dessous.
             </p>
             <label class="cloud-toggle">
               <input id="cloudFallback" type="checkbox" />

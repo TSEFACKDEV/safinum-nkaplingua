@@ -37,7 +37,7 @@ Nous pouvons signer une convention, limiter l’usage au hackathon et retirer
 les données à votre demande.
 
 Cordialement,
-L’équipe NkapLingua
+L’équipe ARTEMIS 237
 ```
 
 **Canal** : formulaire de contact de Bible.com / United Bible Societies, ou
@@ -69,7 +69,7 @@ Sans licence explicite, nous ne pouvons pas utiliser le dataset dans un
 projet public.
 
 Cordialement,
-L’équipe NkapLingua
+L’équipe ARTEMIS 237
 ```
 
 **Canal** : discussion Hugging Face du dataset ou profil `OlameMend`.
@@ -98,7 +98,7 @@ Pouvez-vous préciser :
 Nous ne pouvons pas utiliser un fichier sans licence explicite.
 
 Cordialement,
-L’équipe NkapLingua
+L’équipe ARTEMIS 237
 ```
 
 **Canal** : discussion Hugging Face des datasets `Favourez`.
@@ -126,7 +126,7 @@ Pouvez-vous nous confirmer :
 4. si un usage commercial est exclu ou soumis à un accord séparé.
 
 Cordialement,
-L’équipe NkapLingua
+L’équipe ARTEMIS 237
 ```
 
 **Canal** : Mozilla Data Collective / Institut de recherche indiqué sur la

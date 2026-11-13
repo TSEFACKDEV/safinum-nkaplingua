@@ -83,6 +83,8 @@ jobs:
           node tests/error-taxonomy.test.js
           node tests/receipt.test.js
           node tests/sentence-fallback.test.js
+          node tests/unseen-text.test.js
+          node tests/popup-unseen.test.js
 
       - name: Validate manifests
         run: |

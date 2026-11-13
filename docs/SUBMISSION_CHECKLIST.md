@@ -1,5 +1,7 @@
 # Checklist de soumission — SAFINUM Innovate 2026
 
+**Équipe ARTEMIS 237** — Klein · Freedy · Marius.
+
 > **État réel — recette du 12–13 novembre 2026** : pack-only **188/188 sur
 > les 5 étapes** en Chrome et Firefox, EN **40/44**, restauration 5/5,
 > 0 erreur, **0 phrase validée**. Les 3 ZIP, le PDF et la release doivent être

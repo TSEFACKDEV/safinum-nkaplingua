@@ -7,6 +7,7 @@ const t = (key, vars) => (UI ? UI.t(key, vars) : key);
 
 let target = "fub";
 let actionBusy = false;
+let restoreAvailable = false;
 
 function setStatus(message) {
   const status = $("status");
@@ -39,12 +40,19 @@ function updatePrivacyIndicator(enabled) {
   indicator.dataset.cloud = enabled ? "true" : "false";
 }
 
+function setRestoreAvailable(available) {
+  restoreAvailable = Boolean(available);
+  const button = $("restore");
+  if (button) button.disabled = actionBusy || !restoreAvailable;
+}
+
 function setActionsBusy(busy) {
   actionBusy = busy;
-  for (const id of ["translatePage", "restore", "translateSelection"]) {
+  for (const id of ["translatePage", "translateSelection"]) {
     const button = $(id);
     if (button) button.disabled = busy;
   }
+  setRestoreAvailable(restoreAvailable);
   document.querySelector(".app")?.setAttribute("aria-busy", busy ? "true" : "false");
 }
 
@@ -70,6 +78,7 @@ async function refreshPageState() {
       return;
     }
     if (state?.translated) {
+      setRestoreAvailable(true);
       // Le reçu reste disponible quand le popup est rouvert après coup :
       // sans cela, seuls les compteurs d’état étaient visibles.
       if (state.summary) {
@@ -89,8 +98,10 @@ async function refreshPageState() {
       );
       return;
     }
+    setRestoreAvailable(false);
     setStatus(t("ready"));
   } catch {
+    setRestoreAvailable(false);
     setStatus(t("ready"));
   }
 }
@@ -111,13 +122,18 @@ function renderReceipt(summary) {
     hideReceipt();
     return;
   }
-  $("receiptTranslated").textContent = summary.translated;
+  const translated = Number(summary.translated) || 0;
+  const untranslated = Number(summary.untranslated) || 0;
+  $("receiptTranslated").textContent = translated;
   $("receiptPartial").textContent = summary.partial || 0;
-  $("receiptUntranslated").textContent = summary.untranslated || 0;
+  $("receiptUntranslated").textContent = untranslated;
   $("receiptUnverified").textContent = summary.human || 0;
   $("receiptEngine").textContent = summary.provider
     ? providerLabel(summary.provider)
     : "";
+  $("receiptSummary").textContent = untranslated
+    ? t("receiptSummaryPartial", { translated, untranslated })
+    : t("receiptSummaryFull", { translated });
   const notes = [];
   if (summary.demo) {
     notes.push(t("receiptDemo", { n: summary.demo }));
@@ -126,6 +142,7 @@ function renderReceipt(summary) {
   notes.push(summary.human ? t("receiptDraft") : t("receiptValidated"));
   $("receiptNote").textContent = notes.join(" · ");
   receipt.hidden = false;
+  setRestoreAvailable(true);
 }
 
 api.runtime.onMessage.addListener((message) => {
@@ -133,9 +150,11 @@ api.runtime.onMessage.addListener((message) => {
   const summary = message.summary || {};
   renderReceipt(summary);
   if (!summary.translated) {
+    setRestoreAvailable(false);
     setStatus(t("noTranslation"));
     return;
   }
+  setRestoreAvailable(true);
   if (summary.simple) {
     setStatus(t("translationDone"));
     return;
@@ -443,14 +462,14 @@ function localizeActionError(message) {
 }
 
 async function runPageAction(button, pending, message, successText, useResult = false) {
-  if (actionBusy) return;
+  if (actionBusy) return null;
   setActionsBusy(true);
   setStatus(pending);
   try {
     const response = await sendToPage(message);
     if (!response?.ok) {
       setStatus(localizeActionError(response?.error || t("actionError")));
-      return;
+      return null;
     }
     if (response.simple) {
       setStatus(t("translationDone"));
@@ -459,8 +478,10 @@ async function runPageAction(button, pending, message, successText, useResult = 
     } else {
       setStatus(response.message || successText);
     }
+    return response;
   } catch (error) {
     setStatus(localizeActionError(error.message));
+    return null;
   } finally {
     setActionsBusy(false);
   }
@@ -476,14 +497,15 @@ $("translatePage").addEventListener("click", () =>
   )
 );
 
-$("restore").addEventListener("click", () => {
+$("restore").addEventListener("click", async () => {
   hideReceipt();
-  return runPageAction(
+  const response = await runPageAction(
     $("restore"),
     t("restoring"),
     { type: "NK_RESTORE" },
     t("restored")
   );
+  if (response?.ok) setRestoreAvailable(false);
 });
 
 $("translateSelection").addEventListener("click", () =>
@@ -529,27 +551,41 @@ $("translateText").addEventListener("click", async () => {
       return;
     }
 
-    const detected = response?.detected;
-    const detectedLabel =
-      detected?.code === "en"
-        ? `${t("english")} (${Math.round((detected.confidence || 0) * 100)} %)`
-        : detected?.code === "fr"
-          ? `${t("french")} (${Math.round((detected.confidence || 0) * 100)} %)`
-          : t("unknownLanguage");
+    const translation = response?.translation;
+    if (!translation) {
+      failTest(t("unknownError"));
+      return;
+    }
 
-    if (!response?.translation?.ok) {
-      const reason = String(response?.translation?.reason || "");
-      let message = "La traduction a été refusée par sécurité. Le texte original est conservé.";
+    if (!translation.ok) {
+      const reason = String(translation.reason || "");
+
+      // Ces refus sont attendus : mieux vaut expliquer calmement que
+      // d'afficher une erreur rouge pour une phrase absente du pack.
       if (reason === "pack_miss") {
-        message = t("packMiss", { lang: spec().label });
-      } else if (reason === "pack_unverified") {
-        message = t("packUnverified");
-      } else if (
+        setTestError("");
+        meta.textContent = t("unseenKept", { lang: spec().label });
+        setStatus(t("unseenKeptStatus"));
+        return;
+      }
+      if (reason === "pack_unverified") {
+        setTestError("");
+        meta.textContent = t("unseenUnverified");
+        setStatus(t("unseenKeptStatus"));
+        return;
+      }
+      if (
         reason === "untranslated_critical" ||
         reason === "critical_pack_only"
       ) {
-        message = t("critical");
-      } else if (reason.startsWith("low_roundtrip")) {
+        setTestError("");
+        meta.textContent = t("unseenCritical");
+        setStatus(t("unseenKeptStatus"));
+        return;
+      }
+
+      let message = t("refused");
+      if (reason.startsWith("low_roundtrip")) {
         message = t("lowRoundtrip");
       } else if (reason.startsWith("token_lost")) {
         message = t("tokenLost");
@@ -563,25 +599,31 @@ $("translateText").addEventListener("click", async () => {
         message = t("dntMissing");
       } else if (reason === "english_leak" || reason === "french_leak") {
         message = t("wrongLanguage");
-      } else {
-        message = t("refused");
       }
       failTest(message);
       return;
     }
 
-    result.textContent = response.translation.text;
+    result.textContent = translation.text;
     result.lang = target;
-    meta.textContent =
-      `${t("sourceDetected")} : ${detectedLabel} · ` +
-      `${t("engine")} : ${providerLabel(response.provider)} · ` +
-      `${t("targetLabel")} : ${spec().label}`;
-
-    if (typeof response.translation.roundtrip === "number") {
-      meta.textContent +=
-        ` · ${Math.round(response.translation.roundtrip * 100)} %`;
-    }
     setTestError("");
+
+    if (translation.partial) {
+      meta.textContent =
+        `${t("unseenPartial", {
+          kept: translation.keptSentences,
+          total: translation.totalSentences
+        })} ${t("unseenWhy")}`;
+      setStatus(
+        t("unseenPartialStatus", { n: translation.keptSentences })
+      );
+      return;
+    }
+
+    meta.textContent =
+      translation.totalSentences > 1
+        ? t("unseenAllDone", { n: translation.totalSentences })
+        : t("unseenDone");
     setStatus(t("testSuccess"));
   } catch (error) {
     failTest(localizeActionError(error.message));

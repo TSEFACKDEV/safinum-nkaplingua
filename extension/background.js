@@ -144,6 +144,20 @@ function detectSourceLanguage(text, hint) {
 /* Entrée publique                                                    */
 /* ------------------------------------------------------------------ */
 
+// Découpage du texte inédit : on retente phrase par phrase pour ne pas
+// perdre une phrase connue à cause d'un paragraphe entier absent du pack.
+const TEXT_SENTENCE_SPLIT_RE =
+  /(?<=[.!?…])\s+(?=[\p{Lu}\p{N}"«(“'])/u;
+
+function splitTextSentences(value) {
+  return String(value || "")
+    .trim()
+    .split(TEXT_SENTENCE_SPLIT_RE)
+    .flatMap((part) => part.split(/\n+/))
+    .map((part) => part.trim())
+    .filter(Boolean);
+}
+
 async function translateText(text, target, source, demo = false) {
   const clean = String(text || "").trim();
   if (!clean) return { translation: null, error: "empty_text" };
@@ -152,16 +166,66 @@ async function translateText(text, target, source, demo = false) {
     ? LANG.detectLanguage(clean, "")
     : { code: "fr", confidence: 0 };
   const detected = source || (detectedInfo.code === "en" ? "en" : "fr");
-  const result = await translateSegments(
-    [{ id: "text", text: clean }],
-    target,
-    detected,
-    { demo }
-  );
+  const sentences = splitTextSentences(clean);
 
+  // Un seul segment : comportement historique, sans découpage superflu.
+  if (sentences.length <= 1) {
+    const result = await translateSegments(
+      [{ id: "text", text: clean }],
+      target,
+      detected,
+      { demo }
+    );
+
+    if (result.error) return result;
+    return {
+      translation: result.translations?.[0] || null,
+      provider: result.provider || null,
+      detected: detectedInfo
+    };
+  }
+
+  const segments = sentences.map((sentence, index) => ({
+    id: `text#${index}`,
+    text: sentence
+  }));
+  const result = await translateSegments(segments, target, detected, {
+    demo
+  });
   if (result.error) return result;
+
+  const byId = new Map(
+    (result.translations || []).map((item) => [item.id, item])
+  );
+  let translatedSentences = 0;
+  let keptSentences = 0;
+  let firstReason = null;
+
+  const pieces = sentences.map((sentence, index) => {
+    const item = byId.get(`text#${index}`);
+    // Une phrase n'est reprise que si sa traduction est réellement
+    // différente de la source. Sinon elle reste en français, telle quelle.
+    if (item?.ok && item.text && item.text.trim() !== sentence.trim()) {
+      translatedSentences += 1;
+      return String(item.text).trim();
+    }
+    keptSentences += 1;
+    if (!firstReason && item?.reason) firstReason = item.reason;
+    return sentence;
+  });
+
+  const allKept = translatedSentences === 0;
   return {
-    translation: result.translations?.[0] || null,
+    translation: {
+      id: "text",
+      text: pieces.join(" "),
+      ok: !allKept,
+      reason: allKept ? firstReason || "pack_miss" : null,
+      partial: keptSentences > 0 && translatedSentences > 0,
+      translatedSentences,
+      keptSentences,
+      totalSentences: sentences.length
+    },
     provider: result.provider || null,
     detected: detectedInfo
   };

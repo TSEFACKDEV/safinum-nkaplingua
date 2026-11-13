@@ -149,7 +149,7 @@ Pouvez-vous nous confirmer :
 Nous pouvons signer une convention et limiter l’usage aux besoins du prototype.
 
 Cordialement,
-L’équipe NkapLingua
+L’équipe ARTEMIS 237
 ```
 
 ## 6. Sources réellement libres

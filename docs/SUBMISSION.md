@@ -1,6 +1,8 @@
 # Soumission — SAFINUM Innovate Challenge 2026
 
-**Version en préparation : 0.6.1** — trois langues (fulfulde, ewondo, duala),
+**Équipe ARTEMIS 237** — Klein · Freedy · Marius.
+
+**Version en préparation : 0.6.2** — trois langues (fulfulde, ewondo, duala),
 détection FR/EN, protection des noms et des montants, filtres de qualité.
 Glossaire et packs **en cours de validation** ; cloud MyMemory expérimental et
 désactivé par défaut.
@@ -15,8 +17,8 @@ La version 0.4.0 reste disponible dans l’historique des releases.
 https://github.com/TSEFACKDEV/safinum-nkaplingua/releases/latest/download/NkapLingua-Demo.mp4
 ```
 
-- Durée : **2 min 19** (limite : 3 min)
-- Format : MP4, 1920×1080
+- Durée : **1 min 47** (limite : 3 min)
+- Format : MP4, 1280×720
 - Contenu : problème, solution, parcours, sécurité, langue, impact
 
 ### 2. Documentation

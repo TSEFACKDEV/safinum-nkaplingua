@@ -401,6 +401,14 @@
         font-size: 7.5pt;
       }
 
+      .compact-table {
+        margin-bottom: 3mm;
+      }
+
+      .compact-table td {
+        padding: 1.9mm 2.5mm;
+      }
+
       .diagram {
         display: grid;
         grid-template-columns: 1fr 1fr 1fr;
@@ -507,7 +515,7 @@
 
       <div class="cover-bottom">
         <p>
-          <strong>Équipe NkapLingua</strong><br />
+          <strong>Équipe ARTEMIS 237</strong><br />
           Klein · Freedy · Marius<br />
           Yaoundé, Cameroun · novembre 2026
         </p>
@@ -746,13 +754,13 @@
 
       <div class="figure-row" style="margin-top: 5mm">
         <div style="flex: 1">
-          <img class="screenshot" style="max-height: 56mm; width: auto" src="assets/demo-overview.png" alt="Aperçu de la page FINAKA" />
+          <img class="screenshot" style="max-height: 50mm; width: auto" src="assets/demo-overview.png" alt="Aperçu de la page FINAKA" />
           <p class="figure-caption">
             Page de démonstration FINAKA : solde, transfert, récapitulatif,
             sécurité et test de contenu inédit.
           </p>
         </div>
-        <img class="screenshot-small" src="assets/popup.png" alt="Popup NkapLingua" />
+        <img class="screenshot-small" style="width: 54mm" src="assets/popup.png" alt="Popup NkapLingua" />
       </div>
 
       <h3>Les cinq fonctionnalités minimales</h3>
@@ -779,12 +787,12 @@
         </tr>
         <tr>
           <td><strong>5. Nouveau contenu</strong></td>
-          <td>Popup « texte inédit » + traduction de sélection.</td>
+          <td>Popup « texte inédit » avec repli phrase par phrase : les phrases connues sont traduites, les autres restent en français. Traduction de sélection incluse.</td>
         </tr>
       </table>
 
-      <h3 style="margin-top: 5mm">Recette réelle du 12–13 novembre 2026</h3>
-      <table>
+      <h3 style="margin-top: 3mm">Recette réelle du 12–13 novembre 2026</h3>
+      <table class="compact-table">
         <tr>
           <th>Mesure</th>
           <th>Résultat</th>
@@ -803,13 +811,13 @@
         </tr>
         <tr>
           <td>Preuve (packs, sans cloud)</td>
-          <td class="mono">docs/test-results/real-site-packs-2026-11-13-015831.json</td>
+          <td class="mono">docs/test-results/real-site-packs-2026-11-13-121851.json</td>
         </tr>
       </table>
       <p class="figure-caption">
         Chrome réel sur safinum.cm/hackathon-test, montants et bénéficiaires
-        préservés ; Firefox dans <span class="mono">docs/REAL_TEST_2026-11-12.md</span>.
-        Brouillons non validés, aucune validation native.
+        préservés ; Firefox : <span class="mono">docs/REAL_TEST_2026-11-12.md</span>.
+        Aucune validation native.
       </p>
 
       <div class="page-footer">

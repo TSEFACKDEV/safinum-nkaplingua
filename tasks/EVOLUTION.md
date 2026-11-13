@@ -3660,3 +3660,85 @@ mot `json`) avec les champs ci-dessous. Exemple de structure, en indentation :
   ]
 }
 ```
+
+## 2026-11-13T12:24:00+01:00 — Klein — K19 — done
+
+```json
+{
+  "timestamp": "2026-11-13T12:24:00+01:00",
+  "person": "Klein",
+  "branch": "klein",
+  "task": "K19",
+  "status": "done",
+  "summary": "Interface du popup simplifiée : une seule langue cible, un bouton principal, actions secondaires séparées, résultat compact (passages traduits / laissés en français) et confidentialité repliée. Le texte inédit multi-phrases est désormais découpé phrase par phrase : les phrases connues sont traduites, les inconnues restent en français avec une explication neutre au lieu d'une erreur rouge. Identité d'équipe ARTEMIS 237 ajoutée au popup, au README, au dossier technique, au document de soumission, aux consentements, aux permissions de données, aux sources de référence et à la vidéo. Version 0.6.2, PDF 8 pages, ZIP et vidéo régénérés.",
+  "files": [
+    "extension/background.js",
+    "extension/popup.html",
+    "extension/popup.css",
+    "extension/popup.js",
+    "extension/ui-copy.js",
+    "extension/manifest.json",
+    "extension/manifest.firefox.json",
+    "extension/manifest.universal.json",
+    "tests/unseen-text.test.js",
+    "tests/popup-unseen.test.js",
+    "tests/README.md",
+    ".github/workflows/ci.yml",
+    "README.md",
+    "docs/TECHNICAL.md",
+    "docs/SUBMISSION_DOCUMENT.html",
+    "docs/SUBMISSION.md",
+    "docs/SUBMISSION_CHECKLIST.md",
+    "docs/PRESELECTION.md",
+    "docs/DEMO.md",
+    "docs/README_MANQUANT.md",
+    "docs/VALIDATION_REPORT.md",
+    "docs/CONSENT_TEMPLATE.md",
+    "docs/DATA_PERMISSIONS.md",
+    "docs/REFERENCE_SOURCES.md",
+    "video/slides.html",
+    "scripts/record-demo.js",
+    "docs/assets/popup.png",
+    "docs/assets/popup-redesign.png",
+    "dist/NkapLingua-Documentation.pdf",
+    "dist/nkaplingua-demo.mp4"
+  ],
+  "tests": [
+    {
+      "command": "for t in content privacy cloud-gating criticality preservation title error-taxonomy sentence-fallback receipt state ui-language popup-actions unseen-text popup-unseen; do node tests/$t.test.js; done",
+      "result": "pass",
+      "note": "14 suites vertes, dont repli texte inédit et popup"
+    },
+    {
+      "command": "node scripts/test-extension.js",
+      "result": "pass",
+      "note": "registre, détection, packs, jetons, qualité, niveau A"
+    },
+    {
+      "command": "NK_MOCK=1 server/.venv/bin/python -m pytest -q server/test_api.py",
+      "result": "pass",
+      "note": "30 passed"
+    },
+    {
+      "command": "node tests/pipeline.e2e.js --mode=all && node tests/site-demo.e2e.js",
+      "result": "pass",
+      "note": "pipeline pack/reviewed/edge et démo SAFINUM"
+    },
+    {
+      "command": "NODE_PATH=... NK_TEST_CACHE=... CHROME_PATH=... node tests/real-site.e2e.js",
+      "result": "pass",
+      "note": "Chrome, 5 étapes + EN, 228 segments traduits, 0 erreur"
+    },
+    {
+      "command": "bash scripts/package-extension.sh && npx --yes web-ext lint --source-dir dist/package/firefox",
+      "result": "pass",
+      "note": "3 ZIP 404–405 Ko, lint 0/0/0"
+    }
+  ],
+  "evidence": "docs/test-results/real-site-packs-2026-11-13-121851.json ; dist/NkapLingua-Documentation.pdf (8 pages, 1,08 Mo) ; dist/nkaplingua-demo.mp4 (1 min 47 s, 1,95 Mo) ; 3 ZIP 404–405 Ko ; lint 0/0/0",
+  "next": "Publier la release v0.6.2 avec les assets et soumettre avant la deadline",
+  "blockers": [
+    "0 phrase validée par un T2 indépendant : le niveau A reste en français hors démo"
+  ]
+}
+```

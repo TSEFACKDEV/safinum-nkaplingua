@@ -27,7 +27,7 @@ Trois manques dominent :
 | Navigateurs | Chrome 158 et Firefox 159, recettes réelles |
 | Premier écran, 3 langues | fub 40/40, ewo 39/40, dua 40/40 (audit 9 nov) |
 | EN pack-only | **40/44** ; 4 dates restantes |
-| Reçu de traduction | compteurs, partiels, non validés, moteur, nettoyage à la restauration |
+| Résultat compact | passages traduits, passages laissés en français, détail technique masqué |
 | Niveau A | strictement `validated` ; sinon original + badge « non traduit » |
 | Brouillons B/C hors démo | acceptés avec toast « pack non validé » |
 | Confidentialité | `context` supprimé, MyMemory opt-in, tests verts |
@@ -49,7 +49,7 @@ Preuves : [REAL_TEST_2026-11-10.md](REAL_TEST_2026-11-10.md),
 | **Panel TRAPD** | T2 indépendant, arbitre et consentements manquants (K1/K3/K4/K5) | Impossible de passer les packs en `validated`. |
 | **Contenu inédit** | **1/20 en production, 4/20 en démo** ; NLLB seul 31/192 | Le produit ne traduit pas de façon fiable une page inconnue. |
 | **Modèle / backend** | NLLB non téléchargé localement ; `flagship-ai` absent | Qualité, latence et concurrence réelles non mesurables ici. |
-| **Release obsolète** | ZIP locaux reconstruits le **12 nov** (403/404 Ko) ; release GitHub/PDF encore à publier ; PDF/vidéo non régénérés | Le ZIP publié ne contient pas les derniers packs EN/B-C ni les correctifs. |
+| **Release à jour** | **v0.6.2** : 3 ZIP reconstruits le 13 nov (404–405 Ko), PDF 8 pages et vidéo 1 min 47 s régénérés, lint 0/0/0 | Les assets publiés correspondent au code et à l’interface simplifiée. |
 
 ## 3. Manques fonctionnels
 
@@ -65,7 +65,7 @@ Preuves : [REAL_TEST_2026-11-10.md](REAL_TEST_2026-11-10.md),
 
 ## 4. Manques de livrables et de méthode
 
-- **PDF de documentation et vidéo** non régénérés après les changements ; le HTML des compteurs est à jour, pas l'asset de release.
+- **PDF et vidéo** régénérés le 13 novembre 2026 pour la v0.6.2 (interface simplifiée, équipe ARTEMIS 237).
 - **Harnais Chrome/Firefox** versionnés mais **manuels** : ils ne tournent pas en CI (pas de navigateur dans le runner).
 - **Tests réels** non exécutés en CI ; seuls les tests mock/pack y tournent.
 - **Reste du lot Klein** : K1–K6, K8, K9, K11 encore ouverts.

@@ -3,6 +3,8 @@
 **Projet** : NkapLingua — couche d’accessibilité linguistique pour les services
 financiers numériques camerounais.
 
+**Équipe** : ARTEMIS 237 (Klein, Freedy, Marius).
+
 **Challenge** : SAFINUM Innovate Challenge 2026 — Hackathon Preselection.
 
 **Langues cibles** : fulfulde (Adamawa) et ewondo en **MT brouillon**
@@ -11,7 +13,7 @@ communautaire**. Aucune sortie MT n’est présentée comme validée : le niveau
 reste couvert par les packs. Yemba, medumba, bassa et ghomala’ sont retirés du
 prototype (voir `tasks/klein.md`, K10).
 
-**Version** : prototype 0.6 — novembre 2026.
+**Version** : prototype 0.6.2 — novembre 2026.
 
 ---
 

@@ -52,8 +52,9 @@ champs de formulaire, les mots de passe et les codes OTP. »
 Ouvrir le popup, coller un paragraphe que le jury choisit, cliquer sur
 **Traduire ce texte**.
 
-« Ce paragraphe n’était pas dans la page, ni dans le jeu d’entraînement. Le
-modèle le traduit à la volée. »
+« Ce paragraphe n’était pas dans la page. Les phrases déjà présentes dans le
+pack sont traduites ; les phrases inconnues restent en français, sans mot à
+mot. Le popup indique combien de phrases restent en français et pourquoi. »
 
 ### 1:40 — Sécurité
 
