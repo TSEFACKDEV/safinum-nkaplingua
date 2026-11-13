@@ -351,7 +351,17 @@
     }
   }
 
+  function clearDocumentSelection() {
+    try {
+      const selection = window.getSelection?.();
+      if (selection && selection.rangeCount > 0) selection.removeAllRanges();
+    } catch {
+      // Certaines pages restreignent la sélection.
+    }
+  }
+
   function openPanel() {
+    clearDocumentSelection();
     setTextCopy();
     populateLanguages();
     panel.hidden = false;
@@ -557,6 +567,7 @@
     const dy = event.clientY - launcherDrag.startY;
     if (!launcherDrag.moved && Math.abs(dx) + Math.abs(dy) < 4) return;
     launcherDrag.moved = true;
+    clearDocumentSelection();
     const left = Math.min(Math.max(8, launcherDrag.left + dx), window.innerWidth - 56);
     const top = Math.min(Math.max(8, launcherDrag.top + dy), window.innerHeight - 56);
     host.style.left = `${left}px`;
@@ -606,6 +617,8 @@
     const dy = event.clientY - dragState.startY;
     if (!dragState.moved && Math.abs(dx) + Math.abs(dy) < 4) return;
     dragState.moved = true;
+    clearDocumentSelection();
+    event.preventDefault();
     const left = Math.min(Math.max(8, dragState.left + dx), window.innerWidth - 56);
     const top = Math.min(Math.max(8, dragState.top + dy), window.innerHeight - 56);
     host.style.left = `${left}px`;

@@ -173,9 +173,18 @@ function createWidget(lang = "fr") {
     });
     dragLauncher.dispatchEvent(event);
   };
+  const paragraph = draggable.document.querySelector("p");
+  const range = draggable.document.createRange();
+  range.selectNodeContents(paragraph);
+  draggable.window.getSelection().addRange(range);
+  assert(draggable.window.getSelection().rangeCount === 1, "sélection de test absente");
   dispatchPointer("pointerdown", 100, 100);
   dispatchPointer("pointermove", 180, 150);
   dispatchPointer("pointerup", 180, 150);
+  assert(
+    draggable.window.getSelection().rangeCount === 0,
+    "le drag laisse une sélection de page"
+  );
   await new Promise((resolve) => setTimeout(resolve, 10));
   assert(draggable.host.style.left !== "", "launcher non déplacé horizontalement");
   assert(draggable.host.style.top !== "", "launcher non déplacé verticalement");

@@ -613,6 +613,9 @@
   }
 
   function restoreAll() {
+    clearPageSelection();
+    selectionHost?.remove();
+    selectionHost = null;
     const restoredCount =
       translatedNodes.size +
       translatedAttributes.length +
@@ -716,6 +719,16 @@
     ).slice(0, 20000);
   }
 
+  function clearPageSelection() {
+    try {
+      const selection = window.getSelection?.();
+      if (selection && selection.rangeCount > 0) selection.removeAllRanges();
+    } catch {
+      // La sélection peut ne pas être accessible sur certaines pages.
+    }
+    lastSelectionText = "";
+  }
+
   async function translatePage(target) {
     if (applying) {
       showToast(tr("Une traduction est déjà en cours.", "A translation is already in progress."));
@@ -729,6 +742,11 @@
       return { ok: false, error: "Langue cible inconnue." };
     }
 
+    // Le remplacement des nœuds pendant la traduction ne doit pas laisser
+    // une plage de sélection surlignée sur l'ancien texte.
+    clearPageSelection();
+    selectionHost?.remove();
+    selectionHost = null;
     applying = true;
     active = true;
     stopObserver();
@@ -1353,6 +1371,9 @@
         response.translation?.demoCritical === true,
         response.translation || {}
       );
+      // L'infobulle porte déjà l'original : on retire le surlignage de la
+      // page pour ne pas laisser une sélection accrochée après l'action.
+      clearPageSelection();
       return { ok: true, translated: 1 };
     } catch (error) {
       console.error("[NkapLingua]", error);

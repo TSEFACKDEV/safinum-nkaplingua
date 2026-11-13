@@ -241,6 +241,18 @@ function sendMessage(message) {
     "seconde traduction des attributs échouée"
   );
 
+  // Une restauration ne doit pas laisser la sélection surlignée sur le DOM
+  // remplacé (bug observé sur « Renseignez les informations… »).
+  const selectionRange = window.document.createRange();
+  selectionRange.selectNodeContents(window.document.getElementById("solde"));
+  const pageSelection = window.getSelection();
+  pageSelection.removeAllRanges();
+  pageSelection.addRange(selectionRange);
+  assert(pageSelection.rangeCount === 1, "sélection de test non posée");
+  await sendMessage({ type: "NK_RESTORE" });
+  await new Promise((resolve) => setTimeout(resolve, 50));
+  assert(pageSelection.rangeCount === 0, "sélection restée après restauration");
+
   console.log("content.js OK — texte, noms, attributs, options, restauration");
 })().catch((error) => {
   console.error("FAIL", error);
