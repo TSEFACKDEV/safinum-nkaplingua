@@ -259,6 +259,7 @@
   let currentTarget = "fub";
   let translatedTitleOriginal = null;
   let lastResult = null;
+  let lastSelectionText = "";
   const DEMO_PAGE = LANG.isDemoPage?.() === true;
   const pageIsEnglish = () =>
     String(document.documentElement?.lang || "").toLowerCase().startsWith("en");
@@ -1248,9 +1249,9 @@
   /* Traduction de la sélection                                         */
   /* ------------------------------------------------------------------ */
 
-  async function translateSelection(target) {
+  async function translateSelection(target, forcedText = "") {
     const selection = window.getSelection();
-    const text = selection?.toString().trim();
+    const text = String(forcedText || selection?.toString() || "").trim();
     if (!text) {
       showToast(tr("Sélectionnez d'abord du texte.", "Select some text first."));
       return { ok: false, error: "Sélectionnez d'abord du texte." };
@@ -1265,7 +1266,9 @@
 
     let anchorRect = null;
     try {
-      anchorRect = selection.getRangeAt(0).getBoundingClientRect();
+      if (selection && selection.rangeCount > 0) {
+        anchorRect = selection.getRangeAt(0).getBoundingClientRect();
+      }
     } catch {
       // La sélection peut être vide ou non textuelle.
     }
@@ -1541,6 +1544,9 @@
   /* ------------------------------------------------------------------ */
 
   function showToast(message) {
+    // Le widget affiche son propre statut : pas de toast concurrent en bas
+    // à droite quand une action vient du widget.
+    if (globalThis.__NK_WIDGET_QUIET__) return;
     toastHost?.remove();
 
     const host = document.createElement("div");
@@ -1665,4 +1671,76 @@
       // storage peut être indisponible sur certaines pages.
     }
   })();
+
+  // Mémoriser la dernière sélection utile : cliquer dans le widget peut
+  // replier la sélection du document avant l'appel.
+  document.addEventListener(
+    "selectionchange",
+    () => {
+      const value = window.getSelection?.()?.toString().trim();
+      if (value) lastSelectionText = value;
+    },
+    true
+  );
+
+  // API du widget flottant. Le widget vit dans un Shadow DOM et ne lit
+  // jamais les champs, mots de passe ou valeurs de formulaire.
+  globalThis.__NK_WIDGET_API__ = {
+    getLanguages() {
+      return LANG.listTargets().map((item) => ({
+        code: item.code,
+        label: item.label,
+        engineLabel: item.engineLabel || (item.engine === "pack" ? "Pack" : "MT")
+      }));
+    },
+    getTarget() {
+      const spec = LANG.getTarget(currentTarget) || LANG.getTarget("fub");
+      return {
+        code: spec.code,
+        label: spec.label,
+        engineLabel:
+          spec.engineLabel || (spec.engine === "pack" ? "Pack" : "MT")
+      };
+    },
+    getState: getPageState,
+    getSelection() {
+      const current = window.getSelection?.()?.toString().trim();
+      return current || lastSelectionText;
+    },
+    async setTarget(code) {
+      if (!LANG.getTarget(code)) {
+        return { ok: false, error: "Langue cible inconnue." };
+      }
+      const previous = currentTarget;
+      currentTarget = code;
+      try {
+        await api.storage?.local?.set({ nkTarget: code });
+      } catch {
+        // Stockage indisponible : la session reste utilisable.
+      }
+      if (previous !== code && (lastResult?.translated || 0) > 0) {
+        restoreAll();
+        const result = await translatePage(code);
+        return { ...result, retranslated: true };
+      }
+      return { ok: true, target: code, retranslated: false };
+    },
+    translatePage(code) {
+      return translatePage(code || currentTarget);
+    },
+    restore() {
+      return restoreAll();
+    },
+    translateSelection(code, text) {
+      return translateSelection(code || currentTarget, text || "");
+    },
+    translateText(text) {
+      return api.runtime.sendMessage({
+        type: "NK_TRANSLATE_TEXT",
+        target: currentTarget,
+        text,
+        demo: DEMO_PAGE
+      });
+    }
+  };
 })();

@@ -2,7 +2,7 @@
 
 **Équipe ARTEMIS 237** — Klein · Freedy · Marius.
 
-**Version en préparation : 0.6.2** — trois langues (fulfulde, ewondo, duala),
+**Version en préparation : 0.7.0** — trois langues (fulfulde, ewondo, duala),
 détection FR/EN, protection des noms et des montants, filtres de qualité.
 Glossaire et packs **en cours de validation** ; cloud MyMemory expérimental et
 désactivé par défaut.

@@ -49,10 +49,9 @@ Projet préparé pour le **SAFINUM Innovate Challenge 2026** (Yaoundé,
 
 Le niveau A (solde, frais, PIN/OTP, confirmation, erreurs) ne vient que d’un
 pack validé en mode strict ; sans phrase validée, l’original reste affiché
-avec un badge « non traduit ». En mode démo SAFINUM, une entrée humaine
-`draft`/`reviewed` peut couvrir le niveau A avec le badge « brouillon
-humain ». Depuis le 10 novembre, hors démo, les brouillons `draft`/`reviewed`
-ne couvrent que le niveau B/C, jamais A, avec un toast « pack non validé ».
+avec une mention discrète de démonstration. En mode démo SAFINUM, une entrée
+humaine `draft`/`reviewed` peut couvrir le niveau A. Hors démo, les brouillons
+`draft`/`reviewed` ne couvrent que le niveau B/C, jamais A.
 
 Suivi détaillé du lot moteur : [docs/MARIUS_STATUS.md](docs/MARIUS_STATUS.md).
 
@@ -66,6 +65,19 @@ Suivi détaillé du lot moteur : [docs/MARIUS_STATUS.md](docs/MARIUS_STATUS.md).
   <img src="docs/assets/popup-redesign.png" alt="Popup de l’extension NkapLingua" width="300" />
   <img src="docs/assets/popup-redesign-list.png" alt="Liste des langues du popup NkapLingua" width="300" />
 </p>
+
+<p align="center">
+  <img src="docs/assets/widget.png" alt="Widget flottant NkapLingua sur une page financière" width="760" />
+</p>
+
+### Widget flottant
+
+Le widget apparaît en bas à droite des pages HTTP/HTTPS. Un clic ouvre un
+panneau compact : langue cible, traduction de la page, restauration,
+traduction de la sélection et test d'un texte. Il est isolé en Shadow DOM,
+déplaçable, refermable avec `Échap`, et ne lit jamais les champs, mots de
+passe, PIN ou valeurs de formulaire. Sur les pages déjà ouvertes, le popup
+injecte aussi le widget.
 
 Design system : [`docs/DESIGN.md`](docs/DESIGN.md).
 

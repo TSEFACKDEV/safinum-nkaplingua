@@ -1,7 +1,7 @@
 {
   "manifest_version": 3,
   "name": "NkapLingua — SAFINUM 2026",
-  "version": "0.6.2",
+  "version": "0.7.0",
   "description": "Traduction financière non intrusive en fulfulde, ewondo et duala. Détection FR/EN, backend local ou cloud expérimental.",
   "minimum_chrome_version": "116",
   "permissions": [
@@ -34,5 +34,20 @@
   },
   "content_security_policy": {
     "extension_pages": "script-src 'self'; object-src 'self'"
-  }
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "js": [
+        "languages.js",
+        "content.js",
+        "widget.js"
+      ],
+      "run_at": "document_idle",
+      "all_frames": false
+    }
+  ]
 }

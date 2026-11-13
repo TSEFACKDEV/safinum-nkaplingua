@@ -69,7 +69,7 @@ function fail(message) {
     for (const id of tabIds) {
       try {
         await worker.evaluate(async (tabId) => chrome.scripting.executeScript({
-          target: { tabId }, files: ["languages.js", "content.js"]
+          target: { tabId }, files: ["languages.js", "content.js", "widget.js"]
         }), id);
       } catch {}
     }

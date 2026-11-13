@@ -13,7 +13,7 @@ communautaire**. Aucune sortie MT n’est présentée comme validée : le niveau
 reste couvert par les packs. Yemba, medumba, bassa et ghomala’ sont retirés du
 prototype (voir `tasks/klein.md`, K10).
 
-**Version** : prototype 0.6.2 — novembre 2026.
+**Version** : prototype 0.7.0 — novembre 2026.
 
 ---
 

@@ -154,3 +154,17 @@ page du dataset.
 - Entraîner sur un texte biblique © Bible Society sans accord.
 - Committer les fichiers audio ou le texte biblique dans le dépôt.
 - Présenter un modèle entraîné sur des données non libres comme « libre ».
+
+
+## Widget flottant (v0.7.0)
+
+Le widget est injecté par `content_scripts` sur les pages `http://` et
+`https://` pour être disponible sans clic sur l'icône. Le content script ne
+scanne pas la page au chargement : il ne lit le DOM qu'au moment où
+l'utilisateur lance une traduction, une sélection ou un test de texte. Le
+widget ne lit jamais les champs, mots de passe, PIN ou valeurs de formulaire.
+Il est isolé en Shadow DOM et sa position est la seule donnée conservée
+(`nkWidgetPosition`).
+
+La permission d'hôte associée est donc large par construction ; elle doit être
+expliquée dans la fiche de soumission et dans la vidéo.

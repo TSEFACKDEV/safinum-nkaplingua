@@ -31,12 +31,12 @@ avertissements est traitée comme une contrainte produit, pas comme un détail.
 
 ## Operating Context
 
-- L'utilisateur ouvre le popup depuis une page financière déjà chargée.
+- L'utilisateur ouvre le popup, ou utilise le widget flottant déjà présent sur la page financière.
 - Trois langues cibles : fulfulde d'Adamawa (`fub`), ewondo (`ewo`), duala
   (`dua`). Le fulfulde est en MT ; l'ewondo et le duala sont des packs de
   phrases validées.
-- Le popup est la seule surface de l'extension : pas de page d'options ni de
-  side panel.
+- Deux surfaces : le popup de la barre d'outils et le widget flottant injecté
+  dans la page. Pas de page d'options ni de side panel.
 - Le backend local NLLB peut être présent ; le cloud MyMemory reste
   expérimental et ne doit pas être le chemin de démonstration.
 - Le popup doit tenir dans une fenêtre de 380 × 600 px environ, sans scroll
@@ -45,7 +45,7 @@ avertissements est traitée comme une contrainte produit, pas comme un détail.
 ## Capabilities and Constraints
 
 - Traduire la page active, restaurer l'original, traduire une sélection.
-- Tester un texte inédit dans le popup.
+- Tester un texte inédit dans le popup ou le widget.
 - Choisir la langue cible ; l'état de la langue (MT ou pack) est affiché.
 - Afficher l'état de la traduction, les erreurs, le moteur utilisé et la
   détection FR/EN.
@@ -70,6 +70,7 @@ avertissements est traitée comme une contrainte produit, pas comme un détail.
 ## Evidence on Hand
 
 - `extension/popup.html`, `extension/popup.css`, `extension/popup.js`.
+- `extension/widget.js` (Shadow DOM, launcher 48 px, panneau).
 - `extension/content.js` pour les bulles de sélection et les toasts.
 - `demo/index.html` (page FINAKA fictive) et `docs/assets/popup.png`.
 - Textes réels du produit dans le README et les docs.

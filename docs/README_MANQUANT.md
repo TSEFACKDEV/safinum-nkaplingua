@@ -49,7 +49,7 @@ Preuves : [REAL_TEST_2026-11-10.md](REAL_TEST_2026-11-10.md),
 | **Panel TRAPD** | T2 indépendant, arbitre et consentements manquants (K1/K3/K4/K5) | Impossible de passer les packs en `validated`. |
 | **Contenu inédit** | **1/20 en production, 4/20 en démo** ; NLLB seul 31/192 | Le produit ne traduit pas de façon fiable une page inconnue. |
 | **Modèle / backend** | NLLB non téléchargé localement ; `flagship-ai` absent | Qualité, latence et concurrence réelles non mesurables ici. |
-| **Release à jour** | **v0.6.2** : 3 ZIP reconstruits le 13 nov (404–405 Ko), PDF 8 pages et vidéo 1 min 47 s régénérés, lint 0/0/0 | Les assets publiés correspondent au code et à l’interface simplifiée. |
+| **Release à jour** | **v0.7.0** (code + widget) : 3 ZIP reconstruits ; PDF et vidéo restent v0.6.2 jusqu’à régénération. | Les assets publiés ne correspondent pas encore tous au widget. |
 
 ## 3. Manques fonctionnels
 

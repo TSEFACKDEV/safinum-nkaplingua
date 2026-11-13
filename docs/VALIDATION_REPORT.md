@@ -7,9 +7,9 @@
 > restent historiques.
 
 **Date** : 8 novembre 2026 (état intermédiaire, non signé)
-**Version** : 0.6.2  
-**Langues** : fulfulde (`fub`), ewondo (`ewo`), duala (`dua`)  
-**Responsable** : Klein  
+**Version** : 0.7.0
+**Langues** : fulfulde (`fub`), ewondo (`ewo`), duala (`dua`)
+**Responsable** : Klein
 **Statut** : **audit des relectures reçu, aucune ligne validée** — 85 lignes
 fulfulde « Tafsiri » rejetées ; T2 non indépendant dans les trois langues.
 Voir [`NATIVE_REVIEW_AUDIT.md`](NATIVE_REVIEW_AUDIT.md).

@@ -214,7 +214,7 @@ async function main() {
           async (tabId) =>
             chrome.scripting.executeScript({
               target: { tabId },
-              files: ["languages.js", "content.js"]
+              files: ["languages.js", "content.js", "widget.js"]
             }),
           id
         );
@@ -333,7 +333,7 @@ async function main() {
           async (tabId) =>
             chrome.scripting.executeScript({
               target: { tabId },
-              files: ["languages.js", "content.js"]
+              files: ["languages.js", "content.js", "widget.js"]
             }),
           id
         );
@@ -368,7 +368,7 @@ async function main() {
           async (tabId) =>
             chrome.scripting.executeScript({
               target: { tabId },
-              files: ["languages.js", "content.js"]
+              files: ["languages.js", "content.js", "widget.js"]
             }),
           id
         );

@@ -60,7 +60,7 @@ def build_xpi() -> None:
     manifest["content_scripts"] = [
         {
             "matches": [origin],
-            "js": ["languages.js", "content.js", "autotrigger.js"],
+            "js": ["languages.js", "content.js", "widget.js", "autotrigger.js"],
             "run_at": "document_idle",
         }
     ]

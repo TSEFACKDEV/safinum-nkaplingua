@@ -322,7 +322,7 @@ async function ensureContentScript(tabId) {
   try {
     await api.scripting.executeScript({
       target: { tabId },
-      files: ["languages.js", "content.js"]
+      files: ["languages.js", "content.js", "widget.js"]
     });
   } catch (error) {
     throw new Error(

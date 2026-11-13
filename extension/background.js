@@ -75,7 +75,7 @@ api.contextMenus.onClicked.addListener((info, tab) => {
       api.scripting
         .executeScript({
           target: { tabId: tab.id },
-          files: ["languages.js", "content.js"]
+          files: ["languages.js", "content.js", "widget.js"]
         })
         .then(() =>
           api.tabs.sendMessage(tab.id, { type: "NK_TRANSLATE_SELECTION" })

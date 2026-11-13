@@ -5,7 +5,7 @@
 > **État réel — recette du 13 novembre 2026** : pack-only **188/188 sur
 > les 5 étapes** en Chrome et Firefox, EN **40/44**, restauration 5/5,
 > 0 erreur, **0 phrase validée**. Les 3 ZIP, le PDF et la release doivent être
-> reconstruits et publiés en **v0.6.2**. La vidéo est un screencast muet de
+> reconstruits et publiés en **v0.7.0** ; le PDF et la vidéo restent en v0.6.2. La vidéo est un screencast muet de
 > 107 s ; la voix off reste à ajouter ou à remplacer par des sous-titres.
 > Ne pas confondre couverture pack et validation native.
 > Voir [`REAL_TEST_2026-11-12.md`](REAL_TEST_2026-11-12.md).
