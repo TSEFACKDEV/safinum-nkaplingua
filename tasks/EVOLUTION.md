@@ -3555,7 +3555,7 @@ mot `json`) avec les champs ci-dessous. Exemple de structure, en indentation :
   "branch": "klein",
   "task": "K16",
   "status": "done",
-  "summary": "Audit de soumission : suppression d'un motif de nom inutilisé, correction du commentaire background sur la MT critique en démo, mention unique « démonstration » désormais visible en mode SAFINUM, et reçu de traduction conservé quand le popup est rouvert. Documentation mise à jour (recette 12–13 novembre, 188/188, packs 231/210/203, 0 validée), PDF régénéré en 8 pages sans page vide, 3 ZIP reconstruits et lint Firefox 0/0/0. Le mode vocal reste hors périmètre, documenté comme feuille de route dans docs/KAMA_VOICE_REUSE.md.",
+  "summary": "Audit de soumission : suppression d'un motif de nom inutilisé, correction du commentaire background sur la MT critique en démo, mention unique « démonstration » désormais visible en mode SAFINUM, et reçu de traduction conservé quand le popup est rouvert. Documentation mise à jour (recette 12–13 novembre, 188/188, packs 231/210/203, 0 validée), PDF régénéré en 8 pages sans page vide, 3 ZIP reconstruits et lint Firefox 0/0/0. Le mode vocal reste hors périmètre, documenté comme feuille de route dans docs/VOICE_ROADMAP.md.",
   "files": [
     "extension/content.js",
     "extension/background.js",
@@ -3565,7 +3565,7 @@ mot `json`) avec les champs ci-dessous. Exemple de structure, en indentation :
     "tests/site-demo.e2e.js",
     "docs/SUBMISSION_DOCUMENT.html",
     "docs/SUBMISSION_CHECKLIST.md",
-    "docs/KAMA_VOICE_REUSE.md",
+    "docs/VOICE_ROADMAP.md",
     "README.md",
     "dist/NkapLingua-Documentation.pdf",
     "docs/test-results/real-site-packs-2026-11-13-015831.json"
@@ -3612,6 +3612,51 @@ mot `json`) avec les champs ci-dessous. Exemple de structure, en indentation :
   "blockers": [
     "0 phrase validée par un T2 indépendant : le niveau A reste en français hors démo",
     "Mode vocal non livré : aucun locuteur natif ni TTS licencié disponible avant la soumission"
+  ]
+}
+```
+
+## 2026-11-13T11:39:00+01:00 — Klein — K18 — done
+
+```json
+{
+  "timestamp": "2026-11-13T11:39:00+01:00",
+  "person": "Klein",
+  "branch": "klein",
+  "task": "K18",
+  "status": "done",
+  "summary": "Nettoyage de soumission : suppression définitive du document de cadrage vocal hérité d'un projet tiers et de toutes ses références, remplacé par docs/VOICE_ROADMAP.md (feuille de route audio humain validé, sans mention tierce). La lecture vocale de démonstration non commitée a été auditée puis écartée de la soumission : elle déformait le français de repli (« compte » → « tchompte », « Je » → « Dje ») et portait des mentions d'accent et de religion non nécessaires. Les changements sont archivés hors dépôt dans nkaplingua-voice-demo-marius-2026-11-13.patch ; le code revient à l'état v0.6.1 déjà publié et testé.",
+  "files": [
+    "docs/VOICE_ROADMAP.md",
+    "dist/release-notes-v0.6.1.md",
+    "tasks/EVOLUTION.md"
+  ],
+  "tests": [
+    {
+      "command": "for t in content privacy cloud-gating criticality preservation title error-taxonomy sentence-fallback receipt state ui-language popup-actions; do node tests/$t.test.js; done",
+      "result": "pass",
+      "note": "12 suites vertes après restauration v0.6.1"
+    },
+    {
+      "command": "node scripts/test-extension.js",
+      "result": "pass",
+      "note": "registre, détection, packs, jetons, qualité, niveau A"
+    },
+    {
+      "command": "NK_MOCK=1 server/.venv/bin/python -m pytest -q server/test_api.py",
+      "result": "pass",
+      "note": "30 passed"
+    },
+    {
+      "command": "for s in check-language-data check-language-packs check-native-kit check-pack-collisions check-training-data; do python3 scripts/$s.py; done",
+      "result": "pass",
+      "note": "tous les contrôles de données verts"
+    }
+  ],
+  "evidence": "docs/VOICE_ROADMAP.md ; archive hors dépôt ../nkaplingua-voice-demo-marius-2026-11-13.patch ; 12 suites + 30 tests API verts ; aucune occurrence du nom tiers dans le dépôt",
+  "next": "Pousser klein/develop/main, mettre à jour le corps de la release v0.6.1 puis soumettre",
+  "blockers": [
+    "0 phrase validée par un T2 indépendant : le niveau A reste en français hors démo"
   ]
 }
 ```
