@@ -64,6 +64,9 @@ avertissements est traitée comme une contrainte produit, pas comme un détail.
 - Le popup est une **console** : Noto Sans uniquement, fond blanc/gris,
   monochrome, bouton noir. Pas de serif, pas de crème, pas d'or dans
   l'interface ; l'icône forêt/or porte la marque.
+- Le **widget flottant** reprend l'icône de l'app (forêt `#123B2E`, or
+  `#C9A45C`, crème `#F8F4EC`) : launcher 48 px, CTA forêt, focus or.
+  Il est déplaçable même fermé et garde sa position.
 - La camerounité vient du contexte financier, des langues et de la retenue,
   pas de motifs décoratifs.
 

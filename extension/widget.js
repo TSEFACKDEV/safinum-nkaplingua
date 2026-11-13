@@ -82,118 +82,120 @@
       *, *::before, *::after { box-sizing: border-box; }
       button, select, textarea { font: inherit; }
       button { -webkit-tap-highlight-color: transparent; }
-      .root { pointer-events: auto; font: 13px/1.45 "Noto Sans", system-ui, -apple-system, "Segoe UI", sans-serif; color: #111; }
+      .root {
+        --forest: #123B2E; --forest-700: #1D5A45; --forest-100: #DCEBE3;
+        --gold: #C9A45C; --cream: #F8F4EC; --ink: #10231C;
+        pointer-events: auto; font: 13px/1.45 "Noto Sans", system-ui, -apple-system, "Segoe UI", sans-serif; color: var(--ink);
+      }
       .launcher {
-        display: grid; place-items: center; width: 48px; height: 48px; padding: 0;
-        border: 1px solid #111; border-radius: 14px; background: #111; color: #fff;
-        cursor: pointer; box-shadow: 0 10px 26px rgba(17,17,17,.22);
-        transition: background-color 120ms cubic-bezier(.2,0,0,1), transform 120ms cubic-bezier(.2,0,0,1);
+        display: block; width: 48px; height: 48px; padding: 0;
+        border: 0; border-radius: 14px; background: transparent;
+        cursor: grab; box-shadow: 0 10px 26px rgba(18,59,46,.28);
+        touch-action: none;
+        transition: transform 120ms cubic-bezier(.2,0,0,1), box-shadow 120ms cubic-bezier(.2,0,0,1);
       }
-      .launcher:hover { background: #2a2a2a; }
-      .launcher:active { transform: translateY(1px); }
+      .launcher:hover { transform: translateY(-1px); box-shadow: 0 13px 30px rgba(18,59,46,.34); }
+      .launcher:active { transform: translateY(1px); cursor: grabbing; }
       .launcher:focus-visible {
-        outline: 2px solid #fff; outline-offset: 2px;
-        box-shadow: 0 0 0 4px #111, 0 10px 26px rgba(17,17,17,.22);
+        outline: 2px solid var(--gold); outline-offset: 3px;
+        box-shadow: 0 0 0 5px rgba(248,244,236,.9), 0 10px 26px rgba(18,59,46,.3);
       }
-      .launcher svg { width: 24px; height: 24px; }
+      .launcher svg { display: block; width: 48px; height: 48px; border-radius: 14px; }
       .panel {
         position: absolute; right: 0; bottom: 60px;
         width: min(320px, calc(100vw - 24px)); max-height: calc(100vh - 96px);
         overflow: auto; overscroll-behavior: contain;
-        border: 1px solid #deded9; border-radius: 14px; background: #fff;
-        box-shadow: 0 18px 44px rgba(17,17,17,.18);
-        scrollbar-width: thin; scrollbar-color: #dcdcd7 transparent;
+        border: 1px solid var(--forest-100); border-radius: 14px; background: #fff;
+        box-shadow: 0 18px 44px rgba(18,59,46,.2);
+        scrollbar-width: thin; scrollbar-color: var(--forest-100) transparent;
         animation: panel-in 160ms cubic-bezier(.2,0,0,1) both;
       }
       .panel[hidden] { display: none; }
       @keyframes panel-in { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
       .header {
         display: flex; align-items: center; justify-content: space-between; gap: 8px;
-        min-height: 48px; padding: 0 8px 0 14px; border-bottom: 1px solid #ecece8;
+        min-height: 48px; padding: 0 8px 0 14px; border-bottom: 1px solid var(--forest-100);
         cursor: grab; user-select: none; touch-action: none;
       }
       .header:active { cursor: grabbing; }
       .brand { display: flex; align-items: center; gap: 8px; min-width: 0; }
-      .mark {
-        display: grid; place-items: center; width: 24px; height: 24px;
-        border-radius: 7px; background: #111; color: #fff; flex: none;
-      }
-      .mark svg { width: 15px; height: 15px; }
-      .name { font-size: 13px; font-weight: 700; letter-spacing: -.01em; white-space: nowrap; }
+      .mark { display: block; width: 24px; height: 24px; flex: none; }
+      .mark svg { display: block; width: 24px; height: 24px; border-radius: 7px; }
+      .name { color: var(--forest); font-size: 13px; font-weight: 700; letter-spacing: -.01em; white-space: nowrap; }
       .header-actions { display: flex; align-items: center; gap: 2px; flex: none; }
       .icon-button {
         display: grid; place-items: center; width: 44px; height: 44px; padding: 0;
-        border: 0; border-radius: 8px; background: transparent; color: #666; cursor: pointer;
+        border: 0; border-radius: 8px; background: transparent; color: var(--forest-700); cursor: pointer;
       }
-      .icon-button:hover { background: #f4f4f1; color: #111; }
-      .icon-button:focus-visible { outline: 2px solid #111; outline-offset: -2px; }
+      .icon-button:hover { background: var(--cream); color: var(--forest); }
+      .icon-button:focus-visible { outline: 2px solid var(--gold); outline-offset: -2px; }
       .icon-button svg { width: 16px; height: 16px; }
       .body { padding: 14px; }
       .field { display: grid; gap: 6px; margin-bottom: 10px; }
-      .label { color: #666; font-size: 11px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; }
+      .label { color: var(--forest-700); font-size: 11px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; }
       .select {
         width: 100%; height: 44px; padding: 0 34px 0 11px;
-        border: 1px solid #dcdcd7; border-radius: 8px; background: #fff; color: #111;
+        border: 1px solid var(--forest-100); border-radius: 8px; background: #fff; color: var(--ink);
         font-size: 13px; font-weight: 600; cursor: pointer;
         appearance: none;
         background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'%3E%3Cpath d='M5 7.5l5 5 5-5' fill='none' stroke='%23666' stroke-width='1.7' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
         background-repeat: no-repeat; background-position: right 11px center; background-size: 14px;
       }
-      .select:focus-visible { outline: 2px solid #111; outline-offset: 1px; }
+      .select:focus-visible { outline: 2px solid var(--gold); outline-offset: 1px; }
       .status {
-        min-height: 18px; margin: 0 0 10px; color: #666; font-size: 12px; line-height: 1.4;
+        min-height: 18px; margin: 0 0 10px; color: var(--forest-700); font-size: 12px; line-height: 1.4;
       }
       .status[data-tone="danger"] { color: #b42318; }
       .primary {
         display: flex; align-items: center; justify-content: space-between; gap: 10px;
         width: 100%; height: 44px; padding: 0 12px 0 14px;
-        border: 0; border-radius: 8px; background: #111; color: #fff;
+        border: 0; border-radius: 8px; background: var(--forest); color: #fff;
         font-size: 13px; font-weight: 600; cursor: pointer;
         transition: background-color 120ms cubic-bezier(.2,0,0,1), transform 120ms cubic-bezier(.2,0,0,1);
       }
-      .primary:hover { background: #2a2a2a; }
+      .primary:hover { background: var(--forest-700); }
       .primary:active { transform: translateY(1px); }
-      .primary:focus-visible { outline: 2px solid #111; outline-offset: 2px; }
+      .primary:focus-visible { outline: 2px solid var(--gold); outline-offset: 2px; }
       .primary svg { width: 16px; height: 16px; flex: none; }
       .actions { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; margin-top: 6px; }
       .secondary {
-        height: 44px; padding: 0 8px; border: 1px solid #dcdcd7; border-radius: 8px;
-        background: #fff; color: #333; font-size: 12px; font-weight: 600; cursor: pointer;
+        height: 44px; padding: 0 8px; border: 1px solid var(--forest-100); border-radius: 8px;
+        background: #fff; color: var(--forest); font-size: 12px; font-weight: 600; cursor: pointer;
       }
-      .secondary:hover { background: #fafaf8; border-color: #c9c9c3; }
-      .secondary:focus-visible { outline: 2px solid #111; outline-offset: 2px; }
+      .secondary:hover { background: var(--cream); border-color: var(--gold); }
+      .secondary:focus-visible { outline: 2px solid var(--gold); outline-offset: 2px; }
       button:disabled { opacity: .55; cursor: default; }
       .primary:disabled:hover, .secondary:disabled:hover { background: inherit; }
-      .test { margin-top: 14px; padding-top: 12px; border-top: 1px solid #ecece8; }
+      .test { margin-top: 14px; padding-top: 12px; border-top: 1px solid var(--forest-100); }
       .test > summary {
         display: flex; align-items: center; gap: 8px; min-height: 44px;
-        color: #111; font-size: 12px; font-weight: 600; cursor: pointer; list-style: none;
+        color: var(--forest); font-size: 12px; font-weight: 600; cursor: pointer; list-style: none;
       }
       .test > summary::-webkit-details-marker { display: none; }
       .test > summary::after {
         content: ""; width: 6px; height: 6px; margin-left: auto;
-        border-right: 1.5px solid #666; border-bottom: 1.5px solid #666;
+        border-right: 1.5px solid var(--forest-700); border-bottom: 1.5px solid var(--forest-700);
         transform: rotate(45deg);
       }
       .test[open] > summary::after { transform: rotate(-135deg); }
-      .test > summary:focus-visible { outline: 2px solid #111; outline-offset: 2px; border-radius: 6px; }
+      .test > summary:focus-visible { outline: 2px solid var(--gold); outline-offset: 2px; border-radius: 6px; }
       .textarea {
         width: 100%; min-height: 68px; margin-top: 4px; padding: 9px 10px;
-        border: 1px solid #dcdcd7; border-radius: 8px; background: #fff; color: #111;
+        border: 1px solid var(--forest-100); border-radius: 8px; background: #fff; color: var(--ink);
         font-size: 12px; line-height: 1.5; resize: vertical;
       }
-      .textarea:focus-visible { outline: 2px solid #111; outline-offset: 1px; }
+      .textarea:focus-visible { outline: 2px solid var(--gold); outline-offset: 1px; }
       .run {
         width: 100%; height: 44px; margin-top: 6px;
-        border: 1px solid #dcdcd7; border-radius: 8px; background: #fafaf8;
-        color: #111; font-size: 12px; font-weight: 600; cursor: pointer;
+        border: 1px solid var(--forest-100); border-radius: 8px; background: var(--cream);
+        color: var(--forest); font-size: 12px; font-weight: 600; cursor: pointer;
       }
-      .run:hover { background: #f2f2ef; }
-      .run:focus-visible { outline: 2px solid #111; outline-offset: 2px; }
+      .run:hover { background: #F1E8D6; }
+      .run:focus-visible { outline: 2px solid var(--gold); outline-offset: 2px; }
       .error { margin: 6px 0 0; color: #b42318; font-size: 12px; line-height: 1.4; }
-      .result { margin-top: 8px; color: #111; font-size: 12px; line-height: 1.5; white-space: pre-wrap; }
-      .result:not(:empty) { padding: 8px 9px; border: 1px solid #ecece8; border-radius: 8px; background: #fafaf8; }
-      .grip { display: grid; place-items: center; width: 24px; height: 24px; color: #b3b3ad; flex: none; }
+      .result { margin-top: 8px; color: var(--ink); font-size: 12px; line-height: 1.5; white-space: pre-wrap; }
+      .result:not(:empty) { padding: 8px 9px; border: 1px solid var(--forest-100); border-radius: 8px; background: var(--cream); }
+      .grip { display: grid; place-items: center; width: 24px; height: 24px; color: var(--gold); flex: none; }
       .grip svg { width: 14px; height: 14px; }
       @media (prefers-reduced-motion: reduce) {
         .panel { animation: none; }
@@ -202,17 +204,22 @@
     </style>
     <div class="root" data-busy="false">
       <button class="launcher" id="launcher" type="button" aria-expanded="false" aria-controls="panel">
-        <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
-          <path d="M5.5 18V6l13 12V6" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/>
-          <path d="M7.5 4.4c2.3-1.7 6.7-1.7 9 0" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+        <svg viewBox="0 0 128 128" aria-hidden="true">
+          <rect width="128" height="128" rx="30" fill="#123B2E"/>
+          <path d="M28 94V34h14l26 35V34h14v60H68L42 59v35H28z" fill="#C9A45C"/>
+          <path d="M94 43c8 5 13 13 13 22s-5 17-13 22" fill="none" stroke="#F8F4EC" stroke-width="6" stroke-linecap="round"/>
+          <circle cx="101" cy="66" r="4.5" fill="#F8F4EC"/>
         </svg>
       </button>
       <section class="panel" id="panel" role="dialog" aria-modal="false" aria-labelledby="widget-name" hidden>
         <header class="header" id="drag">
           <div class="brand">
             <span class="mark" aria-hidden="true">
-              <svg viewBox="0 0 24 24" fill="none">
-                <path d="M5.5 18V6l13 12V6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              <svg viewBox="0 0 128 128">
+                <rect width="128" height="128" rx="30" fill="#123B2E"/>
+                <path d="M28 94V34h14l26 35V34h14v60H68L42 59v35H28z" fill="#C9A45C"/>
+                <path d="M94 43c8 5 13 13 13 22s-5 17-13 22" fill="none" stroke="#F8F4EC" stroke-width="6" stroke-linecap="round"/>
+                <circle cx="101" cy="66" r="4.5" fill="#F8F4EC"/>
               </svg>
             </span>
             <span class="name" id="widget-name">NkapLingua</span>
@@ -280,6 +287,8 @@
 
   let busy = false;
   let dragState = null;
+  let launcherDrag = null;
+  let suppressLauncherClick = false;
 
   function setTextCopy() {
     const c = copy();
@@ -471,7 +480,12 @@
     }
   }
 
-  launcher.addEventListener("click", () => {
+  launcher.addEventListener("click", (event) => {
+    if (suppressLauncherClick) {
+      suppressLauncherClick = false;
+      event.preventDefault();
+      return;
+    }
     if (panel.hidden) openPanel();
     else closePanel();
   });
@@ -520,6 +534,56 @@
     host.style.right = "auto";
     host.style.bottom = "auto";
   });
+
+  // Le launcher est déplaçable même quand le panneau est fermé.
+  launcher.addEventListener("pointerdown", (event) => {
+    if (event.pointerType === "mouse" && event.button !== 0) return;
+    // Un nouveau geste annule un éventuel clic de drag non émis.
+    suppressLauncherClick = false;
+    const rect = host.getBoundingClientRect();
+    launcherDrag = {
+      pointerId: event.pointerId,
+      startX: event.clientX,
+      startY: event.clientY,
+      left: rect.left,
+      top: rect.top,
+      moved: false
+    };
+    launcher.setPointerCapture?.(event.pointerId);
+  });
+  launcher.addEventListener("pointermove", (event) => {
+    if (!launcherDrag || launcherDrag.pointerId !== event.pointerId) return;
+    const dx = event.clientX - launcherDrag.startX;
+    const dy = event.clientY - launcherDrag.startY;
+    if (!launcherDrag.moved && Math.abs(dx) + Math.abs(dy) < 4) return;
+    launcherDrag.moved = true;
+    const left = Math.min(Math.max(8, launcherDrag.left + dx), window.innerWidth - 56);
+    const top = Math.min(Math.max(8, launcherDrag.top + dy), window.innerHeight - 56);
+    host.style.left = `${left}px`;
+    host.style.top = `${top}px`;
+    host.style.right = "auto";
+    host.style.bottom = "auto";
+    event.preventDefault();
+  });
+  const endLauncherDrag = async (event) => {
+    if (!launcherDrag || launcherDrag.pointerId !== event.pointerId) return;
+    const moved = launcherDrag.moved;
+    launcherDrag = null;
+    if (moved) {
+      suppressLauncherClick = true;
+      const storage = (globalThis.browser ?? globalThis.chrome)?.storage?.local;
+      const rect = host.getBoundingClientRect();
+      try {
+        await storage?.set({
+          nkWidgetPosition: { left: Math.round(rect.left), top: Math.round(rect.top) }
+        });
+      } catch {
+        // La position reste valable pour la session.
+      }
+    }
+  };
+  launcher.addEventListener("pointerup", endLauncherDrag);
+  launcher.addEventListener("pointercancel", endLauncherDrag);
 
   // Déplacement au pointeur depuis l'en-tête.
   drag.addEventListener("pointerdown", (event) => {

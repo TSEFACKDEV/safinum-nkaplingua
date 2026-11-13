@@ -93,6 +93,9 @@ function createWidget(lang = "fr") {
   assert((launcher.getAttribute("aria-label") || "").length > 0, "launcher sans nom accessible");
   assert(shadow.textContent.includes("NkapLingua"), "marque absente");
   assert(!shadow.textContent.includes("non validé"), "mention de validation visible");
+  assert(shadow.innerHTML.includes('fill="#123B2E"'), "forêt de l'icône absente");
+  assert(shadow.innerHTML.includes('fill="#C9A45C"'), "or de l'icône absent");
+  assert(shadow.innerHTML.includes('fill="#F8F4EC"'), "crème de l'icône absent");
 
   launcher.click();
   assert(!panel.hidden, "panneau non ouvert");
@@ -155,6 +158,36 @@ function createWidget(lang = "fr") {
   input.value = "secret";
   document.body.append(input);
   assert(!shadow.textContent.includes("secret"), "secret recopié dans le widget");
+
+  // Le launcher se déplace sans ouvrir le panneau.
+  const draggable = createWidget("fr");
+  const dragLauncher = draggable.host.shadowRoot.getElementById("launcher");
+  const dispatchPointer = (type, x, y) => {
+    const event = new draggable.window.Event(type, { bubbles: true, cancelable: true });
+    Object.defineProperties(event, {
+      pointerId: { value: 7 },
+      pointerType: { value: "mouse" },
+      button: { value: 0 },
+      clientX: { value: x },
+      clientY: { value: y }
+    });
+    dragLauncher.dispatchEvent(event);
+  };
+  dispatchPointer("pointerdown", 100, 100);
+  dispatchPointer("pointermove", 180, 150);
+  dispatchPointer("pointerup", 180, 150);
+  await new Promise((resolve) => setTimeout(resolve, 10));
+  assert(draggable.host.style.left !== "", "launcher non déplacé horizontalement");
+  assert(draggable.host.style.top !== "", "launcher non déplacé verticalement");
+  assert(
+    draggable.host.shadowRoot.getElementById("panel").hidden,
+    "le déplacement a ouvert le panneau"
+  );
+  dragLauncher.click();
+  assert(
+    draggable.host.shadowRoot.getElementById("panel").hidden,
+    "le clic après déplacement a ouvert le panneau"
+  );
 
   const english = createWidget("en");
   const englishShadow = english.host.shadowRoot;

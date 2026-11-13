@@ -72,12 +72,13 @@ Suivi détaillé du lot moteur : [docs/MARIUS_STATUS.md](docs/MARIUS_STATUS.md).
 
 ### Widget flottant
 
-Le widget apparaît en bas à droite des pages HTTP/HTTPS. Un clic ouvre un
-panneau compact : langue cible, traduction de la page, restauration,
-traduction de la sélection et test d'un texte. Il est isolé en Shadow DOM,
-déplaçable, refermable avec `Échap`, et ne lit jamais les champs, mots de
-passe, PIN ou valeurs de formulaire. Sur les pages déjà ouvertes, le popup
-injecte aussi le widget.
+Le widget apparaît en bas à droite des pages HTTP/HTTPS avec l'icône de l'app
+(forêt `#123B2E`, or `#C9A45C`). Un clic ouvre un panneau compact : langue
+cible, traduction de la page, restauration, traduction de la sélection et test
+d'un texte. Il est isolé en Shadow DOM, **déplaçable même fermé** (le launcher
+se glisse à la souris), refermable avec `Échap`, et ne lit jamais les champs,
+mots de passe, PIN ou valeurs de formulaire. Sa position est mémorisée. Sur les
+pages déjà ouvertes, le popup injecte aussi le widget.
 
 Design system : [`docs/DESIGN.md`](docs/DESIGN.md).
 
