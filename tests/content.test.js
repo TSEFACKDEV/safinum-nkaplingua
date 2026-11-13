@@ -253,6 +253,21 @@ function sendMessage(message) {
   await new Promise((resolve) => setTimeout(resolve, 50));
   assert(pageSelection.rangeCount === 0, "sélection restée après restauration");
 
+  // La dernière sélection doit survivre à la perte de focus du popup.
+  const transfert = window.document.getElementById("transfert");
+  const popupRange = window.document.createRange();
+  popupRange.selectNodeContents(transfert);
+  pageSelection.removeAllRanges();
+  pageSelection.addRange(popupRange);
+  // jsdom n'émet pas toujours selectionchange ; le navigateur réel le fait.
+  window.document.dispatchEvent(new window.Event("selectionchange"));
+  pageSelection.removeAllRanges();
+  const selectionResponse = await sendMessage({
+    type: "NK_TRANSLATE_SELECTION",
+    target: "fub"
+  });
+  assert(selectionResponse?.ok, "traduction de sélection perdue après perte de focus");
+
   console.log("content.js OK — texte, noms, attributs, options, restauration");
 })().catch((error) => {
   console.error("FAIL", error);

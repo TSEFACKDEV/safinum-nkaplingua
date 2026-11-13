@@ -75,7 +75,8 @@ Suivi détaillé du lot moteur : [docs/MARIUS_STATUS.md](docs/MARIUS_STATUS.md).
 Le widget apparaît en bas à droite des pages HTTP/HTTPS avec l'icône de l'app
 (forêt `#123B2E`, or `#C9A45C`). Un clic ouvre un panneau compact : langue
 cible, traduction de la page, restauration, traduction de la sélection et test
-d'un texte. Il est isolé en Shadow DOM, **déplaçable même fermé** (le launcher
+d'un texte. La sélection est d'abord tentée en entier (une entrée de pack peut
+contenir deux phrases), puis découpée phrase par phrase en repli. Il est isolé en Shadow DOM, **déplaçable même fermé** (le launcher
 se glisse à la souris), refermable avec `Échap`, et ne lit jamais les champs,
 mots de passe, PIN ou valeurs de formulaire. Sa position est mémorisée. Sur les
 pages déjà ouvertes, le popup injecte aussi le widget.

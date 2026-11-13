@@ -1269,7 +1269,8 @@
 
   async function translateSelection(target, forcedText = "") {
     const selection = window.getSelection();
-    const text = String(forcedText || selection?.toString() || "").trim();
+    const currentText = String(selection?.toString() || "").trim();
+    const text = String(forcedText || currentText || lastSelectionText || "").trim();
     if (!text) {
       showToast(tr("Sélectionnez d'abord du texte.", "Select some text first."));
       return { ok: false, error: "Sélectionnez d'abord du texte." };

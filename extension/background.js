@@ -168,19 +168,31 @@ async function translateText(text, target, source, demo = false) {
   const detected = source || (detectedInfo.code === "en" ? "en" : "fr");
   const sentences = splitTextSentences(clean);
 
-  // Un seul segment : comportement historique, sans découpage superflu.
-  if (sentences.length <= 1) {
-    const result = await translateSegments(
-      [{ id: "text", text: clean }],
-      target,
-      detected,
-      { demo, freeText: true }
-    );
-
-    if (result.error) return result;
+  // Toujours tenter le texte entier d'abord. Une phrase du pack peut
+  // contenir deux phrases (« Renseignez… Vérifiez… ») : découper avant
+  // l'essai ferait rater l'entrée exacte et donnerait l'impression que la
+  // sélection n'est pas traduite.
+  const whole = await translateSegments(
+    [{ id: "text", text: clean }],
+    target,
+    detected,
+    { demo, freeText: true }
+  );
+  if (whole.error) return whole;
+  const wholeTranslation = whole.translations?.[0] || null;
+  if (wholeTranslation?.ok) {
     return {
-      translation: result.translations?.[0] || null,
-      provider: result.provider || null,
+      translation: wholeTranslation,
+      provider: whole.provider || null,
+      detected: detectedInfo
+    };
+  }
+
+  // Un seul segment : on rend le verdict (refus ou pack manquant).
+  if (sentences.length <= 1) {
+    return {
+      translation: wholeTranslation,
+      provider: whole.provider || null,
       detected: detectedInfo
     };
   }
