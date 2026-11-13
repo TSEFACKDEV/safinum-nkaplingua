@@ -1,6 +1,6 @@
 # Soumission — SAFINUM Innovate Challenge 2026
 
-**Version en préparation : 0.6.0** — trois langues (fulfulde, ewondo, duala),
+**Version en préparation : 0.6.1** — trois langues (fulfulde, ewondo, duala),
 détection FR/EN, protection des noms et des montants, filtres de qualité.
 Glossaire et packs **en cours de validation** ; cloud MyMemory expérimental et
 désactivé par défaut.

@@ -7,7 +7,7 @@
 > restent historiques.
 
 **Date** : 8 novembre 2026 (état intermédiaire, non signé)
-**Version** : 0.6.0  
+**Version** : 0.6.1  
 **Langues** : fulfulde (`fub`), ewondo (`ewo`), duala (`dua`)  
 **Responsable** : Klein  
 **Statut** : **audit des relectures reçu, aucune ligne validée** — 85 lignes
