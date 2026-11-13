@@ -174,7 +174,7 @@ async function translateText(text, target, source, demo = false) {
       [{ id: "text", text: clean }],
       target,
       detected,
-      { demo }
+      { demo, freeText: true }
     );
 
     if (result.error) return result;
@@ -190,7 +190,8 @@ async function translateText(text, target, source, demo = false) {
     text: sentence
   }));
   const result = await translateSegments(segments, target, detected, {
-    demo
+    demo,
+    freeText: true
   });
   if (result.error) return result;
 
@@ -234,6 +235,15 @@ async function translateText(text, target, source, demo = false) {
 const CRITICALITY_TERMS =
   /\b(solde|frais|montant|total|beneficiaire|pin|otp|confirmer|confirmation|annuler|annulation|erreur|securite|reessayer|reference|transaction|paiement|virement|transfert|compte|debit|credit|taux|interet|echeance|penalite|retard|echec)\b/i;
 
+// Le texte inédit (essai libre) part toujours vers le moteur local autorisé :
+// une phrase banale comme « Votre transfert est en cours » ne doit pas être
+// bloquée simplement parce qu'elle contient un mot du domaine financier.
+// Seules les phrases où une inversion de sens coûte de l'argent restent
+// protégées : secrets d'authentification, fraude, refus pour solde, etc.
+// (Le niveau A strict reste appliqué aux pages, via CRITICALITY_TERMS.)
+const CRITICALITY_HARD_TERMS =
+  /\b(pin|otp|code secret|code de confirmation|mot de passe|password|kyc|fraude|frauduleux|usurpation|phishing|hameconnage|volé|vole|bloque|bloquee|bloquée|suspendu|suspendue|insuffisant|insuffisante|refuse|refusee|refusée|annule|annulee|annulée|impossible|invalide|echoue|echouee|echouée|echec|contester|litige|rembourse|remboursement)\b/i;
+
 /**
  * Niveau A : segment critique (solde, frais, PIN, confirmation, erreur…).
  * Il ne peut venir que d'un pack validé, jamais d'une MT ni d'un fuzzy.
@@ -243,6 +253,18 @@ function classifyCriticality(text) {
     .normalize("NFD")
     .replace(/[\u0300-\u036f]/g, "");
   return CRITICALITY_TERMS.test(normalized) ? "A" : "B";
+}
+
+/**
+ * Texte saisi librement dans le popup : le niveau A y est calculé avec la
+ * liste stricte, pour ne pas renvoyer « reste en français » sur tout texte
+ * contenant « transfert », « frais » ou « compte ».
+ */
+function classifyFreeTextCriticality(text) {
+  const normalized = String(text || "")
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "");
+  return CRITICALITY_HARD_TERMS.test(normalized) ? "A" : "B";
 }
 
 function isUnchangedLiteral(text) {
@@ -266,6 +288,7 @@ async function translateSegments(segments, target, source, options = {}) {
     return { translations: [], provider: null };
   }
   const demoMode = Boolean(options.demo);
+  const freeText = Boolean(options.freeText);
 
   const targetSpec = LANG?.getTarget(target);
   if (!targetSpec) {
@@ -290,7 +313,9 @@ async function translateSegments(segments, target, source, options = {}) {
       text: redaction.text,
       tokens: redaction.tokens,
       originalText: segment.text || "",
-      criticality: classifyCriticality(segment.text || "")
+      criticality: (freeText ? classifyFreeTextCriticality : classifyCriticality)(
+        segment.text || ""
+      )
     };
   });
   const preparedById = new Map(
@@ -359,10 +384,13 @@ async function translateSegments(segments, target, source, options = {}) {
       });
     } catch (error) {
       if (targetSpec.engine === "pack") {
+        const packUnavailable = freeText
+          ? "Le pack Duala n'a pas pu être chargé. Rechargez l'extension et réessayez."
+          : `Pack ${targetSpec.label} indisponible : ${String(error)}`;
         return {
           translations: [],
           provider: null,
-          error: `Pack ${targetSpec.label} indisponible : ${String(error)}`
+          error: packUnavailable
         };
       }
       // Pour une cible MT, un pack absent ne doit pas bloquer le moteur.
