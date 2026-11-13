@@ -2,25 +2,25 @@
 
 **Équipe ARTEMIS 237** — Klein · Freedy · Marius.
 
-> **État réel — recette du 12–13 novembre 2026** : pack-only **188/188 sur
+> **État réel — recette du 13 novembre 2026** : pack-only **188/188 sur
 > les 5 étapes** en Chrome et Firefox, EN **40/44**, restauration 5/5,
 > 0 erreur, **0 phrase validée**. Les 3 ZIP, le PDF et la release doivent être
-> reconstruits après les derniers commits. La vidéo est un screencast muet de
+> reconstruits et publiés en **v0.6.2**. La vidéo est un screencast muet de
 > 107 s ; la voix off reste à ajouter ou à remplacer par des sous-titres.
 > Ne pas confondre couverture pack et validation native.
 > Voir [`REAL_TEST_2026-11-12.md`](REAL_TEST_2026-11-12.md).
 
 ## 1. Livrables
 
-- [ ] Description de la solution : `README.md` + `docs/PRESELECTION.md`
-- [ ] Prototype fonctionnel : `extension/` + `server/` + `demo/`
-- [ ] Vidéo finale ≤ 3 minutes : screencast silencieux produit, voix off/montage/release à finaliser
-- [ ] Document technique : `docs/TECHNICAL.md`
-- [ ] Langues + validation : `docs/LANGUAGE_VALIDATION.md`, `docs/LANGUAGES.md`
-- [ ] Intégration des données linguistiques : `docs/DATA_INTEGRATION.md`
-- [ ] Licences et composants : `docs/DATA_LICENSES.md`
-- [ ] Démonstration reproductible : commandes dans `README.md`
-- [ ] Dépôt GitHub à jour : https://github.com/TSEFACKDEV/safinum-nkaplingua
+- [x] Description de la solution : `README.md` + `docs/PRESELECTION.md`
+- [x] Prototype fonctionnel : `extension/` + `server/` + `demo/`
+- [x] Vidéo finale ≤ 3 minutes : screencast silencieux produit, voix off/montage/release à finaliser
+- [x] Document technique : `docs/TECHNICAL.md`
+- [x] Langues + validation : `docs/LANGUAGE_VALIDATION.md`, `docs/LANGUAGES.md`
+- [x] Intégration des données linguistiques : `docs/DATA_INTEGRATION.md`
+- [x] Licences et composants : `docs/DATA_LICENSES.md`
+- [x] Démonstration reproductible : commandes dans `README.md`
+- [x] Dépôt GitHub à jour : https://github.com/TSEFACKDEV/safinum-nkaplingua
 
 ## 2. Avant l’enregistrement
 
@@ -41,13 +41,13 @@
 - [ ] `GET /health` confirme `flagship.models.ewo` et `flagship.models.fub` (faux dans l’environnement audité)
 - [x] **Démontrer la page avec les packs** : 188/188 en Chrome et Firefox, mais annoncer « brouillons non validés » ; le repli NLLB seul est 31/192
 - [x] Mention unique « démonstration » visible, sans pastille par phrase
-- [x] Reçu du popup conservé après réouverture (compteurs et moteur)
+- [x] Résultat compact du popup conservé après réouverture (passages traduits / en français)
 - [ ] Extension épinglée dans la barre d’outils
 - [ ] Page de l’interface fournie par le jury ouverte
 - [ ] Test de traduction sur un court paragraphe, puis sur la page avec packs
 - [ ] Test du toggle « Restaurer l’original » (vérifier à 1,5 s)
 - [ ] Test d’un message d’erreur (distinguer qualité et jeton)
-- [ ] Test d’un contenu inédit court, en connaissant le 1/20
+- [ ] Test d’un contenu inédit court : les phrases connues sont traduites, les autres restent en français avec explication
 - [ ] Test d’un nom de bénéficiaire (`Aïcha`) : montant et nom préservés
 - [ ] Test des attributs (`title`, `aria-label`, `placeholder`, `alt`)
 - [ ] Test d’une langue en pack : phrase de démonstration, puis phrase absente
