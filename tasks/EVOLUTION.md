@@ -3545,3 +3545,73 @@ mot `json`) avec les champs ci-dessous. Exemple de structure, en indentation :
   "blockers": []
 }
 ```
+
+## 2026-11-13T02:05:00+01:00 — Klein — K16 — done
+
+```json
+{
+  "timestamp": "2026-11-13T02:05:00+01:00",
+  "person": "Klein",
+  "branch": "klein",
+  "task": "K16",
+  "status": "done",
+  "summary": "Audit de soumission : suppression d'un motif de nom inutilisé, correction du commentaire background sur la MT critique en démo, mention unique « démonstration » désormais visible en mode SAFINUM, et reçu de traduction conservé quand le popup est rouvert. Documentation mise à jour (recette 12–13 novembre, 188/188, packs 231/210/203, 0 validée), PDF régénéré en 8 pages sans page vide, 3 ZIP reconstruits et lint Firefox 0/0/0. Le mode vocal reste hors périmètre, documenté comme feuille de route dans docs/KAMA_VOICE_REUSE.md.",
+  "files": [
+    "extension/content.js",
+    "extension/background.js",
+    "extension/popup.js",
+    "tests/state.test.js",
+    "tests/popup-actions.test.js",
+    "tests/site-demo.e2e.js",
+    "docs/SUBMISSION_DOCUMENT.html",
+    "docs/SUBMISSION_CHECKLIST.md",
+    "docs/KAMA_VOICE_REUSE.md",
+    "README.md",
+    "dist/NkapLingua-Documentation.pdf",
+    "docs/test-results/real-site-packs-2026-11-13-015831.json"
+  ],
+  "tests": [
+    {
+      "command": "node tests/{content,privacy,cloud-gating,criticality,preservation,title,error-taxonomy,sentence-fallback,receipt,state,ui-language,popup-actions}.test.js",
+      "result": "pass",
+      "note": "12 suites vertes, dont reçu persistant et état"
+    },
+    {
+      "command": "node scripts/test-extension.js",
+      "result": "pass",
+      "note": "registre, détection, packs, jetons, qualité, niveau A"
+    },
+    {
+      "command": "node tests/pipeline.e2e.js --mode=all && node tests/site-demo.e2e.js",
+      "result": "pass",
+      "note": "pipeline pack/reviewed/edge et démo SAFINUM"
+    },
+    {
+      "command": "NODE_PATH=... NK_TEST_CACHE=... node tests/real-site.e2e.js",
+      "result": "pass",
+      "note": "Chrome, 5 étapes + EN, 188/188, 228 passages, 0 erreur"
+    },
+    {
+      "command": "NK_MOCK=1 server/.venv/bin/python -m pytest -q server/test_api.py",
+      "result": "pass",
+      "note": "30 passed"
+    },
+    {
+      "command": "bash scripts/package-extension.sh && npx --yes web-ext lint --source-dir dist/package/firefox",
+      "result": "pass",
+      "note": "3 ZIP 403/404 Ko, lint 0 erreur / 0 warning / 0 notice"
+    },
+    {
+      "command": "for s in check-evolution check-language-data check-language-packs check-native-kit check-pack-collisions check-training-data; do python3 scripts/$s.py; done",
+      "result": "pass",
+      "note": "tous les contrôles de données verts"
+    }
+  ],
+  "evidence": "docs/test-results/real-site-packs-2026-11-13-015831.json ; dist/NkapLingua-Documentation.pdf (8 pages) ; 3 ZIP 403/404 Ko ; lint 0/0/0",
+  "next": "Publier la release, ajouter la voix off ou les sous-titres, puis soumettre avant la deadline",
+  "blockers": [
+    "0 phrase validée par un T2 indépendant : le niveau A reste en français hors démo",
+    "Mode vocal non livré : aucun locuteur natif ni TTS licencié disponible avant la soumission"
+  ]
+}
+```

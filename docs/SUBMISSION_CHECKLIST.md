@@ -1,11 +1,12 @@
 # Checklist de soumission — SAFINUM Innovate 2026
 
-> **État réel — audit du 10 novembre 2026** : pack-only **188/188 sur les 5
-> étapes**, EN **40/44**, 3 ZIP + lint OK, 1/20 inédites en production,
-> 4/20 en démo, **0 phrase validée**, Firefox non rejoué. La vidéo finale
-> (voix off/montage/release) n’est pas prête. Ne pas confondre couverture pack
-> et validation native.
-> Voir [`AUDIT_2026-11-09.md`](AUDIT_2026-11-09.md).
+> **État réel — recette du 12–13 novembre 2026** : pack-only **188/188 sur
+> les 5 étapes** en Chrome et Firefox, EN **40/44**, restauration 5/5,
+> 0 erreur, **0 phrase validée**. Les 3 ZIP, le PDF et la release doivent être
+> reconstruits après les derniers commits. La vidéo est un screencast muet de
+> 107 s ; la voix off reste à ajouter ou à remplacer par des sous-titres.
+> Ne pas confondre couverture pack et validation native.
+> Voir [`REAL_TEST_2026-11-12.md`](REAL_TEST_2026-11-12.md).
 
 ## 1. Livrables
 
@@ -36,7 +37,9 @@
 - [ ] **Bloqué** : modèles `flagship-ai/cameroon-int8` absents dans l’audit ; NLLB seul est plus faible
 - [ ] Modèle NLLB téléchargé en secours (ou mode `NK_MOCK=1` pour l’UI)
 - [ ] `GET /health` confirme `flagship.models.ewo` et `flagship.models.fub` (faux dans l’environnement audité)
-- [x] **Démontrer la page avec les packs** : 188/188, mais annoncer « brouillons non validés » ; le repli NLLB seul est 31/192
+- [x] **Démontrer la page avec les packs** : 188/188 en Chrome et Firefox, mais annoncer « brouillons non validés » ; le repli NLLB seul est 31/192
+- [x] Mention unique « démonstration » visible, sans pastille par phrase
+- [x] Reçu du popup conservé après réouverture (compteurs et moteur)
 - [ ] Extension épinglée dans la barre d’outils
 - [ ] Page de l’interface fournie par le jury ouverte
 - [ ] Test de traduction sur un court paragraphe, puis sur la page avec packs
@@ -45,7 +48,7 @@
 - [ ] Test d’un contenu inédit court, en connaissant le 1/20
 - [ ] Test d’un nom de bénéficiaire (`Aïcha`) : montant et nom préservés
 - [ ] Test des attributs (`title`, `aria-label`, `placeholder`, `alt`)
-- [ ] Test d’une langue en pack : phrase validée, puis phrase absente
+- [ ] Test d’une langue en pack : phrase de démonstration, puis phrase absente
 - [ ] Connaître les limites par cœur (pas de survente)
 
 ## 4. Questions probables du jury

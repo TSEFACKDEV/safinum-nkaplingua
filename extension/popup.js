@@ -70,6 +70,13 @@ async function refreshPageState() {
       return;
     }
     if (state?.translated) {
+      // Le reçu reste disponible quand le popup est rouvert après coup :
+      // sans cela, seuls les compteurs d’état étaient visibles.
+      if (state.summary) {
+        renderReceipt(state.summary);
+      } else {
+        hideReceipt();
+      }
       const label = state.label
         ? displayName({ label: state.label })
         : t("unknownLanguage");

@@ -103,7 +103,7 @@
     partial
   }) {
     clearNotice();
-    if (DEMO_PAGE || !translated) return;
+    if (!translated) return;
 
     const host = document.createElement("div");
     host.id = "nk-notice-host";
@@ -237,14 +237,6 @@
       "mademoiselle|m\\.|mme|mlle|dr|professeur|prof|à|de|du|pour|" +
       "chez|vers|contact)" +
       "\\s*:?\\s+" +
-      "([\\p{Lu}][\\p{L}'’-]+(?:\\s+[\\p{Lu}][\\p{L}'’-]+){0,2})",
-    "giu"
-  );
-
-  const NAME_VOCATIVE_RE = new RegExp(
-    "(?:^|[^\\p{L}])" +
-      "(bonjour|bonsoir|salut|hello|hi|coucou|cher|chère|dear)" +
-      "\\s*[,:-]?\\s+" +
       "([\\p{Lu}][\\p{L}'’-]+(?:\\s+[\\p{Lu}][\\p{L}'’-]+){0,2})",
     "giu"
   );
@@ -1205,7 +1197,8 @@
         target: targetCode,
         label: spec.label,
         truncated: pageTruncated,
-        active
+        active,
+        summary
       };
       return {
         ok: true,
@@ -1607,6 +1600,7 @@
       truncated: lastResult?.truncated === true,
       target: currentTarget,
       label: spec?.label || "",
+      summary: lastResult?.summary || null,
       pageLang: document.documentElement?.lang || ""
     };
   }

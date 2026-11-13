@@ -10,6 +10,22 @@ const root = path.resolve(__dirname, "..");
 const html = fs.readFileSync(path.join(root, "extension/popup.html"), "utf8");
 const read = (f) => fs.readFileSync(path.join(root, "extension", f), "utf8");
 let reply = { ok: true, translated: 3, untranslated: 0 };
+let stateReply = {
+  ok: true,
+  translated: 7,
+  untranslated: 2,
+  target: "fub",
+  label: "Fulfulde (Adamawa)",
+  summary: {
+    label: "Fulfulde (Adamawa)",
+    translated: 7,
+    untranslated: 2,
+    partial: 1,
+    human: 6,
+    demo: 0,
+    provider: "pack"
+  }
+};
 
 const dom = new JSDOM(html, {
   url: "chrome-extension://test/popup.html",
@@ -22,7 +38,7 @@ window.chrome = {
   tabs: {
     query: async () => [{ id: 1 }],
     sendMessage: async (id, message) => {
-      if (message.type === "NK_GET_STATE") return { ok: true, translated: 0 };
+      if (message.type === "NK_GET_STATE") return stateReply;
       return reply;
     }
   },
@@ -40,6 +56,12 @@ const wait = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 
 (async () => {
   await wait(80);
+  const receipt = window.document.getElementById("receipt");
+  assert(receipt.hidden === false, "reçu non restauré à l’ouverture du popup");
+  assert(
+    window.document.getElementById("receiptTranslated").textContent === "7",
+    "compteurs du reçu non restaurés"
+  );
   const button = window.document.getElementById("restore");
   reply = { ok: false, error: "Aucune traduction à restaurer." };
   button.click();

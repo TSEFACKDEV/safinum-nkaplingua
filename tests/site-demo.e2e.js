@@ -182,9 +182,16 @@ async function main() {
   assert(summary.partial >= 0, "reçu partiels invalide");
   assert(summary.provider === "pack", `reçu moteur : ${summary.provider}`);
 
-  // En mode démo, aucune pastille ni mention technique visible.
+  // En mode démo, une mention unique et discrète reste visible : elle indique
+  // que les traductions sont des brouillons de démonstration. Les pastilles
+  // par phrase, elles, restent désactivées.
   const notice = window.document.getElementById("nk-notice-host");
-  assert(!notice, "notice de démonstration encore visible");
+  assert(notice, "mention de démonstration absente");
+  const noticeText = notice.shadowRoot?.querySelector(".notice")?.textContent || "";
+  assert(
+    /démonstration|demo/i.test(noticeText),
+    `mention de démonstration incorrecte : ${noticeText}`
+  );
   assert(
     !read("extension/content.js").includes('content: "brouillon humain"') &&
       !read("extension/content.js").includes('content: "brouillon éditorial"'),

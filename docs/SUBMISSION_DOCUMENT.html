@@ -530,7 +530,7 @@
         condition de crédit ou une alerte de sécurité.
       </p>
 
-      <div class="grid-2" style="margin-top: 7mm">
+      <div class="grid-2" style="margin-top: 5mm">
         <div class="card">
           <h4>Le problème</h4>
           <p>
@@ -578,28 +578,28 @@
         </li>
       </ul>
 
-      <div class="callout" style="margin-top: 6mm">
+      <div class="callout" style="margin-top: 4mm">
         <strong>Positionnement :</strong> NkapLingua n’est pas un nouveau service
         financier. C’est une couche d’accessibilité linguistique qui s’adapte aux
         services existants.
       </div>
 
-      <h3>Périmètre du prototype</h3>
+      <h3 style="margin-top: 5mm">Périmètre du prototype</h3>
       <div class="grid-3">
         <div class="card">
           <h4>Inclus</h4>
           <ul>
             <li>Extension Chrome/Edge/Firefox.</li>
             <li>Fulfulde + ewondo MT brouillon, duala en pack.</li>
-            <li>Détection FR/EN, choix de langue.</li>
-            <li>Parcours et contrôle montants/noms.</li>
+            <li>Détection FR/EN.</li>
+            <li>Contrôle montants/noms.</li>
           </ul>
         </div>
         <div class="card">
           <h4>Hors périmètre</h4>
           <ul>
             <li>Application mobile native.</li>
-            <li>Traduction audio/TTS dans les langues cibles.</li>
+            <li>Audio/TTS dans les langues cibles.</li>
             <li>Contrats juridiques certifiés.</li>
             <li>Déploiement en production bancaire.</li>
           </ul>
@@ -607,7 +607,7 @@
         <div class="card">
           <h4>Hypothèses</h4>
           <ul>
-            <li>Interface web dans un navigateur.</li>
+            <li>Interface web.</li>
             <li>Backend local optionnel.</li>
             <li>Validation native à faire.</li>
             <li>Opérations simulées.</li>
@@ -746,7 +746,7 @@
 
       <div class="figure-row" style="margin-top: 5mm">
         <div style="flex: 1">
-          <img class="screenshot" src="assets/demo-overview.png" alt="Aperçu de la page FINAKA" />
+          <img class="screenshot" style="max-height: 56mm; width: auto" src="assets/demo-overview.png" alt="Aperçu de la page FINAKA" />
           <p class="figure-caption">
             Page de démonstration FINAKA : solde, transfert, récapitulatif,
             sécurité et test de contenu inédit.
@@ -783,6 +783,34 @@
         </tr>
       </table>
 
+      <h3 style="margin-top: 5mm">Recette réelle du 12–13 novembre 2026</h3>
+      <table>
+        <tr>
+          <th>Mesure</th>
+          <th>Résultat</th>
+        </tr>
+        <tr>
+          <td>Page SAFINUM, 5 étapes, français</td>
+          <td><strong>188 / 188 segments</strong> avec les packs, 0 erreur, 0 critique MT, restauration 5/5 (Chrome et Firefox).</td>
+        </tr>
+        <tr>
+          <td>Page SAFINUM, anglais</td>
+          <td><strong>40 / 44 segments</strong> ; 4 dates restent en source.</td>
+        </tr>
+        <tr>
+          <td>Packs embarqués</td>
+          <td>Fulfulde 231, ewondo 210, duala 203 entrées ; <strong>0 validée</strong>.</td>
+        </tr>
+        <tr>
+          <td>Preuve (packs, sans cloud)</td>
+          <td class="mono">docs/test-results/real-site-packs-2026-11-13-015831.json</td>
+        </tr>
+      </table>
+      <p class="figure-caption">
+        Chrome réel sur safinum.cm/hackathon-test, montants et bénéficiaires
+        préservés ; Firefox dans <span class="mono">docs/REAL_TEST_2026-11-12.md</span>.
+        Brouillons non validés, aucune validation native.
+      </p>
 
       <div class="page-footer">
         <span><strong>NkapLingua</strong> · SAFINUM 2026</span>
@@ -920,6 +948,7 @@
         <li>Les moteurs flagship-ai/NLLB sont des <strong>brouillons</strong>, pas des traductions certifiées.</li>
         <li>Les phrases courtes sont plus fiables que les phrases longues.</li>
         <li>Les trois packs contiennent des brouillons humains et éditoriaux (231/210/203 entrées) mais aucune entrée validée : un T2 indépendant et un arbitre restent nécessaires.</li>
+        <li>Le repli phrase par phrase ne traduit que les phrases connues du pack ; une phrase critique non validée reste en français, même au milieu d’un paragraphe.</li>
         <li>Le backend filtre les sorties dégénérées ; les phrases critiques sans pack restent en français.</li>
         <li>La validation native est la prochaine étape obligatoire.</li>
         <li>Le prototype ne remplace pas une traduction contractuelle officielle.</li>
@@ -1011,7 +1040,7 @@
         <tr>
           <td>Corpus Adamawa Fulfulde–French</td>
           <td>NOODL-1.0</td>
-          <td>Évaluation / adaptation.</td>
+          <td>Référence documentaire ; aucune donnée redistribuée sans autorisation écrite.</td>
         </tr>
         <tr>
           <td>MyMemory Translation API</td>
@@ -1026,7 +1055,7 @@
         <tr>
           <td>Common Voice Adamawa Fulfulde</td>
           <td>CC0 1.0</td>
-          <td>Audio optionnel.</td>
+          <td>Référence ; non embarqué dans le paquet livré.</td>
         </tr>
         <tr>
           <td>Noto Sans / Fraunces</td>
@@ -1049,7 +1078,7 @@
         <li>Pas d’iframes cross-origin.</li>
         <li>Pas de shadow DOM fermé.</li>
         <li>Pas de TTS dans le MVP.</li>
-        <li>Backend local requis pour la MT ewondo/fulfulde.</li>
+        <li>Backend local requis uniquement hors pack ; les phrases absentes du pack restent en français.</li>
         <li>flagship-ai/NLLB non commercial.</li>
         <li>Pas une traduction certifiée.</li>
       </ul>

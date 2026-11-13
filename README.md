@@ -29,7 +29,7 @@ ci-dessous et [`docs/NATIVE_REVIEW_AUDIT.md`](docs/NATIVE_REVIEW_AUDIT.md).
 Projet préparé pour le **SAFINUM Innovate Challenge 2026** (Yaoundé,
 26–28 novembre 2026).
 
-## État réel au 10 novembre 2026
+## État réel au 13 novembre 2026
 
 | Élément | État vérifié |
 |---|---|
@@ -39,6 +39,7 @@ Projet préparé pour le **SAFINUM Innovate Challenge 2026** (Yaoundé,
 | Audio | **0 enregistrement** ; 15 phrases sans montant prêtes |
 | MT duala (pilote) | **échoué** : répétitions, non utilisable pour le niveau A |
 | Test site officiel | **188/188** sur 5 étapes en Chrome et Firefox, 0 non traduit, 0 critique MT, restauration 5/5, 0 erreur ; NLLB seul : 31/192 |
+| Traçabilité | mention unique « démonstration » sur la page, reçu du popup conservé après réouverture |
 | EN pack-only | **40/44** (4 dates restantes) ; 38/44 avec backend dans l’audit du 9 nov |
 | Firefox 159 | recette réelle 5 étapes + EN via XPI de test |
 | CI GitHub Actions | **5 jobs verts** sur `develop` |

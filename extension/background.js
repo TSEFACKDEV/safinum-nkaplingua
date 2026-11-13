@@ -13,7 +13,9 @@
  *  - aucune valeur de formulaire, aucun cookie, aucun code PIN n’est lu ;
  *  - les montants, URLs, emails et noms sont contrôlés après traduction ;
  *  - une phrase contenant un terme du niveau A (solde, frais, PIN/OTP, etc.)
- *    n’est jamais envoyée à la MT : elle exige une entrée de pack validée.
+ *    n’est jamais envoyée à la MT hors mode démo SAFINUM : elle exige une
+ *    entrée de pack validée. En démo explicite, un résultat de MT sur un
+ *    segment A est marqué `demoCritical` et affiché avec une alerte.
  */
 
 // Chrome service worker : charge le registre partagé. Firefox et les tests

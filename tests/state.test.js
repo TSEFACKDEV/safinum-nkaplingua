@@ -92,6 +92,10 @@ function send(message) {
   const translated = await send({ type: "NK_GET_STATE" });
   assert(translated.translated > 0, "état traduit non exposé");
   assert(translated.target === "fub", "cible initiale incorrecte");
+  assert(
+    translated.summary && translated.summary.translated === translated.translated,
+    "reçu absent de l’état exposé au popup"
+  );
 
   const switched = await send({ type: "NK_SET_TARGET", target: "ewo" });
   assert(switched.ok === true && switched.retranslating === true, "retraduction non annoncée");
