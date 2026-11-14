@@ -827,6 +827,7 @@
           source,
           demo: DEMO_PAGE,
           looseDemo: PUBLIC_DEMO_PAGE,
+          publicDemo: PUBLIC_DEMO_PAGE,
           segments: parts.map(({ index, text }) => ({
             id: `${segment.id}#s${index}`,
             text
@@ -890,7 +891,8 @@
             target: targetCode,
             source: titleSource,
             demo: DEMO_PAGE,
-          looseDemo: PUBLIC_DEMO_PAGE,
+            looseDemo: PUBLIC_DEMO_PAGE,
+            publicDemo: PUBLIC_DEMO_PAGE,
             text: titleRedaction.text
           });
           if (titleResponse?.translation?.ok) {
@@ -926,6 +928,7 @@
           source,
           demo: DEMO_PAGE,
           looseDemo: PUBLIC_DEMO_PAGE,
+          publicDemo: PUBLIC_DEMO_PAGE,
           segments: batch.map(({ id, text }) => ({
             id,
             text
@@ -1306,6 +1309,7 @@
         source: sourceInfo.code === "en" ? "en" : "fr",
         demo: DEMO_PAGE,
           looseDemo: PUBLIC_DEMO_PAGE,
+          publicDemo: PUBLIC_DEMO_PAGE,
         text: redacted
       });
 
@@ -1767,7 +1771,8 @@
         target: currentTarget,
         text,
         demo: DEMO_PAGE,
-        looseDemo: PUBLIC_DEMO_PAGE
+        looseDemo: PUBLIC_DEMO_PAGE,
+        publicDemo: PUBLIC_DEMO_PAGE
       });
     }
   };

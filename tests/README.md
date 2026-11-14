@@ -41,7 +41,8 @@ Node 20+ (CI) ou 24 (poste de dev). Python 3.12 pour le backend.
 | `tests/widget.test.js` | widget flottant : launcher, panneau, langue, traduction, restauration, sélection, test de texte | `node tests/widget.test.js` | **pass** |
 | `tests/widget-api.test.js` | intégration content script → widget : API et 3 langues | `node tests/widget-api.test.js` | **pass** |
 | `tests/selection.test.js` | sélection : phrase entière d'abord (pack deux phrases), puis repli phrase par phrase | `node tests/selection.test.js` | **pass** |
-| `tests/demo-loose.test.js` | démo publique : brut NLLB accepté sur round-trip faible, jamais réutilisé hors démo | `node tests/demo-loose.test.js` | **pass** |
+| `tests/demo-loose.test.js` | démo publique : overlay FINAKA sans backend, brut NLLB sur round-trip faible, jamais réutilisé hors démo | `node tests/demo-loose.test.js` | **pass** |
+| `tests/demo-page.test.js` | page FINAKA réelle : 109 nœuds traduits par l'overlay sans backend | `node tests/demo-page.test.js` | **pass** |
 | `tests/popup-unseen.test.js` | popup : repli partiel expliqué sans erreur rouge, phrase absente signalée calmement | `node tests/popup-unseen.test.js` | **pass** |
 
 Vérifications complémentaires :

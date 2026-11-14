@@ -31,6 +31,15 @@ function createBackground() {
   };
   globalThis.fetch = async (url, init) => {
     const value = String(url);
+    if (value.includes("/demo/fub-demo.json")) {
+      return {
+        ok: true,
+        json: async () => JSON.parse(fs.readFileSync(
+          path.join(root, "extension/demo/fub-demo.json"),
+          "utf8"
+        ))
+      };
+    }
     if (value.includes("/health")) {
       return { ok: true, json: async () => ({ loaded: true }) };
     }
@@ -72,6 +81,34 @@ function createBackground() {
   assert(
     demo.translation.text.includes("[demo]"),
     "traduction brute non appliquée"
+  );
+
+  const overlay = await send({
+    type: "NK_TRANSLATE_TEXT",
+    target: "fub",
+    text: "Vue d’ensemble",
+    demo: true,
+    looseDemo: false,
+    publicDemo: true
+  });
+  assert(
+    overlay.translation?.ok === true &&
+      overlay.translation.text === "Winndannde yeeso",
+    `overlay public absent : ${JSON.stringify(overlay.translation)}`
+  );
+
+  const tokenized = await send({
+    type: "NK_TRANSLATE_TEXT",
+    target: "fub",
+    text: "Il reste 11 semaines",
+    demo: true,
+    looseDemo: false,
+    publicDemo: true
+  });
+  assert(
+    tokenized.translation?.ok === true &&
+      tokenized.translation.text.includes("11"),
+    `overlay à jetons absent : ${JSON.stringify(tokenized.translation)}`
   );
 
   const strict = await send({

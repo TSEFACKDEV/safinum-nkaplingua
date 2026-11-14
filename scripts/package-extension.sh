@@ -26,6 +26,7 @@ copy_common() {
   cp "$ROOT"/extension/INSTALL.md "$target"/
   cp -R "$ROOT"/extension/fonts "$target"/fonts
   cp -R "$ROOT"/extension/language-packs "$target"/language-packs
+  cp -R "$ROOT"/extension/demo "$target"/demo
 
   # Le service worker Chrome peut être chargé comme module (importScripts
   # interdit). On inline le registre des langues dans le background packagé

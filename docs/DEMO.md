@@ -105,3 +105,12 @@ l’utilisateur garde le contrôle. »
 - Cacher que le modèle est un baseline.
 - Utiliser une page pré-traduite en prétendant que c’est du direct.
 
+
+
+## Démo publique et overlay
+
+La page `https://tsefackdev.github.io/safinum-nkaplingua/demo/` est reconnue
+comme démo. Elle charge un overlay `extension/demo/fub-demo.json` réservé au
+fulfulde et à cette page : les libellés FINAKA sont ainsi traduits même sans
+backend. Le pack principal et les vrais sites ne sont pas modifiés ; aucun
+résultat de démonstration n'entre dans le cache strict.

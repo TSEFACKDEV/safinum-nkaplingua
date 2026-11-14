@@ -107,7 +107,11 @@ api.runtime.onMessage.addListener((message, _sender, sendResponse) => {
       message.segments || [],
       message.target || DEFAULT_TARGET,
       message.source,
-      { demo: Boolean(message.demo), looseDemo: Boolean(message.looseDemo) }
+      {
+        demo: Boolean(message.demo),
+        looseDemo: Boolean(message.looseDemo),
+        publicDemo: Boolean(message.publicDemo)
+      }
     )
       .then(sendResponse)
       .catch((error) => sendResponse({ error: String(error) }));
@@ -120,7 +124,8 @@ api.runtime.onMessage.addListener((message, _sender, sendResponse) => {
       message.target || DEFAULT_TARGET,
       message.source,
       Boolean(message.demo),
-      Boolean(message.looseDemo)
+      Boolean(message.looseDemo),
+      Boolean(message.publicDemo)
     )
       .then(sendResponse)
       .catch((error) => sendResponse({ error: String(error) }));
@@ -159,7 +164,14 @@ function splitTextSentences(value) {
     .filter(Boolean);
 }
 
-async function translateText(text, target, source, demo = false, looseDemo = false) {
+async function translateText(
+  text,
+  target,
+  source,
+  demo = false,
+  looseDemo = false,
+  publicDemo = false
+) {
   const clean = String(text || "").trim();
   if (!clean) return { translation: null, error: "empty_text" };
 
@@ -177,7 +189,7 @@ async function translateText(text, target, source, demo = false, looseDemo = fal
     [{ id: "text", text: clean }],
     target,
     detected,
-    { demo, freeText: true, looseDemo }
+    { demo, freeText: true, looseDemo, publicDemo }
   );
   if (whole.error) return whole;
   const wholeTranslation = whole.translations?.[0] || null;
@@ -205,7 +217,8 @@ async function translateText(text, target, source, demo = false, looseDemo = fal
   const result = await translateSegments(segments, target, detected, {
     demo,
     freeText: true,
-    looseDemo
+    looseDemo,
+    publicDemo
   });
   if (result.error) return result;
 
@@ -304,6 +317,7 @@ async function translateSegments(segments, target, source, options = {}) {
   const demoMode = Boolean(options.demo);
   const freeText = Boolean(options.freeText);
   const looseDemo = Boolean(options.looseDemo);
+  const publicDemo = Boolean(options.publicDemo);
 
   const targetSpec = LANG?.getTarget(target);
   if (!targetSpec) {
@@ -395,7 +409,8 @@ async function translateSegments(segments, target, source, options = {}) {
     let packResults = [];
     try {
       packResults = await translateWithPack(missing, targetSpec, {
-        demo: demoMode
+        demo: demoMode,
+        publicDemo
       });
     } catch (error) {
       if (targetSpec.engine === "pack") {
@@ -769,6 +784,24 @@ function finalizeTranslation(translation, segment) {
 /* Packs communautaires                                               */
 /* ------------------------------------------------------------------ */
 
+let demoPackPromise = null;
+
+async function loadDemoPack() {
+  if (!demoPackPromise) {
+    demoPackPromise = (async () => {
+      const url = api.runtime.getURL("demo/fub-demo.json");
+      const response = await fetch(url);
+      if (!response.ok) throw new Error(`demo pack HTTP ${response.status}`);
+      const pack = await response.json();
+      if (!pack || !Array.isArray(pack.entries)) {
+        throw new Error("format de l'overlay démo invalide");
+      }
+      return pack;
+    })();
+  }
+  return demoPackPromise;
+}
+
 async function loadPack(targetSpec) {
   const code = targetSpec.code;
 
@@ -847,7 +880,19 @@ function indexPack(pack) {
 
 async function translateWithPack(segments, targetSpec, options = {}) {
   const pack = await loadPack(targetSpec);
-  const index = indexPack(pack);
+  let packForLookup = pack;
+  if (options.publicDemo && targetSpec.code === "fub") {
+    try {
+      const demoPack = await loadDemoPack();
+      packForLookup = {
+        ...pack,
+        entries: [...(pack.entries || []), ...(demoPack.entries || [])]
+      };
+    } catch {
+      // Overlay absent : le pack principal reste utilisable.
+    }
+  }
+  const index = indexPack(packForLookup);
 
   return segments.map((segment) => {
     // Politique produit : hors démo, les brouillons humains sont utilisables
