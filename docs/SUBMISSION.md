@@ -63,7 +63,7 @@ https://github.com/TSEFACKDEV/safinum-nkaplingua/releases/latest/download/nkapli
 ## Démo publique
 
 ```text
-https://markitchi.github.io/nkaplingua-demo/demo/
+https://tsefackdev.github.io/safinum-nkaplingua/demo/
 ```
 
 ## Installation de l’extension

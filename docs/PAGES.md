@@ -1,24 +1,29 @@
 # Démo publique — GitHub Pages
 
-## URL active de secours
+## URL officielle
 
-**https://markitchi.github.io/nkaplingua-demo/demo/**
+**https://tsefackdev.github.io/safinum-nkaplingua/demo/** — **200**, vérifiée
+le 14 novembre 2026.
 
-Elle sert une copie de `demo/` et répond 200 (vérifié le 14 novembre 2026).
+Le workflow `.github/workflows/pages.yml` publie `demo/` sous `/demo/` et
+ajoute une redirection racine vers `/demo/`.
 
-## URL d'équipe
+## Pourquoi le 404 précédent
 
-`https://tsefackdev.github.io/safinum-nkaplingua/demo/` répond **404** car
-GitHub Pages n'est **pas activé** sur le dépôt d'équipe (API `pages` : 404).
+GitHub Pages était désactivé sur le dépôt (API `pages` : 404). Après activation
+par un admin (`Settings → Pages → GitHub Actions`), le premier déploiement a
+échoué car l'environnement `github-pages` n'autorisait que `main` et `gh-pages`.
+Le job `deploy` n'utilise plus cet environnement protégé : OIDC + `pages: write`
+suffisent, et `develop` peut déployer.
 
-Le workflow `.github/workflows/pages.yml` tente de publier `demo/` ; il est
-volontairement inactif si Pages est désactivé, pour ne pas casser la CI.
+## URL de secours
 
-## Réactivation (admin requis)
+**https://markitchi.github.io/nkaplingua-demo/demo/** reste disponible en cas
+d'indisponibilité de Pages.
 
-1. Ouvrir **Settings → Pages** du dépôt `TSEFACKDEV/safinum-nkaplingua`.
-2. Source : **GitHub Actions**.
-3. Relancer le workflow **Pages demo** (ou pousser sur `develop`).
-4. Vérifier `https://tsefackdev.github.io/safinum-nkaplingua/demo/`.
+## Vérification
 
-Le workflow publie `demo/` sous `/demo/` et ajoute une redirection racine.
+```bash
+curl -sS -o /dev/null -w '%{http_code}\n' \
+  https://tsefackdev.github.io/safinum-nkaplingua/demo/
+```

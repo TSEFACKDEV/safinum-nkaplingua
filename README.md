@@ -96,11 +96,7 @@ Autres états du popup : [test de texte](docs/assets/popup-redesign-test.png),
 | **Documentation PDF** | [NkapLingua-Documentation.pdf](https://github.com/TSEFACKDEV/safinum-nkaplingua/releases/latest/download/NkapLingua-Documentation.pdf) |
 | **Extension universelle** (Chrome/Edge/Firefox) | [nkaplingua-extension.zip](https://github.com/TSEFACKDEV/safinum-nkaplingua/releases/latest/download/nkaplingua-extension.zip) |
 | **Dépôt GitHub** | https://github.com/TSEFACKDEV/safinum-nkaplingua |
-| **Démo publique** | https://markitchi.github.io/nkaplingua-demo/demo/ |
-
-> URL de secours active. L’URL d’équipe `tsefackdev.github.io/safinum-nkaplingua/demo/`
-> nécessite la réactivation de GitHub Pages par un admin du dépôt
-> (Settings → Pages → GitHub Actions). Voir [`docs/PAGES.md`](docs/PAGES.md).
+| **Démo publique** | https://tsefackdev.github.io/safinum-nkaplingua/demo/ |
 | **Guide de soumission** | [`docs/SUBMISSION.md`](docs/SUBMISSION.md) |
 
 > L’extension universelle fonctionne sans installation Python : elle utilise
@@ -292,7 +288,7 @@ demande le backend local (option B) ou un pack rempli.
 2. Dézipper le fichier.
 3. Charger le dossier dans Chrome/Edge ou Firefox (voir ci-dessous).
 4. Ouvrir la démo publique :
-   **https://markitchi.github.io/nkaplingua-demo/demo/**
+   **https://tsefackdev.github.io/safinum-nkaplingua/demo/**
 5. Cliquer sur l’icône NkapLingua → **Traduire cette page**.
 
 L’extension utilise le backend local s’il tourne. Le cloud MyMemory n’est
@@ -358,7 +354,7 @@ NK_MOCK=1 uvicorn app:app --host 127.0.0.1 --port 8000
 
 ### Page de démo
 
-- en ligne : `https://markitchi.github.io/nkaplingua-demo/demo/`
+- en ligne : `https://tsefackdev.github.io/safinum-nkaplingua/demo/`
 - en local : `http://127.0.0.1:8000/demo` (si backend lancé)
 - dans le dépôt : `demo/index.html`
 
@@ -373,7 +369,7 @@ NK_MOCK=1 uvicorn app:app --host 127.0.0.1 --port 8000
 5. Sélectionner le dossier dézippé (celui qui contient `manifest.json`).
 6. Épingler **NkapLingua**.
 7. Ouvrir la démo publique :
-   **https://markitchi.github.io/nkaplingua-demo/demo/**
+   **https://tsefackdev.github.io/safinum-nkaplingua/demo/**
 8. Cliquer sur l’icône → **Traduire cette page**.
 
 > Chrome 149+ bloque le chargement automatique via `--load-extension` dans les
