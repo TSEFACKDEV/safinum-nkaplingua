@@ -307,6 +307,13 @@ vm.runInContext(
   );
   assert(
     LANG.isDemoPage({
+      hostname: "tsefackdev.github.io",
+      pathname: "/safinum-nkaplingua/demo/"
+    }) === true,
+    "démo publique GitHub Pages non reconnue"
+  );
+  assert(
+    LANG.isDemoPage({
       hostname: "example.com",
       pathname: "/hackathon-test"
     }) === false,

@@ -397,12 +397,15 @@
   // Le site de test SAFINUM est un environnement fictif : on autorise la MT
   // sur les phrases critiques, mais uniquement avec un badge « démo non
   // validée ». Les vraies pages bancaires restent en mode strict.
-  function isDemoPage(locationLike) {
+  function isPublicDemoPage(locationLike) {
     try {
       const loc = locationLike || globalThis.location;
       const host = String(loc?.hostname || "").toLowerCase();
       const path = String(loc?.pathname || "");
-      if (host === "safinum.cm" && path.startsWith("/hackathon-test")) {
+      if (
+        host === "tsefackdev.github.io" &&
+        path.startsWith("/safinum-nkaplingua/demo")
+      ) {
         return true;
       }
       if (
@@ -411,7 +414,24 @@
       ) {
         return true;
       }
+      if (loc?.protocol === "file:" && /\/demo(?:\/|$)/.test(path)) {
+        return true;
+      }
       return false;
+    } catch {
+      return false;
+    }
+  }
+
+  function isDemoPage(locationLike) {
+    try {
+      const loc = locationLike || globalThis.location;
+      const host = String(loc?.hostname || "").toLowerCase();
+      const path = String(loc?.pathname || "");
+      if (host === "safinum.cm" && path.startsWith("/hackathon-test")) {
+        return true;
+      }
+      return isPublicDemoPage(loc);
     } catch {
       return false;
     }
@@ -482,6 +502,7 @@
     protectTerms,
     restoreTerms,
     isCriticalText,
-    isDemoPage
+    isDemoPage,
+    isPublicDemoPage
   };
 })(globalThis);

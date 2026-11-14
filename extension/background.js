@@ -107,7 +107,7 @@ api.runtime.onMessage.addListener((message, _sender, sendResponse) => {
       message.segments || [],
       message.target || DEFAULT_TARGET,
       message.source,
-      { demo: Boolean(message.demo) }
+      { demo: Boolean(message.demo), looseDemo: Boolean(message.looseDemo) }
     )
       .then(sendResponse)
       .catch((error) => sendResponse({ error: String(error) }));
@@ -119,7 +119,8 @@ api.runtime.onMessage.addListener((message, _sender, sendResponse) => {
       message.text || "",
       message.target || DEFAULT_TARGET,
       message.source,
-      Boolean(message.demo)
+      Boolean(message.demo),
+      Boolean(message.looseDemo)
     )
       .then(sendResponse)
       .catch((error) => sendResponse({ error: String(error) }));
@@ -158,7 +159,7 @@ function splitTextSentences(value) {
     .filter(Boolean);
 }
 
-async function translateText(text, target, source, demo = false) {
+async function translateText(text, target, source, demo = false, looseDemo = false) {
   const clean = String(text || "").trim();
   if (!clean) return { translation: null, error: "empty_text" };
 
@@ -176,7 +177,7 @@ async function translateText(text, target, source, demo = false) {
     [{ id: "text", text: clean }],
     target,
     detected,
-    { demo, freeText: true }
+    { demo, freeText: true, looseDemo }
   );
   if (whole.error) return whole;
   const wholeTranslation = whole.translations?.[0] || null;
@@ -203,7 +204,8 @@ async function translateText(text, target, source, demo = false) {
   }));
   const result = await translateSegments(segments, target, detected, {
     demo,
-    freeText: true
+    freeText: true,
+    looseDemo
   });
   if (result.error) return result;
 
@@ -301,6 +303,7 @@ async function translateSegments(segments, target, source, options = {}) {
   }
   const demoMode = Boolean(options.demo);
   const freeText = Boolean(options.freeText);
+  const looseDemo = Boolean(options.looseDemo);
 
   const targetSpec = LANG?.getTarget(target);
   if (!targetSpec) {
@@ -568,6 +571,25 @@ async function translateSegments(segments, target, source, options = {}) {
     }
   }
 
+  // Démo publique : le contenu FINAKA n'est pas couvert par les packs du
+  // site de compétition. On accepte le brut NLLB même si le round-trip est
+  // faible, pour que toute la page soit lisible. Les jetons (montants, noms)
+  // restent vérifiés ensuite par finalizeTranslation.
+  if (looseDemo && Array.isArray(translations)) {
+    translations = translations.map((translation) => {
+      if (translation?.ok) return translation;
+      const reason = String(translation?.reason || "");
+      if (
+        translation?.text &&
+        translation.text.trim() &&
+        reason.startsWith("low_roundtrip")
+      ) {
+        return { ...translation, ok: true, reason: null, demoLoose: true };
+      }
+      return translation;
+    });
+  }
+
   // 2b) Si le local est disponible mais rejette certaines phrases (jeton,
   // qualité, rétro-traduction), on demande une seconde opinion au cloud
   // pseudonymisé. Le local reste prioritaire pour les phrases acceptées.
@@ -649,6 +671,8 @@ async function translateSegments(segments, target, source, options = {}) {
     // hors démonstration.
     if (
       final.ok &&
+      !demoMode &&
+      !final.demoLoose &&
       prepared?.criticality !== "A" &&
       final.packStatus !== "reviewed" &&
       final.packStatus !== "draft"

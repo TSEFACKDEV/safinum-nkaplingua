@@ -261,6 +261,7 @@
   let lastResult = null;
   let lastSelectionText = "";
   const DEMO_PAGE = LANG.isDemoPage?.() === true;
+  const PUBLIC_DEMO_PAGE = LANG.isPublicDemoPage?.() === true;
   const pageIsEnglish = () =>
     String(document.documentElement?.lang || "").toLowerCase().startsWith("en");
   const tr = (fr, en) => (pageIsEnglish() ? en : fr);
@@ -825,6 +826,7 @@
           target: targetCode,
           source,
           demo: DEMO_PAGE,
+          looseDemo: PUBLIC_DEMO_PAGE,
           segments: parts.map(({ index, text }) => ({
             id: `${segment.id}#s${index}`,
             text
@@ -888,6 +890,7 @@
             target: targetCode,
             source: titleSource,
             demo: DEMO_PAGE,
+          looseDemo: PUBLIC_DEMO_PAGE,
             text: titleRedaction.text
           });
           if (titleResponse?.translation?.ok) {
@@ -922,6 +925,7 @@
           target: targetCode,
           source,
           demo: DEMO_PAGE,
+          looseDemo: PUBLIC_DEMO_PAGE,
           segments: batch.map(({ id, text }) => ({
             id,
             text
@@ -1301,6 +1305,7 @@
         target: targetCode,
         source: sourceInfo.code === "en" ? "en" : "fr",
         demo: DEMO_PAGE,
+          looseDemo: PUBLIC_DEMO_PAGE,
         text: redacted
       });
 
@@ -1761,7 +1766,8 @@
         type: "NK_TRANSLATE_TEXT",
         target: currentTarget,
         text,
-        demo: DEMO_PAGE
+        demo: DEMO_PAGE,
+        looseDemo: PUBLIC_DEMO_PAGE
       });
     }
   };
